@@ -2,7 +2,7 @@ truncate table usuario_table;
 truncate table sueño_table;
 truncate table alergeno; 
 
-insert into usuario_table (apellidos, `contraseña`, email, nombre, nombre_usuario) values
+insert into user_table (surname, `contraseña`, email, name, nombre_usuario) values
 ('1','pwd', 'user1@gmail.com', 'user', 'user1'),
 ('2','pwd', 'user2@gmail.com', 'user', 'user2'),
 ('3','pwd', 'user3@gmail.com', 'user', 'user3'),
@@ -10,7 +10,7 @@ insert into usuario_table (apellidos, `contraseña`, email, nombre, nombre_usuar
 ('5','pwd', 'user5@gmail.com', 'user', 'user5'),
 ('6','pwd', 'user6@gmail.com', 'user', 'user6');
 
-insert into alergeno (nombre, descripcion) values
+insert into allergen (name, description) values
 ('Gluten', 'Presente en trigo, cebada, centeno y sus derivados.'),
 ('Lactosa', 'Azúcar presente en la leche y productos lácteos.'),
 ('Frutos secos', 'Incluye almendras, avellanas, nueces, anacardos, pistachos, etc.'),
@@ -22,7 +22,7 @@ insert into alergeno (nombre, descripcion) values
 ('Sésamo', 'Presente en panes, galletas, tahini y otros productos.'),
 ('Sulfitos', 'Utilizados como conservantes en vinos, frutas secas y productos procesados.');
 
-insert into `sueño_table` (fin, inicio, num_desvalos, `tipo_sueño`) values
+insert into sueño_table (fin, inicio, num_desvalos, `tipo_sueño`) values
 ('2024-03-03 22:00:00.000000', '2024-03-04 06:30:00.000000', 2, 1),
 ('2024-03-04 23:15:00.000000', '2024-03-05 07:00:00.000000', 3, 2),
 ('2024-03-05 21:45:00.000000', '2024-03-06 05:20:00.000000', 1, 1),
