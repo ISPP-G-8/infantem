@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/allergens")
+@RequestMapping("api/v1/allergens")
 public class AllergenController {
 
     @Autowired
