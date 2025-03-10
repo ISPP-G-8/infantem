@@ -1,6 +1,7 @@
 package com.isppG8.infantem.infantem.allergen;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
@@ -31,21 +32,24 @@ public class AllergenServiceTest {
     
     @Test
     public void testGetAllergenById() {
-        Allergen allergen = this.allergenService.getAllergenById(1L).get();
+        Allergen allergen = this.allergenService.getAllergenById(1); 
+    
+        assertNotNull(allergen);
         assertEquals("Gluten", allergen.getName());
         assertEquals("Presente en trigo, cebada, centeno y sus derivados.", allergen.getDescription());
-    }
+}
+
 
     @Test
     public void testGetAllAllergensWrongID() {
-        assertThrows(EntityNotFoundException.class, () -> allergenService.getAllergenById(11L));   
+        assertThrows(EntityNotFoundException.class, () -> allergenService.getAllergenById(1));   
     }
 
     @Test
     public void testCreateAllergen() {
         Allergen allergen = new Allergen("Fruta", "Presente en frutas y sus derivados.");
         Allergen createdAllergen = this.allergenService.createAllergen(allergen);
-        Allergen storedAllergen = this.allergenService.getAllergenById(createdAllergen.getId()).get();
+        Allergen storedAllergen = this.allergenService.getAllergenById(createdAllergen.getId().intValue());
         assertEquals("Fruta", storedAllergen.getName());
         assertEquals("Presente en frutas y sus derivados.", storedAllergen.getDescription());
     }
@@ -73,8 +77,9 @@ public class AllergenServiceTest {
         Allergen allergen = new Allergen("Medicamentos", "Presente en medicamentos y fármacos.");
         Allergen createdAllergen = this.allergenService.createAllergen(allergen);
         Allergen updatedAllergen = new Allergen("Medicamentos y jarabes", "Presente en medicamentos y fármacos. También en jarabes.");
-        this.allergenService.updateAllergen(createdAllergen.getId(), updatedAllergen).get();
-        Allergen storedAllergen = this.allergenService.getAllergenById(createdAllergen.getId()).get();
+        this.allergenService.updateAllergen(createdAllergen.getId(), updatedAllergen);
+        Allergen storedAllergen = this.allergenService.getAllergenById(createdAllergen.getId().intValue());
+
         assertEquals("Medicamentos y jarabes", storedAllergen.getName());
         assertEquals("Presente en medicamentos y fármacos. También en jarabes.", storedAllergen.getDescription());
     }
@@ -90,7 +95,7 @@ public class AllergenServiceTest {
         Allergen allergen = new Allergen("Prueba", "Prueba");
         Allergen createdAllergen = this.allergenService.createAllergen(allergen);
         this.allergenService.deleteAllergen(createdAllergen.getId());
-        Allergen deletedAllergen = this.allergenService.getAllergenById(createdAllergen.getId()).orElse(null);
+        Allergen deletedAllergen = this.allergenService.getAllergenById(createdAllergen.getId().intValue());
         assertEquals(null, deletedAllergen);
         // Next line is commented until we implement the exception handling in the service
         // assertThrows(EntityNotFoundException.class, () -> allergenService.getAllergenById(createdAllergen.getId()));
