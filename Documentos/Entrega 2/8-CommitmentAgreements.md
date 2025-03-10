@@ -286,8 +286,11 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
 
 ### 5. **David Fuentelsaz Rodríguez**
    "Yo, como miembro de este equipo, me comprometo a seguir los lineamientos del equipo y trabajar con dedicación para cumplir con los objetivos establecidos."  
-   Firma: 
-   <img src = "./img/Firma-DavidFuentelsaz.png" width="150" />
+   Firma:
+   
+   <img src = "./img/Firma-DavidFuentelsaz.png" width="320" />
+
+
    Fecha: 10/03/2025
 
 ### 6. **David Vargas Muñiz**
