@@ -100,17 +100,17 @@ Ver figura 1 para todas las características de cada plan.
 
 | Característica | Plan básico | Plan premium |
 |----------------|-------------|--------------|
-| Detección de alergias e intolerancias | [x] | [x] |
-| Recetas creadas por especialistas filtradas por edad | [x] | [x] |
-| MarketPlace | [x] | [x] |
-| Registro de alimentación | [x] | [x] |
-| Calendario | [x] | [x] |
-| Sistema de hitos | [x] | [x] |
-| Seguimiento del crecimiento mediante métricas básicas del bebe | [x] | [x] |
-| Recordatorios inteligentes | [ ] | [x] |
-| Seguimiento del crecimiento del bebe mediante métricas avanzadas | [ ] | [x] |
-| Recetas personalizadas mediante filtrado por diferentes métricas adicionales | [ ] | [x] |
-| Eliminación de anuncios | [ ] | [x] |
-| Cupón de descuentos en productos del Marketplace. | [ ] | [x] |
+| Detección de alergias e intolerancias | ✅ | ✅ |
+| Recetas creadas por especialistas filtradas por edad | ✅ | ✅ |
+| MarketPlace | ✅ | ✅ |
+| Registro de alimentación | ✅ | ✅ |
+| Calendario | ✅ | ✅ |
+| Sistema de hitos | ✅ | ✅ |
+| Seguimiento del crecimiento mediante métricas básicas del bebe | ✅ | ✅ |
+| Recordatorios inteligentes | ❌ | ✅ |
+| Seguimiento del crecimiento del bebe mediante métricas avanzadas | ❌ | ✅ |
+| Recetas personalizadas mediante filtrado por diferentes métricas adicionales | ❌ | ✅ |
+| Eliminación de anuncios | ❌ | ✅ |
+| Cupón de descuentos en productos del Marketplace. | ❌ | ✅ |
 
 *Figura 1 tabla comparativa de los planes*
