@@ -1,6 +1,7 @@
 # Commitment Agreement
 
-![Portada](./img/Infantem.png)
+![Portada](../../frontend/assets/Documentos/Infantem.png)
+
 
 **Fecha:** 18/02/2025  
 **Grupo 8:** Infantem  
@@ -288,7 +289,7 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
    "Yo, como miembro de este equipo, me comprometo a seguir los lineamientos del equipo y trabajar con dedicación para cumplir con los objetivos establecidos."  
    Firma:
    
-   <img src = "./img/Firma-DavidFuentelsaz.png" width="320" />
+   <img src = "../../frontend/assets/Documentos/Firma-DavidFuentelsaz.png" width="320" />
 
 
    Fecha: 10/03/2025
