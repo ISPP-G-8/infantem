@@ -42,10 +42,10 @@
 
 ## Índice
 1. [Identificación de competidores](#identificacion-de-competidores)
-1.1. [Competidores directos](#competidores-directos)
-1.2. [Competidores indirectos](#competidores-indirectos)
+  1.1. [Competidores directos](#competidores-directos)
+  1.2. [Competidores indirectos](#competidores-indirectos)
 2. [Análisis de las 4P’s de los competidores directos](#analisis-4ps)
-3. <a id='#tabla-comparativa'>Tabla comparativa de los competidores directos</a>
+3. [Tabla comparativa de los competidores directos](#tabla-comparativa-de-los-competidores)
 
 ---
 
@@ -169,3 +169,17 @@ Modelo freemium con una versión de pago que elimina anuncios y agrega funcional
 - Marketing basado en beneficios de la IA en nutrición.
 
 
+### Tabla comparativa de los competidores
+
+| Característica |  Infantem | Little Lunches |  Fuddle  |  Solid Starts  | Nuttriapp  |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+|  Detección de alergias e intolerancias | ✅ Sí | ❌ No | ❌ No | ❌ No | ✅ Sí |
+|Recetas creadas por especialistas filtradas por edad |✅ Sí |✅ Sí |✅ Sí | ✅ Sí| ✅ Sí |
+ MarketPlace                                                                  | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No |
+| Registro de alimentación                                                     | ✅ Sí | ✅ Sí | ✅ Sí | ✅ Sí | ✅ Sí |
+| Calendario                                                                   | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No |
+| Sistema de hitos                                                             | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No |
+| Seguimiento del crecimiento mediante métricas del bebé                       | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No |
+| Foro                                                                         | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No |
+| Recordatorios inteligentes                                                   | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No |
+| Recetas personalizadas mediante filtrado por diferentes métricas adicionales | ✅ Sí | ❌ No | ✅ Sí | ❌ No | ✅ Sí |
