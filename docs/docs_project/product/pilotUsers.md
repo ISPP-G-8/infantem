@@ -6,49 +6,64 @@
 **Grupo 8:** Infantem  
 **Ideando un proyecto**
 
-**Usuarios:**  
-- Álvaro Jiménez Osuna  
-- Ángela López Oliva  
-- Antonio Jiménez Ortega  
-- Daniel del Castillo Piñero  
-- David Fuentelsaz Rodríguez  
-- David Vargas Muñiz  
-- Enrique García Abadía  
-- Felipe Solís Agudo  
-- Javier Santos Martín  
-- Javier Ulecia García  
-- José García de Tejada Delgado  
-- Jose Maria Morgado Prudencio  
-- Josué Rodríguez López  
-- Lucía Noya Cano  
-- Luis Giraldo Santiago  
-- Miguel Galán Lerate  
-- Paula Luna Navarro  
+## Integrantes del Grupo
+<div style="display: flex; justify-content: space-between; gap: 2px;">
+  <div>
+    <ul style="padding-left: 0; list-style: none;">
+      <li>Álvaro Jiménez Osuna</li>
+      <li>Ángela López Oliva</li>
+      <li>Antonio Jiménez Ortega</li>
+      <li>Daniel del Castillo Piñero</li>
+      <li>David Fuentelsaz Rodríguez</li>
+      <li>David Vargas Muñiz</li>
+      <li>Enrique García Abadía</li>
+      <li>Felipe Solís Agudo</li>
+      <li>Javier Santos Martín</li>
+    </ul>
+  </div>
+
+  <div>
+    <ul style="padding-left: 0; list-style: none;">
+    <li>Javier Ulecia García</li>
+      <li>José García de Tejada Delgado</li>
+      <li>Jose Maria Morgado Prudencio</li>
+      <li>Josué Rodríguez López</li>
+      <li>Lucía Noya Cano</li>
+      <li>Luis Giraldo Santiago</li>
+      <li>Miguel Galán Lerate</li>
+      <li>Paula Luna Navarro</li>
+    </ul>
+  </div>
+</div>
 
 ---
 
 ## Índice
 
-1. Introducción
-2. Gestión de los usuarios piloto
-    1. Selección de usuarios piloto
-    2. Responsabilidades de los usuarios piloto
-    3. Perfiles de usuarios piloto
-        1. Usuarios piloto compradores
-    4. Compromisos de los usuarios piloto
-3. Escenarios de prueba (Test Scenarios)
-4. Deadlines y programa de encuestas
-5. Plan de comunicaciones
-6. Recopilación y procesamiento de la información
-    1. Métodos de recolección
-    2. Procesamiento y uso de la información
-7. Evaluación del éxito del programa piloto
-8. Lecciones aprendidas
-9. Lista de usuarios piloto
+- [Colaboradores del documento](#colaboradores-del-documento)
+- [Introducción](#introducción)  
+- [Gestión de los usuarios piloto](#gestión-de-los-usuarios-piloto)  
+  - [Selección de usuarios piloto](#selección-de-usuarios-piloto)  
+  - [Responsabilidades de los usuarios piloto](#responsabilidades-de-los-usuarios-piloto)  
+  - [Perfiles de usuarios piloto](#perfiles-de-usuarios-piloto)  
+    - [Usuarios piloto compradores](#usuarios-piloto-compradores)  
+  - [Compromisos de los usuarios piloto](#compromisos-de-los-usuarios-piloto)  
+- [Escenarios de prueba (Test Scenarios)](#escenarios-de-prueba-test-scenarios)  
+- [Deadlines y programa de encuestas](#deadlines-y-programa-de-encuestas)  
+- [Plan de comunicaciones](#plan-de-comunicaciones)  
+- [Recopilación y procesamiento de la información](#recopilación-y-procesamiento-de-la-información)  
+  - [Métodos de recolección](#métodos-de-recolección)  
+  - [Procesamiento y uso de la información](#procesamiento-y-uso-de-la-información)  
+- [Evaluación del éxito del programa piloto](#evaluación-del-éxito-del-programa-piloto)  
+- [Lecciones aprendidas](#lecciones-aprendidas)  
+- [Lista de usuarios piloto](#lista-de-usuarios-piloto)  
 
 ---
+## Colaboradores del documento
+- Jose Maria Morgado Prudencio
+  - Creó el documento en md.
 
-## 1. Introducción
+## Introducción
 
 Uno de los factores clave para el éxito de nuestra aplicación es la aceptación por parte de los padres y cuidadores, así como especialistas en nutrición. Por ello, se implementará un programa de pruebas con usuarios piloto que permitirá recopilar retroalimentación sobre la usabilidad, funcionalidades y efectividad de la aplicación.
 
@@ -56,15 +71,15 @@ Este documento detalla los perfiles de usuarios piloto, su agrupación por plan 
 
 ---
 
-## 2. Gestión de los usuarios piloto
+## Gestión de los usuarios piloto
 
-### 2.1 Selección de usuarios piloto
+### Selección de usuarios piloto
 
 Los usuarios piloto han sido seleccionados con base a los siguientes criterios:  
 - Interés en participar activamente en las pruebas y proporcionar retroalimentación.  
 - Disponibilidad para probar nuevas funcionalidades dentro del período de pruebas establecido.
 
-### 2.2 Responsabilidades de los usuarios piloto
+### Responsabilidades de los usuarios piloto
 
 Los usuarios piloto deberán:  
 - Probar las funcionalidades asignadas dentro del plazo indicado.  
@@ -72,7 +87,7 @@ Los usuarios piloto deberán:
 - Reportar errores y sugerencias de mejora de manera estructurada.  
 - Mantener una actitud colaborativa y proactiva durante el programa de pruebas.
 
-### 2.3 Perfiles de usuarios piloto
+### Perfiles de usuarios piloto
 
 Para maximizar el impacto de las pruebas, se han identificado cuatro perfiles clave de usuarios piloto, los cuales se agrupan según el tipo de plan de acceso en la aplicación:  
 - Padres primerizos  
@@ -80,7 +95,7 @@ Para maximizar el impacto de las pruebas, se han identificado cuatro perfiles cl
 - Expertos en nutrición  
 - Usuarios Premium
 
-#### 2.3.1 Usuarios piloto compradores
+#### Usuarios piloto compradores
 
 1. **Padres primerizos**  
     **Perfil:** Padres que están iniciando él proceso de alimentación complementaria de su bebé.  
@@ -114,7 +129,7 @@ Para maximizar el impacto de las pruebas, se han identificado cuatro perfiles cl
     - Usabilidad de la plataforma desde la perspectiva de un profesional  
     - Relevancia de las consultas online y recomendaciones personalizadas  
 
-### 2.4 Compromisos de los usuarios piloto
+### Compromisos de los usuarios piloto
 
 Los usuarios piloto se comprometen a:  
 - Utilizar la aplicación durante el periodo de pruebas.  
@@ -128,7 +143,7 @@ A cambio, recibirán los siguientes beneficios:
 
 ---
 
-## 3. Escenarios de prueba (Test Scenarios)
+## Escenarios de prueba (Test Scenarios)
 
 Los escenarios clave que se evaluarán por los usuarios piloto incluyen:  
 - Registro y seguimiento de alimentación y crecimiento del bebé.  
@@ -140,7 +155,7 @@ Los escenarios clave que se evaluarán por los usuarios piloto incluyen:
 
 ---
 
-## 4. Deadlines y programa de encuestas
+## Deadlines y programa de encuestas
 
 Las encuestas para probar las funcionalidades implementadas serán antes de que acabe cada sprint, siendo estas el 12/03/2025, 26/03/2025 y 09/03/2025.
 
@@ -153,7 +168,7 @@ Las encuestas para probar las funcionalidades implementadas serán antes de que 
 
 ---
 
-## 5. Plan de comunicaciones
+## Plan de comunicaciones
 
 Canales de comunicación:  
 - **Grupo de WhatsApp:** para dudas y comentarios rápidos  
@@ -167,16 +182,16 @@ Horarios de contacto:
 
 ---
 
-## 6. Recopilación y procesamiento de la información
+## Recopilación y procesamiento de la información
 
-### 6.1 Métodos de recolección
+### Métodos de recolección
 
 - Encuestas estructuradas  
 - Pruebas de usabilidad en tiempo real  
 - Grupos de discusión  
 - Registro de errores y mejoras  
 
-### 6.2 Procesamiento y uso de la información
+### Procesamiento y uso de la información
 
 - Análisis de patrones de uso  
 - Priorización de mejoras  
@@ -184,7 +199,7 @@ Horarios de contacto:
 
 ---
 
-## 7. Evaluación del éxito del programa piloto
+## Evaluación del éxito del programa piloto
 
 El éxito del programa de usuarios piloto se medirá en función de dos factores clave:  
 - **Tasa de adopción de funcionalidades clave**  
@@ -192,7 +207,7 @@ El éxito del programa de usuarios piloto se medirá en función de dos factores
 
 ---
 
-## 8. Lecciones aprendidas
+## Lecciones aprendidas
 
 - Identificación de funcionalidades con baja adopción y su posible mejora o eliminación.  
 - Ajustes en la interfaz para mejorar la experiencia de usuario y accesibilidad.  
@@ -201,7 +216,7 @@ El éxito del programa de usuarios piloto se medirá en función de dos factores
 
 ---
 
-## 9. Lista de usuarios piloto
+## Lista de usuarios piloto
 
 **Proto usuarios**
 
@@ -228,3 +243,5 @@ El éxito del programa de usuarios piloto se medirá en función de dos factores
 |--------------------|--------------------|  
 | MIRIAN SANTIAGO    | Experta en nutrición |  
 | BEATRIZ CHAVES     | Experta en nutrición |  
+
+
