@@ -326,8 +326,11 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
 
 ### 12. **Jose Maria Morgado Prudencio**
    "Yo, como miembro de este equipo, me comprometo a aportar mis conocimientos y habilidades para que el equipo cumpla con los objetivos del proyecto."  
-   Firma: ______________________  
-   Fecha: ______________________
+   Firma:   
+
+   <img src = "../../frontend/assets/Documentos/firmas/Firma-JoseMorgado.png" width="320" />
+
+   Fecha: 11/03/2025
 
 ### 13. **Josué Rodríguez López**
    "Yo, como miembro de este equipo, me comprometo a trabajar con dedicación y a ser proactivo en la búsqueda de soluciones para el equipo."  
@@ -343,7 +346,7 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
    "Yo, como miembro de este equipo, me comprometo a contribuir al progreso del proyecto y a cumplir con los plazos y tareas establecidos."  
    Firma:
    
-   <img src = "../../frontend/assets/Documentos/firmas/FirmaLuisGiraldo.png" width="320" />
+   <img src = "../../frontend/assets/Documentos/firmas/Firma-LuisGiraldo.png" width="320" />
 
 
    Fecha: 11/03/2025
