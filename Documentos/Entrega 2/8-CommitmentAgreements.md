@@ -289,7 +289,7 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
    "Yo, como miembro de este equipo, me comprometo a seguir los lineamientos del equipo y trabajar con dedicación para cumplir con los objetivos establecidos."  
    Firma:
    
-   <img src = "../../frontend/assets/Documentos/Firma-DavidFuentelsaz.png" width="320" />
+   <img src = "../../frontend/assets/Documentos/firmas/Firma-DavidFuentelsaz.png" width="320" />
 
 
    Fecha: 10/03/2025
