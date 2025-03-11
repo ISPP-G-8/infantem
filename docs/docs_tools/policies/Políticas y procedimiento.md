@@ -186,7 +186,7 @@ El proyecto seguirá una estrategia de versionado basada en el esquema vX.Y.Z, d
 
 Cada versión etiquetada en la rama de producción main activará un workflow de Release automática.
 
-Ver [Análisis CDCI](../../Documentos%20sobre%20el%20proyecto/Análisis/Análisis%20CDCI.md)
+Ver [Análisis CDCI](../../docs_project/analisys/Análisis%20CDCI.md)
 
 
 ## Políticas de las tareas
