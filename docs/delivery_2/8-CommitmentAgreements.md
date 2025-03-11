@@ -357,8 +357,12 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
    Fecha: ______________________
 
 ### 17. **Paula Luna Navarro**
-   "Yo, como miembro de este equipo, me comprometo a trabajar de manera colaborativa y con responsabilidad para que el proyecto se desarrolle de manera exitosa."  
-   Firma: ______________________  
-   Fecha: ______________________
+   "Yo, como miembro de este equipo, me comprometo a trabajar de manera colaborativa y con responsabilidad para que el proyecto se desarrolle de manera exitosa." 
+
+   Firma: 
+   
+   <img src = "../../frontend/assets/Documentos/firmas/Firma-PaulaLuna.png" width="320" />  
+
+   Fecha: 12/03/2025
 
 
