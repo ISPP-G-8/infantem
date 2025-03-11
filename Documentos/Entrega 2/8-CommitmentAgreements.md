@@ -341,8 +341,12 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
 
 ### 15. **Luis Giraldo Santiago**
    "Yo, como miembro de este equipo, me comprometo a contribuir al progreso del proyecto y a cumplir con los plazos y tareas establecidos."  
-   Firma: ______________________  
-   Fecha: ______________________
+   Firma:
+   
+   <img src = "../../frontend/assets/Documentos/firmas/FirmaLuisGiraldo.png" width="320" />
+
+
+   Fecha: 11/03/2025
 
 ### 16. **Miguel Galán Lerate**
    "Yo, como miembro de este equipo, me comprometo a aportar mi esfuerzo y conocimientos para cumplir con los objetivos del equipo."  
