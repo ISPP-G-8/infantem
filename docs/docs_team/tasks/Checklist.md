@@ -51,43 +51,43 @@
 
 ## Lista de tareas
 
-<input type="checkbox"> Métricas cuantitativas para el control y seguimiento.  
+- [ ] Métricas cuantitativas para el control y seguimiento.  
   - Cuidado al poner normas basadas en estas métricas (la gente suele obsesionarse con ellas y es lo que priorizan haciendo trampas muchas veces)
 > Nota: puesto también en el feedback
 
 Todo esto para la presentación (a partir de ahora son 15 minutos de presentación). las partes de idea de negocio ya no son tan importantes, tienen que estar obligatoriamente eso sí, Si hay actualizaciones mencionarlas también (como por ejemplo en los riesgos…).
 
-<input type="checkbox"> Killer start  
-<input type="checkbox"> Objetivo  
-<input type="checkbox"> Poner tambien la descripción del proyecto  
+- [ ] Killer start  
+- [ ] Objetivo  
+- [ ] Poner tambien la descripción del proyecto  
 > Nota tres anteriores: importante al inicio, mirar el feedback
 
-<input type="checkbox"> Analisis competidores  
-<input type="checkbox"> Costes  
-<input type="checkbox"> Equipo (con menos importancia) -> dejar claros los roles de cada uno para este sprint  
-<input type="checkbox"> Seguimiento del CA  
-<input type="checkbox"> Prototipo del software (lo que llevamos). Se tiene que ver (no poner pantallas de móvil)  
-<input type="checkbox"> Retrospectiva de mitad de sprint.  
-<input type="checkbox"> Análisis de rendimiento del equipo
+- [ ]Analisis competidores  
+- [ ] Costes  
+- [ ] Equipo (con menos importancia) -> dejar claros los roles de cada uno para este sprint  
+- [ ] Seguimiento del CA  
+- [ ] Prototipo del software (lo que llevamos). Se tiene que ver (no poner pantallas de móvil)  
+- [ ] Retrospectiva de mitad de sprint.  
+- [ ] Análisis de rendimiento del equipo
   - Cómo definimos la productividad lo definimos nosotros
 
-<input type="checkbox"> Problemas encontrados
+- [ ] Problemas encontrados
   - Elecciones aplicados
   - Traza con el análisis de riesgos (lo normal es haber seguido lo que está en el plan de contingencia)
   - Lecciones aprendidas también y mejora
   
-<input type="checkbox"> Como estamos según la planificación  
+- [ ] Como estamos según la planificación  
   - Mirar en MS Project
   - Mirar horas consumidas del total del proyecto
   - Planificación viva, se tiene que ajustar constantemente.
     - Si se reestima mencionar también
 
-<input type="checkbox"> Gestión de usuarios pilotos 
+- [ ] Gestión de usuarios pilotos 
   - Cómo se gestiona la comunicación con ellos.
   - Hay que tener una agenda (fechas de entrega de material a los usuarios, fechas límite para que nos den el feedback, confirmaciones…)
   - Se puede adaptar la gestión de los usuarios piloto a nuestro proyecto , se pueden crear grupos de usuarios.
 
 
-<input type="checkbox"> Pequeño reporte de la IA.  
+- [ ] Pequeño reporte de la IA.  
   - Hay que poner los prompts.
   - Crear documento en drive para que se vayan poniendo.
