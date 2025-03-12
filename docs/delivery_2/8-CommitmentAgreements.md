@@ -392,7 +392,7 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
 
    "Yo, como miembro de este equipo, me comprometo a aportar mi esfuerzo y conocimientos para cumplir con los objetivos del equipo."
    
-   Firma <img src = "../../docs/imagenes/firmas/Firma-MiguelGalán.png">
+   Firma <img src = "../../docs/imagenes/firmas/Firma-MiguelGalán.png" width="200">
    
    Fecha: 12/03/2025
 
