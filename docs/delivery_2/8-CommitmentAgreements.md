@@ -1,6 +1,6 @@
 # Commitment Agreement
 
-![Portada](../../)
+<img src = "../../docs/imagenes/Infantem.png" width="320" />
 
 **Fecha:** 18/02/2025
 **Grupo 8:** Infantem
