@@ -368,9 +368,9 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
 
    "Yo, como miembro de este equipo, me comprometo a trabajar con dedicación y a ser proactivo en la búsqueda de soluciones para el equipo."
    
-   Firma: ______________________
+   Firma: <img src = "../../docs/imagenes/firmas/Firma-JosueRodriguez.png" width="200" />
    
-   Fecha: ______________________
+   Fecha: 12/03/2025
 
 ### 14. **Lucía Noya Cano**
 
