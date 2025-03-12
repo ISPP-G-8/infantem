@@ -61,6 +61,7 @@ Este documento recoge la evaluación del desempeño de los usuarios piloto en ba
 - **Fecha de acceso:** 12/03/2025 00:03
 - **Fecha de feedback:** 12/03/2025 11:49
 - **Puntuación:** **8**
+- **Link clockify:** (No aportado)
 - **Fallos encontrados:**
   - No se entiende por qué es necesario introducir datos del bebé para ver recetas.
   - Las recetas incluyen una descripción, pero no detallan los pasos a seguir.
@@ -80,6 +81,7 @@ Natalia ha realizado una evaluación completa y ha detectado varios aspectos imp
 - **Fecha de acceso:** 12/03/2025 00:03
 - **Fecha de feedback:** 12/03/2025 13:52
 - **Puntuación:** **9**
+- **Link clockify:** https://app.clockify.me/shared/67d1c79bbecbe07bd98fe030
 - **Fallos encontrados:**
   - Diseño poco atractivo, escasos detalles visuales.
   - Textos de las recetas condensados y de tamaño pequeño.
@@ -99,6 +101,7 @@ Antonio cumplió con el formulario y proporcionó comentarios enfocados en la es
 - **Fecha de acceso:** 12/03/2025 00:03
 - **Fecha de feedback:** 12/03/2025 16:25
 - **Puntuación:** **10**
+- **Link clockify:** (No aportado)
 - **Fallos encontrados:**
   - Diseño impersonal, similar a estilos por defecto.
   - No queda clara la finalidad de la app.
@@ -124,6 +127,7 @@ Ramón destacó como uno de los usuarios más analíticos. Fue más allá de lo 
 - **Fecha de acceso:** 12/03/2025 00:03
 - **Fecha de feedback:** 12/03/2025 14:57
 - **Puntuación:** **9**
+- **Link clockify:** (No aportado)
 - **Fallos encontrados:**
   - La app no le llamó la atención.
   - Falta de detalles importantes en la información mostrada.
@@ -142,6 +146,7 @@ Alberto proporcionó una evaluación detallada, señalando tanto problemas funci
 - **Fecha de acceso:** 12/03/2025 00:03
 - **Fecha de feedback:** 12/03/2025 18:26:07
 - **Puntuación:** **9**
+- **Link clockify:** https://app.clockify.me/shared/67d1c3fbbecbe07bd98fd41f
 - **Fallos encontrados:**
   - "El sistema de alérgenos no es del todo claro.
   - La navegación hacia la pantalla de bebés es confusa.
