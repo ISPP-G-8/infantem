@@ -1,5 +1,6 @@
-![Portada](../../../frontend/assets/Documentos/Infantem.png)
+# Análisis de competidores
 
+![Portada](../../../docs/imagenes/Infantem.png)
 
 **Fecha:** 18/02/2025  
 **Grupo 8:** Infantem  

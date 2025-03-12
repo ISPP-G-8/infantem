@@ -1,7 +1,6 @@
 # Plantilla del Sprint 1
 
-![Portada](../../../frontend/assets/Documentos/Infantem.png)
-
+![Portada](../../../docs/imagenes/Infantem.png)
 
 **Fecha:** 18/02/2025  
 **Grupo 8:** Infantem  
@@ -199,14 +198,14 @@ La aplicación cuenta con funcionalidades básicas que son de uso gratuito para 
 - Caso Realista
     - Un 5% de los padres con un hijo recién nacido utiliza Infantem, que se traduce en 1342 usuarios. Si de este número un 7% (94 personas) adquieren el plan Premium, se conseguiría un beneficio de 469,06 € el primer mes. Suponiendo también que la mitad de los usuarios continúa con la suscripción durante 6 meses, queda la distribución por mes que se puede ver en el gráfico correspondiente. Estos datos indican que el beneficio total por suscripciones en un año sería de 5628,72 € sin descontar el IVA y 21.027,52 € tras IVA.
 
-<img src='../../../frontend/assets/Documentos/GraficaBeneficioDespuesDelLanzamiento.png' width=500 style='display: block; margin-left:auto; margin-right:auto;' >
+<img src='../../../docs/imagenes/GraficaBeneficioDespuesDelLanzamiento.png' width=500 style='display: block; margin-left:auto; margin-right:auto;' >
 
 <p style="text-align:center;font-style:italic;">Gráfico 1: Distribución de beneficio por meses después del lanzamiento</p>
 
 - Caso optimista
   - Un 10% de los padres con un recién nacido utiliza la aplicación, que se traduce en 2683 usuarios. Si un 10% de ellos (268) adquieren el plan Premium se conseguiría un beneficio de 1337,32 € el primer mes. Suponiendo que la mitad de los usuarios mantiene el plan durante un año queda la distribución por mes que se puede ver en el gráfico 2. Estos datos indican que el beneficio total por suscripciones en un año sería de 60179,4 € con IVA y 47541,72 € al descontar el IVA.
 
-<img src='../../../frontend/assets/Documentos/GraficaBeneficioDespuesDelLanzamiento2.png' width=500 style='display: block; margin-left:auto; margin-right:auto;' >
+<img src='../../../docs/imagenes/GraficaBeneficioDespuesDelLanzamiento2.png' width=500 style='display: block; margin-left:auto; margin-right:auto;' >
 
 <p style="text-align:center;font-style:italic;">Gráfico 2: Distribución de beneficio por meses después del lanzamiento</p>
 
@@ -267,7 +266,7 @@ Finalmente, se analiza la relación entre los beneficios estimados y los costes 
 
 Con un beneficio total anual estimado de 12.521,75 €, el tiempo estimado para recuperar la inversión inicial (punto de equilibrio) sería de aproximadamente 5 años si se mantiene este escenario. 
 
-<img src='../../../frontend/assets/Documentos/RelacionIngresoEntreCostePesimista.png' width=550 style='display: block; margin-left:auto; margin-right:auto;' >
+<img src='../../../docs/imagenes/RelacionIngresoEntreCostePesimista.png' width=550 style='display: block; margin-left:auto; margin-right:auto;' >
 
 
 <p style="text-align:center;font-style:italic;">Gráfico 3: Relación entre beneficio acumulado y coste del proyecto caso pesimista</p>
@@ -283,7 +282,7 @@ Este caso representa un punto de equilibrio más accesible que el pesimista (5 a
 
 Con un beneficio total anual estimado de 256.659,84 €, la inversión se recuperaría en menos de un año (aproximadamente 3 meses), generando beneficios netos rápidamente.
 
-<img src='../../../frontend/assets/Documentos/RelacionIngresoEntreCosteOptimista.png' width=550 style='display: block; margin-left:auto; margin-right:auto;' >
+<img src='../../../docs/imagenes/RelacionIngresoEntreCosteOptimista.png' width=550 style='display: block; margin-left:auto; margin-right:auto;' >
 
 <p style="text-align:center;font-style:italic;">Gráfico 4: Relación entre beneficio acumulado y coste del proyecto caso optimista</p> 
 
