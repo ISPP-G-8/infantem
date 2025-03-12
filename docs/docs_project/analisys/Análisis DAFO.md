@@ -47,7 +47,7 @@
 4. [Oportunidades (Factores externos positivos)](#oportunidades)
 
 
-## Debilidades (Factores internos negativos)
+## 1. Debilidades (Factores internos negativos)
 1. **Dependencia de expertos en nutrición y pediatría** (Requiere validación constante de información por profesionales).
 2. **Reticencia a pagar por una suscripción** (Muchos padres pueden preferir buscar información gratuita en internet).
 3. **Competencia con recursos gratuitos** (Blogs, redes sociales y foros ya ofrecen consejos sobre alimentación infantil).
@@ -55,7 +55,7 @@
 5. **Necesidad de personalización avanzada** (Cada bebé tiene necesidades únicas, por lo que la app debe ofrecer recomendaciones muy ajustadas para evitar errores).
 
 
-## Amenazas (Factores externos negativos)
+## 2. Amenazas (Factores externos negativos)
 
 1. **Regulaciones sanitarias y de datos** (Cumplimiento estricto de normativas como GDPR sobre el manejo de datos médicos y privacidad infantil).
 2. **Desconfianza en la tecnología para la salud infantil** (Algunos padres pueden dudar en seguir consejos de una app en lugar de consultar a un pediatra).
@@ -63,7 +63,7 @@
 4. **Evolución de las recomendaciones médicas** (Las guías de alimentación infantil pueden cambiar, requiriendo constantes actualizaciones en la app).
 5. **Desafíos en la monetización** (No todos los padres estarían dispuestos a pagar por funcionalidades premium).
 
-## Fortalezas (Factores internos positivos)
+## 3. Fortalezas (Factores internos positivos)
 1. **Diferenciación en el mercado** (Se enfoca en la fase previa a la alimentación complementaria, cubriendo una necesidad menos atendida).
 2. **Personalización basada en evidencia científica** (Recomendaciones adaptadas según la edad y desarrollo del bebé).
 3. **Funciones innovadoras** (Registro de alimentos, detección de alergias, recordatorios inteligentes y conexión con especialistas).
@@ -72,7 +72,7 @@
 6. **Modelo de negocio escalable** (Freemium con suscripción premium, publicidad segmentada y consultas online).
 
 
-## Oportunidades (Factores externos positivos)
+## 4. Oportunidades (Factores externos positivos)
 1. **Creciente interés en la alimentación saludable infantil** (Más padres buscan orientación confiable sobre nutrición desde el nacimiento).
 2. **Tendencia hacia la digitalización de la salud** (Cada vez más personas confían en apps de salud y bienestar).
 3. **Colaboraciones con pediatras y marcas de alimentación infantil** (Posibles acuerdos con clínicas, fabricantes de productos para bebés y farmacias).
