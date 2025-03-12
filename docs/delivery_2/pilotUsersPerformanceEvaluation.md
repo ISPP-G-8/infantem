@@ -137,6 +137,28 @@ Ramón destacó como uno de los usuarios más analíticos. Fue más allá de lo 
 Alberto proporcionó una evaluación detallada, señalando tanto problemas funcionales como estéticos. A pesar de que la evaluación de los requisitos fue algo más básica, sus comentarios sobre la interfaz, el diseño de la aplicación y la falta de elementos visuales fueron muy pertinentes. Su feedback se enfocó en aspectos importantes para mejorar la experiencia de usuario, y su puntuación refleja una implicación más allá de lo mínimo.
 ---
 
+### Santiago Rosado
+
+- **Fecha de acceso:** 12/03/2025 00:03
+- **Fecha de feedback:** 12/03/2025 18:26:07
+- **Puntuación:** **9**
+- **Fallos encontrados:**
+  - "El sistema de alérgenos no es del todo claro.
+  - La navegación hacia la pantalla de bebés es confusa.
+  - Las secciones ""Suggested"" ""Recommended"" están demasiado juntas, lo que dificulta diferenciarlas."
+- **Recomendaciones de mejora:**
+  - "Explicar mejor el funcionamiento de los alérgenos dentro de la aplicación.
+  - Hacer más intuitivo el acceso a la pantalla de bebés.
+  - Separar visualmente las secciones ""Suggested"" y ""Recommended"" para que sean más distinguibles.
+  - Mejorar el diseño general para darle más personalidad a la aplicación.
+  - Hacer que las recetas sean más atractivas visualmente, añadiendo imágenes o mejorando su presentación."
+- **Otros comentarios:**
+  - En general, le parece que va bien encaminada
+  - Interfaz es clara y fácil de usar
+- **Evaluación del desempeño:**
+Santiago Rosado realizó una evaluación detallada, identificando tanto problemas de usabilidad como aspectos visuales que afectan la experiencia del usuario. Sus observaciones sobre la falta de claridad en el sistema de alérgenos, la navegación confusa y la proximidad de secciones similares evidencian un análisis minucioso. Además, sus sugerencias apuntan a mejoras tanto funcionales como estéticas, lo que refleja un enfoque integral en la optimización de la aplicación. Su retroalimentación destaca la importancia de una interfaz más intuitiva y atractiva, lo que demuestra un alto nivel de implicación en la evaluación.
+---
+
 ## Resumen de Evaluaciones
 
 | Usuario           | Fecha de Feedback       | Puntuación | Nivel de Colaboración                                |
@@ -145,7 +167,7 @@ Alberto proporcionó una evaluación detallada, señalando tanto problemas funci
 | Antonio Macías    | 12/03/2025 13:52        | 9          | Comentarios útiles pero algo más generales           |
 | Ramón Gavira      | 12/03/2025 16:25        | 10          | Evaluación detallada con propuestas claras           |
 | Alberto Carmona   | 12/03/2025 14:57        | 9          | Evaluación detallada y constructiva                  |
-
+| Santiago Rosado   | 12/03/2025 18:26:07        | 9          | Evaluación detallada y constructiva                  |
 ---
 
 > *Este sistema de evaluación sirve como guía para valorar la implicación de los usuarios piloto y tomar decisiones sobre futuras iteraciones y pruebas de usuario.*
