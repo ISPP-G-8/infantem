@@ -121,9 +121,9 @@ Modelo freemium con una versión de pago que elimina anuncios y agrega funcional
 **Reseñas**:
 - Muy útil para la organización, pero algunos consideran que la versión gratuita es limitada
 
-### Análisis de las 4P’s de los competidores directos
+## Análisis de las 4P’s de los competidores directos
 
-#### Little Lunches
+### Little Lunches
 **Producto**:
 - Aplicación que ofrece planes de comidas semanales diseñados por dietistas.
 - Recetas adaptadas a diferentes edades, desde bebés hasta adolescentes.
@@ -148,7 +148,7 @@ Modelo freemium con una versión de pago que elimina anuncios y agrega funcional
 - Blog con artículos sobre alimentación saludable.
 - Publicidad en Google Ads y redes sociales.
 
-#### Fuddle:
+### Fuddle:
 **Producto**:
 - Aplicación que utiliza inteligencia artificial para generar planes de alimentación personalizados.
 - Incluye gestión nutricional, recetas y seguimiento de comidas.
@@ -169,7 +169,7 @@ Modelo freemium con una versión de pago que elimina anuncios y agrega funcional
 - Marketing basado en beneficios de la IA en nutrición.
 
 
-### Tabla comparativa de los competidores
+## Tabla comparativa de los competidores
 
 | Característica |  Infantem | Little Lunches |  Fuddle  |  Solid Starts  | Nuttriapp  |
 |:---:|:---:|:---:|:---:|:---:|:---:|
