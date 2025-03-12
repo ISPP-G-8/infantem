@@ -1,6 +1,6 @@
-# Feedback Usuarios Piloto
+# Pilot Users Performance Evaluation
 
-![Portada](../../../frontend/assets/Documentos/Infantem.png)
+![Portada](../imagenes/Infantem.png)
 ---
 **Fecha:** 18/02/2025  
 **Grupo 8:** Infantem  
@@ -39,72 +39,113 @@
 
 ---
 
-## Índice
-1. [Cómo completar este documento](#cómo-completar-este-documento)
-2. [Enlace del sistema desplegado](#enlace-del-sistema-desplegado)
-3. [Funcionalidades a probar](#funcionalidades-a-probar)
-4. [Información del usuario piloto](#información-del-usuario-piloto)
-5. [Evaluación de funcionalidades](#evaluación-de-funcionalidades)
-6. [Comentarios adicionales](#comentarios-adicionales)
+Este documento recoge la evaluación del desempeño de los usuarios piloto en base a los comentarios proporcionados, según el sistema de puntuación establecido.
+
+## Sistema de Evaluación
+
+| **Puntuación** | **Descripción** |
+|----------------|-----------------|
+| 10             | Proporciona comentarios detallados y sugerencias que van más allá de lo solicitado, evidenciando una exploración profunda del sistema. |
+| 8-9            | Completa la evaluación con información útil, aportando observaciones que ayudan a mejorar el producto. |
+| 6-7            | Entrega el formulario completo, aunque con respuestas algo superficiales o sin comentarios extra. |
+| 5              | Presenta el documento de forma básica, sin mostrar mucho interés en el proceso. |
+| 1-4            | Rellena el documento de forma incompleta o sin haber probado correctamente la aplicación. |
+| 0              | No entrega el documento de evaluación. |
 
 ---
 
-## Cómo completar este documento
+## Evaluaciones Individuales
 
-Este archivo debe completarse con la información solicitada en los campos indicados, preferiblemente debajo de cada título subrayado. El objetivo es recopilar comentarios detallados sobre las funcionalidades del sistema para poder realizar mejoras basadas en la experiencia del usuario.
+### Natalia Olmo
 
-## Enlace del sistema desplegado
-[Especificar enlace aquí]
+- **Fecha de acceso:** 12/03/2025 00:03
+- **Fecha de feedback:** 12/03/2025 11:49
+- **Puntuación:** **8**
+- **Fallos encontrados:**
+  - No se entiende por qué es necesario introducir datos del bebé para ver recetas.
+  - Las recetas incluyen una descripción, pero no detallan los pasos a seguir.
+- **Recomendaciones de mejora:**
+  - Traducir la app al español, con opción a inglés en el futuro.
+  - Añadir pestaña “Mis bebés” en la AppNavBar.
+  - Añadir imágenes para mejorar la interfaz.
+- **Otros comentarios:**
+  - Aplicación bien organizada y fácil de usar.
+  - Algunas ayudas fueron útiles, otras no.
+- **Evaluación del desempeño:**
+Natalia ha realizado una evaluación completa y ha detectado varios aspectos importantes que podrían mejorarse, como la falta de lógica en ciertos requisitos (introducir datos del bebé para acceder a recetas) y la necesidad de más detalle en las instrucciones de cocina. Sus sugerencias fueron proactivas, incluyendo mejoras visuales y estructurales como añadir una pestaña específica para gestionar a los bebés y la traducción de la aplicación. Su implicación demuestra un nivel de colaboración alto y compromiso con la mejora del producto.
+---
 
-## Funcionalidades a probar
+### Antonio Macías
 
-Estas son las funcionalidades que ya están desarrolladas y que necesitan ser evaluadas. No es necesario que asistáis a ninguna reunión para proporcionar vuestros comentarios; podéis completarlo de forma autónoma. Sin embargo, si consideráis necesario aclarar algo o discutir algún aspecto del sistema en más detalle, no dudéis en solicitar una reunión.
+- **Fecha de acceso:** 12/03/2025 00:03
+- **Fecha de feedback:** 12/03/2025 13:52
+- **Puntuación:** **9**
+- **Fallos encontrados:**
+  - Diseño poco atractivo, escasos detalles visuales.
+  - Textos de las recetas condensados y de tamaño pequeño.
+- **Recomendaciones de mejora:**
+  - Mejorar diseño visual y estética.
+  - Optimizar distribución del texto en recetas.
+  - Aumentar tamaño de texto.
+- **Otros comentarios:**
+  - Interfaz simple y fácil de entender.
+  - Se percibe como una primera versión del sistema.
+- **Evaluación del desempeño:**
+Antonio cumplió con el formulario y proporcionó comentarios enfocados en la estética y usabilidad, señalando que la interfaz actual se percibe poco atractiva y que la legibilidad del contenido podría mejorar. Aunque sus observaciones fueron algo más generales, tocó aspectos esenciales para mejorar la experiencia de usuario. Su aportación sugiere que exploró la app lo suficiente como para detectar carencias clave, aunque no profundizó en el análisis de funciones o usabilidad avanzada.
+---
 
-- **Registro de alquiler**
-- **Solicitud de alquiler**
-- **Búsqueda avanzada**
-- **Gestión de usuarios**
-- **Operaciones CRUD para objetos**
+### Ramón Gavira
 
-**Objetivo:** Queremos saber qué tan fácil o difícil es utilizar estas funcionalidades por cuenta propia, sin necesidad de mucha ayuda adicional. Además, cualquier comentario sobre la usabilidad y posibles mejoras será muy útil.
+- **Fecha de acceso:** 12/03/2025 00:03
+- **Fecha de feedback:** 12/03/2025 16:25
+- **Puntuación:** **10**
+- **Fallos encontrados:**
+  - Diseño impersonal, similar a estilos por defecto.
+  - No queda clara la finalidad de la app.
+  - “Añadir bebé” puede parecer trivial/gamificado.
+  - Parámetros del bebé no relacionados directamente con las recetas.
+  - Falta una página principal explicativa.
+  - Las recetas no incluyen pasos.
+- **Recomendaciones de mejora:**
+  - Crear identidad visual atractiva y corporativa.
+  - Clarificar la función principal desde la home.
+  - Revisar los campos de datos del bebé.
+  - Rediseñar “Añadir bebé” para mayor coherencia.
+  - Incluir pasos en las recetas o señalar futuras actualizaciones.
+- **Otros comentarios:**
+  - Reconoce el estado inicial del desarrollo.
+  - Muestra interés en la evolución futura de la app.
+- **Evaluación del desempeño:**
+Ramón destacó como uno de los usuarios más analíticos. Fue más allá de lo esperado, haciendo una evaluación crítica y constructiva tanto del diseño como de la lógica de la aplicación. Señaló con claridad varios puntos de fricción en la experiencia del usuario, como la falta de identidad visual, la desconexión entre los datos del bebé y las recetas, y la ausencia de pasos en las recetas. Sus recomendaciones fueron claras, bien argumentadas y orientadas a una evolución del producto. Su nivel de compromiso fue sobresaliente y demostró una alta capacidad para detectar mejoras viables.
+---
 
-## Información del usuario piloto
+### Alberto Carmona
 
-- **Nombre del usuario piloto:** [Aquí]
-- **Fecha en la que se recibió el documento (dd/mm):** [Aquí]
-- **Fecha de entrega del documento (dd/mm):** [Aquí]
-- **Tiempo invertido:** [Aquí]
+- **Fecha de acceso:** 12/03/2025 00:03
+- **Fecha de feedback:** 12/03/2025 14:57
+- **Puntuación:** **9**
+- **Fallos encontrados:**
+  - La app no le llamó la atención.
+  - Falta de detalles importantes en la información mostrada.
+- **Recomendaciones de mejora:**
+  - Añadir elementos visuales y funcionales más atractivos.
+  - Profundizar en la información mostrada.
+- **Otros comentarios:**
+  - Interfaz clara y bien organizada.
+  - Algunas ayudas útiles, otras no.
+- **Evaluación del desempeño:**
+Alberto proporcionó una evaluación detallada, señalando tanto problemas funcionales como estéticos. A pesar de que la evaluación de los requisitos fue algo más básica, sus comentarios sobre la interfaz, el diseño de la aplicación y la falta de elementos visuales fueron muy pertinentes. Su feedback se enfocó en aspectos importantes para mejorar la experiencia de usuario, y su puntuación refleja una implicación más allá de lo mínimo.
+---
+
+## Resumen de Evaluaciones
+
+| Usuario           | Fecha de Feedback       | Puntuación | Nivel de Colaboración                                |
+|-------------------|-------------------------|------------|------------------------------------------------------|
+| Natalia Olmo      | 12/03/2025 11:49        | 8          | Aporta observaciones útiles y sugerencias relevantes |
+| Antonio Macías    | 12/03/2025 13:52        | 9          | Comentarios útiles pero algo más generales           |
+| Ramón Gavira      | 12/03/2025 16:25        | 10          | Evaluación detallada con propuestas claras           |
+| Alberto Carmona   | 12/03/2025 14:57        | 9          | Evaluación detallada y constructiva                  |
 
 ---
 
-## Evaluación de funcionalidades
-
-Por favor, incluya comentarios detallados sobre cada funcionalidad, destacando cualquier problema que haya surgido al intentar utilizarla, errores encontrados y sugerencias para mejorar. Tómese su tiempo para proporcionar una evaluación honesta y detallada.
-
-### Registro de alquiler:
-[Comentarios aquí]
-
-### Solicitud de alquiler:
-[Comentarios aquí]
-
-### Búsqueda avanzada:
-[Comentarios aquí]
-
-### Gestión de usuarios:
-[Comentarios aquí]
-
-### Operaciones CRUD para objetos:
-[Comentarios aquí]
-
----
-
-## Comentarios adicionales
-
-Si tienes alguna sugerencia o comentario adicional que no esté relacionado directamente con las funcionalidades anteriores, pero que consideras relevante para el proyecto, por favor compártelo aquí:
-
-[Comentarios adicionales aquí]
-
----
-
-¡Gracias por tu colaboración!  
-Tu retroalimentación es clave para mejorar el sistema y ofrecer una mejor experiencia al usuario final. Si lo consideras necesario, no dudes en solicitar una reunión para resolver dudas o discutir puntos específicos.
+> *Este sistema de evaluación sirve como guía para valorar la implicación de los usuarios piloto y tomar decisiones sobre futuras iteraciones y pruebas de usuario.*
