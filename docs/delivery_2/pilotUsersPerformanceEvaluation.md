@@ -101,7 +101,7 @@ Antonio cumplió con el formulario y proporcionó comentarios enfocados en la es
 - **Fecha de acceso:** 12/03/2025 00:03
 - **Fecha de feedback:** 12/03/2025 16:25
 - **Puntuación:** **10**
-- **Link clockify:** (No aportado)
+- **Link clockify:** https://app.clockify.me/shared/67d1e152ef0d12419bbe688c
 - **Fallos encontrados:**
   - Diseño impersonal, similar a estilos por defecto.
   - No queda clara la finalidad de la app.
@@ -127,7 +127,7 @@ Ramón destacó como uno de los usuarios más analíticos. Fue más allá de lo 
 - **Fecha de acceso:** 12/03/2025 00:03
 - **Fecha de feedback:** 12/03/2025 14:57
 - **Puntuación:** **9**
-- **Link clockify:** (No aportado)
+- **Link clockify:** https://app.clockify.me/shared/67d1e3d006a063047ed7a5a3
 - **Fallos encontrados:**
   - La app no le llamó la atención.
   - Falta de detalles importantes en la información mostrada.
@@ -163,6 +163,30 @@ Alberto proporcionó una evaluación detallada, señalando tanto problemas funci
 - **Evaluación del desempeño:**
 Santiago Rosado realizó una evaluación detallada, identificando tanto problemas de usabilidad como aspectos visuales que afectan la experiencia del usuario. Sus observaciones sobre la falta de claridad en el sistema de alérgenos, la navegación confusa y la proximidad de secciones similares evidencian un análisis minucioso. Además, sus sugerencias apuntan a mejoras tanto funcionales como estéticas, lo que refleja un enfoque integral en la optimización de la aplicación. Su retroalimentación destaca la importancia de una interfaz más intuitiva y atractiva, lo que demuestra un alto nivel de implicación en la evaluación.
 ---
+### Raúl Heras
+
+- **Fecha de acceso:** 12/03/2025 00:03
+- **Fecha de feedback:** 12/03/2025 20:19:23
+- **Puntuación:** **9**
+- **Link clockify:** https://app.clockify.me/shared/67d1de8dbecbe07bd9902354
+- **Fallos encontrados:**
+  - El sistema de alérgenos no es del todo claro.
+  - La navegación hacia la pantalla de bebés es confusa.
+  - La información no resalta a la vista más que los títulos, lo que da una sensación de "biblia" y no invita a la lectura.
+  - Las cards de los bebés están mejor organizadas respecto al texto, pero la información está muy apelotonada, causando fatiga visual.
+  - Algunas opciones de navegación no son del todo claras.
+- **Recomendaciones de mejora:**
+  - Optimizar la presentación de la información para hacerla más atractiva y fácil de leer.
+  - Segmentar mejor el contenido para evitar la sobrecarga visual.
+  - Mejorar la organización de las cards de bebés para que la información no se vea tan amontonada.
+  - Hacer más intuitivo el acceso a ciertas funciones que pueden resultar confusas.
+- **Otros comentarios:**
+  - La aplicación es clara y fácil de usar en términos generales.
+  - La información proporcionada fue suficiente y útil.
+  - La estructura y organización de la interfaz pueden mejorar para ofrecer una experiencia más agradable.
+- **Evaluación del desempeño:**
+Raúl Heras Pérez realizó una evaluación equilibrada, destacando tanto aspectos positivos como áreas de mejora en la aplicación. Su análisis se centró en la presentación de la información y la usabilidad, señalando que el diseño actual puede resultar confuso y generar fatiga visual. Aunque su valoración fue neutral, sus observaciones sobre la organización del contenido y la claridad de la navegación reflejan un enfoque crítico y constructivo. Su retroalimentación resalta la necesidad de mejorar la disposición visual de la información para hacerla más atractiva y accesible, lo que aporta valor al proceso de optimización de la aplicación.
+---
 
 ## Resumen de Evaluaciones
 
@@ -173,6 +197,7 @@ Santiago Rosado realizó una evaluación detallada, identificando tanto problema
 | Ramón Gavira      | 12/03/2025 16:25        | 10          | Evaluación detallada con propuestas claras           |
 | Alberto Carmona   | 12/03/2025 14:57        | 9          | Evaluación detallada y constructiva                  |
 | Santiago Rosado   | 12/03/2025 18:26:07        | 9          | Evaluación detallada y constructiva                  |
+| Raúl Heras   | 12/03/2025 20:19:23        | 9          | Evaluación detallada y constructiva                  |
 ---
 
 > *Este sistema de evaluación sirve como guía para valorar la implicación de los usuarios piloto y tomar decisiones sobre futuras iteraciones y pruebas de usuario.*
