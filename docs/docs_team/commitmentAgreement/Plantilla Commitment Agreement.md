@@ -1,6 +1,6 @@
 # Commitment Agreement
 
-![Portada](../../frontend/assets/Documentos/Infantem.png)
+![Portada](../../../frontend/assets/Documentos/Infantem.png)
 
 
 **Fecha:** 18/02/2025  

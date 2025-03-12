@@ -277,7 +277,8 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
 
 ### 3. **Antonio Jiménez Ortega**
    "Yo, como miembro de este equipo, me comprometo a trabajar de manera proactiva y comprometida con el equipo para garantizar que todos los plazos y tareas sean cumplidos."  
-   Firma: ______________________  
+   Firma: 
+   <img src = "../../frontend/assets/Documentos/firmas/Firma-AntonioJimenez.png" width="300" />
    Fecha: ______________________
 
 ### 4. **Daniel del Castillo Piñero**
