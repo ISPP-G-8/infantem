@@ -260,7 +260,7 @@ En este apartado se presentan los ingresos totales combinados de todas las forma
 
 ## 4. Relación entre ingresos y coste del proyecto (beneficios)
 
-Finalmente, se analiza la relación entre los beneficios estimados y los costes del proyecto. Según la tabla de desglose de costes (Tabla 4), el coste total del proyecto, incluyendo un 10% de reserva para contingencias, es de 61.470,376 €.
+Finalmente, se analiza la relación entre los ingresos estimados y los costes del proyecto. Según la tabla de desglose de costes (Tabla 4), el coste total del proyecto, incluyendo un 10% de reserva para contingencias, es de 61.470,376 €.
 
 **Caso pesimista** 
 
