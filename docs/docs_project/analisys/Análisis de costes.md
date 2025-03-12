@@ -188,26 +188,26 @@ En la siguiente tabla se recogen los costes totales del proyecto, incluyendo en 
 <p style="text-align:center;font-style:italic;">Tabla 7: desglose de costes del proyecto</p>
 
 
-## 3. Beneficios (Ingresos)
-Para el cálculo de los beneficios se tendrán en cuenta un caso optimista y un caso pesimista de adopción del sistema cómo se expondrán en los siguientes puntos. Estos casos se basan en el número de nacimientos medio por mes según el INE en 2024, siendo esta cifra de 26837. Infantem cuenta con cuatro maneras distintas de monetización. 
+## 3. Ingresos
+Para el cálculo de los ingresos se tendrán en cuenta un caso optimista y un caso pesimista de adopción del sistema cómo se expondrán en los siguientes puntos. Estos casos se basan en el número de nacimientos medio por mes según el INE en 2024, siendo esta cifra de 26837. Infantem cuenta con cuatro maneras distintas de monetización. 
 
 ### 3.1. Modelo Freemium
 La aplicación cuenta con funcionalidades básicas que son de uso gratuito para todos los usuarios. Sin embargo, también ofrece un plan Premium que ofrece funcionalidades extra. Dicho plan tiene un precio de 4,99 €. En estos datos no se descuenta el IVA. 
 - Caso pesimista 
-    - Un 1% de los padres con un hijo recién nacido utiliza Infantem, que se traduce en 268 usuarios. Si de este número un 5% (13 personas) adquieren el plan Premium se conseguiría un beneficio de 64,87 € el primer mes. Suponiendo también que la mitad de los usuarios continúa con la suscripción durante 6 meses queda la distribución por mes que se puede ver en el gráfico 1. Estos datos indican que el beneficio total por suscripciones en un año sería de 2237,97 € sin descontar el IVA y 1767,99 € si se descuenta..
+    - Un 1% de los padres con un hijo recién nacido utiliza Infantem, que se traduce en 268 usuarios. Si de este número un 5% (13 personas) adquieren el plan Premium se conseguiría unos ingresos de 64,87 € el primer mes. Suponiendo también que la mitad de los usuarios continúa con la suscripción durante 6 meses queda la distribución por mes que se puede ver en el gráfico 1. Estos datos indican que los ingresos totales por suscripciones en un año sería de 2237,97 € sin descontar el IVA y 1767,99 € si se descuenta.
 - Caso Realista
-    - Un 5% de los padres con un hijo recién nacido utiliza Infantem, que se traduce en 1342 usuarios. Si de este número un 7% (94 personas) adquieren el plan Premium, se conseguiría un beneficio de 469,06 € el primer mes. Suponiendo también que la mitad de los usuarios continúa con la suscripción durante 6 meses, queda la distribución por mes que se puede ver en el gráfico correspondiente. Estos datos indican que el beneficio total por suscripciones en un año sería de 5628,72 € sin descontar el IVA y 21.027,52 € tras IVA.
+    - Un 5% de los padres con un hijo recién nacido utiliza Infantem, que se traduce en 1342 usuarios. Si de este número un 7% (94 personas) adquieren el plan Premium, se conseguiría unos ingresos de 469,06 € el primer mes. Suponiendo también que la mitad de los usuarios continúa con la suscripción durante 6 meses, queda la distribución por mes que se puede ver en el gráfico correspondiente. Estos datos indican que los ingresos totales por suscripciones en un año sería de 5628,72 € sin descontar el IVA y 21.027,52 € tras IVA.
 
-<img src='../../../docs/imagenes/GraficaBeneficioDespuesDelLanzamiento.png' width=500 style='display: block; margin-left:auto; margin-right:auto;' >
+<img src='../../../docs/imagenes/GraficaIngresosDespuesDelLanzamiento.png' width=500 style='display: block; margin-left:auto; margin-right:auto;' >
 
-<p style="text-align:center;font-style:italic;">Gráfico 1: Distribución de beneficio por meses después del lanzamiento</p>
+<p style="text-align:center;font-style:italic;">Gráfico 1: Distribución de INGRESOS por meses después del lanzamiento</p>
 
 - Caso optimista
-  - Un 10% de los padres con un recién nacido utiliza la aplicación, que se traduce en 2683 usuarios. Si un 10% de ellos (268) adquieren el plan Premium se conseguiría un beneficio de 1337,32 € el primer mes. Suponiendo que la mitad de los usuarios mantiene el plan durante un año queda la distribución por mes que se puede ver en el gráfico 2. Estos datos indican que el beneficio total por suscripciones en un año sería de 60179,4 € con IVA y 47541,72 € al descontar el IVA.
+  - Un 10% de los padres con un recién nacido utiliza la aplicación, que se traduce en 2683 usuarios. Si un 10% de ellos (268) adquieren el plan Premium se conseguiría unos ingresos de 1337,32 € el primer mes. Suponiendo que la mitad de los usuarios mantiene el plan durante un año queda la distribución por mes que se puede ver en el gráfico 2. Estos datos indican que los ingresos totales por suscripciones en un año sería de 60179,4 € con IVA y 47541,72 € al descontar el IVA.
 
-<img src='../../../docs/imagenes/GraficaBeneficioDespuesDelLanzamiento2.png' width=500 style='display: block; margin-left:auto; margin-right:auto;' >
+<img src='../../../docs/imagenes/GraficaIngresosDespuesDelLanzamiento2.png' width=500 style='display: block; margin-left:auto; margin-right:auto;' >
 
-<p style="text-align:center;font-style:italic;">Gráfico 2: Distribución de beneficio por meses después del lanzamiento</p>
+<p style="text-align:center;font-style:italic;">Gráfico 2: Distribución de INGRESOS por meses después del lanzamiento</p>
 
 ### 3.2. Publicidad segmentada
 
@@ -215,50 +215,50 @@ Para los usuarios que no dispongan de plan premium tendrán publicidad en la apl
 - Caso pesimista 
   - Nuevamente se asume que un 1% (268) de los padres con hijos recién nacidos usa Infantum y que el 95% (255) de ellos tiene el plan gratuito. Si durante un año utilizan la aplicación significa que cada uno ha visto 1825 anuncios, haciendo un total de 465375 visualizaciones de anuncios. Este número se traduce a su vez en 465 paquetes de 1000 visualizaciones, generando así 930 € anuales. No obstante, a esta cantidad hay que restarle en torno a un 15% (si factura menos de un millón de euros) de comisión por la plataforma en la que se aloja la aplicación y un 21% de IVA, quedando 595,2 €. 
 - Caso Realista
-  - Se asume que un 5% (1342 usuarios) de los padres con hijos recién nacidos usa Infantem y que el 92% (1234 usuarios) tiene el plan gratuito. Si durante un año utilizan la aplicación, cada uno verá 1825 anuncios, lo que resulta en 2.251.450 visualizaciones de anuncios. Este número equivale a 2251 paquetes de 1000 visualizaciones, generando así 4502 € anuales. Tras restar aproximadamente un 15% de comisión de la plataforma y un 21% de IVA, el beneficio anual neto se sitúa en 3.042,8 €.
+  - Se asume que un 5% (1342 usuarios) de los padres con hijos recién nacidos usa Infantem y que el 92% (1234 usuarios) tiene el plan gratuito. Si durante un año utilizan la aplicación, cada uno verá 1825 anuncios, lo que resulta en 2.251.450 visualizaciones de anuncios. Este número equivale a 2251 paquetes de 1000 visualizaciones, generando así 4502 € anuales. Tras restar aproximadamente un 15% de comisión de la plataforma y un 21% de IVA, el ingreso anual neto se sitúa en 3.042,8 €.
 - Caso optimista 
-  - Nuevamente se asume que un 10% (2683) de los padres con hijos recién nacidos usa Infantum y que el 90% (2414) de ellos tiene el plan gratuito. Si durante un año utilizan la aplicación significa que cada uno ha visto 1825 anuncios, haciendo un total de 4405550 visualizaciones de anuncios. Este número se traduce a su vez en 4405 paquetes de 1000 visualizaciones, generando así 8810€ anuales. Restándole a esta cantidad las comisiones y el IVA se obtiene un beneficio anual de 5638,4 €. 
+  - Nuevamente se asume que un 10% (2683) de los padres con hijos recién nacidos usa Infantum y que el 90% (2414) de ellos tiene el plan gratuito. Si durante un año utilizan la aplicación significa que cada uno ha visto 1825 anuncios, haciendo un total de 4405550 visualizaciones de anuncios. Este número se traduce a su vez en 4405 paquetes de 1000 visualizaciones, generando así 8810€ anuales. Restándole a esta cantidad las comisiones y el IVA se obtiene un ingreso anual de 5638,4 €. 
 
 ### 3.3. Marketplace
 
 Infantem contará con un marketplace especializado en productos para bebés, donde terceros podrán ofrecer artículos relacionados con la alimentación infantil, higiene, ropa, juguetes educativos y otros productos de interés para los padres. La monetización de este marketplace se basará en comisiones por cada venta realizada a través de la plataforma. 
 
-Al igual que en los modelos anteriores, se plantean dos escenarios para el análisis de beneficios: un caso optimista y un caso pesimista. Se ha considerado un ticket medio de compra de 40 € por usuario y una comisión del 10% por cada venta, sin descontar el IVA. 
+Al igual que en los modelos anteriores, se plantean dos escenarios para el análisis de ingresos: un caso optimista y un caso pesimista. Se ha considerado un ticket medio de compra de 40 € por usuario y una comisión del 10% por cada venta, sin descontar el IVA. 
 
 - Caso pesimista 
-  - En este escenario, se asume que un 1% de los padres con un hijo recién nacido utiliza el marketplace de Infantem, lo que equivale a 268 usuarios. Se presupone que cada usuario realiza una compra mensual con un valor medio de 40 €. Esto se traduce en unas ventas totales mensuales de 10.720 €. Dado que Infantem obtiene una comisión del 10% por cada venta, se generaría un beneficio mensual de 1.072 €. 
-  Si consideramos que este volumen de ventas se mantiene constante durante todo el año, el beneficio anual antes de aplicar el IVA sería de 12.864 €. Tras descontar el 21% de IVA, el beneficio anual se situaría en 10.158,56 €. 
+  - En este escenario, se asume que un 1% de los padres con un hijo recién nacido utiliza el marketplace de Infantem, lo que equivale a 268 usuarios. Se presupone que cada usuario realiza una compra mensual con un valor medio de 40 €. Esto se traduce en unas ventas totales mensuales de 10.720 €. Dado que Infantem obtiene una comisión del 10% por cada venta, se generaría un ingreso mensual de 1.072 €. 
+  Si consideramos que este volumen de ventas se mantiene constante durante todo el año, el ingreso anual antes de aplicar el IVA sería de 12.864 €. Tras descontar el 21% de IVA, el ingreso anual se situaría en 10.158,56 €. 
 - Caso Realista
-  - En este escenario, se asume que un 5% de los padres con un hijo recién nacido (1342 usuarios) utiliza el marketplace de Infantem. Se estima que cada usuario realiza 1,5 compras al mes con un valor medio de 40 € cada una.Esto resulta en unas ventas totales mensuales de 80.520 €. Aplicando la comisión del 10%, el beneficio mensual sería de 8.052 €. Si este volumen de ventas se mantiene durante todo el año, el beneficio anual antes de IVA sería de 96.624 €. Tras descontar el 21% de IVA, el beneficio neto anual alcanzaría 76.331 €.
+  - En este escenario, se asume que un 5% de los padres con un hijo recién nacido (1342 usuarios) utiliza el marketplace de Infantem. Se estima que cada usuario realiza 1,5 compras al mes con un valor medio de 40 € cada una.Esto resulta en unas ventas totales mensuales de 80.520 €. Aplicando la comisión del 10%, el ingreso mensual sería de 8.052 €. Si este volumen de ventas se mantiene durante todo el año, el ingreso anual antes de IVA sería de 96.624 €. Tras descontar el 21% de IVA, el ingreso neto anual alcanzaría 76.331 €.
 
 
 - Caso optimista 
   - En un escenario más favorable, se estima que un 10% de los padres con un hijo recién nacido utiliza el marketplace de Infantem, lo que se traduce en 2.683 usuarios. Se plantea que cada usuario realiza dos compras al mes, con un valor medio de 40 € cada una. Esto daría lugar a unas ventas totales mensuales de 214.640 €. 
-  Aplicando la comisión del 10%, el beneficio mensual ascendería a 21.464 €. Manteniendo este ritmo de ventas durante un año, se obtendría un beneficio anual antes de IVA de 257.568 €. Tras descontar el 21% de IVA, el beneficio anual alcanzaría los 203.479,72 €. 
+  Aplicando la comisión del 10%, el ingreso mensual ascendería a 21.464 €. Manteniendo este ritmo de ventas durante un año, se obtendría un ingreso anual antes de IVA de 257.568 €. Tras descontar el 21% de IVA, el ingreso anual alcanzaría los 203.479,72 €. 
 
 
-### 3.4. Suma total de beneficios 
-En este apartado se presentan los beneficios totales combinados de todas las formas de monetización expuestas anteriormente (modelo Freemium, publicidad segmentada y marketplace), distinguiendo entre el caso optimista y el caso pesimista
+### 3.4. Suma total de ingresos 
+En este apartado se presentan los ingresos totales combinados de todas las formas de monetización expuestas anteriormente (modelo Freemium, publicidad segmentada y marketplace), distinguiendo entre el caso optimista y el caso pesimista
 
 **Caso pesimista** 
 - **Modelo Freemium**: 1.767,99 € anuales (tras IVA) 
 - **Publicidad segmentada**: 595,2 € anuales (tras IVA) 
 - **Marketplace**: 10.158,56 € anuales (tras IVA) 
-**Beneficio total anual en el caso pesimista**: 12.521,75 € 
+**Ingresos totales anual en el caso pesimista**: 12.521,75 € 
 
 **Caso Realista**
 - **Modelo Freemium**: 21.027,52 € anuales (tras IVA)
 - **Publicidad segmentada**: 3.042,8 € anuales (tras IVA)
 - **Marketplace**: 76.331 € anuales (tras IVA)
-**Beneficio total anual en el caso pesimista**: 100.401,32 €
+**Ingresos totales anual en el caso pesimista**: 100.401,32 €
 
 **Caso optimista** 
 - **Modelo Freemium**: 47.541,72 € anuales (tras IVA) 
 - **Publicidad segmentada**: 5.638,4 € anuales (tras IVA)
 - **Marketplace**: 203.479,72 € anuales (tras IVA) 
-**Beneficio total anual en el caso optimista**: 256.659,84 € 
+**Ingresos totales anual en el caso optimista**: 256.659,84 € 
 
-## 4. Relación entre beneficio y coste del proyecto
+## 4. Relación entre ingresos y coste del proyecto (beneficios)
 
 Finalmente, se analiza la relación entre los beneficios estimados y los costes del proyecto. Según la tabla de desglose de costes (Tabla 4), el coste total del proyecto, incluyendo un 10% de reserva para contingencias, es de 61.470,376 €.
 
@@ -269,22 +269,22 @@ Con un beneficio total anual estimado de 12.521,75 €, el tiempo estimado para 
 <img src='../../../docs/imagenes/RelacionIngresoEntreCostePesimista.png' width=550 style='display: block; margin-left:auto; margin-right:auto;' >
 
 
-<p style="text-align:center;font-style:italic;">Gráfico 3: Relación entre beneficio acumulado y coste del proyecto caso pesimista</p>
+<p style="text-align:center;font-style:italic;">Gráfico 3: Relación entre ingresos acumulados y coste del proyecto caso pesimista</p>
 
 **Caso Realista**
 
-Con un beneficio total anual estimado de 100.401,32 €, el tiempo estimado para recuperar la inversión inicial de 61.470,38 € sería de aproximadamente 8 meses si se mantiene este escenario.
+Con unos ingresos totales anuales estimado de 100.401,32 €, el tiempo estimado para recuperar la inversión inicial de 61.470,38 € sería de aproximadamente 8 meses si se mantiene este escenario.
 
 Este caso representa un punto de equilibrio más accesible que el pesimista (5 años) pero más conservador que el optimista (3 meses), mostrando una viabilidad intermedia del proyecto.
 
 
 **Caso optimista**
 
-Con un beneficio total anual estimado de 256.659,84 €, la inversión se recuperaría en menos de un año (aproximadamente 3 meses), generando beneficios netos rápidamente.
+Con uno ingresos totales anuales estimado de 256.659,84 €, la inversión se recuperaría en menos de un año (aproximadamente 3 meses), generando beneficios netos rápidamente.
 
 <img src='../../../docs/imagenes/RelacionIngresoEntreCosteOptimista.png' width=550 style='display: block; margin-left:auto; margin-right:auto;' >
 
-<p style="text-align:center;font-style:italic;">Gráfico 4: Relación entre beneficio acumulado y coste del proyecto caso optimista</p> 
+<p style="text-align:center;font-style:italic;">Gráfico 4: Relación entre ingreso acumulado y coste del proyecto caso optimista</p> 
 
 ## 5. Conclusión
 
