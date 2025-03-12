@@ -344,9 +344,9 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
 
    "Yo, como miembro de este equipo, me comprometo a mantener un alto nivel de compromiso con el equipo y a cumplir con las responsabilidades asignadas."
    
-   Firma: ______________________
+   Firma: <img src = "../../docs/imagenes/firmas/Firma-JavierUleciaGarcia.png" width="200" />
    
-   Fecha: ______________________
+   Fecha: 12/03/2025
 
 ### 11. **José García de Tejada Delgado**
 
