@@ -1,5 +1,6 @@
-![Portada](../../../frontend/assets/Documentos/Infantem.png)
+# Análisis de competidores
 
+![Portada](../../../docs/imagenes/Infantem.png)
 
 **Fecha:** 18/02/2025  
 **Grupo 8:** Infantem  
@@ -49,7 +50,7 @@
 
 ---
 
-## Identificación de competidores
+## 1. Identificación de competidores
 
 Para identificar los competidores directos de nuestra aplicación de alimentación infantil, hemos analizado tres criterios clave:
 1. **Modelo de negocio**: Aplicaciones que monetizan de manera similar mediante suscripción, freemium o publicidad.
@@ -59,7 +60,7 @@ Para identificar los competidores directos de nuestra aplicación de alimentaci�
 Tras este análisis, hemos clasificado los competidores en <u>directos e indirectos</u>.
 
 
-### Competidores directos
+### 1.1. Competidores directos
 
 #### Little Lunches
 **Descripción**:
@@ -91,7 +92,7 @@ Suscripción mensual para desbloquear más funcionalidades.
 - Interfaz intuitiva, pero algunos reportan que las sugerencias de IA no siempre son acertadas.
 - No tiene opciones de interacción social.
 
-### Competidores indirectos
+### 1.2. Competidores indirectos
 
 #### Mealime
 **Descripción**:
@@ -121,7 +122,7 @@ Modelo freemium con una versión de pago que elimina anuncios y agrega funcional
 **Reseñas**:
 - Muy útil para la organización, pero algunos consideran que la versión gratuita es limitada
 
-## Análisis de las 4P’s de los competidores directos
+## 2. Análisis de las 4P’s de los competidores directos
 
 ### Little Lunches
 **Producto**:
@@ -169,7 +170,7 @@ Modelo freemium con una versión de pago que elimina anuncios y agrega funcional
 - Marketing basado en beneficios de la IA en nutrición.
 
 
-## Tabla comparativa de los competidores
+## 3. Tabla comparativa de los competidores
 
 | Característica |  Infantem | Little Lunches |  Fuddle  |  Solid Starts  | Nuttriapp  |
 |:---:|:---:|:---:|:---:|:---:|:---:|
