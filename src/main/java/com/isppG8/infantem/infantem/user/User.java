@@ -15,12 +15,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -48,9 +47,14 @@ public class User {
     @Column(unique = true)
     @NotBlank
     @Size(min = 3, max = 50)
+    @Pattern(regexp = "^[a-zA-Z0-9._-]{3,50}$", 
+    message = "The username can only contain letters, numbers, periods, hyphens, and underscores.")
     private String username;
 
     @NotBlank
+    @Size(min = 8, max = 100, message = "The password must be between 8 and 100 characters long.")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$", 
+            message = "The password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.")
     private String password;
 
     @Email
