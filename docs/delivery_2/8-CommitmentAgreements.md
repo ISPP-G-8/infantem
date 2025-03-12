@@ -292,9 +292,9 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
 
    "Yo, como miembro de este equipo, me comprometo a ser un miembro activo del equipo y a respetar todos los procesos acordados para contribuir al éxito del proyecto."
    
-   Firma: ______________________
+   Firma: <img src = "../../docs/imagenes/firmas/Firma-AntonioJimenez.png" width="200" >
    
-   Fecha: ______________________
+   Fecha: 12/03/2025
 
 ### 5. **David Fuentelsaz Rodríguez**
 
