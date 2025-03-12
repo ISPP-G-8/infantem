@@ -126,17 +126,55 @@ Ramón destacó como uno de los usuarios más analíticos. Fue más allá de lo 
 
 - **Fecha de acceso:** 12/03/2025 00:03
 - **Fecha de feedback:** 12/03/2025 14:57
-- **Puntuación:** **9**
+- **Puntuación:** **10**
 - **Link clockify:** https://app.clockify.me/shared/67d1e3d006a063047ed7a5a3
-- **Fallos encontrados:**
-  - La app no le llamó la atención.
-  - Falta de detalles importantes en la información mostrada.
-- **Recomendaciones de mejora:**
-  - Añadir elementos visuales y funcionales más atractivos.
-  - Profundizar en la información mostrada.
-- **Otros comentarios:**
-  - Interfaz clara y bien organizada.
-  - Algunas ayudas útiles, otras no.
+
+**Fallos encontrados**:
+
+**Información de los bebés**:
+- Los elementos donde se recoge la información son poco estéticos y carecen de separación, lo que hace que todo se vea muy junto (fecha de nacimiento, género, etc.).
+- El botón "Add Baby" no es adecuado, ya que parece que se está añadiendo un producto a un carrito de compra.
+- Los elementos de la navbar en negro con azul no se ven bien; deberían estar en blanco (Recipes, Alimentos, etc.).
+- Falta un botón de eliminar en la sección de edición de bebés (si no está planificado para futuras actualizaciones).
+- Inconsistencia en el idioma de la navbar: algunas secciones están en inglés (Recipes) y otras en español (Alimentos).
+- La palabra "Alérgenos" debe llevar tilde.
+- En la funcionalidad se menciona el seguimiento del crecimiento y visitas médicas, pero no se ve reflejado en la aplicación.
+**Sugerencia de recetas**:
+- No está claro para qué bebé se sugieren las recetas. Actualmente, todas tienen las mismas, pero en el futuro, ¿cómo se diferenciarán?
+- Falta un filtrado por ingredientes y etapas de desarrollo del bebé.
+- No se indica en qué momento del día es adecuada cada receta, a pesar de que la funcionalidad menciona que deberían estar adaptadas a distintos momentos.
+
+**Búsqueda de recetas por nombre**:
+- Funciona correctamente, pero no ofrece más opciones de filtrado.
+
+**Recetas favoritas**:
+- No hay información visible en la página antes de iniciar sesión.
+- Podría haber una sección con las recetas más añadidas a favoritos para que la página tenga contenido antes de loggearse.
+
+**Vista detallada de Receta**:
+- Falta una imagen de la receta terminada.
+- No hay una sección con los pasos a seguir para cocinar la receta, a pesar de que la funcionalidad principal indica que debería guiar al usuario en la preparación del plato.
+
+- **Recomendaciones de mejora**:
+- Separar mejor los elementos en la sección de información de los bebés para mejorar la legibilidad.
+- Cambiar el nombre del botón "Add Baby" por algo más intuitivo.
+- Modificar los colores de la navbar para mejorar la visibilidad del texto.
+- Añadir un botón de eliminar en la sección de edición de bebés.
+- Unificar el idioma de la navbar para evitar confusión.
+- Corregir la ortografía en términos clave como "Alérgenos".
+- Implementar funcionalidades que permitan el seguimiento del crecimiento y visitas médicas.
+- Especificar para qué bebé se están sugiriendo las recetas.
+- Incluir filtros por ingredientes y etapas de desarrollo del bebé.
+- Añadir información sobre el momento del día en el que es recomendable cada receta.
+- Mostrar contenido de recetas favoritas antes de iniciar sesión, como una lista con las más añadidas por los usuarios.
+- Agregar imágenes a la vista detallada de recetas para hacerla más atractiva.
+- Incluir una sección con los pasos detallados para preparar cada receta.
+
+- **Otros comentarios**:
+- La funcionalidad de búsqueda de recetas por nombre cumple con lo esperado.
+- La estructura de la aplicación es buena, pero faltan detalles para mejorar la usabilidad y la experiencia visual.
+- Se aprecian avances en la organización de la información, pero aún hay margen de mejora en la claridad y distribución de los elementos.
+
 - **Evaluación del desempeño:**
 Alberto proporcionó una evaluación detallada, señalando tanto problemas funcionales como estéticos. A pesar de que la evaluación de los requisitos fue algo más básica, sus comentarios sobre la interfaz, el diseño de la aplicación y la falta de elementos visuales fueron muy pertinentes. Su feedback se enfocó en aspectos importantes para mejorar la experiencia de usuario, y su puntuación refleja una implicación más allá de lo mínimo.
 ---
@@ -195,7 +233,7 @@ Raúl Heras Pérez realizó una evaluación equilibrada, destacando tanto aspect
 | Natalia Olmo      | 12/03/2025 11:49        | 8          | Aporta observaciones útiles y sugerencias relevantes |
 | Antonio Macías    | 12/03/2025 13:52        | 9          | Comentarios útiles pero algo más generales           |
 | Ramón Gavira      | 12/03/2025 16:25        | 10          | Evaluación detallada con propuestas claras           |
-| Alberto Carmona   | 12/03/2025 14:57        | 9          | Evaluación detallada y constructiva                  |
+| Alberto Carmona   | 12/03/2025 14:57        | 10         | Evaluación detallada y constructiva                  |
 | Santiago Rosado   | 12/03/2025 18:26:07        | 9          | Evaluación detallada y constructiva                  |
 | Raúl Heras   | 12/03/2025 20:19:23        | 9          | Evaluación detallada y constructiva                  |
 ---
