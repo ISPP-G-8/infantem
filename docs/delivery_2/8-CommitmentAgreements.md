@@ -376,9 +376,9 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
 
    "Yo, como miembro de este equipo, me comprometo a colaborar activamente en el proyecto y a mantener una actitud positiva y respetuosa con todos los miembros del equipo."
    
-   Firma: ______________________
+   Firma: <img src = "../../docs/imagenes/firmas/Firma-LuciaNoyaCano.png" width="200">
    
-   Fecha: ______________________
+   Fecha: 12/03/2025
 
 ### 15. **Luis Giraldo Santiago**
 
