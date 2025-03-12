@@ -277,8 +277,10 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
 ### 2. **Ángela López Oliva**
 
    "Yo, como miembro de este equipo, me comprometo a seguir las políticas y directrices del equipo, aportando lo mejor de mí para cumplir con mis responsabilidades y objetivos."
-   Firma: ______________________
-   Fecha: ______________________
+
+   Firma: <img src = "../../docs/imagenes/firmas/Firma-AngelaLopez.png" width="200" >
+   
+   Fecha: 12/03/2025
 
 ### 3. **Antonio Jiménez Ortega**
 
