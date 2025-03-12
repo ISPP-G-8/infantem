@@ -318,7 +318,7 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
    
    Firma: <img src = "../../docs/imagenes/firmas/Firma-EnriqueGarcia.jpg" width="200" />
    
-   Fecha: ______________________
+   Fecha: 12/03/2025
 
 ### 8. **Felipe Solís Agudo**
 
