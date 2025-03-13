@@ -225,6 +225,41 @@ Santiago Rosado realizó una evaluación detallada, identificando tanto problema
 - **Evaluación del desempeño:**
 Raúl Heras Pérez realizó una evaluación equilibrada, destacando tanto aspectos positivos como áreas de mejora en la aplicación. Su análisis se centró en la presentación de la información y la usabilidad, señalando que el diseño actual puede resultar confuso y generar fatiga visual. Aunque su valoración fue neutral, sus observaciones sobre la organización del contenido y la claridad de la navegación reflejan un enfoque crítico y constructivo. Su retroalimentación resalta la necesidad de mejorar la disposición visual de la información para hacerla más atractiva y accesible, lo que aporta valor al proceso de optimización de la aplicación.
 ---
+### Beatriz Chaves
+
+- **Fecha de acceso:** 12/03/2025 00:03
+- **Fecha de feedback:** 13/03/2025 11:54:00
+- **Puntuación:** **7**
+- **Fallos encontrados:**
+  - No se reportaron fallos específicos.
+- **Recomendaciones de mejora:**
+  - Mejorar la interfaz gráfica.
+- **Otros comentarios:**
+  - La aplicación es clara y fácil de usar.
+  - La información fue suficiente y relevante.
+  - Se podría mejorar la estética visual de la aplicación.
+- **Evaluación del desempeño:**
+Beatriz proporcionó un feedback positivo en términos de usabilidad, destacando la claridad de la aplicación. Sin embargo, señaló que la interfaz gráfica necesita mejoras.
+Su evaluación resalta que la aplicación es funcional, pero aún se puede optimizar a nivel visual para ofrecer una experiencia más atractiva.
+No aportó comentarios adicionales ni reportó fallos, por lo que no podemos identificar áreas de mejora concretas a partir de su intervención.
+---
+### Miriam Santiago
+
+- **Fecha de acceso:** 12/03/2025 00:03
+- **Fecha de feedback:** 13/03/2025 12:52:32
+- **Puntuación:** **7**
+- **Fallos encontrados:**
+  - No se reportaron fallos específicos.
+- **Recomendaciones de mejora:**
+  - Aclarar mejor algunas funciones y mejorar la distinción de opciones.
+- **Otros comentarios:**
+  - La aplicación es fácil de usar y entender, aunque podría ser más clara en algunos aspectos.
+  - Fue suficiente y relevante la información proporcionada.
+  - La interfaz está bien organizada, pero algunas funciones necesitan mayor claridad.
+- **Evaluación del desempeño:**
+Miriam dejó un feedback general positivo, destacando la facilidad de uso de la aplicación, aunque identificó algunas áreas donde la claridad podría mejorar. 
+Su evaluación sugiere que, aunque la organización es adecuada, algunas opciones de navegación aún requieren más distinción para evitar confusión.
+No aportó comentarios adicionales ni reportó fallos, por lo que no podemos identificar áreas de mejora concretas a partir de su intervención.
 
 ## Resumen de Evaluaciones
 
@@ -236,6 +271,8 @@ Raúl Heras Pérez realizó una evaluación equilibrada, destacando tanto aspect
 | Alberto Carmona   | 12/03/2025 14:57        | 10         | Evaluación detallada y constructiva                  |
 | Santiago Rosado   | 12/03/2025 18:26:07        | 9          | Evaluación detallada y constructiva                  |
 | Raúl Heras   | 12/03/2025 20:19:23        | 9          | Evaluación detallada y constructiva                  |
+| Beatriz Chaves   | 13/03/2025 11:54:00        | 7          | Evaluacion no muy detallada                  |
+| Miriam Santiago   | 13/03/2025 12:52:32        | 7          | Evaluacion no muy detallada                  |
 ---
 
 > *Este sistema de evaluación sirve como guía para valorar la implicación de los usuarios piloto y tomar decisiones sobre futuras iteraciones y pruebas de usuario.*
