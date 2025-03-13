@@ -11,6 +11,7 @@ export default function FavouriteRecipes() {
   const [loading, setLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState<number | null>(null);
+  const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -40,7 +41,7 @@ export default function FavouriteRecipes() {
   useEffect(() => {
     if (isLoggedIn && userId) {
       setLoading(true);
-      fetch(`http://localhost:8081/api/v1/recipes/favorites/${userId}`)
+      fetch(`${apiUrl}/api/v1/recipes/favorites/${userId}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);

@@ -20,6 +20,7 @@ export default function Page() {
   const [age, setAge] = useState<number | null>(null);
 
   const [jwt, setJwt] = useState<string | null>(null);
+  const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
   useEffect(() => {
     const getUserToken = async () => {
@@ -33,7 +34,7 @@ export default function Page() {
 
   useEffect(() => {
     if (jwt) {
-      fetch(`http://localhost:8080/api/v1/recipes/recommended?age=${age}`, {
+      fetch(`${apiUrl}/api/v1/recipes/recommended?age=${age}`, {
         headers: {
           "Authorization": "Bearer " + jwt
         }
@@ -61,7 +62,7 @@ export default function Page() {
 
   useEffect(() => {
     if (jwt) {
-      fetch("http://localhost:8080/api/v1/recipes/user/1", {
+      fetch(`${apiUrl}/api/v1/recipes/user/1`, {
         headers: {
           "Authorization": "Bearer " + jwt
         }
@@ -96,7 +97,7 @@ export default function Page() {
   }, [jwt]);
 
   useEffect(() => {
-    fetch(`http://localhost:8081/api/v1/recipes/recommendations/${babyId}`)
+    fetch(`${apiUrl}/api/v1/recipes/recommendations/${babyId}`)
       .then((response) => {
         if (!response.ok) {
           return response.text().then((text) => {
@@ -130,7 +131,7 @@ export default function Page() {
     if (age === null) return;
 
     try {
-      const response = await fetch(`http://localhost:8080/api/v1/recipes/recommended?age=${age}`, {
+      const response = await fetch(`${apiUrl}/api/v1/recipes/recommended?age=${age}`, {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${jwt}`,
