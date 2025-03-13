@@ -233,6 +233,7 @@ Date: 11/03/2025
 - Elaboración de DAFO de ideas anteriores
 - Elaboración de curriculum interno
 - Visualización de píldoras teóricas
+- Lectura de los feedbacks
 
 
 #### Noya Cano, Lucía-12
@@ -335,7 +336,15 @@ Date: 11/03/2025
 #### Luna Navarro, Paula-10
 
 #### Morgado Prudencio, Jose Maria-11
-
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Lectura de actas de las reuniones no asistidas
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Visualización de vídeos EV.
+- Investigacion sobre la implementacion de la publicidad
+- Implementacion de entidades
+- Analisis de Riesgos
+- performanceEvaluation de Usuarios Piloto
 #### Noya Cano, Lucía-12
 
 #### Rodríguez López, Josué-13
@@ -343,6 +352,19 @@ Date: 11/03/2025
 #### Santos Martín, Javier-14
 
 #### Solís Agudo, Felipe-15
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Desarrollo de actas de las reuniones internas del grupo.
+- Gestión como vocal principal del subgrupo de desarrollo "Frontend" (asignación de tareas, revisión del avance de dichas tareas,...).
+- Participación en el desarrollo de las vistas "recipeRecommendations", "recipeDetails" y "favourites".
+- Planificación de los costes e ingresos estimados para una semana, seis meses y un añodespués del lanzamiento de la aplicación.
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Visualización de vídeos EV.
+- Actualización requisitos funcionales del MVP.
+- Desarrollo de la versión inicial del NavBar de la aplicación.
+- Participación activa como usuario piloto para otro grupo de la asignatura.
+- Revisión diagrama de clases.
+- Revisión de los documentos obligatorios del Sprint 1.
 
 #### Ulecia García, Javier-16
 
@@ -388,19 +410,6 @@ Date: 11/03/2025
 #### Santos Martín, Javier-14
 
 #### Solís Agudo, Felipe-15
-- Asistencia a las sesiones de presentación.
-- Asistencia a reuniones internas del grupo.
-- Desarrollo de actas de las reuniones internas del grupo.
-- Gestión como vocal principal del subgrupo de desarrollo "Frontend" (asignación de tareas, revisión del avance de dichas tareas,...).
-- Participación en el desarrollo de las vistas "recipeRecommendations", "recipeDetails" y "favourites".
-- Planificación de los costes e ingresos estimados para una semana, seis meses y un añodespués del lanzamiento de la aplicación.
-- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
-- Visualización de vídeos EV.
-- Actualización requisitos funcionales del MVP.
-- Desarrollo de la versión inicial del NavBar de la aplicación.
-- Participación activa como usuario piloto para otro grupo de la asignatura.
-- Revisión diagrama de clases.
-- Revisión de los documentos obligatorios del Sprint 1.
 
 #### Ulecia García, Javier-16
 
