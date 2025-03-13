@@ -1,6 +1,6 @@
 # Individual Performance Evaluation Form
 
-![Portada](../../frontend/assets/Documentos/Infantem.png)
+<img src = "../../docs/imagenes/Infantem.png" width="320" />
 
 
 **Fecha:** 18/02/2025  
@@ -321,6 +321,14 @@ Date: 11/03/2025
 #### Galán Lerate, Miguel-3
 
 #### García Abadía, Enrique-4
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Asistencia a reuniones de vocales del grupo.
+- Reviones de frontend pre-presentaciones y unificacion de estilos.
+- Frontend de funcionalidad de registro de alimentos (eliminada posteriormente).
+- Creacion y configuracion de frontend de la funcionalidad baby.
+- Redaccion de documento revision.md juanto a Jose García de Tejada Delgado
+
 
 #### García de Tejada Delgado, José-5
 
