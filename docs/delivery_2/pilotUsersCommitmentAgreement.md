@@ -1,6 +1,6 @@
 # Commitment Agreement - Pilot Users
 
-![Portada](../../../frontend/assets/Documentos/Infantem.png)
+![Portada](../imagenes/Infantem.png)
 
 **Fecha:** 18/02/2025  
 **Grupo 8:** Infantem  
