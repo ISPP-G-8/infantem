@@ -3,6 +3,8 @@ package com.isppG8.infantem.infantem.disease;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.isppG8.infantem.infantem.baby.Baby;
 
 import jakarta.persistence.Entity;
@@ -20,10 +22,13 @@ import lombok.Setter;
 @Entity
 @Table(name = "disease_table")
 @Getter @Setter
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Disease {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer Id;
+
     private String name;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -32,7 +37,7 @@ public class Disease {
 
     @ManyToMany
     @JoinTable(
-        name = "vaccine_baby",
+        name = "disease_baby",
         joinColumns = @JoinColumn(name = "baby_id"),
         inverseJoinColumns = @JoinColumn(name = "disease_id")
     )

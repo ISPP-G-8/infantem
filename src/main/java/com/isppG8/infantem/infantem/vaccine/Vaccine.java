@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.isppG8.infantem.infantem.baby.Baby;
 
 import jakarta.persistence.CascadeType;
@@ -20,6 +22,8 @@ import lombok.Setter;
 @Entity
 @Table(name= "vaccine_table")
 @Getter @Setter
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+
 public class Vaccine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

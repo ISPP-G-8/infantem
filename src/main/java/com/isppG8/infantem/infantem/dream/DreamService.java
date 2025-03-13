@@ -26,8 +26,8 @@ public class DreamService {
 
     public Optional<Dream> updateDream(Long id, Dream dreamDetails) {
         return dreamRepository.findById(id).map(dream -> {
-            dream.setStart(dreamDetails.getStart());
-            dream.setEnd(dreamDetails.getEnd());
+            dream.setDateStart(dreamDetails.getDateStart());
+            dream.setDateEnd(dreamDetails.getDateEnd());
             dream.setNumWakeups(dreamDetails.getNumWakeups());
             dream.setDreamType(dreamDetails.getDreamType());
             return dreamRepository.save(dream);

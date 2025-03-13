@@ -19,14 +19,15 @@ public class AuthService {
 
 	private final PasswordEncoder encoder;
 	private final AuthoritiesService authoritiesService;
-	private final UserService userService;	
+	private final UserService userService;
 
 	@Autowired
-	public AuthService(@Nullable PasswordEncoder encoder, AuthoritiesService authoritiesService, UserService userService) {
-		if(encoder!=null){
-				this.encoder = encoder;
-		} else	{
-				this.encoder=new BCryptPasswordEncoder();
+	public AuthService(@Nullable PasswordEncoder encoder, AuthoritiesService authoritiesService,
+			UserService userService) {
+		if (encoder != null) {
+			this.encoder = encoder;
+		} else {
+			this.encoder = new BCryptPasswordEncoder();
 		}
 		this.authoritiesService = authoritiesService;
 		this.userService = userService;
@@ -45,6 +46,5 @@ public class AuthService {
 		user.setAuthorities(authority);
 		userService.save(user);
 
-		}
 	}
-
+}

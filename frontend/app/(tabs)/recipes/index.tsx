@@ -1,53 +1,52 @@
 import { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity, TextInput, ScrollView } from "react-native";
 import { Link } from "expo-router";
-import { recipes } from "../../../hardcoded_data/recipesData"; 
-import { Recipe } from "../../../types/Recipe"; 
+import { recipes } from "../../../hardcoded_data/recipesData";
+import { Recipe } from "../../../types/Recipe";
 
 export default function Page() {
   const gs = require("../../../static/styles/globalStyles");
-  const [searchQuery, setSearchQuery] = useState(""); 
-  const [suggestedRecipes, setSuggestedRecipes] = useState<Recipe[]>(recipes); 
-  const [recommendedRecipes, setRecommendedRecipes] = useState<Recipe[]>([]); 
-  const [filteredSuggestedRecipes, setFilteredSuggestedRecipes] = useState<Recipe[]>(recipes); 
-  const [filteredRecommendedRecipes, setFilteredRecommendedRecipes] = useState<Recipe[]>([]); 
-  const [loading, setLoading] = useState(true); 
-  const [babyId, setBabyId] = useState<number>(1); 
-  const [allRecipes, setAllRecipes] = useState<Recipe[]>([]); 
+  const [searchQuery, setSearchQuery] = useState("");
+  const [suggestedRecipes, setSuggestedRecipes] = useState<Recipe[]>(recipes);
+  const [recommendedRecipes, setRecommendedRecipes] = useState<Recipe[]>([]);
+  const [filteredSuggestedRecipes, setFilteredSuggestedRecipes] = useState<Recipe[]>(recipes);
+  const [filteredRecommendedRecipes, setFilteredRecommendedRecipes] = useState<Recipe[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [babyId, setBabyId] = useState<number>(1);
+  const [allRecipes, setAllRecipes] = useState<Recipe[]>([]);
 
   useEffect(() => {
-    fetch(`http://localhost:8081/api/v1/recipes/recommendations/${babyId}`)
+    fetch(`http://localhost:8081/api/v1/recipes/recommended/${babyId}`)
       .then((response) => {
         if (!response.ok) {
           return response.text().then((text) => {
             throw new Error(`Error: ${response.status} - ${text}`);
           });
         }
-        return response.json(); 
+        return response.json();
       })
       .then((data: Recipe[]) => {
-        setRecommendedRecipes(data); 
-        setFilteredRecommendedRecipes(data); 
+        setRecommendedRecipes(data);
+        setFilteredRecommendedRecipes(data);
       })
       .catch((error) => {
         console.error("Error fetching recommended recipes:", error);
       })
       .finally(() => setLoading(false));
-  }, [babyId]); 
-
+  }, [babyId]);
 
   useEffect(() => {
     fetch("http://localhost:8081/api/v1/recipes/all")
       .then((response) => {
-        console.log("Response received:", response); 
-  
+        console.log("Response received:", response);
+
         return response.text().then((text) => {
-          console.log("Response body:", text); 
-  
+          console.log("Response body:", text);
+
           if (!response.ok) {
             throw new Error(`Error: ${response.status} - ${text}`);
           }
-  
+
           try {
             return JSON.parse(text);
           } catch (error) {
@@ -56,25 +55,25 @@ export default function Page() {
         });
       })
       .then((data: Recipe[]) => {
-        console.log("Parsed JSON:", data); 
+        console.log("Parsed JSON:", data);
         setAllRecipes(data);
       })
       .catch((error) => {
         console.error("Error fetching all recipes:", error);
       });
-  }, []); 
-  
+  }, []);
+
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
 
     const filteredSuggested = recipes.filter((recipe) =>
-      recipe.title.toLowerCase().includes(query.toLowerCase()) 
+      recipe.title.toLowerCase().includes(query.toLowerCase())
     );
     setFilteredSuggestedRecipes(filteredSuggested);
 
     const filteredRecommended = recommendedRecipes.filter((recipe) =>
-      recipe.title.toLowerCase().includes(query.toLowerCase()) 
+      recipe.title.toLowerCase().includes(query.toLowerCase())
     );
     setFilteredRecommendedRecipes(filteredRecommended);
   };
@@ -93,7 +92,7 @@ export default function Page() {
             style={gs.input}
             placeholder="Search recipes..."
             value={searchQuery}
-            onChangeText={handleSearch} 
+            onChangeText={handleSearch}
           />
 
           <View style={{ flexDirection: "row", gap: 10, marginVertical: 10, alignSelf: "flex-start" }}>

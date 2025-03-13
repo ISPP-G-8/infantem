@@ -15,6 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 import com.isppG8.infantem.infantem.config.jwt.AuthEntryPointJwt;
 import com.isppG8.infantem.infantem.config.jwt.AuthTokenFilter;
 
@@ -28,6 +30,7 @@ public class SecurityConfig {
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            .cors(withDefaults())
 			.csrf(AbstractHttpConfigurer::disable)		
 			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.exceptionHandling((exepciontHandling) -> exepciontHandling.authenticationEntryPoint(unauthorizedHandler))	

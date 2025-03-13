@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @RequestMapping("/api/v1/recipes")
 public class RecipeController {
 
-    //TODO: add validation for only owner of the recipe can update or delete
+    // TODO: add validation for only owner of the recipe can update or delete
 
     private RecipeService recipeService;
 
@@ -28,7 +27,7 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
-     @GetMapping("/recommended")
+    @GetMapping("/recommended")
     public ResponseEntity<List<Recipe>> getRecommendedRecipes(@RequestParam Integer age) {
         List<Recipe> recipes = recipeService.getRecommendedRecipes(age);
         return ResponseEntity.ok(recipes);
@@ -64,6 +63,5 @@ public class RecipeController {
         recipeService.deleteRecipe(id);
         return ResponseEntity.ok().build();
     }
-
 
 }

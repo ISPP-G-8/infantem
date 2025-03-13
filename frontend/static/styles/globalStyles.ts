@@ -104,8 +104,8 @@ module.exports = StyleSheet.create({
 
   card: {
 
-    width: "100%", 
-    alignSelf: "flex-start", 
+    width: "90%", 
+    //alignSelf: "flex-start", 
 
     backgroundColor: "#FFF",
     padding: 15,

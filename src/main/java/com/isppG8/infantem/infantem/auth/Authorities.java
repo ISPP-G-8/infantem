@@ -14,11 +14,9 @@ import lombok.Setter;
 public class Authorities implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE	, generator = "entity_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "entity_seq")
 	private Integer Id;
 
 	private String authority;
-	
-	
-}
 
+}

@@ -12,6 +12,9 @@ import jakarta.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.isppG8.infantem.infantem.allergen.Allergen;
 import com.isppG8.infantem.infantem.disease.Disease;
 import com.isppG8.infantem.infantem.dream.Dream;
@@ -38,6 +41,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Getter
 @Setter
 @Table(name = "baby_table")
@@ -54,11 +58,11 @@ public class Baby {
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate birthDate;
 
-    @NotBlank
+    @NotNull
     @Enumerated(EnumType.STRING)
     private Genre genre;
 
-    @NotBlank
+    @NotNull
     private Double weight;
 
     @NotNull

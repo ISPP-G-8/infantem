@@ -1,20 +1,26 @@
 import { Link } from "expo-router";
-import { View, ActivityIndicator, Text } from "react-native";
+import { View, Text } from "react-native";
 
 export default function Index() {
   const gs = require("../static/styles/globalStyles"); 
 
   return (
-    <View
-			style={[gs.container, { justifyContent: "center" }]}
-		>
-      <Text> This needs the login logic to work properly </Text>
-			<ActivityIndicator style={{ padding:20 }} size="large" color="black" />
+    <View style={[gs.container, { justifyContent: "center" }]}>
 
-      <Link href={"/recipes"}>
-        <Text style={gs.linkText}>See the recipes!</Text>
-      </Link>
+      <View style={[gs.card, {maxWidth: 500}]}> 
+        <Text style={gs.headerText}> Bienvenido a Infantem </Text>
+        <Text style={gs.subHeaderText}>Aquí podrás dar el mejor cuidado a tu bebé.</Text>
+      
+        <View style={{marginTop:20, gap:10}}> 
+          <Link style={[gs.mainButton, {width:"100%", textAlign:"center"}]} href={"/signin"}>
+            <Text style={gs.mainButtonText} >Inicia sesión</Text>
+          </Link>
+          <Link style={[gs.secondaryButton, {width:"100%", textAlign:"center"}]} href={"/recipes"}>
+            <Text style={gs.secondaryButtonText} >Continúa como invitado</Text>
+          </Link>
+        </View>
 
+      </View>
 		</View>
   );
 }

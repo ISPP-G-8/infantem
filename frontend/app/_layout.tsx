@@ -5,23 +5,23 @@ export default function RootLayout() {
   // We must manage the login logic to got an AuthProvider.
   return (
     <Stack
-      initialRouteName="login"
+      initialRouteName="signin"
       screenOptions={{
         headerTitle: "Infantem",
       }}
     >
       <Stack.Screen
-        name="login"
+        name="signin"
         options={{
           headerShown: false,
           animation: "slide_from_bottom",
         }}
       />
       <Stack.Screen
-        name="profile"
+        name="signup"
         options={{
-          headerTitle: "Profile",
-          animation: "slide_from_right",
+          headerShown: false,
+          animation: "slide_from_bottom",
         }}
       />
       <Stack.Screen
