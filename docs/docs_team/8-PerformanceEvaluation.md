@@ -37,6 +37,7 @@
   </div>
 </div>
 
+**Revisión: Felipe Solís Agudo**
 ---
 
 ## Índice
@@ -233,6 +234,7 @@ Date: 11/03/2025
 - Elaboración de DAFO de ideas anteriores
 - Elaboración de curriculum interno
 - Visualización de píldoras teóricas
+- Lectura de los feedbacks
 
 
 #### Noya Cano, Lucía-12
@@ -343,19 +345,68 @@ Date: 11/03/2025
 #### Luna Navarro, Paula-10
 
 #### Morgado Prudencio, Jose Maria-11
-
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Lectura de actas de las reuniones no asistidas
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Visualización de vídeos EV.
+- Investigacion sobre la implementacion de la publicidad
+- Implementacion de entidades
+- Analisis de Riesgos
+- performanceEvaluation de Usuarios Piloto
 #### Noya Cano, Lucía-12
+- Asistencia a las sesiones de presentación.
+- Asistencias a reuniones internas del grupo.
+- Lectura de actas a las reuniones no asistidas.
+- Visualización de vídeos EV.
+- Desarrollo de la funcionalidad de recomendación de recetas en Backend.
+- Creación en Backend de las entidades "Intake", "Recipe", "Disease", "Vaccine".
+- Creación de los respectivos CRUD a las distintas entidades creadas.
+- Gestión como vocal secundaria del subgrupo "Documentación" (Asistencia a reuniones, asignación de tareas de documentación...)
+- Realización del documento de Commitment Agreement para los usuarios pilotos "pilotUsersCommitmentAgreement".
+- Realización del documento de Performance Evaluation de los usuarios piloto una vez recogido su feedback "pilotUsersPerformanceEvaluation".
+- Realización del documento guía visual de la interfaz de la aplicación para los usuarios piloto.
+- Documentación pasada de formato Word a formato Markdown.
+- Creación de tests para el módulo auth.
 
 #### Rodríguez López, Josué-13
 
 #### Santos Martín, Javier-14
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Desarrollo del stack de la aplicación en cliente
+- Desarrollo de la pantalla temporal de alergénos
+- Desarrollo del login y el manejo de sesión en cliente
+- Arreglo de la feature de Bebé en cliente
+- Arreglo de la feature de Recetas en cliente
+- Mantenimiento de la landing page.
+- Documentación del proceso CI/CD del proyecto
 
 #### Solís Agudo, Felipe-15
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Desarrollo de actas de las reuniones internas del grupo.
+- Gestión como vocal principal del subgrupo de desarrollo "Frontend" (asignación de tareas, revisión del avance de dichas tareas,...).
+- Participación en el desarrollo de las vistas "recipeRecommendations", "recipeDetails" y "favourites".
+- Planificación de los costes e ingresos estimados para una semana, seis meses y un añodespués del lanzamiento de la aplicación.
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Visualización de vídeos EV.
+- Actualización requisitos funcionales del MVP.
+- Desarrollo de la versión inicial del NavBar de la aplicación.
+- Participación activa como usuario piloto para otro grupo de la asignatura.
+- Revisión diagrama de clases.
+- Revisión de los documentos obligatorios del Sprint 1.
 
 #### Ulecia García, Javier-16
 
 #### Vargas Muñiz, David-17
-
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Visualización de vídeos EV.
+- Revisión de calidad del frontend.
+- Presentación 07/03/2025.
+- Presentación evaluable 14/03/2025.
 
 <a id="sprint-2"></a>
 
@@ -364,6 +415,18 @@ Date: 11/03/2025
 #### del Catillo Piñero, Daniel-1
 
 #### Fuentelsaz Rodríguez, David-2
+
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Visualización de vídeos EV.
+- Revisión y reajuste de los requisitos de información.
+- Desarrollo y revisión del modelo UML de la aplicación.
+- Revisión del desarrollo backend. 
+- Gestión como vocal secundario del subgrupo de desarrollo "Backend".
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Desarrollo del documento de Commitment Agreement en MarkDown.
+- Corrección y desarrollo de la lógica de la entidad Baby. 
 
 #### Galán Lerate, Miguel-3
 

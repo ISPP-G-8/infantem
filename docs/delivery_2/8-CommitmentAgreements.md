@@ -271,14 +271,18 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
 ### 1. **Álvaro Jiménez Osuna**
 
    "Yo, como miembro de este equipo, me comprometo a cumplir con lo establecido en este acuerdo para asegurar el éxito del proyecto y el buen funcionamiento del equipo."
-   Firma: ______________________
-   Fecha: ______________________
+   
+   Firma: <img src = "../../docs/imagenes/firmas/Firma-AlvaroJimenezOsuna.png" width="200" >
+
+   Fecha: 12/03/2025
 
 ### 2. **Ángela López Oliva**
 
    "Yo, como miembro de este equipo, me comprometo a seguir las políticas y directrices del equipo, aportando lo mejor de mí para cumplir con mis responsabilidades y objetivos."
-   Firma: ______________________
-   Fecha: ______________________
+
+   Firma: <img src = "../../docs/imagenes/firmas/Firma-AngelaLopez.png" width="200" >
+   
+   Fecha: 12/03/2025
 
 ### 3. **Antonio Jiménez Ortega**
 
@@ -292,9 +296,9 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
 
    "Yo, como miembro de este equipo, me comprometo a ser un miembro activo del equipo y a respetar todos los procesos acordados para contribuir al éxito del proyecto."
    
-   Firma: ______________________
+   Firma: <img src = "../../docs/imagenes/firmas/Firma-DanieldelCastillo.png" width="200" >
    
-   Fecha: ______________________
+   Fecha: 12/03/2025
 
 ### 5. **David Fuentelsaz Rodríguez**
 
@@ -308,9 +312,9 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
 
    "Yo, como miembro de este equipo, me comprometo a colaborar de manera efectiva y a contribuir al cumplimiento de las metas de este proyecto."
    
-   Firma: ______________________
+   Firma: <img src = "../../docs/imagenes/firmas/Firma-DavidVargas.jpg" width="200" />
    
-   Fecha: ______________________
+   Fecha: 13/03/2025
 
 ### 7. **Enrique García Abadía**
 
@@ -318,39 +322,39 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
    
    Firma: <img src = "../../docs/imagenes/firmas/Firma-EnriqueGarcia.jpg" width="200" />
    
-   Fecha: ______________________
+   Fecha: 12/03/2025
 
 ### 8. **Felipe Solís Agudo**
 
-   "Yo, como miembro de este equipo, me comprometo a cumplir con las tareas asignadas y a trabajar en conjunto con el equipo para asegurar el éxito del proyecto."
+   "Yo, como miembro de este equipo, me comprometo a cumplir con lo establecido en este acuerdo para asegurar el éxito del proyecto y el buen funcionamiento del equipo."
    
-   Firma: ______________________
-   
-   Fecha: ______________________
+   Firma: <img src = "../../docs/imagenes/firmas/Firma-FelipeSolisAgudo.PNG" width="200" >
+
+   Fecha: 13/03/2025
 
 ### 9. **Javier Santos Martín**
 
    "Yo, como miembro de este equipo, me comprometo a dedicar mi esfuerzo al cumplimiento de los objetivos del equipo, respetando los acuerdos establecidos."
    
-   Firma: ______________________
+   Firma: <img src = "../../docs/imagenes/firmas/Firma-JavierSantos.png" width="200" >
    
-   Fecha: ______________________
+   Fecha: 13/03/2025
 
 ### 10. **Javier Ulecia García**
 
    "Yo, como miembro de este equipo, me comprometo a mantener un alto nivel de compromiso con el equipo y a cumplir con las responsabilidades asignadas."
    
-   Firma: ______________________
+   Firma: <img src = "../../docs/imagenes/firmas/Firma-JavierUleciaGarcia.png" width="200" />
    
-   Fecha: ______________________
+   Fecha: 12/03/2025
 
 ### 11. **José García de Tejada Delgado**
 
    "Yo, como miembro de este equipo, me comprometo a ser puntual y colaborativo para garantizar que el proyecto avance según lo planeado."
    
-   Firma: ______________________
+   Firma: <img src = "../../docs/imagenes/firmas/Firma-JoseGarciaDeTejadaDelgado.png" width="200" />
    
-   Fecha: ______________________
+   Fecha: 13/03/2025
 
 ### 12. **Jose Maria Morgado Prudencio**
 
@@ -364,17 +368,17 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
 
    "Yo, como miembro de este equipo, me comprometo a trabajar con dedicación y a ser proactivo en la búsqueda de soluciones para el equipo."
    
-   Firma: ______________________
+   Firma: <img src = "../../docs/imagenes/firmas/Firma-JosueRodriguez.png" width="200" />
    
-   Fecha: ______________________
+   Fecha: 12/03/2025
 
 ### 14. **Lucía Noya Cano**
 
    "Yo, como miembro de este equipo, me comprometo a colaborar activamente en el proyecto y a mantener una actitud positiva y respetuosa con todos los miembros del equipo."
    
-   Firma: ______________________
+   Firma: <img src = "../../docs/imagenes/firmas/Firma-LuciaNoyaCano.png" width="200">
    
-   Fecha: ______________________
+   Fecha: 12/03/2025
 
 ### 15. **Luis Giraldo Santiago**
 
@@ -388,9 +392,9 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
 
    "Yo, como miembro de este equipo, me comprometo a aportar mi esfuerzo y conocimientos para cumplir con los objetivos del equipo."
    
-   Firma: ______________________
+   Firma <img src = "../../docs/imagenes/firmas/Firma-MiguelGalán.png" width="200">
    
-   Fecha: ______________________
+   Fecha: 12/03/2025
 
 ### 17. **Paula Luna Navarro**
 
