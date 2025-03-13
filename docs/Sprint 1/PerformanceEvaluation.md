@@ -66,25 +66,25 @@ Date: 11/03/2025
 
 |  Student | #DP1 | #S1 | #S2 |#S3 |#PPL | #WPL | Total |Weigh |
 |--------------------------------|--|--|--|--|--|--|---|--|
-| del Catillo Piñero, Daniel     |10|  |  |  |  |  |0,5|5%|
-| Fuentelsaz Rodríguez, David    |10|  |  |  |  |  |0,5|5%|
-| Galán Lerate, Miguel           |10|  |  |  |  |  |0,5|5%|
-| García Abadía, Enrique         |10|  |  |  |  |  |0,5|5%|
-| García de Tejada Delgado, José |10|  |  |  |  |  |0,5|5%|
-| Giraldo Santiago, Luis         |10|  |  |  |  |  |0,5|5%|
-| Jiménez Ortega, Antonio        |10|  |  |  |  |  |0,5|5%|
-| Jiménez Osuna, Álvaro          |10|  |  |  |  |  |0,5|5%|
-| López Oliva, Ángela            |10|  |  |  |  |  |0,5|5%|
-| Luna Navarro, Paula            |10|  |  |  |  |  |0,5|5%|
-| Morgado Prudencio, Jose Maria  | 7|  |  |  |  |  |0,5|5%|
-| Noya Cano, Lucía               |10|  |  |  |  |  |0,5|5%|
-| Rodríguez López, Josué         |10|  |  |  |  |  |0,5|5%|
-| Santos Martín, Javier          |10|  |  |  |  |  |0,5|5%|
-| Solís Agudo, Felipe            |10|  |  |  |  |  |0,5|5%|
-| Ulecia García, Javier          |10|  |  |  |  |  |0,5|5%|
-| Vargas Muñiz, David            |10|  |  |  |  |  |0,5|5%|
+| del Catillo Piñero, Daniel     |10|10|  |  |  |  |1,5|15%|
+| Fuentelsaz Rodríguez, David    |10|10|  |  |  |  |1,5|15%|
+| Galán Lerate, Miguel           |10|10|  |  |  |  |1,5|15%|
+| García Abadía, Enrique         |10|10|  |  |  |  |1,5|15%|
+| García de Tejada Delgado, José |10|10|  |  |  |  |1,5|15%|
+| Giraldo Santiago, Luis         |10|10|  |  |  |  |1,5|15%|
+| Jiménez Ortega, Antonio        |10| 9|  |  |  |  |1,425|15%|
+| Jiménez Osuna, Álvaro          |10|10|  |  |  |  |1,5|15%|
+| López Oliva, Ángela            |10| 9|  |  |  |  |1,425|15%|
+| Luna Navarro, Paula            |10| 9|  |  |  |  |1,425|15%|
+| Morgado Prudencio, Jose Maria  | 7|10|  |  |  |  |1,125|15%|
+| Noya Cano, Lucía               |10| 9|  |  |  |  |1,425|15%|
+| Rodríguez López, Josué         |10|10|  |  |  |  |1,5|15%|
+| Santos Martín, Javier          |10|10|  |  |  |  |1,5|15%|
+| Solís Agudo, Felipe            |10|10|  |  |  |  |1,5|15%|
+| Ulecia García, Javier          |10| 4|  |  |  |  |1,05|15%|
+| Vargas Muñiz, David            |10| 9|  |  |  |  |1,425|15%|
 
-| Total |160  |  s|  s|  s|  s|  s| 
+| Total |167  |  159|  s|  s|  s|  s| 
 |--|--|--|--|--|--|--|
 
 
@@ -323,6 +323,17 @@ Date: 11/03/2025
 
 #### del Catillo Piñero, Daniel-1
 
+- Asistencia a las sesiones de presentación.
+- Preparación de reuniones.
+- Asistencia a reuniones internas del grupo.
+- Informe de productividad.
+- Contactar con usuarios pilotos.
+- Arreglo de la base de datos.
+- Revisión de pull request.
+- Revisión de la presentación.
+- funcionamiento del perfil de ususario.
+
+
 #### Fuentelsaz Rodríguez, David-2
 
 - Asistencia a las sesiones de presentación.
@@ -347,9 +358,15 @@ Date: 11/03/2025
 - Correción final de Urls en frontend.
 - Despliegue en App Engine.
 
-
-
 #### García Abadía, Enrique-4
+
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Asistencia a reuniones de vocales del grupo.
+- Reviones de frontend pre-presentaciones y unificacion de estilos.
+- Frontend de funcionalidad de registro de alimentos (eliminada posteriormente).
+- Creacion y configuracion de frontend de la funcionalidad baby.
+- Redaccion de documento revision.md juanto a Jose García de Tejada Delgado
 
 #### García de Tejada Delgado, José-5
 
@@ -363,6 +380,22 @@ Date: 11/03/2025
 - Documento revisión.md 
 
 #### Giraldo Santiago, Luis-6
+
+- Asistencia a las sesiones de presentación.
+- Preparación de reuniones.
+- Asistencia a reuniones internas del grupo.
+- Pasar documentos de docs a md.
+- Descripción de tareas.
+- Asignación de tareas.
+- Desarrollo de la clase dream, con su CRUD.
+- Gestión del feedback en la base de datos compartidas.
+- Creación de la restospectiva.
+- Creación de KBreport.md.
+- Revisón de pull requets.
+- Revisión y corrección de código.
+- Creación del MS project.
+- Ayuda hacer la presentación del 07/03.
+- Creación de la estructura de documentos en el repositorio.
 
 #### Jiménez Ortega, Antonio-7
 - Asistencia a las sesiones de presentación.
@@ -428,6 +461,7 @@ Date: 11/03/2025
 - Implementacion de entidades
 - Analisis de Riesgos
 - performanceEvaluation de Usuarios Piloto
+
 #### Noya Cano, Lucía-12
 - Asistencia a las sesiones de presentación.
 - Asistencias a reuniones internas del grupo.
