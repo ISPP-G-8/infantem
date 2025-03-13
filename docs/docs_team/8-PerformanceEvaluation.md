@@ -153,7 +153,6 @@ Date: 11/03/2025
 - Reestructuración base de conocimiento
 - Visualización vídeos EV
 
-
 #### Giraldo Santiago, Luis-6
 
 - Asistencia a las sesiones de presentación.
@@ -344,6 +343,15 @@ Date: 11/03/2025
 
 #### García de Tejada Delgado, José-5
 
+- Asistencia a las sesiones de presentación
+- Asistencia a reuniones internas del grupo
+- Visualización vídeos EV
+- Implementación sistema autentificación backend inicial
+- Refactoring general API backend
+- Arreglos finales autentificación backend
+- Implementación parcial algoritmo detección de alérgenos backend
+- Documento revisión.md 
+
 #### Giraldo Santiago, Luis-6
 
 #### Jiménez Ortega, Antonio-7
@@ -403,6 +411,19 @@ Date: 11/03/2025
 - Creación de tests para el módulo auth.
 
 #### Rodríguez López, Josué-13
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Desarrollo y correción de requisitos de información.
+- Desarrollo del diagrama de clases del sistema.
+- Control de entradas de tiempo del equipo en Clockify.
+- Desarrollo de pruebas unitarias de AllergenService.
+- Gestión y planificación del equipo de Backend como vocal.
+- Gestión de grupo de frontend para coordinación con backend.
+- Desarrollo de la lógica de la entidad recetas (RecipeController.java, Recipe.java, RecipeService.java y RecipeRepository.java).
+- Usuario piloto del grupo 4.
+- Implementar la lógica de uso de JWT en el backend para autenticar a los clietnes y permitir el acceso a los endpoints de la API.
+- Solución de problemas en la lógica de baby.
+- Desarrollo del timeEffortReport.
 
 #### Santos Martín, Javier-14
 - Asistencia a las sesiones de presentación.
@@ -437,8 +458,8 @@ Date: 11/03/2025
 - Ordenar y mejorar el documente del equipo y sus roles.
 - Entidad Baby y su CRUD.
 - Registro de alimentos.
-- Valudación del usuario.
-- Version inicial del login ,signin y signup.
+- Validación del usuario.
+- Versión inicial del login, signin y signup.
 - Visualización de videos EV.
 
 #### Vargas Muñiz, David-17

@@ -55,7 +55,21 @@
     3.3. [Marketplace](#marketplace) 
     3.4. [Suma total de beneficios](#suma-total-beneficios) 
 4. [Relación entre beneficio y coste del proyecto](#relacion-beneficios-costes)
-5. [Conclusión](#conclusion)
+5. [Costes posteriores a la fecha de lanzamiento (1 semana)](#5-costes-posteriores-a-la-fecha-de-lanzamiento-1-semana)
+    5.1 [Costes de infraestructura en producción](#51-costes-de-infraestructura-en-producción)
+    5.2 [Costes de atención al cliente y soporte técnico](#52-costes-de-atención-al-cliente-y-soporte-técnico)
+    5.3 [Costes de herramientas y servicios de mantenimiento](#53-costes-de-herramientas-y-servicios-de-mantenimiento)
+6. [Beneficios obtenidos en la primera semana](#6-beneficios-obtenidos-en-la-primera-semana)
+    6.1 [6.1 Ingresos en la primera semana](#61-ingresos-en-la-primera-semana)
+    6.2 [6.2 Beneficio neto en la primera semana](#62-beneficio-neto-en-la-primera-semana)
+    6.3 [6.3 Análisis del resultado](#63-análisis-del-resultado)
+7. [Costes Posteriores a la Fecha de Lanzamiento (6 meses y 1 año)](#7-costes-posteriores-a-la-fecha-de-lanzamiento-6-meses-y-1-año)
+    7.1 [Costes de Infraestructura en Producción](#71-costes-de-infraestructura-en-producción)
+    7.2 [Costes de Atención al Cliente y Soporte Técnico](#72-costes-de-atención-al-cliente-y-soporte-técnico)
+    7.3 [Costes de Herramientas y Mantenimiento](#73-costes-de-herramientas-y-mantenimiento)
+    7.4 [Beneficios Obtenidos](#74-beneficios-obtenidos)
+    7.5 [Análisis del resultado](#75-análisis-del-resultado)
+8. [Conclusiones](#8-conclusiones)
 
 ## 1. Introducción
 Este documento tiene como objetivo analizar los costes asociados al desarrollo y mantenimiento de la aplicación Infantem. El análisis de costes se basa en la metodología PMBOK, considerando tanto los gastos de personal, infraestructura, herramientas de desarrollo, hardware y distribución, como una reserva de contingencia de un 10% sobre el total estimado. Además, se presenta una estimación de beneficios basada en el modelo de suscripción premium de la aplicación junto con un sistema de publicidad segmentada. 
@@ -286,7 +300,303 @@ Con uno ingresos totales anuales estimado de 256.659,84 €, la inversión se re
 
 <p style="text-align:center;font-style:italic;">Gráfico 4: Relación entre ingreso acumulado y coste del proyecto caso optimista</p> 
 
-## 5. Conclusión
+## 5. Costes posteriores a la fecha de lanzamiento (1 semana)
+
+Una vez establecidos los costes que tendrán lugar durante toda la fase de desarrollo, es necesario establecer los costes que incurrirán durante, al menos, una semana después del lanzamiento de nuestra aplicación. Para ello tendremos en cuenta a 1352 usuarios, teniendo en cuenta el caso realista. Podemos dividir estos costes en distintos tipos:
+
+### 5.1 Costes de infraestructura en producción
+
+Estos costes provienen del uso de servidores, bases de datos, almacenamiento y tráfico generado por los usuarios.
+
+#### **Infraestructura en la primera semana**
+
+#### **Hosting y servidores (Google Cloud)**
+
+**Instancias Compute Engine (e2-standard-2)**  
+- **Costes:** 0,0676 €/hora  
+- **Cálculo:** 2 instancias funcionando 24h x 7 días = 168 horas  
+- **Total:** 22,72 €  
+
+#### **Ancho de banda (Datos enviados a los usuarios)**
+- **Costes:** 0,12 €/GB (primer GB gratis)  
+- **Estimación:** Cada usuario genera en promedio 50 MB/día, lo que equivale a **(1.342 usuarios × 50 MB × 7 días) / 1.024 ≈ 458 GB**  
+- **Total:** 54,84 €  
+
+#### **Google Cloud Storage (Backup - 50 GB)**
+- **Costes:** 0,020 €/GB/mes  
+- **Para 1 semana:** 0,020 × (50 GB ÷ 4)  
+- **Total:** 0,25 €  
+
+#### **Logging y monitoreo (Cloud Logging - Stackdriver)**
+- **Costes:** 0,50 €/GB después de 50 GB gratuitos  
+- **Estimación:** 5 GB adicionales  
+- **Total:** 2,50 €  
+
+#### **Memoria adicional para Servidor**
+- **Costes:** 0,009 €/GB/hora  
+- **Cálculo:** 4 GB × 168 horas  
+- **Total:** 6,05 €  
+
+---
+
+### **Total Infraestructura: 86,36 €**  
+
+---
+
+### 5.2 Costes de atención al cliente y soporte técnico
+
+Estos costes incluyen la atención al usuario, solución de problemas, respuesta a tickets, etc.
+
+#### **Soporte técnico y atención al cliente**
+- **Horas de soporte estimadas:** 2 personas atendiendo tickets y dudas (40 h/semana)  
+- **Costo por hora (QA/Documentación):** 17,5 €/h  
+- **Total:** 700 €  
+
+---
+
+### 5.3 Costes de herramientas y servicios de mantenimiento
+
+Utilizaremos estas herramientas para monitorear, analizar y gestionar la aplicación.
+
+#### **Monitorización (Google Cloud Monitoring)**
+- **Estimación:** 10 €/semana  
+
+#### **Automatización y bots de soporte (Chatbots)**
+- **Uso estimado:** Gratis en primeras semanas con planes básicos  
+- **Total:** 0 €  
+
+---
+
+### **Total Herramientas y Mantenimiento: 10 €**  
+
+---
+
+## **Coste total de la primera semana post-lanzamiento:**  
+### **796,36 €**
+
+- 
+
+## 6. Beneficios obtenidos en la primera semana
+
+Para calcular los beneficios en la primera semana tras el lanzamiento, consideramos los ingresos obtenidos a partir de nuestras tres fuentes de monetización principales: **modelo Freemium (suscripciones Premium), publicidad segmentada y marketplace**. Luego, comparamos estos ingresos con los costes operativos de la semana.
+
+---
+
+### **6.1 Ingresos en la primera semana**  
+
+#### **a) Ingresos por suscripciones Premium**  
+Siguiendo el caso realista, **94 usuarios** adquieren el plan Premium por **4,99 €** al mes.  
+
+- **Ingresos mensuales**:  
+  - 94 × 4,99 € = **469,06 €**
+- **Ingresos semanales**:  
+  - 469,06 € ÷ 4 ≈ **117,27 €**
+
+---
+
+#### **b) Ingresos por publicidad segmentada**  
+En el caso realista, **1.234 usuarios** entran a la app con la versión gratuita y ven anuncios.  
+Estimamos que cada usuario ve **5 anuncios al día**, lo que suma **35 anuncios por semana**.  
+
+- **Total de visualizaciones semanales**:  
+  - 1.234 usuarios × 35 anuncios = **43.190 visualizaciones**
+- **CPM (Costo por Mil Impresiones)** = **2 €/1000 visualizaciones**  
+- **Ingresos semanales por publicidad**:  
+  - (43.190 ÷ 1000) × 2 € ≈ **86,38 €**
+- **Ingresos netos tras comisiones e IVA (-36%)**:  
+  - 86,38 € × 0,64 = **55,28 €**
+
+---
+
+#### **c) Ingresos por Marketplace**  
+Se estima que **1.342 usuarios** utilizan el marketplace. Cada usuario realiza **1,5 compras al mes** con un ticket medio de **40 €**.  
+
+- **Ventas mensuales totales**:  
+  - 1.342 × 1,5 × 40 € = **80.520 €**
+- **Comisión del 10%**:  
+  - 80.520 € × 0,10 = **8.052 €**
+- **Ingresos semanales**:  
+  - 8.052 € ÷ 4 ≈ **2.013 €**
+- **Ingresos netos tras IVA (-21%)**:  
+  - 2.013 € × 0,79 ≈ **1.590,27 €**
+
+---
+
+### **6.2 Beneficio neto en la primera semana**
+
+Ahora restamos los costes operativos a los ingresos generados en la primera semana.
+
+| Concepto | Ingresos (€) | Costes (€) |
+|----------|------------|------------|
+| **Suscripciones Premium** | 117,27 € | — |
+| **Publicidad segmentada** | 55,28 € | — |
+| **Marketplace** | 1.590,27 € | — |
+| **Total ingresos** | **1.762,82 €** | **796,36 €** |
+| **Beneficio neto** | **966,46 €** | — |
+
+---
+
+### **6.3 Análisis del resultado**
+
+En la **primera semana**, generaríamos un **beneficio neto de 966,46 €**.  
+
+Este resultado muestra que, aunque el modelo Freemium por sí solo no cubriría los costes operativos en la primera semana, la combinación con publicidad y el marketplace hace que la aplicación sea rentable desde el inicio.  
+
+**Conclusiones clave:**
+- El **Marketplace** es la mayor fuente de ingresos, representando **90%** del beneficio semanal.
+- **La publicidad y las suscripciones Premium aún no cubren por sí solas los costes**, pero pueden crecer con más usuarios activos.
+- La **rentabilidad se mantiene si la base de usuarios se mantiene y crece con el tiempo**.  
+
+Si se mantiene esta tendencia, **el beneficio mensual estimado sería de 3.865,84 €**, lo que confirma que podemos generar ingresos sostenibles y escalar.
+ 
+## 7. Costes Posteriores a la Fecha de Lanzamiento (6 meses y 1 año)  
+
+A medida que la base de usuarios de nuestra aplicación crece, los costes de infraestructura, soporte y mantenimiento también aumentarán proporcionalmente. Se calcula el impacto financiero a **6 meses** y **1 año** después del lanzamiento, asumiendo un crecimiento realista en el número de usuarios.  
+
+En este escenario, la aplicación crece a un **15% mensual**, lo que resulta en:  
+- **Usuarios a los 6 meses**: 2.692  
+- **Usuarios al año**: 5.392  
+
+---
+
+### 7.1 Costes de Infraestructura en Producción  
+
+Los costes de servidores, almacenamiento y tráfico aumentan en función del crecimiento de usuarios.  
+
+#### **Hosting y Servidores (Google Cloud - Compute Engine e2-standard-2)**  
+- **Cálculo**: 2 instancias al inicio, aumentando a 4 instancias a los 6 meses y a 8 instancias al año.  
+- **Total 6 meses**: 45,44 €/mes → **272,64 €**  
+- **Total 12 meses**: 90,88 €/mes → **1.090,56 €**  
+
+#### **Ancho de Banda (Datos Enviados a los Usuarios)**  
+- **Cálculo**: 50 MB/día por usuario  
+- **Total 6 meses**: (2.692 usuarios × 50 MB × 30 días) ÷ 1.024 × 0,12 €/GB = **265,97 €/mes → 1.595,82 €**  
+- **Total 12 meses**: (5.392 usuarios × 50 MB × 30 días) ÷ 1.024 × 0,12 €/GB = **532,73 €/mes → 6.392,76 €**  
+
+#### **Google Cloud Storage (Backup - 100 GB en 6 meses, 200 GB al año)**  
+- **Total 6 meses**: 2 €/mes → **12 €**  
+- **Total 12 meses**: 4 €/mes → **48 €**  
+
+#### **Logging y Monitoreo (Cloud Logging - Stackdriver)**  
+- **Total 6 meses**: 5 GB adicionales por mes → 2,50 €/mes → **15 €**  
+- **Total 12 meses**: 10 GB adicionales por mes → 5 €/mes → **60 €**  
+
+---
+
+### 7.2 Costes de Atención al Cliente y Soporte Técnico  
+
+Con más usuarios, se requiere más soporte. Se aumenta el equipo de atención al cliente progresivamente.  
+
+- **6 meses**: 2 empleados (40 h/semana) → **5.600 €**  
+- **12 meses**: 4 empleados (40 h/semana) → **22.400 €**  
+
+---
+
+### 7.3 Costes de Herramientas y Mantenimiento  
+
+- **Monitorización (Google Cloud Monitoring)**  
+  - 6 meses: 40 €/mes → **240 €**  
+  - 12 meses: 80 €/mes → **960 €**  
+
+- **Automatización y Chatbots**  
+  - 6 meses: Plan estándar → **50 €/mes → 300 €**  
+  - 12 meses: Plan avanzado → **100 €/mes → 1.200 €**  
+
+---
+
+### **Coste Total en 6 Meses**: **7.935,46 €**  
+### **Coste Total en 1 Año**: **32.151,32 €**  
+
+---
+
+## 7.4 Beneficios Obtenidos  
+
+### **7.4.1 Ingresos a los 6 Meses**  
+
+#### **a) Ingresos por Suscripciones Premium**  
+Usuarios premium creciendo al 7% del total:  
+- **Usuarios premium**: 188  
+- **Ingresos mensuales**: 188 × 4,99 € = **937,12 €**  
+- **Ingresos totales en 6 meses**: **5.622,72 €**  
+
+---
+
+#### **b) Ingresos por Publicidad Segmentada**  
+- **Visualizaciones totales**: (2.692 × 35 anuncios × 4 semanas) = **376.880 visualizaciones**  
+- **CPM** = 2 €/1000 visualizaciones  
+- **Ingresos mensuales**: (376.880 ÷ 1.000) × 2 € = **753,76 €**  
+- **Ingresos netos tras comisiones e IVA (-36%)**: **482,41 €/mes → 2.894,46 € en 6 meses**  
+
+---
+
+#### **c) Ingresos por Marketplace**  
+- **Ventas mensuales totales**: 2.692 × 1,5 × 40 € = **161.520 €**  
+- **Comisión del 10%**: **16.152 €/mes → 96.912 € en 6 meses**  
+- **Ingresos netos tras IVA (-21%)**: **12.756 €/mes → 76.536 € en 6 meses**  
+
+---
+
+### **7.4.2 Beneficio Neto en 6 Meses**  
+
+| Concepto | Ingresos (€) | Costes (€) |
+|----------|------------|------------|
+| **Suscripciones Premium** | 5.622,72 € | — |
+| **Publicidad Segmentada** | 2.894,46 € | — |
+| **Marketplace** | 76.536 € | — |
+| **Total Ingresos** | **85.053,18 €** | **7.935,46 €** |
+| **Beneficio Neto** | **77.117,72 €** | — |
+
+---
+
+### **7.4.3 Beneficios al Año**  
+
+#### **a) Ingresos por Suscripciones Premium**  
+Usuarios premium creciendo al 7% del total:  
+- **Usuarios premium**: 377  
+- **Ingresos mensuales**: 377 × 4,99 € = **1.880,23 €**  
+- **Ingresos totales en 12 meses**: **22.562,76 €**  
+
+---
+
+#### **b) Ingresos por Publicidad Segmentada**  
+- **Visualizaciones totales**: (5.392 × 35 × 4) = **754.880 visualizaciones**  
+- **CPM** = 2 €/1000 visualizaciones  
+- **Ingresos mensuales**: (754.880 ÷ 1.000) × 2 € = **1.509,76 €**  
+- **Ingresos netos tras comisiones e IVA (-36%)**: **966,25 €/mes → 11.595 € en 12 meses**  
+
+---
+
+#### **c) Ingresos por Marketplace**  
+- **Ventas mensuales totales**: 5.392 × 1,5 × 40 € = **323.520 €**  
+- **Comisión del 10%**: **32.352 €/mes → 388.224 € en 12 meses**  
+- **Ingresos netos tras IVA (-21%)**: **25.558 €/mes → 306.696 € en 12 meses**  
+
+---
+
+### **7.4.4 Beneficio Neto en 1 Año**  
+
+| Concepto | Ingresos (€) | Costes (€) |
+|----------|------------|------------|
+| **Suscripciones Premium** | 22.562,76 € | — |
+| **Publicidad Segmentada** | 11.595 € | — |
+| **Marketplace** | 306.696 € | — |
+| **Total Ingresos** | **340.853,76 €** | **32.151,32 €** |
+| **Beneficio Neto** | **308.702,44 €** | — |
+
+---
+
+### 7.5 **Análisis del resultado**  
+
+- A los **6 meses**, obtendríamos un **beneficio neto de 77.117,72 €**.  
+- A los **12 meses**, el beneficio neto asciende a **308.702,44 €**, demostrando un crecimiento exponencial.  
+- El **Marketplace** sigue siendo la mayor fuente de ingresos, representando un **90% del beneficio total**.  
+- La **publicidad y suscripciones** continúan en aumento, pero aún no son el pilar principal de la monetización.  
+- Los costes operativos se incrementan, pero el crecimiento de ingresos los supera ampliamente, consolidando la rentabilidad del negocio. 
+
+
+
+
+## 8. Conclusiones
 
 El análisis de costes y beneficios realizado en este documento permite evaluar la
 viabilidad económica del proyecto Infantem. Con una inversión inicial estimada en

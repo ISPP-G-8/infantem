@@ -55,8 +55,12 @@
    - 2.10. [Documentación de Casos de Uso](#documentación-de-casos-de-uso)
    - 2.11. [Retroalimentación sobre Interfaz de Usuario](#retroalimentación-sobre-interfaz-de-usuario)
 3. [Firma del Usuario](#firma-del-usuario)
+---
 
-**Revisado por Felipe Solís Agudo**
+## Colaboradores del documento
+- **Lucía Noya Cano**
+**Creó el documento.**
+- **Revisado por Felipe Solís Agudo**
 
 ---
 

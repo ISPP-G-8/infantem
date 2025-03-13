@@ -36,8 +36,29 @@
   </div>
 </div>
 
+**Contribuyentes**
+Álvaro Jiménez Osuna
+Ángela López Oliva
+Antonio Jiménez Ortega
+Daniel del Castillo Piñero
+David Fuentelsaz Rodríguez
+David Vargas Muñiz
+Enrique García Abadía
+Felipe Solís Agudo
+Javier Santos Martín
+Javier Ulecia García
+José García de Tejada Delgado
+Jose Maria Morgado Prudencio
+Josué Rodríguez López
+Lucía Noya Cano
+Luis Giraldo Santiago
+Miguel Galán Lerate
+Paula Luna Navarro
 
-**Revisión: Felipe Solís Agudo**
+## Colaboradores del documento
+- **Lucía Noya Cano:**
+**Creó el documento.**
+- **Revisión: Felipe Solís Agudo**
 ---
 
 Este documento recoge la evaluación del desempeño de los usuarios piloto en base a los comentarios proporcionados, según el sistema de puntuación establecido.
