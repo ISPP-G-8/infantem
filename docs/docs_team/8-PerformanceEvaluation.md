@@ -431,6 +431,15 @@ Date: 11/03/2025
 - Revisión de los documentos obligatorios del Sprint 1.
 
 #### Ulecia García, Javier-16
+- Asistencia a las seseiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Cambiar el MVP.
+- Ordenar y mejorar el documente del equipo y sus roles.
+- Entidad Baby y su CRUD.
+- Registro de alimentos.
+- Valudación del usuario.
+- Version inicial del login ,signin y signup.
+- Visualización de videos EV.
 
 #### Vargas Muñiz, David-17
 - Asistencia a las sesiones de presentación.
