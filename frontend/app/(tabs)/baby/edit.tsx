@@ -7,26 +7,17 @@ import { useLocalSearchParams } from 'expo-router';
 export default function EditBaby() {
   const gs = require("../../../static/styles/globalStyles");
   const router = useRouter();
-
   const [baby, setBaby] = useState(null);
-  const [loading, setLoading] = useState<boolean>(true); // Estado para manejar la carga
-  const [jwt, setJwt] = useState<string | null>(null);
-
+  const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(""); // Estado para errores
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const { id } = useLocalSearchParams();
 
-
-  useEffect(() => {
-    const getUserToken = async () => {
-      const token = await getToken();
-      setJwt(token);
-    };
-    getUserToken();
-  },[]) 
-
+  // Fetch datos iniciales del bebé
   useEffect(() => {
     const fetchBabyData = async () => {
-      if (id && jwt) {
+      const jwt = await getToken();
+      if (id) {
         try {
           const response = await fetch(`${apiUrl}/api/v1/baby/${id}`, {
             headers: { "Authorization": `Bearer ${jwt}` },
@@ -41,30 +32,48 @@ export default function EditBaby() {
           }
 
           const data = JSON.parse(text);
-          console.log("Parsed JSON:", data);
           setBaby(data);
-          console.log("Baby data:", baby);
         } catch (error) {
           console.error("Error fetching baby data:", error);
+          setErrorMessage("Failed to load baby data. Please try again later.");
         } finally {
-          setLoading(false); // Datos cargados o error, dejar de mostrar el mensaje de carga
+          setLoading(false);
         }
       } else {
-        setLoading(false); // No hay ID, dejar de mostrar el mensaje de carga
+        setLoading(false);
       }
     };
 
     fetchBabyData();
-  }, [id, jwt]);
+  }, [id]);
 
-  const handleSave = async () => {
-    const jwt = await getToken(); 
   
-    console.log("JWT for PUT request:", jwt); 
+  // Función para traducir el error técnico a un mensaje claro
+  const parseErrorMessage = (errorMessage: string) => {
+    try {
+      const errorObj = JSON.parse(errorMessage);
+      if (errorObj.message && errorObj.message.includes("java.time.LocalDate")) {
+        return "La fecha ingresada no es válida. Usa el formato YYYY-MM-DD.";
+      }
+      // Puedes agregar más chequeos según otros errores del backend
+      return "Error al guardar los datos. Revisa la información ingresada.";
+    } catch (e) {
+      return "Error inesperado al procesar la respuesta del servidor.";
+    }
+  };
+
+
+  // Función para guardar cambios
+  const handleSave = async () => {
+    setErrorMessage(""); // Limpiar errores anteriores
+    const jwt = await getToken();
+  
+    console.log("JWT for PUT request:", jwt);
   
     if (!jwt) {
       console.error("No JWT token found, aborting request");
-      return; 
+      setErrorMessage("Error de autenticación. Por favor, inicia sesión nuevamente.");
+      return;
     }
   
     try {
@@ -72,25 +81,30 @@ export default function EditBaby() {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${jwt}`, 
+          "Authorization": `Bearer ${jwt}`,
         },
         body: JSON.stringify(baby),
       });
   
       if (response.ok) {
-        router.push("/baby"); 
+        router.push("/baby");
       } else {
-        console.error("Error updating baby:", response.statusText);
+        const errorText = await response.text();
+        console.error("Error updating baby:", errorText);
+        
+        // Usar la función para interpretar y mostrar error amigable
+        const friendlyMessage = parseErrorMessage(errorText);
+        setErrorMessage(friendlyMessage);
       }
     } catch (error) {
       console.error("Error updating baby:", error);
+      setErrorMessage("Ocurrió un error inesperado. Por favor, intenta nuevamente.");
     }
   };
 
   if (loading) {
     return (
       <View style={{ flex: 1 }}>
-        
         <Text>Loading...</Text>
       </View>
     );
@@ -99,15 +113,15 @@ export default function EditBaby() {
   if (!baby) {
     return (
       <View style={{ flex: 1 }}>
-        
         <Text>No baby data found.</Text>
       </View>
     );
-  } 
+  }
 
   return (
     <View style={{ flex: 1 }}>
-      {baby && <View style={[gs.container, { paddingTop: 100, paddingBottom: 100 }]}>
+      {baby && (
+        <View style={[gs.container, { paddingTop: 100, paddingBottom: 100 }]}>
           <Text style={gs.headerText}>Edit Baby Information</Text>
           <TextInput
             style={gs.input}
@@ -151,12 +165,20 @@ export default function EditBaby() {
             value={baby.foodPreference}
             onChangeText={(text) => setBaby({ ...baby, foodPreference: text })}
           />
+
+          {/* Botón de Guardar */}
           <TouchableOpacity style={gs.mainButton} onPress={handleSave}>
             <Text style={gs.mainButtonText}>Save</Text>
           </TouchableOpacity>
-        </View>}
-        
+
+          {/* Mostrar error si existe */}
+          {errorMessage !== "" && (
+            <Text style={{ color: "red", marginTop: 10, textAlign: "center" }}>
+              {errorMessage}
+            </Text>
+          )}
+        </View>
+      )}
     </View>
   );
 }
-

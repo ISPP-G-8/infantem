@@ -55,6 +55,7 @@ public class Baby {
     @Size(min = 3, max = 50)
     private String name;
 
+    @NotNull
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate birthDate;
 

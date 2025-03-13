@@ -1,8 +1,3 @@
-
-// I KNOW THIS MUST BE ERASED AND THE ADD AND THE INDEX MUST BE THE SAME COMPONENTE/SCREEN
-// THIS IS JUST TEMPORARY FOR THE FIRST SPRING
-// TODO: CHANGE THIS.
-
 import { useState, useEffect } from "react";
 import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
@@ -15,61 +10,93 @@ export default function AddBaby() {
 
   const [name, setName] = useState<string>("");
   const [birthDate, setBirthDate] = useState<string>("");
-  const [genre, setGenre] = useState<string>("male"); 
+  const [genre, setGenre] = useState<string>("MALE");
   const [weight, setWeight] = useState<number | null>(null);
   const [height, setHeight] = useState<number | null>(null);
   const [cephalicPerimeter, setCephalicPerimeter] = useState<number | null>(null);
   const [foodPreference, setFoodPreference] = useState<string>("");
 
-  const [loading, setLoading] = useState<boolean>(true); // Estado para manejar la carga
+  const [loading, setLoading] = useState<boolean>(true);
   const [jwt, setJwt] = useState<string | null>(null);
+
+  const [errorMessage, setErrorMessage] = useState<string>(""); // Para mostrar errores
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
-
+  // Obtener token al montar
   useEffect(() => {
     const getUserToken = async () => {
       const token = await getToken();
       setJwt(token);
+      setLoading(false);
     };
     getUserToken();
-  },[]) 
+  }, []);
 
+  // Función para traducir errores del backend
+  const parseErrorMessage = (errorMessage: string) => {
+    try {
+      const errorObj = JSON.parse(errorMessage);
+      if (errorObj.message && errorObj.message.includes("java.time.LocalDate")) {
+        return "La fecha ingresada no es válida. Usa el formato YYYY-MM-DD.";
+      }
+      return "Error al guardar los datos. Revisa la información ingresada.";
+    } catch (e) {
+      return "Error inesperado al procesar la respuesta del servidor.";
+    }
+  };
+
+  // Guardar bebé
   const handleSave = async () => {
+    setErrorMessage(""); // Limpiar errores previos
     if (jwt) {
       try {
         const response = await fetch(`${apiUrl}/api/v1/baby`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${jwt}`, 
+            "Authorization": `Bearer ${jwt}`,
           },
           body: JSON.stringify({
-            name: name,
-            birthDate: birthDate,
-            genre: genre,
-            weight: weight,
-            height: height,
-            cephalicPerimeter: cephalicPerimeter,
-            foodPreference: foodPreference,
+            name,
+            birthDate,
+            genre,
+            weight,
+            height,
+            cephalicPerimeter,
+            foodPreference,
           }),
         });
-    
+
         if (response.ok) {
-          router.push("/baby"); 
+          router.push("/baby"); // Redirigir al listado
         } else {
-          console.error("Error updating baby:", response.statusText);
+          const errorText = await response.text();
+          console.error("Error creating baby:", errorText);
+          const friendlyMessage = parseErrorMessage(errorText);
+          setErrorMessage(friendlyMessage); // Mostrar error amigable
         }
       } catch (error) {
-        console.error("Error updating baby:", error);
+        console.error("Error creating baby:", error);
+        setErrorMessage("Ocurrió un error inesperado. Por favor, intenta nuevamente.");
       }
+    } else {
+      setErrorMessage("Error de autenticación. Por favor, inicia sesión nuevamente.");
     }
   };
 
+  if (loading) {
+    return (
+      <View style={[gs.container, { paddingTop: 100 }]}>
+        <Text>Cargando...</Text>
+      </View>
+    );
+  }
 
   return (
-  <View style={[gs.container, { paddingTop: 100, paddingBottom: 100 }]}>
+    <View style={[gs.container, { paddingTop: 100, paddingBottom: 100 }]}>
       <Text style={gs.headerText}>Add a baby</Text>
+
       <TextInput
         style={gs.input}
         placeholder="Name"
@@ -78,7 +105,7 @@ export default function AddBaby() {
       />
       <TextInput
         style={gs.input}
-        placeholder="2023-01-01"
+        placeholder="YYYY-MM-DD"
         value={birthDate}
         onChangeText={setBirthDate}
       />
@@ -93,33 +120,24 @@ export default function AddBaby() {
       </Picker>
       <TextInput
         style={gs.input}
-        placeholder="Weight"
-        value={weight?.toString()}
+        placeholder="Weight (kg)"
+        value={weight?.toString() || ""}
         keyboardType="numeric"
-        onChangeText={(text) => {
-          const newValue = parseFloat(text) || 0;
-          setWeight(newValue);
-        }}
+        onChangeText={(text) => setWeight(text ? parseFloat(text) : null)}
       />
       <TextInput
         style={gs.input}
-        placeholder="Height"
-        value={height?.toString()}
+        placeholder="Height (cm)"
+        value={height?.toString() || ""}
         keyboardType="numeric"
-        onChangeText={(text) => {
-          const newValue = parseInt(text) || 0;
-          setHeight(newValue);
-        }}
+        onChangeText={(text) => setHeight(text ? parseInt(text) : null)}
       />
       <TextInput
         style={gs.input}
-        placeholder="Cephalic Perimeter"
-        value={cephalicPerimeter?.toString()}
+        placeholder="Cephalic Perimeter (cm)"
+        value={cephalicPerimeter?.toString() || ""}
         keyboardType="numeric"
-        onChangeText={(text) => {
-          const newValue = parseInt(text) || 0;
-          setCephalicPerimeter(newValue);
-        }}
+        onChangeText={(text) => setCephalicPerimeter(text ? parseInt(text) : null)}
       />
       <TextInput
         style={gs.input}
@@ -127,11 +145,17 @@ export default function AddBaby() {
         value={foodPreference}
         onChangeText={setFoodPreference}
       />
+
+      {/* Mostrar error si existe */}
+      {errorMessage !== "" && (
+        <View style={{ backgroundColor: "#ffdddd", padding: 10, borderRadius: 8, marginTop: 15 }}>
+          <Text style={{ color: "#cc0000", textAlign: "center" }}>{errorMessage}</Text>
+        </View>
+      )}
+
       <TouchableOpacity style={gs.mainButton} onPress={handleSave}>
         <Text style={gs.mainButtonText}>Save</Text>
       </TouchableOpacity>
     </View>
   );
 }
-
-
