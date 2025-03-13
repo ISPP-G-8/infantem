@@ -41,7 +41,7 @@
 
 
 ## Índice
-1. [Información del Usuario](#información-del-usuario)
+1. [Información a completar por el Usuario Piloto](#información-del-usuario)
 2. [Compromiso del Usuario Piloto](#compromiso-del-usuario-piloto)
    - 2.1. [Uso del Sistema](#uso-del-sistema)
    - 2.2. [Participación en Reuniones y Encuestas](#participación-en-reuniones-y-encuestas)
@@ -58,7 +58,7 @@
 
 ---
 
-## Información del Usuario
+## Información a completar por el Usuario Piloto
 - **Nombre:** [Nombre del Usuario]
 - **Fecha:** [DD/MM/AAAA]
 - **Versión del Proyecto:** 1.0
@@ -111,7 +111,7 @@ Me comprometo a proporcionar comentarios sobre la interfaz de usuario (UI), incl
 
    <img src = "../../docs/imagenes/firmas_UP/NataliaOlmo_Firma.png" width="200" >
 
-   Fecha: ______________________
+   Fecha: 12/03/2023
 
 ### 2. **Antonio Macías**
 
@@ -121,7 +121,7 @@ Me comprometo a proporcionar comentarios sobre la interfaz de usuario (UI), incl
    
    <img src = "../../docs/imagenes/firmas_UP/antonioMacias_Firma.png" width="200" >
 
-   Fecha: ______________________
+   Fecha: 12/03/2023
 
 ### 3. **Ramón Gavira**
 
@@ -131,7 +131,7 @@ Me comprometo a proporcionar comentarios sobre la interfaz de usuario (UI), incl
 
    <img src = "../../docs/imagenes/firmas_UP/RamonGavira_firma.jpeg" width="200" >
 
-   Fecha: ______________________
+   Fecha: 12/03/2023
 
 ### 4. **Alberto Carmona**
 
@@ -141,7 +141,7 @@ Firma:
    
    <img src = "../../docs/imagenes/firmas_UP/AlbertoCarmona_Firma.png" width="200" >
 
-   Fecha: ______________________
+   Fecha: 12/03/2023
 
 ### 5. **Santiago Rosado**
 
@@ -151,7 +151,7 @@ Firma:
   
   <img src="../../docs/imagenes/firmas_UP/SantiagoRosado_firma.png" width="200">
 
-   Fecha: ______________________
+   Fecha: 12/03/2023
 
 ### 6. **Raúl Heras**
 
@@ -162,7 +162,7 @@ Firma:
   <img src="../../docs/imagenes/firmas_UP/RaúlHeras_firma.png" width="200">
 
 
-   Fecha: ______________________
+   Fecha: 12/03/2023
 
 ### 7. **Maria Caso**
 
@@ -179,7 +179,7 @@ Firma:
   <img src="../../docs/imagenes/firmas_UP/MirianSantiago_firma.png" width="200">
 
 
-   Fecha: ______________________
+   Fecha: 13/03/2023
 
 ### 9. **Bea Chaves**
 
@@ -190,4 +190,4 @@ Firma:
   <img src="../../docs/imagenes/firmas_UP/BeatrizChaves_firma.png" width="200">
 
 
-   Fecha: ______________________
+   Fecha: 13/03/2023
