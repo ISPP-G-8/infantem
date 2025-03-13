@@ -39,8 +39,13 @@
 
 ---
 
+## Colaboradores del documento
+- Josué Rodríguez López
+  - Creó la versión inicial del documento
+- José García de Tejada Delgado
+  - Formatting colaboradores
+
 ## Índice
-- [Colaboradores del documento](#colaboradores-del-documento)
 - [Resumen del tiempo invertido por el equipo](#resumen-del-tiempo-invertido-por-el-equipo)
 - [Informe detallado de las horas invertidas por cada miembro del equipo](#informe-detallado-de-las-horas-invertidas-por-cada-miembro-del-equipo)
   - [Álvaro Jiménez Osuna](#álvaro-jiménez-osuna)
@@ -60,10 +65,6 @@
   - [Luis Giraldo Santiago](#luis-giraldo-santiago)
   - [Miguel Galán Lerate](#miguel-galán-lerate)
   - [Paula Luna Navarro](#paula-luna-navarro)
-
-## Colaboradores del documento
-- Josué Rodríguez López López
-  - Creó la versión inicial del documento
 
 ## Resumen del tiempo invertido por el equipo
 <img src = "../../docs/imagenes/HorasClockifyS1.png" width="1000" />

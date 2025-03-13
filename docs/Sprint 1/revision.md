@@ -39,8 +39,13 @@
 
 ---
 
-
-
+## Colaboradores del documento
+- Luis Giraldo
+  - Creó la plantilla de los documentos
+- Enrique García Abadía
+  - Estructura general del documento
+- José García de Tejada Delgado
+  - Finalizado de los datos faltantes
 
 
 ## Índice
@@ -97,12 +102,3 @@ Actualmente no hay requisitos extra para usar el proyecto
 
 (en caso de que el embed falle, el vídeo está en el siguiente link: https://github.com/ISPP-G-8/infantem/blob/main/docs/Sprint%201/video_S1_ISPP.mp4 )
 
-
-
-## Colaboradores del documento
-- Luis Giraldo
-  - Creó la plantilla de los documentos
-- Enrique García Abadía
-  - Estructura general del documento
-- José García de Tejada Delgado
-  - Finalizado de los datos faltantes
