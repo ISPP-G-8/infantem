@@ -59,6 +59,7 @@
 
 ## Colaboradores del documento
 - **Lucía Noya Cano**
+- **Paula Luna Navarro:**
 **Creó el documento.**
 - **Revisado por Felipe Solís Agudo**
 
