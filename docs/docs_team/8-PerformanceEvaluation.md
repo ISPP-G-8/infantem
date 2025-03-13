@@ -152,11 +152,6 @@ Date: 11/03/2025
 - Análisis y búsqueda de competidores alternativa actual
 - Reestructuración base de conocimiento
 - Visualización vídeos EV
-- Implementación sistema autentificación backend inicial
-- Refactoring general API backend
-- Arreglos finales autentificación backend
-- Implementación parcial algoritmo detección de alérgenos backend
-
 
 #### Giraldo Santiago, Luis-6
 
@@ -347,6 +342,15 @@ Date: 11/03/2025
 #### García Abadía, Enrique-4
 
 #### García de Tejada Delgado, José-5
+
+- Asistencia a las sesiones de presentación
+- Asistencia a reuniones internas del grupo
+- Visualización vídeos EV
+- Implementación sistema autentificación backend inicial
+- Refactoring general API backend
+- Arreglos finales autentificación backend
+- Implementación parcial algoritmo detección de alérgenos backend
+- Documento revisión.md 
 
 #### Giraldo Santiago, Luis-6
 
