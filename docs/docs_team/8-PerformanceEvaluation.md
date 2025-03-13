@@ -1,6 +1,6 @@
 # Individual Performance Evaluation Form
 
-![Portada](../../frontend/assets/Documentos/Infantem.png)
+![Portada](../imagenes/Infantem.png)
 
 
 **Fecha:** 18/02/2025  
@@ -298,9 +298,14 @@ Date: 11/03/2025
 - Documento de usuarios piloto
 
 
-#### Vargas Muñiz, David-17
-
-- Asistencia a las sesiones de presentación.
+#### Vargas Muñiz, Davi- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Elaboración de nueva propuesta de idea.
+- Visualización de vídeos EV.
+- Redacción del informe de uso de la IA
+- Creación del currículum interno.
+- Análisis de costes.
+- Análisis de competidores.iones de presentación.
 - Asistencia a reuniones internas del grupo.
 - Recopilación de feedback de todos los grupos durante las sesiones de presentación.
 - Elaboración de nueva propuesta de idea.
@@ -320,6 +325,18 @@ Date: 11/03/2025
 
 #### Fuentelsaz Rodríguez, David-2
 
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Visualización de vídeos EV.
+- Revisión y reajuste de los requisitos de información.
+- Desarrollo y revisión del modelo UML de la aplicación.
+- Revisión del desarrollo backend. 
+- Gestión como vocal secundario del subgrupo de desarrollo "Backend".
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Desarrollo del documento de Commitment Agreement en MarkDown.
+- Corrección y desarrollo de la lógica de la entidad Baby. 
+
 #### Galán Lerate, Miguel-3
 
 #### García Abadía, Enrique-4
@@ -333,6 +350,13 @@ Date: 11/03/2025
 #### Jiménez Osuna, Álvaro-8
 
 #### López Oliva, Ángela-9
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Recopilación de feedback propio durante las sesiones de presentación.
+- Elaboración de la presentación del Sprint.
+- Desarrollo de la parte visual del Log-in.
+- Desarrollo de la parte visual de la Home Page.
+- Conversión de documentos de C.A. de los usuarios piloto 
 
 #### Luna Navarro, Paula-10
 
@@ -347,6 +371,19 @@ Date: 11/03/2025
 - Analisis de Riesgos
 - performanceEvaluation de Usuarios Piloto
 #### Noya Cano, Lucía-12
+- Asistencia a las sesiones de presentación.
+- Asistencias a reuniones internas del grupo.
+- Lectura de actas a las reuniones no asistidas.
+- Visualización de vídeos EV.
+- Desarrollo de la funcionalidad de recomendación de recetas en Backend.
+- Creación en Backend de las entidades "Intake", "Recipe", "Disease", "Vaccine".
+- Creación de los respectivos CRUD a las distintas entidades creadas.
+- Gestión como vocal secundaria del subgrupo "Documentación" (Asistencia a reuniones, asignación de tareas de documentación...)
+- Realización del documento de Commitment Agreement para los usuarios pilotos "pilotUsersCommitmentAgreement".
+- Realización del documento de Performance Evaluation de los usuarios piloto una vez recogido su feedback "pilotUsersPerformanceEvaluation".
+- Realización del documento guía visual de la interfaz de la aplicación para los usuarios piloto.
+- Documentación pasada de formato Word a formato Markdown.
+- Creación de tests para el módulo auth.
 
 #### Rodríguez López, Josué-13
 
@@ -394,18 +431,6 @@ Date: 11/03/2025
 #### del Catillo Piñero, Daniel-1
 
 #### Fuentelsaz Rodríguez, David-2
-
-- Asistencia a las sesiones de presentación.
-- Asistencia a reuniones internas del grupo.
-- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
-- Visualización de vídeos EV.
-- Revisión y reajuste de los requisitos de información.
-- Desarrollo y revisión del modelo UML de la aplicación.
-- Revisión del desarrollo backend. 
-- Gestión como vocal secundario del subgrupo de desarrollo "Backend".
-- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
-- Desarrollo del documento de Commitment Agreement en MarkDown.
-- Corrección y desarrollo de la lógica de la entidad Baby. 
 
 #### Galán Lerate, Miguel-3
 
