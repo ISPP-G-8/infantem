@@ -359,6 +359,22 @@ Date: 11/03/2025
 - Conversión de documentos de C.A. de los usuarios piloto 
 
 #### Luna Navarro, Paula-10
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Lectura de actas de las reuniones no asistidas
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Visualización de vídeos EV.
+- Creación en Backend de las entidades "User" y "Allergen"
+- Creación de los respectivos CRUD a las distintas entidades creadas.
+- Actualización del documento "Analisis de Costes"
+- Ejercer de vocal del subgrupo "Documentación", asistiendo a reuniones de vocales, asignando tareas y organizando el grupo.
+- Gestión de usuarios piloto, comunicación con ellos, explicación del funcionamiento de la recogida de feedback cada sprint, reuniones con ellos etc.
+- Realización de la encuesta para recoger el feedback
+- Realización del documento de Performance Evaluation de los usuarios piloto una vez recogido su feedback "pilotUsersPerformanceEvaluation".
+- Revisión y modificación del documento de Commitment Agreement para los usuarios pilotos "pilotUsersCommitmentAgreement".
+- Como vocal, me he encargado de recoger el feedback de los usuarios piloto y comunicarlo con mis demás compañeros vocales
+- Documentación pasada de formato Word a formato Markdown.
+- Mejora en la gestión de errores al eliminar alérgenos (tarea de Validacion backend)
 
 #### Morgado Prudencio, Jose Maria-11
 - Asistencia a las sesiones de presentación.
