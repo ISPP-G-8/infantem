@@ -351,6 +351,15 @@ Date: 11/03/2025
 #### Rodríguez López, Josué-13
 
 #### Santos Martín, Javier-14
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Desarrollo del stack de la aplicación en cliente
+- Desarrollo de la pantalla temporal de alergénos
+- Desarrollo del login y el manejo de sesión en cliente
+- Arreglo de la feature de Bebé en cliente
+- Arreglo de la feature de Recetas en cliente
+- Mantenimiento de la landing page.
+- Documentación del proceso CI/CD del proyecto
 
 #### Solís Agudo, Felipe-15
 - Asistencia a las sesiones de presentación.

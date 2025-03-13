@@ -336,9 +336,9 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
 
    "Yo, como miembro de este equipo, me comprometo a dedicar mi esfuerzo al cumplimiento de los objetivos del equipo, respetando los acuerdos establecidos."
    
-   Firma: ______________________
+   Firma: <img src = "../../docs/imagenes/firmas/Firma-JavierSantos.png" width="200" >
    
-   Fecha: ______________________
+   Fecha: 13/03/2025
 
 ### 10. **Javier Ulecia García**
 
@@ -352,9 +352,9 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
 
    "Yo, como miembro de este equipo, me comprometo a ser puntual y colaborativo para garantizar que el proyecto avance según lo planeado."
    
-   Firma: ______________________
+   Firma: <img src = "../../docs/imagenes/firmas/Firma-JoseGarciaDeTejadaDelgado.png" width="200" />
    
-   Fecha: ______________________
+   Fecha: 13/03/2025
 
 ### 12. **Jose Maria Morgado Prudencio**
 
