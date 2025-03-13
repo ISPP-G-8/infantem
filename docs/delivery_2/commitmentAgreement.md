@@ -4,7 +4,7 @@
 
 **Fecha:** 18/02/2025
 **Grupo 8:** Infantem
-**Ideando un proyecto**
+**Sprint 1**
 
 ## Integrantes del Grupo
 
@@ -28,6 +28,7 @@
 
 
 **Revisión: Felipe Solís Agudo**
+
 ---
 
 ## Índice

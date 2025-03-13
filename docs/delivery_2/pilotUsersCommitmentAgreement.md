@@ -4,7 +4,7 @@
 
 **Fecha:** 18/02/2025  
 **Grupo 8:** Infantem  
-**Ideando un proyecto**
+**Sprint 1**
 
 
 ## Integrantes del Grupo
@@ -55,6 +55,8 @@
    - 2.10. [Documentación de Casos de Uso](#documentación-de-casos-de-uso)
    - 2.11. [Retroalimentación sobre Interfaz de Usuario](#retroalimentación-sobre-interfaz-de-usuario)
 3. [Firma del Usuario](#firma-del-usuario)
+
+**Revisado por Felipe Solís Agudo**
 
 ---
 
