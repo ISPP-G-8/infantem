@@ -55,7 +55,10 @@ Luis Giraldo Santiago
 Miguel Galán Lerate
 Paula Luna Navarro
 
-**Revisión: Felipe Solís Agudo**
+## Colaboradores del documento
+- **Lucía Noya Cano:**
+**Creó el documento.**
+- **Revisión: Felipe Solís Agudo**
 ---
 
 Este documento recoge la evaluación del desempeño de los usuarios piloto en base a los comentarios proporcionados, según el sistema de puntuación establecido.
