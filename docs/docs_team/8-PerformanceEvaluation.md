@@ -37,6 +37,7 @@
   </div>
 </div>
 
+**Revisión: Felipe Solís Agudo**
 ---
 
 ## Índice
@@ -343,6 +344,19 @@ Date: 11/03/2025
 #### Santos Martín, Javier-14
 
 #### Solís Agudo, Felipe-15
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Desarrollo de actas de las reuniones internas del grupo.
+- Gestión como vocal principal del subgrupo de desarrollo "Frontend" (asignación de tareas, revisión del avance de dichas tareas,...).
+- Participación en el desarrollo de las vistas "recipeRecommendations", "recipeDetails" y "favourites".
+- Planificación de los costes e ingresos estimados para una semana, seis meses y un añodespués del lanzamiento de la aplicación.
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Visualización de vídeos EV.
+- Actualización requisitos funcionales del MVP.
+- Desarrollo de la versión inicial del NavBar de la aplicación.
+- Participación activa como usuario piloto para otro grupo de la asignatura.
+- Revisión diagrama de clases.
+- Revisión de los documentos obligatorios del Sprint 1.
 
 #### Ulecia García, Javier-16
 
@@ -388,19 +402,6 @@ Date: 11/03/2025
 #### Santos Martín, Javier-14
 
 #### Solís Agudo, Felipe-15
-- Asistencia a las sesiones de presentación.
-- Asistencia a reuniones internas del grupo.
-- Desarrollo de actas de las reuniones internas del grupo.
-- Gestión como vocal principal del subgrupo de desarrollo "Frontend" (asignación de tareas, revisión del avance de dichas tareas,...).
-- Participación en el desarrollo de las vistas "recipeRecommendations", "recipeDetails" y "favourites".
-- Planificación de los costes e ingresos estimados para una semana, seis meses y un añodespués del lanzamiento de la aplicación.
-- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
-- Visualización de vídeos EV.
-- Actualización requisitos funcionales del MVP.
-- Desarrollo de la versión inicial del NavBar de la aplicación.
-- Participación activa como usuario piloto para otro grupo de la asignatura.
-- Revisión diagrama de clases.
-- Revisión de los documentos obligatorios del Sprint 1.
 
 #### Ulecia García, Javier-16
 

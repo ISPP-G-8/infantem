@@ -36,6 +36,8 @@
   </div>
 </div>
 
+**Revisión: Felipe Solís Agudo**
+
 ---
 
 ## Índice
@@ -62,6 +64,7 @@
 ## Colaboradores del documento
 - Jose Maria Morgado Prudencio
   - Creó el documento en md.
+- Revisión por Felipe Solís Agudo
 
 ## Introducción
 
@@ -231,11 +234,11 @@ El éxito del programa de usuarios piloto se medirá en función de dos factores
 
 | Nombre               | Grupo perteneciente | Perfil            |  
 |----------------------|---------------------|-------------------|  
-| ALBERTO CARMONA SICRE | 1                   | Papa primerizo    |  
-| NATALIA OLMO VILLEGAS | 3                   | Padres experimentados |  
+| ALBERTO CARMONA SICRE | 1                   | Usuario estándar |  
+| NATALIA OLMO VILLEGAS | 3                   | Usuario estándar |  
 | SANTIAGO ROSADO RAYA  | 4                   | Usuarios Premium  |  
 | RAÚL HERAS PEREZ      | 5                   | Usuarios Premium  |  
-| ANTONIO MACIAS FERRERA| 6                   | Padres experimentados |
+| ANTONIO MACIAS FERRERA| 6                   | Usuario estándar |
 
 **Usuarios externos a EV**
 
