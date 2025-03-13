@@ -333,6 +333,13 @@ Date: 11/03/2025
 #### Jiménez Osuna, Álvaro-8
 
 #### López Oliva, Ángela-9
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Recopilación de feedback propio durante las sesiones de presentación.
+- Elaboración de la presentación del Sprint.
+- Desarrollo de la parte visual del Log-in.
+- Desarrollo de la parte visual de la Home Page.
+- Conversión de documentos de C.A. de los usuarios piloto 
 
 #### Luna Navarro, Paula-10
 
