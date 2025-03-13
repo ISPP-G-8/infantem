@@ -152,6 +152,10 @@ Date: 11/03/2025
 - Análisis y búsqueda de competidores alternativa actual
 - Reestructuración base de conocimiento
 - Visualización vídeos EV
+- Implementación sistema autentificación backend inicial
+- Refactoring general API backend
+- Arreglos finales autentificación backend
+- Implementación parcial algoritmo detección de alérgenos backend
 
 
 #### Giraldo Santiago, Luis-6
