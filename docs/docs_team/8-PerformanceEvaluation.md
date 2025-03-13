@@ -276,6 +276,12 @@ Date: 11/03/2025
 - Documentación de instalación de la aplicación
 - Desarrollo de la landing page
 - Elaboración de las políticas del equipo
+- Desarrollo del stack de la aplicación en cliente
+- Desarrollo de la pantalla temporal de alergénos
+- Desarrollo del login y el manejo de sesión en cliente
+- Arreglo de la feature de Bebé en cliente
+- Arreglo de la feature de Recetas en cliente
+- Mantenimiento de la landing page.
 
 
 #### Solís Agudo, Felipe-15
