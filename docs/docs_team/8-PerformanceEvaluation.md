@@ -338,6 +338,18 @@ Date: 11/03/2025
 - Corrección y desarrollo de la lógica de la entidad Baby. 
 
 #### Galán Lerate, Miguel-3
+- Asistencia a clase.
+- Asistencia a reuniones internas del grupo.
+- Testing de recomendaciones de recetas.
+- Refactorizar recomendaciones de recetas.
+- Corrección de entidad Baby.
+- Corrección de CRUD inicial de Baby.
+- Desarrollo de workflows CI/CD.
+- Creación de entornos de ejecución.
+- Correción final de Urls en frontend.
+- Despliegue en App Engine.
+
+
 
 #### García Abadía, Enrique-4
 
