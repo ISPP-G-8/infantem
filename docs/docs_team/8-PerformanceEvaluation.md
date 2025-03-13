@@ -347,7 +347,13 @@ Date: 11/03/2025
 #### Ulecia García, Javier-16
 
 #### Vargas Muñiz, David-17
-
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Visualización de vídeos EV.
+- Revisión de calidad del frontend.
+- Presentación 07/03/2025.
+- Presentación evaluable 14/03/2025.
 
 <a id="sprint-2"></a>
 
