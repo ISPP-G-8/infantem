@@ -4,7 +4,7 @@
 ---
 **Fecha:** 18/02/2025  
 **Grupo 8:** Infantem  
-**Ideando un proyecto**
+**Sprint 1**
 
 ## Integrantes del Grupo
 <div style="display: flex; justify-content: space-between; gap: 2px;">
@@ -37,6 +37,7 @@
 </div>
 
 
+**Revisión: Felipe Solís Agudo**
 ---
 
 Este documento recoge la evaluación del desempeño de los usuarios piloto en base a los comentarios proporcionados, según el sistema de puntuación establecido.

@@ -26,6 +26,8 @@
 - Miguel Galán Lerate
 - Paula Luna Navarro
 
+
+**Revisión: Felipe Solís Agudo**
 ---
 
 ## Índice

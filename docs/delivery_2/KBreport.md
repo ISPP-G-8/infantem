@@ -56,6 +56,7 @@ Enlace a la base de conocimiento común, [sección del grupo 8](https://bcc2425.
 ## Colaboradores del documento
 - Luis Giraldo
   - Creó el documento.
+- Revisado por Felipe Solís Agudo
 
 
 
