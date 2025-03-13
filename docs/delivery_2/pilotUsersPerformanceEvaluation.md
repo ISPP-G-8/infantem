@@ -61,7 +61,7 @@ Este documento recoge la evaluación del desempeño de los usuarios piloto en ba
 - **Fecha de acceso:** 12/03/2025 00:03
 - **Fecha de feedback:** 12/03/2025 11:49
 - **Puntuación:** **8**
-- **Link clockify:** (No aportado)
+- **Link clockify:** https://app.clockify.me/shared/67d2ba1ebecbe07bd991b985
 - **Fallos encontrados:**
   - No se entiende por qué es necesario introducir datos del bebé para ver recetas.
   - Las recetas incluyen una descripción, pero no detallan los pasos a seguir.
@@ -155,7 +155,7 @@ Ramón destacó como uno de los usuarios más analíticos. Fue más allá de lo 
 - Falta una imagen de la receta terminada.
 - No hay una sección con los pasos a seguir para cocinar la receta, a pesar de que la funcionalidad principal indica que debería guiar al usuario en la preparación del plato.
 
-- **Recomendaciones de mejora**:
+**Recomendaciones de mejora**:
 - Separar mejor los elementos en la sección de información de los bebés para mejorar la legibilidad.
 - Cambiar el nombre del botón "Add Baby" por algo más intuitivo.
 - Modificar los colores de la navbar para mejorar la visibilidad del texto.
@@ -170,13 +170,13 @@ Ramón destacó como uno de los usuarios más analíticos. Fue más allá de lo 
 - Agregar imágenes a la vista detallada de recetas para hacerla más atractiva.
 - Incluir una sección con los pasos detallados para preparar cada receta.
 
-- **Otros comentarios**:
+**Otros comentarios**:
 - La funcionalidad de búsqueda de recetas por nombre cumple con lo esperado.
 - La estructura de la aplicación es buena, pero faltan detalles para mejorar la usabilidad y la experiencia visual.
 - Se aprecian avances en la organización de la información, pero aún hay margen de mejora en la claridad y distribución de los elementos.
 
-- **Evaluación del desempeño:**
-Alberto proporcionó una evaluación detallada, señalando tanto problemas funcionales como estéticos. A pesar de que la evaluación de los requisitos fue algo más básica, sus comentarios sobre la interfaz, el diseño de la aplicación y la falta de elementos visuales fueron muy pertinentes. Su feedback se enfocó en aspectos importantes para mejorar la experiencia de usuario, y su puntuación refleja una implicación más allá de lo mínimo.
+**Evaluación del desempeño:**
+- Alberto proporcionó una evaluación detallada, señalando tanto problemas funcionales como estéticos. A pesar de que la evaluación de los requisitos fue algo más básica, sus comentarios sobre la interfaz, el diseño de la aplicación y la falta de elementos visuales fueron muy pertinentes. Su feedback se enfocó en aspectos importantes para mejorar la experiencia de usuario, y su puntuación refleja una implicación más allá de lo mínimo.
 ---
 
 ### Santiago Rosado
@@ -268,11 +268,12 @@ No aportó comentarios adicionales ni reportó fallos, por lo que no podemos ide
 | Natalia Olmo      | 12/03/2025 11:49        | 8          | Aporta observaciones útiles y sugerencias relevantes |
 | Antonio Macías    | 12/03/2025 13:52        | 9          | Comentarios útiles pero algo más generales           |
 | Ramón Gavira      | 12/03/2025 16:25        | 10          | Evaluación detallada con propuestas claras           |
-| Alberto Carmona   | 12/03/2025 14:57        | 10         | Evaluación detallada y constructiva                  |
+| Alberto Carmona   | 12/03/2025 14:57        | 10         | Evaluación detallada con propuestas claras                 |
 | Santiago Rosado   | 12/03/2025 18:26:07        | 9          | Evaluación detallada y constructiva                  |
 | Raúl Heras   | 12/03/2025 20:19:23        | 9          | Evaluación detallada y constructiva                  |
 | Beatriz Chaves   | 13/03/2025 11:54:00        | 7          | Evaluacion no muy detallada                  |
 | Miriam Santiago   | 13/03/2025 12:52:32        | 7          | Evaluacion no muy detallada                  |
+| María Caso   | -        | 0         | No aportó feedback
 ---
 
 > *Este sistema de evaluación sirve como guía para valorar la implicación de los usuarios piloto y tomar decisiones sobre futuras iteraciones y pruebas de usuario.*
