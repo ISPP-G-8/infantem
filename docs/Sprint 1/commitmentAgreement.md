@@ -311,7 +311,7 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
    
    Firma: <img src = "../../docs/imagenes/firmas/Firma-AntonioJimenez.png" width="200" >
    
-   Fecha: ______________________
+   Fecha: 11/03/2025
 
 ### 4. **Daniel del Castillo Piñero**
 
