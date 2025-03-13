@@ -312,9 +312,9 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
 
    "Yo, como miembro de este equipo, me comprometo a colaborar de manera efectiva y a contribuir al cumplimiento de las metas de este proyecto."
    
-   Firma: ______________________
+   Firma: <img src = "../../docs/imagenes/firmas/Firma-DavidVargas.jpg" width="200" />
    
-   Fecha: ______________________
+   Fecha: 13/03/2025
 
 ### 7. **Enrique García Abadía**
 
