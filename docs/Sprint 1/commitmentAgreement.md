@@ -26,6 +26,24 @@
 - Miguel Galán Lerate
 - Paula Luna Navarro
 
+**Contribuyentes**
+Álvaro Jiménez Osuna
+Ángela López Oliva
+Antonio Jiménez Ortega
+Daniel del Castillo Piñero
+David Fuentelsaz Rodríguez
+David Vargas Muñiz
+Enrique García Abadía
+Felipe Solís Agudo
+Javier Santos Martín
+Javier Ulecia García
+José García de Tejada Delgado
+Jose Maria Morgado Prudencio
+Josué Rodríguez López
+Lucía Noya Cano
+Luis Giraldo Santiago
+Miguel Galán Lerate
+Paula Luna Navarro
 
 **Revisión: Felipe Solís Agudo**
 
