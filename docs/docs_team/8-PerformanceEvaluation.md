@@ -1,6 +1,6 @@
 # Individual Performance Evaluation Form
 
-<img src = "../../docs/imagenes/Infantem.png" width="320" />
+![Portada](../imagenes/Infantem.png)
 
 
 **Fecha:** 18/02/2025  
@@ -298,9 +298,14 @@ Date: 11/03/2025
 - Documento de usuarios piloto
 
 
-#### Vargas Muñiz, David-17
-
-- Asistencia a las sesiones de presentación.
+#### Vargas Muñiz, Davi- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Elaboración de nueva propuesta de idea.
+- Visualización de vídeos EV.
+- Redacción del informe de uso de la IA
+- Creación del currículum interno.
+- Análisis de costes.
+- Análisis de competidores.iones de presentación.
 - Asistencia a reuniones internas del grupo.
 - Recopilación de feedback de todos los grupos durante las sesiones de presentación.
 - Elaboración de nueva propuesta de idea.
@@ -320,17 +325,21 @@ Date: 11/03/2025
 
 #### Fuentelsaz Rodríguez, David-2
 
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Visualización de vídeos EV.
+- Revisión y reajuste de los requisitos de información.
+- Desarrollo y revisión del modelo UML de la aplicación.
+- Revisión del desarrollo backend. 
+- Gestión como vocal secundario del subgrupo de desarrollo "Backend".
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Desarrollo del documento de Commitment Agreement en MarkDown.
+- Corrección y desarrollo de la lógica de la entidad Baby. 
+
 #### Galán Lerate, Miguel-3
 
 #### García Abadía, Enrique-4
-- Asistencia a las sesiones de presentación.
-- Asistencia a reuniones internas del grupo.
-- Asistencia a reuniones de vocales del grupo.
-- Reviones de frontend pre-presentaciones y unificacion de estilos.
-- Frontend de funcionalidad de registro de alimentos (eliminada posteriormente).
-- Creacion y configuracion de frontend de la funcionalidad baby.
-- Redaccion de documento revision.md juanto a Jose García de Tejada Delgado
-
 
 #### García de Tejada Delgado, José-5
 
@@ -422,18 +431,6 @@ Date: 11/03/2025
 #### del Catillo Piñero, Daniel-1
 
 #### Fuentelsaz Rodríguez, David-2
-
-- Asistencia a las sesiones de presentación.
-- Asistencia a reuniones internas del grupo.
-- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
-- Visualización de vídeos EV.
-- Revisión y reajuste de los requisitos de información.
-- Desarrollo y revisión del modelo UML de la aplicación.
-- Revisión del desarrollo backend. 
-- Gestión como vocal secundario del subgrupo de desarrollo "Backend".
-- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
-- Desarrollo del documento de Commitment Agreement en MarkDown.
-- Corrección y desarrollo de la lógica de la entidad Baby. 
 
 #### Galán Lerate, Miguel-3
 
