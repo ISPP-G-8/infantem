@@ -36,13 +36,15 @@
   </div>
 </div>
 
-**Revisión: Felipe Solís Agudo**
+## Colaboradores del documento
+- Jose Maria Morgado Prudencio
+  - Creó el documento en md.
+- Revisión por Felipe Solís Agudo
 
 ---
 
 ## Índice
 
-- [Colaboradores del documento](#colaboradores-del-documento)
 - [Introducción](#introducción)  
 - [Gestión de los usuarios piloto](#gestión-de-los-usuarios-piloto)  
   - [Selección de usuarios piloto](#selección-de-usuarios-piloto)  
@@ -61,10 +63,6 @@
 - [Lista de usuarios piloto](#lista-de-usuarios-piloto)  
 
 ---
-## Colaboradores del documento
-- Jose Maria Morgado Prudencio
-  - Creó el documento en md.
-- Revisión por Felipe Solís Agudo
 
 ## Introducción
 

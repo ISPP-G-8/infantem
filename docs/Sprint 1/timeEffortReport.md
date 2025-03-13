@@ -37,13 +37,12 @@
   </div>
 </div>
 
----
-
 ## Colaboradores del documento
 - Josué Rodríguez López
   - Creó la versión inicial del documento
 - José García de Tejada Delgado
   - Formatting colaboradores
+---
 
 ## Índice
 - [Resumen del tiempo invertido por el equipo](#resumen-del-tiempo-invertido-por-el-equipo)

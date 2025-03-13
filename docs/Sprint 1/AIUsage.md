@@ -30,6 +30,19 @@
 
 **Revisión: Felipe Solís Agudo**
 
+## Colaboradores del documento
+- Felipe Solís Agudo
+  - Colaborador en la creación de los prompts
+  - Revisión y corrección de errores
+- Josué Rodríguez López
+  - Colaborador en la creación de los prompts
+  - Revisión y corrección de errores
+- Javier Santos Martín
+  - Colaborador en la creación de los prompts
+- Antonio Jiménez Ortega
+  - Colaborador en la creación de los prompts
+- Luis Giraldo Santiago
+  - Colaborador en la creación de los prompts
 ---
 
 ## Índice
@@ -149,6 +162,30 @@ como hacer en MD para que cuando pulse un punto definido en mi indice me lleve d
 - Como añado una nota en un parrofo en md, si se puede
 - Como hago una checklist en md
 
+#### Josué Rodríguez López
+
+##### 09/03/2025
+ - estoy haciendo los tests, pero quiero que usen una base de datos de prueba de test, como hago eso
+ - quiero usar una base de datos de prueba de mysql en vez de la de h2, como hago eso?
+ - que excepcion deberia devolver un servicio cuando con el metodo getById no se encuentra el objeto en base de datos?
+ - se suele hacer algun caso negativo para el testing del metodo create?
+ 
+##### 10/03/2025
+ - si un usuario puede tener muchas recetas asociadas, pero una receta solo puede estar asociada a un usuario que tipo de relacion tengo que poner?
+  - necesito que una receta pueda existir sin ingesta, pero una ingesta no puede existir sin receta, en que clase debo poner la restriccion de que la relacion no puede ser nula?
+  - hazme un json de una receta para que lo pueda pasar como cuerpo de una peticion http
+  - es mejor devolver la lista vacia o una excepcion cuando un metodo de listAll no devuelve nada?
+
+
+##### 11/03/2025
+ - como hacer para que sea necesario estar loggeado para acceder a una api?
+ - tengo hecho ya toda la logica de autenticacion, lo unico que necesito es que los endpoints de recipeController solo esten disponibles para llamadas que contengan un token
+ - requestMatchers(AntPathRequestMatcher.antMatcher("/api/v1/users/**")).hasAuthority(ADMIN), que diferencia hay entre poner el antpathrequestmatcher y no hacerlo
+ - donde se define en el proyecto la validacion del token una vez llega en una peticion?
+ - tengo un cors que quiero usar, como lo hago?
+ - no tengo claro que poner dentro del addFilterBefore del cors, la clase de mi cors se llama CorsConfig.java
+ - se supone que cors.and esta obsoleto, que deberia usar en su lugar?
+ - me he dado cuenta de que el token fall por haber expirado, como puedo arreglar eso?
 ---
 
 ## 6. Conclusión

@@ -37,8 +37,6 @@
   </div>
 </div>
 
----
-
 ## Colaboradores del documento
 - Luis Giraldo
   - Creó la plantilla de los documentos
@@ -46,6 +44,7 @@
   - Estructura general del documento
 - José García de Tejada Delgado
   - Finalizado de los datos faltantes
+---
 
 
 ## Índice

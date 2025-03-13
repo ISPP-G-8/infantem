@@ -45,7 +45,11 @@ Luis Giraldo Santiago
 Miguel Galán Lerate
 Paula Luna Navarro
 
-**Revisión: Felipe Solís Agudo**
+## Colaboradores del documento
+- David Fuentelsaz Rodríguez
+  - Creó la versión inicial del documento
+- Todos los miembros de equipo
+  - Firmar Commitment Agreement
 
 ---
 

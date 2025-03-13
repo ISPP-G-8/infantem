@@ -36,6 +36,11 @@
   </div>
 </div>
 
+## Colaboradores del documento
+- Luis Giraldo
+  - Creó el documento.
+- Revisado por Felipe Solís Agudo
+
 ---
 
 Enlace a la base de conocimiento común, [sección del grupo 8](https://bcc2425.vercel.app/docs/grupos-tarde/Grupo%208)
@@ -43,7 +48,6 @@ Enlace a la base de conocimiento común, [sección del grupo 8](https://bcc2425.
 
 
 ## Índice
-- [Colaboradores del documento](#colaboradores-del-documento)
 - [Aportaciones del Grupo 8 para el Sprint 1](#aportaciones-del-grupo-8-para-el-sprint-1)
   - [Grupo 8 - Infantem](#grupo-8---infantem)
   - [Grupo 7 - Map Your World](#grupo-7---map-your-world)
@@ -52,12 +56,6 @@ Enlace a la base de conocimiento común, [sección del grupo 8](https://bcc2425.
   - [Grupo 11 - Pawtel](#grupo-11---pawtel)
 - [Acciones de consolidación](#acciones-de-consolidación)
   - [Aprendizajes generales de otros grupos](#aprendizajes-generales-de-otros-grupos)
-
-## Colaboradores del documento
-- Luis Giraldo
-  - Creó el documento.
-- Revisado por Felipe Solís Agudo
-
 
 
 
