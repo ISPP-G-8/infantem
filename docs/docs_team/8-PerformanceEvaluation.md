@@ -386,6 +386,18 @@ Date: 11/03/2025
 
 #### Fuentelsaz Rodríguez, David-2
 
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Visualización de vídeos EV.
+- Revisión y reajuste de los requisitos de información.
+- Desarrollo y revisión del modelo UML de la aplicación.
+- Revisión del desarrollo backend. 
+- Gestión como vocal secundario del subgrupo de desarrollo "Backend".
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Desarrollo del documento de Commitment Agreement en MarkDown.
+- Corrección y desarrollo de la lógica de la entidad Baby. 
+
 #### Galán Lerate, Miguel-3
 
 #### García Abadía, Enrique-4
