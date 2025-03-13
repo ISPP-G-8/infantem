@@ -355,6 +355,18 @@ Date: 11/03/2025
 #### Giraldo Santiago, Luis-6
 
 #### Jiménez Ortega, Antonio-7
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Recopilación de feedback propio durante las sesiones de presentación.
+- Desarrollo de la parte visual de las recetas del usuario.
+- Desarrollo de la parte visual de las recetas recomendadas al usuario junto con su filtro de búsqueda por edad en meses del bebé
+- Conversión de todos los documentos de análisis del proyecto (costes, DAFO, riesgos, competidores)
+- Arreglo de varios errores en la lógica del código de frontend de la pantalla de recetas
+- Tradución de inglés al castellano de la app y sus datos de prueba
+- Participación inicial como usuario piloto del grupo 6
+- Organización en las tareas de frontend
+- Grabación del vídeo de demostración de la app del S1
+
 
 #### Jiménez Osuna, Álvaro-8
 
