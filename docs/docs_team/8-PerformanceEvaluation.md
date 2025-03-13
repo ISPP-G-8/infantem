@@ -234,6 +234,7 @@ Date: 11/03/2025
 - Elaboración de DAFO de ideas anteriores
 - Elaboración de curriculum interno
 - Visualización de píldoras teóricas
+- Lectura de los feedbacks
 
 
 #### Noya Cano, Lucía-12
@@ -336,12 +337,29 @@ Date: 11/03/2025
 #### Luna Navarro, Paula-10
 
 #### Morgado Prudencio, Jose Maria-11
-
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Lectura de actas de las reuniones no asistidas
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Visualización de vídeos EV.
+- Investigacion sobre la implementacion de la publicidad
+- Implementacion de entidades
+- Analisis de Riesgos
+- performanceEvaluation de Usuarios Piloto
 #### Noya Cano, Lucía-12
 
 #### Rodríguez López, Josué-13
 
 #### Santos Martín, Javier-14
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Desarrollo del stack de la aplicación en cliente
+- Desarrollo de la pantalla temporal de alergénos
+- Desarrollo del login y el manejo de sesión en cliente
+- Arreglo de la feature de Bebé en cliente
+- Arreglo de la feature de Recetas en cliente
+- Mantenimiento de la landing page.
+- Documentación del proceso CI/CD del proyecto
 
 #### Solís Agudo, Felipe-15
 - Asistencia a las sesiones de presentación.
@@ -376,6 +394,18 @@ Date: 11/03/2025
 #### del Catillo Piñero, Daniel-1
 
 #### Fuentelsaz Rodríguez, David-2
+
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Visualización de vídeos EV.
+- Revisión y reajuste de los requisitos de información.
+- Desarrollo y revisión del modelo UML de la aplicación.
+- Revisión del desarrollo backend. 
+- Gestión como vocal secundario del subgrupo de desarrollo "Backend".
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Desarrollo del documento de Commitment Agreement en MarkDown.
+- Corrección y desarrollo de la lógica de la entidad Baby. 
 
 #### Galán Lerate, Miguel-3
 

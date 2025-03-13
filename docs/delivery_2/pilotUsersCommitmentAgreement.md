@@ -101,9 +101,93 @@ Me comprometo a documentar cualquier caso de uso inesperado o situación que no 
 Me comprometo a proporcionar comentarios sobre la interfaz de usuario (UI), incluyendo la facilidad de navegación, diseño visual, accesibilidad y cualquier inconveniente relacionado con la interacción con el sistema.
 
 ---
+### Usuarios Piloto
 
-## Firma del Usuario
-Al firmar este documento, reconozco que he comprendido y acepto las responsabilidades que se me asignan. Me comprometo a cumplir con lo establecido en este acuerdo.
+### 1. **Natalia Olmo**
 
-**Firma del Usuario:** [Firma del usuario aquí]  
-**Fecha:** [DD/MM/AAAA]
+   "Yo, como usuario piloto, me comprometo a participar activamente en las pruebas y proporcionar retroalimentación honesta y detallada."
+
+   Firma: 
+
+   <img src = "../../docs/imagenes/firmas_UP/NataliaOlmo_Firma.png" width="200" >
+
+   Fecha: ______________________
+
+### 2. **Antonio Macías**
+
+   "Yo, como usuario piloto, me comprometo a utilizar la aplicación siguiendo las indicaciones del equipo y a reportar cualquier incidencia encontrada."
+
+   Firma: 
+   
+   <img src = "../../docs/imagenes/firmas_UP/antonioMacias_Firma.png" width="200" >
+
+   Fecha: ______________________
+
+### 3. **Ramón Gavira**
+
+   "Yo, como usuario piloto, me comprometo a evaluar el funcionamiento del sistema y a compartir mis observaciones con el equipo de desarrollo."
+
+  Firma: 
+
+   <img src = "../../docs/imagenes/firmas_UP/RamonGavira_firma.jpeg" width="200" >
+
+   Fecha: ______________________
+
+### 4. **Alberto Carmona**
+
+   "Yo, como usuario piloto, me comprometo a probar la aplicación en distintos escenarios y a contribuir con sugerencias para su mejora."
+
+Firma: 
+   
+   <img src = "../../docs/imagenes/firmas_UP/AlbertoCarmona_Firma.png" width="200" >
+
+   Fecha: ______________________
+
+### 5. **Santiago Rosado**
+
+   "Yo, como usuario piloto, me comprometo a brindar un análisis detallado de mi experiencia con la aplicación para optimizar su rendimiento."
+
+  Firma: 
+  
+  <img src="../../docs/imagenes/firmas_UP/SantiagoRosado_firma.png" width="200">
+
+   Fecha: ______________________
+
+### 6. **Raúl Heras**
+
+   "Yo, como usuario piloto, me comprometo a participar en las pruebas y a proporcionar comentarios constructivos sobre el funcionamiento del sistema."
+
+   Firma: 
+  
+  <img src="../../docs/imagenes/firmas_UP/RaúlHeras_firma.png" width="200">
+
+
+   Fecha: ______________________
+
+### 7. **Maria Caso**
+
+   Firma: (no aporto firma)
+
+   Fecha: ______________________
+
+### 8. **Miriam Santiago**
+
+   "Yo, como usuario piloto, me comprometo a utilizar la aplicación de manera responsable y a comunicar cualquier problema técnico detectado."
+
+   Firma: 
+  
+  <img src="../../docs/imagenes/firmas_UP/MirianSantiago_firma.png" width="200">
+
+
+   Fecha: ______________________
+
+### 9. **Bea Chaves**
+
+   "Yo, como usuario piloto, me comprometo a participar activamente en la evaluación del sistema y a sugerir mejoras según mi experiencia."
+
+  Firma: 
+  
+  <img src="../../docs/imagenes/firmas_UP/BeatrizChaves_firma.png" width="200">
+
+
+   Fecha: ______________________
