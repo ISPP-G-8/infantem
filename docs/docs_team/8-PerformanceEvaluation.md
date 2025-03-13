@@ -327,8 +327,6 @@ Date: 11/03/2025
 
 - Asistencia a las sesiones de presentación.
 - Asistencia a reuniones internas del grupo.
-- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
-- Visualización de vídeos EV.
 - Revisión y reajuste de los requisitos de información.
 - Desarrollo y revisión del modelo UML de la aplicación.
 - Revisión del desarrollo backend. 
@@ -381,6 +379,17 @@ Date: 11/03/2025
 
 
 #### Jiménez Osuna, Álvaro-8
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Gestión como vocal secundario del subgrupo de desarrollo "Frontend".
+- Elaboración de la presentación del Sprint.
+- Actualización del documento de MSProject.
+- Organización y subdivisión de las tareas Frontend.
+- Revisión y unificación estilos Presentacion
+- Elaboración de la pantalla Profile y Desarrollo de los Avatares.
+- Customizar los iconos de la aplicación.
+- Revisión del Diagrama de Clases.
+- Set Up del proyecto para MAC.
 
 #### López Oliva, Ángela-9
 - Asistencia a las sesiones de presentación.
