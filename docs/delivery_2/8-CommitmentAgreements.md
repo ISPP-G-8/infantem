@@ -326,11 +326,11 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
 
 ### 8. **Felipe Solís Agudo**
 
-   "Yo, como miembro de este equipo, me comprometo a cumplir con las tareas asignadas y a trabajar en conjunto con el equipo para asegurar el éxito del proyecto."
+   "Yo, como miembro de este equipo, me comprometo a cumplir con lo establecido en este acuerdo para asegurar el éxito del proyecto y el buen funcionamiento del equipo."
    
-   Firma: ______________________
-   
-   Fecha: ______________________
+   Firma: <img src = "../../docs/imagenes/firmas/Firma-FelipeSolisAgudo.PNG" width="200" >
+
+   Fecha: 13/03/2025
 
 ### 9. **Javier Santos Martín**
 
