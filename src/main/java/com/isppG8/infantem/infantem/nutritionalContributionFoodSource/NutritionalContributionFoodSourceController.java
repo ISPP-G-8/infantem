@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
+
 @RestController
-@RequestMapping({"/nutritionalContributions/{nutritionalcontributionId}/nutritionalContributionFoodSources", "/foodSources/{foodSourceId}/nutritionalContributionFoodSources"})
+@RequestMapping({"api/v1/nutritionalContributions/{nutritionalcontributionId}/nutritionalContributionFoodSources", "api/v1/foodSources/{foodSourceId}/nutritionalContributionFoodSources"})
 public class NutritionalContributionFoodSourceController {
     @Autowired
     private NutritionalContributionFoodSourceService nutritionalContributionFoodSourceService;
@@ -31,7 +33,7 @@ public class NutritionalContributionFoodSourceController {
     }
     
     @PostMapping
-    public NutritionalContributionFoodSource createNutritionalContributionFoodSource(@RequestBody NutritionalContributionFoodSource nutritionalContributionFoodSource) {
+    public NutritionalContributionFoodSource createNutritionalContributionFoodSource(@Valid @RequestBody NutritionalContributionFoodSource nutritionalContributionFoodSource) {
         return nutritionalContributionFoodSourceService.createNutritionalContributionFoodSource(nutritionalContributionFoodSource);
     }
     

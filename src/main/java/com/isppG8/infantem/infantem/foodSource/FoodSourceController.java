@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/foodSources")
+@RequestMapping("api/v1/foodSources")
 public class FoodSourceController {
     @Autowired
     private FoodSourceService foodSourceService;

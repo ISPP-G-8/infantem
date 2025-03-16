@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/milestones")
+@RequestMapping("api/v1/milestones")
 public class MilestoneController {
 
     @Autowired
