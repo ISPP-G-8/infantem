@@ -1,4 +1,4 @@
-# Plantilla del Sprint 2
+# Acta del [Cambiar por la fecha]
 
 ![Portada](../../images/Infantem.png)
 
