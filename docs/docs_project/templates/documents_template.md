@@ -1,15 +1,15 @@
-# Plantilla del Sprint 1
+# Plantilla del Sprint 2
 
-![Portada](../../../frontend/assets/Documentos/Infantem.png)
+![Portada](../../images/Infantem.png)
 
 
 **Fecha:** 18/02/2025  
 **Grupo 8:** Infantem  
-**Sprint 1**
+**Sprint 2**
 
 ## Integrantes del Grupo
-<div style="display: flex; justify-content: space-between; gap: 2px;">
-  <div>
+<div style="display: flex; justify-content: space-between; gap: 20px;">
+  <div style="width: 50%;">
     <ul style="padding-left: 0; list-style: none;">
       <li>Álvaro Jiménez Osuna</li>
       <li>Ángela López Oliva</li>
@@ -23,9 +23,9 @@
     </ul>
   </div>
 
-  <div>
+  <div style="width: 50%;">
     <ul style="padding-left: 0; list-style: none;">
-    <li>Javier Ulecia García</li>
+      <li>Javier Ulecia García</li>
       <li>José García de Tejada Delgado</li>
       <li>Jose Maria Morgado Prudencio</li>
       <li>Josué Rodríguez López</li>
@@ -37,11 +37,8 @@
   </div>
 </div>
 
+
 ---
-
-
-
-
 
 ## Índice
 - [Colaboradores del documento](#colaboradores-del-documento)
