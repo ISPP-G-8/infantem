@@ -21,11 +21,6 @@
       <li>Enrique García Abadía</li>
       <li>Felipe Solís Agudo</li>
       <li>Javier Santos Martín</li>
-    </ul>
-  </div>
-
-  <div style="flex: 1;">
-    <ul style="padding-left: 0; list-style: none;">
       <li>Javier Ulecia García</li>
       <li>José García de Tejada Delgado</li>
       <li>Jose Maria Morgado Prudencio</li>
