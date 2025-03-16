@@ -8,8 +8,9 @@
 **Sprint 2**
 
 ## Integrantes del Grupo
-<div style="display: flex; justify-content: space-between; gap: 20px;">
-  <div style="width: 50%;">
+## Integrantes del Grupo
+<div style="display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 20px;">
+  <div style="flex: 1;">
     <ul style="padding-left: 0; list-style: none;">
       <li>Álvaro Jiménez Osuna</li>
       <li>Ángela López Oliva</li>
@@ -23,7 +24,7 @@
     </ul>
   </div>
 
-  <div style="width: 50%;">
+  <div style="flex: 1;">
     <ul style="padding-left: 0; list-style: none;">
       <li>Javier Ulecia García</li>
       <li>José García de Tejada Delgado</li>
@@ -36,6 +37,7 @@
     </ul>
   </div>
 </div>
+
 
 
 ---
