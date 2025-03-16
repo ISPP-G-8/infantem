@@ -38,7 +38,7 @@
 ## Índice
 - [Colaboradores del documento](#colaboradores-del-documento)
 - [Aportaciones](#aportaciones)
-- [Aportaciones](#aportaciones)
+- [Temas](#temas)
 
 
 ## Colaboradores del documento
