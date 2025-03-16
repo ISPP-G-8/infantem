@@ -1,60 +1,62 @@
-# Commitment Agreement
+# Commitment Agreement Template
 
-![Portada](../../../frontend/assets/Documentos/Infantem.png)
+![Portada](../../images/Infantem.png)
 
 
-**Fecha:** 18/02/2025  
+**Fecha:** 16/03/2025  
 **Grupo 8:** Infantem  
-**Ideando un proyecto**
+**Sprint 2**
 
 ## Integrantes del Grupo
-- Álvaro Jiménez Osuna
-- Ángela López Oliva
-- Antonio Jiménez Ortega
-- Daniel del Castillo Piñero
-- David Fuentelsaz Rodríguez
-- David Vargas Muñiz
-- Enrique García Abadía
-- Felipe Solís Agudo
-- Javier Santos Martín
-- Javier Ulecia García
-- José García de Tejada Delgado
-- Jose Maria Morgado Prudencio
-- Josué Rodríguez López
-- Lucía Noya Cano
-- Luis Giraldo Santiago
-- Miguel Galán Lerate
-- Paula Luna Navarro
+<div style="display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 20px;">
+  <div style="flex: 1;">
+    <ul style="padding-left: 0; list-style: none;">
+      <li>Álvaro Jiménez Osuna</li>
+      <li>Ángela López Oliva</li>
+      <li>Antonio Jiménez Ortega</li>
+      <li>Daniel del Castillo Piñero</li>
+      <li>David Fuentelsaz Rodríguez</li>
+      <li>David Vargas Muñiz</li>
+      <li>Enrique García Abadía</li>
+      <li>Felipe Solís Agudo</li>
+      <li>Javier Santos Martín</li>
+      <li>Javier Ulecia García</li>
+      <li>José García de Tejada Delgado</li>
+      <li>Jose Maria Morgado Prudencio</li>
+      <li>Josué Rodríguez López</li>
+      <li>Lucía Noya Cano</li>
+      <li>Luis Giraldo Santiago</li>
+      <li>Miguel Galán Lerate</li>
+      <li>Paula Luna Navarro</li>
+    </ul>
+  </div>
+</div>
+
+
 
 ---
 
 ## Índice
-1. Compromiso
-2. Resolución de Problemas
-3. Políticas Organizacionales
-    1. Documentación de Procesos y Comprensión Colectiva
-    2. Imagen Corporativa Consistente
-    3. Respeto por Roles y Responsabilidades
-    4. Transparencia y Comunicación
-    5. Cumplimiento de Plazos y Entregas
-    6. Política de Capacitación Continua
-    7. Gestión de Recursos
-    8. Gestión de Riesgos
-    9. Evaluaciones Periódicas del Desempeño
-    10. Promoción de la Inclusión y Diversidad
-    11. Política de Reuniones
-4. Sistema de Evaluación Periódica de los Miembros
-    1. Dedicación y Esfuerzo
-    2. Calidad del Trabajo
-    3. Trabajo en Equipo
-    4. Asistencia a Reuniones
-    5. Adherencia a Políticas
-5. Recompensas y Penalizaciones
-6. Condiciones para la expulsión del grupo
-7. Firma del Alumno
-      1. Miembros del Equipo
+- [Colaboradores del documento](#colaboradores-del-documento)
+- [Compromiso](#compromiso)
+- [Resolución de Problemas](#resolución-de-problemas)
+- [Políticas Organizacionales](#políticas-organizacionales)
+- [Sistema de Evaluación Periódica de los Miembros](#sistema-de-evaluación-periódica-de-los-miembros)
+- [Grandes métricas a tener en cuenta](#grandes-métricas-a-tener-en-cuenta)
+- [Recompensas y Penalizaciones](#recompensas-y-penalizaciones)
+- [Condiciones para la expulsión del grupo](#condiciones-para-la-expulsión-del-grupo)
+- [Firma de los Alumnos](#firma-de-los-alumnos)
 
----
+
+## Colaboradores del documento
+- David Fuentelsaz Rodríguez
+  - Creó la versión inicial del documento
+- Todos los miembros de equipo
+  - Firmar Commitment Agreement
+- Luis Giraldo
+  - Actualiza el docuemnto al sprint 2
+  - Camnbia el sistema de evaluación periódica de los miembros
+
 
 ## Compromiso
 
@@ -158,9 +160,9 @@ Se medirá el nivel de compromiso de cada miembro respecto al tiempo invertido e
 
 | ID  | Indicadores Clave                                                | Métricas Cuantitativas                             |
 | --- | ----------------------------------------------------------------- | ------------------------------------------------- |
-| 1   | Registro en herramientas como Clockify que refleje las 10 horas semanales comprometidas. | Semanas de desarrollo que han superado las 10 horas de desarrollo. |
-| 2   | Disponibilidad y capacidad de respuesta en horarios acordados.    | Tiempo de respuesta promedio > 10 horas           |
-| 3   | Proactividad en la búsqueda de soluciones o mejoras relacionadas con las tareas asignadas. | Participación activa en propuestas de mejoras o solución de problemas al menos 1 vez por sprint. |
+| 1   | Registro de horas en Clockify que refleje las horas requeridas para el sprint. | Se ha llegado al 85% de horas requeridas en el sprint.  |
+| 2   | Reacción avisos en canales oficiales de comunicación.    | Tiempo de respuesta tiene que ser inferior a 24 horas desde que se emitió el aviso y al menos se ha tenido que reaccionar al 90% de los avisos. |
+| 3   | Proactividad en la búsqueda de soluciones o mejoras relacionadas con las tareas asignadas. | Participación activa en propuestas de mejoras o solución de problemas. Cada propuesta significativa contará para las recompensas. |
 
 ### 2. Calidad del Trabajo
 Se evaluará la calidad, precisión y eficacia con la que se completan las tareas asignadas.
@@ -168,25 +170,25 @@ Se evaluará la calidad, precisión y eficacia con la que se completan las tarea
 | ID  | Indicadores Clave                                                | Métricas Cuantitativas                             |
 | --- | ----------------------------------------------------------------- | ------------------------------------------------- |
 | 1   | Cumplimiento de los requerimientos establecidos en las tareas.   | Las tareas completadas por el miembro del equipo cumplen con los requisitos y contribuyen significativamente al avance del proyecto. La calidad se medirá tanto por la precisión como por la capacidad de la tarea para solucionar problemas o avanzar en los objetivos del proyecto. |
-| 2   | Disponibilidad y capacidad de respuesta en horarios acordados.    | Tiempo de respuesta promedio > 10 horas           |
-| 3   | Corrección de errores dentro de plazos razonables.                | Al menos el 80% de los errores reportados en tareas asignadas al miembro del equipo deben ser corregidos dentro del plazo definido. |
+| 2   | Capacidad de resolución de la tarea.    | Tiempo que se invierte en la tarea frente a los puntos de esta. |
+| 3   | Corrección de errores dentro de plazos razonables.                | Ha corregido todos lo errores relacionado con el codigo desarrolldo. En caso de no hacerlo y obligar a otro miembro a su coreección, contará para las penalizaciones. En cambio si surge un error no necesariamente relacionado con nada desarrollado con el y este lo corrige, contará para las recompensas. |
 
 ### 3. Trabajo en Equipo
 Se valorará la capacidad de cada miembro para integrarse en el equipo y colaborar de manera efectiva.
 
 | ID  | Indicadores Clave                                                | Métricas Cuantitativas                             |
 | --- | ----------------------------------------------------------------- | ------------------------------------------------- |
-| 1   | Comunicación respetuosa, clara y proactiva en los canales oficiales. | Por cada comunicación irrespetuosa o no proactiva se anota un punto negativo. |
-| 2   | Participación activa en discusiones grupales, aportando ideas constructivas. | Aportación en al menos el 75% de las reuniones.    |
-| 3   | Capacidad para aceptar críticas de manera positiva y mejorar en base a ellas. | Feedback positivo en al menos el 80% de los casos. |
-| 4   | Actitud colaborativa ante los desafíos, ayudando a otros miembros cuando sea necesario. | Registros de colaboración en GitHub, Discord o reuniones de al menos un 80%. |
+| 1   | Comunicación respetuosa, clara y proactiva en los canales oficiales. | Por cada comunicación irrespetuosa o no proactiva se anota un punto negativo y contará para las penalizaciones. |
+| 2   | Participación activa en reuniones grupales, aportando ideas constructivas. | Aportación en al menos el 85% de las reuniones.    |
+| 3   | Capacidad para aceptar y dar críticas de manera positiva y haciendo mejorar al miembro que se le da o haciendote mejorar. | Dar feedback a las Pull Request que se suban, si no se hace contará como para las penalizaciones. En cambio, si porporciona feedback al 80% se apunatrá para las remcompensas. |
+| 4   | Actitud colaborativa ante los desafíos, ayudando a otros miembros cuando sea necesario. | Registros de colaboración en GitHub. |
 
 ### 4. Asistencia a Reuniones
 La asistencia a las reuniones establecidas es fundamental para coordinar esfuerzos y garantizar el flujo de trabajo.
 
 | ID  | Indicadores Clave                                                | Métricas Cuantitativas                             |
 | --- | ----------------------------------------------------------------- | ------------------------------------------------- |
-| 1   | Presencia activa en reuniones programadas.                        | Al menos el 80% de asistencia en reuniones ordinarias. |
+| 1   | Presencia activa en reuniones ordinarias.                        | Al menos el 80% de asistencia en reuniones ordinarias. |
 | 2   | Presencia en reuniones extraordinarias.                           | Al menos el 50% de asistencia en reuniones extraordinarias. |
 | 3   | Justificación adecuada en caso de ausencia.                       | Justificación aceptada en el 100% de los casos de inasistencia. |
 
@@ -196,9 +198,8 @@ Se evaluará el grado de cumplimiento de las metodologías y normas internas aco
 | ID  | Indicadores Clave                                                | Métricas Cuantitativas                             |
 | --- | ----------------------------------------------------------------- | ------------------------------------------------- |
 | 1   | Uso correcto de las herramientas definidas para gestión de tareas y tiempos. | 100% de tareas registradas en las herramientas oficiales. |
-| 2   | Disponibilidad y capacidad de respuesta en horarios acordados.    | El tiempo de respuesta promedio para tareas o mensajes urgentes dentro del horario acordado debe ser inferior a 4 horas para el 90% de los casos. |
-| 3   | Seguimiento de las políticas de desarrollo establecidas (ramas, sprints, estándares de codificación, etc.). | 90% de cumplimiento en revisiones de código y metodologías. |
-| 4   | Respeto por los roles y responsabilidades asignadas.               | Sin incidentes de incumplimiento de roles.         |
+| 2   | Seguimiento de las políticas de desarrollo establecidas (ramas, sprints, estándares de codificación, etc.). | 90% de cumplimiento en revisiones de código y metodologías. |
+| 3   | Respeto por los roles y responsabilidades asignadas.               | Sin incidentes de incumplimiento de roles.         |
 
 Todos los criterios definidos anteriormente se tendrán en cuenta a la hora de realizar la evaluación de cada miembro al final de cada hito. El mal desempeño de trabajo debido al incumplimiento de los criterios supondrá una penalización en la calificación individual.
 
@@ -210,6 +211,7 @@ Todos los criterios definidos anteriormente se tendrán en cuenta a la hora de r
 - **Tareas completadas.**
 - **Ratio de asistencias a reuniones.**
 - **Reacción a los avisos importantes.**
+- **Evolcución en las notas**
 
 Si bien las métricas son esenciales para el seguimiento del proyecto, es crucial recordar que no deben ser el único factor determinante en la evaluación del rendimiento. La obsesión con ellas puede llevar a comportamientos contraproducentes, como la manipulación de los datos para cumplir con los números, lo cual socavaría el espíritu de colaboración. Por lo tanto, se deben aplicar las siguientes consideraciones:
 
@@ -257,7 +259,7 @@ Para casos más extremos de mal rendimiento, se expulsará del grupo al miembro 
 
 ---
 
-## Firma del Alumno
+## Firma de los Alumnos
 
 Al firmar este documento, el miembro del equipo entiende y acepta las responsabilidades que se le han asignado y se compromete a cumplirlas según lo establecido en este documento. El incumplimiento de este compromiso dará lugar a una reunión de todos los miembros con la finalidad de decidir la medida a tomar, que puede llegar a ser todo lo grave que se considere, llegando incluso a expulsión del equipo.
 
