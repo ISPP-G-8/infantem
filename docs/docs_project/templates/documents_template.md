@@ -8,7 +8,6 @@
 **Sprint 2**
 
 ## Integrantes del Grupo
-## Integrantes del Grupo
 <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 20px;">
   <div style="flex: 1;">
     <ul style="padding-left: 0; list-style: none;">
