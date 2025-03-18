@@ -92,6 +92,21 @@ Suscripción mensual para desbloquear más funcionalidades.
 - Interfaz intuitiva, pero algunos reportan que las sugerencias de IA no siempre son acertadas.
 - No tiene opciones de interacción social.
 
+#### Peque Ideas
+**Descripción**:
+Aplicación para niños de entre 2 y 7 años, enfocada en la alimentacion saludable.
+**Diferenciación**:
+Está enfocada en niños de entre 2 y 7 años, no desde el nacimiento. No ofrece recetas de manera gratuita.
+No ofrece foros ni comunidad de apoyo.
+No tiene funcionalidades de seguimiento del crecimiento o detección de alergias.
+**Público objetivo**:
+Padres y Madres de niños entre 2 y 7 años que buscan recetas saludables, menús equilibrados y actividades para fomentar hábitos alimenticios positivos.
+**Monetización**:
+Diferentes suscripciones para acceder a distintas funcionalidades.
+**Reseñas**:
+- Todas las funcionalidades son de pago debido a que trabajan nutricionistas, dietistas y pediatras.
+- Dispone de gran variedad de recetas, idead y consejos.
+
 ### 1.2. Competidores indirectos
 
 #### Mealime
@@ -169,18 +184,37 @@ Modelo freemium con una versión de pago que elimina anuncios y agrega funcional
 - Colaboraciones con influencers y dietistas.
 - Marketing basado en beneficios de la IA en nutrición.
 
+### Peque Ideas:
+**Producto**:
+- Aplicación con recestas para niños de entre 2 y 7 años.
+- Incluye recetas, guias de nutricion y chat con especialistas.
+- Basado en restricciones alimentarias y preferencias personales.
+- No está enfocada exclusivamente en bebés o niños.
+
+**Precio**:
+- Modelo freemium con opciones limitadas gratuitas.
+- Suscripción mensual para desbloquear menús, chat con especialistas y recetas.
+
+**Plaza (Distribución)**:
+- Disponible en App Store y Google Play.
+
+**Promoción**:
+- Uso de posts redes sociales.
+- Colaboraciones con influencers.
+
 
 ## 3. Tabla comparativa de los competidores
 
-| Característica |  Infantem | Little Lunches |  Fuddle  |  Solid Starts  | Nuttriapp  |
-|:---:|:---:|:---:|:---:|:---:|:---:|
-|  Detección de alergias e intolerancias | ✅ Sí | ❌ No | ❌ No | ❌ No | ✅ Sí |
-|Recetas creadas por especialistas filtradas por edad |✅ Sí |✅ Sí |✅ Sí | ✅ Sí| ✅ Sí |
- MarketPlace                                                                  | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No |
-| Registro de alimentación                                                     | ✅ Sí | ✅ Sí | ✅ Sí | ✅ Sí | ✅ Sí |
-| Calendario                                                                   | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No |
-| Sistema de hitos                                                             | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No |
-| Seguimiento del crecimiento mediante métricas del bebé                       | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No |
-| Foro                                                                         | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No |
-| Recordatorios inteligentes                                                   | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No |
-| Recetas personalizadas mediante filtrado por diferentes métricas adicionales | ✅ Sí | ❌ No | ✅ Sí | ❌ No | ✅ Sí |
+| Característica |  Infantem | Little Lunches |  Fuddle  |  Solid Starts  | Nuttriapp  | Peque Ideas |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Detección de alergias e intolerancias | ✅ Sí | ❌ No | ❌ No | ❌ No | ✅ Sí | ❌ No |
+| Recetas creadas por especialistas filtradas por edad | ✅ Sí | ✅ Sí | ✅ Sí | ✅ Sí | ✅ Sí | ✅ Sí |
+| MarketPlace | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No | ❌ No |
+| Registro de alimentación | ✅ Sí | ✅ Sí | ✅ Sí | ✅ Sí | ✅ Sí | ✅ Sí |
+| Calendario | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No | ❌ No |
+| Sistema de hitos | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No | ❌ No |
+| Seguimiento del crecimiento mediante métricas del bebé | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No | ❌ No |
+| Foro | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No | ❌ No |
+| Recordatorios inteligentes | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No | ❌ No |
+| Recetas personalizadas mediante filtrado por diferentes métricas adicionales | ✅ Sí | ❌ No | ✅ Sí | ❌ No | ✅ Sí | ✅ Sí |
+
