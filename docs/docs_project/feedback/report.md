@@ -1,3 +1,58 @@
+# Feedback para la bese de conocimento común
+
+![Portada](../../images/Infantem.png)
+
+
+**Fecha:** 18/03/2025  
+**Grupo 8:** Infantem  
+**Sprint 2**
+
+## Integrantes del Grupo
+<div style="display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 20px;">
+  <div style="flex: 1;">
+    <ul style="padding-left: 0; list-style: none;">
+      <li>Álvaro Jiménez Osuna</li>
+      <li>Ángela López Oliva</li>
+      <li>Antonio Jiménez Ortega</li>
+      <li>Daniel del Castillo Piñero</li>
+      <li>David Fuentelsaz Rodríguez</li>
+      <li>David Vargas Muñiz</li>
+      <li>Enrique García Abadía</li>
+      <li>Felipe Solís Agudo</li>
+      <li>Javier Santos Martín</li>
+      <li>Javier Ulecia García</li>
+      <li>José García de Tejada Delgado</li>
+      <li>Jose Maria Morgado Prudencio</li>
+      <li>Josué Rodríguez López</li>
+      <li>Lucía Noya Cano</li>
+      <li>Luis Giraldo Santiago</li>
+      <li>Miguel Galán Lerate</li>
+      <li>Paula Luna Navarro</li>
+    </ul>
+  </div>
+</div>
+
+---
+
+## Índice
+- [Colaboradores del documento](#colaboradores-del-documento)
+- [Grupo 8 - Infantem](#grupo-8---infantem)
+- [Grupo 7 - Map Your World](#grupo-7---map-your-world)
+- [Grupo 9 - Caronte](#grupo-9---caronte)
+- [Grupo 10 - Go 4 Surprise](#grupo-10---go-4-surprise)
+- [Grupo 11 - Pawtel](#grupo-11---pawtel)
+
+
+## Colaboradores del documento
+- Luis Giraldo
+  - Creó la plantilla de los documentos
+  - Acrualizó el docuemnto
+- Felipe Solís Agudo
+  - Recogió el feedback en clase
+- Josué Rodríguez López
+  - Recogió el feedback en clase
+
+
 # Grupo 8 - Infantem
 
 En esta página se encuentra el feedback recogido por el equipo del grupo 8 durante las sesiones de clase. Con secciones para cada semana, se detallan los comentarios y sugerencias del profesor y los compañeros, así como las tareas a realizar para la siguiente semana. Además, se incluye una sección para cada grupo con el feedback proporcionado por el grupo 8. Ante todo este feedback no se han llevado a cabo acciones de consolidación.
@@ -103,6 +158,31 @@ Este reporte también se puede encontrar en la base de conocimiento compartida: 
 - La parte de planificación no se ve bien, nada legible. Hacer énfasis en el diagrama de Gantt 
 - Ser más descriptivo en la planificación: no usar siglas cuyo significado no sea obvio.
 
+## Semana 5
+#### Feedback relacionado con la presentación
+- Si tenemos que hacer demo/enseñar video:
+  - Asegurarnos de que se vea todo.
+  - No enseñar el login/register.
+  - Contar una historia: Humanizar la experiencia, usar una persona real para que todo tenga un hilo argumental.
+  - Recetas y usuarios realistas, no enseñar receta1, receta2 .. user1.. etc.
+  - SOLO ENSEÑAR Y DARLE IMPORTANCIA A LO CORE.
+- Tener un mejor killer opener (QUE VUELVA EL BEBE), muy neutro hay que llamar más la atención .
+- Tardar menos tiempo en explicar el proyecto (hemos tardado 3.50).
+- Los bebés de la presentación están bien pero quizás sobran algunos que no dicen nada del epígrafe.
+- Las X de los competidores que sean rojas para que impacte más.
+- Seguir analizando la estructura jerárquica del equipo (Mejor hablar de responsabilidades que de roles).
+- El feedback tenemos que seguir priorizando.
+- Buscar más usuarios piloto.
+- Super importante mostrar algún prompt como el de las dos últimas presentaciones (caronte o map Your World).
+- Falta explicar cómo hemos calculado las notas.
+
+
+#### Feedback relacionado con el desarrollo del proyecto
+- Poner datos de prueba realistas, no receta 1 receta 2, user1 user2.
+- No estamos usando sonar ni herramientas para comprobar el código que haya que refactorizar (podemos analizar la evolución de las métricas de sonar a lo largo de los siguiente sprints).
+- Analizar cuando “alucinan” las IAs que estamos usando y marcarlo en el documento de prompts para cuando se haga el análisis.
+
+
 
 ## Grupo 7 - Map Your World
 # Semana 1
@@ -166,7 +246,28 @@ Este reporte también se puede encontrar en la base de conocimiento compartida: 
 #### Feedback relacionado con el desarrollo del proyecto
 - Intencionalmente en blanco
 
-## Grupo 9 -  Caronte
+# Semana 5
+#### Feedback relacionado con la presentación
+- Hacer una demo en directo es arriesgado; mejor usar un video grabado.
+
+- La demo de escritorio no aporta valor, ya que la aplicación está enfocada a dispositivos móviles.
+
+- Los enlaces a la demo deben ubicarse al final de la presentación.
+
+- Se debe evitar dar respuestas vagas al explicar los problemas enfrentados
+
+
+#### Feedback relacionado con el desarrollo del proyecto
+- Es necesario actualizar el registro de riesgos; no se pudo hacer a tiempo debido a múltiples problemas.
+
+- Faltan métricas de productividad consolidadas, y se deberían mostrar de manera clara para entender cómo se calculan las evaluaciones.
+
+- La planificación del Sprint 2 se entendería mejor con un diagrama de Gantt.
+
+- Buen uso de la IA exponiendo casos reales.
+
+
+## Grupo 9 - Caronte
 # Semana 1
 #### Feedback relacionado con la presentación
 - Intencionalmente en blanco
@@ -199,7 +300,24 @@ Este reporte también se puede encontrar en la base de conocimiento compartida: 
 #### Feedback relacionado con el desarrollo del proyecto
 - Costes insuficientes. Poner costes, ingresos y gastos. Hay que ser más conservadores en los cálculos.
 
-## Grupo 10 -  Go 4 Surprise
+# Semana 5
+#### Feedback relacionado con la presentación
+- La presentación tiene un diseño muy cuidado. Se recomienda que las barras de progreso indiquen claramente hasta dónde llega el porcentaje.
+
+- En la gráfica del equipo de trabajo:
+  - Pasar más rápido por esta diapositiva.
+  - En lugar de usar bolas con números, mostrar imágenes de las personas y sus responsabilidades.
+
+- En la diapositiva 14:
+  - Los decimales en el número de horas no aportan valor.
+  - Dividir la información por sprint con una línea.Las horas totales no son tan relevantes; es mejor mostrar la media de horas.
+
+#### Feedback relacionado con el desarrollo del proyecto
+- En la diapositiva 7, la transparencia refleja datos mes a mes, pero no de manera acumulativa. Se debería mostrar de forma acumulativa e incluir pérdidas y ganancias.
+
+- Anticipar el problema de gestión de pagos desde el inicio, ya que incluso el equipo cree que puede ser un inconveniente. La PoC (prueba de concepto) debería haberse realizado en el Sprint 1.
+
+## Grupo 10 - Go 4 Surprise
 # Semana 1
 #### Feedback relacionado con la presentación
 - Intencionalmente en blanco
@@ -240,8 +358,38 @@ Este reporte también se puede encontrar en la base de conocimiento compartida: 
 #### Feedback relacionado con el desarrollo del proyecto
 - Intencionalmente en blanco
 
+# Semana 5
+#### Feedback relacionado con la presentación
+- Excelente presentación por parte del ponente, con un punto extra por entusiasmo en el killer opener. Sin embargo, cuidado al lanzar preguntas al público asumiendo que la respuesta será afirmativa.
 
-## Grupo 11 -  Pawtel
+- Mencionar alcohol en la presentación puede ser arriesgado dependiendo del tipo de público.
+
+- La transición entre las diapositivas 6 y 7 podría ser más fluida; se recomienda presentarlas juntas. Además, hay inconsistencias en las escalas de las gráficas (una en semanas y otra en meses).
+
+- Buena estrategia al definir los roles del equipo (mayoría full-stack). Se recomienda homogeneizar el formato de las fotos.
+
+- Se debe mejorar la sincronización entre el video y el presentador, así como mayor zoom en el video.
+
+- Para el análisis del sprint, sería mejor dividir la presentación en tres diapositivas:
+  - Lo que ha funcionado bien
+  - Lo que ha fallado
+  - Lo que se debe mejorar
+
+- Además, se recomienda adelantar los problemas en la presentación en lugar de mencionarlos más adelante.
+
+
+#### Feedback relacionado con el desarrollo del proyecto
+- Es preferible hablar de estimación esperada de ingresos en lugar de estimación media.
+
+- En la demo, la parte de registro y login no es necesaria; lo más importante es mostrar la funcionalidad de los casos de uso core.
+
+- Diagramas de Gantt bien utilizados para visualizar el desarrollo de tareas.
+
+- Se ha echado en falta información sobre cómo se ha tenido en cuenta el feedback de los usuarios piloto.
+
+
+
+## Grupo 11 - Pawtel
 # Semana 1
 #### Feedback relacionado con la presentación
 - Intencionalmente en blanco
@@ -291,3 +439,24 @@ Este reporte también se puede encontrar en la base de conocimiento compartida: 
 
 #### Feedback relacionado con el desarrollo del proyecto
 - Intencionalmente en blanco
+
+
+# Semana 5
+#### Feedback relacionado con la presentación
+- El killer opening parece más un anuncio que una forma de atraer a la audiencia, ser más imaginativo y dejar claro que hay un problema a resolver.
+- Evitar hacer la demo en directo para prevenir errores técnicos (pantalla azul de Windows). Es preferible usar un video con zoom.
+- Buena idea incluir un Hall of Fame y Hall of Shame.
+
+
+#### Feedback relacionado con el desarrollo del proyecto
+- La gráfica de usuarios de alojamiento para mascotas carece de información a partir de 2025.
+
+- La gráfica de costes no puede mantenerse constante durante 24 meses. Aunque los costes de desarrollo sean altos, en producción también aumentan (mantenimiento y despliegue).
+
+- Se detecta cierta confusión entre OPEX y CAPEX.
+
+- El modelo de negocio podría ser vulnerable a cookie stuffing, revisar posibles riesgos.
+
+- Es importante optimizar las llamadas a la API para mejorar la comunicación entre el backend y el frontend.
+
+- Se recomienda mejorar el sistema CI/CD.
