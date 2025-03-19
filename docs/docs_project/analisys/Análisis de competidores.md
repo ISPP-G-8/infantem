@@ -92,6 +92,47 @@ Suscripción mensual para desbloquear más funcionalidades.
 - Interfaz intuitiva, pero algunos reportan que las sugerencias de IA no siempre son acertadas.
 - No tiene opciones de interacción social.
 
+#### Solid Starts: Baby Food App
+**Descripción**:
+Base de datos de alimentos para bebés que proporciona información detallada sobre la introducción segura de cada alimento, incluyendo riesgos de asfixia, alérgenos y beneficios nutricionales.
+**Diferenciación**:
+Su fortaleza es su extenso catálogo de alimentos con imágenes y descripciones detalladas de cómo ofrecerlos a los bebés. No tiene recetas personalizadas, seguimiento del crecimiento ni recordatorios inteligentes. No ofrece interacción con especialistas ni comunidad activa dentro de la app.
+**Público objetivo**:
+Padres interesados en aplicar el método Baby-Led Weaning (BLW) y asegurarse de ofrecer alimentos de forma segura a sus bebés.
+**Monetización**:
+Ofrece contenido gratuito, pero desbloquear toda la base de datos y funciones premium requiere una compra única o suscripción.
+**Reseñas**:
+- Información detallada de cada alimento, útil para evitar riesgos de asfixias y alergias.
+- La mayoría de funcionalidades avanzadas requieren de pago, y no hay planificador de comidas.
+
+#### Nuttriapp
+**Descripción**:
+Aplicación de nutrición infantil que ayuda a los padres a introducir nuevos alimentos en la dieta de su bebé, proporcionando información sobre más de 100 ingredientes y seguimiento de comidas.
+**Diferenciación**:
+Se enfoca en la introducción de alimentos sólidos, ofreciendo recomendaciones de ingredientes según la edad del bebé. No incluye seguimiento del crecimiento, detección avanzada de alergias ni consultas con especialistas. No tiene foro ni comunidad interactiva.
+**Público objetivo**:
+Padres con bebés en etapa de alimentación complementaria (6+ meses) que buscan una guía sobre qué alimentos introducir y cuándo.
+**Monetización**:
+Versión gratuita con funciones básicas y una opción premium para desbloquear más ingredientes y recomendaciones.
+**Reseñas**:
+-  Interfaz amigable y útil para padres primerizos que buscan orientación sobre la introducción de alimentos.
+- Falta de personalización en las recomendaciones y ausencia de funciones de seguimiento del crecimiento.
+
+#### Peque Ideas
+**Descripción**:
+Aplicación para niños de entre 2 y 7 años, enfocada en la alimentacion saludable.
+**Diferenciación**:
+Está enfocada en niños de entre 2 y 7 años, no desde el nacimiento. No ofrece recetas de manera gratuita.
+No ofrece foros ni comunidad de apoyo.
+No tiene funcionalidades de seguimiento del crecimiento o detección de alergias.
+**Público objetivo**:
+Padres y Madres de niños entre 2 y 7 años que buscan recetas saludables, menús equilibrados y actividades para fomentar hábitos alimenticios positivos.
+**Monetización**:
+Diferentes suscripciones para acceder a distintas funcionalidades.
+**Reseñas**:
+- Todas las funcionalidades son de pago debido a que trabajan nutricionistas, dietistas y pediatras.
+- Dispone de gran variedad de recetas, idead y consejos.
+
 ### 1.2. Competidores indirectos
 
 #### Mealime
@@ -169,18 +210,75 @@ Modelo freemium con una versión de pago que elimina anuncios y agrega funcional
 - Colaboraciones con influencers y dietistas.
 - Marketing basado en beneficios de la IA en nutrición.
 
+### Solid Starts: Baby Food App:
+**Producto**:
+- Base de datos con informacion detallada sobre alimentos para bebés.
+- Explicaciones sobre cómo introducir cada alimento de manera segura, con énfasis en el Baby-Led Weaning (BLW).
+- Evaluación de riesgos de asfixia, alérgenos y beneficios nutricionales.
+
+**Precio**:
+- Acceso gratuito con información básica sobre algunos alimentos.
+- Desbloqueo del contenido completo mediante una compra única o suscripción.
+
+**Plaza (Distribución)**:
+- Disponible en App Store y Google Play.
+- Página web con artículos sobre nutrición infantil y acceso a guías descargables.
+
+**Promoción**:
+- Uso de Instagram y TikTok con vídeos educativos sobre alimentación infantil.
+- Apariciones en foros y blogs de crianza recomendando la app.
+- Colaboraciones con expertos en Baby-Led Weaning y pediatría.
+
+### Nuttriapp:
+**Producto**:
+- Aplicación enfocada en la introducción de alimentos sólidos para bebés.
+- Incluye una base de datos de más de 100 ingredientes con información nutricional.
+- Proporciona orientación sobre cuándo y cómo introducir nuevos alimentos.
+
+**Precio**:
+- Modelo freemium con acceso limitado a ciertos alimentos y funciones.
+- Suscripción premium para desbloquear más ingredientes y recomendaciones personalizadas.
+
+**Plaza (Distribución)**:
+- Disponible en App Store y Google Play.
+- Página web con contenido informativo y recursos para padres.
+
+**Promoción**:
+- Presencia en redes sociales con publicaciones sobre nutrición infantil.
+- Campañas de anuncios con Google-Ads y redes sociales.
+- Colaboraciones con pediatras y nutricionistas especializados en alimentación infantil.
+
+### Peque Ideas:
+**Producto**:
+- Aplicación con recestas para niños de entre 2 y 7 años.
+- Incluye recetas, guias de nutricion y chat con especialistas.
+- Basado en restricciones alimentarias y preferencias personales.
+- No está enfocada exclusivamente en bebés o niños.
+
+**Precio**:
+- Modelo freemium con opciones limitadas gratuitas.
+- Suscripción mensual para desbloquear menús, chat con especialistas y recetas.
+
+**Plaza (Distribución)**:
+- Disponible en App Store y Google Play.
+
+**Promoción**:
+- Uso de posts redes sociales.
+- Colaboraciones con influencers.
+
 
 ## 3. Tabla comparativa de los competidores
 
-| Característica |  Infantem | Little Lunches |  Fuddle  |  Solid Starts  | Nuttriapp  |
-|:---:|:---:|:---:|:---:|:---:|:---:|
-|  Detección de alergias e intolerancias | ✅ Sí | ❌ No | ❌ No | ❌ No | ✅ Sí |
-|Recetas creadas por especialistas filtradas por edad |✅ Sí |✅ Sí |✅ Sí | ✅ Sí| ✅ Sí |
- MarketPlace                                                                  | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No |
-| Registro de alimentación                                                     | ✅ Sí | ✅ Sí | ✅ Sí | ✅ Sí | ✅ Sí |
-| Calendario                                                                   | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No |
-| Sistema de hitos                                                             | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No |
-| Seguimiento del crecimiento mediante métricas del bebé                       | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No |
-| Foro                                                                         | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No |
-| Recordatorios inteligentes                                                   | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No |
-| Recetas personalizadas mediante filtrado por diferentes métricas adicionales | ✅ Sí | ❌ No | ✅ Sí | ❌ No | ✅ Sí |
+| Característica |  Infantem | Little Lunches |  Fuddle  |  Solid Starts  | Nuttriapp  | Peque Ideas |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Detección de alergias e intolerancias | ✅ Sí | ❌ No | ❌ No | ❌ No | ✅ Sí | ❌ No |
+| Recetas creadas por especialistas filtradas por edad | ✅ Sí | ✅ Sí | ✅ Sí | ✅ Sí | ✅ Sí | ✅ Sí |
+| MarketPlace | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No | ❌ No |
+| Registro de alimentación | ✅ Sí | ✅ Sí | ✅ Sí | ✅ Sí | ✅ Sí | ✅ Sí |
+| Calendario | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No | ❌ No |
+| Sistema de hitos | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No | ❌ No |
+| Seguimiento del crecimiento mediante métricas del bebé | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No | ❌ No |
+| Foro | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No | ❌ No |
+| Recordatorios inteligentes | ✅ Sí | ❌ No | ❌ No | ❌ No | ❌ No | ❌ No |
+| Recetas personalizadas mediante filtrado por diferentes métricas adicionales | ✅ Sí | ❌ No | ✅ Sí | ❌ No | ✅ Sí | ✅ Sí |
+
