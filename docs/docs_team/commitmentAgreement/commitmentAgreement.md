@@ -272,7 +272,7 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
 
    "Yo, como miembro de este equipo, me comprometo a cumplir con lo establecido en este acuerdo para asegurar el éxito del proyecto y el buen funcionamiento del equipo."
    
-   Firma: <img src = "../../docs/imagenes/firmas/Firma-AlvaroJimenezOsuna.png" width="200" >
+   Firma: <img src = "..\docs\images\firmas\Firma-AlvaroJimenezOsuna.png" width="200" >
 
    Fecha: 12/03/2025
 
@@ -280,7 +280,7 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
 
    "Yo, como miembro de este equipo, me comprometo a seguir las políticas y directrices del equipo, aportando lo mejor de mí para cumplir con mis responsabilidades y objetivos."
 
-   Firma: <img src = "../../docs/imagenes/firmas/Firma-AngelaLopez.png" width="200" >
+   Firma: <img src = "../docs/imagenes/firmas/Firma-AngelaLopez.png" width="200" >
    
    Fecha: 12/03/2025
 
@@ -384,7 +384,7 @@ Al firmar este documento, el miembro del equipo entiende y acepta las responsabi
 
    "Yo, como miembro de este equipo, me comprometo a contribuir al progreso del proyecto y a cumplir con los plazos y tareas establecidos."
    
-   Firma: <img src = "../../docs/imagenes/firmas/Firma-LuisGiraldo.png" width="200" />
+   Firma: <img src = "../docs/imagenes/firmas/Firma-LuisGiraldo.png" width="200" />
 
    Fecha: 11/03/2025
 
