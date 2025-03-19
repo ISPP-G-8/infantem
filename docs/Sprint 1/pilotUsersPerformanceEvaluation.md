@@ -298,5 +298,35 @@ No aportó comentarios adicionales ni reportó fallos, por lo que no podemos ide
 | Miriam Santiago   | 13/03/2025 12:52:32        | 7          | Evaluacion no muy detallada                  |
 | María Caso   | -        | 0         | No aportó feedback
 ---
+## Mejoras y Cambios Necesarios - Sprint 1
+A partir del feedback proporcionado por los usuarios piloto, hemos identificado varias áreas de mejora para optimizar la experiencia de uso de la aplicación. A continuación, se detallan los principales cambios y ajustes necesarios para hacerla más intuitiva, atractiva y funcional.
 
+### Diseño y apariencia
+- Rediseñar la identidad visual para que sea más atractiva y personalizada, evitando un estilo genérico.
+- Incluir más elementos visuales, como imágenes y gráficos, para mejorar la interfaz.
+- Mejorar la organización visual de las cards de bebés para evitar la sobrecarga de información.
+- Optimizar el diseño de la aplicación para que sea más moderna y llamativa.
+
+### Navegación y Usabilidad
+- Hacer más intuitivo el acceso a la pantalla de bebés.
+- Separar visualmente las secciones "Suggested" y "Recommended" para diferenciarlas mejor.
+- Reorganizar la información para evitar una apariencia densa y facilitar la lectura.
+- Asegurar que todas las opciones de navegación sean claras y comprensibles.
+
+### Contenido y Estructura
+- Explicar mejor el propósito de la aplicación desde la pantalla principal para que el usuario entienda su utilidad.
+- Mejorar la presentación de la información para que sea más clara y atractiva.
+- Reestructurar los textos de las recetas para facilitar su lectura.
+- Incluir los pasos detallados en cada receta o indicar que estarán disponibles en futuras actualizaciones.
+- Aumentar el tamaño del texto de las recetas para mejorar la accesibilidad.
+
+### Funcionalidad
+- Revisar los datos que se solicitan en la ficha del bebé y mantener solo los realmente necesarios.
+- Optimizar la funcionalidad de "Añadir bebé" para que no parezca trivial o un elemento de juego.
+- Explicar mejor el sistema de alérgenos dentro de la aplicación.
+- Incluir una pestaña en la barra de navegación llamada "Mis bebés" para acceder fácilmente a esta información.
+
+### Idioma y Accesibilidad
+- Traducir la aplicación al español y, en el futuro, añadir la opción de cambiar a inglés.
+- Mejorar la segmentación del contenido para evitar la fatiga visual.
 > *Este sistema de evaluación sirve como guía para valorar la implicación de los usuarios piloto y tomar decisiones sobre futuras iteraciones y pruebas de usuario.*
