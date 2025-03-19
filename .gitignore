@@ -8,6 +8,7 @@ target/
 *.iml
 *.ipr
 
+
 /nbproject/private/
 /nbbuild/
 /dist/
@@ -42,4 +43,6 @@ Thumbs.db
 
 *.vim/
 *workspace/
+
+.env
 

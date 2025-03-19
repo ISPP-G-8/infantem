@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping({"/nutrients/{nutrientId}/foodNutrients"})
+@RequestMapping({"api/v1/nutrients/{nutrientId}/foodNutrients"})
 public class FoodNutrientController {
     
     private FoodNutrientService foodNutrientService;

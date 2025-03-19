@@ -1,0 +1,32 @@
+# Control de versiones
+.git
+.gitignore
+
+# Archivos de compilación
+target/
+node_modules/
+
+# Archivos generados y temporales
+*.map
+*.log
+*.env
+*.env.*
+.cache/
+*.bak
+
+# Directorios de desarrollo y prueba
+__tests__/
+__mocks__/
+.vscode/
+.idea/
+jest.config.js
+
+
+# Otros
+*.DS_Store
+*.iml
+*.swp
+
+# Excepciones para incluir archivos importantes
+!frontend/dist/assets/node_modules/
+!frontend/.env

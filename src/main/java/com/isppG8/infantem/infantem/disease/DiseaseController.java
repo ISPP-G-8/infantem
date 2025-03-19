@@ -33,11 +33,6 @@ public class DiseaseController {
     public Disease create(@RequestBody Disease disease) {
         return service.save(disease);
     }
-    @PutMapping("/{id}")
-    public Disease update(@PathVariable Long id, @RequestBody Disease disease) {
-        disease.setId(id);
-        return service.save(disease);
-    }
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         service.delete(id); }

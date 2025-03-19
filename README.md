@@ -301,7 +301,7 @@ Running `npx expo start` without options will show the Expo developer tools wher
 2. Start the frontend and verify that it compiles successfully (Default port is 8081).
 3. Open the app in a web browser, emulator, or physical device and check that it loads correctly.
 4. Ensure that the frontend can communicate with the backend:
-   - The `App` component in the frontend makes a request to `http://localhost:8080/api/v1/example`.
+   - The `App` component in the frontend makes a request to `${apiUrl}/api/v1/example`.
    - If the backend is running correctly, the app should display:
      ```
      Backend is up and running! :D

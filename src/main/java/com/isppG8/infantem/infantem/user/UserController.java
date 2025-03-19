@@ -4,12 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
+
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/users")
-@CrossOrigin(origins = "*")
+@RequestMapping("api/v1/users")
 public class UserController {
 
     @Autowired
@@ -28,12 +29,12 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
+    public User createUser(@Valid @RequestBody User user) {
         return userService.createUser(user);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @Valid @RequestBody User userDetails) {
         Optional<User> updatedUser = userService.updateUser(id, userDetails);
         return updatedUser.map(ResponseEntity::ok)
                              .orElseGet(() -> ResponseEntity.notFound().build());

@@ -1,0 +1,60 @@
+name: Run Tests
+on:
+  push:
+    branches:
+      - "main"
+      - "develop"
+  pull_request:
+    branches:
+      - "main"
+      - "develop"
+
+jobs:
+  test-backend:
+    name: Test Backend
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_ROOT_PASSWORD: root_password
+          MYSQL_DATABASE: infantem_db
+          MYSQL_USER: spring_user
+          MYSQL_PASSWORD: StrongPassword123!
+          SPRING_PROFILES_ACTIVE: development
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping --silent" --health-timeout=5s --health-retries=3
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: 21
+
+      - name: Install dependencies and run backend tests
+        run: mvn clean install
+
+  test-frontend:
+    name: Test Frontend
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: cd frontend && npm install
+
+      #- name: Run frontend tests
+        #run: Add command to execute tests
