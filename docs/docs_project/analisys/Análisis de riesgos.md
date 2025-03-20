@@ -217,7 +217,7 @@ Cada riesgo ha sido evaluado en función de su probabilidad de ocurrencia y su i
 - **Categoría**:  Operativo
 - **Probabilidad de Ocurrencia**: Media
 - **Impacto**: Alto
-Responsable: Riesgo General
+- **Responsable**:: Riesgo General
 - **Estrategia de Mitigación**: 
     - Implementación de un sistema de gestión de tareas más eficiente
     - Reuniones de seguimiento semanal
@@ -226,7 +226,21 @@ Responsable: Riesgo General
     - Monitoreo y corrección continua
     - Revisión constante de la planificación
     - Mejorar la documentación interna
+- **Estado**: Mitigado
+- **Fecha de Resolución**: 18/03/2025
+- **Notas / Observaciones**: A día de hoy, el equipo ha mejorado considerablemente su organización, logrando trabajar de manera más eficiente y efectiva. Como resultado, el caos que anteriormente afectaba al equipo ha desaparecido.
+Este riesgo ha sido resuelto con éxito gracias a la implementación del plan de mitigación, siendo el factor más determinante la optimización en la asignación de tareas.
+- **Lecciones aprendidas**:Hemos aprendido la importancia de una buena gestión y comunicación dentro del equipo así como la importancia que tiene un trabajo bien hecho y seguido.
+### Riesgo # 2
+- **Fecha de Identificación**: 18/03/2025
+- **Descripción del Riesgo**: Nuestro plan de prueba de Google Cloud finalizó, impidiendo que los usuarios pilotos realizarán la evaluación.
+- **Categoría**:  Técnico
+- **Probabilidad de Ocurrencia**: Alta
+- **Impacto**: Alto
+- **Responsable**: Miguel Galán Lerate
+- **Estrategia de Mitigación**: Se está valorando la opción de usar render o seguir usando Google Cloud, ya sea con otro código de activación o bien con un plan pagado.
 - **Estado**: Pendiente
 - **Fecha de Resolución**: No aplica
-- **Notas / Observaciones**: No se han observado ninguno de los otros riesgos.
-- **Lecciones aprendidas**:
+- **Notas / Observaciones**: Pendiente de mitigación.
+- **Lecciones aprendidas**:Es importante anticipar la expiración de los planes gratuitos y contar con una estrategia de contingencia para evitar interrupciones en el servicio.
+
