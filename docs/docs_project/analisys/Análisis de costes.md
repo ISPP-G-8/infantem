@@ -3,7 +3,7 @@
 ![Portada](../../../docs/imagenes/Infantem.png)
 
 **Fecha:** 18/02/2025  
-**Grupo 8:** Infantem  
+**Grupo 8:** Infantem   
 **Sprint 1**
 
 ## Integrantes del Grupo
@@ -178,12 +178,15 @@ Actualmente, este portátil está disponible en MediaMarkt por un precio de 629 
 Se ha elegido Google Play Store y Apple App Store para distribuir la aplicación, debido a su amplio alcance y facilidad de acceso en dispositivos Android e iOS, respectivamente. 
 - En el caso de Google Play Store, el único coste asociado es el registro de desarrollador, con un pago único de 23,98 €, que permite gestionar y publicar la aplicación durante todo el periodo del proyecto. 
 - Para Apple App Store, se requiere una suscripción anual al programa de desarrolladores de Apple, con un coste de 99 USD anuales. Dado que el proyecto tiene una duración de 15 semanas, se considerará el coste total de 99 USD (aproximadamente 94,97 € al tipo de cambio actual) https://developer.apple.com/la/support/compare-memberships/.
+- Para el coste de los Storyboards se ha estimado utilizando las tarifas de diseñadores gráficos en España, que es 45€/h, estimando un tiempo de 2 horas por storyboard, con un total de 3 unidades, uno para usuarios, otro clientes y otro inversiones.
+https://www.zaask.es/cuanto-cuesta/disenador-grafico
 
 | Elemento           | Proveedor | Detalle                      | Coste total       |
 |--------------------|----------|-----------------------------|-------------------|
 | Google Play Store | Google   | Registro de desarrollador   | 23,98 € (pago único) |
 | Apple App Store   | Apple    | Apple Developer Program    | 94,97 €          |
-|                  |          | **Total**                   | **118,95 €**     |
+| Storyboards   | Servicio externo    | Creación de storyboards (3 unidades)    | 270 €          |
+|                  |          | **Total**                   | **388,95 €**     |
 <p style="text-align:center;font-style:italic;">Tabla 6: Desglose de costes de distribución</p>
 
 ### 2.6. Costes totales
@@ -196,9 +199,9 @@ En la siguiente tabla se recogen los costes totales del proyecto, incluyendo en 
 | Costes de Infraestructura                  | 187,65 €      |
 | Costes de Herramientas de Desarrollo       | 1.284,56 €    |
 | Costes de Hardware y Amortización          | 10.693 €      |
-| Costes de Publicación y Distribución       | 118,95 €      |
-| **Total**                                  | **55.882,16 €** |
-| **Coste del proyecto (total + 10% de reserva de contingencias)** | **61.470,376 €** |
+| Costes de Publicación y Distribución       | 388,95 €      |
+| **Total**                                  | **56.152,16 €** |
+| **Coste del proyecto (total + 10% de reserva de contingencias)** | **61.767,376 €** |
 <p style="text-align:center;font-style:italic;">Tabla 7: desglose de costes del proyecto</p>
 
 
@@ -287,7 +290,7 @@ Con un beneficio total anual estimado de 12.521,75 €, el tiempo estimado para 
 
 **Caso Realista**
 
-Con unos ingresos totales anuales estimado de 100.401,32 €, el tiempo estimado para recuperar la inversión inicial de 61.470,38 € sería de aproximadamente 8 meses si se mantiene este escenario.
+Con unos ingresos totales anuales estimado de 100.401,32 €, el tiempo estimado para recuperar la inversión inicial de 61.767,376 € sería de aproximadamente 8 meses si se mantiene este escenario.
 
 Este caso representa un punto de equilibrio más accesible que el pesimista (5 años) pero más conservador que el optimista (3 meses), mostrando una viabilidad intermedia del proyecto.
 
