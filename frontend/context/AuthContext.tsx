@@ -22,21 +22,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
-
+  
   useEffect(() => {
-    checkAuth();
-  }, []);
-
-  const checkAuth = async (): Promise<boolean> => {
-    try {
-      setIsLoading(true);
-      setToken(await getToken());
-
+    const validateToken = async () => {
       if (!token) {
         setIsAuthenticated(false);
         setUser(null);
         setIsLoading(false);
-        return false;
+        return;
       }
 
       try {
@@ -46,7 +39,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             'Authorization': `Bearer ${token}`,
           },
         });
-
+        
         if (response.ok) {
           const userData = await response.json();
           setUser({
@@ -59,23 +52,29 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             profilePhotoRoute: userData.profilePhotoRoute,
           });
           setIsAuthenticated(true);
-          setIsLoading(false);
-          return true;
         } else {
           await signOut();
-          return false;
         }
-
       } catch (error) {
         console.error('Error validating token:', error);
-        // I've read some approaches sayn that maybe we should consider validate
-        // just via token if the API is not available. ATM I thought it's not a good
-        // idea. I return false. - Javier Santos
         setIsAuthenticated(false);
         setUser(null);
+      } finally {
         setIsLoading(false);
-        return false;
       }
+    };
+
+    if (isLoading || token) {
+      validateToken();
+    }
+  }, [token, apiUrl]);
+
+  const checkAuth = async (): Promise<boolean> => {
+    try {
+      setIsLoading(true);
+      const storedToken = await getToken();
+      setToken(storedToken); 
+      return storedToken != null; 
     } catch (error) {
       console.error('Auth check failed:', error);
       setIsAuthenticated(false);
@@ -85,13 +84,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
   const signOut = async () => {
     try {
       await removeToken();
+      setToken(null); 
       setUser(null);
       setIsAuthenticated(false);
       router.replace('/signin');
-
     } catch (error) {
       console.error('Sign out failed', error);
     }
