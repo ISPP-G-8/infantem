@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.isppG8.infantem.infantem.baby.Baby;
 import com.isppG8.infantem.infantem.baby.Genre;
 
 import jakarta.persistence.EnumType;
@@ -19,6 +20,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BabyDTO {
+
+    private Integer id;
 
     @NotBlank
     @Size(min = 3, max = 50)
@@ -45,4 +48,18 @@ public class BabyDTO {
 
     @NotBlank
     private String foodPreference;
+
+    public BabyDTO() {
+    }
+
+    public BabyDTO(Baby baby) {
+        this.id = baby.getId();
+        this.name = baby.getName();
+        this.birthDate = baby.getBirthDate();
+        this.genre = baby.getGenre();
+        this.weight = baby.getWeight();
+        this.height = baby.getHeight();
+        this.cephalicPerimeter = baby.getCephalicPerimeter();
+        this.foodPreference = baby.getFoodPreference();
+    }
 }
