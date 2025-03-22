@@ -43,33 +43,39 @@
 ## Índice
 1. [Introducción](#introduccion) 
 2. [Estimación de Costes](#estimacion-costes) 
-    2.1 [Desglose de Costes de Personal](#desglose-costes-personal)
-    2.3 [Desglose de Costes de Infraestructura](#desglose-costes-infraestructura)
-    2.4 [Desglose de Costes de Herramientas de Desarrollo](#desglose-costes-heramientas-desarollo) 
-    2.5 [Desglose de Costes de Hardware y Amortización](#desglose-costes-hardware-amortizacion) 
-    2.6 [Desglose de Costes de Distribución y Publicación](#desglose-costes-distribucion-publicacion) 
-    2.7 [Costes totales](#costes-totales)
-3. [Beneficios](#beneficios) 
-    3.1. [Modelo Freemium](#modelo-freemium) 
-    3.2. [Publicidad segmentada](#publicidad-segmentada) 
-    3.3. [Marketplace](#marketplace) 
-    3.4. [Suma total de beneficios](#suma-total-beneficios) 
-4. [Relación entre beneficio y coste del proyecto](#relacion-beneficios-costes)
-5. [Costes posteriores a la fecha de lanzamiento (1 semana)](#5-costes-posteriores-a-la-fecha-de-lanzamiento-1-semana)
-    5.1 [Costes de infraestructura en producción](#51-costes-de-infraestructura-en-producción)
-    5.2 [Costes de atención al cliente y soporte técnico](#52-costes-de-atención-al-cliente-y-soporte-técnico)
-    5.3 [Costes de herramientas y servicios de mantenimiento](#53-costes-de-herramientas-y-servicios-de-mantenimiento)
-6. [Beneficios obtenidos en la primera semana](#6-beneficios-obtenidos-en-la-primera-semana)
-    6.1 [6.1 Ingresos en la primera semana](#61-ingresos-en-la-primera-semana)
-    6.2 [6.2 Beneficio neto en la primera semana](#62-beneficio-neto-en-la-primera-semana)
-    6.3 [6.3 Análisis del resultado](#63-análisis-del-resultado)
-7. [Costes Posteriores a la Fecha de Lanzamiento (6 meses y 1 año)](#7-costes-posteriores-a-la-fecha-de-lanzamiento-6-meses-y-1-año)
-    7.1 [Costes de Infraestructura en Producción](#71-costes-de-infraestructura-en-producción)
-    7.2 [Costes de Atención al Cliente y Soporte Técnico](#72-costes-de-atención-al-cliente-y-soporte-técnico)
-    7.3 [Costes de Herramientas y Mantenimiento](#73-costes-de-herramientas-y-mantenimiento)
-    7.4 [Beneficios Obtenidos](#74-beneficios-obtenidos)
-    7.5 [Análisis del resultado](#75-análisis-del-resultado)
-8. [Conclusiones](#8-conclusiones)
+    2.1 [Desglose de Costes de Personal](#21-desglose-de-costes-de-personal)
+    2.2 [Desglose de Costes de Infraestructura](#22-desglose-de-costes-de-infraestructura)
+    2.3 [Desglose de Costes de Herramientas de Desarrollo](#23-desglose-de-costes-de-herramientas-de-desarrollo) 
+    2.4 [Desglose de Costes de Hardware y Amortización](#24-desglose-de-costes-de-hardware-y-amortización) 
+    2.5 [Desglose de Costes de Distribución y Publicación](#25-desglose-de-costes-de-distribución-y-publicación) 
+    2.6 [Costes totales](#26-costes-totales)
+3. [Ingresos](#3-ingresos) 
+    3.1. [Modelo Freemium](#31-modelo-freemium) 
+    3.2. [Publicidad segmentada](#32-publicidad-segmentada) 
+    3.3. [Marketplace](#33-marketplace) 
+    3.4. [Suma total de beneficios](#34-suma-total-de-ingresos) 
+4. [Relación entre beneficio y coste del proyecto](#4-relación-entre-ingresos-y-coste-del-proyecto-beneficios)
+5. [Modelo de inversion](#5-modelo-de-inversión)
+    5.1 [Necesidad de inversión](#51-necesidades-de-inversión)
+    5.2 [Modelo de retorno para los inversores](#52-modelo-de-retorno-para-los-inversores)
+    5.3 [Tiempo de recuperación estimado](#53-tiempo-de-recuperación-estimado)
+    5.4 [Bonificación por crecimiento acelerado](#54-bonificación-por-crecimiento-acelerado)
+    5.5 [Beneficios para los inversores](#55-beneficios-para-los-inversores)
+6. [Costes posteriores a la fecha de lanzamiento (1 semana)](#6-costes-posteriores-a-la-fecha-de-lanzamiento-1-semana)
+    6.1 [Costes de infraestructura en producción](#61-costes-de-infraestructura-en-producción)
+    6.2 [Costes de atención al cliente y soporte técnico](#62-costes-de-atención-al-cliente-y-soporte-técnico)
+    6.3 [Costes de herramientas y servicios de mantenimiento](#63-costes-de-herramientas-y-servicios-de-mantenimiento)
+7. [Beneficios obtenidos en la primera semana](#7-beneficios-obtenidos-en-la-primera-semana)
+    7.1 [Ingresos en la primera semana](#71-ingresos-en-la-primera-semana)
+    7.2 [Beneficio neto en la primera semana](#72-beneficio-neto-en-la-primera-semana)
+    7.3 [Análisis del resultado](#73-análisis-del-resultado)
+8. [Costes Posteriores a la Fecha de Lanzamiento (6 meses y 1 año)](#8-costes-posteriores-a-la-fecha-de-lanzamiento-6-meses-y-1-año)
+    8.1 [Costes de Infraestructura en Producción](#81-costes-de-infraestructura-en-producción)
+    8.2 [Costes de Atención al Cliente y Soporte Técnico](#82-costes-de-atención-al-cliente-y-soporte-técnico)
+    8.3 [Costes de Herramientas y Mantenimiento](#83-costes-de-herramientas-y-mantenimiento)
+    8.4 [Beneficios Obtenidos](#84-beneficios-obtenidos)
+    8.5 [Análisis del resultado](#85-análisis-del-resultado)
+9. [Conclusiones](#9-conclusiones)
 
 ## 1. Introducción
 Este documento tiene como objetivo analizar los costes asociados al desarrollo y mantenimiento de la aplicación Infantem. El análisis de costes se basa en la metodología PMBOK, considerando tanto los gastos de personal, infraestructura, herramientas de desarrollo, hardware y distribución, como una reserva de contingencia de un 10% sobre el total estimado. Además, se presenta una estimación de beneficios basada en el modelo de suscripción premium de la aplicación junto con un sistema de publicidad segmentada. 
@@ -303,11 +309,40 @@ Con uno ingresos totales anuales estimado de 256.659,84 €, la inversión se re
 
 <p style="text-align:center;font-style:italic;">Gráfico 4: Relación entre ingreso acumulado y coste del proyecto caso optimista</p> 
 
-## 5. Costes posteriores a la fecha de lanzamiento (1 semana)
+## 5. Modelo de inversión
+### 5.1 necesidades de inversión
+El coste total del proyecto asciende a 61.767,376€, por lo que se busca cubrir el mayor porcentaje posible con inversión externa.
+
+### 5.2 Modelo de retorno para los inversores
+Los inversores recibiran un portentaje de los beneficios netos hasta recuperar la inversión. Posteriormente podran:
+- Seguir recibiendo un percentaje menor (10%) de los beneficios a largo plazo.
+- Salir del proyecto con un retorno adicional del 10% sobre su inversión
+
+### 5.3 Tiempo de recuperación estimado
+Los ingresos anuales estimados son de 100.401,32€.
+Estimando un beneficio neto del 30% → 30.120,40€.
+La parte de beneficios destinada a inversores es 9.036,12 € (30% del beneficio neto).
+Por lo tanto el tiempo de recuperacion de la inverison completa es ~7 años si se capta el total de 61.767,376 €
+
+### 5.4 Bonificación por crecimiento acelerado
+Para incentivar y acelerar la recuperación, se establece un sistema de bonificación basado en crecimiento:
+- Si los ingresos superan los 150.000 € anuales en los 2 primeros años, los inversores recibiran un 20% adicional sobre los beneficios ya obtenidos.
+- Si los ingresos superan los 200.000 € en los primeros 3 años, se otorgará otro 10% adicional.
+
+Con estas bonificaciones se puede acelerar el porceso de recuperación de la inversión sin comprometer la rentabilidad del negocio a largo plazo.
+
+### 5.5 Beneficios para los inversores
+- Modelo sin riesgos de perdida total: Los inversores no dependen de vender su participacion, sino que obtienen beneficios directamente.
+- Potencial de crecimiento: Si los ingresos aumentan, el retorno se acelera.
+- Bonificación adicional: Los inversores pueden recibir pagos extras si el negocio crece mas rápido de lo previsto.
+- Flexibilidad: Los inversores pueden elegir seguir con un porcentaje menor o salir con un 10% extra.
+
+
+## 6. Costes posteriores a la fecha de lanzamiento (1 semana)
 
 Una vez establecidos los costes que tendrán lugar durante toda la fase de desarrollo, es necesario establecer los costes que incurrirán durante, al menos, una semana después del lanzamiento de nuestra aplicación. Para ello tendremos en cuenta a 1352 usuarios, teniendo en cuenta el caso realista. Podemos dividir estos costes en distintos tipos:
 
-### 5.1 Costes de infraestructura en producción
+### 6.1 Costes de infraestructura en producción
 
 Estos costes provienen del uso de servidores, bases de datos, almacenamiento y tráfico generado por los usuarios.
 
@@ -346,7 +381,7 @@ Estos costes provienen del uso de servidores, bases de datos, almacenamiento y t
 
 ---
 
-### 5.2 Costes de atención al cliente y soporte técnico
+### 6.2 Costes de atención al cliente y soporte técnico
 
 Estos costes incluyen la atención al usuario, solución de problemas, respuesta a tickets, etc.
 
@@ -357,7 +392,7 @@ Estos costes incluyen la atención al usuario, solución de problemas, respuesta
 
 ---
 
-### 5.3 Costes de herramientas y servicios de mantenimiento
+### 6.3 Costes de herramientas y servicios de mantenimiento
 
 Utilizaremos estas herramientas para monitorear, analizar y gestionar la aplicación.
 
@@ -379,13 +414,13 @@ Utilizaremos estas herramientas para monitorear, analizar y gestionar la aplicac
 
 - 
 
-## 6. Beneficios obtenidos en la primera semana
+## 7. Beneficios obtenidos en la primera semana
 
 Para calcular los beneficios en la primera semana tras el lanzamiento, consideramos los ingresos obtenidos a partir de nuestras tres fuentes de monetización principales: **modelo Freemium (suscripciones Premium), publicidad segmentada y marketplace**. Luego, comparamos estos ingresos con los costes operativos de la semana.
 
 ---
 
-### **6.1 Ingresos en la primera semana**  
+### **7.1 Ingresos en la primera semana**  
 
 #### **a) Ingresos por suscripciones Premium**  
 Siguiendo el caso realista, **94 usuarios** adquieren el plan Premium por **4,99 €** al mes.  
@@ -425,7 +460,7 @@ Se estima que **1.342 usuarios** utilizan el marketplace. Cada usuario realiza *
 
 ---
 
-### **6.2 Beneficio neto en la primera semana**
+### **7.2 Beneficio neto en la primera semana**
 
 Ahora restamos los costes operativos a los ingresos generados en la primera semana.
 
@@ -439,7 +474,7 @@ Ahora restamos los costes operativos a los ingresos generados en la primera sema
 
 ---
 
-### **6.3 Análisis del resultado**
+### **7.3 Análisis del resultado**
 
 En la **primera semana**, generaríamos un **beneficio neto de 966,46 €**.  
 
@@ -452,7 +487,7 @@ Este resultado muestra que, aunque el modelo Freemium por sí solo no cubriría 
 
 Si se mantiene esta tendencia, **el beneficio mensual estimado sería de 3.865,84 €**, lo que confirma que podemos generar ingresos sostenibles y escalar.
  
-## 7. Costes Posteriores a la Fecha de Lanzamiento (6 meses y 1 año)  
+## 8. Costes Posteriores a la Fecha de Lanzamiento (6 meses y 1 año)  
 
 A medida que la base de usuarios de nuestra aplicación crece, los costes de infraestructura, soporte y mantenimiento también aumentarán proporcionalmente. Se calcula el impacto financiero a **6 meses** y **1 año** después del lanzamiento, asumiendo un crecimiento realista en el número de usuarios.  
 
@@ -462,7 +497,7 @@ En este escenario, la aplicación crece a un **15% mensual**, lo que resulta en:
 
 ---
 
-### 7.1 Costes de Infraestructura en Producción  
+### 8.1 Costes de Infraestructura en Producción  
 
 Los costes de servidores, almacenamiento y tráfico aumentan en función del crecimiento de usuarios.  
 
@@ -486,7 +521,7 @@ Los costes de servidores, almacenamiento y tráfico aumentan en función del cre
 
 ---
 
-### 7.2 Costes de Atención al Cliente y Soporte Técnico  
+### 8.2 Costes de Atención al Cliente y Soporte Técnico  
 
 Con más usuarios, se requiere más soporte. Se aumenta el equipo de atención al cliente progresivamente.  
 
@@ -495,7 +530,7 @@ Con más usuarios, se requiere más soporte. Se aumenta el equipo de atención a
 
 ---
 
-### 7.3 Costes de Herramientas y Mantenimiento  
+### 8.3 Costes de Herramientas y Mantenimiento  
 
 - **Monitorización (Google Cloud Monitoring)**  
   - 6 meses: 40 €/mes → **240 €**  
@@ -512,9 +547,9 @@ Con más usuarios, se requiere más soporte. Se aumenta el equipo de atención a
 
 ---
 
-## 7.4 Beneficios Obtenidos  
+## 8.4 Beneficios Obtenidos  
 
-### **7.4.1 Ingresos a los 6 Meses**  
+### **8.4.1 Ingresos a los 6 Meses**  
 
 #### **a) Ingresos por Suscripciones Premium**  
 Usuarios premium creciendo al 7% del total:  
@@ -539,7 +574,7 @@ Usuarios premium creciendo al 7% del total:
 
 ---
 
-### **7.4.2 Beneficio Neto en 6 Meses**  
+### **8.4.2 Beneficio Neto en 6 Meses**  
 
 | Concepto | Ingresos (€) | Costes (€) |
 |----------|------------|------------|
@@ -551,7 +586,7 @@ Usuarios premium creciendo al 7% del total:
 
 ---
 
-### **7.4.3 Beneficios al Año**  
+### **8.4.3 Beneficios al Año**  
 
 #### **a) Ingresos por Suscripciones Premium**  
 Usuarios premium creciendo al 7% del total:  
@@ -576,7 +611,7 @@ Usuarios premium creciendo al 7% del total:
 
 ---
 
-### **7.4.4 Beneficio Neto en 1 Año**  
+### **8.4.4 Beneficio Neto en 1 Año**  
 
 | Concepto | Ingresos (€) | Costes (€) |
 |----------|------------|------------|
@@ -588,7 +623,7 @@ Usuarios premium creciendo al 7% del total:
 
 ---
 
-### 7.5 **Análisis del resultado**  
+### 8.5 **Análisis del resultado**  
 
 - A los **6 meses**, obtendríamos un **beneficio neto de 77.117,72 €**.  
 - A los **12 meses**, el beneficio neto asciende a **308.702,44 €**, demostrando un crecimiento exponencial.  
@@ -599,7 +634,7 @@ Usuarios premium creciendo al 7% del total:
 
 
 
-## 8. Conclusiones
+## 9. Conclusiones
 
 El análisis de costes y beneficios realizado en este documento permite evaluar la
 viabilidad económica del proyecto Infantem. Con una inversión inicial estimada en
