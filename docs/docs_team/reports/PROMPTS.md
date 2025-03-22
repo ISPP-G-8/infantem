@@ -2,12 +2,12 @@
 
 ![Portada](../../../frontend/assets/Documentos/Infantem.png)
 
-
-**Fecha:** 18/02/2025  
-**Grupo 8:** Infantem  
+**Fecha:** 18/02/2025
+**Grupo 8:** Infantem
 **Sprint 1**
 
 ## Integrantes del Grupo
+
 <div style="display: flex; justify-content: space-between; gap: 2px;">
   <div>
     <ul style="padding-left: 0; list-style: none;">
@@ -23,7 +23,7 @@
     </ul>
   </div>
 
-  <div>
+<div>
     <ul style="padding-left: 0; list-style: none;">
     <li>Javier Ulecia García</li>
       <li>José García de Tejada Delgado</li>
@@ -39,18 +39,15 @@
 
 ---
 
-
-
 ## Índice
+
 - [Colaboradores del documento](#colaboradores-del-documento)
 - [Prompts de cada miembro](#prompts-de-cada-miembro)
 
-
 ## Colaboradores del documento
+
 - Luis Giraldo
   - Creó el documento en md.
-
-
 
 ## Prompts de cada miembro
 
@@ -60,18 +57,17 @@
 
 Hay más tipos de alimentos que "fruta, verdura, huevos, legumbres, pescados, carne, lácteos, cereal, aceite y fruto seco"?
 
-Sí, hay más categorías de alimentos que pueden considerarse aparte de las que mencionaste. Algunas adicionales incluyen:  
+Sí, hay más categorías de alimentos que pueden considerarse aparte de las que mencionaste. Algunas adicionales incluyen:
 
-🔹 Hongos y setas (como champiñones, trufas, shiitake)  
-🔹 Algas (como nori, wakame, espirulina)  
-🔹 Tubérculos y raíces (como patata, yuca, batata, jengibre)  
-🔹 Especias y hierbas aromáticas (como canela, cúrcuma, orégano, albahaca)  
-🔹 Endulzantes naturales (como miel, jarabe de arce, stevia)  
-🔹 Bebidas naturales (como café, té, cacao, infusiones)  
-🔹 Fermentados (como yogur, kéfir, chucrut, kimchi, miso)  
+🔹 Hongos y setas (como champiñones, trufas, shiitake)
+🔹 Algas (como nori, wakame, espirulina)
+🔹 Tubérculos y raíces (como patata, yuca, batata, jengibre)
+🔹 Especias y hierbas aromáticas (como canela, cúrcuma, orégano, albahaca)
+🔹 Endulzantes naturales (como miel, jarabe de arce, stevia)
+🔹 Bebidas naturales (como café, té, cacao, infusiones)
+🔹 Fermentados (como yogur, kéfir, chucrut, kimchi, miso)
 
 Cada una de estas categorías tiene propiedades únicas y contribuye de manera distinta a la alimentación. ¿Te interesa alguna en particular? 😊
-
 
 ### Javier Santos Martín (prompts)
 
@@ -81,12 +77,10 @@ What are all the differences between a map, an object and a record in ts?
 
 #### 06/03/2025
 
-
 When you work with js you can export the jsons as a json file, if you are working with typescript and you have an array of typed json as:
 type Whatever = {};
-const arr: Whatever[] = [{},{},{},{}]; 
+const arr: Whatever[] = [{},{},{},{}];
 Which is the best approach to move the content to separated files? cause they cannot be named as .json can they?
-
 
 ### Antonio Jiménez Ortega (prompts)
 
@@ -94,11 +88,9 @@ Which is the best approach to move the content to separated files? cause they ca
 
 como hacer en MD para que cuando pulse un punto definido en mi indice me lleve directamente a dicho punto en el documento
 
-
 ### Luis Giraldo Santantiago
 
 #### 11/03/2025
-
 
 - Pregunta: Estoy intentando poner la ruta pero no se como ponerla bien
 - Sabes si puedo poner tres columnas en md, osease tengo una lista pero es muy larga y la quiero poner en horizontal
@@ -108,3 +100,8 @@ como hacer en MD para que cuando pulse un punto definido en mi indice me lleve d
 - Como añado una nota en un parrofo en md, si se puede
 - Como hago una checklist en md
 
+### Enrique García Abadía
+
+### 22/03/2025
+
+- Te voy a pasar una transcripción de una reunión de un equipo de desarrollo de un proyecto de software. En la reunion se habla del feedback dado por los profesores, los avances realizados en la semana, que se espera que llevemos para el siguiente control y como vamos a organizarnos el trabajo. Generame un acta detallada que sintetice la informacion de la transcripcion.
