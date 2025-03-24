@@ -1,5 +1,5 @@
 import { Builder, Browser, By, until, Key } from 'selenium-webdriver'; 
-/* 
+
 (async function testAgeBasedRecommendations() {
   let driver = await new Builder().forBrowser(Browser.FIREFOX).build();
 
@@ -86,7 +86,7 @@ import { Builder, Browser, By, until, Key } from 'selenium-webdriver';
   } finally {
     await driver.quit();
   }
-})(); */
+})();
 
 
 (async function testAddRecipe() {
