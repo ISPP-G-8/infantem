@@ -1,7 +1,6 @@
 package com.isppG8.infantem.infantem.dream;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.isppG8.infantem.infantem.dream.dto.DreamDTO;
 
 import jakarta.validation.Valid;
 
@@ -29,30 +30,31 @@ public class DreamController {
     }
 
     @GetMapping
-    public List<Dream> getAllDreams() {
-        return dreamService.getAllDreams();
+    public List<DreamDTO> getAllDreams() {
+        return dreamService.getAllDreams().stream().map(DreamDTO::new).toList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Dream> getDreamById(@PathVariable Long id) {
-        Optional<Dream> dream = dreamService.getDreamById(id);
-        return dream.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<DreamDTO> getDreamById(@PathVariable Long id) {
+        Dream dream = dreamService.getDreamById(id);
+        return ResponseEntity.ok(new DreamDTO(dream));
     }
 
     @PostMapping
-    public ResponseEntity<Dream> createDream(@Valid @RequestBody Dream dream) {
-        return ResponseEntity.ok(dreamService.createDream(dream));
+    public ResponseEntity<DreamDTO> createDream(@Valid @RequestBody Dream dream) {
+        Dream createdDream = dreamService.createDream(dream);
+        return ResponseEntity.status(201).body(new DreamDTO(createdDream));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Dream> updateDream(@PathVariable Long id, @Valid @RequestBody Dream dreamDetails) {
+    public ResponseEntity<DreamDTO> updateDream(@PathVariable Long id, @Valid @RequestBody Dream dreamDetails) {
         Dream updatedDream = dreamService.updateDream(id, dreamDetails);
-        return ResponseEntity.ok(updatedDream);
+        return ResponseEntity.ok(new DreamDTO(updatedDream));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDream(@PathVariable Long id) {
-        boolean deleted = dreamService.deleteDream(id);
-        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+        dreamService.deleteDream(id);
+        return ResponseEntity.noContent().build();
     }
 }
