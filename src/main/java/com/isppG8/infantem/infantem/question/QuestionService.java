@@ -14,9 +14,9 @@ public class QuestionService {
     private BabyService babyService;
 
     public List<Question> getQuestionsByBabyId(int babyId) {
-	if (babyService.findById(babyId) == null) {
-		throw new RuntimeException("Baby doesn't exist");
-	}
+        if (babyService.findById(babyId) == null) {
+            throw new RuntimeException("Baby doesn't exist");
+        }
         return questionRepository.findByBabyId(babyId);
     }
 

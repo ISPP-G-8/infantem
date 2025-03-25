@@ -23,7 +23,7 @@ import lombok.Setter;
 public class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE	, generator = "entity_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "entity_seq")
     private Integer Id;
 
     @NotNull
@@ -32,7 +32,7 @@ public class Question {
     @NotNull
     private Integer answer;
 
-    //Relaciones
+    // Relaciones
 
     @ManyToMany
     private Set<Food> food;
@@ -41,4 +41,3 @@ public class Question {
     private Baby baby;
 
 }
-
