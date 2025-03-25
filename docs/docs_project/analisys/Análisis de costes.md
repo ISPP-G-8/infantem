@@ -59,7 +59,7 @@
 5. [Modelo de Inversión](#5-modelo-de-inversión)  
    - 5.1 [Necesidad de Inversión](#51-necesidades-de-inversión)  
    - 5.2 [Modelo de Retorno para los Inversores](#52-modelo-de-retorno-para-los-inversores)  
-   - 5.3 [Tiempo de Recuperación Estimado](#53-tiempo-de-recuperación-estimado)  
+   - 5.3 [Estrategia de recuperación en 2 años](#53-estrategia-de-recuperacion-en-2-años)  
    - 5.4 [Bonificación por Crecimiento Acelerado](#54-bonificación-por-crecimiento-acelerado)  
    - 5.5 [Beneficios para los Inversores](#55-beneficios-para-los-inversores)  
 6. [Costes Posteriores a la Fecha de Lanzamiento (1 Semana)](#6-costes-posteriores-a-la-fecha-de-lanzamiento-1-semana)  
@@ -416,20 +416,36 @@ Los inversores recibiran un portentaje de los beneficios netos hasta recuperar l
 - Seguir recibiendo un percentaje menor (10%) de los beneficios a largo plazo.
 - Salir del proyecto con un retorno adicional del 10% sobre su inversión
 
-### 5.3 Tiempo de recuperación estimado
-Los ingresos anuales estimados son de 100.401,32€.
-Estimando un beneficio neto del 30% → 30.120,40€.
-La parte de beneficios destinada a inversores es 9.036,12 € (30% del beneficio neto).
-Por lo tanto el tiempo de recuperacion de la inverison completa es ~7 años si se capta el total de 61.767,376 €
+### 5.3 Estrategia de recuperacion en 2 años
+
+Para garantizar que los inversores recuperen su inversión en 2 años o menos, se aplicará una combinación de estrategias:
+
+- El 50% de los beneficios netos serán destinados a la recuperación de inversión hasta alcanzar el monto aportado.
+- Cálculo de recuperación estimado:
+  - Ingresos estimados en 2 años: 150.000 € (primer año) + 200.000 € (segundo año) = 350.000 €
+  - Beneficio neto estimado (30% del margen): 105.000€ en 2 años.
+  - Parte destinada a inversores (50% del beneficio neto): 52.500 € en 2 años.
+  - Monto restante tras 2 años: 61.767,376 € - 52.500 € = 9.267,376 €, que se recuperará en meses con ingresos futuros.
+- Optimización de los ingresos:
+  - Aumento del número de suscriptores premium.
+  - Expansión del marketplace con más alianzas y productos exclusivos.
+  - Nuevas estrategias de monetización mediante publicidad segmentada.
+- Pago fijo parcial con recompra anticipada:
+  - Se garantizará un pago fijo de 5.000 € a los inversores.
+  - Con esto, la recuperación total en 2 años alcanzará los 61.767,376 €.
+
+
 
 ### 5.4 Bonificación por crecimiento acelerado
 Para incentivar y acelerar la recuperación, se establece un sistema de bonificación basado en crecimiento:
-- Si los ingresos superan los 150.000 € anuales en los 2 primeros años, los inversores recibiran un 20% adicional sobre los beneficios ya obtenidos.
+- Si los ingresos superan los 150.000 € anuales en los primeros 2 años, los inversores recibirán un 20% adicional sobre los beneficios ya percibidos.
 - Si los ingresos superan los 200.000 € en los primeros 3 años, se otorgará otro 10% adicional.
+
 
 Con estas bonificaciones se puede acelerar el porceso de recuperación de la inversión sin comprometer la rentabilidad del negocio a largo plazo.
 
 ### 5.5 Beneficios para los inversores
+- Recuperación de inversión en 2 años garantizada mediante un 50% de los beneficios netos y pagos fijos
 - Modelo sin riesgos de perdida total: Los inversores no dependen de vender su participacion, sino que obtienen beneficios directamente.
 - Potencial de crecimiento: Si los ingresos aumentan, el retorno se acelera.
 - Bonificación adicional: Los inversores pueden recibir pagos extras si el negocio crece mas rápido de lo previsto.
