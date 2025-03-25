@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { ActivityIndicator, Modal, TextInput, Alert,ImageBackground } from "react-native";
+import { ActivityIndicator, Modal, TextInput, Alert, ImageBackground } from "react-native";
 import { Text, View, TouchableOpacity, ScrollView, Image, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useAuth } from "../../../context/AuthContext";
+import TermsConditionsModal from "../../../components/TermsConditionsModal";
 
 const avatarOptions = [
   // There are no avatar images in backend yet.
@@ -15,6 +16,7 @@ const avatarOptions = [
 export default function Account() {
   const [modalVisible, setModalVisible] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [termsModalVisible, setTermsModalVisible] = useState(false);
   const navigation = useNavigation();
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
@@ -91,11 +93,11 @@ export default function Account() {
   return (
     <ImageBackground
       source={require("../../../static/images/Background.png")}
-      style={{ flex: 1, width: "100%", height: "100%", justifyContent: "center" }}
+      style={{ flex: 1, width: "100%", height: "100%", justifyContent: "center", paddingBottom: 10 }}
       imageStyle={{ resizeMode: "cover", opacity: 0.9 }}
-    >      
-    <ScrollView contentContainerStyle={[gs.container, { paddingTop: 100, paddingBottom: 100, backgroundColor:"transparent" }]}>
-    <Image source={require("../../../static/images/Bib.png")} style={{ position: 'absolute', top: "20%", right: "72%", width: 120, height: 120,transform: [{ rotate: '-15deg' }] }} />
+    >
+      <ScrollView contentContainerStyle={[gs.container, { paddingTop: 50, paddingBottom: 100, backgroundColor: "transparent" }]}>
+        <Image source={require("../../../static/images/Bib.png")} style={{ position: 'absolute', top: "20%", right: "72%", width: 120, height: 120, transform: [{ rotate: '-15deg' }] }} />
 
 
         <Text style={[gs.headerText, { color: "#1565C0" }]}>Perfil</Text>
@@ -106,24 +108,24 @@ export default function Account() {
 
         {user && (
           <>
-            <Text style={[gs.inputLabel,{width:"80%",paddingLeft:10,color: "#1565C0", fontWeight: "bold"}]}>Nombre</Text>
-            <TextInput 
-              style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0" , opacity:0.8, width:"80%"}]} 
-            value={user.name} editable={isEditing} onChangeText={(text) => setUser({ ...user, name: text })} />
+            <Text style={[gs.inputLabel, { width: "80%", marginTop: 20, paddingLeft: 10, color: "#1565C0", fontWeight: "bold" }]}>Nombre</Text>
+            <TextInput
+              style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "80%" }]}
+              value={user.name} editable={isEditing} onChangeText={(text) => setUser({ ...user, name: text })} />
 
-            <Text style={[gs.inputLabel,{width:"80%",paddingLeft:10,color: "#1565C0", fontWeight: "bold"}]}>Apellido</Text>
-            <TextInput 
-             style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0" , opacity:0.8, width:"80%"}]} 
-            value={user.surname} editable={isEditing} onChangeText={(text) => setUser({ ...user, surname: text })} />
+            <Text style={[gs.inputLabel, { width: "80%", paddingLeft: 10, color: "#1565C0", fontWeight: "bold" }]}>Apellido</Text>
+            <TextInput
+              style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "80%" }]}
+              value={user.surname} editable={isEditing} onChangeText={(text) => setUser({ ...user, surname: text })} />
 
-            <Text style={[gs.inputLabel,{width:"80%",paddingLeft:10,color: "#1565C0", fontWeight: "bold"}]}>Nombre de Usuario</Text>
-            <TextInput 
-              style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0" , opacity:0.8, width:"80%"}]} 
+            <Text style={[gs.inputLabel, { width: "80%", paddingLeft: 10, color: "#1565C0", fontWeight: "bold" }]}>Nombre de Usuario</Text>
+            <TextInput
+              style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "80%" }]}
               value={user.username} editable={isEditing} onChangeText={(text) => setUser({ ...user, username: text })} />
 
-            <Text style={[gs.inputLabel,{width:"80%",paddingLeft:10,color: "#1565C0", fontWeight: "bold"}]}>Correo Electrónico</Text>
-            <TextInput 
-              style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0" , opacity:0.8, width:"80%"}]} 
+            <Text style={[gs.inputLabel, { width: "80%", paddingLeft: 10, color: "#1565C0", fontWeight: "bold" }]}>Correo Electrónico</Text>
+            <TextInput
+              style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "80%" }]}
               value={user.email} editable={isEditing} onChangeText={(text) => setUser({ ...user, email: text })} />
           </>
         )}
@@ -132,9 +134,27 @@ export default function Account() {
           <Text style={gs.mainButtonText}>{isEditing ? "Guardar Cambios" : "Editar Perfil"}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[gs.secondaryButton, { marginTop: 10}]} onPress={handleLogout}>
+        <TouchableOpacity style={[gs.secondaryButton, { marginTop: 10 }]} onPress={handleLogout}>
           <Text style={[gs.secondaryButtonText]}>Cerrar Sesión</Text>
         </TouchableOpacity>
+
+        <Text style={{ marginTop: 10 }}>
+          Ver&nbsp;
+          <Text
+            style={{ color: "#007AFF", fontSize: 14 }}
+            onPress={() => {
+              setTermsModalVisible(true);
+            }}
+          >
+            términos y condiciones
+          </Text>
+          <br/>
+        </Text>
+        
+        <TermsConditionsModal
+          visible={termsModalVisible}
+          onClose={() => setTermsModalVisible(false)}
+        />
 
         <Modal visible={modalVisible} animationType="fade" transparent={true}>
           <View style={gs.modalOverlay}>
