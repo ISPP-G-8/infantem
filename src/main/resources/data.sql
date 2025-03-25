@@ -122,3 +122,10 @@ INSERT INTO intake_recipe (intake_id, recipe_id) VALUES
 (4, 6),         
 (5, 7), (5, 8); 
 
+-- Inserción preguntas
+INSERT INTO question (answer,baby_id,question,id,recipe_id) VALUES
+(0,1,1,1,1),
+(1,1,1,2,1),
+(1,1,2,3,1),
+(1,1,2,4,1),
+(0,1,3,5,1);

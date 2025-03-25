@@ -12,8 +12,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 import jakarta.persistence.CascadeType;
->>>>>>> feat/allergenAlgorithm
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
