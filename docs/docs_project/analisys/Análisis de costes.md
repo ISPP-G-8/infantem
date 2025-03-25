@@ -41,48 +41,49 @@
 
 
 ## Índice
-1. [Introducción](#introduccion) 
-2. [Estimación de Costes](#estimacion-costes) 
-    2.1 [Desglose de Costes de Personal](#21-desglose-de-costes-de-personal)
-    2.2 [Desglose de Costes de Infraestructura](#22-desglose-de-costes-de-infraestructura)
-    2.3 [Desglose de Costes de Herramientas de Desarrollo](#23-desglose-de-costes-de-herramientas-de-desarrollo) 
-    2.4 [Desglose de Costes de Hardware y Amortización](#24-desglose-de-costes-de-hardware-y-amortización) 
-    2.5 [Desglose de Costes de Distribución y Publicación](#25-desglose-de-costes-de-distribución-y-publicación) 
-    2.6 [Costes totales](#26-costes-totales)
-3. [Ingresos](#3-ingresos) 
-    3.1. [Modelo Freemium](#31-modelo-freemium) 
-    3.2. [Publicidad segmentada](#32-publicidad-segmentada) 
-    3.3. [Marketplace](#33-marketplace) 
-    3.4. [Suma total de beneficios](#34-suma-total-de-ingresos) 
-4. [Relación entre beneficio y coste del proyecto](#4-relación-entre-ingresos-y-coste-del-proyecto-beneficios)
-5. [Modelo de inversion](#5-modelo-de-inversión)
-    5.1 [Necesidad de inversión](#51-necesidades-de-inversión)
-    5.2 [Modelo de retorno para los inversores](#52-modelo-de-retorno-para-los-inversores)
-    5.3 [Tiempo de recuperación estimado](#53-tiempo-de-recuperación-estimado)
-    5.4 [Bonificación por crecimiento acelerado](#54-bonificación-por-crecimiento-acelerado)
-    5.5 [Beneficios para los inversores](#55-beneficios-para-los-inversores)
-6. [Costes posteriores a la fecha de lanzamiento (1 semana)](#6-costes-posteriores-a-la-fecha-de-lanzamiento-1-semana)
-    6.1 [Costes de infraestructura en producción](#61-costes-de-infraestructura-en-producción)
-    6.2 [Costes de atención al cliente y soporte técnico](#62-costes-de-atención-al-cliente-y-soporte-técnico)
-    6.3 [Costes de herramientas y servicios de mantenimiento](#63-costes-de-herramientas-y-servicios-de-mantenimiento)
-7. [Beneficios obtenidos en la primera semana](#7-beneficios-obtenidos-en-la-primera-semana)
-    7.1 [Ingresos en la primera semana](#71-ingresos-en-la-primera-semana)
-    7.2 [Beneficio neto en la primera semana](#72-beneficio-neto-en-la-primera-semana)
-    7.3 [Análisis del resultado](#73-análisis-del-resultado)
-8. [Costes Posteriores a la Fecha de Lanzamiento (6 meses y 1 año)](#8-costes-posteriores-a-la-fecha-de-lanzamiento-6-meses-y-1-año)
-    8.1 [Costes de Infraestructura en Producción](#81-costes-de-infraestructura-en-producción)
-    8.2 [Costes de Atención al Cliente y Soporte Técnico](#82-costes-de-atención-al-cliente-y-soporte-técnico)
-    8.3 [Costes de Herramientas y Mantenimiento](#83-costes-de-herramientas-y-mantenimiento)
-    8.4 [Beneficios Obtenidos](#84-beneficios-obtenidos)
-    8.5 [Análisis del resultado](#85-análisis-del-resultado)
-9. [Conclusiones](#9-conclusiones)
+
+1. [Introducción](#introduccion)  
+2. [Desglose de costes](#2-desglose-de-costes)  
+   - 2.1 [Desglose de Costes de Personal](#21-desglose-de-costes-de-personal)  
+   - 2.2 [Desglose de Costes de Infraestructura](#22-desglose-de-costes-de-infraestructura)  
+   - 2.3 [Desglose de Costes de Herramientas de Desarrollo](#23-desglose-de-costes-de-herramientas-de-desarrollo)  
+   - 2.4 [Desglose de Costes de Hardware y Amortización](#24-desglose-de-costes-de-hardware-y-amortización)  
+   - 2.5 [Desglose de Costes de Distribución y Publicación](#25-desglose-de-costes-de-distribución-y-publicación)  
+   - 2.6 [Costes Totales](#26-costes-totales)  
+3. [Ingresos](#3-ingresos)  
+   - 3.1 [Modelo Freemium](#31-modelo-freemium)  
+   - 3.2 [Publicidad Segmentada](#32-publicidad-segmentada)  
+   - 3.3 [Marketplace](#33-marketplace)  
+   - 3.4 [Suma Total de Beneficios](#34-suma-total-de-ingresos)  
+4. [Relación entre Beneficio y Coste del Proyecto](#4-relación-entre-ingresos-y-coste-del-proyecto-beneficios)  
+5. [Modelo de Inversión](#5-modelo-de-inversión)  
+   - 5.1 [Necesidad de Inversión](#51-necesidades-de-inversión)  
+   - 5.2 [Modelo de Retorno para los Inversores](#52-modelo-de-retorno-para-los-inversores)  
+   - 5.3 [Tiempo de Recuperación Estimado](#53-tiempo-de-recuperación-estimado)  
+   - 5.4 [Bonificación por Crecimiento Acelerado](#54-bonificación-por-crecimiento-acelerado)  
+   - 5.5 [Beneficios para los Inversores](#55-beneficios-para-los-inversores)  
+6. [Costes Posteriores a la Fecha de Lanzamiento (1 Semana)](#6-costes-posteriores-a-la-fecha-de-lanzamiento-1-semana)  
+   - 6.1 [Costes de Infraestructura en Producción](#61-costes-de-infraestructura-en-producción)  
+   - 6.2 [Costes de Atención al Cliente y Soporte Técnico](#62-costes-de-atención-al-cliente-y-soporte-técnico)  
+   - 6.3 [Costes de Herramientas y Servicios de Mantenimiento](#63-costes-de-herramientas-y-servicios-de-mantenimiento)  
+7. [Beneficios Obtenidos en la Primera Semana](#7-beneficios-obtenidos-en-la-primera-semana)  
+   - 7.1 [Ingresos en la Primera Semana](#71-ingresos-en-la-primera-semana)  
+   - 7.2 [Beneficio Neto en la Primera Semana](#72-beneficio-neto-en-la-primera-semana)  
+   - 7.3 [Análisis del Resultado](#73-análisis-del-resultado)  
+8. [Costes Posteriores a la Fecha de Lanzamiento (6 Meses y 1 Año)](#8-costes-posteriores-a-la-fecha-de-lanzamiento-6-meses-y-1-año)  
+   - 8.1 [Costes de Infraestructura en Producción](#81-costes-de-infraestructura-en-producción)  
+   - 8.2 [Costes de Atención al Cliente y Soporte Técnico](#82-costes-de-atención-al-cliente-y-soporte-técnico)  
+
+## Colaboradores del documento
+- Jose Morgado
+  - Actualizacion del documento (25/03/2025).
 
 ## 1. Introducción
 Este documento tiene como objetivo analizar los costes asociados al desarrollo y mantenimiento de la aplicación Infantem. El análisis de costes se basa en la metodología PMBOK, considerando tanto los gastos de personal, infraestructura, herramientas de desarrollo, hardware y distribución, como una reserva de contingencia de un 10% sobre el total estimado. Además, se presenta una estimación de beneficios basada en el modelo de suscripción premium de la aplicación junto con un sistema de publicidad segmentada. 
 
 Con una media de 26.837 nacimientos al mes en España, la aplicación cuenta con un mercado potencial significativo. Se estima que un porcentaje de estos nuevos padres optará por utilizar Infantem, ya sea en su versión gratuita o mediante la suscripción premium, con un coste de 4,99 € al mes. Este documento analiza la viabilidad económica del proyecto y su potencial retorno de inversión. 
 
-## 2. Estimación de Costes
+## 2. Desglose de costes
 ### 2.1. Desglose de Costes de Personal
 En la tabla 1 se observa un desglose de los costes asociados por tener un trabajador en nómina según el rol que tenga asociado. Los datos de los salarios han sido extraídos de la página https://www.getmanfred.com, donde miles de trabajadores reflejan de manera activa sus condiciones salariales. Los datos mostrados son siempre la media que la página proporciona para cada perfil. En el caso de que algún empleado tenga asignados dos roles distintos el coste se calculará como la media aritmética de ambos roles. El coste total del está redondeado al alza a dos cifras decimales.
 
@@ -131,7 +132,40 @@ Para todos los trabajadores se espera un tiempo de dedicación semanal de 10 hor
 | Javier Ulecia García          | Backend <br> Analista                      | 17,74 €         | 2661 €         |
 | David Vargas Muñiz            | Frontend <br> QA e Ingeniero de pruebas    | 17,65 €         | 2647,5 €       |
 |||Total: |43.598 €|
-<p style="text-align:center;font-style:italic;">Tabla 2: Desglose del coste de cada miembro</p>
+<p style="text-align:center;font-style:italic;">Tabla 2: Desglose del coste de cada miembro durante el desarrollo</p>
+
+Para la proyección a dos años del coste de personal, se ha tenido en cuenta las 15 semanas del desarrollo inicial, totalizando 150 horas. Sin embargo, una vez lanzada la aplicación, el equipo continuará con una carga de trabajo reducida pero sostenida para realizar mantenimiento, actualizaciones y soporte técnico.
+
+A continuación, se presentan las nuevas estimaciones de costes de personal con la siguiente distribución:
+
+  - Primer año post-lanzamiento: 6 meses de trabajo a media carga (5 horas semanales) y 6 meses a una carga reducida de mantenimiento (3 horas semanales).
+
+  - Segundo año post-lanzamiento: 12 meses a una carga reducida de mantenimiento (3 horas semanales).
+
+Se asume que los costes por hora se mantendrán constantes.
+
+| Empleado                        | Roles                                    | Coste por hora | Horas (Año 1) | Coste (Año 1) | Horas (Año 2) | Coste (Año 2) | Coste Total 2 años |
+|---------------------------------|-----------------------------------------|---------------|--------------|--------------|--------------|--------------|------------------|
+| Daniel del Castillo Piñero      | Jefe de proyecto  <br>  Full-Stack     | 19.06 €       | 208          | 3964.48 €    | 156          | 2973.36 €    | 6937.84 €       |
+| David Fuentelsaz Rodríguez      | Backend  <br>  Documentador            | 18.67 €       | 208          | 3883.36 €    | 156          | 2912.52 €    | 6795.88 €       |
+| Miguel Galán Lerate             | Backend  <br>  Analista                | 17.74 €       | 208          | 3698.92 €    | 156          | 2777.64 €    | 6476.56 €       |
+| Enrique García Abadía           | Frontend  <br>  QA e Ingeniero de pruebas | 17.65 €   | 208          | 3671.20 €    | 156          | 2757.90 €    | 6429.10 €       |
+| José García de Tejada Delgado   | Backend  <br> QA e Ingeniero de pruebas | 17.71 €       | 208          | 3683.68 €    | 156          | 2767.76 €    | 6451.44 €       |
+| Luis Giraldo Santiago           | Jefe de proyecto  <br> Full-Stack       | 19.06 €       | 208          | 3964.48 €    | 156          | 2973.36 €    | 6937.84 €       |
+| Antonio Jiménez Ortega          | Frontend  <br> QA e Ingeniero de pruebas | 17.65 €   | 208          | 3671.20 €    | 156          | 2757.90 €    | 6429.10 €       |
+| Álvaro Jiménez Osuna            | Frontend  <br> Analista                 | 17.68 €       | 208          | 3676.64 €    | 156          | 2760.48 €    | 6437.12 €       |
+| Ángela López Oliva              | Frontend <br> Documentador              | 18.61 €       | 208          | 3860.88 €    | 156          | 2891.16 €    | 6752.04 €       |
+| Paula Luna Navarro              | Backend <br> Documentador               | 18.67 €       | 208          | 3883.36 €    | 156          | 2912.52 €    | 6795.88 €       |
+| José María Morgado Prudencio    | Backend <br> Documentador               | 18.67 €       | 208          | 3883.36 €    | 156          | 2912.52 €    | 6795.88 €       |
+| Lucía Noya Cano                 | Backend <br> Documentador               | 18.67 €       | 208          | 3883.36 €    | 156          | 2912.52 €    | 6795.88 €       |
+| Josué Rodríguez López           | Backend <br> QA e Ingeniero de pruebas  | 17.71 €       | 208          | 3683.68 €    | 156          | 2767.76 €    | 6451.44 €       |
+| Javier Santos Martín            | Frontend <br> Analista                  | 17.68 €       | 208          | 3676.64 €    | 156          | 2760.48 €    | 6437.12 €       |
+| Felipe Solís Agudo              | Frontend <br> Analista                  | 17.68 €       | 208          | 3676.64 €    | 156          | 2760.48 €    | 6437.12 €       |
+| Javier Ulecia García            | Backend <br> Analista                   | 17.74 €       | 208          | 3698.92 €    | 156          | 2777.64 €    | 6476.56 €       |
+| David Vargas Muñiz              | Frontend <br> QA e Ingeniero de pruebas | 17.65 €       | 208          | 3671.20 €    | 156          | 2757.90 €    | 6429.10 €       |
+| **Total:**                      |                                         |               |              | **72,898.84 €** |              | **54,674.13 €** | **127,572.97 €** |
+<p style="text-align:center;font-style:italic;">Tabla 2.2: Desglose del coste de cada miembro tras lanzar la app</p>
+
 
 ### 2.2. Desglose de Costes de Infraestructura
 Los costes estimados para 15 semanas se han calculado en función de los precios oficiales de IONOS y Google Cloud Platform (GCP). El dominio Infantem.app en IONOS tiene un precio anual de 12 € ionos.com prorrateado para 15 semanas. Para el despliegue en Google App Engine, se ha considerado una instancia estándar F1 funcionando 24/7 durante 15 semanas, a un coste de 0,05 €/hora cloud.google.com. 
@@ -150,7 +184,22 @@ Los backups en Google Cloud Storage se estimaron para 20 GB a 0,026 €/GB/mes. 
 | App Engine Logs (Stackdriver)                   | 0,50 €/GB (después de 50 GB gratuitos)         | 0,50 €/GB               | 10 GB adicionales                     | 5,00 €                    |
 | Memoria  adicional para instancias | 0,009 €/GB/hora  | 0,009 €/GB/h  | 2 GB × 2.520  horas | 45,36 € |
 ||||Total:|187,65 €|
-<p style="text-align:center;font-style:italic;">Tabla 3: Desglose del coste de la infraestructura</p>
+<p style="text-align:center;font-style:italic;">Tabla 3: Desglose del coste de la infraestructura durante el desarrollo</p>
+
+
+| Elemento                                         | Detalle                                          | Precio unitario         | Uso estimado                            | Coste total (Año 1) | Coste total (Año 2) | Coste total (2 años) |
+|--------------------------------------------------|-------------------------------------------------|-------------------------|----------------------------------------|---------------------|----------------------|-----------------------|
+| Dominio en IONOS                                 | Infantem.app                                    | 12 €/año                | 1 año                                  | 12,00 €             | 12,00 €              | 24,00 €               |
+| Instancias App Engine (Standard - F1)           | 0,05 €/hora - 1 instancia en funcionamiento 24/7 | 0,05 €/hora             | 24h × 7d × 52 semanas = 4.368 horas    | 218,40 €            | 218,40 €             | 436,80 €              |
+| Ancho de banda (Outbound traffic - 50 GB)       | 0,12 €/GB; primer 1 GB/mes gratuito             | 0,12 €/GB               | 49 GB (después del gratuito) × 12 meses | 70,56 €             | 70,56 €              | 141,12 €              |
+| Google Cloud Functions                          | 0,40 €/millón de invocaciones (primer 2M gratis/mes) | 0,40 €/M invocaciones   | 3M invocaciones × 12 meses             | 0,00 €              | 0,00 €               | 0,00 €                |
+| Google Cloud Storage (Backups - 20 GB)          | 0,026 €/GB/mes                                  | 0,026 €/GB/mes          | 20 GB × 12 meses                       | 6,24 €              | 6,24 €               | 12,48 €               |
+| App Engine Logs (Stackdriver)                   | 0,50 €/GB (después de 50 GB gratuitos)         | 0,50 €/GB               | 10 GB adicionales × 12 meses          | 60,00 €             | 60,00 €              | 120,00 €              |
+| Memoria adicional para instancias               | 0,009 €/GB/hora                                 | 0,009 €/GB/h            | 2 GB × 4.368 horas (52 semanas/año)    | 78,72 €             | 78,72 €              | 157,44 €              |
+| **Total**                                       |                                                 |                         |                                        | **445,92 €**        | **445,92 €**          | **891,84 €**          |
+
+
+<p style="text-align:center;font-style:italic;">Tabla 3.2: Desglose del coste de la infraestructura tras lanzar la app</p>
 
 
 ### 2.3. Desglose de Costes de Herramientas de Desarrollo
@@ -167,6 +216,18 @@ Para el desarrollo del proyecto se han seleccionado herramientas ampliamente uti
 |||Total:|1284,56 €|
 <p style="text-align:center;font-style:italic;">Tabla 4: Desglose del coste de las herramientas de desarrollo</p>
 
+| Elemento                        | Proveedor            | Detalle                                         | Coste total (Año 1) | Coste total (Año 2) | Coste total (2 años) |
+|----------------------------------|----------------------|-------------------------------------------------|---------------------|---------------------|----------------------|
+| Repositorio de Código            | GitHub               | Plan Enterprise (20,15€/mes)                    | 1284,56 €           | 1284,56 €           | 2569,12 €            |
+| Entorno de desarrollo (IDE)      | VS Code              | Gratuito                                        | 0 €                 | 0 €                 | 0 €                  |
+| CI/CD (Integración continua)     | GitHub Actions       | Gratuito (uso limitado 2000 min/mes)            | 0 €                 | 0 €                 | 0 €                  |
+| Spring Boot                      | VMWare               | Gratuito                                        | 0 €                 | 0 €                 | 0 €                  |
+| React Native                     | Meta                 | Gratuito                                        | 0 €                 | 0 €                 | 0 €                  |
+| MySQL                            | Oracle Corporation   | Licencia GPL                                    | 0 €                 | 0 €                 | 0 €                  |
+| **Total**                        |                      |                                                 | **1284,56 €**       | **1284,56 €**       | **2569,12 €**        |
+
+<p style="text-align:center;font-style:italic;">Tabla 4.2: Desglose del coste de las herramientas tras lanzar la app</p>
+
 ### 2.4. Desglose de Costes de Hardware y Amortización
 
 Para el desarrollo del proyecto, se ha seleccionado el Lenovo IdeaPad Slim 3 15IRH8, un portátil que ofrece un equilibrio óptimo entre rendimiento y coste. 
@@ -178,12 +239,13 @@ Actualmente, este portátil está disponible en MediaMarkt por un precio de 629 
 | Lenovo  IdeaPad  Slim 3 Gen |             3 años  |               17  |           629 €  |                           17,47 €  |             1.113,85 €             | 10.693 €    |
 <p style="text-align:center;font-style:italic;">Tabla 5: Desglose del coste del hardware</p>
 
+Ya que estos pagos estan hechos al principio del desarrollo, a la hora de expanderlos a los 2 años tras el lanzamiento de la app, no habria que asumir costos nuevos ya que la vida util de los dispositivos comprende este periodo de tiempo.
 
 ### 2.5. Desglose de Costes de Distribución y Publicación
 
 Se ha elegido Google Play Store y Apple App Store para distribuir la aplicación, debido a su amplio alcance y facilidad de acceso en dispositivos Android e iOS, respectivamente. 
 - En el caso de Google Play Store, el único coste asociado es el registro de desarrollador, con un pago único de 23,98 €, que permite gestionar y publicar la aplicación durante todo el periodo del proyecto. 
-- Para Apple App Store, se requiere una suscripción anual al programa de desarrolladores de Apple, con un coste de 99 USD anuales. Dado que el proyecto tiene una duración de 15 semanas, se considerará el coste total de 99 USD (aproximadamente 94,97 € al tipo de cambio actual) https://developer.apple.com/la/support/compare-memberships/.
+- Para Apple App Store, se requiere una suscripción anual al programa de desarrolladores de Apple, con un coste de 99 USD anuales. Dado que el proyecto tiene una duración de 15 semanas, se considerará el coste total de 99 USD (aproximadamente 94,97 € al tipo de cambio actual). En el caso del lanzamiento de la app y para extender los costes a 2 años, tendriamos un coste de 198 USD por 2 años.  https://developer.apple.com/la/support/compare-memberships/.
 - Para el coste de los Storyboards se ha estimado utilizando las tarifas de diseñadores gráficos en España, que es 45€/h, estimando un tiempo de 2 horas por storyboard, con un total de 3 unidades, uno para usuarios, otro clientes y otro inversiones.
 https://www.zaask.es/cuanto-cuesta/disenador-grafico
 
@@ -194,6 +256,16 @@ https://www.zaask.es/cuanto-cuesta/disenador-grafico
 | Storyboards   | Servicio externo    | Creación de storyboards (3 unidades)    | 270 €          |
 |                  |          | **Total**                   | **388,95 €**     |
 <p style="text-align:center;font-style:italic;">Tabla 6: Desglose de costes de distribución</p>
+
+Para la expansion de costes a vista 2 años, deberiamos tener en cuenta el segundo año de subscripcion a Apple App Store ya que los demas pagos ya se habrian hecho en el desarrollo:
+
+| Elemento           | Proveedor  | Detalle                               | Coste total       |
+|--------------------|------------|---------------------------------------|-------------------|
+| Apple App Store    | Apple      | Apple Developer Program               | 94.97 €          |
+|                    |            | **Total**                             | **94.97 €**      |
+
+<p style="text-align:center;font-style:italic;">Tabla 6: Desglose de costes de distribución tras el lanzamiento de la app</p>
+
 
 ### 2.6. Costes totales
 
@@ -210,6 +282,17 @@ En la siguiente tabla se recogen los costes totales del proyecto, incluyendo en 
 | **Coste del proyecto (total + 10% de reserva de contingencias)** | **61.767,376 €** |
 <p style="text-align:center;font-style:italic;">Tabla 7: desglose de costes del proyecto</p>
 
+
+| Categoría                                  | Costes  Año 1 | Costes  Año 2 | Costes Total   |
+|--------------------------------------------|---------------|---------------|---------------|
+| Costes de personal                         | 72,898.84 €   | 54,674.13 €   | 127,572.97 €  |
+| Costes de Infraestructura                  | 445,92 €      | 891.84€       | 1337.76 €     |
+| Costes de Herramientas de Desarrollo       | 1.284,56 €    | 1.284,56 €    | 2569.12 €     |
+| Costes de Hardware y Amortización          | 0 €           | 0 €           | 0 €           |
+| Costes de Publicación y Distribución       | 0 €           | 94.97€        | 94.97 €       |
+| **Total**                                  |  € | €     | ** €**     |
+| **Coste del proyecto** | ** €** |
+<p style="text-align:center;font-style:italic;">Tabla 7: desglose de costes del proyecto tras el lanzamiento de la app</p>
 
 ## 3. Ingresos
 Para el cálculo de los ingresos se tendrán en cuenta un caso optimista y un caso pesimista de adopción del sistema cómo se expondrán en los siguientes puntos. Estos casos se basan en el número de nacimientos medio por mes según el INE en 2024, siendo esta cifra de 26837. Infantem cuenta con cuatro maneras distintas de monetización. 
