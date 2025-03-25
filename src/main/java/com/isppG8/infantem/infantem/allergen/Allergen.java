@@ -8,6 +8,12 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.isppG8.infantem.infantem.baby.Baby;
 import com.isppG8.infantem.infantem.recipe.Recipe;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+import jakarta.persistence.CascadeType;
+>>>>>>> feat/allergenAlgorithm
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +22,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +30,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonIdentityInfo(scope = Allergen.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-
 public class Allergen {
 
     public Allergen() {
