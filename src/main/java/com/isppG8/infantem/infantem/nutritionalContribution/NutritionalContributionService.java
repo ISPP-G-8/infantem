@@ -1,4 +1,5 @@
 package com.isppG8.infantem.infantem.nutritionalContribution;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -22,12 +23,12 @@ public class NutritionalContributionService {
         return nutritionalContributionRepository.save(NutritionalContribution);
     }
 
-    public Optional<NutritionalContribution> updateNutritionalContribution(Long id, NutritionalContribution NutritionalContributionDetails) {
+    public Optional<NutritionalContribution> updateNutritionalContribution(Long id,
+            NutritionalContribution NutritionalContributionDetails) {
         return nutritionalContributionRepository.findById(id).map(NutritionalContribution -> {
             NutritionalContribution.setMinAgeMonths(NutritionalContributionDetails.getMinAgeMonths());
             NutritionalContribution.setMaxAgeMonths(NutritionalContributionDetails.getMaxAgeMonths());
-            return nutritionalContributionRepository
-            .save(NutritionalContribution);
+            return nutritionalContributionRepository.save(NutritionalContribution);
         });
     }
 

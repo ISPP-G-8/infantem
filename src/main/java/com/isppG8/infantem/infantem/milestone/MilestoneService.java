@@ -25,7 +25,7 @@ public class MilestoneService {
     }
 
     public boolean deleteMilestone(Long id) {
-        if (milestoneRepository.existsById(id)){
+        if (milestoneRepository.existsById(id)) {
             milestoneRepository.deleteById(id);
             return true;
         }

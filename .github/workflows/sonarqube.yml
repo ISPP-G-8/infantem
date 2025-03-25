@@ -1,0 +1,24 @@
+name: Análisis con SonarQube
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  sonar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v3
+
+      - name: Configurar JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Compilar y ejecutar pruebas
+        run: mvn clean verify
+
+      - name: Análisis con SonarQube
+        run: mvn sonar:sonar -Dsonar.projectKey=ISPP-G-8_infantem -Dsonar.organization=ispp-g-8 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}

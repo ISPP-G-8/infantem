@@ -1,4 +1,5 @@
 package com.isppG8.infantem.infantem.nutrient;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class NutrientService {
     @Autowired
     private NutrientRepository nutrientRepository;
-    
+
     public List<Nutrient> getAllNutrients() {
         return nutrientRepository.findAll();
     }
@@ -27,8 +28,7 @@ public class NutrientService {
             Nutrient.setName(NutrientDetails.getName());
             Nutrient.setType(NutrientDetails.getType());
             Nutrient.setUnit(NutrientDetails.getUnit());
-            return nutrientRepository
-            .save(Nutrient);
+            return nutrientRepository.save(Nutrient);
         });
     }
 

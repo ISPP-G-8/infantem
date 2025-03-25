@@ -1,6 +1,10 @@
 export type Recipe = {
- title: string;
- description: string;
- ingredients: string[];
+    id: number;
+    name: string;
+    description: string;
+    minRecommendedAge: number;
+    maxRecommendedAge: number | null;
+    ingredients: string;
+    elaboration: string;
 }
 

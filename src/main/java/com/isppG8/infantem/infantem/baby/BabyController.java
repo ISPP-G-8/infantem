@@ -2,8 +2,6 @@ package com.isppG8.infantem.infantem.baby;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +12,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.isppG8.infantem.infantem.baby.dto.BabyDTO;
+
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/api/v1/baby")
 public class BabyController {
 
     private final BabyService babyService;
@@ -26,43 +29,40 @@ public class BabyController {
     public BabyController(BabyService babyService) {
         this.babyService = babyService;
     }
-    
+
     @GetMapping
-    public List<Baby> findAll() {
-        return babyService.findAll();
+    public ResponseEntity<List<BabyDTO>> findBabiesByUser() {
+        List<BabyDTO> babies = babyService.findBabiesByUser().stream().map(baby -> new BabyDTO(baby)).toList();
+
+        if (babies.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(babies);
     }
 
     @GetMapping("/{id}")
-    public Baby findById(int id) {
-        return babyService.findById(id);
+    public ResponseEntity<BabyDTO> findById(@PathVariable Integer id) {
+        Baby baby = babyService.findById(id);
+        return ResponseEntity.ok().body(new BabyDTO(baby));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Baby createBebe(@RequestBody @Valid Baby baby) {
-        babyService.save(baby);
-        return baby;
+    public ResponseEntity<BabyDTO> createBaby(@RequestBody @Valid BabyDTO babyDTO) {
+        Baby createdBaby = babyService.createBaby(babyDTO);
+        return ResponseEntity.status(201).body(new BabyDTO(createdBaby));
     }
 
-    @PutMapping("/update/{id}")
-    public void updateBebe(@PathVariable("id") Integer id,@RequestBody @Valid Baby baby) {
-        Baby bebeToUpdate = babyService.findById(id);
-        if(bebeToUpdate == null) {
-            throw new RuntimeException("Bebe not found");
-        }
-        bebeToUpdate.setName(baby.getName());
-        bebeToUpdate.setBirthDate(baby.getBirthDate());
-        bebeToUpdate.setGenre(baby.getGenre());
-        bebeToUpdate.setWeight(baby.getWeight());
-        bebeToUpdate.setHeight(baby.getHeight());
-        bebeToUpdate.setCephalicPerimeter(baby.getCephalicPerimeter());
-        bebeToUpdate.setFoodPreference(baby.getFoodPreference());
-
-        babyService.save(bebeToUpdate);
+    @PutMapping("/{id}")
+    public ResponseEntity<BabyDTO> updateBaby(@PathVariable("id") Integer id, @RequestBody @Valid Baby baby) {
+        Baby updatedBaby = babyService.updateBaby(id, baby);
+        return ResponseEntity.ok(new BabyDTO(updatedBaby));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void deleteBaby(@PathVariable("id") Integer id) {
-        babyService.deleteBaby(id);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBaby(@PathVariable("id") Integer id) {
+        this.babyService.deleteBaby(id);
+        return ResponseEntity.noContent().build();
     }
 }

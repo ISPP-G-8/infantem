@@ -2,6 +2,9 @@ package com.isppG8.infantem.infantem.allergen;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -10,18 +13,24 @@ import java.util.List;
 @Service
 public class AllergenService {
 
-    @Autowired
     private AllergenRepository allergenRepository;
 
+    @Autowired
+    public AllergenService(AllergenRepository allergenRepository) {
+        this.allergenRepository = allergenRepository;
+    }
+
+    @Transactional(readOnly = true)
     public List<Allergen> getAllAllergens() {
         return allergenRepository.findAll();
     }
 
-    public Allergen getAllergenById(int id) {
-    return allergenRepository.findById((long)id)
-        .orElseThrow(() -> new EntityNotFoundException("El alérgeno con ID " + id + " no existe"));
+    @Transactional(readOnly = true)
+    public Allergen getAllergenById(Long id) {
+        return allergenRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Allergen", "id", id));
     }
 
+    @Transactional
     public Allergen createAllergen(Allergen allergen) {
         if (allergen.getName() == null || allergen.getName().trim().isEmpty() || allergen.getDescription() == null || allergen.getDescription().trim().isEmpty()) {
             throw new IllegalArgumentException("El nombre y la descripción del alérgeno no pueden estar vacíos");
@@ -34,23 +43,22 @@ public class AllergenService {
         return allergenRepository.save(allergen);
     }
 
+    @Transactional
     public Allergen updateAllergen(Long id, Allergen allergenDetails) {
-        Allergen allergen = allergenRepository.findById(id)
-            .orElseThrow(() -> new EntityNotFoundException("No se puede actualizar. El alérgeno con ID " + id + " no existe"));
-    
-        allergen.setName(allergenDetails.getName());
-        allergen.setDescription(allergenDetails.getDescription());
-    
-        return allergenRepository.save(allergen);
+        return allergenRepository.findById(id).map(allergen -> {
+            allergen.setName(allergenDetails.getName());
+            allergen.setDescription(allergenDetails.getDescription());
+            return allergenRepository.save(allergen);
+        }).orElseThrow(() -> new ResourceNotFoundException("Allergen", "id", id));
     }
     
 
+    @Transactional
     public void deleteAllergen(Long id) {
-        Allergen allergen = allergenRepository.findById(id)
-            .orElseThrow(() -> new EntityNotFoundException("No se puede eliminar. El alérgeno con ID " + id + " no existe"));
-    
-        allergenRepository.delete(allergen);
+        if (!allergenRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Allergen", "id", id);
+        }
+        allergenRepository.deleteById(id);
     }
     
 }
-

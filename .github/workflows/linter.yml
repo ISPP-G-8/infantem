@@ -1,0 +1,58 @@
+name: Lint and Format Code
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+    branches:
+      - "main"
+
+jobs:
+  lint-backend:
+    name: Lint Backend
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: 21 
+
+      - name: Install formatter dependency
+        run: mvn dependency:get -Dartifact=net.revelc.code.formatter:formatter-maven-plugin:2.25.0
+
+      - name: Apply formatter
+        run: mvn formatter:format
+
+      - uses: stefanzweifel/git-auto-commit-action@8621497c8c39c72f3e2a999a26b4ca1b5058a842
+        with:
+          commit_message: "fix: Apply formatter"
+
+      - name: Check linter
+        run: mvn checkstyle:check
+
+  lint-frontend:
+    name: Lint Frontend
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: cd frontend && npm install
+
+      #- name: Run frontend linter
+        #run: Add linter command
