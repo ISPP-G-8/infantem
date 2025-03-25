@@ -31,24 +31,24 @@ public class QuestionService {
     }
 
     public Question createQuestion(Question question) {
-	User currentUser = this.userService.findCurrentUser();
-	Baby questionBaby = question.getBaby();
-	System.out.println(questionBaby.getName().toString());
-	if (!currentUser.getBabies().contains(questionBaby)) {
-		throw new ResourceNotOwnedException("Not your baby");
-	}
+        User currentUser = this.userService.findCurrentUser();
+        Baby questionBaby = question.getBaby();
+        System.out.println(questionBaby.getName().toString());
+        if (!currentUser.getBabies().contains(questionBaby)) {
+            throw new ResourceNotOwnedException("Not your baby");
+        }
         return questionRepository.save(question);
     }
 
     public Question findQuestionById(Long id) {
-	User currentUser = this.userService.findCurrentUser();
-	Question question = questionRepository.findQuestionById(id).orElse(null);
-	if (question==null) {
-		throw new ResourceNotFoundException("Question doesn't exist");
-	}
-	if (!question.getBaby().getUsers().contains(currentUser)) {
-		throw new ResourceNotOwnedException("Not your baby");
-	}
-	return question;
+        User currentUser = this.userService.findCurrentUser();
+        Question question = questionRepository.findQuestionById(id).orElse(null);
+        if (question == null) {
+            throw new ResourceNotFoundException("Question doesn't exist");
+        }
+        if (!question.getBaby().getUsers().contains(currentUser)) {
+            throw new ResourceNotOwnedException("Not your baby");
+        }
+        return question;
     }
 }

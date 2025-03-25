@@ -7,8 +7,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class QuestionDTO{
-	
+public class QuestionDTO {
+
     private Long id;
 
     private Integer question;
@@ -24,11 +24,10 @@ public class QuestionDTO{
     }
 
     public QuestionDTO(Question question) {
-	this.id = question.getId();
-	this.answer = question.getAnswer();
-	this.question = question.getQuestion();
-	this.recipe = question.getRecipe().getName();
-	this.baby = question.getBaby().getName();
+        this.id = question.getId();
+        this.answer = question.getAnswer();
+        this.question = question.getQuestion();
+        this.recipe = question.getRecipe().getName();
+        this.baby = question.getBaby().getName();
     }
 }
-

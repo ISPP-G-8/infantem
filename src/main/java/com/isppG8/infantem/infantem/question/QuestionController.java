@@ -28,8 +28,8 @@ public class QuestionController {
 
     @GetMapping("/{id}")
     public QuestionDTO findQuestionById(@PathVariable Long id) {
-	Question question = questionService.findQuestionById(id);
-	return new QuestionDTO(question);	
+        Question question = questionService.findQuestionById(id);
+        return new QuestionDTO(question);
     }
 
 }
