@@ -26,19 +26,21 @@ import lombok.Setter;
 
 public class Allergen {
 
-
     public Allergen() {
 
     }
+
     public Allergen(Allergen allergen) {
-	this.id = allergen.id;
-	this.name = allergen.name;
-	this.description = allergen.description;
+        this.id = allergen.id;
+        this.name = allergen.name;
+        this.description = allergen.description;
     }
-    public Allergen(String name,String description) {
-	this.name = name;
-	this.description = description;
+
+    public Allergen(String name, String description) {
+        this.name = name;
+        this.description = description;
     }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

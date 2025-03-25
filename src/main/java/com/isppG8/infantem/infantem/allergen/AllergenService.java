@@ -32,14 +32,15 @@ public class AllergenService {
 
     @Transactional
     public Allergen createAllergen(Allergen allergen) {
-        if (allergen.getName() == null || allergen.getName().trim().isEmpty() || allergen.getDescription() == null || allergen.getDescription().trim().isEmpty()) {
+        if (allergen.getName() == null || allergen.getName().trim().isEmpty() || allergen.getDescription() == null
+                || allergen.getDescription().trim().isEmpty()) {
             throw new IllegalArgumentException("El nombre y la descripción del alérgeno no pueden estar vacíos");
         }
-        
+
         if (allergenRepository.findByName(allergen.getName()).isPresent()) {
             throw new IllegalArgumentException("Ya existe un alérgeno con el nombre: " + allergen.getName());
         }
-    
+
         return allergenRepository.save(allergen);
     }
 
@@ -51,7 +52,6 @@ public class AllergenService {
             return allergenRepository.save(allergen);
         }).orElseThrow(() -> new ResourceNotFoundException("Allergen", "id", id));
     }
-    
 
     @Transactional
     public void deleteAllergen(Long id) {
@@ -60,5 +60,5 @@ public class AllergenService {
         }
         allergenRepository.deleteById(id);
     }
-    
+
 }

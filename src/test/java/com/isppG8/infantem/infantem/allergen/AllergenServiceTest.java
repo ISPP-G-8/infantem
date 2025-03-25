@@ -27,22 +27,21 @@ public class AllergenServiceTest {
         assertEquals(10, allergens.size());
         assertEquals("Gluten", allergens.get(0).getName());
         assertEquals("Lactosa", allergens.get(1).getName());
-        assertEquals("Sulfitos", allergens.get(allergens.size()-1).getName());
+        assertEquals("Sulfitos", allergens.get(allergens.size() - 1).getName());
     }
-    
+
     @Test
     public void testGetAllergenById() {
-        Allergen allergen = this.allergenService.getAllergenById(Long.valueOf(1)); 
-    
+        Allergen allergen = this.allergenService.getAllergenById(Long.valueOf(1));
+
         assertNotNull(allergen);
         assertEquals("Gluten", allergen.getName());
         assertEquals("Presente en trigo, cebada, centeno y sus derivados.", allergen.getDescription());
-}
-
+    }
 
     @Test
     public void testGetAllAllergensWrongID() {
-        assertThrows(EntityNotFoundException.class, () -> allergenService.getAllergenById(Long.valueOf(1)));   
+        assertThrows(EntityNotFoundException.class, () -> allergenService.getAllergenById(Long.valueOf(1)));
     }
 
     @Test
@@ -76,7 +75,8 @@ public class AllergenServiceTest {
     public void testUpdateAllergen() {
         Allergen allergen = new Allergen("Medicamentos", "Presente en medicamentos y fármacos.");
         Allergen createdAllergen = this.allergenService.createAllergen(allergen);
-        Allergen updatedAllergen = new Allergen("Medicamentos y jarabes", "Presente en medicamentos y fármacos. También en jarabes.");
+        Allergen updatedAllergen = new Allergen("Medicamentos y jarabes",
+                "Presente en medicamentos y fármacos. También en jarabes.");
         this.allergenService.updateAllergen(createdAllergen.getId(), updatedAllergen);
         Allergen storedAllergen = this.allergenService.getAllergenById(createdAllergen.getId());
 
@@ -86,7 +86,8 @@ public class AllergenServiceTest {
 
     @Test
     public void testUpdateAllergenWrongID() {
-        Allergen updatedAllergen = new Allergen("Medicamentos y jarabes", "Presente en medicamentos y fármacos. También en jarabes.");
+        Allergen updatedAllergen = new Allergen("Medicamentos y jarabes",
+                "Presente en medicamentos y fármacos. También en jarabes.");
         assertThrows(EntityNotFoundException.class, () -> allergenService.updateAllergen(1000L, updatedAllergen));
     }
 
