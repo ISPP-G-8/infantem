@@ -14,7 +14,6 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar contraseña
-
   const [modalVisible, setModalVisible] = useState(false);
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [openedTerms, setOpenedTerms] = useState(false);
@@ -70,17 +69,6 @@ export default function Signup() {
     } catch (error) {
       console.error("An error ocurred: ", error);
     }
-  };
-
-  const handleAcceptTerms = () => {
-    setAcceptedTerms(true);
-    setModalVisible(false);
-    setOpenedTerms(true);
-  };
-
-  const handleDeclineTerms = () => {
-    setAcceptedTerms(false);
-    setModalVisible(false);
   };
 
   return (
