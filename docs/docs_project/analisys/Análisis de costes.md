@@ -264,7 +264,7 @@ Para la expansion de costes a vista 2 años, deberiamos tener en cuenta el segun
 | Apple App Store    | Apple      | Apple Developer Program               | 94.97 €          |
 |                    |            | **Total**                             | **94.97 €**      |
 
-<p style="text-align:center;font-style:italic;">Tabla 6: Desglose de costes de distribución tras el lanzamiento de la app</p>
+<p style="text-align:center;font-style:italic;">Tabla 6.2: Desglose de costes de distribución tras el lanzamiento de la app</p>
 
 
 ### 2.6. Costes totales
@@ -292,7 +292,7 @@ En la siguiente tabla se recogen los costes totales del proyecto, incluyendo en 
 | Costes de Publicación y Distribución       | 0 €           | 94.97€        | 94.97 €       |
 | **Total**                                  |  74,629,32  € | 56,945,50     |**131,574.82 €**  |
 
-<p style="text-align:center;font-style:italic;">Tabla 7: desglose de costes del proyecto tras el lanzamiento de la app</p>
+<p style="text-align:center;font-style:italic;">Tabla 7.2: desglose de costes del proyecto tras el lanzamiento de la app</p>
 
 ## 3. Ingresos
 Para el cálculo de los ingresos se tendrán en cuenta un caso optimista y un caso pesimista de adopción del sistema cómo se expondrán en los siguientes puntos. Estos casos se basan en el número de nacimientos medio por mes según el INE en 2024, siendo esta cifra de 26837. Infantem cuenta con cuatro maneras distintas de monetización. 
