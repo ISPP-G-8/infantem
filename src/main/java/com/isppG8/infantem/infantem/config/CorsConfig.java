@@ -13,7 +13,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**") 
-                        .allowedOrigins("http://127.0.0.1:8081", "http://localhost:8081","https://ispp-2425-g8.ew.r.appspot.com")
+                        .allowedOrigins("http://127.0.0.1:8081", "http://localhost:8081","https://ispp-2425-g8-s1.ew.r.appspot.com")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowCredentials(true);
             }
