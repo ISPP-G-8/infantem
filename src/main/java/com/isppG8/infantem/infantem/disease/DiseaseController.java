@@ -54,4 +54,3 @@ public class DiseaseController {
         return ResponseEntity.noContent().build();
     }
 }
-    

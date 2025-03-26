@@ -24,9 +24,9 @@ public class DiseaseDTO {
     public DiseaseDTO(Disease disease) {
         this.id = disease.getId();
         this.name = disease.getName();
-	this.startDate = disease.getStartDate();
-	this.endDate = disease.getEndDate();
-	this.symptoms = disease.getSymptoms();
-	this.extraObservations = disease.getExtraObservations();
+        this.startDate = disease.getStartDate();
+        this.endDate = disease.getEndDate();
+        this.symptoms = disease.getSymptoms();
+        this.extraObservations = disease.getExtraObservations();
     }
 }
