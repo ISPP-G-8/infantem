@@ -1,5 +1,6 @@
 package com.isppG8.infantem.infantem.vaccine;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotOwnedException;
 import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserService;
+import com.isppG8.infantem.infantem.vaccine.dto.VaccineSummary;
 
 @Service
 public class VaccineService {
@@ -57,5 +59,14 @@ public class VaccineService {
         if (!baby.getUsers().contains(user)) {
             throw new ResourceNotOwnedException(vaccine.getBaby());
         }
+    }
+
+    // Methods for calendar
+    public List<LocalDate> getVaccinesByBabyIdAndDate(Integer babyId, LocalDate start, LocalDate end) {
+        return this.vaccineRepository.getVaccinesByBabyIdAndDate(babyId, start, end);
+    }
+
+    public List<VaccineSummary> getVaccineSummaryByBabyIdAndDate(Integer babyId, LocalDate day) {
+        return this.vaccineRepository.getVaccineSummaryByBabyIdAndDate(babyId, day);
     }
 }

@@ -51,20 +51,29 @@ INSERT INTO baby_allergen (allergen_id, baby_id) VALUES
 
 -- Inserción de registros de sueño
 INSERT INTO dream_table (baby_id, date_start, date_end, num_wakeups, dream_type) VALUES
-(1, '2024-03-03 22:00:00', '2024-03-04 06:30:00', 2, 1),
-(2, '2024-03-04 23:15:00', '2024-03-05 07:00:00', 3, 2);
+(1, '2025-03-03 22:00:00', '2025-03-04 06:30:00', 2, 1),
+(1, '2025-03-04 23:15:00', '2025-03-05 07:00:00', 3, 1),
+(1, '2025-03-05 21:30:00', '2025-03-06 06:45:00', 1, 2),
+(4, '2025-03-06 22:45:00', '2025-03-07 07:30:00', 2, 3),
+(5, '2025-03-07 23:00:00', '2025-03-08 07:15:00', 1, 1);
 
 -- Inserción de vacunas
 INSERT INTO vaccine_table (type, vaccination_date, baby_id) VALUES
 ('MMR', '2023-06-01', 1),
 ('DTaP', '2023-07-01', 2),
-('HepB', '2023-08-01', 3),
+('HepB', '2025-03-04', 3),
 ('Polio', '2023-09-01', 4),
-('Hib', '2023-10-01', 5);
+('Hib', '2023-10-01', 5),
+('Rotavirus', '2023-11-01', 1),
+('PCV', '2025-03-03', 1),
+('HepA', '2024-01-01', 1),
+('Varicela', '2024-02-01', 4),
+('Meningococo', '2024-03-01', 5);
+
 
 -- Relación entre usuarios y bebés
 INSERT INTO user_baby (user_id, baby_id) VALUES
-(1, 1), (2, 2);
+(1, 1), (2, 2), (1,3);
 
 -- Inserción de hitos
 INSERT INTO milestone (name, description) VALUES
@@ -103,28 +112,49 @@ INSERT INTO recipe_allergen(allergen_id,recipe_id) VALUES
 
 -- Inserción de síntomas relacionados con las ingestas
 INSERT INTO intake_symptom (description, date) VALUES
-('El bebé no presentó ningún síntoma.', '2024-03-01 08:00:00'),
-('El bebé rechazó la comida ofrecida.', '2024-03-01 12:30:00'),
-('El bebé mostró signos de malestar estomacal.', '2024-03-01 18:00:00'),
-('El bebé presentó una reacción alérgica leve.', '2024-03-02 08:30:00'),
-('El bebé presentó una reacción alérgica severa.', '2024-03-02 13:00:00'),
-('El bebé vomitó después de la ingesta.', '2024-03-02 15:00:00'),
-('El bebé tuvo diarrea después de la ingesta.', '2024-03-02 18:00:00'),
-('El bebé presentó fiebre después de la ingesta.', '2024-03-03 08:00:00'),
-('El bebé presentó erupciones en la piel.', '2024-03-03 12:00:00'),
-('Otros síntomas no especificados.', '2024-03-03 18:00:00');
+('El bebé no presentó ningún síntoma.', '2025-03-01 08:00:00'),
+('El bebé rechazó la comida ofrecida.', '2025-03-01 12:30:00'),
+('El bebé mostró signos de malestar estomacal.', '2025-03-01 18:00:00'),
+('El bebé presentó una reacción alérgica leve.', '2025-03-02 08:30:00'),
+('El bebé presentó una reacción alérgica severa.', '2025-03-02 13:00:00'),
+('El bebé vomitó después de la ingesta.', '2025-03-02 15:00:00'),
+('El bebé tuvo diarrea después de la ingesta.', '2025-03-02 18:00:00'),
+('El bebé presentó fiebre después de la ingesta.', '2025-03-03 08:00:00'),
+('El bebé presentó erupciones en la piel.', '2025-03-03 12:00:00'),
+('Otros síntomas no especificados.', '2025-03-03 18:00:00');
 
 -- Inserción de ingestas
 INSERT INTO intake_table (date, quantity, observations, baby_id, intake_symptom_id) VALUES
-('2024-03-01 08:00:00', 200, 'Desayuno: el bebé comió bien, sin problemas.', 1, 1),
-('2024-03-01 12:30:00', 150, 'Almuerzo: el bebé dejó un poco de comida.', 1, 2),
-('2024-03-01 18:00:00', 180, 'Merienda: el bebé disfrutó la comida.', 2, 3),
-('2024-03-02 08:30:00', 220, 'Desayuno: el bebé comió todo.', 3, 1),
-('2024-03-02 13:00:00', 160, 'Almuerzo: el bebé tuvo un poco de malestar.', 4, 4);
+('2025-03-01 08:00:00', 200, 'Desayuno: el bebé comió bien, sin problemas.', 1, 1),
+('2025-03-01 12:30:00', 150, 'Almuerzo: el bebé dejó un poco de comida.', 1, 2),
+('2025-03-01 18:00:00', 180, 'Merienda: el bebé disfrutó la comida.', 2, 3),
+('2025-03-02 08:30:00', 220, 'Desayuno: el bebé comió todo.', 3, 1),
+('2025-03-02 13:00:00', 160, 'Almuerzo: el bebé tuvo un poco de malestar.', 4, 4);
 
 -- Relación entre intake y recetas
 INSERT INTO intake_recipe (intake_id, recipe_id) VALUES
 (1, 1), (1, 2), 
 (2, 3),        
-(3, 4), (3, 5)
+(3, 4), (3, 5);
 
+
+-- Inserción de enfermedades en la tabla disease_table
+INSERT INTO disease_table (id, name, start_date, end_date, symptoms, extra_observations, baby_id) VALUES
+(1, 'Varicela', '2025-03-01', '2025-03-09', 'Erupción cutánea, fiebre', 'Se recomienda mantener al bebé hidratado.', 1),
+(2, 'Gripe', '2025-02-03', '2025-03-02', 'Fiebre, tos, congestión nasal', 'Administrar medicamentos según indicación médica.', 1),
+(3, 'Otitis', '2024-01-10', '2025-01-15', 'Dolor de oído, fiebre', 'Evitar exponer al bebé al agua durante el tratamiento.', 1),
+(4, 'Bronquitis', '2025-03-05', '2025-03-15', 'Tos persistente, dificultad para respirar', 'Se recomienda usar humidificador.', 2),
+(5, 'Conjuntivitis', '2025-03-12', '2025-03-14', 'Ojos rojos, secreción ocular', 'Limpiar los ojos con solución salina.', 2);
+
+-- Inserción de métricas en la tabla metric_table
+INSERT INTO metric_table (id, weight, height, cephalic_perimeter, date, baby_id) VALUES
+(1, 3.5, 50.0, 35, '2025-03-01', 1),
+(2, 4.0, 52.0, 36, '2025-03-04', 1),
+(3, 5.0, 55.0, 37, '2025-04-01', 1),
+(4, 6.0, 60.0, 38, '2025-05-01', 2),
+(5, 7.0, 65.0, 39, '2025-06-01', 3),
+(6, 8.0, 70.0, 40, '2025-07-01', 3),
+(7, 9.0, 75.0, 41, '2025-08-01', 4),
+(8, 10.0, 80.0, 42, '2025-09-01', 4),
+(9, 11.0, 85.0, 43, '2025-10-01', 5),
+(10, 12.0, 90.0, 44, '2025-11-01', 5);

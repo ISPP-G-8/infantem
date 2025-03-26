@@ -25,7 +25,7 @@ public class JwtUtils {
     private String jwtSecret;
 
     @Value("${infantem.jwt.timeout}")
-    private int jwtExpirationMs;
+    private Long jwtExpirationMs;
 
     public String generateJwtToken(Authentication authentication) {
 
