@@ -57,7 +57,7 @@ Paula Luna Navarro
 
 ## Colaboradores del documento
 - **Paula Luna Navarro:**
-**Creó el documento.**
+**Creó el documento y escribió su contenido**
 ---
 
 Este documento recoge la evaluación del desempeño de los usuarios piloto en base a los comentarios proporcionados, según el sistema de puntuación establecido.
@@ -77,225 +77,209 @@ Este documento recoge la evaluación del desempeño de los usuarios piloto en ba
 
 ## Evaluaciones Individuales
 
-### Natalia Olmo
+### Natalia Olmo  
 
-- **Fecha de acceso:** 12/03/2025 00:03
-- **Fecha de feedback:** 12/03/2025 11:49
-- **Puntuación:** **8**
-- **Link clockify:** https://app.clockify.me/shared/67d2ba1ebecbe07bd991b985
-- **Fallos encontrados:**
-  - No se entiende por qué es necesario introducir datos del bebé para ver recetas.
-  - Las recetas incluyen una descripción, pero no detallan los pasos a seguir.
-- **Recomendaciones de mejora:**
-  - Traducir la app al español, con opción a inglés en el futuro.
-  - Añadir pestaña “Mis bebés” en la AppNavBar.
-  - Añadir imágenes para mejorar la interfaz.
-- **Otros comentarios:**
-  - Aplicación bien organizada y fácil de usar.
-  - Algunas ayudas fueron útiles, otras no.
-- **Evaluación del desempeño:**
-Natalia ha realizado una evaluación completa y ha detectado varios aspectos importantes que podrían mejorarse, como la falta de lógica en ciertos requisitos (introducir datos del bebé para acceder a recetas) y la necesidad de más detalle en las instrucciones de cocina. Sus sugerencias fueron proactivas, incluyendo mejoras visuales y estructurales como añadir una pestaña específica para gestionar a los bebés y la traducción de la aplicación. Su implicación demuestra un nivel de colaboración alto y compromiso con la mejora del producto.
+- **Fecha de acceso:** 24/03/2025 16:54 
+- **Fecha de feedback:** 25/03/2025 17:56  
+- **Puntuación:** **9**  
+- **Link clockify:** https://app.clockify.me/shared/67e31298d7264d5caa1b3043  
+
+#### **Fallos encontrados:**  
+- El perfil de usuario tiene cierto **retraso (lag)** al editarlo.  
+- Al guardar cambios en el perfil, el botón no se actualiza correctamente.  
+- Permite ingresar un correo sin el símbolo **"@"**, lo que puede generar errores.  
+- En la sección de edición de bebés, permite registrar fechas de nacimiento futuras (ej. 2027), lo cual no debería ser posible.  
+
+#### **Recomendaciones de mejora:**  
+- **Añadir más fotos** para hacer la interfaz visualmente más atractiva.  
+- Asegurar que los botones de edición y guardado reflejen correctamente los cambios realizados.  
+- **Restringir la fecha de nacimiento de bebés** hasta la fecha actual para evitar inconsistencias.  
+- Evaluar si el campo de **perímetro cefálico** es realmente necesario en la ficha del bebé.  
+
+#### **Otros comentarios:**  
+- Desde el móvil, no se ve el contenido completo de la sección **"Elaboración"** en las recetas.  
+- Los colores son adecuados, pero añadir más imágenes mejoraría la experiencia visual.  
+
+#### **Evaluación del desempeño:**  
+Natalia proporcionó un **feedback detallado y enfocado en la usabilidad**, señalando fallos importantes en la edición de perfiles y gestión de datos en la ficha del bebé. Sus observaciones resaltan la necesidad de mejorar la validación de datos y optimizar la experiencia de usuario en la interfaz móvil. Su implicación en la evaluación fue **muy positiva y constructiva**.  
+
 ---
 
-### Antonio Macías
+### Antonio Macías  
 
-- **Fecha de acceso:** 12/03/2025 00:03
-- **Fecha de feedback:** 12/03/2025 13:52
-- **Puntuación:** **9**
-- **Link clockify:** https://app.clockify.me/shared/67d1c79bbecbe07bd98fe030
-- **Fallos encontrados:**
-  - Diseño poco atractivo, escasos detalles visuales.
-  - Textos de las recetas condensados y de tamaño pequeño.
-- **Recomendaciones de mejora:**
-  - Mejorar diseño visual y estética.
-  - Optimizar distribución del texto en recetas.
-  - Aumentar tamaño de texto.
-- **Otros comentarios:**
-  - Interfaz simple y fácil de entender.
-  - Se percibe como una primera versión del sistema.
-- **Evaluación del desempeño:**
-Antonio cumplió con el formulario y proporcionó comentarios enfocados en la estética y usabilidad, señalando que la interfaz actual se percibe poco atractiva y que la legibilidad del contenido podría mejorar. Aunque sus observaciones fueron algo más generales, tocó aspectos esenciales para mejorar la experiencia de usuario. Su aportación sugiere que exploró la app lo suficiente como para detectar carencias clave, aunque no profundizó en el análisis de funciones o usabilidad avanzada.
+- **Fecha de acceso:** 24/03/2025 19:24    
+- **Fecha de feedback:** 24/03/2025 19:56  
+- **Puntuación:** **10**  
+- **Link clockify:** https://app.clockify.me/shared/67e4257d492c8e6e4f233a0a  
+
+#### **Fallos encontrados:**  
+- Después de registrarse, al intentar iniciar sesión por segunda vez, la pantalla aparece en blanco.  
+- Falta de imágenes en la aplicación, lo que hace que la interfaz sea poco atractiva visualmente.  
+- No se especifica si la edad recomendada en las recetas es en meses o años, lo que puede generar confusión.  
+- La barra de navegación pasa desapercibida y no es intuitiva.  
+- La interfaz no está centrada correctamente en algunos apartados.  
+- Algunos elementos de las recetas no están bien estructurados y dificultan la lectura.  
+
+#### **Recomendaciones de mejora:**  
+- La aplicación debería **recomendar recetas según la edad del bebé** para una mejor personalización.  
+- Añadir imágenes y explicaciones más detalladas sobre la preparación de recetas.  
+- Incluir un **buscador de recetas por ingredientes** para facilitar la exploración del contenido.  
+- Mejorar la presentación visual y asegurarse de que la interfaz esté correctamente centrada.  
+- Especificar claramente si la edad recomendada en recetas es en **meses o años**.  
+- **Añadir un calendario** en la sección de bebés para facilitar la selección de la fecha de nacimiento.  
+- Permitir añadir un bebé sin necesidad de escribir una preferencia alimentaria.  
+- Corregir las recomendaciones nutricionales, asegurando que los alimentos propuestos sean adecuados para cada etapa del desarrollo.  
+
+#### **Otros comentarios:**  
+- La aplicación tiene un diseño sencillo pero fácil de manejar.  
+- Algunas recetas parecen **desactualizadas en cuanto a nutrición infantil**, por ejemplo, en la recomendación del huevo o alimentos triturados para bebés.  
+- Añadir más fotos haría la app más atractiva visualmente.  
+
+#### **Evaluación del desempeño:**  
+Antonio realizó una evaluación **equilibrada y detallada**, centrándose en la claridad de la información y la organización de la interfaz. Destacó problemas en la estructura de las recetas y en la experiencia de usuario con la navegación y el diseño. Sus sugerencias fueron **prácticas y enfocadas en mejorar la usabilidad**, lo que demuestra un buen nivel de compromiso con la evaluación.  
+
+
 ---
 
-### Ramón Gavira
+### Ramón Gavira  
 
-- **Fecha de acceso:** 12/03/2025 00:03
-- **Fecha de feedback:** 12/03/2025 16:25
-- **Puntuación:** **10**
-- **Link clockify:** https://app.clockify.me/shared/67d1e152ef0d12419bbe688c
-- **Fallos encontrados:**
-  - Diseño impersonal, similar a estilos por defecto.
-  - No queda clara la finalidad de la app.
-  - “Añadir bebé” puede parecer trivial/gamificado.
-  - Parámetros del bebé no relacionados directamente con las recetas.
-  - Falta una página principal explicativa.
-  - Las recetas no incluyen pasos.
-- **Recomendaciones de mejora:**
-  - Crear identidad visual atractiva y corporativa.
-  - Clarificar la función principal desde la home.
-  - Revisar los campos de datos del bebé.
-  - Rediseñar “Añadir bebé” para mayor coherencia.
-  - Incluir pasos en las recetas o señalar futuras actualizaciones.
-- **Otros comentarios:**
-  - Reconoce el estado inicial del desarrollo.
-  - Muestra interés en la evolución futura de la app.
-- **Evaluación del desempeño:**
-Ramón destacó como uno de los usuarios más analíticos. Fue más allá de lo esperado, haciendo una evaluación crítica y constructiva tanto del diseño como de la lógica de la aplicación. Señaló con claridad varios puntos de fricción en la experiencia del usuario, como la falta de identidad visual, la desconexión entre los datos del bebé y las recetas, y la ausencia de pasos en las recetas. Sus recomendaciones fueron claras, bien argumentadas y orientadas a una evolución del producto. Su nivel de compromiso fue sobresaliente y demostró una alta capacidad para detectar mejoras viables.
----
+- **Fecha de acceso:**  24/03/2025 16:46  
+- **Fecha de feedback:** 24/03/2025 19:24
+- **Puntuación:** **10**  
+- **Link clockify:** https://app.clockify.me/shared/67e1a499492c8e6e4f1c1df0
+
+#### **Fallos encontrados:**  
+- Problemas con la navegación inicial, falta de una homepage clara y redirecciones incorrectas.  
+- Problemas en el formulario de login, con elementos descentrados.  
+- Errores 500 en la gestión del perfil debido a validaciones realizadas a nivel de base de datos.  
+- Falta de feedback visual en la edición del perfil de usuario.  
+- Problemas de visualización en dispositivos móviles.  
+- Fondo poco atractivo y falta de una marca personal definida.  
+- Fallos completos en la funcionalidad de crear bebés, posiblemente por validaciones incorrectas.  
+- Inconsistencias en la presentación de recetas, como uso incorrecto de mayúsculas/minúsculas y mala estructuración de los campos.  
+
+#### **Recomendaciones de mejora:**  
+- Implementar una **homepage clara y funcional**.  
+- Centrar correctamente los elementos del formulario de login.  
+- Gestionar las validaciones a nivel de servicio en lugar de la base de datos para evitar errores 500.  
+- Añadir feedback visual para mejorar la experiencia del usuario.  
+- Corregir problemas de visualización en dispositivos móviles.  
+- Mejorar la presentación visual con una **identidad de marca más definida**.  
+- Revisar y corregir la funcionalidad de creación de bebés.  
+- Mejorar la presentación de recetas con fotos más grandes y mejor organización de la información.  
+
+#### **Otros comentarios:**  
+- El diseño debe ser más atractivo y funcional, asegurando una buena experiencia en dispositivos móviles.  
+- Las recetas necesitan un formato más estético y mejor estructurado.  
+
+#### **Evaluación del desempeño:**  
+Ramón realizó un análisis exhaustivo de la aplicación, señalando **problemas clave en la navegación, validaciones y experiencia del usuario**. Su feedback fue detallado y bien argumentado, abordando tanto la funcionalidad como la estética del sistema. Destacó la necesidad de mejorar la presentación visual y la usabilidad en móviles, así como de implementar soluciones más robustas para la gestión de errores y validaciones. Su nivel de compromiso y capacidad para identificar mejoras viables fue **sobresaliente**.  
+
 
 ### Alberto Carmona
 
-- **Fecha de acceso:** 12/03/2025 00:03
-- **Fecha de feedback:** 12/03/2025 14:57
-- **Puntuación:** **10**
-- **Link clockify:** https://app.clockify.me/shared/67d1e3d006a063047ed7a5a3
+- **Fecha de acceso:** 
+- **Fecha de feedback:** 
+- **Puntuación:** ****
+- **Link clockify:** 
 
 **Fallos encontrados**:
 
 **Información de los bebés**:
-- Los elementos donde se recoge la información son poco estéticos y carecen de separación, lo que hace que todo se vea muy junto (fecha de nacimiento, género, etc.).
-- El botón "Add Baby" no es adecuado, ya que parece que se está añadiendo un producto a un carrito de compra.
-- Los elementos de la navbar en negro con azul no se ven bien; deberían estar en blanco (Recipes, Alimentos, etc.).
-- Falta un botón de eliminar en la sección de edición de bebés (si no está planificado para futuras actualizaciones).
-- Inconsistencia en el idioma de la navbar: algunas secciones están en inglés (Recipes) y otras en español (Alimentos).
-- La palabra "Alérgenos" debe llevar tilde.
-- En la funcionalidad se menciona el seguimiento del crecimiento y visitas médicas, pero no se ve reflejado en la aplicación.
+
 **Sugerencia de recetas**:
-- No está claro para qué bebé se sugieren las recetas. Actualmente, todas tienen las mismas, pero en el futuro, ¿cómo se diferenciarán?
-- Falta un filtrado por ingredientes y etapas de desarrollo del bebé.
-- No se indica en qué momento del día es adecuada cada receta, a pesar de que la funcionalidad menciona que deberían estar adaptadas a distintos momentos.
+
 
 **Búsqueda de recetas por nombre**:
-- Funciona correctamente, pero no ofrece más opciones de filtrado.
+
 
 **Recetas favoritas**:
-- No hay información visible en la página antes de iniciar sesión.
-- Podría haber una sección con las recetas más añadidas a favoritos para que la página tenga contenido antes de loggearse.
+
 
 **Vista detallada de Receta**:
-- Falta una imagen de la receta terminada.
-- No hay una sección con los pasos a seguir para cocinar la receta, a pesar de que la funcionalidad principal indica que debería guiar al usuario en la preparación del plato.
+
 
 **Recomendaciones de mejora**:
-- Separar mejor los elementos en la sección de información de los bebés para mejorar la legibilidad.
-- Cambiar el nombre del botón "Add Baby" por algo más intuitivo.
-- Modificar los colores de la navbar para mejorar la visibilidad del texto.
-- Añadir un botón de eliminar en la sección de edición de bebés.
-- Unificar el idioma de la navbar para evitar confusión.
-- Corregir la ortografía en términos clave como "Alérgenos".
-- Implementar funcionalidades que permitan el seguimiento del crecimiento y visitas médicas.
-- Especificar para qué bebé se están sugiriendo las recetas.
-- Incluir filtros por ingredientes y etapas de desarrollo del bebé.
-- Añadir información sobre el momento del día en el que es recomendable cada receta.
-- Mostrar contenido de recetas favoritas antes de iniciar sesión, como una lista con las más añadidas por los usuarios.
-- Agregar imágenes a la vista detallada de recetas para hacerla más atractiva.
-- Incluir una sección con los pasos detallados para preparar cada receta.
+
 
 **Otros comentarios**:
-- La funcionalidad de búsqueda de recetas por nombre cumple con lo esperado.
-- La estructura de la aplicación es buena, pero faltan detalles para mejorar la usabilidad y la experiencia visual.
-- Se aprecian avances en la organización de la información, pero aún hay margen de mejora en la claridad y distribución de los elementos.
+
 
 **Evaluación del desempeño:**
-- Alberto proporcionó una evaluación detallada, señalando tanto problemas funcionales como estéticos. A pesar de que la evaluación de los requisitos fue algo más básica, sus comentarios sobre la interfaz, el diseño de la aplicación y la falta de elementos visuales fueron muy pertinentes. Su feedback se enfocó en aspectos importantes para mejorar la experiencia de usuario, y su puntuación refleja una implicación más allá de lo mínimo.
+
 ---
 
-### Santiago Rosado
+### Santiago Rosado  
 
-- **Fecha de acceso:** 12/03/2025 00:03
-- **Fecha de feedback:** 12/03/2025 18:26:07
-- **Puntuación:** **9**
-- **Link clockify:** https://app.clockify.me/shared/67d1c3fbbecbe07bd98fd41f
-- **Fallos encontrados:**
-  - "El sistema de alérgenos no es del todo claro.
-  - La navegación hacia la pantalla de bebés es confusa.
-  - Las secciones ""Suggested"" ""Recommended"" están demasiado juntas, lo que dificulta diferenciarlas."
-- **Recomendaciones de mejora:**
-  - "Explicar mejor el funcionamiento de los alérgenos dentro de la aplicación.
-  - Hacer más intuitivo el acceso a la pantalla de bebés.
-  - Separar visualmente las secciones ""Suggested"" y ""Recommended"" para que sean más distinguibles.
-  - Mejorar el diseño general para darle más personalidad a la aplicación.
-  - Hacer que las recetas sean más atractivas visualmente, añadiendo imágenes o mejorando su presentación."
-- **Otros comentarios:**
-  - En general, le parece que va bien encaminada
-  - Interfaz es clara y fácil de usar
-- **Evaluación del desempeño:**
-Santiago Rosado realizó una evaluación detallada, identificando tanto problemas de usabilidad como aspectos visuales que afectan la experiencia del usuario. Sus observaciones sobre la falta de claridad en el sistema de alérgenos, la navegación confusa y la proximidad de secciones similares evidencian un análisis minucioso. Además, sus sugerencias apuntan a mejoras tanto funcionales como estéticas, lo que refleja un enfoque integral en la optimización de la aplicación. Su retroalimentación destaca la importancia de una interfaz más intuitiva y atractiva, lo que demuestra un alto nivel de implicación en la evaluación.
+- **Fecha de acceso:** 24/03/2025 16:46  
+- **Fecha de feedback:** 25/03/2025 17:56  
+- **Puntuación:** **9**  
+- **Link clockify:** https://app.clockify.me/shared/67e1a2e7f562c161b720e35f
+
+#### **Fallos encontrados:**  
+- No se puede visualizar la contraseña mientras se escribe ni hay opción de recuperación en caso de olvido.  
+- Falta de especificidad en los mensajes de error al iniciar sesión.  
+- Al registrarse con datos incorrectos, el mensaje de error no señala en qué campo está el problema.  
+- Al modificar información en el perfil, las validaciones no indican correctamente los errores.  
+- Intentos de cambio de email sin éxito, sin que el sistema muestre un mensaje de error adecuado.  
+
+#### **Recomendaciones de mejora:**  
+- Añadir la opción de visualizar la contraseña en el campo de login y permitir la recuperación de credenciales.  
+- Mejorar los mensajes de error para que sean más específicos y ayuden al usuario a corregir el problema.  
+- Implementar validaciones a nivel de servicio para mostrar claramente qué campo contiene errores al registrarse o editar información.  
+- Asegurar que al modificar datos como el email, el sistema brinde una respuesta clara sobre el estado del cambio.  
+
+#### **Otros comentarios:**  
+- La pantalla de inicio se siente vacía; añadir imágenes ayudaría a hacerla más atractiva visualmente.  
+
+#### **Evaluación del desempeño:**  
+Santiago proporcionó un feedback centrado en la **experiencia del usuario en el login y la gestión del perfil**, destacando problemas en la validación de errores y la falta de opciones esenciales como la recuperación de contraseña. Sus observaciones fueron detalladas y bien argumentadas, proponiendo mejoras claras que pueden optimizar la usabilidad de la aplicación. Su compromiso con la evaluación y la precisión de su análisis fueron **muy valiosos** para el equipo de desarrollo.  
+
+
 ---
-### Raúl Heras
+### Raúl Heras  
 
-- **Fecha de acceso:** 12/03/2025 00:03
-- **Fecha de feedback:** 12/03/2025 20:19:23
-- **Puntuación:** **9**
-- **Link clockify:** https://app.clockify.me/shared/67d1de8dbecbe07bd9902354
-- **Fallos encontrados:**
-  - El sistema de alérgenos no es del todo claro.
-  - La navegación hacia la pantalla de bebés es confusa.
-  - La información no resalta a la vista más que los títulos, lo que da una sensación de "biblia" y no invita a la lectura.
-  - Las cards de los bebés están mejor organizadas respecto al texto, pero la información está muy apelotonada, causando fatiga visual.
-  - Algunas opciones de navegación no son del todo claras.
-- **Recomendaciones de mejora:**
-  - Optimizar la presentación de la información para hacerla más atractiva y fácil de leer.
-  - Segmentar mejor el contenido para evitar la sobrecarga visual.
-  - Mejorar la organización de las cards de bebés para que la información no se vea tan amontonada.
-  - Hacer más intuitivo el acceso a ciertas funciones que pueden resultar confusas.
-- **Otros comentarios:**
-  - La aplicación es clara y fácil de usar en términos generales.
-  - La información proporcionada fue suficiente y útil.
-  - La estructura y organización de la interfaz pueden mejorar para ofrecer una experiencia más agradable.
-- **Evaluación del desempeño:**
-Raúl Heras Pérez realizó una evaluación equilibrada, destacando tanto aspectos positivos como áreas de mejora en la aplicación. Su análisis se centró en la presentación de la información y la usabilidad, señalando que el diseño actual puede resultar confuso y generar fatiga visual. Aunque su valoración fue neutral, sus observaciones sobre la organización del contenido y la claridad de la navegación reflejan un enfoque crítico y constructivo. Su retroalimentación resalta la necesidad de mejorar la disposición visual de la información para hacerla más atractiva y accesible, lo que aporta valor al proceso de optimización de la aplicación.
+- **Fecha de acceso:** 24/03/2025 16:46  
+- **Fecha de feedback:** 25/03/2025 17:56  
+- **Puntuación:** **9**  
+- **Link clockify:** https://app.clockify.me/shared/67e2cfaff562c161b7242e28
+
+#### **Fallos encontrados:**  
+- Los cambios en las recetas tardan en reflejarse en el frontend.  
+- Algunas recetas pueden editarse y guardarse con campos vacíos.  
+- No es posible editar la información de un bebé una vez creado.  
+- Algunos campos de texto se salen de los contenedores, afectando la visualización.  
+- Un bug en la barra de navegación de la sección de recetas causa errores en la redirección.  
+
+#### **Recomendaciones de mejora:**  
+- Añadir la opción de eliminar recetas desde la interfaz de usuario.  
+- Mejorar la consistencia en la actualización de cambios en el frontend.  
+- Implementar validaciones para evitar que las recetas puedan guardarse sin información obligatoria.  
+- Corregir el bug en la barra de navegación inferior para evitar problemas de redirección.  
+- Ajustar los contenedores de texto para evitar que los campos se desborden y afecten la visualización.  
+
+#### **Otros comentarios:**  
+- Sería un buen añadido permitir el inicio de sesión con Google.  
+- El diseño puede mejorarse con más imágenes para hacerlo más atractivo visualmente.  
+
+#### **Evaluación del desempeño:**  
+Raúl realizó un análisis **detallado y orientado a la funcionalidad y experiencia del usuario**, detectando problemas clave en la edición de recetas, la gestión de información del bebé y la consistencia visual en la interfaz. Su feedback fue preciso y propuso soluciones prácticas para mejorar la usabilidad y estabilidad del sistema. Su implicación en la evaluación fue **muy positiva y constructiva**.  
+
 ---
-### Beatriz Chaves
-
-- **Fecha de acceso:** 12/03/2025 00:03
-- **Fecha de feedback:** 13/03/2025 11:54:00
-- **Puntuación:** **7**
-- **Fallos encontrados:**
-  - No se reportaron fallos específicos.
-- **Recomendaciones de mejora:**
-  - Mejorar la interfaz gráfica.
-- **Otros comentarios:**
-  - La aplicación es clara y fácil de usar.
-  - La información fue suficiente y relevante.
-  - Se podría mejorar la estética visual de la aplicación.
-- **Evaluación del desempeño:**
-Beatriz proporcionó un feedback positivo en términos de usabilidad, destacando la claridad de la aplicación. Sin embargo, señaló que la interfaz gráfica necesita mejoras.
-Su evaluación resalta que la aplicación es funcional, pero aún se puede optimizar a nivel visual para ofrecer una experiencia más atractiva.
-No aportó comentarios adicionales ni reportó fallos, por lo que no podemos identificar áreas de mejora concretas a partir de su intervención.
----
-### Miriam Santiago
-
-- **Fecha de acceso:** 12/03/2025 00:03
-- **Fecha de feedback:** 13/03/2025 12:52:32
-- **Puntuación:** **7**
-- **Fallos encontrados:**
-  - No se reportaron fallos específicos.
-- **Recomendaciones de mejora:**
-  - Aclarar mejor algunas funciones y mejorar la distinción de opciones.
-- **Otros comentarios:**
-  - La aplicación es fácil de usar y entender, aunque podría ser más clara en algunos aspectos.
-  - Fue suficiente y relevante la información proporcionada.
-  - La interfaz está bien organizada, pero algunas funciones necesitan mayor claridad.
-- **Evaluación del desempeño:**
-Miriam dejó un feedback general positivo, destacando la facilidad de uso de la aplicación, aunque identificó algunas áreas donde la claridad podría mejorar. 
-Su evaluación sugiere que, aunque la organización es adecuada, algunas opciones de navegación aún requieren más distinción para evitar confusión.
-No aportó comentarios adicionales ni reportó fallos, por lo que no podemos identificar áreas de mejora concretas a partir de su intervención.
 
 ## Resumen de Evaluaciones
 
 | Usuario           | Fecha de Feedback       | Puntuación | Nivel de Colaboración                                |
 |-------------------|-------------------------|------------|------------------------------------------------------|
-| Natalia Olmo      | 12/03/2025 11:49        | 8          | Aporta observaciones útiles y sugerencias relevantes |
+| Natalia Olmo      | 12/03/2025 11:49        | 9          | Aporta observaciones útiles y sugerencias relevantes |
 | Antonio Macías    | 12/03/2025 13:52        | 9          | Comentarios útiles pero algo más generales           |
 | Ramón Gavira      | 12/03/2025 16:25        | 10          | Evaluación detallada con propuestas claras           |
 | Alberto Carmona   | 12/03/2025 14:57        | 10         | Evaluación detallada con propuestas claras                 |
 | Santiago Rosado   | 12/03/2025 18:26:07        | 9          | Evaluación detallada y constructiva                  |
 | Raúl Heras   | 12/03/2025 20:19:23        | 9          | Evaluación detallada y constructiva                  |
-| Beatriz Chaves   | 13/03/2025 11:54:00        | 7          | Evaluacion no muy detallada                  |
-| Miriam Santiago   | 13/03/2025 12:52:32        | 7          | Evaluacion no muy detallada                  |
-| María Caso   | -        | 0         | No aportó feedback
+
 ---
+> *Estas evaluaciones corresponden a los estudiantes que cursan la asignatura Ingeniería del Software para Proyectos Profesionales (ISPP), quienes han participado como usuarios piloto en la prueba de la aplicación. Sus valoraciones han sido registradas de manera individual para reflejar sus hallazgos y sugerencias de mejora. El resto de opiniones han sido agrupadas y resumidas en el apartado siguiente para ofrecer una visión más global del feedback recibido.*
 # Mejoras y Cambios Necesarios - Sprint 2  
 
 A partir del feedback proporcionado por los usuarios piloto, hemos identificado varias áreas de mejora para optimizar la experiencia de uso de la aplicación. A continuación, se detallan los principales cambios y ajustes necesarios para hacerla más intuitiva, atractiva y funcional.  
