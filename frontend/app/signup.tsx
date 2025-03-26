@@ -40,6 +40,20 @@ export default function Signup() {
   }
 
   const handleSubmit = async () => {
+    // const existentUserByEmail = await fetch(`${apiUrl}/api/v1/users/email/${email}`, {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+
+    // const existentUserByUsername = await fetch(`${apiUrl}/api/v1/users/email/${email}`, {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+
     if (!name || !surname || !username || !email || !password) {
       setErrorMessage("Debes rellenar todos los campos.");
       return;
@@ -51,6 +65,9 @@ export default function Signup() {
       return;
     } else if (surname.length < 3) {
       setErrorMessage("El apellido debe tener al menos 3 caracteres.");
+      return;
+    } else if (username.length < 3) {
+      setErrorMessage("Tu nombre de usuario debe tener al menos 3 caracteres.");
       return;
     } else if (username.length < 3) {
       setErrorMessage("Tu nombre de usuario debe tener al menos 3 caracteres.");
@@ -75,6 +92,17 @@ export default function Signup() {
             email: email,
             password: password,
           }),
+        })
+        .then(async function(response) {
+          if (!response.ok) {
+            const data = await response.json();
+            // La estructura de la respuesta varía dependiendo del origen del error, esto se debe a como está hecho el backend que maneja esto
+            if (data.error === "Error: Username is already taken!") { // Error de nombre de usuario (el atributo de la respuesta es 'error')
+              setErrorMessage("El nombre de usuario ya existe.");
+            } else if (data.message === "Email address is already registered.") { // Error de email (el atributo de la respuesta es 'message')
+              setErrorMessage("El email ya está registrado.");
+            }
+          }
         });
 
         if (!signupResponse.ok) {
