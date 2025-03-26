@@ -31,14 +31,18 @@ public class SecurityConfig {
 
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.cors(withDefaults()).csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .exceptionHandling(
-                        (exepciontHandling) -> exepciontHandling.authenticationEntryPoint(unauthorizedHandler))
-                .authorizeHttpRequests((requests) -> requests.requestMatchers("api/v1/recipes/*").authenticated()
-                        .requestMatchers("api/v1/auth/*").permitAll().anyRequest().authenticated())
-                .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
-                .formLogin(AbstractHttpConfigurer::disable).httpBasic(Customizer.withDefaults());
+        http.cors(withDefaults())
+            .csrf(AbstractHttpConfigurer::disable)
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .exceptionHandling(ex -> ex.authenticationEntryPoint(unauthorizedHandler))
+            .authorizeHttpRequests(requests -> requests
+                .requestMatchers("api/v1/recipes/*").authenticated()
+                .requestMatchers("api/v1/auth/*", "/swagger-ui/**", "/v3/api-docs/**", "swagger*").permitAll() // Ajustado para aceptar todas las rutas de Swagger
+                .anyRequest().authenticated())
+            .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
+            .formLogin(AbstractHttpConfigurer::disable)
+            .httpBasic(Customizer.withDefaults());
+    
         return http.build();
     }
 
