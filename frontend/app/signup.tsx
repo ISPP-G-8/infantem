@@ -22,38 +22,23 @@ export default function Signup() {
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const gs = require("../static/styles/globalStyles");
+  const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  const validEmail = (email) => {
-    if (email.match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    )) {
+  const validEmail = (email: String) => {
+    if (email.match(emailRegex)) {
       return true;
     }
     return false;
   };
 
-  const validPassword = (password) => {
+  const validPassword = (password: String) => {
     if (password.match(/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/)) {
       return true;
     }
     return false;
-  }
+  };
 
   const handleSubmit = async () => {
-    // const existentUserByEmail = await fetch(`${apiUrl}/api/v1/users/email/${email}`, {
-    //   method: "GET",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // });
-
-    // const existentUserByUsername = await fetch(`${apiUrl}/api/v1/users/email/${email}`, {
-    //   method: "GET",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // });
-
     if (!name || !surname || !username || !email || !password) {
       setErrorMessage("Debes rellenar todos los campos.");
       return;
@@ -78,6 +63,9 @@ export default function Signup() {
     } else if (password !== repeatPassword) {
       setErrorMessage("Las contraseñas no coinciden.");
       return;
+    } else if (!acceptedTerms) {
+      setErrorMessage("Debes leer y aceptar los términos y condiciones.");
+      return;
     } else {
       try {
         const signupResponse = await fetch(`${apiUrl}/api/v1/auth/signup`, {
@@ -93,52 +81,42 @@ export default function Signup() {
             password: password,
           }),
         })
-        .then(async function(response) {
-          if (!response.ok) {
-            const data = await response.json();
-            // La estructura de la respuesta varía dependiendo del origen del error, esto se debe a como está hecho el backend que maneja esto
-            if (data.error === "Error: Username is already taken!") { // Error de nombre de usuario (el atributo de la respuesta es 'error')
-              setErrorMessage("El nombre de usuario ya existe.");
-            } else if (data.message === "Email address is already registered.") { // Error de email (el atributo de la respuesta es 'message')
-              setErrorMessage("El email ya está registrado.");
+          .then(async function (response) {
+            if (!response.ok) {
+              const data = await response.json();
+              if (data.message === "Error: Username is already taken!") {
+                setErrorMessage("El nombre de usuario ya existe.");
+                return;
+              } else if (data.message === "Email address is already registered.") {
+                setErrorMessage("El email ya está registrado.");
+                return;
+              }
+            } else {
+              const signinResponse = await fetch(`${apiUrl}/api/v1/auth/signin`, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  username: username,
+                  password: password,
+                }),
+              });
+
+              if (!signinResponse.ok) {
+                setErrorMessage("Algo no ha ido bien");
+                return;
+              }
+
+              const data = await signinResponse.json();
+              await storeToken(data.token);
+              router.push("/recipes");
             }
-          }
-        });
-
-        if (!signupResponse.ok) {
-          setErrorMessage("Algo no ha ido bien.");
-          return;
-        } else if (!acceptedTerms) {
-          setErrorMessage("Debes leer y aceptar los términos y condiciones.");
-          return;
-        }
-
-        // Autologin después del registro
-        const signinResponse = await fetch(`${apiUrl}/api/v1/auth/signin`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username: username,
-            password: password,
-          }),
-        });
-
-        if (!signinResponse.ok) {
-          setErrorMessage("Algo no ha ido bien");
-          return;
-        }
-
-        const data = await signinResponse.json();
-        await storeToken(data.token);
-        router.push("/recipes");
-
+          });
       } catch (error) {
         console.error("An error ocurred: ", error);
       }
     }
-
   };
 
   return (
