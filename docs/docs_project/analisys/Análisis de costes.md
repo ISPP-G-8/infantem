@@ -73,11 +73,26 @@
 
 ## 1. Introducción
 
-Este documento tiene como objetivo analizar los costes asociados al desarrollo y mantenimiento de la aplicación Infantem. El análisis de costes se basa en la metodología PMBOK, considerando tanto los gastos de personal, infraestructura, herramientas de desarrollo, hardware y distribución, como una reserva de contingencia de un 10% sobre el total estimado. Además, se presenta una estimación de beneficios basada en el modelo de suscripción premium de la aplicación junto con un sistema de publicidad segmentada.
+Este documento actualiza y analiza los costes e ingresos asociados al desarrollo, lanzamiento y mantenimiento de la aplicación Infantem. Se diferencian claramente los costes de inversión (CAPEX) y los costes operativos (OPEX), así como los ingresos proyectados en escenarios pesimista, realista y optimista.
 
 Con una media de 26.837 nacimientos al mes en España, la aplicación cuenta con un mercado potencial significativo. Se estima que un porcentaje de estos nuevos padres optará por utilizar Infantem, ya sea en su versión gratuita o mediante la suscripción premium, con un coste de 4,99 € al mes. Este documento analiza la viabilidad económica del proyecto y su potencial retorno de inversión.
 
 ## 2. Estimación de Costes
+
+## Costes por Periodo
+
+| Periodo            | CAPEX (€) | OPEX (€)   | TOTAL (€)     |
+|--------------------|-----------|------------|----------------|
+| Semana 1           | 3.796     | 12,51      | 3.808,51       |
+| Semana 5           | 15.415    | 62,55      | 15.477,55      |
+| Semana 10          | 30.830    | 125,10     | 30.955,10      |
+| Semana 15          | 43.598    | 187,65     | 43.785,65      |
+| Primeros 6 meses   | 0         | 7.935,46   | 7.935,46       |
+| Primer Año         | 0         | 32.151,32  | 32.151,32      |
+| Segundo Año        | 0         | 103.248,64 | 103.248,64     |
+
+> *CAPEX:* Inversiones iniciales (desarrollo, hardware).  
+> *OPEX:* Costes operativos (infraestructura, soporte, mantenimiento).
 
 ### 2.1. Desglose de Costes de Personal
 
@@ -278,6 +293,19 @@ Al igual que en los modelos anteriores, se plantean dos escenarios para el anál
 
 En este apartado se presentan los ingresos totales combinados de todas las formas de monetización expuestas anteriormente (modelo Freemium, publicidad segmentada y marketplace), distinguiendo entre el caso optimista y el caso pesimista
 
+### Escenarios de ingresos: Optimista, Realista y Pesimista
+
+| Periodo            | Optimista (€) | Realista (€) | Pesimista (€) |
+|--------------------|----------------|----------------|-----------------|
+| Semana 1 a 15      | 0              | 0              | 0               |
+| Semana 16          | 3.708,35       | 1.762,82       | 686,62          |
+| Primeros 6 meses   | 167.747,43     | 85.053,18      | 16.502,64       |
+| Primer Año         | 256.659,84     | 340.853,76     | 12.521,75       |
+| Segundo Año        | 513.319,68     | 681.707,52     | 25.043,50       |
+
+> Los ingresos están divididos en tres fuentes:  
+> *Freemium (suscripciones premium), **Publicidad segmentada, y **Marketplace*.
+
 **Caso pesimista**
 
 - **Modelo Freemium**: 1.767,99 € anuales (tras IVA)
@@ -320,6 +348,8 @@ Este caso representa un punto de equilibrio más accesible que el pesimista (5 a
 **Caso optimista**
 
 Con uno ingresos totales anuales estimado de 256.659,84 €, la inversión se recuperaría en menos de un año (aproximadamente 3 meses), generando beneficios netos rápidamente.
+
+
 
 <img src='../../../docs/imagenes/RelacionIngresoEntreCosteOptimista.png' width=550 style='display: block; margin-left:auto; margin-right:auto;' >
 
@@ -643,6 +673,15 @@ Usuarios premium creciendo al 7% del total:
 | **Beneficio Neto**        | **308.702,44 €** | —                     |
 
 ---
+## Análisis de Rentabilidad
+
+- La inversión inicial (CAPEX) asciende a 43.598 €.
+- El punto de equilibrio se alcanza:
+  - En *3 meses* en el escenario optimista.
+  - En *8 meses* en el escenario realista.
+  - En *5 años* en el escenario pesimista.
+- A partir del lanzamiento, todos los costes son OPEX, centrados en infraestructura y soporte.
+- El *Marketplace* es el mayor generador de ingresos en todos los escenarios.
 
 ### 7.5 **Análisis del resultado**
 
@@ -654,12 +693,4 @@ Usuarios premium creciendo al 7% del total:
 
 ## 8. Conclusiones
 
-El análisis de costes y beneficios realizado en este documento permite evaluar la
-viabilidad económica del proyecto Infantem. Con una inversión inicial estimada en
-61.470,38 €, se han proyectado diferentes escenarios de ingresos basados en modelos
-de monetización como suscripción premium, publicidad segmentada y marketplace.
-Aunque el caso pesimista muestra un retorno más limitado, el caso optimista
-demuestra un potencial significativo de rentabilidad. Estos resultados sugieren que
-Infantem podría convertirse en una aplicación sostenible y escalable en el mercado de
-productos y servicios para padres primerizos, siempre que se logre una adopción
-adecuada por parte de los usuarios.
+El análisis actualizado confirma que Infantem es viable económicamente y puede generar beneficios desde los primeros meses si se logra una base de usuarios significativa. Su modelo escalable, basado en ingresos recurrentes y bajo CAPEX tras el lanzamiento, permite una expansión sostenida y rentable.
