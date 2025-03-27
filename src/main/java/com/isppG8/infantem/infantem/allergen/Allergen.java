@@ -36,7 +36,8 @@ public class Allergen {
     @NotBlank
     private String description;
 
-    @ManyToMany(mappedBy = "allergens")
+    @ManyToMany
+    @JoinTable(name = "recipe_allergen", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "allergen_id"))
     private List<Recipe> recipes = new ArrayList<>();
 
     @ManyToMany

@@ -55,7 +55,7 @@ public class BabyController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BabyDTO> updateBaby(@PathVariable("id") Integer id, @RequestBody @Valid Baby baby) {
+    public ResponseEntity<BabyDTO> updateBaby(@PathVariable("id") Integer id, @RequestBody @Valid BabyDTO baby) {
         Baby updatedBaby = babyService.updateBaby(id, baby);
         return ResponseEntity.ok(new BabyDTO(updatedBaby));
     }

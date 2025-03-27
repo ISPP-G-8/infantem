@@ -6,11 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
+import com.isppG8.infantem.infantem.subscription.SubscriptionInfantemRepository;
 
 @Service
 public class UserService {
@@ -19,7 +19,7 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private SubscriptionInfantemRepository subscriptionInfantemRepository;
 
     @Transactional(readOnly = true)
     public List<User> getAllUsers() {
@@ -35,19 +35,8 @@ public class UserService {
         return userRepository.findByUsername(username).orElse(null);
     }
 
-    @Transactional
-    public User createUser(User user) {
-
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            throw new IllegalArgumentException("Email address is already registered.");
-        }
-
-        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
-            throw new IllegalArgumentException("Username is already registered.");
-        }
-
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null);
     }
 
     @Transactional(readOnly = true)
@@ -57,6 +46,10 @@ public class UserService {
             throw new ResourceNotFoundException("Nobody authenticated!");
         else
             return findByUsername(auth.getName());
+    }
+
+    public Integer findCurrentUserId() {
+        return this.findCurrentUser().getId();
     }
 
     @Transactional
@@ -93,13 +86,8 @@ public class UserService {
         return false;
     }
 
-    @Transactional(readOnly = true)
-    public Optional<User> login(String username, String password) {
-        Optional<User> user = userRepository.findByUsername(username);
-        if (user.isPresent() && passwordEncoder.matches(password, user.get().getPassword())) {
-            return user;
-        }
-        return Optional.empty();
+    public Optional<User> getUserByStripeCustomerId(String stripeCustomerId) {
+        return subscriptionInfantemRepository.findByStripeCustomerId(stripeCustomerId);
     }
 
 }

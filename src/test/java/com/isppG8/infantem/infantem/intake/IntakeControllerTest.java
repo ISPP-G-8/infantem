@@ -147,8 +147,7 @@ public class IntakeControllerTest {
         String invalidJson = "{}";
 
         mockMvc.perform(post("/api/v1/intake").header("Authorization", "Bearer " + token).with(csrf())
-                .contentType(MediaType.APPLICATION_JSON).content(invalidJson))
-                .andExpect(status().isInternalServerError());
+                .contentType(MediaType.APPLICATION_JSON).content(invalidJson)).andExpect(status().isBadRequest());
     }
 
     @Test

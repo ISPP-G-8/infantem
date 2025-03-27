@@ -1,6 +1,10 @@
 package com.isppG8.infantem.infantem.dream;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,10 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.isppG8.infantem.infantem.baby.Baby;
 import com.isppG8.infantem.infantem.baby.BabyRepository;
+import com.isppG8.infantem.infantem.dream.dto.DreamSummary;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotOwnedException;
 import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserService;
+import com.isppG8.infantem.infantem.util.Tuple;
 
 @Service
 public class DreamService {
@@ -71,5 +77,41 @@ public class DreamService {
         if (!baby.getUsers().contains(user)) {
             throw new ResourceNotOwnedException(dream.getBaby());
         }
+    }
+
+    // Methods for calendar
+
+    @Transactional(readOnly = true)
+    public Set<LocalDate> getDreamsByBabyIdAndDate(Integer babyId, LocalDate start, LocalDate end) {
+        LocalDateTime startDateTime = start.atStartOfDay();
+        LocalDateTime endDateTime = end.atTime(23, 59, 59);
+
+        List<Tuple<LocalDateTime, LocalDateTime>> dreamDates = dreamRepository.findDreamDatesByBabyIdAndDate(babyId,
+                startDateTime, endDateTime);
+
+        Set<LocalDate> dates = new HashSet<>();
+        for (Tuple<LocalDateTime, LocalDateTime> t : dreamDates) {
+            LocalDate startDate = t.first().toLocalDate();
+            LocalDate endDate = t.second().toLocalDate();
+
+            // Check if startDate and endDate are on the same month to only add dates on the asked month
+            startDate = startDate.isAfter(start) ? startDate : start;
+            endDate = endDate.isBefore(end) ? endDate : end;
+            while (!startDate.isAfter(endDate)) {
+                dates.add(startDate);
+                startDate = startDate.plusDays(1);
+            }
+        }
+
+        return dates;
+    }
+
+    @Transactional(readOnly = true)
+    public List<DreamSummary> getDreamSummaryByBabyIdAndDate(Integer babyId, LocalDate day) {
+        LocalDateTime startDateTime = day.atStartOfDay();
+        LocalDateTime endDateTime = day.atTime(23, 59, 59);
+        List<Dream> dreams = dreamRepository.findDreamSummaryByBabyIdAndDate(babyId, startDateTime, endDateTime);
+
+        return dreams.stream().map(DreamSummary::new).toList();
     }
 }

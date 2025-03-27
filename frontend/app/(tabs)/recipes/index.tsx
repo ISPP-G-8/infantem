@@ -45,7 +45,9 @@ export default function Page() {
       if (response.ok) {
         const recipesData = await response.json();
         setAllRecommendedRecipes(recipesData);
-        setAllFilteredRecipes(recipesData);
+        // TODO: This must be changed. The pagination must be managed. This is a hot fix needed to have the application working.
+        // FIX THIS.
+        setAllFilteredRecipes(recipesData.content); 
         return true;
       } else {
         return false;

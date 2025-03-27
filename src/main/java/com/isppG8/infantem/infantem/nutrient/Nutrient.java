@@ -1,6 +1,9 @@
 package com.isppG8.infantem.infantem.nutrient;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,6 +34,8 @@ public class Nutrient {
     // Atributos
 
     private String name;
+
+    @Enumerated(EnumType.STRING)
     private NutrientType type;
     private String unit;
 

@@ -18,6 +18,7 @@ import com.isppG8.infantem.infantem.allergen.Allergen;
 
 import com.isppG8.infantem.infantem.dream.Dream;
 import com.isppG8.infantem.infantem.intake.Intake;
+import com.isppG8.infantem.infantem.metric.Metric;
 import com.isppG8.infantem.infantem.milestoneCompleted.MilestoneCompleted;
 import com.isppG8.infantem.infantem.nutritionalContribution.NutritionalContribution;
 import com.isppG8.infantem.infantem.user.User;
@@ -84,6 +85,9 @@ public class Baby {
 
     @OneToMany(mappedBy = "baby", cascade = CascadeType.ALL)
     private List<Dream> sleep = new ArrayList<>();
+
+    @OneToMany(mappedBy = "baby", cascade = CascadeType.ALL)
+    private List<Metric> metrics = new ArrayList<>();
 
     @OneToMany(mappedBy = "baby", cascade = CascadeType.ALL)
     private List<MilestoneCompleted> milestonesCompleted = new ArrayList<>();

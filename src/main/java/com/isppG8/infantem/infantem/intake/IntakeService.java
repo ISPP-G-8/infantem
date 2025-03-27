@@ -1,5 +1,7 @@
 package com.isppG8.infantem.infantem.intake;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotOwnedException;
 import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserService;
+
+import com.isppG8.infantem.infantem.intake.dto.IntakeSummary;
 
 @Service
 public class IntakeService {
@@ -77,5 +81,20 @@ public class IntakeService {
             throw new ResourceNotOwnedException(intake.getBaby());
         }
 
+    }
+
+    public List<LocalDate> getIntakesByBabyIdAndDate(Integer babyId, LocalDate start, LocalDate end) {
+        LocalDateTime startDateTime = start.atStartOfDay();
+        LocalDateTime endDateTime = end.atTime(23, 59, 59);
+        List<LocalDateTime> intakeDates = intakeRepository.getIntakesByBabyIdAndDate(babyId, startDateTime,
+                endDateTime);
+        return intakeDates.stream().map(LocalDateTime::toLocalDate).toList();
+    }
+
+    public List<IntakeSummary> getIntakeSummaryByBabyIdAndDate(Integer babyId, LocalDate day) {
+        LocalDateTime start = day.atStartOfDay();
+        LocalDateTime end = day.atTime(23, 59, 59);
+        List<Intake> intakes = this.intakeRepository.getIntakeSummaryByBabyIdAndDate(babyId, start, end);
+        return intakes.stream().map(IntakeSummary::new).toList();
     }
 }

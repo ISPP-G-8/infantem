@@ -53,7 +53,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -118,6 +125,32 @@
         	<artifactId>spring-security-test</artifactId>
         	<scope>test</scope>
     	</dependency>
+		
+		<dependency>
+    		<groupId>com.stripe</groupId>
+    		<artifactId>stripe-java</artifactId>
+    		<version>24.9.0</version>
+		</dependency>
+
+		<dependency>
+    		<groupId>com.fasterxml.jackson.core</groupId>
+    		<artifactId>jackson-databind</artifactId>
+    		<version>2.15.0</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.github.ulisesbocchio</groupId>
+			<artifactId>jasypt-spring-boot-starter</artifactId>
+			<version>3.0.5</version>
+		</dependency>
+
+		<dependency>
+    		<groupId>org.mockito</groupId>
+    		<artifactId>mockito-core</artifactId>
+    		<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -160,6 +193,25 @@
     			<groupId>org.sonarsource.scanner.maven</groupId>
     			<artifactId>sonar-maven-plugin</artifactId>
     			<version>3.9.1.2184</version>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.12</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

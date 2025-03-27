@@ -20,6 +20,9 @@ export default function Signup() {
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [openedTerms, setOpenedTerms] = useState(false);
 
+  const [askForEmailToken, setAskForEmailToken] = useState(false);
+  const [emailToken, setEmailToken] = useState<string>("");
+
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const gs = require("../static/styles/globalStyles");
   const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -68,17 +71,14 @@ export default function Signup() {
       return;
     } else {
       try {
-        const signupResponse = await fetch(`${apiUrl}/api/v1/auth/signup`, {
+        const validEmailResponse = await fetch(`${apiUrl}/api/v1/auth/email`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            name: name,
-            surname: surname,
             username: username,
             email: email,
-            password: password,
           }),
         })
           .then(async function (response) {
@@ -119,104 +119,124 @@ export default function Signup() {
     }
   };
 
+
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
       <View style={[gs.container, { justifyContent: "center", alignItems: "center", backgroundColor: "#E3F2FD", flex: 1, paddingVertical: 40 }]}>
 
         <Image source={require("../static/images/profile.webp")} style={{ width: 100, height: 100, borderRadius: 50, marginBottom: 20 }} />
 
+        { askForEmailToken 
+        ? 
+        <View style={[gs.card, { maxWidth: 400, width: "90%", padding: 25, borderRadius: 15, backgroundColor: "white", shadowColor: "#000", shadowOpacity: 0.1, shadowRadius: 10, elevation: 5 }]}>
+          Mira tu email
+          <TextInput
+            style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.6 }]}
+            placeholder="Código de validación" value={emailToken} onChangeText={setEmailToken} />
+          <TouchableOpacity
+            style={{ marginTop: 20, backgroundColor: "#1565C0", padding: 14, borderRadius: 8, alignItems: "center", shadowColor: "#000", shadowOpacity: 0.2, shadowRadius: 5, elevation: 3 }}
+            onPress={handleConfirmToken}
+            >
+            <Text style={{ color: "#FFFFFF", fontSize: 16, fontWeight: "bold" }}>Confirmar</Text>
+          </TouchableOpacity>
+
+        </View> 
+
+        : 
         <View style={[gs.card, { maxWidth: 400, width: "90%", padding: 25, borderRadius: 15, backgroundColor: "white", shadowColor: "#000", shadowOpacity: 0.1, shadowRadius: 10, elevation: 5 }]}>
 
           <Text style={{ fontSize: 24, fontWeight: "bold", color: "#1565C0", textAlign: "center", marginBottom: 15 }}>
-            Regístrate
+          Regístrate
           </Text>
 
           <TextInput
-            style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.6 }]}
-            placeholder="Nombre" value={name} onChangeText={setName} />
+          style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.6 }]}
+          placeholder="Nombre" value={name} onChangeText={setName} />
           <TextInput
-            style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.6 }]}
-            placeholder="Apellido" value={surname} onChangeText={setSurname} />
-          <TextInput
-            style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.6 }]}
-            placeholder="Nombre de usuario" value={username} onChangeText={setUsername} autoCapitalize="none" />
-          <TextInput
-            style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.6 }]}
-            placeholder="Email" value={email} onChangeText={setEmail} autoCapitalize="none" keyboardType="email-address" />
-
-          <View style={{ position: "relative" }}>
+          style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.6 }]}
+          placeholder="Apellido" value={surname} onChangeText={setSurname} />
             <TextInput
-              style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.6 }]}
-              placeholder="Contraseña"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry={!showPassword} // Alternar visibilidad
-            />
-            <TouchableOpacity
-              onPress={() => setShowPassword(!showPassword)}
-              style={{ position: "absolute", right: 50, top: 20 }} // Icono alineado
-            >
-              <Ionicons name={showPassword ? "eye-off" : "eye"} size={24} color="#1565C0" />
-            </TouchableOpacity>
-          </View>
-
-          <View style={{ position: "relative" }}>
+            style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.6 }]}
+          placeholder="Nombre de usuario" value={username} onChangeText={setUsername} autoCapitalize="none" />
             <TextInput
-              style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.6 }]}
-              placeholder="Repite la contraseña"
-              value={repeatPassword}
-              onChangeText={setRepeatPassword}
-              secureTextEntry={!showPassword}
-            />
-            <TouchableOpacity
-              onPress={() => setShowPassword(!showPassword)}
-              style={{ position: "absolute", right: 50, top: 20 }} // Icono alineado
-            >
-              <Ionicons name={showPassword ? "eye-off" : "eye"} size={24} color="#1565C0" />
-            </TouchableOpacity>
-          </View>
+            style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.6 }]}
+          placeholder="Email" value={email} onChangeText={setEmail} autoCapitalize="none" keyboardType="email-address" />
 
-          {errorMessage ? <Text style={{ color: "red", marginVertical: 10, textAlign: "center" }}>{errorMessage}</Text> : null}
+            <View style={{ position: "relative" }}>
+            <TextInput
+            style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.6 }]}
+          placeholder="Contraseña"
+            value={password}
+          onChangeText={setPassword}
+          secureTextEntry={!showPassword} // Alternar visibilidad
+          />
+            <TouchableOpacity
+            onPress={() => setShowPassword(!showPassword)}
+          style={{ position: "absolute", right: 50, top: 20 }} // Icono alineado
+          >
+            <Ionicons name={showPassword ? "eye-off" : "eye"} size={24} color="#1565C0" />
+            </TouchableOpacity>
+            </View>
+
+            <View style={{ position: "relative" }}>
+            <TextInput
+            style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.6 }]}
+          placeholder="Repite la contraseña"
+            value={repeatPassword}
+          onChangeText={setRepeatPassword}
+          secureTextEntry={!showPassword}
+          />
+            <TouchableOpacity
+            onPress={() => setShowPassword(!showPassword)}
+          style={{ position: "absolute", right: 50, top: 20 }} // Icono alineado
+          >
+            <Ionicons name={showPassword ? "eye-off" : "eye"} size={24} color="#1565C0" />
+            </TouchableOpacity>
+            </View>
+
+            {errorMessage ? <Text style={{ color: "red", marginVertical: 10, textAlign: "center" }}>{errorMessage}</Text> : null}
 
           <View style={gs.checkboxView}>
             <CheckBox
-              style={[{ padding: 10 }]}
-              onClick={() => {
-                setAcceptedTerms(!acceptedTerms);
-              }}
-              isChecked={acceptedTerms}
-              disabled={!openedTerms}
-            />
-            <Text style={{ marginLeft: 10 }}>
-              Acepto los&nbsp;
-              <Text
-                style={{ color: "#007AFF", fontSize: 14 }}
-                onPress={() => {
-                  setModalVisible(true);
-                  setOpenedTerms(true);
-                }}
-              >
-                términos y condiciones
-              </Text>
-            </Text>
-          </View>
-
-          <TermsConditionsModal
-            visible={modalVisible}
-            onClose={() => setModalVisible(false)}
+            style={[{ padding: 10 }]}
+          onClick={() => {
+            setAcceptedTerms(!acceptedTerms);
+          }}
+          isChecked={acceptedTerms}
+          disabled={!openedTerms}
           />
-          <Link href={"/signin"} style={{ marginTop: 10, textAlign: "center" }}>
-            <Text style={{ color: "#007AFF", fontSize: 14 }}>¿Ya tienes cuenta? ¡Inicia sesión!</Text>
-          </Link>
+            <Text style={{ marginLeft: 10 }}>
+            Acepto los&nbsp;
+          <Text
+            style={{ color: "#007AFF", fontSize: 14 }}
+          onPress={() => {
+            setModalVisible(true);
+            setOpenedTerms(true);
+          }}
+          >
+            términos y condiciones
+            </Text>
+            </Text>
+            </View>
 
-          <TouchableOpacity
+            <TermsConditionsModal
+            visible={modalVisible}
+          onClose={() => setModalVisible(false)}
+          />
+            <Link href={"/signin"} style={{ marginTop: 10, textAlign: "center" }}>
+            <Text style={{ color: "#007AFF", fontSize: 14 }}>¿Ya tienes cuenta? ¡Inicia sesión!</Text>
+            </Link>
+
+            <TouchableOpacity
             style={{ marginTop: 20, backgroundColor: "#1565C0", padding: 14, borderRadius: 8, alignItems: "center", shadowColor: "#000", shadowOpacity: 0.2, shadowRadius: 5, elevation: 3 }}
-            onPress={handleSubmit}
+          onPress={handleSubmit}
           >
             <Text style={{ color: "#FFFFFF", fontSize: 16, fontWeight: "bold" }}>Registrarse</Text>
-          </TouchableOpacity>
+            </TouchableOpacity>
 
-        </View>
+            </View>
+        }
+
 
       </View>
     </ScrollView>
