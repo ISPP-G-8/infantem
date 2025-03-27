@@ -15,28 +15,31 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping({"api/v1/nutritionalContributions/{nutritionalcontributionId}/nutritionalContributionFoodSources", "api/v1/foodSources/{foodSourceId}/nutritionalContributionFoodSources"})
+@RequestMapping({ "api/v1/nutritionalContributions/{nutritionalcontributionId}/nutritionalContributionFoodSources",
+        "api/v1/foodSources/{foodSourceId}/nutritionalContributionFoodSources" })
 public class NutritionalContributionFoodSourceController {
     @Autowired
     private NutritionalContributionFoodSourceService nutritionalContributionFoodSourceService;
-    
+
     @GetMapping
     public List<NutritionalContributionFoodSource> getNutritionalContributionFoodSources() {
         return nutritionalContributionFoodSourceService.getAllNutritionalContributionFoodSources();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<NutritionalContributionFoodSource> getNutritionalContributionFoodSourceById(@PathVariable Long id) {
+    public ResponseEntity<NutritionalContributionFoodSource> getNutritionalContributionFoodSourceById(
+            @PathVariable Long id) {
         return nutritionalContributionFoodSourceService.getNutritionalContributionFoodSourceById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+                .map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
-    
+
     @PostMapping
-    public NutritionalContributionFoodSource createNutritionalContributionFoodSource(@Valid @RequestBody NutritionalContributionFoodSource nutritionalContributionFoodSource) {
-        return nutritionalContributionFoodSourceService.createNutritionalContributionFoodSource(nutritionalContributionFoodSource);
+    public NutritionalContributionFoodSource createNutritionalContributionFoodSource(
+            @Valid @RequestBody NutritionalContributionFoodSource nutritionalContributionFoodSource) {
+        return nutritionalContributionFoodSourceService
+                .createNutritionalContributionFoodSource(nutritionalContributionFoodSource);
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteNutritionalContributionFoodSource(@PathVariable Long id) {
         if (nutritionalContributionFoodSourceService.deleteNutritionalContributionFoodSource(id)) {
@@ -46,5 +49,4 @@ public class NutritionalContributionFoodSourceController {
         }
     }
 
-    
 }

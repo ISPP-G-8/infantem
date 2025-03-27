@@ -10,14 +10,14 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "example_table")
-@Getter @Setter
+@Getter
+@Setter
 public class Example {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     private String str;
-    
+
 }

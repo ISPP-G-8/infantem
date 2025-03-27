@@ -1,6 +1,9 @@
 package com.isppG8.infantem.infantem.nutrient;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,33 +18,33 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-
 @Entity
 @Table(name = "nutrient_table")
 @JsonIdentityInfo(scope = Nutrient.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Getter
 @Setter
-public class Nutrient{
+public class Nutrient {
 
-    //Id
+    // Id
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //Atributos
+    // Atributos
 
     private String name;
+
+    @Enumerated(EnumType.STRING)
     private NutrientType type;
     private String unit;
 
-    //Relaciones
+    // Relaciones
 
     @OneToMany
     private List<FoodNutrient> foodNutrients;
 
     @OneToMany
     private List<NutritionalContributionNutrient> NutritionalContributionsNutrients;
-
 
 }

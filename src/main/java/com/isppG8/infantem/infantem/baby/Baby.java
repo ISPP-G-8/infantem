@@ -13,12 +13,12 @@ import jakarta.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.isppG8.infantem.infantem.allergen.Allergen;
-import com.isppG8.infantem.infantem.disease.Disease;
+
 import com.isppG8.infantem.infantem.dream.Dream;
 import com.isppG8.infantem.infantem.intake.Intake;
+import com.isppG8.infantem.infantem.metric.Metric;
 import com.isppG8.infantem.infantem.milestoneCompleted.MilestoneCompleted;
 import com.isppG8.infantem.infantem.nutritionalContribution.NutritionalContribution;
 import com.isppG8.infantem.infantem.user.User;
@@ -49,7 +49,7 @@ public class Baby {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Integer id;
 
     @NotBlank
     @Size(min = 3, max = 50)
@@ -78,7 +78,7 @@ public class Baby {
     @NotBlank
     private String foodPreference;
 
-    //Relaciones
+    // Relaciones
 
     @OneToOne
     private NutritionalContribution nutritionalContribution;
@@ -86,34 +86,23 @@ public class Baby {
     @OneToMany(mappedBy = "baby", cascade = CascadeType.ALL)
     private List<Dream> sleep = new ArrayList<>();
 
-    @OneToMany(mappedBy = "baby",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "baby", cascade = CascadeType.ALL)
+    private List<Metric> metrics = new ArrayList<>();
+
+    @OneToMany(mappedBy = "baby", cascade = CascadeType.ALL)
     private List<MilestoneCompleted> milestonesCompleted = new ArrayList<>();
 
-    @OneToMany(mappedBy = "baby",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "baby", cascade = CascadeType.ALL)
     private List<Intake> intakes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "baby", cascade = CascadeType.ALL)
+    private List<Vaccine> vaccines = new ArrayList<>();
 
     @ManyToMany(mappedBy = "babies")
     private List<Allergen> allergen = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "babies",cascade = CascadeType.ALL)
-    private List<Disease> disease = new ArrayList<>();  // Relación con enfermedades
-
     @ManyToMany
-    @JoinTable(
-        name = "vaccine_baby",
-        joinColumns = @JoinColumn(name = "vaccine_id"),
-        inverseJoinColumns = @JoinColumn(name = "baby_id")
-    )
-    private List<Vaccine> vaccines = new ArrayList<>();  // Relación con vacuna
-
-    @ManyToMany
-    @JoinTable(
-        name = "user_baby",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "baby_id")
-    )
+    @JoinTable(name = "user_baby", joinColumns = @JoinColumn(name = "baby_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     @Size(min = 1, max = 2, message = "A baby should have 1 or 2 users")
     private List<User> users = new ArrayList<>();
 }
-
-

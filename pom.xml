@@ -28,7 +28,8 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
-	</properties>
+		<checkstyle.config.location>/checkstyle.xml</checkstyle.config.location>
+  	</properties>
 	<profiles>
 		<profile>
 			<id>development</id>
@@ -52,7 +53,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -102,12 +110,47 @@
 			<artifactId>mysql-socket-factory-connector-j-8</artifactId>
 			<version>1.23.1</version>
 		</dependency>
-		
+		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.33</version>
 		</dependency>
+		<dependency>
+        	<groupId>org.springframework.security</groupId>
+        	<artifactId>spring-security-test</artifactId>
+        	<scope>test</scope>
+    	</dependency>
+		
+		<dependency>
+    		<groupId>com.stripe</groupId>
+    		<artifactId>stripe-java</artifactId>
+    		<version>24.9.0</version>
+		</dependency>
+
+		<dependency>
+    		<groupId>com.fasterxml.jackson.core</groupId>
+    		<artifactId>jackson-databind</artifactId>
+    		<version>2.15.0</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.github.ulisesbocchio</groupId>
+			<artifactId>jasypt-spring-boot-starter</artifactId>
+			<version>3.0.5</version>
+		</dependency>
+
+		<dependency>
+    		<groupId>org.mockito</groupId>
+    		<artifactId>mockito-core</artifactId>
+    		<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -141,7 +184,35 @@
 				<artifactId>appengine-maven-plugin</artifactId>
 				<version>2.4.4</version>
 			</plugin>
-			
+			<plugin>
+                <groupId>net.revelc.code.formatter</groupId>
+                <artifactId>formatter-maven-plugin</artifactId>
+				<version>2.25.0</version>
+            </plugin>
+			<plugin>
+    			<groupId>org.sonarsource.scanner.maven</groupId>
+    			<artifactId>sonar-maven-plugin</artifactId>
+    			<version>3.9.1.2184</version>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.12</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 

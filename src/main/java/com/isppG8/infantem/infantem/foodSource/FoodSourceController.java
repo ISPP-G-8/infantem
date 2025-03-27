@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @RequestMapping("api/v1/foodSources")
 public class FoodSourceController {
@@ -27,20 +26,18 @@ public class FoodSourceController {
 
     @GetMapping("/{id}")
     public ResponseEntity<FoodSource> getFoodSourceById(@PathVariable Long id) {
-        return foodSourceService.getFoodSourceById(id)
-                .map(ResponseEntity::ok)
+        return foodSourceService.getFoodSourceById(id).map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-    
+
     @PostMapping
     public FoodSource createFoodSource(@RequestBody FoodSource foodSource) {
         return foodSourceService.createFoodSource(foodSource);
     }
-    
+
     @PutMapping("/{id}")
     public ResponseEntity<FoodSource> updateFoodSource(@PathVariable Long id, @RequestBody FoodSource foodSource) {
-        return foodSourceService.updateFoodSource(id, foodSource)
-                .map(ResponseEntity::ok)
+        return foodSourceService.updateFoodSource(id, foodSource).map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
@@ -53,5 +50,4 @@ public class FoodSourceController {
         }
     }
 
-    
 }

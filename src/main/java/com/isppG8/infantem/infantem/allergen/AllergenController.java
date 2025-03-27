@@ -2,10 +2,20 @@ package com.isppG8.infantem.infantem.allergen;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.isppG8.infantem.infantem.allergen.dto.AllergenDTO;
+
+import jakarta.validation.Valid;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/allergens")
@@ -15,33 +25,32 @@ public class AllergenController {
     private AllergenService allergenService;
 
     @GetMapping
-    public List<Allergen> getAllAllergens() {
-        return allergenService.getAllAllergens();
+    public List<AllergenDTO> getAllAllergens() {
+        return allergenService.getAllAllergens().stream().map(AllergenDTO::new).toList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Allergen> getAllergenById(@PathVariable Long id) {
-        Optional<Allergen> allergen = allergenService.getAllergenById(id);
-        return allergen.map(ResponseEntity::ok)
-                       .orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<AllergenDTO> getAllergenById(@PathVariable Long id) {
+        Allergen allergen = allergenService.getAllergenById(id);
+        return ResponseEntity.ok(new AllergenDTO(allergen));
     }
 
     @PostMapping
-    public Allergen createAllergen(@RequestBody Allergen allergen) {
-        return allergenService.createAllergen(allergen);
+    public ResponseEntity<AllergenDTO> createAllergen(@Valid @RequestBody Allergen allergen) {
+        Allergen createdAllergen = allergenService.createAllergen(allergen);
+        return ResponseEntity.status(201).body(new AllergenDTO(createdAllergen));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Allergen> updateAllergen(@PathVariable Long id, @RequestBody Allergen allergenDetails) {
-        Optional<Allergen> updatedAllergen = allergenService.updateAllergen(id, allergenDetails);
-        return updatedAllergen.map(ResponseEntity::ok)
-                              .orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<AllergenDTO> updateAllergen(@PathVariable Long id,
+            @Valid @RequestBody Allergen allergenDetails) {
+        Allergen updatedAllergen = allergenService.updateAllergen(id, allergenDetails);
+        return ResponseEntity.ok(new AllergenDTO(updatedAllergen));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAllergen(@PathVariable Long id) {
-        return allergenService.deleteAllergen(id) ? ResponseEntity.noContent().build()
-                                                  : ResponseEntity.notFound().build();
+        allergenService.deleteAllergen(id);
+        return ResponseEntity.noContent().build();
     }
 }
-

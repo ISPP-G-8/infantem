@@ -13,7 +13,8 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "recipe_table")
-@Getter @Setter
+@Getter
+@Setter
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,5 +25,5 @@ public class Recipe {
 
     @OneToMany
     private List<IngredientRecipe> ingredients;
-    
+
 }

@@ -1,6 +1,5 @@
 package com.isppG8.infantem.infantem.intake;
 
-
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -22,7 +21,8 @@ import lombok.Setter;
 @Entity
 @Table(name = "food_table")
 @JsonIdentityInfo(scope = Food.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-@Getter @Setter
+@Getter
+@Setter
 public class Food {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,8 +34,7 @@ public class Food {
     @Enumerated(EnumType.STRING)
     @NotNull
     private FoodCategory foodCategory;
-    
+
     @OneToMany(mappedBy = "food", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<IngredientRecipe> ingredients;
 }
-

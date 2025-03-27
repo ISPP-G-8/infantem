@@ -3,13 +3,13 @@ instance_class: F2
 
 env_variables:
   SPRING_PROFILES_ACTIVE: production
-  EXPO_PUBLIC_API_URL: https://ispp-2425-g8.ew.r.appspot.com/
+  STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+  STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
+  SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+  EXPO_PUBLIC_STRIPE_API_KEY: ${EXPO_PUBLIC_STRIPE_API_KEY}  
+  
 
 handlers:
-# Serve environment variables to the frontend
-- url: /env.json
-  script: auto
-  secure: always
 
 # Serve all API calls to Spring
 - url: /api/.*

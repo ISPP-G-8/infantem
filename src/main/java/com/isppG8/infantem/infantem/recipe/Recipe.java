@@ -5,7 +5,7 @@ import java.util.List;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.isppG8.infantem.infantem.allergen.Allergen;
@@ -33,14 +33,15 @@ import lombok.Setter;
 @Entity
 @Table(name = "recipe_table")
 @JsonIdentityInfo(scope = Recipe.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-@Getter @Setter
+@Getter
+@Setter
 public class Recipe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotBlank
     private String name;
 
     @Column(nullable = true)
@@ -49,18 +50,17 @@ public class Recipe {
     // TODO string??? -.-
     @Column(nullable = true)
     private String photo_route;
-	
-    // TODO string??? -.-
+
     @Column(nullable = true)
     private String ingredients;
 
     @Min(0)
     private Integer minRecommendedAge;
-    
+
     @Min(0)
     @Max(36)
     private Integer maxRecommendedAge;
-    
+
     @Column(nullable = true)
     private String elaboration;
 
@@ -70,18 +70,12 @@ public class Recipe {
     private User user;
 
     @ManyToMany(mappedBy = "recipes")
-    private List<Intake> intakes = new ArrayList<>();
-
-    @ManyToMany
-    @JoinTable(
-        name = "intake_recipe",
-        joinColumns = @JoinColumn(name = "intake_id"),
-        inverseJoinColumns = @JoinColumn(name = "recipe_id")
-    )
     private List<Allergen> allergens = new ArrayList<>();
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FoodNutrient> alimentoNutrientes = new ArrayList<>();
-}
+    @ManyToMany
+    @JoinTable(name = "intake_recipe", joinColumns = @JoinColumn(name = "intake_id"), inverseJoinColumns = @JoinColumn(name = "recipe_id"))
+    private List<Intake> intakes = new ArrayList<>();
 
-    
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FoodNutrient> foodNutrients = new ArrayList<>();
+}

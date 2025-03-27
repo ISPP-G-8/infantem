@@ -13,31 +13,27 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.isppG8.infantem.infantem.nutritionalContribution.NutritionalContribution;
 import com.isppG8.infantem.infantem.foodSource.FoodSource;
 
-
-
 @Entity
 @Table(name = "nutr_contr_food_source_table")
 @JsonIdentityInfo(scope = NutritionalContributionFoodSource.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Getter
 @Setter
-public class NutritionalContributionFoodSource{
+public class NutritionalContributionFoodSource {
 
-    //Id
-    
+    // Id
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    //Atributos
 
-    //Relaciones
+    // Atributos
+
+    // Relaciones
 
     @ManyToOne
     private FoodSource foodSource;
 
     @ManyToOne
     private NutritionalContribution NutritionalContribution;
-
-
 
 }

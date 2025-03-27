@@ -13,28 +13,26 @@ import jakarta.persistence.Table;
 import java.util.List;
 import com.isppG8.infantem.infantem.nutritionalContributionFoodSource.NutritionalContributionFoodSource;
 
-
 @Entity
 @Table(name = "food_source_table")
 @JsonIdentityInfo(scope = FoodSource.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Getter
 @Setter
-public class FoodSource{
+public class FoodSource {
 
-    //Id
+    // Id
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //Atributos
+    // Atributos
 
     private FoodSourceType type;
 
-    //Relaciones
+    // Relaciones
 
     @OneToMany
     private List<NutritionalContributionFoodSource> nutritionalContributionFoodSources;
-
 
 }

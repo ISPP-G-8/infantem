@@ -7,11 +7,17 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "build": "expo export -p web"
+    "build": "expo export -p web",
+    "selenium": "node test/account/test_selenium.js && node test/allergens/test_selenium.js && node test/baby/test_selenium.js && node test/recipes/test_selenium.js"
   },
   "dependencies": {
     "@expo/metro-runtime": "~4.0.1",
     "@react-native-picker/picker": "^2.11.0",
+    "@stripe/react-stripe-js": "^3.0.0",
+    "@stripe/stripe-js": "^5.2.0",
+    "@stripe/stripe-react-native": "0.38.6",
+    "app-infantem-frontend": "file:",
+    "eslint-plugin-import": "^2.31.0",
     "expo": "~52.0.31",
     "expo-constants": "~17.0.7",
     "expo-linking": "~7.0.5",
@@ -23,6 +29,8 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-native": "0.76.7",
+    "react-native-calendars": "^1.1310.0",
+    "react-native-check-box": "^2.1.7",
     "react-native-safe-area-context": "4.12.0",
     "react-native-screens": "~4.4.0",
     "react-native-web": "~0.19.13"
@@ -31,7 +39,9 @@
     "@babel/core": "^7.25.2",
     "@types/jwt-decode": "^2.2.1",
     "@types/react": "~18.3.12",
+    "mocha": "11.1.0",
     "typescript": "^5.3.3"
   },
-  "private": true
+  "private": true,
+  "type": "module"
 }

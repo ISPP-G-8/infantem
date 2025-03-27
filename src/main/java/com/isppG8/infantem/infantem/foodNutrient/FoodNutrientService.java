@@ -1,4 +1,5 @@
 package com.isppG8.infantem.infantem.foodNutrient;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -9,15 +10,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class FoodNutrientService {
 
     private final FoodNutrientRepository foodNutrientRepository;
-    
+
     public FoodNutrientService(FoodNutrientRepository foodNutrientRepository) {
         this.foodNutrientRepository = foodNutrientRepository;
     }
+
     @Transactional(readOnly = true)
     public List<FoodNutrient> getAllFoodNutrients() {
         return foodNutrientRepository.findAll();
     }
-    
+
     @Transactional(readOnly = true)
     public Optional<FoodNutrient> getFoodNutrientById(Long id) {
         return foodNutrientRepository.findById(id);
@@ -41,5 +43,5 @@ public class FoodNutrientService {
         }
         return false;
     }
-    
+
 }

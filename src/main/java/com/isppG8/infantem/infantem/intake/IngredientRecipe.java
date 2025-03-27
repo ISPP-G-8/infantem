@@ -14,7 +14,8 @@ import lombok.Setter;
 @Entity
 @Table(name = "ingredients_table")
 @JsonIdentityInfo(scope = IngredientRecipe.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-@Getter @Setter
+@Getter
+@Setter
 public class IngredientRecipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

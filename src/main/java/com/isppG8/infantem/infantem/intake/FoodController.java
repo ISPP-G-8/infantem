@@ -1,7 +1,5 @@
 package com.isppG8.infantem.infantem.intake;
 
-
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +41,9 @@ public class FoodController {
 
     @PutMapping("/update/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void updateFood(@PathVariable("id") Long id,@RequestBody @Valid Food food) {
+    public void updateFood(@PathVariable("id") Long id, @RequestBody @Valid Food food) {
         Food foodToUpdate = foodService.findById(id);
-        if(foodToUpdate == null) {
+        if (foodToUpdate == null) {
             throw new RuntimeException("Food not found");
         }
         foodToUpdate.setName(food.getName());
@@ -58,7 +56,7 @@ public class FoodController {
     @ResponseStatus(HttpStatus.OK)
     public void deleteFood(@PathVariable("id") Long id) {
         Food food = foodService.findById(id);
-        if(food == null) {
+        if (food == null) {
             throw new RuntimeException("Food not found");
         }
         foodService.delete(food);

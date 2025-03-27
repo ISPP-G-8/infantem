@@ -6,8 +6,9 @@ function StackLayout() {
 			screenOptions={{
 				headerTitleStyle: {
 					fontWeight: "normal",
-					fontSize: 25,
+					fontSize: 20,
 					fontFamily: "sans-serif",
+					color: "#1565C0",
 				},
 			}}
 		>
@@ -17,16 +18,11 @@ function StackLayout() {
 					title: "Mis bebés",
 				}}
 			/>
-			<Stack.Screen
-				name="edit"
+
+      		<Stack.Screen
+				name="form"
 				options={{
-					title: "Modificar datos del bebé",
-				}}
-			/>
-      <Stack.Screen
-				name="add"
-				options={{
-					title: "Añadir un bebé",
+					title: "Añadir o editar un bebé",
 				}}
 			/>
 

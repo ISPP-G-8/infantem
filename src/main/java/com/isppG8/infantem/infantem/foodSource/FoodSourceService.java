@@ -1,16 +1,16 @@
 package com.isppG8.infantem.infantem.foodSource;
+
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class FoodSourceService {
     @Autowired
     private FoodSourceRepository foodSourceRepository;
-    
+
     public List<FoodSource> getAllFoodSources() {
         return foodSourceRepository.findAll();
     }

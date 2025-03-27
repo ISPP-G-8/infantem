@@ -44,5 +44,5 @@ Thumbs.db
 *.vim/
 *workspace/
 
+*.db
 .env
-

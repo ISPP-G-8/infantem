@@ -20,13 +20,16 @@ public class NutritionalContributionNutrientService {
         return nutritionalContributionNutrientRepository.findById(id);
     }
 
-    public NutritionalContributionNutrient createNutritionalContributionNutrient(NutritionalContributionNutrient nutritionalContributionNutrient) {
+    public NutritionalContributionNutrient createNutritionalContributionNutrient(
+            NutritionalContributionNutrient nutritionalContributionNutrient) {
         return nutritionalContributionNutrientRepository.save(nutritionalContributionNutrient);
     }
 
-    public Optional<NutritionalContributionNutrient> updateNutritionalContributionNutrient(Long id, NutritionalContributionNutrient nutritionalContributionNutrientDetails) {
+    public Optional<NutritionalContributionNutrient> updateNutritionalContributionNutrient(Long id,
+            NutritionalContributionNutrient nutritionalContributionNutrientDetails) {
         return nutritionalContributionNutrientRepository.findById(id).map(nutritionalContributionNutrient -> {
-            nutritionalContributionNutrient.setReccomendedAmount(nutritionalContributionNutrientDetails.getReccomendedAmount());
+            nutritionalContributionNutrient
+                    .setReccomendedAmount(nutritionalContributionNutrientDetails.getReccomendedAmount());
             return nutritionalContributionNutrientRepository.save(nutritionalContributionNutrient);
         });
     }

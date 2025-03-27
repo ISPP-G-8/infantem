@@ -13,32 +13,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 @RestController
-@RequestMapping({"api/v1/nutritionalContribution/{nutritionalContributionId}/nutritionalContributionNutrients","api/v1/nutrient/{nutrientId}/nutritionalContributionNutrients"})
+@RequestMapping({ "api/v1/nutritionalContribution/{nutritionalContributionId}/nutritionalContributionNutrients",
+        "api/v1/nutrient/{nutrientId}/nutritionalContributionNutrients" })
 public class NutritionalContributionNutrientController {
     @Autowired
     private NutritionalContributionNutrientService nutritionalContributionNutrientService;
-    
+
     @GetMapping
     public List<NutritionalContributionNutrient> getNutritionalContributionNutrient() {
         return nutritionalContributionNutrientService.getAllNutritionalContributionNutrients();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<NutritionalContributionNutrient> getNutritionalContributionNutrientById(@PathVariable Long id) {
-        return nutritionalContributionNutrientService.getNutritionalContributionNutrientById(id)
-                .map(ResponseEntity::ok)
+    public ResponseEntity<NutritionalContributionNutrient> getNutritionalContributionNutrientById(
+            @PathVariable Long id) {
+        return nutritionalContributionNutrientService.getNutritionalContributionNutrientById(id).map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-    
+
     @PostMapping
-    public NutritionalContributionNutrient createNutritionalContributionNutrient(@RequestBody NutritionalContributionNutrient nutritionalContributionNutrient) {
-        return nutritionalContributionNutrientService.createNutritionalContributionNutrient(nutritionalContributionNutrient);
+    public NutritionalContributionNutrient createNutritionalContributionNutrient(
+            @RequestBody NutritionalContributionNutrient nutritionalContributionNutrient) {
+        return nutritionalContributionNutrientService
+                .createNutritionalContributionNutrient(nutritionalContributionNutrient);
     }
-    
+
     @PutMapping("/{id}")
-    public ResponseEntity<NutritionalContributionNutrient> updateNutritionalContributionNutrient(@PathVariable Long id, @RequestBody NutritionalContributionNutrient nutritionalContributionNutrient) {
-        return nutritionalContributionNutrientService.updateNutritionalContributionNutrient(id, nutritionalContributionNutrient)
-                .map(ResponseEntity::ok)
+    public ResponseEntity<NutritionalContributionNutrient> updateNutritionalContributionNutrient(@PathVariable Long id,
+            @RequestBody NutritionalContributionNutrient nutritionalContributionNutrient) {
+        return nutritionalContributionNutrientService
+                .updateNutritionalContributionNutrient(id, nutritionalContributionNutrient).map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
@@ -51,5 +55,4 @@ public class NutritionalContributionNutrientController {
         }
     }
 
-    
 }

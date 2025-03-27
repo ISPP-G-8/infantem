@@ -13,31 +13,29 @@ import jakarta.persistence.Table;
 import com.isppG8.infantem.infantem.nutrient.Nutrient;
 import com.isppG8.infantem.infantem.recipe.Recipe;
 
-
 @Entity
 @Table(name = "food_nutrient_table")
 @JsonIdentityInfo(scope = FoodNutrient.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Getter
 @Setter
-public class FoodNutrient{
+public class FoodNutrient {
 
-    //Id
+    // Id
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //Atributos
+    // Atributos
 
     private Float amount;
 
-    //Relaciones
+    // Relaciones
 
     @ManyToOne
     private Nutrient nutrient;
 
     @ManyToOne
     private Recipe recipe;
-
 
 }
