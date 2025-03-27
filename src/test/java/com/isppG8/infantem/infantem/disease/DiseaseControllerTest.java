@@ -46,32 +46,19 @@ public class DiseaseControllerTest {
 
     @Autowired
     private DiseaseController diseaseController;
-/*
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
-
-    @NotBlank
-    private String name;
-
-    @NotNull
-    @PastOrPresent
-    private LocalDate startDate;
-
-    @NotNull
-    @PastOrPresent
-    private LocalDate endDate;
-
-    @NotBlank
-    private String symptoms;
-
-    private String extraObservations;
-
-    @ManyToOne
-    @NotNull
-    @JoinColumn(name = "baby_id")
-    private Baby baby;
-*/
+    /*
+     * @Id
+     * @GeneratedValue(strategy = GenerationType.IDENTITY) private Integer Id;
+     * @NotBlank private String name;
+     * @NotNull
+     * @PastOrPresent private LocalDate startDate;
+     * @NotNull
+     * @PastOrPresent private LocalDate endDate;
+     * @NotBlank private String symptoms; private String extraObservations;
+     * @ManyToOne
+     * @NotNull
+     * @JoinColumn(name = "baby_id") private Baby baby;
+     */
 
     @BeforeEach
     void setUp() {
@@ -92,7 +79,7 @@ public class DiseaseControllerTest {
     @Test
     void testGetAll() throws Exception {
         mockMvc.perform(get("/api/v1/disease").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-                .andExpect(ResultMatcherUtils.isLargerThan("$.length()","4"))
+                .andExpect(ResultMatcherUtils.isLargerThan("$.length()", "4"))
                 .andExpect(jsonPath("$[0].name").value("Varicela"));
     }
 
