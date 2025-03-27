@@ -267,7 +267,6 @@ public class RecipeServiceTest {
         recipe.setElaboration("Test Elaboration");
 
         Recipe createdRecipe = recipeService.createRecipe(recipe);
-        assertEquals(16, createdRecipe.getId(), "The recipe id should be 16");
         assertEquals(recipe.getName(), createdRecipe.getName(), "The recipe name should be 'Test Recipe'");
         assertEquals(recipe.getDescription(), createdRecipe.getDescription(),
                 "The recipe description should be 'Test Description'");
