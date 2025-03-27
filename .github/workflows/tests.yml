@@ -37,6 +37,12 @@ jobs:
           distribution: 'adopt'
           java-version: 21
 
+      - name: Configurar variables de entorno backend
+        run: |
+          echo "STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }}" >> $GITHUB_ENV
+          echo "STRIPE_API_KEY=${{ secrets.STRIPE_API_KEY }}" >> $GITHUB_ENV
+          echo "STRIPE_WEBHOOK_SECRET=${{ secrets.STRIPE_WEBHOOK_SECRET }}" >> $GITHUB_ENV
+
       - name: Install dependencies and run backend tests
         run: mvn clean install
 
@@ -52,6 +58,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+
+      - name: Configurar variables de entorno frontend
+        run: |
+          echo "EXPO_PUBLIC_STRIPE_API_KEY=${{ secrets.EXPO_PUBLIC_STRIPE_API_KEY }}" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: cd frontend && npm install

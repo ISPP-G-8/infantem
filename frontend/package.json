@@ -13,6 +13,10 @@
   "dependencies": {
     "@expo/metro-runtime": "~4.0.1",
     "@react-native-picker/picker": "^2.11.0",
+    "@stripe/react-stripe-js": "^3.0.0",
+    "@stripe/stripe-js": "^5.2.0",
+    "@stripe/stripe-react-native": "0.38.6",
+    "app-infantem-frontend": "file:",
     "eslint-plugin-import": "^2.31.0",
     "expo": "~52.0.31",
     "expo-constants": "~17.0.7",
@@ -29,8 +33,7 @@
     "react-native-calendars": "^1.1310.0",
     "react-native-safe-area-context": "4.12.0",
     "react-native-screens": "~4.4.0",
-    "react-native-web": "~0.19.13",
-    "selenium-webdriver": "4.29.0"
+    "react-native-web": "~0.19.13"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

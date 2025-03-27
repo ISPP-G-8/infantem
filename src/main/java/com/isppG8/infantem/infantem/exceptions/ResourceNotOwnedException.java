@@ -11,6 +11,10 @@ public class ResourceNotOwnedException extends RuntimeException {
 
     private static final long serialVersionUID = -3906338266891937036L;
 
+    public ResourceNotOwnedException(final String string) {
+        super(String.format("%s", string));
+    }
+
     public ResourceNotOwnedException(final Object object) {
         super(String.format("%s not owned.", object.getClass().getSimpleName()));
     }

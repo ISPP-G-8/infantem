@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ActivityIndicator, Modal, TextInput, Alert, ImageBackground } from "react-native";
 import { Text, View, TouchableOpacity, ScrollView, Image, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-import { router } from "expo-router";
+import { Link, router } from "expo-router";
 import { useAuth } from "../../../context/AuthContext";
+import { jwtDecode } from "jwt-decode";
 
 const avatarOptions = [
-  // There are no avatar images in backend yet.
   require("../../../assets/avatar/avatar1.png"),
   require("../../../assets/avatar/avatar2.png")
 ];
@@ -16,13 +16,52 @@ export default function Account() {
   const [modalVisible, setModalVisible] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const navigation = useNavigation();
+  const [subscription, setSubscription] = useState(null);
+  const [userId, setUserId] = useState<number | null>(null);
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
-
   const gs = require("../../../static/styles/globalStyles");
-
   const { isLoading, user, token, setUser, checkAuth, signOut } = useAuth();
 
+  useEffect(() => {
+          if (!token) return; // Evita ejecutar el efecto si jwt es null o undefined
+          try {
+              const decodedToken: any = jwtDecode(token);
+              setUserId(decodedToken.jti);
+          } catch (error) {
+              console.error("Error al decodificar el token:", error);
+          }
+      }, [token]);
+
+  // Mueve el useEffect al nivel superior del componente
+  useEffect(() => {
+    if (!user || !token) return;
+    
+    const fetchSubscription = async () => {
+      try {
+        const response = await fetch(`${apiUrl}/api/v1/subscriptions/user/${userId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error("Error fetching subscription");
+        }
+        
+        const data = await response.json();
+        console.log("Subscription data:", data);
+        setSubscription(data);
+      } catch (error) {
+        console.error("Error fetching subscription:", error);
+        setSubscription(null); // Asegúrate de resetear el estado si hay un error
+      }
+    };
+    
+    fetchSubscription();
+  }, [user, token]);
 
   const handleEditProfile = () => {
     setIsEditing(true);
@@ -65,7 +104,6 @@ export default function Account() {
         Alert.alert("Error", `No se pudo guardar los cambios: ${error.message}`);
       });
   };
-
   const handleLogout = signOut;
 
   const handleAvatarSelection = (avatar: any) => {
@@ -100,6 +138,13 @@ export default function Account() {
 
         <Text style={[gs.headerText, { color: "#1565C0" }]}>Perfil</Text>
 
+        {user && !subscription &&(
+          <Link href={"/account/premiumplan"} style={[gs.mainButton, { marginTop: 10, width: 400, textAlign:"center"}]}>
+            <Text style={[gs.mainButtonText, {fontSize:30}]}>¡HAZTE PREMIUM!</Text>
+          </Link>
+        )}
+
+
         <TouchableOpacity style={gs.profileImageContainer} onPress={() => isEditing && setModalVisible(true)} disabled={!isEditing}>
           <Image source={user?.profilePhotoRoute ? { uri: user.profilePhotoRoute } : avatarOptions[0]} style={gs.profileImage} />
         </TouchableOpacity>
@@ -131,8 +176,12 @@ export default function Account() {
         <TouchableOpacity style={[gs.mainButton, { backgroundColor: "#1565C0" }]} onPress={isEditing ? handleSaveChanges : handleEditProfile}>
           <Text style={gs.mainButtonText}>{isEditing ? "Guardar Cambios" : "Editar Perfil"}</Text>
         </TouchableOpacity>
+        
+        {user && subscription &&(
+          <Text style={[gs.mainButtonText, {fontSize:30, color:"black"}]}>¡Felicidades eres premium!</Text>
+        )}
 
-        <TouchableOpacity style={[gs.secondaryButton, { marginTop: 10 }]} onPress={handleLogout}>
+        <TouchableOpacity style={[gs.secondaryButton, { marginTop: 10}]} onPress={handleLogout}>
           <Text style={[gs.secondaryButtonText]}>Cerrar Sesión</Text>
         </TouchableOpacity>
 
