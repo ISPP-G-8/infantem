@@ -14,13 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
-
-
 @RestController
-@RequestMapping({"api/v1/nutrients/{nutrientId}/foodNutrients"})
+@RequestMapping({ "api/v1/nutrients/{nutrientId}/foodNutrients" })
 public class FoodNutrientController {
-    
+
     private FoodNutrientService foodNutrientService;
 
     @Autowired
@@ -35,20 +32,19 @@ public class FoodNutrientController {
 
     @GetMapping("/{id}")
     public ResponseEntity<FoodNutrient> getFoodNutrientById(@PathVariable Long id) {
-        return foodNutrientService.getFoodNutrientById(id)
-                .map(ResponseEntity::ok)
+        return foodNutrientService.getFoodNutrientById(id).map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-    
+
     @PostMapping
     public FoodNutrient createFoodNutrient(@RequestBody FoodNutrient foodNutrient) {
         return foodNutrientService.createFoodNutrient(foodNutrient);
     }
-    
+
     @PutMapping("/{id}")
-    public ResponseEntity<FoodNutrient> updateFoodNutrient(@PathVariable Long id, @RequestBody FoodNutrient foodNutrient) {
-        return foodNutrientService.updateFoodNutrient(id, foodNutrient)
-                .map(ResponseEntity::ok)
+    public ResponseEntity<FoodNutrient> updateFoodNutrient(@PathVariable Long id,
+            @RequestBody FoodNutrient foodNutrient) {
+        return foodNutrientService.updateFoodNutrient(id, foodNutrient).map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
@@ -61,7 +57,4 @@ public class FoodNutrientController {
         }
     }
 
-
-
-    
 }

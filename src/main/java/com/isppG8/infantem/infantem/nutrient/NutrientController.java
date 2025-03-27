@@ -26,20 +26,17 @@ public class NutrientController {
 
     @GetMapping("nutrient/{id}")
     public ResponseEntity<Nutrient> getNutrientById(@PathVariable Long id) {
-        return nutrientService.getNutrientById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        return nutrientService.getNutrientById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
-    
+
     @PostMapping
     public Nutrient createNutrient(@RequestBody Nutrient nutrient) {
         return nutrientService.createNutrient(nutrient);
     }
-    
+
     @PutMapping("nutrient/{id}")
     public ResponseEntity<Nutrient> updateNutrient(@PathVariable Long id, @RequestBody Nutrient nutrient) {
-        return nutrientService.updateNutrient(id, nutrient)
-                .map(ResponseEntity::ok)
+        return nutrientService.updateNutrient(id, nutrient).map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
@@ -52,6 +49,4 @@ public class NutrientController {
         }
     }
 
-    
 }
-

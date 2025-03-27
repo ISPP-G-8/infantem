@@ -7,6 +7,7 @@ import com.isppG8.infantem.infantem.baby.Baby;
 import com.isppG8.infantem.infantem.recipe.Recipe;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,8 +17,10 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -36,13 +39,30 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
+    @NotBlank
+    @Size(min = 3, max = 50)
     private String name;
+
+    @NotBlank
+    @Size(min = 3, max = 50)
     private String surname;
+
+    @NotBlank
+    @Size(min = 3, max = 50)
+    @Column(unique = true, nullable = false)
     private String username;
+
+    @NotBlank
     private String password;
+
+    @NotBlank
+    @Email
+    @Column(unique = true, nullable = false)
     private String email;
+
+    @Size(max = 255)
     private String profilePhotoRoute;
 
     @ManyToOne
@@ -53,8 +73,8 @@ public class User {
     @JsonManagedReference
     private List<Recipe> recipes = new ArrayList<>();
 
-    // TODO Ignored because json serialization of recursive properties is wonky, unrealiable, and fuck that tbh
     @JsonIgnore
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
+
     List<Baby> babies = new ArrayList<>();
 }

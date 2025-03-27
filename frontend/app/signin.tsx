@@ -1,15 +1,16 @@
 import { Link, router } from "expo-router";
 import { useState } from "react";
-import { Text, View, TouchableOpacity, TextInput, Image } from "react-native";
+import { Text, View, TouchableOpacity, TextInput, Image, ScrollView } from "react-native";
 import { storeToken } from "../utils/jwtStorage";
+import { useAuth } from "../context/AuthContext";
 
 export default function Signin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
-  console.log("API URL:", apiUrl);
+  const { isAuthenticated, checkAuth } = useAuth();
+
 
   const gs = require("../static/styles/globalStyles");
 
@@ -27,56 +28,68 @@ export default function Signin() {
       });
 
       if (!response.ok) {
-        // I asked backend to implement the Bad credential error as a JSON. Waiting for that
-        setErrorMessage("Algo no ha ido bien");
+        setErrorMessage("Algo no ha ido bien. Verifica tus credenciales.");
         return;
       }
 
       const data = await response.json();
       await storeToken(data.token);
-      router.push("/recipes");
+      await checkAuth();
+      router.replace("/recipes")
 
     } catch (error) {
-      console.error("An error ocurred: ", error);
+      console.error("An error occurred: ", error);
     }
   };
 
   return (
-    <View style={[gs.container, { justifyContent: "center" }]}>
-      <Text style={gs.headerText}>Iniciar Sesión</Text>
-      <Image source={require("../static/images/profile.webp")} style={[gs.profileImage, { marginBottom: 20 }]} />
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
+      <View style={[gs.container, { justifyContent: "center", alignItems: "center", backgroundColor: "#E3F2FD", flex: 1, paddingVertical: 40 }]}>
+        
+        <Image source={require("../static/images/profile.webp")} style={[{ width: 100, height: 100, borderRadius: 50, marginBottom: 20 }]} />
 
-      <View style={[gs.card, { maxWidth: 400 }]}>
-        <Text style={{ fontWeight: "bold" }}>Nombre de usuario</Text>
-        <TextInput
-          style={gs.input}
-          placeholder="juanperez1234"
-          value={username}
-          onChangeText={setUsername}
-          autoCapitalize="none"
-        />
+        <View style={[gs.card, { maxWidth: 400, width: "90%", padding: 25, borderRadius: 15, backgroundColor: "white", shadowColor: "#000", shadowOpacity: 0.1, shadowRadius: 10, elevation: 5 }]}>
+          
+          <Text style={{ fontSize: 24, fontWeight: "bold", color: "#1565C0", textAlign: "center", marginBottom: 15 }}>
+            Iniciar Sesión
+          </Text>
 
-        <Text style={{ paddingTop: 10, fontWeight: "bold" }}>Contraseña</Text>
-        <TextInput
-          style={gs.input}
-          placeholder="contraseña1234"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-        />
+          <Text style={{ fontSize: 15, color: "#1565C0", textAlign: "center", marginBottom: 15 }}>
+            Introduce tu cuenta de siempre en Infantem o regístrate si es tu primera vez.
+          </Text>
 
-        {errorMessage && <Text style={{ color: "red", marginVertical: 10 }}>{errorMessage}</Text>}
+          <TextInput
+            style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", marginBottom: 10, opacity:0.6 }]}
+            placeholder="Nombre de usuario"
+            value={username}
+            onChangeText={setUsername}
+            autoCapitalize="none"
+          />
 
-        <Link href={"/signup"}>
-          <Text style={{ color: "#007AFF" }}>¿No tienes cuenta? ¡Regístrate!</Text>
-        </Link>
+          <TextInput
+            style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0" , opacity:0.6}]}
+            placeholder="Contraseña"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+          />
 
-        <TouchableOpacity style={[gs.mainButton, { marginTop: 20 }]} onPress={handleSubmit}>
-          <Text style={gs.mainButtonText}>Ingresar</Text>
-        </TouchableOpacity>
+          {errorMessage ? <Text style={{ color: "red", marginVertical: 10, textAlign: "center" }}>{errorMessage}</Text> : null}
+
+          <Link href={"/signup"} style={{ marginTop: 10, textAlign: "center" }}>
+            <Text style={{ color: "#007AFF", fontSize: 14 }}>¿No tienes cuenta? ¡Regístrate!</Text>
+          </Link>
+
+          <TouchableOpacity 
+            style={{ marginTop: 20, backgroundColor: "#1565C0", padding: 14, borderRadius: 8, alignItems: "center", shadowColor: "#000", shadowOpacity: 0.2, shadowRadius: 5, elevation: 3 }}
+            onPress={handleSubmit}
+          >
+            <Text style={{ color: "#FFFFFF", fontSize: 16, fontWeight: "bold" }}>Ingresar</Text>
+          </TouchableOpacity>
+
+        </View>
+
       </View>
-
-
-    </View>
+    </ScrollView>
   );
 }

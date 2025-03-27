@@ -1,4 +1,5 @@
 package com.isppG8.infantem.infantem.nutritionalContributionFoodSource;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,11 +20,12 @@ public class NutritionalContributionFoodSourceService {
         return nutritionalContributionFoodSourceRepository.findById(id);
     }
 
-    public NutritionalContributionFoodSource createNutritionalContributionFoodSource(NutritionalContributionFoodSource NutritionalContributionFoodSource) {
+    public NutritionalContributionFoodSource createNutritionalContributionFoodSource(
+            NutritionalContributionFoodSource NutritionalContributionFoodSource) {
         return nutritionalContributionFoodSourceRepository.save(NutritionalContributionFoodSource);
     }
 
-//This entity does not have a field to update because it is a relationship entity
+    // This entity does not have a field to update because it is a relationship entity
 
     public boolean deleteNutritionalContributionFoodSource(Long id) {
         if (nutritionalContributionFoodSourceRepository.existsById(id)) {

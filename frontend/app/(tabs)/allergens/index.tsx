@@ -1,5 +1,5 @@
 import { Link } from "expo-router";
-import { Text, View, ScrollView, TouchableOpacity, TextInput } from "react-native";
+import { Text, View, ScrollView, TouchableOpacity, TextInput,ImageBackground } from "react-native";
 import { useState } from "react";
 import { questions } from "../../../hardcoded_data/questionsData";
 
@@ -20,21 +20,25 @@ export default function Allergens() {
 
   return (
     <View style={{ flex: 1 }}>
-
-      <ScrollView contentContainerStyle={[gs.container, { paddingTop: 100, paddingBottom: 100 }]}>
-        <Text style={gs.headerText}>Alergenos</Text>
+    <ImageBackground
+      source={require("../../../static/images/Background.png")}
+      style={{ flex: 1, width: "100%", height: "100%" }}
+      imageStyle={{ resizeMode: "cover", opacity: 0.9 }}
+    >
+      <ScrollView contentContainerStyle={{ flexGrow: 1, padding: 20,width: "100%", height: "100%",alignItems: "center", justifyContent: "center" }}>
+        <Text  style={[gs.headerText, { color: "#1565C0",fontSize:38 }]}>Alergenos</Text>
 
         { currentQuestion === questions.length - 1 ? (
           <View style={gs.card}>
-            <Text style={gs.cardTitle}>¡Gracias por completar el cuestionario!</Text>
+            <Text style={[gs.cardTitle,{color:"#1565C0"}]}>¡Gracias por completar el cuestionario!</Text>
           </View>
         ) : (
-          <View>
-            <Text style={[gs.subheaderText, {paddingBottom:40}]}>
+          <View style={{ width: "100%",alignItems: "center", justifyContent: "center" }}>
+            <Text style={[gs.subheaderText, {paddingBottom:40, color: "#1565C0"}]}>
               Realizaremos una serie de preguntas para buscar a qué es alérgico su bebé.
             </Text>
 
-            <View style={gs.card}>
+            <View style={[gs.card, { padding: 20 }]}>
               <Text style={gs.cardTitle}>{questions[currentQuestion].question}</Text>
 
               {questions[currentQuestion].type === "boolean" && (
@@ -69,6 +73,7 @@ export default function Allergens() {
           </View>
         )}
       </ScrollView>
+      </ImageBackground>
     </View>
   );
 }

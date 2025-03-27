@@ -1,0 +1,76 @@
+xproject:
+  name: 'ISPP-2024-L3-08'
+  owner: 'L3'
+  teamId: '08'
+  identities: {}
+  notifications:
+    email: 'dandelpin@alum.us.es'
+  members:
+    member1:
+      name: 'Paula'
+      surname: 'Luna' 
+      githubUsername: 'paulalunanavarro'
+    member2:
+      name: 'Miguel'
+      surname: 'Galán' 
+      githubUsername: 'Migueel0'
+    member3:
+      name: 'Luis'
+      surname: 'Giraldo' 
+      githubUsername: 'Luis-Giraldo-Santiago'
+    member4:
+      name: 'Lucía'
+      surname: 'Noya' 
+      githubUsername: 'lucianoya'
+    member5:
+      name: 'Josué'
+      surname: 'Rodríguez' 
+      githubUsername: 'JosueRodLop'
+    member6:
+      name: 'Jose'
+      surname: 'Morgado' 
+      githubUsername: 'josemorgado'
+    member7:
+      name: 'Jose'
+      surname: 'García' 
+      githubUsername: 'JoseGTD'
+    member8:
+      name: 'Javier'
+      surname: 'Ulecia' 
+      githubUsername: 'javulegar'
+    member9:
+      name: 'Javier'
+      surname: 'Santos' 
+      githubUsername: 'javsanmar5'
+    member10:
+      name: 'Felipe'
+      surname: 'Solís' 
+      githubUsername: 'Fsolis19'
+    member11:
+      name: 'Enrique'
+      surname: 'García' 
+      githubUsername: 'Enrgaraba'
+    member12:
+      name: 'David'
+      surname: 'Vargas' 
+      githubUsername: 'davvarmun'
+    member13:
+      name: 'David'
+      surname: 'Fuentelsaz' 
+      githubUsername: 'DavidFuentelsazRodriguez'
+    member14:
+      name: 'Daniel'
+      surname: 'del Castillo' 
+      githubUsername: 'dedece65'
+    member15:
+      name: 'Antonio'
+      surname: 'Jiménez' 
+      githubUsername: 'antjimort'
+    member16:
+      name: 'Ángela'
+      surname: 'López' 
+      githubUsername: 'angelalop03'
+    member17:
+      name: 'Álvaro'
+      surname: 'Jiménez' 
+      githubUsername: 'Alvar0j'

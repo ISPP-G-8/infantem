@@ -2,42 +2,51 @@ package com.isppG8.infantem.infantem.allergen;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AllergenService {
 
-    @Autowired
     private AllergenRepository allergenRepository;
 
+    @Autowired
+    public AllergenService(AllergenRepository allergenRepository) {
+        this.allergenRepository = allergenRepository;
+    }
+
+    @Transactional(readOnly = true)
     public List<Allergen> getAllAllergens() {
         return allergenRepository.findAll();
     }
 
-    public Optional<Allergen> getAllergenById(Long id) {
-        return allergenRepository.findById(id);
+    @Transactional(readOnly = true)
+    public Allergen getAllergenById(Long id) {
+        return allergenRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Allergen", "id", id));
     }
 
+    @Transactional
     public Allergen createAllergen(Allergen allergen) {
         return allergenRepository.save(allergen);
     }
 
-    public Optional<Allergen> updateAllergen(Long id, Allergen allergenDetails) {
+    @Transactional
+    public Allergen updateAllergen(Long id, Allergen allergenDetails) {
         return allergenRepository.findById(id).map(allergen -> {
             allergen.setName(allergenDetails.getName());
             allergen.setDescription(allergenDetails.getDescription());
             return allergenRepository.save(allergen);
-        });
+        }).orElseThrow(() -> new ResourceNotFoundException("Allergen", "id", id));
     }
 
-    public boolean deleteAllergen(Long id) {
-        if (allergenRepository.existsById(id)) {
-            allergenRepository.deleteById(id);
-            return true;
+    @Transactional
+    public void deleteAllergen(Long id) {
+        if (!allergenRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Allergen", "id", id);
         }
-        return false;
+        allergenRepository.deleteById(id);
     }
 }
-

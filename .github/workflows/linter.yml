@@ -25,6 +25,16 @@ jobs:
           distribution: 'adopt'
           java-version: 21 
 
+      - name: Install formatter dependency
+        run: mvn dependency:get -Dartifact=net.revelc.code.formatter:formatter-maven-plugin:2.25.0
+
+      - name: Apply formatter
+        run: mvn formatter:format
+
+      - uses: stefanzweifel/git-auto-commit-action@8621497c8c39c72f3e2a999a26b4ca1b5058a842
+        with:
+          commit_message: "fix: Apply formatter"
+
       - name: Check linter
         run: mvn checkstyle:check
 

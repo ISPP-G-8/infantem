@@ -17,27 +17,25 @@ import com.isppG8.infantem.infantem.baby.Baby;
 import com.isppG8.infantem.infantem.nutritionalContributionFoodSource.NutritionalContributionFoodSource;
 import com.isppG8.infantem.infantem.nutritionalContributionNutrient.NutritionalContributionNutrient;
 
-
 @Entity
 @Table(name = "nutr_contr_table")
 @Getter
 @Setter
 @JsonIdentityInfo(scope = NutritionalContribution.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class NutritionalContribution{
+public class NutritionalContribution {
 
-
-    //Id
+    // Id
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //Atributos
+    // Atributos
 
     private Integer minAgeMonths;
     private Integer maxAgeMonths;
 
-    //Relaciones
+    // Relaciones
 
     @OneToOne
     private Baby baby;

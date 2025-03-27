@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class NutritionalContributionController {
     @Autowired
     private NutritionalContributionService nutritionalContributionService;
-    
+
     @GetMapping
     public List<NutritionalContribution> getNutritionalContribution() {
         return nutritionalContributionService.getAllNutritionalContributions();
@@ -26,21 +26,21 @@ public class NutritionalContributionController {
 
     @GetMapping("/{id}")
     public ResponseEntity<NutritionalContribution> getNutritionalContributionById(@PathVariable Long id) {
-        return nutritionalContributionService.getNutritionalContributionById(id)
-                .map(ResponseEntity::ok)
+        return nutritionalContributionService.getNutritionalContributionById(id).map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-    
+
     @PostMapping
-    public NutritionalContribution createNutritionalContribution(@RequestBody NutritionalContribution nutritionalContribution) {
+    public NutritionalContribution createNutritionalContribution(
+            @RequestBody NutritionalContribution nutritionalContribution) {
         return nutritionalContributionService.createNutritionalContribution(nutritionalContribution);
     }
-    
+
     @PutMapping("/{id}")
-    public ResponseEntity<NutritionalContribution> updateNutritionalContribution(@PathVariable Long id, @RequestBody NutritionalContribution nutritionalContribution) {
+    public ResponseEntity<NutritionalContribution> updateNutritionalContribution(@PathVariable Long id,
+            @RequestBody NutritionalContribution nutritionalContribution) {
         return nutritionalContributionService.updateNutritionalContribution(id, nutritionalContribution)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+                .map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
@@ -52,6 +52,4 @@ public class NutritionalContributionController {
         }
     }
 
-    
 }
-

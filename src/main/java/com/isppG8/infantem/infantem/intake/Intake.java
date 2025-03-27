@@ -4,7 +4,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -32,25 +36,29 @@ public class Intake {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
+    @PastOrPresent
     private LocalDateTime date;
 
-    private double quantity;
-
-    private String observations;
-    public String description;
-
-    @ManyToMany()
-    @JoinTable(
-        name = "intake_recipe",
-        joinColumns = @JoinColumn(name = "intake_id"),
-        inverseJoinColumns = @JoinColumn(name = "recipe_id")
-    )
     @NotNull
+    @Positive
+    private Integer quantity;
+
+    @NotBlank
+    @Size(max = 255)
+    private String observations;
+
+    @ManyToMany
+    @JoinTable(name = "intake_recipe", joinColumns = @JoinColumn(name = "intake_id"), inverseJoinColumns = @JoinColumn(name = "recipe_id"))
+    @NotNull
+    @Size(min = 1)
     private List<Recipe> recipes = new ArrayList<>();
 
     @ManyToOne
     private IntakeSymptom IntakeSymptom;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "baby_id")
     private Baby baby;

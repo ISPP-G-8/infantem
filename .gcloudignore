@@ -27,6 +27,9 @@ jest.config.js
 *.iml
 *.swp
 
+#Docs folder
+docs/
+
 # Excepciones para incluir archivos importantes
 !frontend/dist/assets/node_modules/
 !frontend/.env
