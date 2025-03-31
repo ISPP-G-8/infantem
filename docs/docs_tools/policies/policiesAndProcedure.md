@@ -188,7 +188,7 @@ El proyecto seguirá una estrategia de versionado basada en el esquema vX.Y.Z, d
 
 Cada versión etiquetada en la rama de producción main activará un workflow de Release automática.
 
-Ver [Análisis CDCI](../../docs_project/analisys/Análisis%20CDCI.md)
+Ver [Análisis CDCI](../../docs_project/analisys/CDCIAnalysis.md.md)
 
 
 ## Políticas de las tareas
@@ -199,7 +199,7 @@ Una vez que se ha terminado una tarea y está en In Review, se puede dar dos cas
 
 Para saber si tu tarea es hija en tu tarea mirar la derecha y tiene que tener un apartado llamado Relationships relleno, como el de la imagen. 
 
-![Portada](../../../frontend/assets/Documentos/TareaHija.png)
+![Portada](../../images/TareaHija.png)
 
 Una vez acabada la tarea y llevada a In Review, se deberá notificar al responsable de la siguiente tarea:
 - En el caso de desarrollo Frontend, avisar a la persona encargada de test de frontend.
