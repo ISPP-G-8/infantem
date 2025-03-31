@@ -1,11 +1,11 @@
 # CI/CD
 
-![Portada](../../../frontend/assets/Documentos/Infantem.png)
+![Portada](../../images/Infantem.png)
 
 
-**Fecha:** 18/02/2025  
+**Fecha:** 31/03/2025  
 **Grupo 8:** Infantem  
-**Sprint 1**
+**Sprint 3**
 
 ## Integrantes del Grupo
 <div style="display: flex; justify-content: space-between; gap: 2px;">
@@ -39,18 +39,15 @@
 
 ---
 
+## Document contributors
 
+- Luis Giraldo
+  - Actualiza al formato del sprint 3
 
 ## Índice
-- [Colaboradores del documento](#colaboradores-del-documento)
 - [Introducción](#introducción)
 - [Integración continua](#integración-continua)
 - [Despliegue continuo](#despliegue-continuo)
-
-
-## Colaboradores del documento
-- Luis Giraldo
-  - Creó el documento en md.
 
 ##  Introducción
 

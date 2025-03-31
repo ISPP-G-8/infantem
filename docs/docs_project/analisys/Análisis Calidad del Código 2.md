@@ -1,10 +1,11 @@
 # Análisis de la Calidad del Código con SonarQube 2
 
-![Portada](../imagenes/Infantem.png)
+![Portada](../../images/Infantem.png)
 
-**Fecha:** 27/03/2025  
+
+**Fecha:** 31/03/2025  
 **Grupo 8:** Infantem  
-**Sprint 2**
+**Sprint 3**
 
 ## Integrantes del Grupo
 <div style="display: flex; justify-content: space-between; gap: 2px;">
@@ -21,9 +22,10 @@
       <li>Javier Santos Martín</li>
     </ul>
   </div>
+
   <div>
     <ul style="padding-left: 0; list-style: none;">
-      <li>Javier Ulecia García</li>
+    <li>Javier Ulecia García</li>
       <li>José García de Tejada Delgado</li>
       <li>Jose Maria Morgado Prudencio</li>
       <li>Josué Rodríguez López</li>
@@ -35,8 +37,12 @@
   </div>
 </div>
 
+---
 ## Colaboradores del documento
-- **Paula Luna Navarro**
+- Paula Luna Navarro
+  - Creó el documento.
+- Luis Giraldo
+  - Actualizó el documento para el sprint 3.
 
 ##  Introducción  
 Este documento proporciona un análisis de la calidad del código del proyecto, basado en el escaneo realizado con **SonarQube**. Se detallan métricas clave, puntos fuertes, áreas de mejora y un plan de acción para optimizar la calidad del código.

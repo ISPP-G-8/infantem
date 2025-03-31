@@ -1,10 +1,11 @@
 # Análisis DAFO
 
-![Portada](../../../docs/imagenes/Infantem.png)
+![Portada](../../images/Infantem.png)
 
-**Fecha:** 18/02/2025  
+
+**Fecha:** 31/03/2025  
 **Grupo 8:** Infantem  
-**Sprint 1**
+**Sprint 3**
 
 ## Integrantes del Grupo
 <div style="display: flex; justify-content: space-between; gap: 2px;">
@@ -37,7 +38,9 @@
 </div>
 
 ---
-
+## Colaboradores del documento
+- Luis Giraldo
+  - Actualizó el documento para el sprint 3.
 
 ## Índice
 1. [Debilidades (Factores internos negativos)](#debilidades)

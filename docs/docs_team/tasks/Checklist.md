@@ -1,11 +1,11 @@
 # Checklist
 
-![Portada](../../../frontend/assets/Documentos/Infantem.png)
+![Portada](../../images/Infantem.png)
 
 
-**Fecha:** 18/02/2025  
+**Fecha:** 31/03/2025  
 **Grupo 8:** Infantem  
-**Sprint 1**
+**Sprint 3**
 
 ## Integrantes del Grupo
 <div style="display: flex; justify-content: space-between; gap: 2px;">
@@ -36,17 +36,16 @@
     </ul>
   </div>
 </div>
-
 ---
 
-## Índice
-- [Colaboradores del documento](#colaboradores-del-documento)
-- [Lista de tareas](#lista-de-tareas)
-
 ## Colaboradores del documento
-- Luis Giraldo
-  - Creó el documento en md.
 
+- Luis Giraldo  
+  - Creó el documento en md.
+  - Actualizó el documento al sprint 3.
+
+## Índice
+- [Lista de tareas](#lista-de-tareas)
 
 
 ## Lista de tareas

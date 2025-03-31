@@ -1,5 +1,6 @@
 # KBreports
-![Portada](../images/Infantem.png)
+
+![Portada](../../images/Infantem.png)
 
 
 **Fecha:** 27/03/2025  

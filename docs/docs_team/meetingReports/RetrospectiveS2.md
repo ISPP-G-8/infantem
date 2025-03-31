@@ -1,6 +1,6 @@
 ## Retrospective - Sprint 2
 
-![Portada](../imagenes/Infantem.png)
+![Portada](../../images/Infantem.png)
 
 
 **Fecha:** 27/03/2025  
@@ -38,10 +38,13 @@
 </div>
 
 ---
-
+## Colaboradores del documento
+- Lucía Noya Cano
+  - Creó el documento.
+- Luis Giraldo
+  - Actualizó el documento al sprint 3.
 
 ## Índice
-- [Colaboradores del documento](#colaboradores-del-documento)
 - [Riegos identificacdos](#riegos-identificacdos)
 - [Desarrollo con pinzas](#desarrollo-con-pinzas)
 - [Desarrollo conforme](#desarrollo-conforme)
@@ -50,13 +53,6 @@
 - [Acciones a tomar para los siguentes sprint](#acciones-a-tomar-para-los-siguentes-sprint)
 
 ---
-
-## Colaboradores del documento
-- Lucía Noya Cano
-  - Creó el documento.
-
----
-
 
 ## Riesgos identificados
 - Posibles retrasos en la implementación de la funcionalidad del pago debido a dificultades con la integración de Stripe.

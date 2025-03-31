@@ -1,13 +1,13 @@
 # Plantilla del Sprint 1
 
-![Portada](../../../docs/imagenes/Infantem.png)
+![Portada](../../images/Infantem.png)
 
-**Fecha:** 27/02/2025
-**Grupo 8:** Infantem
-**Sprint 2**
+
+**Fecha:** 31/03/2025  
+**Grupo 8:** Infantem  
+**Sprint 3**
 
 ## Integrantes del Grupo
-
 <div style="display: flex; justify-content: space-between; gap: 2px;">
   <div>
     <ul style="padding-left: 0; list-style: none;">
@@ -23,7 +23,7 @@
     </ul>
   </div>
 
-<div>
+  <div>
     <ul style="padding-left: 0; list-style: none;">
     <li>Javier Ulecia García</li>
       <li>José García de Tejada Delgado</li>
@@ -37,7 +37,11 @@
   </div>
 </div>
 
----
+--- 
+
+## Colaboradores del documento
+- Luis Giraldo
+  - Actualizó el documento al sprint 3
 
 ## Índice
 

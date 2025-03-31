@@ -1,11 +1,11 @@
-# Plantilla del Sprint 1
+# Análisis de riesgos
 
-![Portada](../../../docs/imagenes/Infantem.png)
+![Portada](../../images/Infantem.png)
 
 
-**Fecha:** 18/02/2025  
+**Fecha:** 31/03/2025  
 **Grupo 8:** Infantem  
-**Sprint 1**
+**Sprint 3**
 
 ## Integrantes del Grupo
 <div style="display: flex; justify-content: space-between; gap: 2px;">
@@ -39,15 +39,19 @@
 
 ---
 
+## Colaboradores del documento
+- Luis Giraldo
+  - Actualizó el documento para el sprint 3.
+
 
 ## Índice
-1. Riesgos
-    1.1. Riesgos Técnicos
-    1.2. Riesgos Legales y Regulatorios
-    1.3. Riesgos de Negocio
-    1.4. Riesgos Operativos
-2. Tabla de priorización de riesgos
-3. Análisis sobre la evolución de los riesgos
+- [1. Riesgos](#1-riesgos)
+  - [1.1. Riesgos Técnicos](#11-riesgos-técnicos)
+  - [1.2. Riesgos Legales y Regulatorios](#12-riesgos-legales-y-regulatorios)
+  - [1.3. Riesgos de Negocio](#13-riesgos-de-negocio)
+  - [1.4. Riesgos Operativos](#14-riesgos-operativos)
+- [2. Tabla de priorización de riesgos](#2-tabla-de-priorización-de-riesgos)
+- [3. Análisis sobre la evolución de los riesgos](#3-análisis-sobre-la-evolución-de-lo-riesgos)
 
 
 

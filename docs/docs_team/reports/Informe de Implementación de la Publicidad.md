@@ -1,11 +1,11 @@
 # Informe de Implementación de la Publicidad
 
-![Portada](../../../frontend/assets/Documentos/Infantem.png)
+![Portada](../../images/Infantem.png)
 
 
-**Fecha:** 18/02/2025  
+**Fecha:** 31/03/2025  
 **Grupo 8:** Infantem  
-**Sprint 1**
+**Sprint 3**
 
 ## Integrantes del Grupo
 <div style="display: flex; justify-content: space-between; gap: 2px;">
@@ -39,21 +39,20 @@
 
 ---
 
+## Colaboradores del documento
 
+- Luis Giraldo  
+  - Creó el documento en md.
+  - Actualizó el documento al sprint 3.
 
 
 
 ## Índice
-- [Colaboradores del documento](#colaboradores-del-documento)
 - [Introducción](#introducción)
 - [Comparativa](#comparativa)
 - [Opción 1](#opción-1)
 - [Opción 2](#opción-2)
 - [Conclusiones](#conclusiones)
-
-## Colaboradores del documento
-- Luis Giraldo
-  - Creó el documento en md.
 
 
 ## Introducción
