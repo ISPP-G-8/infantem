@@ -60,13 +60,13 @@ En el siguiente documento se pretende evaluar la productividad global del equipo
 
 ### Productividad individual 
 
-![Gráfico de la productividad individual](../../../frontend/assets/Documentos/EsfuerzoPorSemana.png)
+![Gráfico de la productividad individual](../../images/EsfuerzoPorSemana.png)
 
 En el gráfico se muestra la productividad individual, en términos de horas, de todos los miembros del equipo.
 
 ### Productividad global
 
-![Gráfico de la productividad global](../../../frontend/assets/Documentos/Productividad%20global.png)
+![Gráfico de la productividad global](../../images/Productividad%20global.png)
 
 En el gráfico se muestra la comparativa de las horas estimadas en cada semana del sprint (10 por miembro del grupo), frente a las horas contabilizadas.
 
