@@ -59,7 +59,7 @@ La integración continua (CI) del proyecto se llevará a cabo utilizando Github 
 
 ### Estrategia de ramas
 
-La estrategia y política de ramas puede ser encontrada en detalle en el documento [Políticas y procedimiento](../../docs_tools/policies/Políticas%20y%20procedimiento.md#política-de-ramas). Aquí se explicarán los conceptos principales para poder entender el buen funcionamiento de la integración continua.
+La estrategia y política de ramas puede ser encontrada en detalle en el documento [Políticas y procedimiento](../../docs_tools/policies/policiesAndProcedure.md#política-de-ramas). Aquí se explicarán los conceptos principales para poder entender el buen funcionamiento de la integración continua.
 - **Rama principal**. La rama ***main*** contiene el código listo para producción.
 - **Ramas de desarrollo**.
   - La rama ***feat/*** donde se desarrollan nuevas funcionalidades.
@@ -92,7 +92,7 @@ Para este despliegue se implementará un sistema de despliegue continuo basado e
 
 #### Releases automáticas
 Cuando en la rama de producción **main**, se reciba una tag con una versión nueva, se realizará de forma automática una release con dicha tag.
-Ver [Políticas y procedimiento](../../docs_tools/policies/Políticas%20y%20procedimiento.md#política-de-versionado).
+Ver [Políticas y procedimiento](../../docs_tools/policies/policiesAndProcedure.md#política-de-versionado).
 
 #### Despliegue automático
 Cuando en la rama de producción **main**, se reciba un push, se realizará un despliegue automático en Google App Engine.
