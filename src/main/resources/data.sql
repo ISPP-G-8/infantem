@@ -44,7 +44,7 @@ INSERT INTO baby_table (name, birth_date, genre, weight, height, cephalic_perime
 
 -- Inserción de relaciones entre bebés y alérgenos
 INSERT INTO baby_allergen (allergen_id, baby_id) VALUES
-(2, 2),
+(1, 2),
 (3, 3),
 (4, 4),
 (5, 5);
@@ -126,16 +126,18 @@ INSERT INTO intake_symptom (description, date) VALUES
 -- Inserción de ingestas
 INSERT INTO intake_table (date, quantity, observations, baby_id, intake_symptom_id) VALUES
 ('2025-03-01 08:00:00', 200, 'Desayuno: el bebé comió bien, sin problemas.', 1, 1),
-('2025-03-01 12:30:00', 150, 'Almuerzo: el bebé dejó un poco de comida.', 1, 2),
+('2025-03-02 08:00:00', 200, 'Desayuno: el bebé comió bien, sin problemas.', 1, 2),
 ('2025-03-01 18:00:00', 180, 'Merienda: el bebé disfrutó la comida.', 2, 3),
-('2025-03-02 08:30:00', 220, 'Desayuno: el bebé comió todo.', 3, 1),
-('2025-03-02 13:00:00', 160, 'Almuerzo: el bebé tuvo un poco de malestar.', 4, 4);
+('2025-03-01 18:00:00', 180, 'Merienda: el bebé disfrutó la comida.', 3, 4),
+('2025-03-02 13:00:00', 160, 'Almuerzo: el bebé tuvo un poco de malestar.', 4, 5);
 
 -- Relación entre intake y recetas
 INSERT INTO intake_recipe (intake_id, recipe_id) VALUES
-(1, 1), (1, 2), 
+(1, 1), 
+(1, 2), 
 (2, 3),        
-(3, 4), (3, 5);
+(3, 4),
+(3, 5);
 
 
 -- Inserción de enfermedades en la tabla disease_table

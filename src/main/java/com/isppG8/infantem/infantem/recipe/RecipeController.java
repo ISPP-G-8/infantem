@@ -117,6 +117,12 @@ public class RecipeController {
         return ResponseEntity.ok(recipes.stream().map(RecipeDTO::new).toList());
     }
 
+    @GetMapping("/recommended/age/{age}")
+    public ResponseEntity<List<RecipeDTO>> getRecommendedRecipesByAge(@PathVariable Integer age) {
+        List<Recipe> recipes = recipeService.getRecommendedRecipesByAge(age);
+        return ResponseEntity.ok(recipes.stream().map(RecipeDTO::new).toList());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Recipe> getRecipeById(@PathVariable Long id) {
 

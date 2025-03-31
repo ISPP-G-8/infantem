@@ -120,7 +120,7 @@ public class CalendarServiceTest {
         assertTrue(baby1Calendar.getVaccines().isEmpty(), "The first baby should not have any vaccines.");
 
         // Check intakes
-        assertEquals(2, baby1Calendar.getIntakes().size(), "The first baby should have 2 intakes");
+        assertEquals(1, baby1Calendar.getIntakes().size(), "The first baby should have 2 intakes");
         assertEquals(1, baby1Calendar.getIntakes().get(0).getId(), "The first intake should have id 1");
         assertEquals(LocalTime.of(8, 00), baby1Calendar.getIntakes().get(0).getDate(),
                 "The first intake should be at 08:00:00");

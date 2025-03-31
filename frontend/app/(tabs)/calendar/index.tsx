@@ -166,15 +166,15 @@ const CalendarTab = () => {
     <View style={[gs.card, { maxWidth:600, padding: 10 }]}>
       {selectedDate ? (
         <View>
-          <Text style={[gs.headerText, { textAlign: "center" }]}>Eventos del día {selectedDate}:</Text>
+          <Text style={[gs.headerText, { textAlign: "center",color:"#1565C0" }]}>Eventos del día {selectedDate}:</Text>
           {events[selectedDate] ? (
             Object.keys(events[selectedDate]).map((babyId) => (
               <View key={babyId} style={{ marginTop: 10 }}>
-                <Text style={[gs.bodyText, { fontWeight: "bold", textAlign: "center" }]}>
+                <Text style={[gs.bodyText, { fontWeight: "bold",color:"#1565C0",marginRight: 30 }]}>
                   {babies[babyId] || `Bebé desconocido (${babyId})`}:
                 </Text>
                 {events[selectedDate][babyId].map((event, index) => (
-                  <Text key={index} style={[gs.bodyText, { textAlign: "center" }]}>
+                  <Text key={index} style={[gs.bodyText, { textAlign: "center",color:"#1565C0" }]}>
                     - {event}
                   </Text>
                 ))}
@@ -182,11 +182,11 @@ const CalendarTab = () => {
               </View>
             ))
           ) : (
-            <Text style={[gs.bodyText, { textAlign: "center" }]}>No hay eventos para el día seleccionado.</Text>
+            <Text style={[gs.bodyText, { textAlign: "center",color:"#1565C0" }]}>No hay eventos para el día seleccionado.</Text>
           )}
         </View>
       ) : (
-        <Text style={[gs.bodyText, { textAlign: "center" }]}>Selecciona un día para ver información</Text>
+        <Text style={[gs.bodyText, { textAlign: "center",color:"#1565C0" }]}>Selecciona un día para ver información</Text>
       )}
     </View>
   );
@@ -194,13 +194,13 @@ const CalendarTab = () => {
   // Renderizar el contenido principal
   const renderContent = () => (
     <ImageBackground
-      source={require("../../../static/images/Background.png")}
-      style={{ flex: 1, width: "100%", height: "100%" }}
+      style={{ flex: 1, width: "100%", height: "100%", backgroundColor: "#E3F2FD" }}
       imageStyle={{ resizeMode: "cover", opacity: 0.9 }}
     >
       <ScrollView contentContainerStyle={{ flexGrow: 1, alignItems: "center", justifyContent: "center", padding: 20 }}>
-        <Text style={[gs.headerText, { textAlign: "center" }]}>Calendario</Text>
-        <Text style={[gs.bodyText, { textAlign: "center" }]}>Selecciona una fecha para ver información</Text>
+      <Text style={{ color: "#1565C0", fontSize: 36, fontWeight: "bold", textAlign: "center", marginBottom: 10 }}>
+      Calendario</Text>
+        <Text style={[gs.bodyText, { textAlign: "center",color:"#1565C0" }]}>Selecciona una fecha para ver información</Text>
         {loading ? (
           <ActivityIndicator size="large" color="#00adf5" />
         ) : (

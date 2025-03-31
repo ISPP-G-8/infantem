@@ -1,8 +1,9 @@
 import { router, useLocalSearchParams } from "expo-router";
-import { View, Text, TouchableOpacity, Alert, ScrollView, TextInput } from "react-native";
+import { View, Text, TouchableOpacity, Alert, ScrollView,Image,useWindowDimensions , TextInput } from "react-native";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import { Recipe } from "../../../types";
+
 
 export default function RecipeDetails() {
 
@@ -15,6 +16,10 @@ export default function RecipeDetails() {
   const [isEditing, setIsEditing] = useState(false);
 
   const [isLoading, setIsLoading] = useState(true);
+  const { width } = useWindowDimensions();
+  const isMobile = width < 768; // Puedes ajustar este umbral según tu diseño
+
+
 
   const gs = require('../../../static/styles/globalStyles');
 
@@ -141,84 +146,104 @@ export default function RecipeDetails() {
   }
 
   return (
-    <ScrollView contentContainerStyle={[gs.container, { paddingTop: 100, paddingBottom: 100, backgroundColor: "transparent" }]}>
-      <View style={[gs.container, { paddingTop: 0, marginTop: 0 }]}>
-        <View style={[gs.content, { marginTop: 0 }]}>
-          <Text style={[gs.cardTitle, { marginBottom: 10 }]}>Nombre de la receta:</Text>
-          <TextInput
-            style={gs.card}
-            value={recipe.name}
-            editable={isEditing}
-            onChangeText={(text) => setRecipe({ ...recipe, name: text })}
-          />
-          <Text style={[gs.cardTitle, { marginBottom: 10 }]}>Descripción:</Text>
-          <TextInput
-            style={gs.card}
-            value={recipe.description}
-            editable={isEditing}
-            onChangeText={(text) => setRecipe({ ...recipe, description: text })}
-          />
-          <Text style={[gs.cardTitle, { marginBottom: 10 }]}>Edad mínima recomendada:</Text>
-          <TextInput
-            style={gs.card}
-            value={recipe.minRecommendedAge.toString()}
-            editable={isEditing}
-            onChangeText={(text) => {
-              const parsedValue = parseInt(text);
-              setRecipe({ ...recipe, minRecommendedAge: isNaN(parsedValue) ? 0 : parsedValue });
+    <View style={{ flex: 1, backgroundColor: "#E3F2FD" }}>
+      <ScrollView contentContainerStyle={{ padding: 20 }}>
+      <View
+        style={{
+        backgroundColor: "white",
+        borderRadius: 16,
+        padding: 20,
+        shadowColor: "#000",
+        shadowOpacity: 0.1,
+        shadowRadius: 10,
+        elevation: 5,
+        flexDirection: isMobile ? "column" : "row",
+        gap: 20,
+        alignItems: isMobile ? "center" : "flex-start",
+  }}
+>
+
+          {/* COLUMNA IZQUIERDA - Imagen */}
+          <Image
+            source={require("frontend/assets/adaptive-icon.png")} 
+            style={{
+              width: 300,
+              height: 300,
+              borderRadius: 16,
             }}
+            resizeMode="cover"
           />
-          {recipe.maxRecommendedAge && (
-            <>
-              <Text style={[gs.cardTitle, { marginBottom: 10 }]}>Edad máxima recomendada:</Text>
-              <TextInput
-                style={gs.card}
-                value={recipe.maxRecommendedAge.toString()}
-                editable={isEditing}
-                onChangeText={(text) => {
-                  const parsedValue = parseInt(text);
-                  setRecipe({ ...recipe, maxRecommendedAge: isNaN(parsedValue) ? 0 : parsedValue });
-                }}
-              />
-            </>
-          )}
-          <Text style={[gs.cardTitle, { marginBottom: 10 }]}>Ingredientes:</Text>
-          {isEditing && (
-            <TextInput
-              style={gs.card}
-              value={recipe.ingredients}
-              editable={isEditing}
-              onChangeText={(text) => setRecipe({ ...recipe, ingredients: text })}
-            />
-          )}
-          {!isEditing && (
-            <>
-              {recipe.ingredients.split(",").map((ingredient, index) => (
-                <Text key={index} style={gs.card}>{ingredient}</Text>
-              ))}
-            </>
-          )}
-          <Text style={[gs.cardTitle, { marginBottom: 10 }]}>Elaboración:</Text>
-          <TextInput
-            style={gs.card}
-            value={recipe.elaboration}
-            editable={isEditing}
-            onChangeText={(text) => setRecipe({ ...recipe, elaboration: text })}
-          />
-          {isEditing && (
-            <TouchableOpacity style={[gs.mainButton, { marginBottom: 20 }]} onPress={handleSaveChanges}>
-              <Text style={gs.mainButtonText}>Guardar Cambios</Text>
-            </TouchableOpacity>
-          )}
-          {isOwned && !isEditing && (
-            <TouchableOpacity style={[gs.mainButton, { marginBottom: 20 }]} onPress={handleEditRecipe}>
-              <Text style={gs.mainButtonText}>Editar Receta</Text>
-            </TouchableOpacity>
-          )}
+  
+          {/* COLUMNA DERECHA - Detalles */}
+          <View style={{ flex: 1 }}>
+            {/* Nombre */}
+            <Text style={{ fontSize: 22, fontWeight: "bold", marginBottom: 12,color: "#1565C0" }}>
+              {recipe.name}
+            </Text>
+  
+            {/* Descripción */}
+            <Text style={{ fontSize: 16, marginBottom: 20,color: "#1565C0" }}>
+              {recipe.description}
+            </Text>
+  
+            {/* Ingredientes */}
+            <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 10,color: "#1565C0" }}>
+              Ingredientes:
+            </Text>
+            {recipe.ingredients.split(",").map((ingredient, index) => (
+              <Text key={index} style={{ marginBottom: 4,color: "#1565C0" }}>
+                • {ingredient.trim()}
+              </Text>
+            ))}
+  
+            {/* Elaboración */}
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "bold",
+                marginTop: 20,
+                marginBottom: 10
+                ,color: "#1565C0"
+              }}
+            >
+              Elaboración:
+            </Text>
+            <Text style={{ lineHeight: 22,color: "#1565C0" }}>{recipe.elaboration}</Text>
+  
+            {/* Edad recomendada */}
+            <Text style={{ fontSize: 16, fontWeight: "bold", marginTop: 20,color: "#1565C0" }}>
+              Edad recomendada:
+            </Text>
+            <Text style={{ color: "#1565C0" }}>
+              De {recipe.minRecommendedAge} meses
+              {recipe.maxRecommendedAge
+                ? ` a ${recipe.maxRecommendedAge} meses`
+                : ""}
+            </Text>
+  
+            {/* Botones de acción */}
+            {isOwned && !isEditing && (
+              <TouchableOpacity
+                style={[gs.mainButton, { marginTop: 30 }]}
+                onPress={handleEditRecipe}
+              >
+                <Text style={gs.mainButtonText}>Editar Receta</Text>
+              </TouchableOpacity>
+            )}
+            {isEditing && (
+              <TouchableOpacity
+                style={[gs.mainButton, { marginTop: 30 }]}
+                onPress={handleSaveChanges}
+              >
+                <Text style={gs.mainButtonText}>Guardar Cambios</Text>
+              </TouchableOpacity>
+            )}
+          </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
+  
 }
 
 

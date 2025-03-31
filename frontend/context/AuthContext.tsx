@@ -96,7 +96,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setToken(null); 
       setUser(null);
       setIsAuthenticated(false);
-      router.replace('/signin');
+      router.replace('/');
     } catch (error) {
       console.error('Sign out failed', error);
     }

@@ -25,6 +25,7 @@ export default function Account() {
 
   useEffect(() => {
           if (!token) return; // Evita ejecutar el efecto si jwt es null o undefined
+          console.log(token)
           try {
               const decodedToken: any = jwtDecode(token);
               setUserId(decodedToken.jti);
@@ -128,15 +129,14 @@ export default function Account() {
 
   return (
     <ImageBackground
-      source={require("../../../static/images/Background.png")}
-      style={{ flex: 1, width: "100%", height: "100%", justifyContent: "center" }}
+      style={{ flex: 1, width: "100%", height: "100%", justifyContent: "center", backgroundColor: "#E3F2FD" }}
       imageStyle={{ resizeMode: "cover", opacity: 0.9 }}
     >
-      <ScrollView contentContainerStyle={[gs.container, { paddingTop: 40, backgroundColor: "transparent" }]}>
-        <Image source={require("../../../static/images/Bib.png")} style={{ position: 'absolute', top: "20%", right: "72%", width: 120, height: 120, transform: [{ rotate: '-15deg' }] }} />
-
-
-        <Text style={[gs.headerText, { color: "#1565C0" }]}>Perfil</Text>
+      <ScrollView contentContainerStyle={[gs.container, { paddingTop: 20, paddingBottom: 100, backgroundColor: "transparent" }]}>
+        <Text 
+         style={{ color: "#1565C0", fontSize: 36, fontWeight: "bold", textAlign: "center", marginBottom: 30 }}>
+        Perfil</Text>
+  
 
         {user && !subscription && (
           <Link href={"/account/premiumplan"} style={[gs.mainButton, { marginVertical: 10, textAlign: "center", width: "80%" }]}>
@@ -146,7 +146,11 @@ export default function Account() {
 
 
         <TouchableOpacity style={gs.profileImageContainer} onPress={() => isEditing && setModalVisible(true)} disabled={!isEditing}>
-          <Image source={user?.profilePhotoRoute ? { uri: user.profilePhotoRoute } : avatarOptions[0]} style={gs.profileImage} />
+           {/* <Image source={user?.profilePhotoRoute ? { uri: user.profilePhotoRoute } : avatarOptions[0]} style={gs.profileImage} /> */}
+          <Image
+            source={require("../../../static/images/avatar2.png")}
+            style={gs.profileImage}
+          />
         </TouchableOpacity>
 
         {user && (
@@ -186,9 +190,9 @@ export default function Account() {
         </TouchableOpacity>
 
         <Modal visible={modalVisible} animationType="fade" transparent={true}>
-          <View style={gs.modalOverlay}>
-            <View style={gs.modalContent}>
-              <Text style={gs.modalTitle}>Selecciona tu avatar</Text>
+          <View style={[gs.modalOverlay,{marginTop: 110,width: "80%",marginHorizontal: "18%"}]}>
+            <View style={[gs.modalContent,{ alignItems: "center", justifyContent: "center" }]}>
+              <Text style={[gs.modalTitle,{color: "#1565C0"}]}>Selecciona tu avatar</Text>
               <FlatList
                 data={avatarOptions}
                 keyExtractor={(item, index) => index.toString()}
@@ -199,9 +203,29 @@ export default function Account() {
                   </TouchableOpacity>
                 )}
               />
-              <TouchableOpacity style={gs.closeModalButton} onPress={() => setModalVisible(false)}>
-                <Text style={gs.closeModalButtonText}>Cerrar</Text>
-              </TouchableOpacity>
+            <TouchableOpacity
+                style={{
+                backgroundColor: "#1565C0",
+                paddingVertical: 10,
+                paddingHorizontal: 20,
+                borderRadius: 8,
+                alignItems: "center",
+                alignSelf: "center",
+                marginTop: 20,
+                }}
+                  onPress={() => setModalVisible(false)}
+                  >
+              <Text
+                style={{
+                color: "white",
+                fontSize: 12,
+                fontFamily: "Loubag-Medium", // Elimínalo si no usas fuente personalizada
+              }}
+              >
+              Cerrar
+              </Text>
+            </TouchableOpacity>
+
             </View>
           </View>
         </Modal>

@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 //import { Redirect } from "expo-router";
 
 export default function TabLayout() {
-  
+
   const { isAuthenticated, isLoading, checkAuth } = useAuth();
 
   useEffect(() => {
@@ -24,8 +24,8 @@ export default function TabLayout() {
   }
 
   return (
-      <Tabs>
-        <Tabs.Screen
+    <Tabs>
+      <Tabs.Screen
         name="recipes"
         options={{
           headerShown: false,
@@ -33,10 +33,10 @@ export default function TabLayout() {
           tabBarLabel: "Recetas",
           tabBarIcon: ({ color }) => (
             <Ionicons name='list' color={color} size={24} />
-            ),
+          ),
         }}
-        />
-        <Tabs.Screen
+      />
+      <Tabs.Screen
         name="allergens"
         options={{
           lazy: true,
@@ -46,8 +46,8 @@ export default function TabLayout() {
             <Ionicons name='medical' color={color} size={24} />
           ),
         }}
-        />
-        <Tabs.Screen
+      />
+      <Tabs.Screen
         name="baby"
         options={{
           lazy: true,
@@ -57,19 +57,8 @@ export default function TabLayout() {
             <Ionicons name='body' color={color} size={24} />
           ),
         }}
-        />
-        <Tabs.Screen
-        name="account"
-        options={{
-lazy: true,
-      headerShown: false,
-      tabBarLabel: "Cuenta",
-      tabBarIcon: ({ color }) => (
-          <Ionicons name='man' color={color} size={24} />
-          ),
-        }}
-        />
-        <Tabs.Screen
+      />
+      <Tabs.Screen
         name="calendar"
         options={{
           lazy: true,
@@ -80,10 +69,21 @@ lazy: true,
           ),
         }}
       />
+      <Tabs.Screen
+        name="account"
+        options={{
+          lazy: true,
+          headerShown: false,
+          tabBarLabel: "Cuenta",
+          tabBarIcon: ({ color }) => (
+            <Ionicons name='man' color={color} size={24} />
+          ),
+        }}
+      />
     </Tabs>
-      
-		);
+
+  );
   // We should return this if the user is not logged in
-	// return <Redirect href="/login" />;
+  // return <Redirect href="/login" />;
 }
 

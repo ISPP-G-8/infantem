@@ -155,4 +155,9 @@ public class RecipeService {
         return recipeRepository.findRecommendedRecipesWithoutAllergen(allergens);
     }
 
+    @Transactional(readOnly = true)
+    public List<Recipe> getRecommendedRecipesByAge(Integer age) {
+        return this.recipeRepository.findRecommendedRecipesByAge(age);
+    }
+
 }

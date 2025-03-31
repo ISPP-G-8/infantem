@@ -50,4 +50,7 @@ public interface RecipeRepository extends CrudRepository<Recipe, Long> {
     @Query("SELECT r FROM Recipe r WHERE r.user IS NULL AND NOT EXISTS (SELECT 1 FROM r.allergens a WHERE a.name IN :allergens)")
     List<Recipe> findRecommendedRecipesWithoutAllergen(@Param("allergens") List<String> allergens);
 
+    @Query("SELECT r FROM Recipe r WHERE r.user IS NULL AND r.minRecommendedAge <= :age AND r.maxRecommendedAge >= :age")
+    List<Recipe> findRecommendedRecipesByAge(@Param("age") Integer age);
+
 }

@@ -15,7 +15,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.isppG8.infantem.infantem.allergen.Allergen;
-
+import com.isppG8.infantem.infantem.disease.Disease;
 import com.isppG8.infantem.infantem.dream.Dream;
 import com.isppG8.infantem.infantem.intake.Intake;
 import com.isppG8.infantem.infantem.metric.Metric;
@@ -98,7 +98,10 @@ public class Baby {
     @OneToMany(mappedBy = "baby", cascade = CascadeType.ALL)
     private List<Vaccine> vaccines = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "babies")
+    @OneToMany(mappedBy = "baby", cascade = CascadeType.ALL)
+    private List<Disease> diseases = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "babies", cascade = CascadeType.ALL)
     private List<Allergen> allergen = new ArrayList<>();
 
     @ManyToMany

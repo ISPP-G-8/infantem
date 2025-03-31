@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Text, View, TextInput, TouchableOpacity } from "react-native";
+import { Text, View, TextInput, TouchableOpacity,ScrollView } from "react-native";
 import { useRouter } from "expo-router";
 import { getToken } from "../../../utils/jwtStorage";
 import { Picker } from "@react-native-picker/picker";
@@ -76,57 +76,85 @@ export default function AddBaby() {
   };
 
   return (
-  <View style={[gs.container, { paddingTop: 100, paddingBottom: 100 }]}>
-      <Text style={gs.headerText}>Añadir una receta</Text>
-      <TextInput
-        style={gs.input}
-        placeholder="Nombre"
-        value={name}
-        onChangeText={setName}
-      />
-      <TextInput
-        style={gs.input}
-        placeholder="Descripción"
-        value={description}
-        onChangeText={setDescription}
-      />
-      <TextInput
-        style={gs.input}
-        placeholder="Ingredientes"
-        value={ingredients}
-        onChangeText={setIngredients}
-      />
-      <TextInput
-        style={gs.input}
-        placeholder="Edad mínima recomendada"
-        value={minRecommendedAge?.toString()}
-        keyboardType="numeric"
-        onChangeText={(text) => {
-          const newValue = parseFloat(text) || 0;
-          setMinRecommendedAge(newValue);
+  <View style={{ flex: 1, backgroundColor: "#E3F2FD" }}>
+      <ScrollView contentContainerStyle={{ padding: 30, paddingBottom: 30 }}>      <View
+        style={{
+          backgroundColor: "rgba(255, 255, 255, 0.79)",
+          borderRadius: 16,
+          padding: 24,
+          marginHorizontal: 20,
+          shadowColor: "#000",
+          shadowOpacity: 0.1,
+          shadowRadius: 10,
+          elevation: 5,
+          alignItems: "center",
+          justifyContent: "center",
+          marginTop: 20,
         }}
-      />
-      <TextInput
-        style={gs.input}
-        placeholder="Edad máxima recomendada"
-        value={maxRecommendedAge?.toString()}
-        keyboardType="numeric"
-        onChangeText={(text) => {
-          const newValue = parseFloat(text) || 0;
-          setMaxRecommendedAge(newValue);
-        }}
-      />
-      <TextInput
-        style={gs.input}
-        placeholder="Elaboración"
-        value={elaboration}
-        onChangeText={setElaboration}
-      />
-      <TouchableOpacity style={gs.mainButton} onPress={handleSave}>
-        <Text style={gs.mainButtonText}>Guardar</Text>
-      </TouchableOpacity>
+      >
+        <Text style={[gs.headerText, { textAlign: "center", marginBottom: 24,color: "#1565C0" }]}>
+          Añadir una receta
+        </Text>
+  
+        <TextInput
+          style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "90%" }]}
+          placeholder="Nombre"
+          value={name}
+          onChangeText={setName}
+        />
+  
+        <TextInput
+          style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "90%" }]}
+          placeholder="Descripción"
+          value={description}
+          onChangeText={setDescription}
+        />
+  
+        <TextInput
+          style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "90%" }]}
+          placeholder="Ingredientes"
+          value={ingredients}
+          onChangeText={setIngredients}
+        />
+  
+        <TextInput
+          style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "90%" }]}
+          placeholder="Edad mínima recomendada"
+          value={minRecommendedAge?.toString()}
+          keyboardType="numeric"
+          onChangeText={(text) => {
+            const newValue = parseFloat(text) || 0;
+            setMinRecommendedAge(newValue);
+          }}
+        />
+  
+        <TextInput
+          style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "90%" }]}
+          placeholder="Edad máxima recomendada"
+          value={maxRecommendedAge?.toString()}
+          keyboardType="numeric"
+          onChangeText={(text) => {
+            const newValue = parseFloat(text) || 0;
+            setMaxRecommendedAge(newValue);
+          }}
+        />
+  
+        <TextInput
+          style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "90%" }]}
+          placeholder="Elaboración"
+          value={elaboration}
+          onChangeText={setElaboration}
+          multiline
+        />
+  
+        <TouchableOpacity style={[gs.mainButton, { alignSelf: "center", marginTop: 10 }]} onPress={handleSave}>
+          <Text style={[gs.mainButtonText, { paddingHorizontal: 24 }]}>Guardar</Text>
+        </TouchableOpacity>
+      </View>
+      </ScrollView>
     </View>
   );
+  
 }
 
 
