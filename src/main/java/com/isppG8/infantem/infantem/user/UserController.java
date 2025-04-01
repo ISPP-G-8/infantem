@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @PreAuthorize("hasAuthority('admin')")
-    @GetMapping
+    @GetMapping("/all")
     public List<UserDTO> getAllUsers() {
         List<UserDTO> users = this.userService.getAllUsers().stream().map(UserDTO::new).toList();
         return users;
