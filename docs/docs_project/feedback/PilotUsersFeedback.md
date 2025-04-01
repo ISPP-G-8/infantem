@@ -1,6 +1,6 @@
 # Feedback Usuarios Piloto
 
-![Portada](../../../docs/imagenes/Infantem.png)
+![Portada](../../../docs/images/Infantem.png)
 
 **Fecha:** 31/03/2025
 **Grupo 8:** Infantem
@@ -39,6 +39,7 @@
 
 ## Colaboradores del documento
 - Paula Luna Navarro: Creación del documento
+- Jose Morgado:
 
 ## Índice
 
@@ -89,34 +90,74 @@ A partir del feedback proporcionado por los usuarios piloto, hemos identificado 
 
 Este apartado recoge y clasifica los errores funcionales, problemas de usabilidad, mejoras visuales y recomendaciones detectadas durante el uso y revisión de la aplicación Infantem. La categorización se ha realizado según tres niveles de prioridad (alta, media y baja), con el objetivo de facilitar su abordaje en próximos sprints de desarrollo. También se incluyen sugerencias de mejora para optimizar la experiencia del usuario y la funcionalidad de la app.
 
+Para categorizar el feedback de los usuarios pilotos, se han usado una serie de metricas, las cuales han aportado un valor de prioridad a cada feedback lo cual hace que se posicione en una u otra categoria.
+Métricas para Categorizar el Feedback
+
+- Frecuencia de Aparición del Problema (FAP):
+
+    - Alta: El problema se ha reportado varias veces por diferentes usuarios.
+    - Media: El problema ha sido mencionado por algunos usuarios.
+    - Baja: El problema ha sido reportado esporádicamente por un solo usuario.
+
+- Impacto en la Experiencia del Usuario (IEU):
+
+    - Alta: El problema afecta de manera significativa la experiencia o funcionalidad de la aplicación (por ejemplo, errores en botones principales o navegación).
+    - Media: El problema afecta de manera moderada, pero no impide usar la aplicación completamente (por ejemplo, pequeños errores visuales).
+    - Baja: El problema tiene un impacto mínimo y no afecta gravemente el uso (por ejemplo, sugerencias estéticas).
+
+- Gravedad del Problema (GP):
+
+    - Alta: El problema es crítico y requiere solución inmediata para evitar que los usuarios abandonen la aplicación.
+    - Media: El problema debe ser resuelto en los próximos sprints, pero no es urgente.
+    - Baja: El problema puede ser pospuesto y solucionado a largo plazo.
+
+- Facilidad de Resolución (FR):
+
+    - Alta: El problema es fácil de corregir con pocos cambios en el código o interfaz.
+    - Media: El problema requiere algunas modificaciones, pero no es demasiado complejo.
+    - Baja: El problema es complicado y podría requerir una reestructuración importante del sistema.
+
+- Prioridad del Usuario (PU):
+
+    - Alta: Los usuarios mencionan este problema de manera persistente, lo que indica que es una necesidad crítica.
+    - Media: Los usuarios mencionan este problema, pero no con tanta frecuencia.
+    - Baja: El problema ha sido mencionado de manera aislada y no parece ser una prioridad.
+
+Cada metrica se puntuara del 1 al 5 dando lugar a un valor de priorizacion de feedback el cual servira para categorizar el feedback basandonos en los siguientes umbrales:
+
+- Prioridad alta: Mas de 20 puntos
+- Prioridad media: Entre 10 y 17 puntos
+- Prioridad baja: Menos de 10 puntos
+
+
 ## Sprint 2 
 ### 🟥 Prioridad Alta
 
-- El botón de búsqueda (lupa) **no funciona correctamente**.
-- **No queda claro** cómo funciona la búsqueda de recetas recomendadas según la edad.
-- Desde el **móvil**, no se ve el contenido completo de la sección **"Elaboración"** en las recetas. Algunos elementos no están bien estructurados y **dificultan la lectura**.
-- No se especifica si la edad recomendada en las recetas es en **meses o años**. **Debe aclararse que es en meses** en toda la aplicación.
-- Las recetas necesitan un **formato más estético y mejor estructurado**.
-- **Faltan mensajes de error** en los formularios de bebés para que el usuario entienda por qué un dato es inválido.
-- No se puede **visualizar la contraseña mientras se escribe**, ni hay **opción de recuperación** en caso de olvido.
+- El botón de búsqueda (lupa) **no funciona correctamente**. (VPF= 24)
+- **No queda claro** cómo funciona la búsqueda de recetas recomendadas según la edad. (VPF= 22)
+- Desde el **móvil**, no se ve el contenido completo de la sección **"Elaboración"** en las recetas. Algunos elementos no están bien estructurados y **dificultan la lectura**. (VPF= 19)
+- No se especifica si la edad recomendada en las recetas es en **meses o años**. **Debe aclararse que es en meses** en toda la aplicación. (VPF= 18)
+- Las recetas necesitan un **formato más estético y mejor estructurado**. (VPF= 18)
+- **Faltan mensajes de error** en los formularios de bebés para que el usuario entienda por qué un dato es inválido. (VPF= 21)
+- No se puede **visualizar la contraseña mientras se escribe**, ni hay **opción de recuperación** en caso de olvido. (VPF= 23)
 
 ---
 
 ### 🟧 Prioridad Media
 
-- El formulario permite ingresar un **correo sin "@"**, lo cual puede generar errores.
-- En la sección de edición de bebés, permite registrar **fechas futuras (ej. 2027)**, lo cual debería estar restringido.
-- La **barra de navegación pasa desapercibida** y no es intuitiva.
-- En el **formulario de login**, hay **elementos descentrados**.
-- Al registrarse con datos incorrectos, el **mensaje de error no señala en qué campo está el fallo**.
+- El formulario permite ingresar un **correo sin "@"**, lo cual puede generar errores. (VPF= 13)
+- En la sección de edición de bebés, permite registrar **fechas futuras (ej. 2027)**, lo cual debería estar restringido. (VPF= 14)
+- La **barra de navegación pasa desapercibida** y no es intuitiva. (VPF= 12)
+- En el **formulario de login**, hay **elementos descentrados**. (VPF= 15)
+- Al registrarse con datos incorrectos, el **mensaje de error no señala en qué campo está el fallo**. (VPF= 14)
 
 ---
 
 ### 🟩 Prioridad Baja
 
-- **Añadir más fotos** para hacer la interfaz más atractiva. ✅ (HECHO)
-- Evaluar si el campo **“perímetro cefálico”** es necesario en la ficha del bebé.
-- **Falta tilde en “Alérgenos”**.
+- **Añadir más fotos** para hacer la interfaz más atractiva. ✅ (HECHO) (VPF= 7)
+- Evaluar si el campo **“perímetro cefálico”** es necesario en la ficha del bebé. (VPF= 6)
+- **Falta tilde en “Alérgenos”**. (VPF= 5)
 
 ---
 
