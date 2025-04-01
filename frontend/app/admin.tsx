@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Recipe, User, Baby } from "../types";
+import { Recipe, User } from "../types";
 import { useAuth } from "../context/AuthContext"
 
 /*
