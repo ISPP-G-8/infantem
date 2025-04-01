@@ -9,6 +9,7 @@ const CalendarTab = () => {
   const [selectedDate, setSelectedDate] = useState<string>(new Date().toISOString().split("T")[0]); // Inicializar con la fecha actual
   const [currentMonth, setCurrentMonth] = useState<string>(new Date().toISOString().split("T")[0]); // Estado para el mes visible
   const [events, setEvents] = useState<{ [key: string]: { [babyId: string]: string[] } }>({});
+  const [monthGeneralInfo, setMonthGeneralInfo] = useState<{ [key: string]: { [babyId: string]: string[] } }>({});
   const [babies, setBabies] = useState<{ [babyId: string]: string }>({}); // Estado para almacenar los nombres de los bebés
   const [loading, setLoading] = useState<boolean>(true);
   const { token } = useAuth();
@@ -91,8 +92,24 @@ const CalendarTab = () => {
   
       const data = await response.json();
       console.log("Datos mensuales recibidos de la API:", data); // Depuración
-  
-      // Transformar los datos en un formato adecuado para el estado
+
+
+      const auxiliarMap: { [key: string]: { [babyId: string]: string[] } } = {};
+      // TODO: Here an interface/type of the baby is needed (TypeScript)
+      data.forEach((baby) => {
+        const babyId = baby.babyId;
+
+        Object.entries(baby.events).forEach(([date, eventList]) => {
+          if (!auxiliarMap[date]) {
+            auxiliarMap[date] = {};
+          }
+          // Check ts too
+          auxiliarMap[date][babyId] = eventList;
+        });
+      });
+      setMonthGeneralInfo(auxiliarMap);
+
+
       const transformedEvents: { [key: string]: { [babyId: string]: any } } = {};
       data.forEach((event: any) => {
         const day = event.date; // Asegúrate de que `date` sea el formato YYYY-MM-DD
@@ -107,9 +124,10 @@ const CalendarTab = () => {
           metrics: event.metrics || [],
         };
       });
-  
+
       console.log("Eventos transformados para el mes:", transformedEvents); // Depuración
       setEvents(transformedEvents);
+
     } catch (error) {
       console.error("Error al obtener los eventos del mes:", error);
     } finally {
@@ -171,36 +189,29 @@ const CalendarTab = () => {
   }, [token, currentMonth]);
 
   const getEventIcons = (day: string) => {
-    const dayEvents = events[day];
+    const dayEvents = monthGeneralInfo[day];
     if (!dayEvents) return null;
-  
-    const icons = [];
-  
-    // Verificar si hay sueños
-    if (Object.values(dayEvents).some((baby) => baby.dreams.length > 0)) {
-      icons.push("💤"); // Icono para sueños
+
+    const icons: string[] = [];
+
+    const allEvents = Object.values(dayEvents).flat(); 
+
+    if (allEvents.includes("Dream")) {
+      icons.push("💤"); 
     }
-  
-    // Verificar si hay enfermedades
-    if (Object.values(dayEvents).some((baby) => baby.diseases.length > 0)) {
-      icons.push("🤒"); // Icono para enfermedades
+    if (allEvents.includes("Disease")) {
+      icons.push("🤒");
     }
-  
-    // Verificar si hay vacunas
-    if (Object.values(dayEvents).some((baby) => baby.vaccines.length > 0)) {
-      icons.push("💉"); // Icono para vacunas
+    if (allEvents.includes("Vaccine")) {
+      icons.push("💉"); 
     }
-  
-    // Verificar si hay ingestas
-    if (Object.values(dayEvents).some((baby) => baby.intakes.length > 0)) {
-      icons.push("🍴"); // Icono para ingestas
+    if (allEvents.includes("Intake")) {
+      icons.push("🍴");
     }
-  
-    // Verificar si hay métricas
-    if (Object.values(dayEvents).some((baby) => baby.metrics.length > 0)) {
-      icons.push("📏"); // Icono para métricas
+    if (allEvents.includes("Metric")) {
+      icons.push("📏"); 
     }
-  
+
     return icons.join(" ");
   };
 
