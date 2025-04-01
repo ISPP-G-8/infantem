@@ -145,7 +145,7 @@ Cada metrica se puntuara del 1 al 5 dando lugar a un valor de priorizacion de fe
 
 ### 🟧 Prioridad Media
 
-- El formulario permite ingresar un **correo sin "@"**, lo cual puede generar errores. (VPF= 13)
+- El formulario permite ingresar un **correo sin "@"**, lo cual puede generar errores. (VPF= 13) HECHO
 - En la sección de edición de bebés, permite registrar **fechas futuras (ej. 2027)**, lo cual debería estar restringido. (VPF= 14) HECHO 
 - La **barra de navegación pasa desapercibida** y no es intuitiva. (VPF= 12) HECHO 
 - En el **formulario de login**, hay **elementos descentrados**. (VPF= 15) HECHO 
