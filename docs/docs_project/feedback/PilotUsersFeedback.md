@@ -136,28 +136,28 @@ Cada metrica se puntuara del 1 al 5 dando lugar a un valor de priorizacion de fe
 - El botón de búsqueda (lupa) **no funciona correctamente**. (VPF= 24)
 - **No queda claro** cómo funciona la búsqueda de recetas recomendadas según la edad. (VPF= 22)
 - Desde el **móvil**, no se ve el contenido completo de la sección **"Elaboración"** en las recetas. Algunos elementos no están bien estructurados y **dificultan la lectura**. (VPF= 19)
-- No se especifica si la edad recomendada en las recetas es en **meses o años**. **Debe aclararse que es en meses** en toda la aplicación. (VPF= 18)
+- No se especifica si la edad recomendada en las recetas es en **meses o años**. **Debe aclararse que es en meses** en toda la aplicación. (VPF= 18) HECHO 
 - Las recetas necesitan un **formato más estético y mejor estructurado**. (VPF= 18)
 - **Faltan mensajes de error** en los formularios de bebés para que el usuario entienda por qué un dato es inválido. (VPF= 21)
-- No se puede **visualizar la contraseña mientras se escribe**, ni hay **opción de recuperación** en caso de olvido. (VPF= 23)
+- No se puede **visualizar la contraseña mientras se escribe** HECHO, ni hay **opción de recuperación** en caso de olvido. (VPF= 23)
 
 ---
 
 ### 🟧 Prioridad Media
 
 - El formulario permite ingresar un **correo sin "@"**, lo cual puede generar errores. (VPF= 13)
-- En la sección de edición de bebés, permite registrar **fechas futuras (ej. 2027)**, lo cual debería estar restringido. (VPF= 14)
-- La **barra de navegación pasa desapercibida** y no es intuitiva. (VPF= 12)
-- En el **formulario de login**, hay **elementos descentrados**. (VPF= 15)
-- Al registrarse con datos incorrectos, el **mensaje de error no señala en qué campo está el fallo**. (VPF= 14)
+- En la sección de edición de bebés, permite registrar **fechas futuras (ej. 2027)**, lo cual debería estar restringido. (VPF= 14) HECHO 
+- La **barra de navegación pasa desapercibida** y no es intuitiva. (VPF= 12) HECHO 
+- En el **formulario de login**, hay **elementos descentrados**. (VPF= 15) HECHO 
+- Al registrarse con datos incorrectos, el **mensaje de error no señala en qué campo está el fallo**. (VPF= 14) HECHO 
 
 ---
 
 ### 🟩 Prioridad Baja
 
-- **Añadir más fotos** para hacer la interfaz más atractiva. ✅ (HECHO) (VPF= 7)
-- Evaluar si el campo **“perímetro cefálico”** es necesario en la ficha del bebé. (VPF= 6)
-- **Falta tilde en “Alérgenos”**. (VPF= 5)
+- **Añadir más fotos** para hacer la interfaz más atractiva. (VPF= 7) HECHO 
+- Evaluar si el campo **“perímetro cefálico”** es necesario en la ficha del bebé. (VPF= 6) HECHO 
+- **Falta tilde en “Alérgenos”**. (VPF= 5) HECHO 
 
 ---
 
