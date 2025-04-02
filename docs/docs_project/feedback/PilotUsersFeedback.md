@@ -259,16 +259,16 @@ Cada metrica se puntuara del 1 al 5 dando lugar a un valor de priorizacion de fe
 ## Sprint 3 
 ### 🟥 Prioridad Alta
 - Faltan validaciones en formularios como 'Añadir Receta' y 'Registro', sin mensajes de error ni campos obligatorios. (VPF=24)
-- El campo 'Apellido' en el perfil muestra el nombre, lo que confunde al usuario. (VPF=21)
+- El campo 'Apellido' en el perfil muestra el nombre, lo que confunde al usuario. (VPF=21) HECHO
 - No hay indicadores visuales de carga en procesos críticos como login, registro o guardar perfil. (VPF=22)
 - No se puede saber si el código de verificación es correcto: falta feedback visual. (VPF=23)
 - La barra de navegación en PC aparece en una posición inesperada. (VPF=19)
-- No se indica si las edades en recetas están en meses o años. (VPF=18)
+- No se indica si las edades en recetas están en meses o años. (VPF=18) HECHO
 - Se permite guardar recetas incompletas solo con el nombre. (VPF=21)
 - La búsqueda de recetas por edad o nombre no funciona adecuadamente ni informa al usuario. (VPF=24)
 
 ### 🟧 Prioridad Media
-- En el perfil, el botón de 'Guardar cambios' no parece funcionar. (VPF=17)
+- En el perfil, el botón de 'Guardar cambios' no parece funcionar. (VPF=17) 
 - No hay opción clara para volver atrás en formularios como el de alérgenos. (VPF=15)
 - El formulario de nombre y apellidos permite caracteres no válidos. (VPF=14)
 - Falta botón de 'lupa' en búsqueda por edad recomendada. (VPF=13)
@@ -279,7 +279,7 @@ Cada metrica se puntuara del 1 al 5 dando lugar a un valor de priorizacion de fe
 
 ### 🟩 Prioridad Baja
 - Falta un botón de cancelar en la sección 'Hazte Premium'. (VPF=9)
-- Errores ortográficos en mensajes del sistema (e.g., 'qeu', 'nuetsra'). (VPF=8)
+- Errores ortográficos en mensajes del sistema (e.g., 'qeu', 'nuetsra'). (VPF=8) HECHO
 - Sería útil añadir una pestaña específica para 'Mis recetas'. (VPF=9)
 - El campo de texto en recetas debería ser más grande para facilitar escritura. (VPF=7)
 - Sugerencia de modal de confirmación al salir sin guardar receta. (VPF=8)
