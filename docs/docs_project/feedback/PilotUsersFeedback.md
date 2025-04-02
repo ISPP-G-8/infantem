@@ -84,7 +84,94 @@ A partir del feedback proporcionado por los usuarios piloto, hemos identificado 
 - Implementar validaciones en la edición de recetas para evitar que puedan guardarse con campos vacíos.  
 
 ## Idioma y Accesibilidad  
-- Permitir visualizar la contraseña en el login y ofrecer una opción de recuperación de credenciales.  
+- Permitir visualizar la contraseña en el login y ofrecer una opción de recuperación de credenciales.
+
+## Sprint 3
+
+## Navegación y Usabilidad
+- Falta botón de lupa en la búsqueda por edad recomendada, lo cual puede confundir especialmente desde móvil.
+
+- La navegación dentro de la sección de recetas no está bien estructurada en algunos dispositivos (las flechas no están alineadas en PC).
+
+- En móviles, al hacer clic en el input de búsqueda, este se desborda del contenedor.
+
+- En el formulario de alérgenos, al escribir en el campo "otros síntomas", no hay botón de continuar, solo se puede avanzar con Enter, lo cual no es intuitivo.
+
+- La barra de navegación no es intuitiva o pasa desapercibida en algunos casos.
+
+- En PC, el Navbar aparece debajo y confunde.
+
+- En la página de perfil, el botón de “Guardar cambios” parece no funcionar: no cambia al estado de “Editar perfil” tras pulsarlo.
+
+- No hay feedback visual al pulsar "Guardar" ni en el inicio de sesión cuando se introduce un código de verificación.
+
+- Se detectan pantallas sin respuesta tras el inicio de sesión o guardado de perfil.
+
+- Faltan botones de navegación para volver atrás en algunas pantallas (como Alérgenos).
+
+- La búsqueda por nombre o edad en la sección de recetas no muestra resultados claros ni indica si hubo un fallo.
+
+- Sugerencia: mostrar resultados de recetas de forma limitada (5-10), no 30 de golpe, para evitar saturar visualmente al usuario. 
+## Contenido y Estructura   
+- Las edades recomendadas para recetas no están bien explicadas: no se sabe si son en meses o años.
+
+- Sería útil añadir etiquetas visuales o filtros por ingredientes, edad, tiempo de elaboración o dificultad.
+
+- La pantalla de recetas podría tener un mejor diseño (centrado, orden, estética de las cards).
+
+- Sería útil incluir una pestaña específica para “Mis recetas” y permitir editar/eliminar desde allí.
+
+- Falta claridad sobre las funcionalidades premium y qué ventajas específicas aportan (añadir imágenes o descripciones).
+
+- Incluir un apartado para guardar recetas como favoritas sería muy útil.
+
+- La opción de alérgenos no queda del todo clara en cuanto a su propósito para el usuario.
+
+- Incluir ejemplos o explicaciones más visuales (videos o imágenes) ayudaría a comprender mejor cómo preparar las recetas.
+
+- El campo de elaboración de recetas es demasiado pequeño y permite guardar recetas incompletas, sin validación.
+## Funcionalidad  
+- La sincronización de eventos con Google Calendar sería un gran añadido, incluyendo descarga de .ics.
+
+- El apartado de planificación de comidas sugerido por un usuario sería muy útil para padres que no quieren decidir cada día qué dar de comer.
+
+- Fallos en la validación del formulario al crear un bebé (acepta nombres inválidos como "99999", "---").
+
+- El formulario de verificación no da mensajes de error si el código introducido es incorrecto.
+
+- El formulario de creación de recetas permite guardar con campos vacíos (solo con el nombre), sin validación ni aviso.
+
+- Se sugiere un modal de confirmación antes de salir de la pantalla de “Añadir receta”.
+
+- El campo de “Apellido” en el perfil muestra el nombre, no el apellido real.
+
+- Faltan indicadores de carga al guardar cambios, iniciar sesión o verificar el código, lo que genera confusión.
+
+- Algunos usuarios reportan que la app no les permitía registrar un bebé con datos válidos sin dar motivo claro.
+
+- En el apartado premium falta un botón para volver atrás o cancelar.
+
+- Añadir funcionalidades como historial, subperfiles por hijo, y recordatorios automáticos sería bien recibido.
+
+- El botón de cerrar sesión funciona correctamente (sin incidencias).
+
+
+## Idioma y Accesibilidad 
+- Añadir validaciones para impedir caracteres especiales y números en campos como nombre y apellido.
+
+- Incluir la opción de visualizar la contraseña durante el login.
+
+- Añadir un botón de recuperación de contraseña sería útil.
+
+- En el modal de suscripción premium, hay errores ortográficos como "qeu" y "nuetsra".
+
+- Se sugiere usar mensajes más visuales o de estilo amigable para explicar funciones complejas (como alérgenos o métricas de búsqueda).
+
+- Los textos explicativos sobre “seguimiento del crecimiento” podrían ser más claros o visuales.
+
+- La aplicación debería mostrar mensajes de error o éxito con claridad cuando se completan acciones clave (login, edición, verificación).
+
+- La estética del calendario fue bien recibida, pero se sugiere más claridad en sus usos previstos (vacunas, eventos, etc.).
 
 ## Categorización y Priorización de Problemas Detectados
 
@@ -169,5 +256,43 @@ Cada metrica se puntuara del 1 al 5 dando lugar a un valor de priorizacion de fe
 - **Añadir la opción de eliminar recetas** desde la interfaz de usuario.
 
 ---
+## Sprint 3 
+### 🟥 Prioridad Alta
+- Faltan validaciones en formularios como 'Añadir Receta' y 'Registro', sin mensajes de error ni campos obligatorios. (VPF=24)
+- El campo 'Apellido' en el perfil muestra el nombre, lo que confunde al usuario. (VPF=21)
+- No hay indicadores visuales de carga en procesos críticos como login, registro o guardar perfil. (VPF=22)
+- No se puede saber si el código de verificación es correcto: falta feedback visual. (VPF=23)
+- La barra de navegación en PC aparece en una posición inesperada. (VPF=19)
+- No se indica si las edades en recetas están en meses o años. (VPF=18)
+- Se permite guardar recetas incompletas solo con el nombre. (VPF=21)
+- La búsqueda de recetas por edad o nombre no funciona adecuadamente ni informa al usuario. (VPF=24)
+
+### 🟧 Prioridad Media
+- En el perfil, el botón de 'Guardar cambios' no parece funcionar. (VPF=17)
+- No hay opción clara para volver atrás en formularios como el de alérgenos. (VPF=15)
+- El formulario de nombre y apellidos permite caracteres no válidos. (VPF=14)
+- Falta botón de 'lupa' en búsqueda por edad recomendada. (VPF=13)
+- El input de búsqueda se desborda visualmente en móviles. (VPF=12)
+- No está claro el propósito del sistema de alérgenos para el usuario. (VPF=16)
+- El diseño del carrusel de recetas en inicio puede mostrar demasiadas recetas de golpe. (VPF=15)
+- No se indica el tiempo de elaboración ni dificultad en las recetas. (VPF=13)
+
+### 🟩 Prioridad Baja
+- Falta un botón de cancelar en la sección 'Hazte Premium'. (VPF=9)
+- Errores ortográficos en mensajes del sistema (e.g., 'qeu', 'nuetsra'). (VPF=8)
+- Sería útil añadir una pestaña específica para 'Mis recetas'. (VPF=9)
+- El campo de texto en recetas debería ser más grande para facilitar escritura. (VPF=7)
+- Sugerencia de modal de confirmación al salir sin guardar receta. (VPF=8)
+- El calendario podría tener más funciones específicas como compartir eventos. (VPF=9)
+- Estéticamente la interfaz ha mejorado mucho y la experiencia es positiva. (VPF=6)
+
+### 💡 Recomendaciones
+- Permitir sincronizar eventos del calendario con Google Calendar (descargar .ics).
+- Implementar sistema de planificación semanal de comidas para bebés.
+- Agregar subperfiles para hijos con edad, alergias y seguimiento personalizado.
+- Incluir explicaciones más visuales en las recetas, como imágenes o videos.
+- Mostrar claramente las funcionalidades premium disponibles con ejemplos.
+- Añadir opción de visualizar contraseña en login (si no está ya).
+- Clarificar el seguimiento de crecimiento del bebé dentro de la app.
 
 > *Este sistema de evaluación sirve como guía para valorar la implicación de los usuarios piloto y tomar decisiones sobre futuras iteraciones y pruebas de usuario.*  
