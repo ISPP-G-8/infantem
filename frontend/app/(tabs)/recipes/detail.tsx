@@ -71,32 +71,28 @@ export default function RecipeDetails() {
 
   const handleDeleteRecipe = () => {
     if (!recipe || !token) return;
-  
+
     fetch(`${apiUrl}/api/v1/recipes/${recipe.id}`, {
       method: "DELETE",
-      headers: { "Authorization": `Bearer ${token}` },
+      headers: { "Authorization": `Bearer ${token}` }
     })
       .then(response => {
         if (!response.ok) {
           return response.json().then(err => {
             throw new Error(JSON.stringify(err));
           });
+        }else{
+          router.push("/recipes");
         }
         return response.json();
-      })
-      .then(() => {
-        Alert.alert("Éxito", "Receta eliminada correctamente", [
-          {
-            text: "Aceptar",
-            onPress: () => router.push("/recipes"),  // Redirigir a la página de recetas después de eliminar
-          },
-        ]);
       })
       .catch(error => {
         Alert.alert("Error", `No se pudo eliminar la receta: ${error.message}`);
       });
   };
-  
+
+
+
   if (!recipe) {
     return (
       <View style={gs.container}>
@@ -132,6 +128,29 @@ export default function RecipeDetails() {
               <TextInput style={{ lineHeight: 22 }} value={recipe.elaboration} onChangeText={(text) => setRecipe({ ...recipe, elaboration: text })} />
             ) : (
               <Text style={{ lineHeight: 22 }}>{recipe.elaboration}</Text>
+            )}
+
+            <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 10 }}>Edad mínima recomendada:</Text>
+            {isEditing ? (
+              <TextInput
+                style={{ fontSize: 16, marginBottom: 10 }}
+                keyboardType="numeric"
+                value={recipe.minRecommendedAge?.toString() || ''}
+                onChangeText={(text) => setRecipe({ ...recipe, minRecommendedAge: parseInt(text) || 0 })}
+              />
+            ) : (
+              <Text>{recipe.minRecommendedAge} meses</Text>
+            )}
+            <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 10 }}>Edad máxima recomendada:</Text>
+            {isEditing ? (
+              <TextInput
+                style={{ fontSize: 16, marginBottom: 10 }}
+                keyboardType="numeric"
+                value={recipe.maxRecommendedAge?.toString() || ''}
+                onChangeText={(text) => setRecipe({ ...recipe, maxRecommendedAge: parseInt(text) || 0 })}
+              />
+            ) : (
+              <Text>{recipe.maxRecommendedAge} meses</Text>
             )}
             {!isOwned && !isEditing && (
               <TouchableOpacity style={[gs.mainButton, { marginTop: 30 }]} onPress={handleEditRecipe}>
