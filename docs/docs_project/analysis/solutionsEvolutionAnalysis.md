@@ -43,6 +43,9 @@
 - Luis Giraldo
   - Actualizó el documento para el sprint 3.
 
+- Jose Morgado
+  - Analizó las soluciones propuestas en las incidencias del backend.
+
 
 ## 1. Introduccion
 
@@ -80,7 +83,7 @@ En este apartado se estudia la evolucion de las incidencias que han tenido lugar
 
 - Metrica usada para su evaluacion: Funcionamiento de los filtros en el frontend.
 
-- Evolucion de la incidencia:
+- Evolucion de la incidencia: Los filtros siguen presentando fallos y no funcionan completamente bien.
 
 ### 3.3 Incidencia 3:
 
@@ -90,7 +93,7 @@ En este apartado se estudia la evolucion de las incidencias que han tenido lugar
 
 - Metrica usada para su evaluacion: Funcionamiento del delete de la entidad baby.
 
-- Evolucion de la incidencia:
+- Evolucion de la incidencia: El error se ha solucionado y el delete en la entidad bebe funciona correctamente.
 
 ### 3.4 Incidencia 4:
 
