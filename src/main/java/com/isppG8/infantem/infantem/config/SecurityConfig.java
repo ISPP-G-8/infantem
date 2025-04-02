@@ -36,7 +36,8 @@ public class SecurityConfig {
                 .exceptionHandling(
                         (exepciontHandling) -> exepciontHandling.authenticationEntryPoint(unauthorizedHandler))
                 .authorizeHttpRequests((requests) -> requests.requestMatchers("api/v1/recipes/*").authenticated()
-                        .requestMatchers("api/v1/auth/*").permitAll().anyRequest().authenticated())
+                        .requestMatchers("api/v1/auth/*").permitAll().requestMatchers("explorer/*").permitAll()
+                        .anyRequest().authenticated())
                 .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
                 .formLogin(AbstractHttpConfigurer::disable).httpBasic(Customizer.withDefaults());
         return http.build();
