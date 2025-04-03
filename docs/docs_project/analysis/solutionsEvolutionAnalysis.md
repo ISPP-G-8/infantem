@@ -61,6 +61,29 @@ Este análisis permitirá extraer aprendizajes clave y establecer buenas prácti
 
 En este apartado se estudia la evolucion de las incidencias que han tenido lugar en el frontend:
 
+### 2.1 Incidencia 1:
+- Incidencia: las recetas del usuario y las recomendadas por el sistema según edad del bebé dejaron de mostrarse en la app.
+- Solución aportada: revisar los endpoints en frontend a los que se les hace peticiones para obtener las recetas.
+- Métrica usada para su evaluación: se podía comprobar que en el frontend no aparecía ninguna de las recetas comentadas.
+- Evolución de la incidencia: se ha conseguido arreglar el fallo haciendo peticiones a los endpoints correctos.
+
+### 2.2 Incidencia 2:
+- Incidencia: los inputs de la pasarela de pago no son completamente visibles al usuario.
+- Solución aportada: revisión de la documntación de Stripe para averiguar la forma de disponer de forma correcta dichos inputs.
+- Métrica usada para su evaluación: visibilidad de los inputs (75% aprox: solo se ven 3 de 4 inputs)
+- Evolución de la incidencia: su solución aún no ha sido llevada a cabo.
+
+### 2.3 Incidencia 3:
+- Incidencia: dificultad para aplicar los estilos correctos al modal de Términos y condiciones legales.
+- Solución aportada: crear un componente aparte y aplicar los estilos correspondientes en el mismo para que no se solapen con los de otros componentes de la pantalla en la que se usa el modal.
+- Métrica usada para su evaluación: en el frontend se podía comprobar que en el modal no se podían aplicar los márgenes correctamente, además de que la lista no hacia scroll.
+- Evolución de la incidencia: ya ha sido resuelta.
+
+### 2.3 Incidencia 3:
+- Incidencia: el formulario de registro de usuario no validaba correctamente los datos introducidos, inclumpliendo algunas reglas de negocio.
+- Solución aportada: se han implementado validaciones en todos los campos, especialmente para comprobar si el nombre de usuario y el correo existen, o que la contraseña cumplía cierto formato.
+- Métrica usada para su evaluación: el sistema permite el registro de los nuevos usuarios a pesar del incumplimiento de las reglas de negocio.
+- Evolución de la incidencia: actualmente, todos los datos introducidos en el formulario son correctamente validados y se muestran por pantalla los posibles errores.
 
 # 3. Backend
 
@@ -69,9 +92,9 @@ En este apartado se estudia la evolucion de las incidencias que han tenido lugar
 
 ### 3.1 Incidencia 1:
 
-- Incidencia: No se complian los estandares minimos de calidad en el codigo.
+- Incidencia: No se cumplían los estándares mínimos de calidad en el código.
 
-- Solucion aportada: Se reescribio gran parte del codigo desde cero.
+- Solución aportada: Se reescribió gran parte del codigo desde cero.
 
 - Metrica usada para su evaluacion: Analisis de calidad de SonarQube.
 
