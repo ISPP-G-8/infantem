@@ -38,8 +38,8 @@
 </div>
 
 ## Colaboradores del documento
-- Paula Luna Navarro: Creación del documento
-- Jose Morgado:
+- Paula Luna Navarro: Creación del documento y documentar el feedback proporcionado
+- Jose Morgado: Sistema de categorización del feedback
 
 ## Índice
 
