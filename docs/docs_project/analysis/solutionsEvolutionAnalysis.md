@@ -45,6 +45,8 @@
 
 - Jose Morgado
   - Analizó las soluciones propuestas en las incidencias del backend.
+- Paula Luna 
+  - Reviso el documento
 
 
 ## 1. Introduccion
