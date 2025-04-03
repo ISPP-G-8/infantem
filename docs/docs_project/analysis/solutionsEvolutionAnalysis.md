@@ -59,25 +59,25 @@ Este análisis permitirá extraer aprendizajes clave y establecer buenas prácti
 
 ## 2. Frontend
 
-En este apartado se estudia la evolucion de las incidencias que han tenido lugar en el frontend:
+En este apartado se estudia la evolución de las incidencias que han tenido lugar en el frontend:
 
 ### 2.1 Incidencia 1:
-- Incidencia: las recetas del usuario y las recomendadas por el sistema según edad del bebé dejaron de mostrarse en la app.
-- Solución aportada: revisar los endpoints en frontend a los que se les hace peticiones para obtener las recetas.
-- Métrica usada para su evaluación: se podía comprobar que en el frontend no aparecía ninguna de las recetas comentadas.
-- Evolución de la incidencia: se ha conseguido arreglar el fallo haciendo peticiones a los endpoints correctos.
+- **Incidencia:** Las recetas del usuario y las recomendadas por el sistema según la edad del bebé dejaron de mostrarse en la app.  
+- **Solución aportada:** Revisar los endpoints en frontend a los que se les hace peticiones para obtener las recetas.  
+- **Métrica usada para su evaluación:** Se podía comprobar que en el frontend no aparecía ninguna de las recetas comentadas.  
+- **Evolución de la incidencia:** Se ha conseguido arreglar el fallo haciendo peticiones a los endpoints correctos.  
 
 ### 2.2 Incidencia 2:
-- Incidencia: los inputs de la pasarela de pago no son completamente visibles al usuario.
-- Solución aportada: revisión de la documntación de Stripe para averiguar la forma de disponer de forma correcta dichos inputs.
-- Métrica usada para su evaluación: visibilidad de los inputs (75% aprox: solo se ven 3 de 4 inputs)
-- Evolución de la incidencia: su solución aún no ha sido llevada a cabo.
+- **Incidencia:** Los inputs de la pasarela de pago no son completamente visibles al usuario.  
+- **Solución aportada:** Revisión de la documentación de Stripe para averiguar la forma de disponer correctamente dichos inputs.  
+- **Métrica usada para su evaluación:** Visibilidad de los inputs (75% aprox: solo se ven 3 de 4 inputs).  
+- **Evolución de la incidencia:** Su solución aún no ha sido llevada a cabo.  
 
 ### 2.3 Incidencia 3:
-- Incidencia: dificultad para aplicar los estilos correctos al modal de Términos y condiciones legales.
-- Solución aportada: crear un componente aparte y aplicar los estilos correspondientes en el mismo para que no se solapen con los de otros componentes de la pantalla en la que se usa el modal.
-- Métrica usada para su evaluación: en el frontend se podía comprobar que en el modal no se podían aplicar los márgenes correctamente, además de que la lista no hacia scroll.
-- Evolución de la incidencia: ya ha sido resuelta.
+- **Incidencia:** Dificultad para aplicar los estilos correctos al modal de Términos y condiciones legales.  
+- **Solución aportada:** Crear un componente aparte y aplicar los estilos correspondientes en el mismo para que no se solapen con los de otros componentes de la pantalla en la que se usa el modal.  
+- **Métrica usada para su evaluación:** En el frontend se podía comprobar que en el modal no se podían aplicar los márgenes correctamente, además de que la lista no hacía scroll.  
+- **Evolución de la incidencia:** Ya ha sido resuelta.  
 
 ### 2.4 Incidencia 4:
 - Incidencia: el formulario de registro de usuario no validaba correctamente los datos introducidos, inclumpliendo algunas reglas de negocio.
@@ -92,55 +92,36 @@ En este apartado se estudia la evolucion de las incidencias que han tenido lugar
 - Evolución de la incidencia: aún no se ha llevado a cabo su resolución.
 # 3. Backend
 
-En este apartado se estudia la evolucion de las incidencias que han tenido lugar en el frontend:
+## 3. Backend
 
+En este apartado se estudia la evolución de las incidencias que han tenido lugar en el backend:
 
 ### 3.1 Incidencia 1:
-
-- Incidencia: No se cumplían los estándares mínimos de calidad en el código.
-
-- Solución aportada: Se reescribió gran parte del codigo desde cero.
-
-- Metrica usada para su evaluacion: Analisis de calidad de SonarQube.
-
-- Evolucion de la incidencia:
+- **Incidencia:** No se cumplían los estándares mínimos de calidad en el código.  
+- **Solución aportada:** Se reescribió gran parte del código desde cero.  
+- **Métrica usada para su evaluación:** Análisis de calidad de SonarQube.  
+- **Evolución de la incidencia:**  
 
 ### 3.2 Incidencia 2:
-
-- Incidencia: Hubo un problema de comunicación entre backend y frontend al refactorizar las recetas para añadir filtros, lo que llevó a cambiar los endpoints sin actualizar el frontend.
-
-- Solucion aportada: Actualizar el frontend.
-
-- Metrica usada para su evaluacion: Funcionamiento de los filtros en el frontend.
-
-- Evolucion de la incidencia: Los filtros siguen presentando fallos y no funcionan completamente bien.
+- **Incidencia:** Hubo un problema de comunicación entre backend y frontend al refactorizar las recetas para añadir filtros, lo que llevó a cambiar los endpoints sin actualizar el frontend.  
+- **Solución aportada:** Actualizar el frontend.  
+- **Métrica usada para su evaluación:** Funcionamiento de los filtros en el frontend.  
+- **Evolución de la incidencia:** Los filtros siguen presentando fallos y no funcionan completamente bien.  
 
 ### 3.3 Incidencia 3:
-
-- Incidencia: A última hora surgió un problema que impedía borrar un bebé debido a un fallo en la relación entre *Intake* e *IntakeSymptoms*.
-
-- Solucion aportada: Depuración y corrección del código para asegurar su estabilidad y calidad.
-
-- Metrica usada para su evaluacion: Funcionamiento del delete de la entidad baby.
-
-- Evolucion de la incidencia: El error se ha solucionado y el delete en la entidad bebe funciona correctamente.
+- **Incidencia:** A última hora surgió un problema que impedía borrar un bebé debido a un fallo en la relación entre *Intake* e *IntakeSymptoms*.  
+- **Solución aportada:** Depuración y corrección del código para asegurar su estabilidad y calidad.  
+- **Métrica usada para su evaluación:** Funcionamiento del *delete* de la entidad *baby*.  
+- **Evolución de la incidencia:** El error se ha solucionado y el *delete* en la entidad *baby* funciona correctamente.  
 
 ### 3.4 Incidencia 4:
-
-- Incidencia: Falta de tests.
-
-- Solucion aportada: Implementar mas tests en las distintas entidades.
-
-- Metrica usada para su evaluacion: Numero de tests implementados.
-
-- Evolucion de la incidencia: El número de tests ha aumentado, pero aún quedan muchos por desarrollar.
+- **Incidencia:** Falta de tests.  
+- **Solución aportada:** Implementar más tests en las distintas entidades.  
+- **Métrica usada para su evaluación:** Número de tests implementados.  
+- **Evolución de la incidencia:** El número de tests ha aumentado, pero aún quedan muchos por desarrollar.  
 
 ### 3.5 Incidencia 5:
-
-- Incidencia: Nos enteramos tarde de que el requisito de validacion de email debia ser entregado en el Sprint 2.
-
-- Solucion aportada: Reestructuracion de las tareas para priorizar el requisito faltante.
-
-- Metrica usada para su evaluacion: Entrega del requisito.
-
-- Evolucion de la incidencia: El requisito se entrego correctamente.
+- **Incidencia:** Nos enteramos tarde de que el requisito de validación de email debía ser entregado en el Sprint 2.  
+- **Solución aportada:** Reestructuración de las tareas para priorizar el requisito faltante.  
+- **Métrica usada para su evaluación:** Entrega del requisito.  
+- **Evolución de la incidencia:** El requisito se entregó correctamente.  
