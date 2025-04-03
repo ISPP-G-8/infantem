@@ -79,12 +79,17 @@ En este apartado se estudia la evolucion de las incidencias que han tenido lugar
 - Métrica usada para su evaluación: en el frontend se podía comprobar que en el modal no se podían aplicar los márgenes correctamente, además de que la lista no hacia scroll.
 - Evolución de la incidencia: ya ha sido resuelta.
 
-### 2.3 Incidencia 3:
+### 2.4 Incidencia 4:
 - Incidencia: el formulario de registro de usuario no validaba correctamente los datos introducidos, inclumpliendo algunas reglas de negocio.
 - Solución aportada: se han implementado validaciones en todos los campos, especialmente para comprobar si el nombre de usuario y el correo existen, o que la contraseña cumplía cierto formato.
 - Métrica usada para su evaluación: el sistema permite el registro de los nuevos usuarios a pesar del incumplimiento de las reglas de negocio.
 - Evolución de la incidencia: actualmente, todos los datos introducidos en el formulario son correctamente validados y se muestran por pantalla los posibles errores.
 
+### 2.5 Incidencia 5:
+- Incidencia: la paginación de la vista de recetas no funciona correctamente.
+- Solución aportada: revisar los errores actuales y que causan el fallo.
+- Métrica usada para su evaluación: no se muestra ningún elemento que permita paginar las recetas. 
+- Evolución de la incidencia: aún no se ha llevado a cabo su resolución.
 # 3. Backend
 
 En este apartado se estudia la evolucion de las incidencias que han tenido lugar en el frontend:
