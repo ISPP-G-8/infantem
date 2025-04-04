@@ -24,15 +24,15 @@ export default function Account() {
   const { isLoading, user, token, setUser, checkAuth, signOut } = useAuth();
 
   useEffect(() => {
-          if (!token) return; // Evita ejecutar el efecto si jwt es null o undefined
-          console.log(token)
-          try {
-              const decodedToken: any = jwtDecode(token);
-              setUserId(decodedToken.jti);
-          } catch (error) {
-              console.error("Error al decodificar el token:", error);
-          }
-      }, [token]);
+    if (!token) return; // Evita ejecutar el efecto si jwt es null o undefined
+    console.log(token);
+    try {
+      const decodedToken: any = jwtDecode(token);
+      setUserId(decodedToken.jti);
+    } catch (error) {
+      console.error("Error al decodificar el token:", error);
+    }
+  }, [token]);
 
   // Mueve el useEffect al nivel superior del componente
   useEffect(() => {
@@ -69,42 +69,59 @@ export default function Account() {
   };
 
   const handleSaveChanges = () => {
-    if (!user || !token) return;
+    if (!user || !token) {
+      console.log("No hay usuario o token disponible.");
+      return;
+    }
+
+    console.log("Guardando cambios...");
 
     const userData = {
       id: user.id,
       name: user.name,
       surname: user.surname,
       username: user.username,
-      password: user.password,
+      password: user.password ? user.password : "placeholderPassword", // Asegúrate de enviar la contraseña si está presente
       email: user.email,
       profilePhotoRoute: user.profilePhotoRoute
     };
 
+    // Verifica que el token esté disponible y válido antes de hacer la solicitud
+    if (!token) {
+      console.log("Token no disponible. No se puede guardar los cambios.");
+      return;
+    }
+
+    // Realiza la solicitud para actualizar los datos del usuario
     fetch(`${apiUrl}/api/v1/users/${user.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
+        "Authorization": `Bearer ${token}` // El token debería ser correcto aquí
       },
       body: JSON.stringify(userData)
     })
       .then(response => {
         if (!response.ok) {
-          return response.json().then(err => { throw new Error(JSON.stringify(err)); });
+          return response.json().then(err => {
+            console.error("Error del servidor:", err);
+            throw new Error(JSON.stringify(err));
+          });
         }
         return response.json();
       })
       .then(data => {
-        setUser(data);
+        console.log("Datos actualizados correctamente:", data);
+        setUser({ ...user, ...data }); // Actualiza solo los datos del usuario, NO el token
         setIsEditing(false);
         Alert.alert("Perfil actualizado", "Los cambios han sido guardados correctamente");
-        router.push("/account");
       })
       .catch(error => {
+        console.error("Error al guardar cambios:", error);
         Alert.alert("Error", `No se pudo guardar los cambios: ${error.message}`);
       });
   };
+
   const handleLogout = signOut;
 
   const handleAvatarSelection = (avatar: any) => {
