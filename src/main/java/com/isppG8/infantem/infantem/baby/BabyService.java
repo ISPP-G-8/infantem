@@ -61,9 +61,6 @@ public class BabyService {
 
         // Añadir el usuario actual
         User currentUser = userService.findCurrentUser();
-        if (baby.getUsers() == null) {
-            baby.setUsers(new ArrayList<>());
-        }
         baby.getUsers().add(currentUser);
 
         return babyRepository.save(baby);

@@ -88,6 +88,13 @@ public class BabyControllerTest {
     }
 
     @Test
+    public void TestFindBabies_NoContent() throws Exception {
+        Mockito.when(babyService.findBabiesByUser()).thenReturn(List.of());
+        mockMvc.perform(get("/api/v1/baby").header("Authorization", "Bearer " + token))
+                .andExpect(status().isNoContent());
+    }
+
+    @Test
     public void TestFindById() throws Exception {
         Baby b1 = createDummyBaby(1);
         Mockito.when(babyService.findById(1)).thenReturn(b1);
