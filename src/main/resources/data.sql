@@ -103,16 +103,16 @@ INSERT INTO recipe_table(max_recommended_age, min_recommended_age, user_id, desc
 
 -- Inserción de anuncios
 INSERT INTO advertisement_table(company_name, title, target_url, photo_route, time_seen, total_clicks, max_minutes, is_completed) VALUES 
-('Nestlé', 'Papillas de frutas', 'google.com', 'a', 0, 0, 1, false),
-('Hero', 'Leche de continuación', 'google.com', 'a', 0, 0, 1, false),
-('Dodot', 'Pañales', 'google.com', 'a', 0, 0, 1, false),
-('Chicco', 'Biberones', 'google.com', 'a', 0, 0, 1, false),
-('Suavinex', 'Chupetes', 'google.com', 'a', 0, 0, 1, false),
-('Johnsons', 'Toallitas húmedas', 'google.com', 'a', 0, 0, 1, false),
-('Blemil', 'Leche de inicio', 'google.com', 'a', 0, 0, 1, false),
-('Nutribén', 'Potitos de verduras', 'google.com', 'a', 0, 0, 1, false),
-('Avent', 'Esterilizador de biberones', 'google.com', 'a', 0, 0, 1, false),
-('Babymoov', 'Cuna de viaje', 'google.com', 'a', 0, 0, 1, false);
+('Nestlé', 'Papillas de frutas', 'https://google.com', 'a', 0, 0, 1, false),
+('Hero', 'Leche de continuación', 'https://google.com', 'a', 0, 0, 1, false),
+('Dodot', 'Pañales', 'https://google.com', 'a', 0, 0, 1, false),
+('Chicco', 'Biberones', 'https://google.com', 'a', 0, 0, 1, false),
+('Suavinex', 'Chupetes', 'https://google.com', 'a', 0, 0, 1, false),
+('Johnsons', 'Toallitas húmedas', 'https://google.com', 'a', 0, 0, 1, false),
+('Blemil', 'Leche de inicio', 'https://google.com', 'a', 0, 0, 1, false),
+('Nutribén', 'Potitos de verduras', 'https://google.com', 'a', 0, 0, 1, false),
+('Avent', 'Esterilizador de biberones', 'https://google.com', 'a', 0, 0, 1, false),
+('Babymoov', 'Cuna de viaje', 'https://google.com', 'a', 0, 0, 1, false);
 
 INSERT INTO recipe_allergen(allergen_id,recipe_id) VALUES
 (1,1),
