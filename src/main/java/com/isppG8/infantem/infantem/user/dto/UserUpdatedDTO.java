@@ -18,11 +18,11 @@ public class UserUpdatedDTO {
     private String role;
     private String jwt;
 
-    public UserUpdatedDTO(){
-	
+    public UserUpdatedDTO() {
+
     }
 
-    public UserUpdatedDTO(User user,String jwt) {
+    public UserUpdatedDTO(User user, String jwt) {
         this.id = user.getId();
         this.name = user.getName();
         this.surname = user.getSurname();
@@ -30,6 +30,6 @@ public class UserUpdatedDTO {
         this.email = user.getEmail();
         this.profilePhotoRoute = user.getProfilePhotoRoute();
         this.role = (user.getAuthorities() != null) ? user.getAuthorities().getAuthority() : null;
-	this.jwt = jwt;
+        this.jwt = jwt;
     }
 }
