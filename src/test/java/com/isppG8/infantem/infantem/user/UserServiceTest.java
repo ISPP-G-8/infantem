@@ -21,6 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.isppG8.infantem.infantem.InfantemApplication;
+import com.isppG8.infantem.infantem.user.dto.UserDTO;
 
 import jakarta.transaction.Transactional;
 
@@ -124,7 +125,7 @@ public class UserServiceTest {
         updatedDetails.setUsername("updatedUsername");
         updatedDetails.setEmail("updated@example.com");
 
-        User updatedUser = userService.updateUser((long) 1, updatedDetails);
+        User updatedUser = userService.updateUser((long) 1, new UserDTO(updatedDetails));
 
         assertNotNull(updatedUser);
         assertEquals("Updated", updatedUser.getName());

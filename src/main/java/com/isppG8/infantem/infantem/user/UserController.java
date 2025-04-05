@@ -16,6 +16,7 @@ import com.isppG8.infantem.infantem.auth.jwt.JwtUtils;
 import com.isppG8.infantem.infantem.auth.payload.response.MessageResponse;
 
 import com.isppG8.infantem.infantem.user.dto.UserDTO;
+import com.isppG8.infantem.infantem.user.dto.UserUpdatedDTO;
 
 import jakarta.validation.Valid;
 
@@ -63,7 +64,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateUser(@PathVariable Long id, @Valid @RequestBody User userDetails,
+    public ResponseEntity<Object> updateUser(@PathVariable Long id, @Valid @RequestBody UserDTO userDetails,
             @RequestHeader(name = "Authorization") String token) {
 
         String jwtId = jwtUtils.getIdFromJwtToken(token.substring(6));
@@ -73,7 +74,9 @@ public class UserController {
         }
 
         User updatedUser = userService.updateUser(id, userDetails);
-        return ResponseEntity.ok().body(new UserDTO(updatedUser));
+	String jwt = jwtUtils.generateTokenFromUsername(updatedUser.getUsername(),updatedUser.getAuthorities());
+
+        return ResponseEntity.ok().body(new UserUpdatedDTO(updatedUser,jwt));
 
     }
 
