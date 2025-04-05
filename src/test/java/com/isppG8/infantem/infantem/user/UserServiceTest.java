@@ -124,7 +124,7 @@ public class UserServiceTest {
         updatedDetails.setSurname("User");
         updatedDetails.setUsername("updatedUsername");
         updatedDetails.setEmail("updated@example.com");
-	updatedDetails.setId(1);
+        updatedDetails.setId(1);
 
         User updatedUser = userService.updateUser((long) 1, new UserDTO(updatedDetails));
 
