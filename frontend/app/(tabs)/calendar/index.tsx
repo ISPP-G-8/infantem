@@ -44,7 +44,6 @@ const CalendarTab = () => {
       }
 
       const data = await response.json();
-      console.log("Datos diarios recibidos de la API:", data); // Depuración
 
       // Transformar los datos en un formato adecuado para el estado
       const transformedEvents: { [key: string]: { [babyId: string]: any } } = {};
@@ -61,7 +60,6 @@ const CalendarTab = () => {
         };
       });
 
-      console.log("Eventos transformados para el día:", transformedEvents); // Depuración
       setEvents((prevEvents) => ({ ...prevEvents, ...transformedEvents }));
     } catch (error) {
       console.error("Error al obtener los eventos del día:", error);
@@ -91,7 +89,6 @@ const CalendarTab = () => {
       }
   
       const data = await response.json();
-      console.log("Datos mensuales recibidos de la API:", data); // Depuración
 
 
       const auxiliarMap: { [key: string]: { [babyId: string]: string[] } } = {};
@@ -125,7 +122,6 @@ const CalendarTab = () => {
         };
       });
 
-      console.log("Eventos transformados para el mes:", transformedEvents); // Depuración
       setEvents(transformedEvents);
 
     } catch (error) {
@@ -176,7 +172,6 @@ const CalendarTab = () => {
   }, [token]);
 
   useEffect(() => {
-    console.log("Estado events actualizado:", events); // Depuración
   }, [events]);
 
   useEffect(() => {
@@ -250,7 +245,6 @@ const CalendarTab = () => {
         : {}),
     };
 
-    console.log("Fechas marcadas en el calendario:", markedDates); // Depuración
 
     return (
       <View style={[gs.card, { maxWidth: 600, padding: 10 }]}>
@@ -303,7 +297,6 @@ const CalendarTab = () => {
 
   // Renderizar la información del día seleccionado
   const renderSelectedDateInfo = () => {
-    console.log("Información del día seleccionado:", events[selectedDate]); // Depuración
 
     return (
       <View style={[gs.card, { maxWidth: 600, padding: 10 }]}>
