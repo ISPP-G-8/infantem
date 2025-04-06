@@ -78,6 +78,15 @@ public class UserService {
     }
 
     @Transactional
+    public User updatePassword(Long userId, String encodedPassword){
+        User user = userRepository.findById(userId)
+        .orElseThrow(() -> new ResourceNotFoundException("User", "Id", userId));
+
+    user.setPassword(encodedPassword);
+    return userRepository.save(user);
+    }
+
+    @Transactional
     public boolean deleteUser(Long id) {
         if (userRepository.existsById(id)) {
             userRepository.deleteById(id);
