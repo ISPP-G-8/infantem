@@ -53,4 +53,10 @@ public interface RecipeRepository extends CrudRepository<Recipe, Long> {
     @Query("SELECT r FROM Recipe r WHERE r.user IS NULL AND r.minRecommendedAge <= :age AND r.maxRecommendedAge >= :age")
     List<Recipe> findRecommendedRecipesByAge(@Param("age") Integer age);
 
+    @Query("SELECT r FROM Recipe r WHERE r.user IS NULL AND :name IS NOT NULL AND :name <> '' AND LOWER(r.name) LIKE LOWER(CONCAT('%', :name, '%'))")
+    List<Recipe> findRecipeRecommendedByName(String name);
+
+    @Query("SELECT r FROM Recipe r WHERE r.user.id = :userId AND :name IS NOT NULL AND :name <> '' AND LOWER(r.name) LIKE LOWER(CONCAT('%', :name, '%'))")
+    List<Recipe> findRecipeByName(String name, @Param("userId") Integer userId);
+
 }

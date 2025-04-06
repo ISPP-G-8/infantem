@@ -190,6 +190,29 @@ public class RecipeControllerTest {
     }
 
     @Test
+    void testFilterRecipesByName() throws Exception {
+        Mockito.when(userService.findCurrentUserId()).thenReturn(1);
+        mockMvc.perform(get("/api/v1/recipes").param("name", "batata").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.content.length()").value(1))
+                .andExpect(jsonPath("$.content[0].name").value("Puré de Zanahoria y Batata"));
+        mockMvc.perform(get("/api/v1/recipes").param("ingredients", "").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.content.length()").value(5))
+                .andExpect(jsonPath("$.content[0].name").value("Puré de Zanahoria y Batata"));
+    }
+
+    @Test
+    void testFilterRecommendedRecipesByName() throws Exception {
+        Mockito.when(userService.findCurrentUserId()).thenReturn(1);
+        mockMvc.perform(
+                get("/api/v1/recipes/recommended").param("name", "puré").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.content.length()").value(1))
+                .andExpect(jsonPath("$.content[0].name").value("Puré de Pollo con Verduras"));
+        mockMvc.perform(get("/api/v1/recipes").param("ingredients", "").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.content.length()").value(5))
+                .andExpect(jsonPath("$.content[0].name").value("Puré de Zanahoria y Batata"));
+    }
+
+    @Test
     void testFilterRecipesByAllergens() throws Exception {
         Mockito.when(userService.findCurrentUserId()).thenReturn(1);
         mockMvc.perform(get("/api/v1/recipes").param("allergens", "Gluten").contentType(MediaType.APPLICATION_JSON))

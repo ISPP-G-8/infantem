@@ -37,11 +37,13 @@ public class Allergen {
     private String description;
 
     @ManyToMany
-    @JoinTable(name = "recipe_allergen", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "allergen_id"))
+    @JoinTable(name = "recipe_allergen", joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "allergen_id"))
     private List<Recipe> recipes = new ArrayList<>();
 
     @ManyToMany
-    @JoinTable(name = "baby_allergen", joinColumns = @JoinColumn(name = "baby_id"), inverseJoinColumns = @JoinColumn(name = "allergen_id"))
+    @JoinTable(name = "baby_allergen", joinColumns = @JoinColumn(name = "baby_id"),
+            inverseJoinColumns = @JoinColumn(name = "allergen_id"))
     private List<Baby> babies = new ArrayList<>();
 
 }

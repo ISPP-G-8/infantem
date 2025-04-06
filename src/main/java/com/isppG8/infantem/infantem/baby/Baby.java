@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -56,6 +57,7 @@ public class Baby {
     private String name;
 
     @NotNull
+    @PastOrPresent
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate birthDate;
 
@@ -105,7 +107,8 @@ public class Baby {
     private List<Allergen> allergen = new ArrayList<>();
 
     @ManyToMany
-    @JoinTable(name = "user_baby", joinColumns = @JoinColumn(name = "baby_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @JoinTable(name = "user_baby", joinColumns = @JoinColumn(name = "baby_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
     @Size(min = 1, max = 2, message = "A baby should have 1 or 2 users")
     private List<User> users = new ArrayList<>();
 }

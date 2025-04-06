@@ -50,7 +50,8 @@ public class Intake {
     private String observations;
 
     @ManyToMany
-    @JoinTable(name = "intake_recipe", joinColumns = @JoinColumn(name = "intake_id"), inverseJoinColumns = @JoinColumn(name = "recipe_id"))
+    @JoinTable(name = "intake_recipe", joinColumns = @JoinColumn(name = "intake_id"),
+            inverseJoinColumns = @JoinColumn(name = "recipe_id"))
     @Size(min = 1)
     private List<Recipe> recipes = new ArrayList<>();
 

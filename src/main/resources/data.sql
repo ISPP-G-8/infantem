@@ -83,7 +83,7 @@ INSERT INTO milestone (name, description) VALUES
 INSERT INTO milestone_completed (baby_id, milestone_id, date) VALUES
 (1, 1, '2024-01-01');
 
--- Inerción de recetas
+-- Inserción de recetas
 INSERT INTO recipe_table(max_recommended_age, min_recommended_age, user_id, description, elaboration, ingredients, name, photo_route) VALUES
 (8, 6, 1, 'Puré de zanahoria y batata', 'Cocinar zanahoria y batata al vapor, triturar.', 'Zanahoria, batata', 'Puré de Zanahoria y Batata', 'a'),
 (7, 5, 2, 'Compota de manzana y pera', 'Cocinar manzana y pera a fuego lento, triturar.', 'Manzana, pera', 'Compota de Manzana y Pera', 'a'),
@@ -101,6 +101,18 @@ INSERT INTO recipe_table(max_recommended_age, min_recommended_age, user_id, desc
 (12, 9, null, 'Mini hamburguesas de ternera', 'Carne de ternera picada, formar mini hamburguesas y cocinar a la plancha.', 'Ternera picada', 'Mini Hamburguesas', 'a'),
 (11, 8, null, 'Pasta corta con verduras', 'Cocinar pasta corta, mezclar con verduras al vapor y triturar ligeramente.', 'Pasta corta, verduras', 'Pasta con Verduras', 'a');
 
+-- Inserción de anuncios
+INSERT INTO advertisement_table(company_name, title, target_url, photo_route, time_seen, total_clicks, max_minutes, is_completed) VALUES 
+('Nestlé', 'Papillas de frutas', 'google.com', 'a', 0, 0, 1, false),
+('Hero', 'Leche de continuación', 'google.com', 'a', 0, 0, 1, false),
+('Dodot', 'Pañales', 'google.com', 'a', 0, 0, 1, false),
+('Chicco', 'Biberones', 'google.com', 'a', 0, 0, 1, false),
+('Suavinex', 'Chupetes', 'google.com', 'a', 0, 0, 1, false),
+('Johnsons', 'Toallitas húmedas', 'google.com', 'a', 0, 0, 1, false),
+('Blemil', 'Leche de inicio', 'google.com', 'a', 0, 0, 1, false),
+('Nutribén', 'Potitos de verduras', 'google.com', 'a', 0, 0, 1, false),
+('Avent', 'Esterilizador de biberones', 'google.com', 'a', 0, 0, 1, false),
+('Babymoov', 'Cuna de viaje', 'google.com', 'a', 0, 0, 1, false);
 
 INSERT INTO recipe_allergen(allergen_id,recipe_id) VALUES
 (1,1),
@@ -160,3 +172,51 @@ INSERT INTO metric_table (id, weight, height, cephalic_perimeter, date, baby_id)
 (8, 10.0, 80.0, 42, '2025-09-01', 4),
 (9, 11.0, 85.0, 43, '2025-10-01', 5),
 (10, 12.0, 90.0, 44, '2025-11-01', 5);
+
+-- Inserción de productos
+
+INSERT INTO product (title, description, image_url, shop_url) VALUES
+(
+  'Philips Avent SCF033/27 - Biberón Natural 260 ml',
+  'Pack de dos biberones con capacidad de 260 ml, sin BPA y con forma ergonómica; enganche natural gracias a la tetina más ancha con forma de pecho.',
+  'https://m.media-amazon.com/images/I/41b7U5nfW1L._AC_SL1000_.jpg',
+  'https://www.amazon.es/Philips-Avent/dp/B095CBHTT4'
+),
+(
+  'Dodot Sensitive Talla 2 (4-8 kg), 240 pañales',
+  'Pañales con suavidad excelente: materiales muy delicados, ideales para pieles sensibles o con tendencia a irritaciones. Alta absorción: buena retención de líquidos.',
+  'https://m.media-amazon.com/images/I/81V-dxSVHeL._AC_SL1500_.jpg',
+  'https://www.amazon.es/DODOT-Sensitive-Pa%C3%B1ales-Talla-240/dp/B082N3H868'
+),
+(
+  'Hero Baby Tarrito de Verduras con Ternera y Arroz (2x235 g)',
+  'Tarrito de verduras con ternera y arroz, sin gluten, adecuado desde los 10 meses.',
+  'https://latiendahero.es/cdn/shop/files/8410175081131_VerdurasconArrozyTernera2x235g_L.png?v=1741782192&width=910',
+  'https://latiendahero.es/products/tarrito-hero-solo-verdura-ternera-y-arroz'
+),
+(
+  'Dodot Toallitas Pure Aqua (144 uds)',
+  'Toallitas con 99% de agua purificada y algodón orgánico, ideales para pieles sensibles.',
+  'https://m.media-amazon.com/images/I/71YW6XLg1-L._AC_SL1500_.jpg',
+  'https://www.amazon.es/Toallitas-Paquetes-Unidades-Elaboradas-Limpieza/dp/B0B6C21YSN'
+),
+(
+  'Chicco Mordedor Fresh Relax 4m+',
+  'Mordedor refrigerante que alivia las encías durante la dentición. Se puede enfriar para mayor alivio.',
+  'https://m.media-amazon.com/images/I/61lpDkUDtLL._AC_SL1500_.jpg',
+  'https://www.amazon.es/Chicco-Fresh-Relax-4-m/dp/B0891CRC5F'
+),
+(
+  'Carrefour Baby Toallitas Sensitive 6x72 uds',
+  'Toallitas con extracto de aloe vera y sin perfume. Testadas dermatológicamente.',
+  'https://static.carrefour.es/hd_510x_/img_pim_food/489929_00_1.jpg',
+  'https://www.carrefour.es/supermercado/toallitas-bebe-sensitive-my-baby-carrefour-72-ud/R-prod395287/p'
+),
+
+(
+  'Lictin Pack 2 baberos impermeables con bolsillo',
+  'Baberos ajustables de silicona con recogemigas. Fáciles de limpiar y resistentes al uso diario.',
+  'https://m.media-amazon.com/images/I/71vX4RWw3PL._AC_SL1500_.jpg',
+  'https://www.amazon.es/Lictin-Babero-Mangas-Impermeable-Ajustable/dp/B0BZVLJGQ9'
+);
+

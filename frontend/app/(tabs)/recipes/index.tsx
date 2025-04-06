@@ -4,7 +4,6 @@ import { Link, useRouter } from "expo-router";
 import { Recipe } from "../../../types/Recipe";
 import { useAuth } from "../../../context/AuthContext";
 
-
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
 export default function Page() {
@@ -372,6 +371,7 @@ export default function Page() {
           )}
         </View>
         
+
 
         <View style={{ width: "100%", alignItems: "center", justifyContent: "center", }}>
 

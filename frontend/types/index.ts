@@ -5,3 +5,5 @@ export * from "./AuthContextType";
 export * from "./Question";
 export * from "./Recipe";
 export * from "./Baby";
+export * from "./Ad";
+export * from "./MarketItem";
