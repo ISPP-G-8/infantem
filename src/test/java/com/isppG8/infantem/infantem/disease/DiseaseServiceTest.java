@@ -51,10 +51,9 @@ public class DiseaseServiceTest {
         }
     }
 
-
     @Autowired
     private DiseaseRepository diseaseRepository;
-    
+
     @Autowired
     private DiseaseService diseaseService;
 
@@ -62,7 +61,6 @@ public class DiseaseServiceTest {
     private UserService userService;
     @Autowired
     private BabyService babyService;
-
 
     private User currentUser;
     private Baby testBaby;
@@ -89,7 +87,6 @@ public class DiseaseServiceTest {
         testDisease.setBaby(testBaby);
         testDisease = diseaseRepository.save(testDisease);
     }
-
 
     @Test
     public void testGetAllDiseases() {
@@ -119,7 +116,7 @@ public class DiseaseServiceTest {
     @Test
     public void testGetById_NotFound() {
         Long id = 999L; // Non-existing ID
-         assertThrows(ResourceNotFoundException.class, () -> diseaseService.getById(id));
+        assertThrows(ResourceNotFoundException.class, () -> diseaseService.getById(id));
     }
 
     @Test
@@ -141,24 +138,24 @@ public class DiseaseServiceTest {
 
     // @Test
     // public void testUpdateDisease_Success() {
-    //     Long id = (long) testDisease.getId();
+    // Long id = (long) testDisease.getId();
 
-    //     Disease updatedDisease = new Disease();
-    //     updatedDisease.setName("Updated Disease");
-    //     updatedDisease.setStartDate(LocalDate.of(2023, 1, 2));
-    //     updatedDisease.setEndDate(LocalDate.of(2023, 1, 4));
-    //     updatedDisease.setSymptoms("Updated Symptoms");
-    //     updatedDisease.setExtraObservations("Updated Observations");
-    //     updatedDisease.setBaby(testBaby);
+    // Disease updatedDisease = new Disease();
+    // updatedDisease.setName("Updated Disease");
+    // updatedDisease.setStartDate(LocalDate.of(2023, 1, 2));
+    // updatedDisease.setEndDate(LocalDate.of(2023, 1, 4));
+    // updatedDisease.setSymptoms("Updated Symptoms");
+    // updatedDisease.setExtraObservations("Updated Observations");
+    // updatedDisease.setBaby(testBaby);
 
-    //     testBaby.setUsers(List.of(currentUser));
+    // testBaby.setUsers(List.of(currentUser));
 
-    //     org.mockito.Mockito.when(userService.findCurrentUser()).thenReturn(currentUser);
-    //     org.mockito.Mockito.when(babyService.findById(testBaby.getId())).thenReturn(testBaby);
+    // org.mockito.Mockito.when(userService.findCurrentUser()).thenReturn(currentUser);
+    // org.mockito.Mockito.when(babyService.findById(testBaby.getId())).thenReturn(testBaby);
 
-    //     Disease res = diseaseService.update(id, updatedDisease);
-    //     assertEquals("Updated Symptoms", res.getSymptoms());
-    //     assertEquals("Updated Observations", res.getExtraObservations());
+    // Disease res = diseaseService.update(id, updatedDisease);
+    // assertEquals("Updated Symptoms", res.getSymptoms());
+    // assertEquals("Updated Observations", res.getExtraObservations());
     // }
 
     @Test
@@ -178,14 +175,14 @@ public class DiseaseServiceTest {
 
     // @Test
     // public void testUpdateIntake_NotFound() {
-    //     Long id = 999L; // Non-existent ID
-    //     Disease updatedDisease = new Disease();
-    //     updatedDisease.setBaby(testBaby);
+    // Long id = 999L; // Non-existent ID
+    // Disease updatedDisease = new Disease();
+    // updatedDisease.setBaby(testBaby);
 
-    //     org.mockito.Mockito.when(userService.findCurrentUser()).thenReturn(currentUser);
-    //     org.mockito.Mockito.when(babyService.findById(testBaby.getId())).thenReturn(testBaby);
+    // org.mockito.Mockito.when(userService.findCurrentUser()).thenReturn(currentUser);
+    // org.mockito.Mockito.when(babyService.findById(testBaby.getId())).thenReturn(testBaby);
 
-    //     assertThrows(ResourceNotFoundException.class, () -> diseaseService.update(id, updatedDisease));
+    // assertThrows(ResourceNotFoundException.class, () -> diseaseService.update(id, updatedDisease));
     // }
 
     @Test
@@ -198,11 +195,11 @@ public class DiseaseServiceTest {
     @Test
     public void testDeleteDisease_Failure() {
         Long id = 999L;
-        assertThrows( ResourceNotFoundException.class, () -> diseaseService.delete(id));
+        assertThrows(ResourceNotFoundException.class, () -> diseaseService.delete(id));
     }
 
     @Test
-    public void testDiseasesByBabyIdAndDate () {
+    public void testDiseasesByBabyIdAndDate() {
         LocalDate start = LocalDate.of(2025, 1, 1);
         LocalDate end = LocalDate.of(2025, 1, 5);
 
@@ -218,7 +215,7 @@ public class DiseaseServiceTest {
         assertFalse(diseaseDates.contains(LocalDate.of(2025, 1, 4)));
         assertFalse(diseaseDates.contains(LocalDate.of(2025, 1, 5)));
     }
-    
+
     @Test
     public void testGetDiseaseSummaryByBabyIdAndDate() {
         // Día dentro del rango de la enfermedad testDisease (1 al 3 de enero 2025)
@@ -227,7 +224,6 @@ public class DiseaseServiceTest {
         List<DiseaseSummary> summaryList = diseaseService.getDiseaseSummaryByBabyIdAndDate(testBaby.getId(), day);
 
         summaryList.forEach(s -> System.out.println("DiseaseSummary: " + s.getId() + ", " + s.getName()));
-
 
         assertNotNull(summaryList);
         assertEquals(2, summaryList.size()); // Hay 2 por una que coge de base de datos
