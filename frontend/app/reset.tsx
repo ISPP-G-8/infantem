@@ -37,13 +37,17 @@ const ResetPassword: React.FC = () => {
 
       if (!response.ok) {
         const data = await response.json();
-        setError(data.message || "Error al restablecer la contraseña.");
+        const errorMessage =
+          data.message === "Validation failed"
+            ? "La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un carácter especial."
+            : data.message || "Error al restablecer la contraseña.";
+        setError(errorMessage);
         return;
       }
 
-      setMessage("Contraseña restablecida correctamente.");
+      setMessage("Contraseña restablecida correctamente. Se te redirigirá al inicio de sesión. Espere por favor...");
       setError("");
-      setTimeout(() => navigation.navigate("Login"), 2000); // Redirige al login después de 3 segundos
+      setTimeout(() => navigation.navigate("signin"), 2500); // Redirige al login después de 3 segundos
     } catch (error) {
       console.error("Error al restablecer la contraseña:", error);
       setError("Ocurrió un error. Inténtalo de nuevo más tarde.");
