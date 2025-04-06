@@ -48,14 +48,12 @@ public class PasswordResetService {
         return resetToken;
     }
 
-
     /**
-     * Scheduled task that deletes all expired password reset tokens from the repository.
-     * This method runs every hour, as specified by the cron expression "0 0 * * * *".
-     * It removes tokens whose expiration date is before the current time.
+     * Scheduled task that deletes all expired password reset tokens from the repository. This method runs every hour,
+     * as specified by the cron expression "0 0 * * * *". It removes tokens whose expiration date is before the current
+     * time.
      */
-    @Scheduled(cron = "0 0 * * * *") 
-    @Transactional
+    @Scheduled(cron = "0 0 * * * *") @Transactional
     public void deleteExpiredTokens() {
         passwordResetRepository.deleteAllByExpirationDateBefore(LocalDateTime.now());
     }
