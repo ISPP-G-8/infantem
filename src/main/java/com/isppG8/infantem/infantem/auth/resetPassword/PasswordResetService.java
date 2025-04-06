@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,7 +30,7 @@ public class PasswordResetService {
         PasswordResetToken resetToken = new PasswordResetToken();
         resetToken.setToken(token);
         resetToken.setUser(user);
-        resetToken.setExpirationDate(LocalDateTime.now().plusMinutes(30));
+        resetToken.setExpirationDate(LocalDateTime.now().plusMinutes(1));
 
         passwordResetRepository.save(resetToken);
         return token;
@@ -45,6 +46,18 @@ public class PasswordResetService {
         }
 
         return resetToken;
+    }
+
+
+    /**
+     * Scheduled task that deletes all expired password reset tokens from the repository.
+     * This method runs every hour, as specified by the cron expression "0 0 * * * *".
+     * It removes tokens whose expiration date is before the current time.
+     */
+    @Scheduled(cron = "0 0 * * * *") 
+    @Transactional
+    public void deleteExpiredTokens() {
+        passwordResetRepository.deleteAllByExpirationDateBefore(LocalDateTime.now());
     }
 
     public void invalidateToken(PasswordResetToken token) {
