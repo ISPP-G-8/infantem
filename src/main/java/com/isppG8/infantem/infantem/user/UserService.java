@@ -78,12 +78,12 @@ public class UserService {
     }
 
     @Transactional
-    public User updatePassword(Long userId, String encodedPassword){
+    public User updatePassword(Long userId, String encodedPassword) {
         User user = userRepository.findById(userId)
-        .orElseThrow(() -> new ResourceNotFoundException("User", "Id", userId));
+                .orElseThrow(() -> new ResourceNotFoundException("User", "Id", userId));
 
-    user.setPassword(encodedPassword);
-    return userRepository.save(user);
+        user.setPassword(encodedPassword);
+        return userRepository.save(user);
     }
 
     @Transactional

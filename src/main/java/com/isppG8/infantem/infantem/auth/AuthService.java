@@ -30,10 +30,10 @@ public class AuthService {
     @Value("${frontend.url}")
     private String frontendUrl;
 
-
     @Autowired
     public AuthService(@Nullable PasswordEncoder encoder, AuthoritiesService authoritiesService,
-            UserService userService, PasswordResetService passwordResetService, EmailDetailsService emailDetailsService) {
+            UserService userService, PasswordResetService passwordResetService,
+            EmailDetailsService emailDetailsService) {
         if (encoder != null) {
             this.encoder = encoder;
         } else {
@@ -62,21 +62,20 @@ public class AuthService {
 
     public void initiatePasswordReset(String email) {
         User user = userService.findByEmail(email);
-    
+
         if (user != null) {
             String token = passwordResetService.createToken(user);
             String resetLink = frontendUrl + "/reset-password?token=" + token;
-    
+
             String subject = "Restablece tu contraseña";
-            String body = "Hola " + user.getName() + ",\n\n" +
-                          "Haz clic en el siguiente enlace para restablecer tu contraseña:\n" +
-                          resetLink + "\n\n" +
-                          "Este enlace caduca en 30 minutos.";
-    
+            String body = "Hola " + user.getName() + ",\n\n"
+                    + "Haz clic en el siguiente enlace para restablecer tu contraseña:\n" + resetLink + "\n\n"
+                    + "Este enlace caduca en 30 minutos.";
+
             EmailDetails emailDetails = new EmailDetails(user.getEmail(), body, subject);
             emailDetailsService.sendSimpleMail(emailDetails);
         }
-    
+
     }
 
     public void resetPassword(String token, String newPassword) {

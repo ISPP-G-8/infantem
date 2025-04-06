@@ -63,10 +63,10 @@ public class AuthController {
         this.emailValidationService = emailValidationService;
     }
 
-    @Operation(summary = "Iniciar sesión", description = "Autentica un usuario y devuelve un token JWT.")
-    @ApiResponse(responseCode = "200", description = "Autenticación exitosa", content = @Content(schema = @Schema(implementation = JwtResponse.class)))
-    @ApiResponse(responseCode = "400", description = "Credenciales incorrectas")
-    @PostMapping("/signin")
+    @Operation(summary = "Iniciar sesión", description = "Autentica un usuario y devuelve un token JWT.") @ApiResponse(
+            responseCode = "200", description = "Autenticación exitosa",
+            content = @Content(schema = @Schema(implementation = JwtResponse.class))) @ApiResponse(responseCode = "400",
+                    description = "Credenciales incorrectas") @PostMapping("/signin")
     public ResponseEntity<Object> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         try {
             Authentication authentication = authenticationManager.authenticate(
@@ -86,10 +86,12 @@ public class AuthController {
         }
     }
 
-    @Operation(summary = "Obtener usuario autenticado", description = "Obtiene la información del usuario autenticado a partir del token JWT.")
-    @ApiResponse(responseCode = "200", description = "Usuario autenticado", content = @Content(schema = @Schema(implementation = AuthDTO.class)))
-    @ApiResponse(responseCode = "400", description = "Token inválido o error de autenticación")
-    @GetMapping("/me")
+    @Operation(summary = "Obtener usuario autenticado",
+            description = "Obtiene la información del usuario autenticado a partir del token JWT.") @ApiResponse(
+                    responseCode = "200", description = "Usuario autenticado",
+                    content = @Content(schema = @Schema(implementation = AuthDTO.class))) @ApiResponse(
+                            responseCode = "400",
+                            description = "Token inválido o error de autenticación") @GetMapping("/me")
     public ResponseEntity<Object> authSantos(@RequestHeader HttpHeaders headers) {
         try {
             if (!headers.containsKey("Authorization")) {
@@ -113,18 +115,20 @@ public class AuthController {
         }
     }
 
-    @Operation(summary = "Validar token JWT", description = "Verifica si un token JWT es válido.")
-    @ApiResponse(responseCode = "200", description = "Token válido", content = @Content(schema = @Schema(implementation = Boolean.class)))
-    @GetMapping("/validate")
+    @Operation(summary = "Validar token JWT", description = "Verifica si un token JWT es válido.") @ApiResponse(
+            responseCode = "200", description = "Token válido",
+            content = @Content(schema = @Schema(implementation = Boolean.class))) @GetMapping("/validate")
     public ResponseEntity<Boolean> validateToken(@RequestParam String token) {
         Boolean isValid = jwtUtils.validateJwtToken(token);
         return ResponseEntity.ok(isValid);
     }
 
-    @Operation(summary = "Registrar nuevo usuario", description = "Registra un usuario en el sistema y devuelve un token JWT.")
-    @ApiResponse(responseCode = "200", description = "Usuario registrado exitosamente", content = @Content(schema = @Schema(implementation = JwtResponse.class)))
-    @ApiResponse(responseCode = "400", description = "Usuario o email ya en uso o código de validación incorrecto")
-    @PostMapping("/signup")
+    @Operation(summary = "Registrar nuevo usuario",
+            description = "Registra un usuario en el sistema y devuelve un token JWT.") @ApiResponse(
+                    responseCode = "200", description = "Usuario registrado exitosamente",
+                    content = @Content(schema = @Schema(implementation = JwtResponse.class))) @ApiResponse(
+                            responseCode = "400",
+                            description = "Usuario o email ya en uso o código de validación incorrecto") @PostMapping("/signup")
     public ResponseEntity<Object> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         boolean existingUser = (userService.findByUsername(signUpRequest.getUsername()) == null);
         boolean existingEmail = (userService.findByEmail(signUpRequest.getEmail()) == null);
@@ -157,10 +161,10 @@ public class AuthController {
         return ResponseEntity.ok().body(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), roles));
     }
 
-    @Operation(summary = "Generar código de validación por email", description = "Envía un código de validación al email del usuario.")
-    @ApiResponse(responseCode = "200", description = "Código enviado exitosamente")
-    @ApiResponse(responseCode = "400", description = "Faltan datos o error en la solicitud")
-    @PostMapping("/email")
+    @Operation(summary = "Generar código de validación por email",
+            description = "Envía un código de validación al email del usuario.") @ApiResponse(responseCode = "200",
+                    description = "Código enviado exitosamente") @ApiResponse(responseCode = "400",
+                            description = "Faltan datos o error en la solicitud") @PostMapping("/email")
     public ResponseEntity<Object> generateCode(@Valid @RequestBody EmailRequest emailRequest) {
         if (emailRequest.getEmail() == null || emailRequest.getUsername() == null) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: missing data"));
