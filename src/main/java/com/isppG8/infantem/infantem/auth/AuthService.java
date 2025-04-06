@@ -65,7 +65,7 @@ public class AuthService {
 
         if (user != null) {
             String token = passwordResetService.createToken(user);
-            String resetLink = frontendUrl + "/reset-password?token=" + token;
+            String resetLink = frontendUrl + "/reset?token=" + token;
 
             String subject = "Restablece tu contraseña";
             String body = "Hola " + user.getName() + ",\n\n"

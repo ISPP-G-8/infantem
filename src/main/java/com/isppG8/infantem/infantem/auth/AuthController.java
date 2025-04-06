@@ -186,7 +186,10 @@ public class AuthController {
                                     content = @Content(schema = @Schema(implementation = MessageResponse.class))),
                             @ApiResponse(responseCode = "400", description = "Solicitud malformada",
                                     content = @Content) }) @PostMapping("/recover-password")
-    public ResponseEntity<?> recoverPassword(@RequestBody @Valid EmailRequest emailRequest) {
+    public ResponseEntity<?> recoverPassword(@RequestBody EmailRequest emailRequest) {
+        if(emailRequest.getEmail() == null){
+            return ResponseEntity.badRequest().body("El email es nulo");
+        }
         authService.initiatePasswordReset(emailRequest.getEmail());
         return ResponseEntity.ok(new MessageResponse(
                 "Si el correo está registrado, se ha enviado un enlace para restablecer la contraseña."));
