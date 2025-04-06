@@ -10,6 +10,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RecipeRepository extends CrudRepository<Recipe, Long> {
 
+    @Query("SELECT r FROM Recipe r")
+    List<Recipe> getAll();
+
     @Query("SELECT r FROM Recipe r WHERE r.user IS NULL")
     List<Recipe> findAllRecommendedRecipes();
 
