@@ -160,4 +160,15 @@ public class RecipeService {
         return this.recipeRepository.findRecommendedRecipesByAge(age);
     }
 
+    @Transactional(readOnly = true)
+    public List<Recipe> getRecommendedRecipesByName(String name) {
+        return this.recipeRepository.findRecipeRecommendedByName(name);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Recipe> getRecipesByName(String name) throws ResourceNotFoundException {
+        Integer userId = this.getCurrentUserId();
+        return this.recipeRepository.findRecipeByName(name, userId);
+    }
+
 }
