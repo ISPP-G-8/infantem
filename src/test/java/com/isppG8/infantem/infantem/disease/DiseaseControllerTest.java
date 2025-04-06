@@ -35,7 +35,7 @@ public class DiseaseControllerTest {
     @TestConfiguration
     static class TestConfig {
         @Bean
-        public DiseaseService intakeService() {
+        public DiseaseService diseaseService() {
             return Mockito.mock(DiseaseService.class);
         }
     }

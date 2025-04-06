@@ -159,7 +159,7 @@ public class DiseaseServiceTest {
     // }
 
     @Test
-    public void testUpdateIntake_NotOwned() {
+    public void testUpdateDisease_NotOwned() {
         Long id = (long) testDisease.getId();
         Disease updatedDisease = new Disease();
         updatedDisease.setBaby(testBaby);
@@ -174,7 +174,7 @@ public class DiseaseServiceTest {
     }
 
     // @Test
-    // public void testUpdateIntake_NotFound() {
+    // public void testUpdateDisease_NotFound() {
     // Long id = 999L; // Non-existent ID
     // Disease updatedDisease = new Disease();
     // updatedDisease.setBaby(testBaby);
