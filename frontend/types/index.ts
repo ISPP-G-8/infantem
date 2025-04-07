@@ -8,3 +8,4 @@ export * from "./Baby";
 export * from "./Ad";
 export * from "./MarketItem";
 export * from "./RecipeFilter";
+export * from "./SignupRequest";
