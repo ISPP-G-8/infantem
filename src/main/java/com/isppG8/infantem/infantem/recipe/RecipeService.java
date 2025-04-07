@@ -171,4 +171,45 @@ public class RecipeService {
         return this.recipeRepository.findRecipeByName(name, userId);
     }
 
+    @Transactional(readOnly = true)
+    public Recipe getRecipeByIdAdmin(Long recipeId) throws ResourceNotFoundException {
+        Recipe recipe = this.recipeRepository.findById(recipeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Recipe", "id", recipeId));
+        return recipe;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Recipe> getAll() {
+        List<Recipe> recipes = this.recipeRepository.getAll();
+        return recipes;
+    }
+
+    @Transactional
+    public Recipe createRecipeAdmin(Recipe recipe) {
+        return this.recipeRepository.save(recipe);
+    }
+
+    @Transactional
+    public Recipe updateRecipeAdmin(Long recipeId, Recipe recipeDetails) {
+        Recipe recipe = this.recipeRepository.findById(recipeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Recipe", "id", recipeId));
+
+        recipe.setName(recipeDetails.getName());
+        recipe.setDescription(recipeDetails.getDescription());
+        recipe.setIngredients(recipeDetails.getIngredients());
+        recipe.setMinRecommendedAge(recipeDetails.getMinRecommendedAge());
+        recipe.setMaxRecommendedAge(recipeDetails.getMaxRecommendedAge());
+        recipe.setElaboration(recipeDetails.getElaboration());
+
+        return this.recipeRepository.save(recipe);
+    }
+
+    @Transactional
+    public void deleteRecipeAdmin(Long recipeId) {
+        Recipe recipe = this.recipeRepository.findById(recipeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Recipe", "id", recipeId));
+
+        this.recipeRepository.delete(recipe);
+    }
+
 }

@@ -106,4 +106,42 @@ public class BabyService {
     private Boolean checkOwnership(Baby baby, Integer userId) {
         return baby.getUsers().stream().anyMatch(user -> user.getId().equals(userId));
     }
+
+    @Transactional(readOnly = true)
+    public Baby findByIdAdmin(int id) throws ResourceNotFoundException, ResourceNotOwnedException {
+
+        Optional<Baby> optionalBaby = babyRepository.findById(id);
+
+        Baby baby = optionalBaby.orElseThrow(() -> new ResourceNotFoundException("Baby", "id", id));
+
+        return baby;
+    }
+
+    @Transactional
+    public Baby updateBabyAdmin(int id, BabyDTO updatedBaby) {
+
+        Baby existingBaby = babyRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Baby", "id", id));
+
+        existingBaby.setName(updatedBaby.getName());
+        existingBaby.setBirthDate(updatedBaby.getBirthDate());
+        existingBaby.setGenre(updatedBaby.getGenre());
+        existingBaby.setWeight(updatedBaby.getWeight());
+        existingBaby.setHeight(updatedBaby.getHeight());
+        existingBaby.setCephalicPerimeter(updatedBaby.getCephalicPerimeter());
+        existingBaby.setFoodPreference(updatedBaby.getFoodPreference());
+
+        return babyRepository.save(existingBaby);
+    }
+
+    @Transactional
+    public void deleteBabyAdmin(int id) {
+        babyRepository.deleteById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Baby> getAll() {
+        List<Baby> babies = babyRepository.getAll();
+        return babies;
+    }
 }
