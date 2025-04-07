@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserService;
 import com.isppG8.infantem.infantem.auth.AuthoritiesService;
 
@@ -37,11 +36,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/v1/admin/recipes")
 public class RecipeControllerAdmin {
 
-    // TODO: add validation for only owner of the recipe can update or delete
-
     private RecipeService recipeService;
-
-    private UserService userService;
 
     private AuthoritiesService authoritiesService;
 
@@ -49,7 +44,6 @@ public class RecipeControllerAdmin {
     public RecipeControllerAdmin(RecipeService recipeService, UserService userService,
             AuthoritiesService authoritiesService) {
         this.recipeService = recipeService;
-        this.userService = userService;
         this.authoritiesService = authoritiesService;
     }
 

@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
-import { Recipe, User } from "../../../types";
+import { Recipe, User, SignUpRequest } from "../../../types";
 import { View, Text, Image, TextInput } from "react-native";
 import { FlatList, Button, TouchableOpacity } from "react-native";
-import { Link } from "expo-router";
 
 /*
     allergen
@@ -34,7 +33,6 @@ export default function Admin() {
   useEffect(() => {
     obtainAllUsers();
     obtainAllRecipes();
-    console.log("Token: ", token);
     // obtainAllBabies();
     // obtainAllDiseases();
     // obtainAllAllergens();
@@ -139,32 +137,66 @@ export default function Admin() {
     setIsEditing(false);
   };
 
-  const handleSaveUser = async () => {
+  const handleAddNewUser = async () => {
     if (!token || !editedUser) return;
 
-    const userToSave: User = originalUser
-      ? {
-          ...originalUser,
-          name: editedUser.name,
-          surname: editedUser.surname,
-          username: editedUser.username,
-          password: editedUser.password,
-          email: editedUser.email,
-          profilePhotoRoute: editedUser.profilePhotoRoute || "",
-        }
-      : {
-          name: editedUser.name,
-          surname: editedUser.surname,
-          username: editedUser.username,
-          password: editedUser.password,
-          email: editedUser.email,
-          profilePhotoRoute: editedUser.profilePhotoRoute || "",
-        };
+    const userToSave: SignUpRequest = {
+      name: editedUser.name,
+      surname: editedUser.surname,
+      username: editedUser.username,
+      password: editedUser.password,
+      email: editedUser.email,
+      code: 1111,
+    };
 
-    const method = userToSave.id ? "PUT" : "POST";
-    const url = userToSave.id
-      ? `${apiUrl}/api/v1/users/${userToSave.id}`
-      : `${apiUrl}/api/v1/users`;
+    const method = "POST";
+    const url = `${apiUrl}/api/v1/admin/users/signup`;
+
+    try {
+      const response = await fetch(url, {
+        method,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userToSave),
+      });
+      if (!response.ok) {
+        console.error("Error saving user: ", response.statusText);
+        return;
+      }
+      const updatedUser = await response.json();
+      setUsers((prev) =>
+        userToSave.id
+          ? prev.map((user) =>
+              user.id === updatedUser.id ? updatedUser : user
+            )
+          : [...prev, updatedUser]
+      );
+      setEditedUser(null);
+      setOriginalUser(null);
+      setIsEditing(false);
+      console.log("User saved successfully");
+    } catch (error) {
+      console.error("Error saving user: ", error);
+    }
+  };
+
+  const handleSaveEditedUser = async () => {
+    if (!token || !editedUser) return;
+
+    const userToSave: User = {
+      ...originalUser,
+      name: editedUser.name,
+      surname: editedUser.surname,
+      username: editedUser.username,
+      password: editedUser.password,
+      email: editedUser.email,
+      profilePhotoRoute: editedUser.profilePhotoRoute || "",
+    };
+
+    const method = "PUT";
+    const url = `${apiUrl}/api/v1/admin/users/${userToSave.id}`;
 
     try {
       const response = await fetch(url, {
@@ -199,14 +231,17 @@ export default function Admin() {
   const handleDeleteUser = async (id: number) => {
     if (!token) return;
     try {
-      const response = await fetch(`${apiUrl}/api/v1/users/${id}`, {
+      const response = await fetch(`${apiUrl}/api/v1/admin/users/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       if (!response.ok) {
-        console.error("Error deleting user: ", response.statusText);
+        console.error(
+          "Error deleting user !response.ok: ",
+          response.statusText
+        );
         return;
       }
       setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
@@ -421,7 +456,9 @@ export default function Admin() {
               />
               <TouchableOpacity
                 style={[gs.mainButton, { marginTop: 20 }]}
-                onPress={handleSaveUser}
+                onPress={
+                  editedUser.id ? handleSaveEditedUser : handleAddNewUser
+                }
               >
                 <Text style={gs.mainButtonText}>
                   {editedUser.id ? "Actualizar" : "Guardar"}
