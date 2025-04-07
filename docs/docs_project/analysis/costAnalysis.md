@@ -1,4 +1,4 @@
-# Plantilla del Sprint 1
+# Análisis de Costes Spprint 3
 
 ![Portada](../../images/Infantem.png)
 
@@ -96,7 +96,7 @@ Con una media de 26.837 nacimientos al mes en España, la aplicación cuenta con
 | Segundo Año        | 0         | 103.248,64 | 103.248,64     |
 
 > *CAPEX:* Inversiones iniciales (desarrollo, hardware).  
-> *OPEX:* Costes operativos (infraestructura, soporte, mantenimiento).
+> *OPEX:* Costes operativos (infraestructura, soporte, mantenimiento,marketing y adquisición de usuarios).
 
 ### 2.1. Desglose de Costes de Personal
 
@@ -269,11 +269,11 @@ La aplicación cuenta con funcionalidades básicas que son de uso gratuito para 
 Para los usuarios que no dispongan de plan premium tendrán publicidad en la aplicación orientada siempre a productos infantiles. Se asume que se tendrá un CPM (Costo por Mil Impresiones) de 2 euros y que un usuario accede de media a la aplicación 5 veces al día. Nuevamente se presenta un caso optimista y uno pesimista, para
 
 - Caso pesimista
-  - Nuevamente se asume que un 1% (268) de los padres con hijos recién nacidos usa Infantum y que el 95% (255) de ellos tiene el plan gratuito. Si durante un año utilizan la aplicación significa que cada uno ha visto 1825 anuncios, haciendo un total de 465375 visualizaciones de anuncios. Este número se traduce a su vez en 465 paquetes de 1000 visualizaciones, generando así 930 € anuales. No obstante, a esta cantidad hay que restarle en torno a un 15% (si factura menos de un millón de euros) de comisión por la plataforma en la que se aloja la aplicación y un 21% de IVA, quedando 595,2 €.
+  - Nuevamente se asume que un 1% (268) de los padres con hijos recién nacidos usa Infantem y que el 95% (255) de ellos tiene el plan gratuito. Si durante un año utilizan la aplicación significa que cada uno ha visto 1825 anuncios, haciendo un total de 465375 visualizaciones de anuncios. Este número se traduce a su vez en 465 paquetes de 1000 visualizaciones, generando así 930 € anuales. No obstante, a esta cantidad hay que restarle en torno a un 15% (si factura menos de un millón de euros) de comisión por la plataforma en la que se aloja la aplicación y un 21% de IVA, quedando 595,2 €.
 - Caso Realista
   - Se asume que un 5% (1342 usuarios) de los padres con hijos recién nacidos usa Infantem y que el 92% (1234 usuarios) tiene el plan gratuito. Si durante un año utilizan la aplicación, cada uno verá 1825 anuncios, lo que resulta en 2.251.450 visualizaciones de anuncios. Este número equivale a 2251 paquetes de 1000 visualizaciones, generando así 4502 € anuales. Tras restar aproximadamente un 15% de comisión de la plataforma y un 21% de IVA, el ingreso anual neto se sitúa en 3.042,8 €.
 - Caso optimista
-  - Nuevamente se asume que un 10% (2683) de los padres con hijos recién nacidos usa Infantum y que el 90% (2414) de ellos tiene el plan gratuito. Si durante un año utilizan la aplicación significa que cada uno ha visto 1825 anuncios, haciendo un total de 4405550 visualizaciones de anuncios. Este número se traduce a su vez en 4405 paquetes de 1000 visualizaciones, generando así 8810€ anuales. Restándole a esta cantidad las comisiones y el IVA se obtiene un ingreso anual de 5638,4 €.
+  - Nuevamente se asume que un 10% (2683) de los padres con hijos recién nacidos usa Infantem y que el 90% (2414) de ellos tiene el plan gratuito. Si durante un año utilizan la aplicación significa que cada uno ha visto 1825 anuncios, haciendo un total de 4405550 visualizaciones de anuncios. Este número se traduce a su vez en 4405 paquetes de 1000 visualizaciones, generando así 8810€ anuales. Restándole a esta cantidad las comisiones y el IVA se obtiene un ingreso anual de 5638,4 €.
 
 ### 3.3. Marketplace
 
