@@ -21,7 +21,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@JsonIdentityInfo(scope = EmailValidation.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(scope = EmailValidation.class, generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Getter
 @Setter
 @Table(name = "email_validation")

@@ -78,7 +78,7 @@ public class BabyServiceTest {
         baby.setGenre(Genre.MALE);
         baby.setWeight(7.0);
         baby.setHeight(50);
-        baby.setCephalicPerimeter(30);
+        baby.setHeadCircumference(30);
         baby.setFoodPreference("Leche materna");
 
         babyService.updateBaby(1, baby);
@@ -94,7 +94,7 @@ public class BabyServiceTest {
         baby.setGenre(Genre.MALE);
         baby.setWeight(7.0);
         baby.setHeight(50);
-        baby.setCephalicPerimeter(30);
+        baby.setHeadCircumference(30);
         baby.setFoodPreference("Leche materna");
 
         Baby b2 = babyService.createBaby(baby);
@@ -112,7 +112,7 @@ public class BabyServiceTest {
         baby.setGenre(Genre.MALE);
         baby.setWeight(7.0);
         baby.setHeight(50);
-        baby.setCephalicPerimeter(30);
+        baby.setHeadCircumference(30);
         baby.setFoodPreference("Leche materna");
         Baby createdBaby = babyService.createBaby(baby);
 
@@ -130,7 +130,7 @@ public class BabyServiceTest {
         baby2.setGenre(Genre.MALE);
         baby2.setWeight(7.0);
         baby2.setHeight(50);
-        baby2.setCephalicPerimeter(30);
+        baby2.setHeadCircumference(30);
         baby2.setFoodPreference("Leche materna");
         Baby created = babyService.createBaby(baby2);
 

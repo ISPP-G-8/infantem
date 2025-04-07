@@ -24,7 +24,15 @@ export default function TabLayout() {
   }
 
   return (
-    <Tabs>
+    <Tabs
+      screenOptions={{
+        tabBarStyle: {
+          borderWidth: 1, 
+          borderColor: "blue", 
+          borderRadius: 10, 
+        },
+      }}
+    >
       <Tabs.Screen
         name="recipes"
         options={{
@@ -70,6 +78,17 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="marketplace"
+        options={{
+          lazy: true,
+          headerShown: false,
+          tabBarLabel: "Tienda",
+          tabBarIcon: ({ color }) => (
+            <Ionicons name='cash' color={color} size={24} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="account"
         options={{
           lazy: true,
@@ -81,7 +100,6 @@ export default function TabLayout() {
         }}
       />
     </Tabs>
-
   );
   // We should return this if the user is not logged in
   // return <Redirect href="/login" />;

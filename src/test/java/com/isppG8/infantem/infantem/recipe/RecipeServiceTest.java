@@ -207,9 +207,58 @@ public class RecipeServiceTest {
     }
 
     @Test
+    public void recommendedRecipeFilterByNameTest() {
+
+        final String EXISTING_NAME = "Puré";
+        final String NON_EXISTING_NAME = "Unexisting Recipe";
+        final String EMPTY_NAME = "";
+
+        List<Recipe> recipesWithName = recipeService.getRecommendedRecipesByName(EXISTING_NAME);
+        recipesWithName.forEach(r -> r.setIngredients(r.getName().toLowerCase()));
+        assertTrue(recipesWithName.size() > 0, "Recipes containing the name should exist.");
+
+        boolean allRecipesContainIngredient = recipesWithName.stream()
+                .allMatch(recipe -> recipe.getName().toLowerCase().contains(EXISTING_NAME.toLowerCase()));
+
+        assertTrue(allRecipesContainIngredient,
+                "All returned recipes should contain the name " + recipesWithName + EXISTING_NAME);
+
+        List<Recipe> recipesWithNonExistingName = recipeService.getRecommendedRecipesByName(NON_EXISTING_NAME);
+        assertTrue(recipesWithNonExistingName.isEmpty(), "No recipes should contain the name " + NON_EXISTING_NAME);
+
+        List<Recipe> recipesWithEmptyName = recipeService.getRecommendedRecipesByName(EMPTY_NAME);
+        assertTrue(recipesWithEmptyName.isEmpty(), "No recipes should be returned for empty name.");
+    }
+
+    @Test
+    public void recipeFilterByNameTest() {
+        Mockito.when(userService.findCurrentUserId()).thenReturn(1);
+        final String EXISTING_NAME = "Batata";
+        final String NON_EXISTING_NAME = "Unexisting Recipe";
+        final String EMPTY_NAME = "";
+
+        List<Recipe> recipesWithName = recipeService.getRecipesByName(EXISTING_NAME);
+        recipesWithName.forEach(r -> r.setIngredients(r.getName().toLowerCase()));
+        assertTrue(recipesWithName.size() > 0, "Recipes containing the name should exist." + recipesWithName);
+
+        boolean allRecipesContainIngredient = recipesWithName.stream()
+                .allMatch(recipe -> recipe.getName().toLowerCase().contains(EXISTING_NAME.toLowerCase()));
+
+        assertTrue(allRecipesContainIngredient,
+                "All returned recipes should contain the name " + recipesWithName + EXISTING_NAME);
+
+        List<Recipe> recipesWithNonExistingName = recipeService.getRecipesByName(NON_EXISTING_NAME);
+        assertTrue(recipesWithNonExistingName.isEmpty(), "No recipes should contain the name " + NON_EXISTING_NAME);
+
+        List<Recipe> recipesWithEmptyName = recipeService.getRecipesByName(EMPTY_NAME);
+        assertTrue(recipesWithEmptyName.isEmpty(),
+                "No recipes should be returned for empty name." + recipesWithEmptyName);
+    }
+
+    @Test
     public void getAllRecommendedRecipesTest() {
         List<Recipe> recommendRecipes = recipeService.getAllRecommendedRecipes();
-        assertEquals(7, recommendRecipes.size(), "Number of recommended recipes should be 7");
+        assertEquals(16, recommendRecipes.size(), "Number of recommended recipes should be 16");
     }
 
     @Test

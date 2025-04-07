@@ -55,8 +55,7 @@ public class Disease {
     @JoinColumn(name = "baby_id")
     private Baby baby;
 
-    @AssertTrue(message = "The end date must be after the start date")
-    @JsonIgnore
+    @AssertTrue(message = "The end date must be after the start date") @JsonIgnore
     public boolean isDateValid() {
         if (startDate == null || endDate == null) {
             return true;

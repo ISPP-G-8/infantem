@@ -27,7 +27,8 @@ public class SignupRequest {
 
     @NotBlank
     @Size(min = 8, message = "La contraseña debe tener al menos 8 caracteres.")
-    @Pattern(regexp = passwordRegex, message = "La contraseña debe contener al menos una letra mayúscula, un número y un carácter especial.")
+    @Pattern(regexp = passwordRegex,
+            message = "La contraseña debe contener al menos una letra mayúscula, un número y un carácter especial.")
     private String password;
 
     @Email

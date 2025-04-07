@@ -56,7 +56,7 @@ public class BabyService {
         baby.setGenre(babyDTO.getGenre());
         baby.setWeight(babyDTO.getWeight());
         baby.setHeight(babyDTO.getHeight());
-        baby.setCephalicPerimeter(babyDTO.getCephalicPerimeter());
+        baby.setHeadCircumference(babyDTO.getHeadCircumference());
         baby.setFoodPreference(babyDTO.getFoodPreference());
 
         // Añadir el usuario actual
@@ -86,7 +86,7 @@ public class BabyService {
         existingBaby.setGenre(updatedBaby.getGenre());
         existingBaby.setWeight(updatedBaby.getWeight());
         existingBaby.setHeight(updatedBaby.getHeight());
-        existingBaby.setCephalicPerimeter(updatedBaby.getCephalicPerimeter());
+        existingBaby.setHeadCircumference(updatedBaby.getHeadCircumference());
         existingBaby.setFoodPreference(updatedBaby.getFoodPreference());
 
         return babyRepository.save(existingBaby);

@@ -15,7 +15,8 @@ import com.isppG8.infantem.infantem.foodSource.FoodSource;
 
 @Entity
 @Table(name = "nutr_contr_food_source_table")
-@JsonIdentityInfo(scope = NutritionalContributionFoodSource.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(scope = NutritionalContributionFoodSource.class,
+        generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Getter
 @Setter
 public class NutritionalContributionFoodSource {

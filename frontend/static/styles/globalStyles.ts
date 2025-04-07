@@ -44,7 +44,7 @@ module.exports = StyleSheet.create({
   },
 
   mainButton: {
-    backgroundColor: "#007AFF", 
+    backgroundColor: "#1565C0", 
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 10,
@@ -63,14 +63,14 @@ module.exports = StyleSheet.create({
   secondaryButton: {
     backgroundColor: "white",
     borderWidth: 2,
-    borderColor: "#007AFF",
+    borderColor: "#1565C0",
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 10,
     alignItems: "center",
   },
   secondaryButtonText: {
-    color: "#007AFF",
+    color: "#1565C0",
     fontSize: 16,
     fontWeight: "bold",
   },
@@ -238,28 +238,29 @@ module.exports = StyleSheet.create({
   },
   navBar: {
     position: "absolute",
-    width: Platform.OS === "ios" ? "100%" : StatusBar.currentHeight,  // Ajuste para iPhone con notch
+    width: Platform.OS === "ios" ? "100%" : StatusBar.currentHeight, 
     left: 0,
     right: 0,
     zIndex: 10,
     backgroundColor: "rgb(0,122,255)",
-    height: 60, // Fija la altura en píxeles para evitar % inconsistentes
+    height: 60,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
-    paddingHorizontal: 15, // Mejor espaciado en móvil
-    elevation: 10, 
+    paddingHorizontal: 15,
+
+    // Sombra en iOS (más intensa y difuminada)
     shadowColor: "#000", 
-    shadowOffset: { width: 0, height: 4 }, 
-    shadowOpacity: 0.3, 
-    shadowRadius: 4, 
+    shadowOffset: { width: 0, height: 10 },  // Mucho más baja
+    shadowOpacity: 0.7,  // Más oscura
+    shadowRadius: 15,  // Mucho más difusa
+
+    // Sombra en Android (elevation más alto)
+    elevation: 25,  // Sombra mucho más intensa en Android
+    
     flexWrap: "wrap",
-  },
-  navBarImage: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-  },
+},
+
   navText: {
     fontSize: width < 400 ? 14 : 16, // Reduce el tamaño en móviles pequeños
     fontWeight: "bold",
@@ -271,6 +272,30 @@ module.exports = StyleSheet.create({
     flex: 1,
     paddingTop: 80, // Ajuste para que no quede oculto en iPhone
   }, 
+
+  bannerContainer: {
+    backgroundColor: "#f9f9f9",
+    padding: 16,
+    borderRadius: 12,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 3 },
+    elevation: 3,
+    margin: 16,
+    alignItems: "center",
+  },
+  brandText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#333",
+    marginBottom: 8,
+  },
+  sentenceText: {
+    fontSize: 16,
+    color: "#666",
+    textAlign: "center",
+  },
   
 
   // Prueba alvjimosu
@@ -368,4 +393,58 @@ module.exports = StyleSheet.create({
     color: "#007AFF",
     textDecorationLine: "underline",
   },
+
+  //// Estilos para la sección de métricas
+
+  containerMetric: {
+    flexGrow: 1,
+    alignItems: 'center',
+    paddingVertical: 10,
+    backgroundColor: '#f5f5f5',
+  },
+  cardMetric: {
+    backgroundColor: '#fff',
+    marginBottom: 25,
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 5,
+    padding: 15,
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#333',
+    marginBottom: 5,
+    width: '100%',
+  },
+  imageContainer: {
+    width: '100%',
+    alignItems: 'center',
+    marginBottom: 15,
+    position: "relative", // Para permitir posicionar el bebé dentro
+  },
+  imageMetric: {
+    width: '100%',
+    backgroundColor: '#fff',
+  },
+  babyImage: {
+    width: 22,
+    height: 22,
+    position: 'absolute',
+  },
+  description: {
+    fontSize: 15,
+    textAlign: 'center',
+    color: '#555',
+    paddingHorizontal: 10,
+    marginTop: 10,
+    lineHeight: 20,
+  },
+
+
 });

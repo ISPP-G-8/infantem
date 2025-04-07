@@ -121,14 +121,14 @@ public class RecipeControllerTest {
     @Test
     void testGetAllRecommendedRecipes() throws Exception {
         mockMvc.perform(get("/api/v1/recipes/recommended").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()).andExpect(jsonPath("$.content.length()").value(7))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.content.length()").value(10))
                 .andExpect(jsonPath("$.content[0].name").value("Puré de Pollo con Verduras"));
     }
 
     @Test
     void testGetRecommendedRecipesForBaby() throws Exception {
         mockMvc.perform(get("/api/v1/recipes/recommended/1").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()).andExpect(jsonPath("$.length()").value(3))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.length()").value(7))
                 .andExpect(jsonPath("$[0].name").value("Puré de Pollo con Verduras"));
     }
 
@@ -144,7 +144,7 @@ public class RecipeControllerTest {
     void testFilterRecommendedRecipesByMaxAge() throws Exception {
         mockMvc.perform(
                 get("/api/v1/recipes/recommended").param("maxAge", "11").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()).andExpect(jsonPath("$.content.length()").value(4))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.content.length()").value(9))
                 .andExpect(jsonPath("$.content[0].name").value("Croquetas de Pescado"));
     }
 
@@ -160,7 +160,7 @@ public class RecipeControllerTest {
     void testFilterRecommendedRecipesByMinxAge() throws Exception {
         Mockito.when(userService.findCurrentUserId()).thenReturn(1);
         mockMvc.perform(get("/api/v1/recipes/recommended").param("minAge", "7").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()).andExpect(jsonPath("$.content.length()").value(3))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.content.length()").value(7))
                 .andExpect(jsonPath("$.content[0].name").value("Puré de Pollo con Verduras"));
     }
 
@@ -185,8 +185,31 @@ public class RecipeControllerTest {
                 .andExpect(jsonPath("$.content[0].name").value("Puré de Pollo con Verduras"));
         mockMvc.perform(
                 get("/api/v1/recipes/recommended").param("ingredients", "").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()).andExpect(jsonPath("$.content.length()").value(7))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.content.length()").value(10))
                 .andExpect(jsonPath("$.content[0].name").value("Puré de Pollo con Verduras"));
+    }
+
+    @Test
+    void testFilterRecipesByName() throws Exception {
+        Mockito.when(userService.findCurrentUserId()).thenReturn(1);
+        mockMvc.perform(get("/api/v1/recipes").param("name", "batata").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.content.length()").value(1))
+                .andExpect(jsonPath("$.content[0].name").value("Puré de Zanahoria y Batata"));
+        mockMvc.perform(get("/api/v1/recipes").param("ingredients", "").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.content.length()").value(5))
+                .andExpect(jsonPath("$.content[0].name").value("Puré de Zanahoria y Batata"));
+    }
+
+    @Test
+    void testFilterRecommendedRecipesByName() throws Exception {
+        Mockito.when(userService.findCurrentUserId()).thenReturn(1);
+        mockMvc.perform(
+                get("/api/v1/recipes/recommended").param("name", "puré").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.content.length()").value(3))
+                .andExpect(jsonPath("$.content[0].name").value("Puré de Pollo con Verduras"));
+        mockMvc.perform(get("/api/v1/recipes").param("ingredients", "").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.content.length()").value(5))
+                .andExpect(jsonPath("$.content[0].name").value("Puré de Zanahoria y Batata"));
     }
 
     @Test
@@ -204,11 +227,11 @@ public class RecipeControllerTest {
     void testFilterRecommendedRecipesByAllergens() throws Exception {
         mockMvc.perform(
                 get("/api/v1/recipes/recommended").param("allergens", "Gluten").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()).andExpect(jsonPath("$.content.length()").value(7))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.content.length()").value(10))
                 .andExpect(jsonPath("$.content[0].name").value("Puré de Pollo con Verduras"));
         mockMvc.perform(
                 get("/api/v1/recipes/recommended").param("allergens", "").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()).andExpect(jsonPath("$.content.length()").value(7))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.content.length()").value(10))
                 .andExpect(jsonPath("$.content[0].name").value("Puré de Pollo con Verduras"));
     }
 

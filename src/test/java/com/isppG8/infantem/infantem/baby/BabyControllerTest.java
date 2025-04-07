@@ -57,7 +57,7 @@ public class BabyControllerTest {
         baby.setGenre(Genre.MALE);
         baby.setWeight(10.0);
         baby.setHeight(10);
-        baby.setCephalicPerimeter(10);
+        baby.setHeadCircumference(10);
         baby.setFoodPreference("Test food preference");
         return baby;
     }
@@ -70,7 +70,7 @@ public class BabyControllerTest {
         baby.setGenre(Genre.MALE);
         baby.setWeight(10.0);
         baby.setHeight(10);
-        baby.setCephalicPerimeter(10);
+        baby.setHeadCircumference(10);
         baby.setFoodPreference("Test food preference");
         return baby;
     }
@@ -105,7 +105,7 @@ public class BabyControllerTest {
                     "genre": "MALE",
                     "weight": 10.0,
                     "height": 10,
-                    "cephalicPerimeter": 10,
+                    "headCircumference": 10,
                     "foodPreference": "Test food preference"
                 }
                 """;
@@ -126,7 +126,7 @@ public class BabyControllerTest {
                     "genre": "MALE",
                     "weight": 20.0,
                     "height": 10,
-                    "cephalicPerimeter": 10,
+                    "headCircumference": 10,
                     "foodPreference": "Updated food preference"
                 }
                 """;
@@ -177,7 +177,7 @@ public class BabyControllerTest {
                     "genre": "MALE",
                     "weight": -20.0,
                     "height": -10,
-                    "cephalicPerimeter": 10,
+                    "headCircumference": 10,
                     "foodPreference": "Updated food preference",
                     "allergens": [
                         { "id": 1 },
