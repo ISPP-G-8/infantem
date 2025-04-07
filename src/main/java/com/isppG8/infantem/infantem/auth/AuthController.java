@@ -187,7 +187,7 @@ public class AuthController {
                             @ApiResponse(responseCode = "400", description = "Solicitud malformada",
                                     content = @Content) }) @PostMapping("/recover-password")
     public ResponseEntity<?> recoverPassword(@RequestBody EmailRequest emailRequest) {
-        if(emailRequest.getEmail() == null){
+        if (emailRequest.getEmail() == null) {
             return ResponseEntity.badRequest().body("El email es nulo");
         }
         authService.initiatePasswordReset(emailRequest.getEmail());
