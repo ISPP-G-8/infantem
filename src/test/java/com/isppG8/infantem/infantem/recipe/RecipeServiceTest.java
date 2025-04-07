@@ -258,7 +258,7 @@ public class RecipeServiceTest {
     @Test
     public void getAllRecommendedRecipesTest() {
         List<Recipe> recommendRecipes = recipeService.getAllRecommendedRecipes();
-        assertEquals(7, recommendRecipes.size(), "Number of recommended recipes should be 7");
+        assertEquals(16, recommendRecipes.size(), "Number of recommended recipes should be 16");
     }
 
     @Test

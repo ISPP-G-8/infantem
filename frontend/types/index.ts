@@ -7,3 +7,4 @@ export * from "./Recipe";
 export * from "./Baby";
 export * from "./Ad";
 export * from "./MarketItem";
+export * from "./RecipeFilter";
