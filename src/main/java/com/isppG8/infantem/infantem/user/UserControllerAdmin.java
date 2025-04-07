@@ -97,11 +97,12 @@ public class UserControllerAdmin {
                     new UsernamePasswordAuthenticationToken(signUpRequest.getUsername(), signUpRequest.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwt = jwtUtils.generateJwtToken(authentication);
-    
+
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
             List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
                     .collect(Collectors.toList());
-            return ResponseEntity.ok().body(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), roles));
+            return ResponseEntity.ok()
+                    .body(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), roles));
         }
         return ResponseEntity.badRequest().body(new MessageResponse("No tienes permiso para hacer esto"));
     }
