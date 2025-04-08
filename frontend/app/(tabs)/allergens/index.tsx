@@ -1,7 +1,7 @@
-import { Link } from "expo-router";
 import { Text, View, ScrollView, TouchableOpacity, TextInput,ImageBackground } from "react-native";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { questions } from "../../../hardcoded_data/questionsData";
+import AdvertisementFetcher from "../../../components/AdvertisementFetcher";
 
 export default function Allergens() {
   
@@ -19,14 +19,13 @@ export default function Allergens() {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: "#E3F2FD" }}>
     <ImageBackground
-      source={require("../../../static/images/Background.png")}
       style={{ flex: 1, width: "100%", height: "100%" }}
       imageStyle={{ resizeMode: "cover", opacity: 0.9 }}
     >
       <ScrollView contentContainerStyle={{ flexGrow: 1, padding: 20,width: "100%", height: "100%",alignItems: "center", justifyContent: "center" }}>
-        <Text  style={[gs.headerText, { color: "#1565C0",fontSize:38 }]}>Alergenos</Text>
+        <Text  style={[gs.headerText, { color: "#1565C0",fontSize:38 }]}>Alérgenos</Text>
 
         { currentQuestion === questions.length - 1 ? (
           <View style={gs.card}>
@@ -73,6 +72,7 @@ export default function Allergens() {
           </View>
         )}
       </ScrollView>
+      <AdvertisementFetcher />
       </ImageBackground>
     </View>
   );

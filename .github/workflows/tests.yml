@@ -1,4 +1,5 @@
 name: Run Tests
+
 on:
   push:
     branches:
@@ -12,20 +13,8 @@ on:
 jobs:
   test-backend:
     name: Test Backend
-    runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql:8
-        env:
-          MYSQL_ROOT_PASSWORD: root_password
-          MYSQL_DATABASE: infantem_db
-          MYSQL_USER: spring_user
-          MYSQL_PASSWORD: StrongPassword123!
-          SPRING_PROFILES_ACTIVE: test
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping --silent" --health-timeout=5s --health-retries=3
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -37,8 +26,15 @@ jobs:
           distribution: 'adopt'
           java-version: 21
 
-      - name: Install dependencies and run backend tests
-        run: mvn clean install
+      - name: Create .env file
+        run: |
+          echo "STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }}" >> .env
+          echo "STRIPE_API_KEY=${{ secrets.STRIPE_API_KEY }}" >> .env
+          echo "STRIPE_WEBHOOK_SECRET=${{ secrets.STRIPE_WEBHOOK_SECRET }}" >> .env
+          echo "EXPO_PUBLIC_STRIPE_API_KEY=${{ secrets.EXPO_PUBLIC_STRIPE_API_KEY }}" >> .env
+
+      - name: Run backend tests
+        run: mvn clean test
 
   test-frontend:
     name: Test Frontend
@@ -57,4 +53,4 @@ jobs:
         run: cd frontend && npm install
 
       #- name: Run frontend tests
-        #run: Add command to execute tests
+       # run: cd frontend && npm test

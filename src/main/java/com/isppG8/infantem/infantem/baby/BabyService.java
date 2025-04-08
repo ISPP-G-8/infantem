@@ -34,14 +34,14 @@ public class BabyService {
     }
 
     @Transactional(readOnly = true)
-    public Baby findById(int id) {
-        User user = userService.findCurrentUser();
+    public Baby findById(int id) throws ResourceNotFoundException, ResourceNotOwnedException {
+        Integer userId = userService.findCurrentUserId();
 
         Optional<Baby> optionalBaby = babyRepository.findById(id);
 
         Baby baby = optionalBaby.orElseThrow(() -> new ResourceNotFoundException("Baby", "id", id));
 
-        if (!baby.getUsers().contains(user)) {
+        if (!checkOwnership(baby, userId)) {
             throw new ResourceNotOwnedException(baby);
         }
 
@@ -70,14 +70,14 @@ public class BabyService {
     }
 
     @Transactional
-    public Baby updateBaby(int id, Baby updatedBaby) {
+    public Baby updateBaby(int id, BabyDTO updatedBaby) {
 
         Baby existingBaby = babyRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Baby", "id", id));
 
         User user = userService.findCurrentUser();
 
-        if (!existingBaby.getUsers().contains(user)) {
+        if (!checkOwnership(existingBaby, user.getId())) {
             throw new ResourceNotOwnedException(existingBaby);
         }
 
@@ -88,24 +88,22 @@ public class BabyService {
         existingBaby.setHeight(updatedBaby.getHeight());
         existingBaby.setCephalicPerimeter(updatedBaby.getCephalicPerimeter());
         existingBaby.setFoodPreference(updatedBaby.getFoodPreference());
-        existingBaby.setAllergen(updatedBaby.getAllergen());
-        existingBaby.setIntakes(updatedBaby.getIntakes());
-        existingBaby.setNutritionalContribution(updatedBaby.getNutritionalContribution());
-        existingBaby.setMilestonesCompleted(updatedBaby.getMilestonesCompleted());
-
-        existingBaby.getSleep().clear();
-        if (updatedBaby.getSleep() != null) {
-            existingBaby.getSleep().addAll(updatedBaby.getSleep());
-        }
 
         return babyRepository.save(existingBaby);
     }
 
     @Transactional
     public void deleteBaby(int id) {
-        if (!babyRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Baby", "id", id);
+        Integer userId = userService.findCurrentUserId();
+        Baby storedBaby = babyRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Baby", "id", id));
+        if (!checkOwnership(storedBaby, userId)) {
+            throw new ResourceNotOwnedException(storedBaby);
         }
         babyRepository.deleteById(id);
+    }
+
+    private Boolean checkOwnership(Baby baby, Integer userId) {
+        return baby.getUsers().stream().anyMatch(user -> user.getId().equals(userId));
     }
 }

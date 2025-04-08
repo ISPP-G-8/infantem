@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,9 +16,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.isppG8.infantem.infantem.allergen.Allergen;
-
+import com.isppG8.infantem.infantem.disease.Disease;
 import com.isppG8.infantem.infantem.dream.Dream;
 import com.isppG8.infantem.infantem.intake.Intake;
+import com.isppG8.infantem.infantem.metric.Metric;
 import com.isppG8.infantem.infantem.milestoneCompleted.MilestoneCompleted;
 import com.isppG8.infantem.infantem.nutritionalContribution.NutritionalContribution;
 import com.isppG8.infantem.infantem.user.User;
@@ -55,6 +57,7 @@ public class Baby {
     private String name;
 
     @NotNull
+    @PastOrPresent
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate birthDate;
 
@@ -86,6 +89,9 @@ public class Baby {
     private List<Dream> sleep = new ArrayList<>();
 
     @OneToMany(mappedBy = "baby", cascade = CascadeType.ALL)
+    private List<Metric> metrics = new ArrayList<>();
+
+    @OneToMany(mappedBy = "baby", cascade = CascadeType.ALL)
     private List<MilestoneCompleted> milestonesCompleted = new ArrayList<>();
 
     @OneToMany(mappedBy = "baby", cascade = CascadeType.ALL)
@@ -94,11 +100,15 @@ public class Baby {
     @OneToMany(mappedBy = "baby", cascade = CascadeType.ALL)
     private List<Vaccine> vaccines = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "babies")
+    @OneToMany(mappedBy = "baby", cascade = CascadeType.ALL)
+    private List<Disease> diseases = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "babies", cascade = CascadeType.ALL)
     private List<Allergen> allergen = new ArrayList<>();
 
     @ManyToMany
-    @JoinTable(name = "user_baby", joinColumns = @JoinColumn(name = "baby_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @JoinTable(name = "user_baby", joinColumns = @JoinColumn(name = "baby_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
     @Size(min = 1, max = 2, message = "A baby should have 1 or 2 users")
     private List<User> users = new ArrayList<>();
 }

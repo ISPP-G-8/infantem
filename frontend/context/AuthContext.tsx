@@ -45,13 +45,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           setUser({
             id: userData.id,
             name: userData.name,
-            surname: userData.name,
+            surname: userData.surname,
             username: userData.username,
             password: userData.password,
             email: userData.email,
             profilePhotoRoute: userData.profilePhotoRoute,
           });
           setIsAuthenticated(true);
+          console.log("reaching here")
         } else {
           await signOut();
         }
@@ -67,13 +68,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (isLoading || token) {
       validateToken();
     }
-  }, [token, apiUrl]);
+  }, [token]);
 
   const checkAuth = async (): Promise<boolean> => {
     try {
       setIsLoading(true);
       const storedToken = await getToken();
       setToken(storedToken); 
+      setIsLoading(false);
       return storedToken != null; 
     } catch (error) {
       console.error('Auth check failed:', error);
@@ -94,7 +96,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setToken(null); 
       setUser(null);
       setIsAuthenticated(false);
-      router.replace('/signin');
+      router.replace('/');
     } catch (error) {
       console.error('Sign out failed', error);
     }

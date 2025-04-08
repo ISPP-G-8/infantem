@@ -18,7 +18,8 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@JsonIdentityInfo(scope = MilestoneCompleted.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(scope = MilestoneCompleted.class, generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class MilestoneCompleted {
 
     // Id

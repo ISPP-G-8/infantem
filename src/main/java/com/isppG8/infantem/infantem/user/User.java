@@ -7,6 +7,7 @@ import com.isppG8.infantem.infantem.baby.Baby;
 import com.isppG8.infantem.infantem.recipe.Recipe;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -38,7 +39,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @NotBlank
     @Size(min = 3, max = 50)
@@ -50,6 +51,7 @@ public class User {
 
     @NotBlank
     @Size(min = 3, max = 50)
+    @Column(unique = true, nullable = false)
     private String username;
 
     @NotBlank
@@ -57,6 +59,7 @@ public class User {
 
     @NotBlank
     @Email
+    @Column(unique = true, nullable = false)
     private String email;
 
     @Size(max = 255)
@@ -71,6 +74,7 @@ public class User {
     private List<Recipe> recipes = new ArrayList<>();
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
+
     List<Baby> babies = new ArrayList<>();
 }

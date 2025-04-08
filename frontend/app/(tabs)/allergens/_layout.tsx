@@ -1,16 +1,27 @@
 import { Stack } from "expo-router";
+import { Text, Pressable } from "react-native";
 
 function StackLayout() {
 	return (
-		<Stack
-			screenOptions={{
-				headerTitleStyle: {
-					fontWeight: "normal",
-					fontSize: 25,
-					fontFamily: "sans-serif",
+		 <Stack
+			  screenOptions={{
+				headerStyle: {
+				  backgroundColor: "#0D47A1", // Azul oscuro
 				},
-			}}
-		>
+				headerTitle: () => (
+				  <Text
+					style={{
+					  fontFamily: "Loubag",
+					  fontSize: 24,
+					  color: "#fff",
+					}}
+				  >
+					Infantem
+				  </Text>
+				),
+				
+			  }}
+			>
 			<Stack.Screen
 				name="index"
 				options={{

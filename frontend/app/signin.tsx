@@ -48,7 +48,7 @@ export default function Signin() {
         
         <Image source={require("../static/images/profile.webp")} style={[{ width: 100, height: 100, borderRadius: 50, marginBottom: 20 }]} />
 
-        <View style={[gs.card, { maxWidth: 400, width: "90%", padding: 25, borderRadius: 15, backgroundColor: "white", shadowColor: "#000", shadowOpacity: 0.1, shadowRadius: 10, elevation: 5 }]}>
+        <View style={[gs.card, { maxWidth: 400, width: "90%", padding: 25, borderRadius: 15, backgroundColor: "white", shadowColor: "#000", shadowOpacity: 0.1, shadowRadius: 10, elevation: 5, alignItems: "center" }]}>
           
           <Text style={{ fontSize: 24, fontWeight: "bold", color: "#1565C0", textAlign: "center", marginBottom: 15 }}>
             Iniciar Sesión

@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
@@ -30,6 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(IntakeController.class)
 @WithMockUser(username = "testUser", roles = { "USER" })
+@ActiveProfiles("test")
 public class IntakeControllerTest {
 
     @TestConfiguration
@@ -147,8 +149,7 @@ public class IntakeControllerTest {
         String invalidJson = "{}";
 
         mockMvc.perform(post("/api/v1/intake").header("Authorization", "Bearer " + token).with(csrf())
-                .contentType(MediaType.APPLICATION_JSON).content(invalidJson))
-                .andExpect(status().isInternalServerError());
+                .contentType(MediaType.APPLICATION_JSON).content(invalidJson)).andExpect(status().isBadRequest());
     }
 
     @Test

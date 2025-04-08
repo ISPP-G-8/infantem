@@ -1,0 +1,57 @@
+name: Deploy to App Engine
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+    
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm install
+          echo "EXPO_PUBLIC_STRIPE_API_KEY=${{ secrets.EXPO_PUBLIC_STRIPE_API_KEY }}" >> .env
+          echo "EXPO_PUBLIC_API_URL=https://ispp-2425-g8-s3.ew.r.appspot.com" >> .env
+          npx expo export -p web
+
+      - name: Set backend env variables
+        uses: 73h/gae-app-yaml-replace-env-variables@f30ad8b638f9ce7004df39351db923f0370564df
+        env:
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+        with:
+          app_yaml_path: "app.yml"
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@6fc4af4b145ae7821d527454aa9bd537d1f2dc5f
+        with:
+          workload_identity_provider: 'projects/125642378529/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
+          service_account: 'my-service-account@ispp-2425-g8-s3.iam.gserviceaccount.com'
+
+      - name: Deploy to App Engine
+        id: deploy
+        uses: google-github-actions/deploy-appengine@fb144a90e63cfe1ed98ca5a4513f8f7145bf13cd
+        with:
+          project_id: 'ispp-2425-g8-s3'
+          deliverables: 'app.yml'
+          promote: true
+          flags: '--quiet'
+
+      - name: Test deployed service
+        run: curl "${{ steps.deploy.outputs.version_url }}"
