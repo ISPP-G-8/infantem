@@ -51,8 +51,7 @@ public class AuthServiceTest {
 
     @Test
     void testInitiatePasswordReset_userExists_sendsEmail() {
-        assertThatCode(() -> authService.initiatePasswordReset("test@example.com"))
-            .doesNotThrowAnyException();
+        assertThatCode(() -> authService.initiatePasswordReset("test@example.com")).doesNotThrowAnyException();
 
         PasswordResetToken token = passwordResetRepository.findByUserId(user.getId()).orElse(null);
         assertThat(token).isNotNull();
@@ -61,8 +60,7 @@ public class AuthServiceTest {
 
     @Test
     void testInitiatePasswordReset_userNotFound_doesNothing() {
-        assertThatCode(() -> authService.initiatePasswordReset("noexiste@email.com"))
-            .doesNotThrowAnyException();
+        assertThatCode(() -> authService.initiatePasswordReset("noexiste@email.com")).doesNotThrowAnyException();
     }
 
     @Test

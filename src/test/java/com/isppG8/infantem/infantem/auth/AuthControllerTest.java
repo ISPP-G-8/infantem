@@ -50,10 +50,8 @@ public class AuthControllerTest {
 
         Mockito.doNothing().when(authService).initiatePasswordReset("test@example.com");
 
-        mockMvc.perform(post("/api/v1/auth/recover-password")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(emailRequest)))
-                .andExpect(status().isOk())
+        mockMvc.perform(post("/api/v1/auth/recover-password").contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(emailRequest))).andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value(
                         "Si el correo está registrado, se ha enviado un enlace para restablecer la contraseña."));
     }
@@ -63,12 +61,9 @@ public class AuthControllerTest {
         EmailRequest emailRequest = new EmailRequest();
         emailRequest.setEmail(null);
 
-        mockMvc.perform(post("/api/v1/auth/recover-password")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(emailRequest)))
-                .andExpect(status().isBadRequest())
-                .andExpect(result ->
-                        assertThat(result.getResponse().getContentAsString()).contains("El email es nulo"));
+        mockMvc.perform(post("/api/v1/auth/recover-password").contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(emailRequest))).andExpect(status().isBadRequest()).andExpect(
+                        result -> assertThat(result.getResponse().getContentAsString()).contains("El email es nulo"));
     }
 
     @Test
@@ -79,10 +74,8 @@ public class AuthControllerTest {
 
         Mockito.doNothing().when(authService).resetPassword("abc123", "newPass123@");
 
-        mockMvc.perform(post("/api/v1/auth/reset-password")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isOk())
+        mockMvc.perform(post("/api/v1/auth/reset-password").contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(request))).andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value("Contraseña restablecida correctamente."));
     }
 
@@ -92,10 +85,8 @@ public class AuthControllerTest {
         request.setToken(null);
         request.setNewPassword("newPass123");
 
-        mockMvc.perform(post("/api/v1/auth/reset-password")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
+        mockMvc.perform(post("/api/v1/auth/reset-password").contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(request))).andExpect(status().isBadRequest());
     }
 
     @Test
@@ -104,9 +95,7 @@ public class AuthControllerTest {
         request.setToken("abc123");
         request.setNewPassword(null);
 
-        mockMvc.perform(post("/api/v1/auth/reset-password")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
+        mockMvc.perform(post("/api/v1/auth/reset-password").contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(request))).andExpect(status().isBadRequest());
     }
 }
