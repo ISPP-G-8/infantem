@@ -39,7 +39,8 @@
 ## Colaboradores del documento
 - **Paula Luna Navarro:**
 Creó el documento y escribió su contenido
-
+- **Lucía Noya Cano:**
+Contribuyó en completar el contenido del documento
 
 ## Índice
 
