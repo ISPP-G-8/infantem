@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
@@ -176,7 +175,7 @@ public class DiseaseServiceTest {
         otherUser.setId(2);
         otherUser.setUsername("user2");
         org.mockito.Mockito.when(userService.findCurrentUser()).thenReturn(otherUser);
-        org.mockito.Mockito.when(babyService.findById(testBaby.getId())).thenReturn(testBaby);
+        org.mockito.Mockito.when(babyRepository.findById(testBaby.getId())).thenReturn(Optional.of(testBaby));
 
         assertThrows(ResourceNotOwnedException.class, () -> diseaseService.update(id, updatedDisease));
     }
