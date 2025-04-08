@@ -39,7 +39,8 @@ public class MetricServiceTest {
         metric.setId(1);
         metric.setWeight(3.5);
         metric.setHeight(50.0);
-        metric.setCephalicPerimeter(35);
+        metric.setHeadCircumference(35.5);
+        metric.setArmCircumference(17.1);
         metric.setDate(LocalDate.now());
     }
 

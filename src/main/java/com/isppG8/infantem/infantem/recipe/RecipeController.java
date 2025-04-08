@@ -58,6 +58,7 @@ public class RecipeController {
             @RequestParam(value = "minAge", required = false) Integer minAge,
             @RequestParam(value = "ingredients", required = false) List<String> ingredients,
             @RequestParam(value = "allergens", required = false) List<String> allergens,
+            @RequestParam(value = "name", required = false) String name,
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size) {
 
@@ -80,6 +81,12 @@ public class RecipeController {
             List<Recipe> recipesByAllergens = recipeService.getRecipesFilteringAllergens(allergens);
             recipes.retainAll(recipesByAllergens);
         }
+
+        if (name != null) {
+            List<Recipe> recipesByName = recipeService.getRecipesByName(name);
+            recipes.retainAll(recipesByName);
+        }
+
         int start = (int) pageable.getOffset();
         int end = Math.min((start + pageable.getPageSize()), recipes.size());
         Page<Recipe> paginatedRecipes = new PageImpl<>(recipes.subList(start, end), pageable, recipes.size());
@@ -97,6 +104,7 @@ public class RecipeController {
             @RequestParam(value = "minAge", required = false) Integer minAge,
             @RequestParam(value = "ingredients", required = false) List<String> ingredients,
             @RequestParam(value = "allergens", required = false) List<String> allergens,
+            @RequestParam(value = "name", required = false) String name,
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size) {
 
@@ -118,6 +126,10 @@ public class RecipeController {
         if (allergens != null && !allergens.isEmpty()) {
             List<Recipe> recipesByAllergens = recipeService.getRecommendedRecipesFilteringAllergens(allergens);
             recipes.retainAll(recipesByAllergens);
+        }
+        if (name != null) {
+            List<Recipe> recipesByName = recipeService.getRecommendedRecipesByName(name);
+            recipes.retainAll(recipesByName);
         }
         int start = (int) pageable.getOffset();
         int end = Math.min((start + pageable.getPageSize()), recipes.size());

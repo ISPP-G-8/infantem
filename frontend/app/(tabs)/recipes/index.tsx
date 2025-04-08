@@ -1,245 +1,222 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Text, View, TextInput, ScrollView, Image, Dimensions, TouchableOpacity } from "react-native";
 import { Link, useRouter } from "expo-router";
 import { Recipe } from "../../../types/Recipe";
 import { useAuth } from "../../../context/AuthContext";
+import { RecipeFilter } from "../../../types";
+import RecipeFilterComponent from "../../../components/RecipeFilter";
+import Pagination from "../../../components/Pagination";
 
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
+
 export default function Page() {
-  const [allRecommendedRecipes, setAllRecommendedRecipes] = useState<Recipe[]>([]);
-  const [userRecipes, setUserRecipes] = useState<Recipe[]>([]);
-  const [recommendedRecipes, setRecommendedRecipes] = useState<Recipe[]>([]);
-  const [allFilteredRecipes, setAllFilteredRecipes] = useState<Recipe[]>([]);
-  const [userFilteredRecipes, setUserFilteredRecipes] = useState<Recipe[]>([]);
-  const [recommendedFilteredRecipes, setRecommendedFilteredRecipes] = useState<Recipe[]>([]);
-
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const [age, setAge] = useState<number | null>(null);
-
   const gs = require("../../../static/styles/globalStyles");
-
-  const { user, token } = useAuth();
-
-  const [activeIndex, setActiveIndex] = useState(0);
+  const { token } = useAuth();
   const router = useRouter();
-  const scrollRef = useRef<ScrollView>(null);
   const screenWidth = Dimensions.get('window').width;
+  const cardWidth = screenWidth < 500 ? 170 : 250;
 
-  interface ScrollEvent {
-    nativeEvent: {
-      contentOffset: {
-        x: number;
-        y: number;
-      };
-    };
-  }
+  const [userRecipes, setUserRecipes] = useState<Recipe[]>([]);
+  const [userPage, setUserPage] = useState<number>(1);
+  const [userTotalPages, setUserTotalPages] = useState<number | null>(null);
+  const [recommendedRecipes, setRecommendedRecipes] = useState<Recipe[]>([]);
+  const [recommendedPage, setRecommendedPage] = useState<number>(1);
+  const [recommendedTotalPages, setRecommendedTotalPages] = useState<number | null>(null);
+
+  const [filters, setFilters] = useState<RecipeFilter>({});
+  const [userRecipesSearchQuery, setUserRecipesSearchQuery] = useState<string | undefined>();
+
 
   useEffect(() => {
-    obtainAllRecommendedRecipes();
-    obtainUserRecipes();
-  }, []);
+    fetchRecommendedRecipes(filters);
+  }, [recommendedPage]);
 
-  const obtainAllRecommendedRecipes = async (): Promise<boolean> => {
+  useEffect(() => {
+    fetchUserRecipes();
+  }, [userPage]);
+
+
+  const fetchRecommendedRecipes = async (filters: RecipeFilter): Promise<boolean> => {
+
+    const queryParams = new URLSearchParams();
+    
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        if (Array.isArray(value)) {
+          if (value.length > 0) {
+            queryParams.append(key, value.join(','));
+          }
+        } else if (typeof value === 'number') {
+          queryParams.append(key, value.toString());
+        } else if (value) {
+          queryParams.append(key, value);
+        }
+      }
+    });
+    
+    const queryString = queryParams.toString();
+    const url = `${apiUrl}/api/v1/recipes/recommended?page=${recommendedPage-1}${queryString ? `&${queryString}` : ''}`;
+
     try {
-      const response = await fetch(`${apiUrl}/api/v1/recipes/recommended`, {
+      const response = await fetch(url, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
         },
       });
 
-      if (response.ok) {
-        const recipesData = await response.json();
-        setAllRecommendedRecipes(recipesData);
-        // TODO: This must be changed. The pagination must be managed. This is a hot fix needed to have the application working.
-        // FIX THIS.
-        setAllFilteredRecipes(recipesData.content); 
-        return true;
-      } else {
-        return false;
-      }
+      if (!response.ok)
+        throw new Error("Error fetching recipes");
+
+      const recipesData = await response.json();
+      setRecommendedRecipes(recipesData.content);
+      setRecommendedTotalPages(recipesData.totalPages);
+      return true;
+
     } catch (error) {
       console.error('Error fetching recipes: ', error);
-      setAllRecommendedRecipes([]);
-      setAllFilteredRecipes([]);
       return false;
     }
   };
 
-  const obtainUserRecipes = async (): Promise<boolean> => {
-    try {
-      let responseReceived = false;
-      if (token && user) {
-        const response = await fetch(`${apiUrl}/api/v1/recipes`, {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-          },
-        });
-        if (response.ok) {
-          const recipesData = await response.json();
-          setUserRecipes(recipesData.content);
-          setUserFilteredRecipes(recipesData.content);
-          responseReceived = true;
-        }
-      }
-      return responseReceived ? true : false;
-    } catch (error) {
-      console.error('Error fetching user recipes: ', error);
-      setUserRecipes([]);
-      setUserFilteredRecipes([]);
-      return false;
-    }
-  };
+  const fetchUserRecipes = async (searchQuery?: string): Promise<boolean> => {
 
-  const fetchRecommendedRecipes = async () => {
-    if (age === null) return;
+    const url = `${apiUrl}/api/v1/recipes?page=${userPage-1}${searchQuery? `&name=${searchQuery}` : ''}`;
+
     try {
-      const response = await fetch(`${apiUrl}/api/v1/recipes/recommended/age/${age}`, {
-        method: "GET",
+      const response = await fetch(url, {
+        method: 'GET',
         headers: {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`,
         },
       });
-      if (!response.ok) {
-        throw new Error("Error al obtener recetas recomendadas");
-      }
-      const data = await response.json();
-      setRecommendedRecipes(data);
-      setRecommendedFilteredRecipes(data);
+
+      if (!response.ok)
+        throw new Error("Error fetching recipes");
+
+      const recipesData = await response.json();
+      setUserRecipes(recipesData.content);
+      setUserTotalPages(recipesData.totalPages);
+      return true
+
     } catch (error) {
-      console.error("Error:", error);
+      console.error('Error fetching user recipes: ', error);
+      return false;
     }
-  };
-
-  const handleSearch = (query: string) => {
-
-    setSearchQuery(query);
-
-    const filteredAll = allRecommendedRecipes.filter((recipe: Recipe) =>
-      recipe.name.toLowerCase().includes(query.toLowerCase())
-    );
-    const filteredUser = userRecipes.filter((recipe: Recipe) =>
-      recipe.name.toLowerCase().includes(query.toLowerCase())
-    );
-    const filteredRecommended = recommendedRecipes.filter((recipe: Recipe) =>
-      recipe.name.toLowerCase().includes(query.toLowerCase())
-    );
-
-    setAllFilteredRecipes(filteredAll);
-    setUserFilteredRecipes(filteredUser);
-    setRecommendedFilteredRecipes(filteredRecommended);
-
-  };
-
-  const handleScroll = (event: ScrollEvent) => {
-    const slideIndex = Math.round(event.nativeEvent.contentOffset.x / screenWidth);
-    setActiveIndex(slideIndex);
-  };
-
-  const goToSlide = (index: number) => {
-    scrollRef.current?.scrollTo({ x: index * screenWidth, animated: true });
-    setActiveIndex(index);
   };
 
   return (
 
     <View style={{ flex: 1, backgroundColor: "#E3F2FD" }}>
       <ScrollView contentContainerStyle={{ padding: 0, paddingBottom: 0 }}>
-        <View
-          style={{
-            width: "90%",
-            backgroundColor: "rgba(255, 255, 255, 0.8)",
-            borderRadius: 10,
-            padding: 20,
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginTop: 30,
-            marginBottom: 10,
-            marginLeft: "5%",
-          }}
-        >
+
+        <View style={{
+          width: "90%", 
+          marginTop: 30, 
+          marginLeft: "5%", 
+          backgroundColor: "white",
+          borderRadius: 8,
+          padding: 16,
+          shadowColor: "#000",
+          shadowOffset: { width: 1, height: 2 },
+          shadowOpacity: 0.2,
+          shadowRadius: 2,
+          elevation: 2
+        }}>
           <View style={{ flex: 1 }}>
             <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 8 }}>
               <Text style={{ fontSize: 28, fontWeight: "bold", color: "#1565C0", marginRight: 10 }}>
                 Recetas
               </Text>
-
             </View>
-            <Text style={{ fontSize: 16, color: "#1565C0" }}>
+            <Text style={{ fontSize: 16, color: "#1565C0", marginBottom: 16 }}>
               Elige entre nuestra variedad de recetas
             </Text>
-          </View>
-          <View style={{ flex: 1, alignItems: "flex-end" }}>
-            <View style={{ flexDirection: "row", width: "100%", backgroundColor: "white", alignItems: "center", borderWidth: 1, borderColor: "#1565C0", borderRadius: 8, opacity: 0.8, paddingHorizontal: 10 }}>
-              <TextInput
-                style={{ flex: 1, padding: 12 }}
-                placeholder="Busca recetas... (Actualmente no disponible)"
-                value={searchQuery}
-                onChangeText={(text) => {
-                  setSearchQuery(text);
+            
+            <View style={{ borderRadius: 8, padding: 12, alignItems:"center", flexDirection: "row", borderWidth: 1, borderColor: "#E0E0E0" }}>
+              <Text style={{ color: "#757575", marginRight: 8 }}>🔍</Text>
+              <TextInput 
+                placeholder="Buscar por título de receta" 
+                style={{ flex: 1, fontSize: 14 }} 
+                onChangeText={(text) => setFilters({ ...filters, name: text })} 
+                placeholderTextColor="#9E9E9E" 
+                selectionColor="#1565C0"
+                returnKeyType="search"
+                onSubmitEditing={() => fetchRecommendedRecipes(filters)}
+              /> 
+              <TouchableOpacity
+                style={{
+                  backgroundColor: "#1565C0",
+                  paddingVertical: 8,
+                  paddingHorizontal: 12,
+                  borderRadius: 6,
                 }}
-              /* onSubmitEditing={() => {
-                handleSearch(searchQuery);
-              }} */
-              />
-              <Image source={require("../../../static/images/MagnifyingGlass.png")} style={{ width: 40, height: 40, opacity: searchQuery.trim() === "" ? 1 : 1 }} />
+                onPress={() => fetchRecommendedRecipes(filters)}
+                >
+                <Text style={{ color: "white", fontWeight: "500" }}>Buscar</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                  style={{
+                    backgroundColor: "white",
+                    width: 32,
+                    height: 32,
+                    borderRadius: 16,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginLeft: 8,
+                    borderWidth: 1,
+                    borderColor: "#E0E0E0"
+                  }}
+                  onPress={() => {
+                    setFilters({});
+                    fetchRecommendedRecipes({}); 
+                  }}
+                >
+              <Text style={{ color: "#757575", fontSize: 16 }}>✕</Text>
+            </TouchableOpacity>
             </View>
           </View>
         </View>
 
         <View
           style={{
-            width: "90%",
             flexDirection: "row",
             alignItems: "center",
-            marginLeft: "5%",
+            marginHorizontal:"5%",
             marginTop: 40,
             marginBottom: 10,
           }}
         >
           <Text style={{ fontSize: 24, fontWeight: "bold", color: "#1565C0", marginRight: 10 }}>
-            Recetas Recomendadas por Nuestros Expertos
+            Recetas recomendadas por nuestros expertos
           </Text>
-          <View
-            style={{
-              flex: 1,
-              height: 2,
-              backgroundColor: "#1565C0",
-              opacity: 0.6,
-            }}
-          />
+          <View style={{ flex: 1, height: 2, backgroundColor: "#1565C0", opacity: 0.6 }}/> 
         </View>
 
 
+        <RecipeFilterComponent filters={filters} setFilters={setFilters} onApplyFilters={fetchRecommendedRecipes} />
 
-        {allFilteredRecipes.length === 0 ? (
+        {recommendedRecipes.length === 0 ? (
           <Text>No se encontraron recetas.</Text>
         ) : (
-          <View
-            style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20, width: "100%" }}
-          >
+          <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
             <ScrollView
-              ref={scrollRef}
               horizontal
               pagingEnabled
-              showsHorizontalScrollIndicator={false}
-              onScroll={handleScroll}
+              showsHorizontalScrollIndicator={true}
               scrollEventThrottle={16}
-              style={{ paddingVertical: 50, marginLeft: 0, marginTop: 0 }}
+              style={{ marginHorizontal: "5%"}}
             >
-              <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 20, paddingHorizontal: 20 }}>
+              <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 20, paddingTop: 20 }}>
 
-                {allFilteredRecipes.map((recipe, index) => (
+                {recommendedRecipes.map((recipe, index) => (
                   <TouchableOpacity key={index} onPress={() => router.push(`/recipes/detail?recipeId=${recipe.id}`)}>
                     <View
                       key={index}
                       style={{
-                        width: 250,
+                        width: cardWidth,
+                        minHeight: 230,
                         backgroundColor: "#fff",
                         borderRadius: 10,
                         overflow: "hidden",
@@ -265,85 +242,96 @@ export default function Page() {
                 ))}
               </View>
             </ScrollView>
-            {/* Flecha Izq */}
-            <TouchableOpacity
-              onPress={() => goToSlide(activeIndex - 1)}
-              style={{ position: 'absolute', right: 0, width: "60%", top: '90%', zIndex: 1 }}
-            >
-              <Image
-                source={require('../../../static/images/left-arrow.png')}
-                style={{ width: 50, height: 50 }}
-              />
-            </TouchableOpacity>
-
-            {/* Flecha derecha */}
-            <TouchableOpacity
-              onPress={() => goToSlide(activeIndex + 1)}
-              style={{ position: 'absolute', right: "-55%", width: "100%", top: '90%', zIndex: 1, marginBottom: 20 }}
-            >
-              <Image
-                source={require('../../../static/images/rigth-arrow.png')}
-                style={{ width: 50, height: 50 }}
-              />
-            </TouchableOpacity>
-
-
+    
           </View>
         )}
 
+        {recommendedTotalPages && (
+          <Pagination 
+          totalPages={recommendedTotalPages} 
+          page={recommendedPage} 
+          setPage={setRecommendedPage} 
+          />
+        )}
 
         <View
           style={{
-            width: "90%",
             flexDirection: "row",
-            alignItems: "center",
-            marginLeft: "5%",
-            marginTop: 100,
+            marginHorizontal:"5%",
+            marginTop: 60,
             marginBottom: 10,
+            alignItems: "center",
           }}
         >
           <Text style={{ fontSize: 24, fontWeight: "bold", color: "#1565C0", marginRight: 10 }}>
-            Recetas recomendadas según la edad
+            Todas tus recetas 
           </Text>
-          <View
-            style={{
-              flex: 1,
-              height: 2,
-              backgroundColor: "#1565C0",
-              opacity: 0.6,
-            }}
-          />
+          <View style={{ flex: 1, height: 1, backgroundColor: "#1565C0", opacity: 0.6 }}/> 
         </View>
 
-        <View style={{ width: "100%", alignItems: "center", justifyContent: "center", marginTop: 50 }}>
+        <View style={{ width: "100%", alignItems: "center", justifyContent: "center", }}>
+          <View style={{ borderRadius: 8, padding: 12, alignItems:"center", flexDirection: "row", backgroundColor: "white"}}>
+            <Text style={{ color: "#757575", marginRight: 8 }}>🔍</Text>
+            <TextInput 
+              placeholder="Buscar por título de receta" 
+              style={{ flex: 1, fontSize: 14 }} 
+              onChangeText={(text) => setUserRecipesSearchQuery(text)}
+              placeholderTextColor="#9E9E9E" 
+              selectionColor="#1565C0"
+              returnKeyType="search"
+              onSubmitEditing={() => fetchUserRecipes(userRecipesSearchQuery)}
+            /> 
+            <TouchableOpacity
+              style={{
+                backgroundColor: "#1565C0",
+                paddingVertical: 8,
+                paddingHorizontal: 12,
+                borderRadius: 6,
+                marginLeft: 8
+              }}
+              onPress={() => fetchUserRecipes(userRecipesSearchQuery)}
+              >
+              <Text style={{ color: "white", fontWeight: "500" }}>Buscar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                backgroundColor: "white",
+                width: 32,
+                height: 32,
+                borderRadius: 16,
+                alignItems: "center",
+                justifyContent: "center",
+                marginLeft: 8,
+                borderWidth: 1,
+                borderColor: "#E0E0E0"
+              }}
+              onPress={() => {
+                setUserRecipesSearchQuery(undefined);
+                fetchUserRecipes(); 
+              }}
+            >
+              <Text style={{ color: "#757575", fontSize: 16 }}>✕</Text>
+            </TouchableOpacity>
+          </View>
 
+          <View style={{ gap: 10, marginVertical: 20, alignSelf: "flex-start", alignItems: "center", width: "100%" }}>
+            <Link style={[gs.mainButton, { backgroundColor: "#1565C0" }]} href={"/recipes/add"}>
+              <Text style={gs.mainButtonText}>Añade una receta</Text>
+            </Link>
+          </View>
 
-          <TextInput
-            style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "50%" }]}
-            placeholder="Introduce la edad de tu bebé en meses. Ej: 10"
-            keyboardType="numeric"
-            value={age !== null ? age.toString() : ""}
-            onChangeText={(text) => {
-              // Convierte el texto en número entero y lo guarda en el estado
-              const numericValue = parseInt(text.replace(/[^0-9]/g, ""), 10);
-              setAge(isNaN(numericValue) ? null : numericValue);
-            }}
-            onSubmitEditing={fetchRecommendedRecipes}
-            returnKeyType="done"
-          />
-
-          {recommendedFilteredRecipes.length === 0 ? (
+          {userRecipes.length === 0 ? (
             <Text style={{ color: "#1565C0" }}>No se encontraron recetas 😥 </Text>
           ) : (
             <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 20, paddingHorizontal: 10, marginTop: 20 }}>
               {
-
-                recommendedFilteredRecipes.map((recipe, index) => (
+                userRecipes.map((recipe, index) => (
                   <TouchableOpacity key={index} onPress={() => router.push(`/recipes/detail?recipeId=${recipe.id}`)}>
                     <View
                       key={index}
                       style={{
-                        width: 250,
+                        width: cardWidth,
+                        minHeight: 230,
                         backgroundColor: "#fff",
                         borderRadius: 10,
                         overflow: "hidden",
@@ -369,75 +357,12 @@ export default function Page() {
                 ))}
             </View>
           )}
-        </View>
-        
-
-
-        <View style={{ width: "100%", alignItems: "center", justifyContent: "center", }}>
-
-          <View
-            style={{
-              width: "90%",
-              flexDirection: "row",
-              alignItems: "center",
-              marginLeft: "5%",
-              marginTop: 40,
-              marginBottom: 10,
-            }}
-          >
-            <Text style={{ fontSize: 24, fontWeight: "bold", color: "#1565C0", marginRight: 10 }}>
-              Todas tus recetas
-            </Text>
-            <View
-              style={{
-                flex: 1,
-                height: 2,
-                backgroundColor: "#1565C0",
-                opacity: 0.6,
-              }}
+          {userTotalPages && userTotalPages > 1 && (
+            <Pagination 
+            totalPages={userTotalPages} 
+            page={userPage} 
+            setPage={setUserPage} 
             />
-          </View>
-          <View style={{ gap: 10, marginVertical: 20, alignSelf: "flex-start", alignItems: "center", width: "100%" }}>
-            <Link style={[gs.mainButton, { backgroundColor: "#1565C0" }]} href={"/recipes/add"}>
-              <Text style={gs.mainButtonText}>Añade una receta</Text>
-            </Link>
-          </View>
-
-          {userFilteredRecipes.length === 0 ? (
-            <Text style={{ color: "#1565C0" }}>No se encontraron recetas 😥 </Text>
-          ) : (
-            <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 20, paddingHorizontal: 10, marginTop: 20 }}>
-              {
-                userFilteredRecipes.map((recipe, index) => (
-                  <TouchableOpacity key={index} onPress={() => router.push(`/recipes/detail?recipeId=${recipe.id}`)}>
-                    <View
-                      key={index}
-                      style={{
-                        width: 250,
-                        backgroundColor: "#fff",
-                        borderRadius: 10,
-                        overflow: "hidden",
-                        shadowColor: "#000",
-                        shadowOpacity: 0.1,
-                        shadowRadius: 6,
-                        elevation: 3,
-                        marginBottom: 30,
-                      }}>
-                      <Image
-                        source={require("frontend/assets/adaptive-icon.png")}
-                        style={{ width: "100%", height: 150 }}
-                        resizeMode="cover"
-                      />
-                      {/* Contenido */}
-                      <View style={{ padding: 12 }}>
-                        <Text style={{ fontWeight: "bold", fontSize: 16, marginBottom: 4 }}>
-                          {recipe.name}
-                        </Text>
-                      </View>
-                    </View>
-                  </TouchableOpacity>
-                ))}
-            </View>
           )}
         </View>
       </ScrollView>

@@ -9,7 +9,6 @@ import jakarta.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.isppG8.infantem.infantem.allergen.Allergen;
-import com.isppG8.infantem.infantem.foodNutrient.FoodNutrient;
 import com.isppG8.infantem.infantem.intake.Intake;
 import com.isppG8.infantem.infantem.user.User;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -22,7 +21,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import lombok.Getter;
@@ -72,7 +70,4 @@ public class Recipe {
 
     @ManyToMany(mappedBy = "recipes", cascade = CascadeType.ALL)
     private List<Intake> intakes = new ArrayList<>();
-
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FoodNutrient> foodNutrients = new ArrayList<>();
 }

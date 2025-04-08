@@ -28,9 +28,6 @@ public interface RecipeRepository extends CrudRepository<Recipe, Long> {
     @Query("SELECT r FROM Recipe r WHERE r.user.id = :userId AND :ingredient IS NOT NULL AND :ingredient <> '' AND LOWER(r.ingredients) LIKE LOWER(CONCAT('%', :ingredient, '%'))")
     List<Recipe> findRecipeByIngredient(String ingredient, @Param("userId") Integer userId);
 
-    @Query("SELECT DISTINCT r FROM Recipe r JOIN r.foodNutrients fn JOIN fn.nutrient n WHERE r.user.id = :userId AND n.name = :nutrientName")
-    List<Recipe> findRecipeByNutrient(@Param("nutrientName") String nutrientName, @Param("userId") Integer userId);
-
     @Query("SELECT r FROM Recipe r WHERE r.user.id = :userId AND NOT EXISTS (SELECT 1 FROM r.allergens a WHERE a.name IN :allergens)")
     List<Recipe> findRecipesWithoutAllergen(@Param("allergens") List<String> allergens,
             @Param("userId") Integer userId);
@@ -44,13 +41,16 @@ public interface RecipeRepository extends CrudRepository<Recipe, Long> {
     @Query("SELECT r FROM Recipe r WHERE r.user IS NULL AND :ingredient IS NOT NULL AND :ingredient <> '' AND LOWER(r.ingredients) LIKE LOWER(CONCAT('%', :ingredient, '%'))")
     List<Recipe> findRecipeRecommendedByIngredient(String ingredient);
 
-    @Query("SELECT DISTINCT r FROM Recipe r JOIN r.foodNutrients fn JOIN fn.nutrient n WHERE r.user IS NULL AND n.name = :nutrientName")
-    List<Recipe> findRecommendedRecipeByNutrient(@Param("nutrientName") String nutrientName);
-
     @Query("SELECT r FROM Recipe r WHERE r.user IS NULL AND NOT EXISTS (SELECT 1 FROM r.allergens a WHERE a.name IN :allergens)")
     List<Recipe> findRecommendedRecipesWithoutAllergen(@Param("allergens") List<String> allergens);
 
     @Query("SELECT r FROM Recipe r WHERE r.user IS NULL AND r.minRecommendedAge <= :age AND r.maxRecommendedAge >= :age")
     List<Recipe> findRecommendedRecipesByAge(@Param("age") Integer age);
+
+    @Query("SELECT r FROM Recipe r WHERE r.user IS NULL AND :name IS NOT NULL AND :name <> '' AND LOWER(r.name) LIKE LOWER(CONCAT('%', :name, '%'))")
+    List<Recipe> findRecipeRecommendedByName(String name);
+
+    @Query("SELECT r FROM Recipe r WHERE r.user.id = :userId AND :name IS NOT NULL AND :name <> '' AND LOWER(r.name) LIKE LOWER(CONCAT('%', :name, '%'))")
+    List<Recipe> findRecipeByName(String name, @Param("userId") Integer userId);
 
 }

@@ -1,13 +1,13 @@
 import React from "react";
-import { Text, View, TouchableOpacity, Image, Linking } from "react-native";
+import { Text, View, TouchableOpacity, Image, Linking, useWindowDimensions } from "react-native";
 import { MarketItem } from "../types";
 
 export default function MarketItemComponent({ item }: { item: MarketItem }) {
   const gs = require("../static/styles/globalStyles");
+  const { width } = useWindowDimensions();
 
-  // Im waiting for a good approach before adding the image
   return (
-    <TouchableOpacity style={gs.card}>
+    <TouchableOpacity style={[gs.card, width < 500 ? { maxWidth: 400 } : null]}>
       <View style={gs.row}>
       { item.imageUrl && (
         <View style={{ marginRight: 20 }}>
