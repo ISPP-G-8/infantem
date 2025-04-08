@@ -48,6 +48,7 @@ public class UserService {
             return findByUsername(auth.getName());
     }
 
+    @Transactional(readOnly = true)
     public Integer findCurrentUserId() {
         return this.findCurrentUser().getId();
     }
