@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -16,12 +17,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import com.isppG8.infantem.infantem.InfantemApplication;
 import com.isppG8.infantem.infantem.baby.Baby;
+import com.isppG8.infantem.infantem.baby.BabyRepository;
 import com.isppG8.infantem.infantem.baby.BabyService;
 import com.isppG8.infantem.infantem.disease.dto.DiseaseSummary;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
@@ -59,8 +63,12 @@ public class DiseaseServiceTest {
 
     @Autowired
     private UserService userService;
+
     @Autowired
     private BabyService babyService;
+
+    @MockitoBean
+    private BabyRepository babyRepository;
 
     private User currentUser;
     private Baby testBaby;
@@ -136,27 +144,27 @@ public class DiseaseServiceTest {
 
     }
 
-    // @Test
-    // public void testUpdateDisease_Success() {
-    // Long id = (long) testDisease.getId();
+    @Test
+    public void testUpdateDisease_Success() {
+        Long id = (long) testDisease.getId();
 
-    // Disease updatedDisease = new Disease();
-    // updatedDisease.setName("Updated Disease");
-    // updatedDisease.setStartDate(LocalDate.of(2023, 1, 2));
-    // updatedDisease.setEndDate(LocalDate.of(2023, 1, 4));
-    // updatedDisease.setSymptoms("Updated Symptoms");
-    // updatedDisease.setExtraObservations("Updated Observations");
-    // updatedDisease.setBaby(testBaby);
+        Disease updatedDisease = new Disease();
+        updatedDisease.setName("Updated Disease");
+        updatedDisease.setStartDate(LocalDate.of(2023, 1, 2));
+        updatedDisease.setEndDate(LocalDate.of(2023, 1, 4));
+        updatedDisease.setSymptoms("Updated Symptoms");
+        updatedDisease.setExtraObservations("Updated Observations");
+        updatedDisease.setBaby(testBaby);
 
-    // testBaby.setUsers(List.of(currentUser));
+        testBaby.setUsers(List.of(currentUser));
 
-    // org.mockito.Mockito.when(userService.findCurrentUser()).thenReturn(currentUser);
-    // org.mockito.Mockito.when(babyService.findById(testBaby.getId())).thenReturn(testBaby);
+        org.mockito.Mockito.when(userService.findCurrentUser()).thenReturn(currentUser);
+        org.mockito.Mockito.when(babyRepository.findById(testBaby.getId())).thenReturn(Optional.of(testBaby));
 
-    // Disease res = diseaseService.update(id, updatedDisease);
-    // assertEquals("Updated Symptoms", res.getSymptoms());
-    // assertEquals("Updated Observations", res.getExtraObservations());
-    // }
+        Disease res = diseaseService.update(id, updatedDisease);
+        assertEquals("Updated Symptoms", res.getSymptoms());
+        assertEquals("Updated Observations", res.getExtraObservations());
+    }
 
     @Test
     public void testUpdateDisease_NotOwned() {
@@ -173,17 +181,17 @@ public class DiseaseServiceTest {
         assertThrows(ResourceNotOwnedException.class, () -> diseaseService.update(id, updatedDisease));
     }
 
-    // @Test
-    // public void testUpdateDisease_NotFound() {
-    // Long id = 999L; // Non-existent ID
-    // Disease updatedDisease = new Disease();
-    // updatedDisease.setBaby(testBaby);
+    @Test
+    public void testUpdateDisease_NotFound() {
+        Long id = 999L; // Non-existent ID
+        Disease updatedDisease = new Disease();
+        updatedDisease.setBaby(testBaby);
 
-    // org.mockito.Mockito.when(userService.findCurrentUser()).thenReturn(currentUser);
-    // org.mockito.Mockito.when(babyService.findById(testBaby.getId())).thenReturn(testBaby);
+        org.mockito.Mockito.when(userService.findCurrentUser()).thenReturn(currentUser);
+        org.mockito.Mockito.when(babyService.findById(testBaby.getId())).thenReturn(testBaby);
 
-    // assertThrows(ResourceNotFoundException.class, () -> diseaseService.update(id, updatedDisease));
-    // }
+        assertThrows(ResourceNotFoundException.class, () -> diseaseService.update(id, updatedDisease));
+    }
 
     @Test
     public void testDeleteDisease_Success() {
