@@ -6,6 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Link, router } from "expo-router";
 import { useAuth } from "../../../context/AuthContext";
 import { jwtDecode } from "jwt-decode";
+import UploadImageModal from "../../../components/UploadImageModal";
 
 const avatarOptions = [
   require("../../../assets/avatar/avatar1.png"),
@@ -13,7 +14,7 @@ const avatarOptions = [
 ];
 
 export default function Account() {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [avatarModalVisible, setAvatarModalVisible] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const navigation = useNavigation();
   const [subscription, setSubscription] = useState(null);
@@ -24,15 +25,15 @@ export default function Account() {
   const { isLoading, user, token, setUser, checkAuth, signOut } = useAuth();
 
   useEffect(() => {
-          if (!token) return; // Evita ejecutar el efecto si jwt es null o undefined
-          console.log(token)
-          try {
-              const decodedToken: any = jwtDecode(token);
-              setUserId(decodedToken.jti);
-          } catch (error) {
-              console.error("Error al decodificar el token:", error);
-          }
-      }, [token]);
+    if (!token) return; // Evita ejecutar el efecto si jwt es null o undefined
+    console.log(token);
+    try {
+      const decodedToken: any = jwtDecode(token);
+      setUserId(decodedToken.jti);
+    } catch (error) {
+      console.error("Error al decodificar el token:", error);
+    }
+  }, [token]);
 
   // Mueve el useEffect al nivel superior del componente
   useEffect(() => {
@@ -114,7 +115,7 @@ export default function Account() {
         : avatar;
 
       setUser({ ...user, profilePhotoRoute: avatarUri });
-      setModalVisible(false);
+      setAvatarModalVisible(false);
     }
   };
 
@@ -133,10 +134,10 @@ export default function Account() {
       imageStyle={{ resizeMode: "cover", opacity: 0.9 }}
     >
       <ScrollView contentContainerStyle={[gs.container, { paddingTop: 20, paddingBottom: 100, backgroundColor: "transparent" }]}>
-        <Text 
-         style={{ color: "#1565C0", fontSize: 36, fontWeight: "bold", textAlign: "center", marginBottom: 30 }}>
-        Perfil</Text>
-  
+        <Text
+          style={{ color: "#1565C0", fontSize: 36, fontWeight: "bold", textAlign: "center", marginBottom: 30 }}>
+          Perfil</Text>
+
 
         {user && !subscription && (
           <Link href={"/account/premiumplan"} style={[gs.mainButton, { marginVertical: 10, textAlign: "center", width: "80%" }]}>
@@ -145,13 +146,18 @@ export default function Account() {
         )}
 
 
-        <TouchableOpacity style={gs.profileImageContainer} onPress={() => isEditing && setModalVisible(true)} disabled={!isEditing}>
-           {/* <Image source={user?.profilePhotoRoute ? { uri: user.profilePhotoRoute } : avatarOptions[0]} style={gs.profileImage} /> */}
+        <TouchableOpacity style={gs.profileImageContainer} onPress={() => isEditing && setAvatarModalVisible(true)} disabled={!isEditing}>
+          {/* <Image source={user?.profilePhotoRoute ? { uri: user.profilePhotoRoute } : avatarOptions[0]} style={gs.profileImage} /> */}
           <Image
             source={require("../../../static/images/avatar2.png")}
             style={gs.profileImage}
           />
         </TouchableOpacity>
+
+        <UploadImageModal
+          visible={avatarModalVisible}
+          onClose={() => setAvatarModalVisible(false)}
+        />
 
         {user && (
           <>
@@ -189,10 +195,10 @@ export default function Account() {
           <Text style={[gs.secondaryButtonText]}>Cerrar Sesión</Text>
         </TouchableOpacity>
 
-        <Modal visible={modalVisible} animationType="fade" transparent={true}>
-          <View style={[gs.modalOverlay,{marginTop: 110,width: "80%",marginHorizontal: "18%"}]}>
-            <View style={[gs.modalContent,{ alignItems: "center", justifyContent: "center" }]}>
-              <Text style={[gs.modalTitle,{color: "#1565C0"}]}>Selecciona tu avatar</Text>
+        {/* <Modal visible={modalVisible} animationType="fade" transparent={true}>
+          <View style={[gs.modalOverlay, { marginTop: 110, width: "80%", marginHorizontal: "18%" }]}>
+            <View style={[gs.modalContent, { alignItems: "center", justifyContent: "center" }]}>
+              <Text style={[gs.modalTitle, { color: "#1565C0" }]}>Selecciona tu avatar</Text>
               <FlatList
                 data={avatarOptions}
                 keyExtractor={(item, index) => index.toString()}
@@ -203,32 +209,32 @@ export default function Account() {
                   </TouchableOpacity>
                 )}
               />
-            <TouchableOpacity
+              <TouchableOpacity
                 style={{
-                backgroundColor: "#1565C0",
-                paddingVertical: 10,
-                paddingHorizontal: 20,
-                borderRadius: 8,
-                alignItems: "center",
-                alignSelf: "center",
-                marginTop: 20,
+                  backgroundColor: "#1565C0",
+                  paddingVertical: 10,
+                  paddingHorizontal: 20,
+                  borderRadius: 8,
+                  alignItems: "center",
+                  alignSelf: "center",
+                  marginTop: 20,
                 }}
-                  onPress={() => setModalVisible(false)}
-                  >
-              <Text
-                style={{
-                color: "white",
-                fontSize: 12,
-                fontFamily: "Loubag-Medium", // Elimínalo si no usas fuente personalizada
-              }}
+                onPress={() => setModalVisible(false)}
               >
-              Cerrar
-              </Text>
-            </TouchableOpacity>
+                <Text
+                  style={{
+                    color: "white",
+                    fontSize: 12,
+                    fontFamily: "Loubag-Medium", // Elimínalo si no usas fuente personalizada
+                  }}
+                >
+                  Cerrar
+                </Text>
+              </TouchableOpacity>
 
             </View>
           </View>
-        </Modal>
+        </Modal> */}
       </ScrollView>
     </ImageBackground>
   );

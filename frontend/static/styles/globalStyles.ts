@@ -127,6 +127,42 @@ module.exports = StyleSheet.create({
     fontSize: 14,
     lineHeight: 22
   },
+  imageButtonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%'
+  },
+  imageButton: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    borderRadius: 10,
+    padding: 10,
+    width: 'auto',
+    backgroundColor: '#0d47a1',
+  },
+  imageDeleteButton: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    borderRadius: 10,
+    padding: 10,
+    width: 'auto',
+    backgroundColor: '#ededed',
+  },
+  imageButtonTextStyle: {
+    color: 'white',
+    fontWeight: 'thin',
+    fontSize: 12,
+    textAlign: 'center'
+  },
+  imageDeleteButtonTextStyle: {
+    color: '#ff0512',
+    fontWeight: 'thin',
+    fontSize: 12,
+    textAlign: 'center'
+  },
   buttonContainer: {
     flexDirection: 'column',
     alignItems: 'center',
@@ -135,11 +171,10 @@ module.exports = StyleSheet.create({
   button: {
     borderRadius: 10,
     padding: 10,
-    elevation: 2,
-    width: '48%'
+    width: '48%',
   },
   buttonClose: {
-    backgroundColor: '#2196F3'
+    backgroundColor: '#0d47a1'
   },
   buttonTextStyle: {
     color: 'white',
