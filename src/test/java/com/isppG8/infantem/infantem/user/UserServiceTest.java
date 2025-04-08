@@ -177,4 +177,10 @@ public class UserServiceTest {
         assertFalse(result);
     }
 
+    @Test
+    public void TestGetUserByStripeCustomerId() {
+        User user = userService.getUserByStripeCustomerId("cus_test").orElse(null);
+        assertNull(user);
+    }
+
 }
