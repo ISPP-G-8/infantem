@@ -41,6 +41,15 @@ public class AllergenController {
         return allergenService.getAllAllergens().stream().map(AllergenDTO::new).toList();
     }
 
+    @Operation(summary = "Obtener todos los alérgenos del bebé",
+            description = "Devuelve una lista de todos los alérgenos a los que un bebé sea alérgico.") @ApiResponse(
+                    responseCode = "200", description = "Lista obtenida con éxito",
+                    content = @Content(array = @ArraySchema(
+                            schema = @Schema(implementation = AllergenDTO.class)))) @GetMapping("baby/{babyId}")
+    public List<AllergenDTO> getAllAllergensByBabyId(@PathVariable Integer babyId) {
+        return allergenService.getAllAllergensByBabyId(babyId).stream().map(AllergenDTO::new).toList();
+    }
+
     @Operation(summary = "Obtener un alérgeno por ID",
             description = "Devuelve un alérgeno basado en su ID.") @ApiResponse(responseCode = "200",
                     description = "Alérgeno encontrado",
