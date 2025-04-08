@@ -87,13 +87,14 @@ Con una media de 26.837 nacimientos al mes en España, la aplicación cuenta con
 
 | Periodo            | CAPEX (€) | OPEX (€)   | TOTAL (€)     |
 |--------------------|-----------|------------|----------------|
-| Semana 1           | 3.796     | 12,51      | 3.808,51       |
+| Semana 1           | 4.396     | 12,51      | 4.408,51       | 
 | Semana 5           | 15.415    | 62,55      | 15.477,55      |
-| Semana 10          | 30.830    | 125,10     | 30.955,10      |
-| Semana 15          | 43.598    | 187,65     | 43.785,65      |
-| Primeros 6 meses   | 0         | 7.935,46   | 7.935,46       |
-| Primer Año         | 0         | 32.151,32  | 32.151,32      |
-| Segundo Año        | 0         | 103.248,64 | 103.248,64     |
+| Semana 10          | 30.830    | 1.950,10   | 32.780,10      |
+| Semana 15          | 43.598    | 2.012,65   | 45.610,65      |
+| Primeros 6 meses   | 0         | 13.410,46  | 13.410,46      |
+| Primer Año         | 0         | 54.051,32  | 54.051,32      |
+| Segundo Año        | 0         | 125.148,64 | 125.148,64     |
+
 
 > *CAPEX:* Inversiones iniciales (desarrollo, hardware).  
 > *OPEX:* Costes operativos (infraestructura, soporte, mantenimiento,marketing y adquisición de usuarios).
@@ -223,20 +224,65 @@ Se ha de tener en cuenta el coste de contrartacion de expertos en el ambito de l
 | ----------- | ------------------ | -------- | -------- | --------- | --------- |
 | Coste total | 60 €              | 180 €   | 900 €   | 1.800€   | 2.700 €  |
 
-### 2.7. Costes totales
+### 2.7. Costes de Marketing y Estrategia de Tracción
+Para asegurar visibilidad, descargas y crecimiento sostenido desde el lanzamiento, se ha diseñado una estrategia de tracción multicanal que incluye publicidad digital, colaboraciones con influencers, contenido en redes sociales, eventos físicos y herramientas de análisis.
+
+
+| Canal / Categoría               | Coste mensual estimado (€) |
+|-------------------------------|----------------------------|
+| Publicidad en Meta (IG/FB)    | 300 €                     |
+| TikTok Ads                    | 200 €                     |
+| Google Ads                    | 250 €                     |
+| Diseño y contenidos           | 25 €                      |
+| Colaboraciones con influencers| 500 €                     |
+| Publicidad física (folletos)  | 150 €                     |
+| Ferias / eventos              | 400 €                     |
+| **Total mensual estimado**    | **1.825 €**               |
+
+Se proyecta mantener este gasto durante **al menos 12 meses**, lo que se traduce en **21.900 € anuales**, incluidos como OPEX en el presupuesto total.
+
+Esto es una versión para la tracción inicial, que podrá ser modificada en proximas versiones
+
+### 2.7.1. Costes de Diseño e Identidad Visual
+
+Para transmitir una imagen coherente, moderna y profesional, se ha realizado una inversión inicial en diseño gráfico que incluye:
+
+- Creación de logotipo adaptable a formatos digitales.
+- Ilustración de mascota corporativa.
+- Paleta de colores y tipografía de marca.
+- Iconografía personalizada para app y RRSS.
+- Producción visual de materiales promocionales.
+
+| Elemento                             | Coste estimado (€) |
+|--------------------------------------|--------------------|
+| Diseño de logotipo                   | 150 €              |
+| Ilustración de mascota               | 200 €              |
+| Creación de paleta visual e identidad| 100 €              |
+| Iconografía y adaptaciones           | 100 €              |
+| Recursos visuales para campañas      | 50 €               |
+| **Total**                            | **600 €**          |
+
+Este coste se incluye como **CAPEX** al tratarse de una inversión única que perdura a lo largo del proyecto.
+
+
+### 2.8. Costes totales
 
 En la siguiente tabla se recogen los costes totales del proyecto, incluyendo en el precio total un 10% de reservas de contingencia
 
-| Categoría                                                             | Costes                  |
-| ---------------------------------------------------------------------- | ----------------------- |
-| Costes de personal                                                     | 43.598 €               |
-| Costes de Infraestructura                                              | 187,65 €               |
-| Costes de Herramientas de Desarrollo                                   | 1.284,56 €             |
-| Costes de Hardware y Amortización                                     | 10.693 €               |
-| Costes de Publicación y Distribución                                 | 118,95 €               |
-| Costes de Expertos (nutricionistas)                                    | 2.700 €                |
-| **Total**                                                        | **58.582,16 €**  |
-| **Coste del proyecto (total + 10% de reserva de contingencias)** | **64.170,376 €** |
+| Categoría                                  | Costes         |
+|-------------------------------------------|----------------|
+| Costes de personal                        | 43.598 €       |
+| Costes de Infraestructura                 | 187,65 €       |
+| Costes de Herramientas de Desarrollo      | 1.284,56 €     |
+| Costes de Hardware y Amortización         | 10.693 €       |
+| Costes de Publicación y Distribución      | 118,95 €       |
+| Costes de Expertos (nutricionistas)       | 2.700 €        |
+|Costes de Marketing y Tracción inicial       | 21.900 €   |
+Costes de diseño e identidad visual	| 600,00 €
+| **Total**                                  | **81.082,16** **€**|
+| **Coste del proyecto (+10% contingencias)**| **88.530,38 €**|
+
+
 
 <p style="text-align:center;font-style:italic;">Tabla 7: desglose de costes del proyecto</p>
 
