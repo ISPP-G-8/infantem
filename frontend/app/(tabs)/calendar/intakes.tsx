@@ -42,7 +42,7 @@ export default function Intakes() {
     <View style={gs.container}> 
       <Text style={{ color: "#1565C0", fontSize: 36, fontWeight: "bold", textAlign: "center", marginBottom: 10 }}>Ingestas</Text>
       <View style={{ gap: 10, marginVertical: 20, alignSelf: "flex-start", alignItems: "center", width: "100%" }}>
-        <Link style={[gs.mainButton, { backgroundColor: "#1565C0" }]} href={"/calendar/addIntake"}>
+        <Link style={[gs.mainButton, { backgroundColor: "#1565C0" }]} href={"/calendar/intakeDetail"}>
           <Text style={gs.mainButtonText}>Añade una ingesta</Text>
         </Link>
       </View>
@@ -75,11 +75,12 @@ export default function Intakes() {
                 )}
                 
                 <View style={{ alignItems: 'flex-end', marginTop: 10 }}>
-                  <TouchableOpacity 
+                  <Link 
                     style={{ backgroundColor: '#1565C0', paddingVertical: 5, paddingHorizontal: 12, borderRadius: 5 }}
+                    href={`/calendar/intakeDetail?intake=${intake.id}`}
                   >
                     <Text style={{ color: 'white', fontWeight: 'bold' }}>Detalles</Text>
-                  </TouchableOpacity>
+                  </Link>
                 </View>
               </View>
             </TouchableOpacity>
