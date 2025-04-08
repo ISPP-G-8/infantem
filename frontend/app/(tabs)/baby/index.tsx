@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity, ImageBackground, ScrollView, Image, TextInput } from "react-native";
 import { getToken } from "../../../utils/jwtStorage";
+import { Link, router } from "expo-router";
 import { Picker } from "@react-native-picker/picker";
 
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
@@ -12,7 +13,7 @@ interface Baby {
   genre?: string;
   weight?: number;
   height?: number;
-  cephalicPerimeter?: number;
+  headCircumference?: number;
   foodPreference?: string;
 }
 
@@ -24,7 +25,7 @@ interface BabyDraft {
   genre: string;
   weight: string;
   height: string;
-  cephalicPerimeter: string;
+  headCircumference: string;
   foodPreference: string;
 }
 
@@ -95,7 +96,7 @@ export default function BabyInfo() {
     const parsedFields = {
       weight: editedBaby.weight ? parseFloat(editedBaby.weight) : undefined,
       height: editedBaby.height ? parseFloat(editedBaby.height) : undefined,
-      cephalicPerimeter: editedBaby.cephalicPerimeter ? parseFloat(editedBaby.cephalicPerimeter) : undefined,
+      headCircumference: editedBaby.headCircumference ? parseFloat(editedBaby.headCircumference) : undefined,
     };
 
     // If we're editing an existing baby, merge the new values with the original data.
@@ -177,7 +178,7 @@ export default function BabyInfo() {
       genre: baby.genre || "OTHER",
       weight: baby.weight ? baby.weight.toString() : "",
       height: baby.height ? baby.height.toString() : "",
-      cephalicPerimeter: baby.cephalicPerimeter ? baby.cephalicPerimeter.toString() : "",
+      headCircumference: baby.headCircumference ? baby.headCircumference.toString() : "",
       foodPreference: baby.foodPreference || "",
     });
     setIsEditing(true);
@@ -191,7 +192,7 @@ export default function BabyInfo() {
       genre: "OTHER",
       weight: "",
       height: "",
-      cephalicPerimeter: "",
+      headCircumference: "",
       foodPreference: "",
     });
     setIsEditing(true);
@@ -277,8 +278,8 @@ export default function BabyInfo() {
                 style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width:"80%" }]} 
                 placeholder="Ej. 35"
                 keyboardType="decimal-pad"
-                value={editedBaby.cephalicPerimeter}
-                onChangeText={(text) => handleInputChange("cephalicPerimeter", text)}
+                value={editedBaby.headCircumference}
+                onChangeText={(text) => handleInputChange("headCircumference", text)}
               />
 
               <Text style={{ alignSelf: 'flex-start', marginLeft: '10%', color: '#1565C0', fontWeight: 'bold', marginTop: 10, marginBottom: 5 }}>Preferencias alimentarias:</Text>
@@ -300,13 +301,13 @@ export default function BabyInfo() {
         </View>
 
         {/* LISTADO DE BEBÉS */}
-        <Text style={[gs.subHeaderText, { color: "#1565C0", marginBottom: 10, fontWeight: "bold" }]}>Mis bebés registrados</Text>
+        {!isEditing && (<Text style={[gs.subHeaderText, { color: "#1565C0", marginBottom: 10, fontWeight: "bold" }]}>Mis bebés registrados</Text>)}
 
-        {babies.length === 0 ? (
+        {babies.length === 0 ? !isEditing &&  (
           <Text style={{ textAlign: "center", color: "gray", fontSize: 16 }}>
             No hay bebés registrados aún.
           </Text>
-        ) : (
+        ) : !isEditing &&  (
           babies.map((baby) => (
             <View key={baby.id} style={[gs.card, { width: "100%", flexDirection: "row", alignItems: "center", padding: 15, marginBottom: 10 }]}>
               <Image
@@ -320,6 +321,12 @@ export default function BabyInfo() {
                 <Text style={gs.cardContent}>⚖️ Peso: {baby.weight} kg </Text>
                 <Text style={gs.cardContent}>📏 Altura: {baby.height} cm</Text>
               </View>
+              <View style={{ flexDirection: "column", gap: 10, marginRight: 20}}>
+                <TouchableOpacity style={[gs.mainButton, { backgroundColor: "green" }]} onPress={() => router.push(`/baby/metricas?babyId=${baby.id}`)}>
+                  <Text style={gs.mainButtonText}>Métricas</Text>
+                </TouchableOpacity>
+              </View>
+
               <View style={{ flexDirection: "column", alignItems: "center", gap: 10 }}>
                 <TouchableOpacity style={gs.mainButton} onPress={() => handleEditBaby(baby)}>
                   <Text style={gs.mainButtonText}>Editar</Text>
@@ -328,6 +335,7 @@ export default function BabyInfo() {
                   <Text style={gs.mainButtonText}>Eliminar</Text>
                 </TouchableOpacity>
               </View>
+
             </View>
           ))
         )}

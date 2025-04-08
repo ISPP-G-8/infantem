@@ -21,7 +21,6 @@ import com.isppG8.infantem.infantem.dream.Dream;
 import com.isppG8.infantem.infantem.intake.Intake;
 import com.isppG8.infantem.infantem.metric.Metric;
 import com.isppG8.infantem.infantem.milestoneCompleted.MilestoneCompleted;
-import com.isppG8.infantem.infantem.nutritionalContribution.NutritionalContribution;
 import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.vaccine.Vaccine;
 
@@ -36,7 +35,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -75,16 +73,12 @@ public class Baby {
 
     @NotNull
     @Min(0)
-    private Integer cephalicPerimeter;
+    private Integer headCircumference;
 
     @NotBlank
     private String foodPreference;
 
     // Relaciones
-
-    @OneToOne
-    private NutritionalContribution nutritionalContribution;
-
     @OneToMany(mappedBy = "baby", cascade = CascadeType.ALL)
     private List<Dream> sleep = new ArrayList<>();
 

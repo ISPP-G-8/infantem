@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.isppG8.infantem.infantem.auth.Authorities;
 import com.isppG8.infantem.infantem.baby.Baby;
 import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserService;
@@ -40,16 +41,23 @@ public class CalendarControllerTest {
 
     static User user1 = new User();
     static User user2 = new User();
+    static Authorities authorities = new Authorities();
 
     @BeforeEach
     void setUp() {
+        authorities.setAuthority("user");
 
         user1.setId(1);
-        user2.setId(2);
+        user1.setAuthorities(authorities); // Asigna correctamente las autoridades
         user1.setUsername("user1");
+
+        user2.setId(2);
+        user2.setAuthorities(authorities); // Asigna correctamente las autoridades
         user2.setUsername("user2");
+
         List<Baby> babies1 = user1.getBabies();
         List<Baby> babies2 = user2.getBabies();
+
         for (Integer i = 1; i <= 4; i++) {
             Baby baby = new Baby();
             baby.setId(i);
@@ -59,8 +67,10 @@ public class CalendarControllerTest {
                 babies2.add(baby);
             }
         }
+
         user1.setBabies(babies1);
         user2.setBabies(babies2);
+
         mockMvc = MockMvcBuilders.standaloneSetup(calendarController).build();
     }
 
