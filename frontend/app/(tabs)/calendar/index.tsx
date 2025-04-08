@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, ImageBackground, ScrollView, ActivityIndicator, TouchableOpacity } from "react-native";
 import { Calendar } from "react-native-calendars";
 import { useAuth } from "../../../context/AuthContext";
+import { useNavigation } from "@react-navigation/native"; // Importa el hook de navegación
 
 const gs = require("../../../static/styles/globalStyles");
 
@@ -13,6 +14,7 @@ const CalendarTab = () => {
   const [babies, setBabies] = useState<{ [babyId: string]: string }>({}); // Estado para almacenar los nombres de los bebés
   const [loading, setLoading] = useState<boolean>(true);
   const { token } = useAuth();
+  const navigation = useNavigation(); // Obtén el objeto de navegación
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
@@ -210,6 +212,10 @@ const CalendarTab = () => {
     return icons.join(" ");
   };
 
+  const navigateToBabyTab = () => {
+    navigation.navigate("baby"); // Reemplaza "BabyTab" con el nombre exacto de la pestaña de bebés en tu configuración de navegación
+  };
+
   // Renderizar el componente del calendario
   const renderCalendar = () => {
     const markedDates = {
@@ -248,6 +254,84 @@ const CalendarTab = () => {
 
     return (
       <View style={[gs.card, { maxWidth: 600, padding: 10 }]}>
+        <View style={{ flexDirection: "row", marginBottom: 10, flexWrap: "wrap", justifyContent: "center" }}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#00adf5",
+              padding: 10,
+              borderRadius: 5,
+              alignItems: "center",
+              marginLeft: 5,
+              marginTop: 5,
+            }}
+            onPress={navigateToBabyTab} // Llama a la función de navegación
+          >
+            <Text style={{ color: "#fff", fontWeight: "bold" }}>Añadir metricas de tamaños</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#00adf5",
+              padding: 10,
+              borderRadius: 5,
+              alignItems: "center",
+              marginLeft: 5,
+              marginTop: 5,
+            }}
+            onPress={() => {
+              navigation.navigate("sleep"); // Navegar a la pestaña Sleep con la fecha seleccionada
+            }}
+          >
+            <Text style={{ color: "#fff", fontWeight: "bold" }}>Añadir sueños</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#00adf5",
+              padding: 10,
+              borderRadius: 5,
+              alignItems: "center",
+              marginLeft: 5,
+              marginTop: 5,
+            }}
+            onPress={() => {
+              // Navegar a la pestaña de creación de métricas de enfermedades
+              navigateToDiseaseMetricsTab(); // Reemplaza con la función correspondiente
+            }}
+          >
+            <Text style={{ color: "#fff", fontWeight: "bold" }}>Añadir enfermedades</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#00adf5",
+              padding: 10,
+              borderRadius: 5,
+              alignItems: "center",
+              marginLeft: 5,
+              marginTop: 5,
+            }}
+            onPress={() => {
+              // Navegar a la pestaña de creación de métricas de vacunas
+              navigateToVaccineMetricsTab(); // Reemplaza con la función correspondiente
+            }}
+          >
+            <Text style={{ color: "#fff", fontWeight: "bold" }}>Añadir vacunas</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#00adf5",
+              padding: 10,
+              borderRadius: 5,
+              alignItems: "center",
+              marginLeft: 5,
+              marginTop: 5,
+            }}
+            onPress={() => {
+              // Navegar a la pestaña de creación de métricas de ingestas
+              navigateToIntakeMetricsTab(); // Reemplaza con la función correspondiente
+            }}
+          >
+            <Text style={{ color: "#fff", fontWeight: "bold" }}>Añadir ingestas</Text>
+          </TouchableOpacity>
+        </View>
         <Calendar
           current={currentMonth}
           onDayPress={handleDayPress}
@@ -380,8 +464,7 @@ const CalendarTab = () => {
                       <Text style={[gs.bodyText, { fontWeight: "bold", marginBottom: 5 }]}>Métricas:</Text>
                       {events[selectedDate][babyId].metrics.map((metric: any, index: number) => (
                         <Text key={index} style={[gs.bodyText, { marginLeft: 10 }]}>
-                          - Peso: {metric.weight} kg, Altura: {metric.height} cm, Perímetro cefálico:{" "}
-                          {metric.cephalicPerimeter} cm
+                          - Peso: {metric.weight} kg, Altura: {metric.height} cm, Perímetro cefálico: {metric.headCircumference} cm
                         </Text>
                       ))}
                     </View>

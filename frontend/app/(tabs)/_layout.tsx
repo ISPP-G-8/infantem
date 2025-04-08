@@ -99,6 +99,7 @@ export default function TabLayout() {
           ),
         }}
       />
+      
     </Tabs>
   );
   // We should return this if the user is not logged in
