@@ -1,5 +1,8 @@
 name: Análisis con SonarQube
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
@@ -10,12 +13,22 @@ jobs:
     steps:
       - name: Checkout del código
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Configurar JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '21'
+          cache: 'maven'
+      
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4 # Usar v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
   
       - name: Create .env file
         run: |
@@ -24,8 +37,21 @@ jobs:
           echo "STRIPE_WEBHOOK_SECRET=${{ secrets.STRIPE_WEBHOOK_SECRET }}" >> .env
           echo "EXPO_PUBLIC_STRIPE_API_KEY=${{ secrets.EXPO_PUBLIC_STRIPE_API_KEY }}" >> .env
 
-      - name: Compilar y ejecutar pruebas
-        run: mvn clean verify
+      - name: Compilar y ejecutar pruebas Backend (Maven)
+        run: mvn -B clean verify
 
-      - name: Análisis con SonarQube
-        run: mvn sonar:sonar -Dsonar.projectKey=ISPP-G-8_infantem -Dsonar.organization=ispp-g-8 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+      - name: Instalar dependencias Frontend (npm)
+        run: npm ci
+        working-directory: ./frontend
+      #- name: Ejecutar pruebas y cobertura Frontend
+      #   run: npm test -- --coverage # Ajusta el comando según tu configuración
+      #   working-directory: ./frontend
+
+      - name: Set up SonarScanner
+        uses: SonarSource/sonar-scanner-setup@v2
+
+      - name: Análisis con SonarScanner CLI
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: sonar-scanner

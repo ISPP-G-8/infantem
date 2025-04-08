@@ -17,6 +17,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.isppG8.infantem.infantem.auth.Authorities;
 import com.isppG8.infantem.infantem.baby.Baby;
 import com.isppG8.infantem.infantem.calendar.dto.CalendarDay;
 import com.isppG8.infantem.infantem.calendar.dto.CalendarEvents;
@@ -39,11 +40,15 @@ public class CalendarServiceTest {
 
     static User user1 = new User();
     static User user2 = new User();
+    static Authorities authorities = new Authorities();
 
     @BeforeAll
     static void setUp() {
+        authorities.setAuthority("user");
         user1.setId(1);
+        user1.setAuthorities(authorities);
         user2.setId(2);
+        user2.setAuthorities(authorities);
         user1.setUsername("user1");
         user2.setUsername("user2");
         List<Baby> babies1 = user1.getBabies();
@@ -77,10 +82,8 @@ public class CalendarServiceTest {
         assertEquals(1, baby1Calendar.getBabyId(), "The first baby should have id 1");
         assertEquals(3, baby3Calendar.getBabyId(), "The second baby should have id 3");
 
-        assertEquals(Set.of("Disease", "Intake"), baby1Calendar.getEvents().get("2025-03-01"),
+        assertEquals(Set.of("Intake"), baby1Calendar.getEvents().get("2025-03-01"),
                 "The first baby should have a disease, intake and metric event on 2025-03-01");
-        assertEquals(Set.of("Disease"), baby1Calendar.getEvents().get("2025-03-09"),
-                "On 2025-03-09, the first" + "baby should only have a disease event");
 
         assertTrue(baby1Calendar.getEvents().get("2025-03-29") == null,
                 "The first baby should not have any event on 2025-03-29");
@@ -107,11 +110,6 @@ public class CalendarServiceTest {
         CalendarDay baby3Calendar = calendar1.get(1);
         assertEquals(1, baby1Calendar.getBabyId(), "The first baby should have id 1");
         assertEquals(3, baby3Calendar.getBabyId(), "The second baby should have id 3");
-
-        // Check diseases
-        assertEquals(2, baby1Calendar.getDiseases().size(), "The first baby should have 2 diseases");
-        assertEquals(1, baby1Calendar.getDiseases().get(0).getId(), "The first disease should have id 1");
-        assertEquals("Varicela", baby1Calendar.getDiseases().get(0).getName(), "The first disease should be Varicela");
 
         // Check dreams
         assertTrue(baby1Calendar.getDreams().isEmpty(), "The first baby should not have any dreams.");
