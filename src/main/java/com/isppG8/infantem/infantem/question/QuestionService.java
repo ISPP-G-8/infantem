@@ -9,19 +9,22 @@ import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotOwnedException;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
 public class QuestionService {
 
-    @Autowired
     private QuestionRepository questionRepository;
-
-    @Autowired
     private BabyService babyService;
+    private UserService userService;
 
     @Autowired
-    private UserService userService;
+    public QuestionService(QuestionRepository questionRepository, BabyService babyService, UserService userService) {
+        this.questionRepository = questionRepository;
+        this.babyService = babyService;
+        this.userService = userService;
+    }
 
     public List<Question> getQuestionsByBabyId(int babyId) {
         if (babyService.findById(babyId) == null) {
@@ -33,7 +36,6 @@ public class QuestionService {
     public Question createQuestion(Question question) {
         User currentUser = this.userService.findCurrentUser();
         Baby questionBaby = question.getBaby();
-        System.out.println(questionBaby.getName().toString());
         if (!currentUser.getBabies().contains(questionBaby)) {
             throw new ResourceNotOwnedException("Not your baby");
         }
@@ -51,4 +53,10 @@ public class QuestionService {
         }
         return question;
     }
+
+    public boolean saveAll(List<Question> questions) {
+        questionRepository.saveAll(new ArrayList<Question>(questions));
+        return true;
+    }
+
 }

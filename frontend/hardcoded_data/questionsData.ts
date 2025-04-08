@@ -23,11 +23,11 @@ export const questions: Question[] = [
       "type": "options",
       "options": [
         "Erupción cutánea",
+        "Dolor abdominal",
         "Hinchazón en labios o cara",
         "Dificultad para respirar",
-        "Vómitos",
         "Diarrea",
-        "Dolor abdominal",
+        "Vómitos",
         "Otros"
       ]
     },

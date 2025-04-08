@@ -97,4 +97,8 @@ public class IntakeService {
         List<Intake> intakes = this.intakeRepository.getIntakeSummaryByBabyIdAndDate(babyId, start, end);
         return intakes.stream().map(IntakeSummary::new).toList();
     }
+
+    public Intake getLastIntake(Integer babyId) {
+        return intakeRepository.getLastIntake(babyId);
+    }
 }

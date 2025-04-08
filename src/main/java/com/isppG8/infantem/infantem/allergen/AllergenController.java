@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import com.isppG8.infantem.infantem.allergen.dto.AllergenDTO;
+import com.isppG8.infantem.infantem.allergen.dto.AllergenQuestionsDTO;
+import com.isppG8.infantem.infantem.allergen.dto.AllergenAnswerDTO;
 import jakarta.validation.Valid;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -75,6 +77,16 @@ public class AllergenController {
     public ResponseEntity<Void> deleteAllergen(@PathVariable Long id) {
         allergenService.deleteAllergen(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "Analizar nuevas respuestas",
+            description = "Recibe una lista de respuestas a preguntas, las guarda y recalcula posibles alergias") @ApiResponse(
+                    responseCode = "200", description = "Guardado y cálculo hecho sin problemas",
+                    content = @Content(schema = @Schema(implementation = AllergenAnswerDTO.class))) @ApiResponse(
+                            responseCode = "404", description = "Bebé no encontrado") @PostMapping("/answers")
+    public ResponseEntity<AllergenAnswerDTO> analyzeAnswersAllergen(@Valid @RequestBody AllergenQuestionsDTO answers) {
+        AllergenAnswerDTO calculatedAllergies = allergenService.calculateAllergies(answers);
+        return ResponseEntity.ok(calculatedAllergies);
     }
 
 }

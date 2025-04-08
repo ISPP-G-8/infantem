@@ -221,9 +221,5 @@ INSERT INTO product (title, description, image_url, shop_url) VALUES
 );
 
 -- Inserción preguntas
-INSERT INTO question (answer,baby_id,question,id,recipe_id) VALUES
-(0,1,1,1,1),
-(1,1,1,2,1),
-(1,1,2,3,1),
-(1,1,2,4,1),
-(0,1,3,5,1);
+INSERT INTO question (id,answer,question,intake_id,baby_id) VALUES
+(1,1,1,1,1);

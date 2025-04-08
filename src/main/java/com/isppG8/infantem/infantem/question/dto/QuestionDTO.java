@@ -2,6 +2,8 @@ package com.isppG8.infantem.infantem.question.dto;
 
 import com.isppG8.infantem.infantem.question.Question;
 
+import java.time.LocalDateTime;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,9 +15,9 @@ public class QuestionDTO {
 
     private Integer question;
 
-    private Boolean answer;
+    private Integer answer;
 
-    private String recipe;
+    private LocalDateTime intake;
 
     private String baby;
 
@@ -27,7 +29,7 @@ public class QuestionDTO {
         this.id = question.getId();
         this.answer = question.getAnswer();
         this.question = question.getQuestion();
-        this.recipe = question.getRecipe().getName();
+        this.intake = question.getIntake().getDate();
         this.baby = question.getBaby().getName();
     }
 }
