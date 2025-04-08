@@ -6,6 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Link, router } from "expo-router";
 import { useAuth } from "../../../context/AuthContext";
 import { jwtDecode } from "jwt-decode";
+import { storeToken, getToken } from "../../../utils/jwtStorage"; 
 
 const avatarOptions = [
   require("../../../assets/avatar/avatar1.png"),
@@ -24,7 +25,7 @@ export default function Account() {
   const { isLoading, user, token, setUser, checkAuth, signOut } = useAuth();
 
   useEffect(() => {
-    if (!token) return; // Evita ejecutar el efecto si jwt es null o undefined
+    if (!token) return; 
     console.log(token);
     try {
       const decodedToken: any = jwtDecode(token);
@@ -34,7 +35,6 @@ export default function Account() {
     }
   }, [token]);
 
-  // Mueve el useEffect al nivel superior del componente
   useEffect(() => {
     if (!user || !token) return;
 
@@ -57,7 +57,7 @@ export default function Account() {
         setSubscription(data);
       } catch (error) {
         console.error("Error fetching subscription:", error);
-        setSubscription(null); // Asegúrate de resetear el estado si hay un error
+        setSubscription(null);
       }
     };
 
@@ -68,59 +68,74 @@ export default function Account() {
     setIsEditing(true);
   };
 
-  const handleSaveChanges = () => {
-    if (!user || !token) {
-      console.log("No hay usuario o token disponible.");
+
+
+  const handleSaveChanges = async () => {
+    if (!user) {
+      console.log("No hay usuario disponible.");
       return;
     }
-
+  
     console.log("Guardando cambios...");
-
+  
+    const token = await getToken(); 
+  
+    if (!token) {
+      console.log("Token no disponible. No se puede guardar los cambios.");
+      return;
+    }
+  
     const userData = {
       id: user.id,
       name: user.name,
       surname: user.surname,
       username: user.username,
-      password: user.password ? user.password : "placeholderPassword", // Asegúrate de enviar la contraseña si está presente
+      password: user.password ? user.password : "placeholderPassword",
       email: user.email,
       profilePhotoRoute: user.profilePhotoRoute
     };
 
-    // Verifica que el token esté disponible y válido antes de hacer la solicitud
-    if (!token) {
-      console.log("Token no disponible. No se puede guardar los cambios.");
+    const decodedToken = jwtDecode(token);
+    console.log("Token antes de enviar:", decodedToken);
+
+    if (!decodedToken.jti) {
+      console.error("Token inválido: no contiene jti");
       return;
     }
-
-    // Realiza la solicitud para actualizar los datos del usuario
-    fetch(`${apiUrl}/api/v1/users/${user.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}` // El token debería ser correcto aquí
-      },
-      body: JSON.stringify(userData)
-    })
-      .then(response => {
-        if (!response.ok) {
-          return response.json().then(err => {
-            console.error("Error del servidor:", err);
-            throw new Error(JSON.stringify(err));
-          });
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log("Datos actualizados correctamente:", data);
-        setUser({ ...user, ...data }); // Actualiza solo los datos del usuario, NO el token
-        setIsEditing(false);
-        Alert.alert("Perfil actualizado", "Los cambios han sido guardados correctamente");
-      })
-      .catch(error => {
-        console.error("Error al guardar cambios:", error);
-        Alert.alert("Error", `No se pudo guardar los cambios: ${error.message}`);
+  
+    try {
+      const response = await fetch(`${apiUrl}/api/v1/users/${user.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}` 
+        },
+        body: JSON.stringify(userData)
       });
+  
+      if (!response.ok) {
+        const err = await response.json();
+        console.error("Error del servidor:", err);
+        throw new Error(JSON.stringify(err));
+      }
+  
+      const data = await response.json();
+      console.log("Datos actualizados correctamente:", data);
+  
+      const newToken = data.jwt;
+  
+      await storeToken(newToken); 
+  
+      setUser({ ...user, ...data, token: newToken }); 
+      setIsEditing(false);
+      Alert.alert("Perfil actualizado", "Los cambios han sido guardados correctamente");
+  
+    } catch (error: any) {
+      console.error("Error al guardar cambios:", error);
+      Alert.alert("Error", `No se pudo guardar los cambios: ${error.message}`);
+    }
   };
+
 
   const handleLogout = signOut;
 
