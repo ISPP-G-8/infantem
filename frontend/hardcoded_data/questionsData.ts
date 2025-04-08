@@ -24,11 +24,12 @@ export const questions: Question[] = [
       "question": "¿Ha presentado alguno de estos síntomas después de consumirlo?",
       "options": [
         "Erupción cutánea",
+        "Dolor abdominal",
         "Hinchazón en labios o cara",
         "Dificultad para respirar",
-        "Vómitos",
         "Diarrea",
-        "Dolor abdominal"
+        "Vómitos",
+        "Otros"
       ]
     },
     {

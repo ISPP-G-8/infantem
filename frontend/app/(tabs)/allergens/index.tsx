@@ -12,8 +12,8 @@ export default function Allergens() {
   const { user, token } = useAuth();
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [babies, setBabies] = useState([]);
-  const [selectedBabyId, setSelectedBabyId] = useState<number>(0);
-  const [allergensResult, setAllergenResult] = useState({})
+  const [selectedBaby, setSelectedBaby] = useState({});
+  const [allergensResult, setAllergenResult] = useState({});
 
   useEffect(() => {
     const fetchBabies = async () => {
@@ -21,6 +21,7 @@ export default function Allergens() {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
         }
       })
         .then((response) => {
@@ -40,11 +41,6 @@ export default function Allergens() {
     fetchBabies();
   }, []);
 
-  useEffect(() => {
-    console.log("AAAAAa");
-    console.log(babies);
-  }, [babies]);
-
   const handleAnswer = (number: number) => {
     const array = [...answers, number];
     setAnswers(array);
@@ -58,17 +54,20 @@ export default function Allergens() {
   const handleSubmit = async (array) => {
     if (token) {
       try {
-        const response = await fetch(`${apiUrl}/api/v1/allergens/allergensBaby/${selectedBabyId}`, {
+        const response = await fetch(`${apiUrl}/api/v1/allergens/answers`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            answers: array
+            answers: array,
+            babyId: selectedBaby.id
           }),
         });
         if (response.ok) {
-          console.log("Data sent successfully");
+          const data = await response.json();
+          setAllergenResult(data);
         }
       } catch (error) {
         console.error("Error while sending data:", error);
@@ -77,8 +76,6 @@ export default function Allergens() {
       console.error("User not authenticated");
     }
   };
-
-
 
   return (
     <View style={{ flex: 1, backgroundColor: "#E3F2FD" }}>
@@ -99,7 +96,7 @@ export default function Allergens() {
                 <View>
                   <TouchableOpacity
                     onPress={() => {
-                      setSelectedBabyId(baby.id);
+                      setSelectedBaby(baby);
                       setCurrentStep(1);
                     }}
                     style={[gs.secondaryButton, { margin: 10 }]}
@@ -115,11 +112,37 @@ export default function Allergens() {
           {currentStep === 1 && (
             <>
               {currentQuestion === questions.length ? (
-                <View style={gs.card}>
-                  <Text style={[gs.cardTitle, { color: "#1565C0" }]}>¡Gracias por completar el cuestionario!</Text>
-                </View>
-
-                // Mostrar aquí resultados del cuestionario
+                <>
+                  <View style={gs.card}>
+                    <Text style={[gs.cardTitle, { color: "#1565C0" }]}>
+                      Estos son los resultados de la evaluación de alérgenos para {selectedBaby.name}:{"\n"}
+                    </Text>
+                    {allergensResult.allergy ? (
+                      <View>
+                        <Text style={gs.cardContent}>
+                          Es bastante posible que tu bebé {selectedBaby.name} sea alérgico a:
+                        </Text>
+                        {allergensResult.detectedAllergies.map((allergen, index) => (
+                          <>
+                            <Text key={index} style={gs.cardContent}>
+                              &nbsp;&nbsp;&nbsp;-&nbsp;<Text style={{ textDecorationLine: "underline" }}>{allergen.name}</Text>:&nbsp;
+                              <Text key={index} style={[gs.cardContent, { textDecorationLine: "none" }]}>
+                                {allergen.description}
+                              </Text>
+                            </Text>
+                          </>
+                        ))}
+                        <Text style={[gs.cardContent, { marginTop: 10 }]}>
+                          {allergensResult.message}
+                        </Text>
+                      </View>
+                    ) : (
+                      <Text style={gs.cardContent}>
+                        {allergensResult.message}
+                      </Text>
+                    )}
+                  </View>
+                </>
               ) : (
                 <View style={{ width: "100%", alignItems: "center", justifyContent: "center" }}>
                   <Text style={[gs.subheaderText, { paddingBottom: 40, color: "#1565C0" }]}>
