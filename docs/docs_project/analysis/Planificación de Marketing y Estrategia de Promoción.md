@@ -1,6 +1,6 @@
 # Planificación de Marketing y Estrategia de Promoción
 
-![Portada](../images/Infantem.png)
+![Portada](../../images/Infantem.png)
 ---
 **Fecha:** 02/04/2025  
 **Grupo 8:** Infantem  
@@ -39,6 +39,8 @@
 ## Colaboradores del documento
 - **Paula Luna Navarro:**
 Creó el documento y escribió su contenido
+- **Lucía Noya Cano:**
+Contribuyó en completar el contenido del documento
 
 ## Índice
 
@@ -53,12 +55,18 @@ Creó el documento y escribió su contenido
    - [Campañas Publicitarias](#c-campañas-publicitarias)
      - [Publicidad Digital](#publicidad-digital)
      - [Publicidad Física](#publicidad-física)
+   - [Estrategia de Tracción Inicial](#d-estrategia-de-tracción-inicial)
+     - [Acciones de Marketing Específicas para la Fase 0 (previas al lanzamiento)](#1-acciones-de-marketing-específicas-para-la-fase-0---previas-al-lanzamiento)
+     - [Incentivos para Primeros Usuarios](#2-incentivos-para-primeros-usuarios)
+     - [Canales Prioritarios Según el Público Objetivo](#3-canales-prioritarios-según-el-público-objetivo)
+     - [Mecanismos de Fidelización Desde el Primer Contacto](#4-mecanismos-de-fidelización-desde-el-primer-contacto)
 5. [Planificación de Campañas y Calendario Editorial](#5-planificación-de-campañas-y-calendario-editorial)
 6. [Costes Estimados](#6-costes-estimados)
-7. [Herramientas a Utilizar](#7-herramientas-a-utilizar)
-8. [Evaluación y Retroalimentación](#8-evaluación-y-retroalimentación)
-9. [Imagen de Marca e Identidad Visual](#9-imagen-de-marca-e-identidad-visual)
-10. [Conclusión](#10-conclusión)
+7. [Definición de Responsabilidades del Equipo de Marketing](#7-definición-de-responsabilidades-del-equipo-de-marketing)
+8. [Herramientas a Utilizar](#8-herramientas-a-utilizar)
+9. [Evaluación y Retroalimentación](#9-evaluación-y-retroalimentación)
+10. [Imagen de Marca e Identidad Visual](#10-imagen-de-marca-e-identidad-visual)
+11. [Conclusión](#11-conclusión)
 
 ---
 ## 1. Introducción y Objetivos
@@ -162,6 +170,60 @@ Inicio: 3 semanas antes del lanzamiento.
 
 ---
 
+### D. Estrategia de Tracción Inicial
+
+**Objetivo:** Diseñar una estrategia efectiva de tracción para captar los primeros usuarios de Infantem durante su fase de lanzamiento (fase 0), generando visibilidad, descargas e interés en la aplicación desde el primer día.
+
+---
+
+#### 1. Acciones de Marketing Específicas para la Fase 0 - Previas al lanzamiento
+
+Con el objetivo de generar expectativa y atraer a los primeros usuarios, se plantean las siguientes acciones para ejecutar en redes sociales y otros canales digitales:
+
+- **Campaña teaser planificada en redes sociales (Instagram, TikTok y Facebook)**: Se programarán publicaciones semanales anunciando que “algo grande está por llegar”, acompañadas de una cuenta regresiva y pequeñas pistas visuales sobre funcionalidades clave de la app. Esta campaña está pensada para generar curiosidad y expectación.
+
+- **Landing page con formulario de pre-registro**: Se lanzará una página donde los usuarios interesados podrán apuntarse para obtener acceso anticipado y beneficios exclusivos en el momento del lanzamiento.
+
+- **Challenge en TikTok/Instagram propuesto**: Se está diseñando el reto “#MiPrimerConsejoDePadreMadre” para fomentar la participación de usuarios en forma de reels o stories compartiendo consejos útiles para madres y padres primerizos.
+
+- **Sorteo de lanzamiento previsto**: Se prevé organizar un sorteo entre los primeros pre-registros, con premios como acceso exclusivo a la app, productos relacionados con bebés (ej. mochilas portabebés, termómetros digitales, etc.), y menciones en la comunidad de usuarios pioneros.
+
+---
+
+#### 2. Incentivos para Primeros Usuarios
+
+- Acceso anticipado a funcionalidades premium.  
+- Reconocimiento como “usuarios fundadores” dentro de la app.  
+- Descuentos en futuras funcionalidades de pago.  
+- Participación exclusiva en encuestas y desarrollo de nuevas funciones.  
+
+---
+
+#### 3. Canales Prioritarios Según el Público Objetivo
+
+- **Madres y Padres Jóvenes (20-35 años)**:
+  - Redes sociales: **Instagram, TikTok, LinkedIn**.
+  - Influencers del mundo de la maternidad/paternidad.
+  - Retos y contenido visual/emocional.
+
+- **Padres Adultos (36-49 años)**:
+  - **Facebook, Google Ads, LinkedIn, clínicas pediátricas.**
+  - Contenido estructurado y educativo.
+  - Campañas PPC y artículos en blogs especializados.
+
+---
+
+#### 4. Mecanismos de Fidelización Desde el Primer Contacto
+
+- **Onboarding gamificado** con la mascota guía (Spoony).  
+- **Mensajes personalizados de bienvenida** según perfil del usuario.  
+- **Emails semanales** con consejos, hitos de desarrollo y uso práctico de la app.  
+- **Sistema de logros/recompensas** por participación activa en la app (validación de datos, recetas añadidas, etc.).  
+- **Espacio para feedback directo y rápido dentro de la app**.  
+
+
+---
+
 ## 5. Planificación de Campañas y Calendario Editorial
 
 - **Teasers previos al lanzamiento.**
@@ -173,21 +235,67 @@ Inicio: 3 semanas antes del lanzamiento.
 
 ## 6. Costes Estimados
 
-| Canal                        | Herramienta        | Coste estimado mensual (€) |
-|-----------------------------|--------------------|-----------------------------|
-| Instagram/Facebook Ads      | Meta Ads           | 300 €                       |
-| TikTok Ads                  | TikTok for Business| 200 €                       |
-| Google Ads (Search + Display)| Google Ads         | 250 €                       |
-| Diseño y contenidos         | Canva Pro   | 25 €                        |
-| Colaboraciones con Influencers | (Micro) Influencers | 500 € aprox.                |
-| Publicidad física (folletos, carteles) | Impresión + colocación | 150 €               |
-| Ferias/Eventos              | Material y espacio | 400 €                       |
+| Canal/Acción                      | Herramienta/Detalle                     | Coste estimado mensual (€) |
+|----------------------------------|----------------------------------------|----------------------------|
+| Instagram/Facebook Ads           | Meta Ads                               | 300 €                      |
+| TikTok Ads                       | TikTok for Business                    | 200 €                      |
+| Google Ads (Search + Display)    | Google Ads                             | 250 €                      |
+| Diseño y contenidos              | Canva Pro                              | 25 €                       |
+| Sorteo de lanzamiento            | Premios para primeros usuarios         | 200 €                      |
+| Colaboraciones con Influencers   | Microinfluencers (m/paternidad)        | 500 € aprox.               |
+| Publicidad física (folletos)     | Impresión + colocación                 | 150 €                      |
+| Ferias/Eventos                   | Material y espacio                     | 400 €                      |
 
-**TOTAL ESTIMADO MENSUAL:** 1.825 €
+**TOTAL ESTIMADO MENSUAL: 2.025 €**
+
 
 ---
 
-## 7. Herramientas a Utilizar
+## 7. Definición de Responsabilidades del Equipo de Marketing
+
+Para asegurar una ejecución eficiente y bien coordinada del plan de marketing, se definen los siguientes roles y responsabilidades dentro del equipo:
+
+| Área / Tarea                         | Responsable                            |
+|-------------------------------------|----------------------------------------|
+| Gestión de redes sociales           | Lucía Noya (Social Media Manager)   |
+| Campañas publicitarias (Meta/Google)| Ángela López (Performance Specialist)  |
+| Colaboraciones con influencers      | Paula Luna  (PR & Influencer Manager) |
+| Análisis de métricas y KPIs         | Álvaro Jiménez (Marketing Analyst)         |
+
+### Gestión de Redes Sociales
+
+- Planificación y publicación del calendario editorial.  
+- Gestión de contenido en Instagram, Facebook, TikTok y LinkedIn.  
+- Interacción con la comunidad, respuesta a comentarios y mensajes.  
+- Coordinación de campañas teaser y retos virales.  
+
+### Campañas Publicitarias (Meta, Google, TikTok)
+
+- Creación y gestión de campañas pagadas en Meta Ads, Google Ads y TikTok Ads.  
+- Optimización de anuncios según rendimiento (CPC, CTR, conversiones).  
+- Control del presupuesto publicitario mensual.  
+
+### Colaboraciones con Influencers
+
+- Identificación y selección de perfiles afines a la app.  
+- Negociación, seguimiento y evaluación de colaboraciones.  
+- Gestión del envío anticipado de la app y materiales promocionales.  
+
+### Análisis de Métricas y KPIs
+
+- Seguimiento de métricas clave (descargas, interacción, tasa de conversión, etc.).  
+- Elaboración de informes semanales de rendimiento.  
+- Recomendaciones basadas en datos para la iteración de campañas.
+
+**Notas:**
+- Todos los miembros colaboran en sesiones semanales de alineación.
+- La revisión de resultados se realiza de forma quincenal con el equipo de producto.
+
+
+---
+
+
+## 8. Herramientas a Utilizar
 
 - **Meta Business Suite:** Para gestión de campañas en Facebook e Instagram.
 - **Google Ads Manager:** Campañas PPC y Display.
@@ -198,7 +306,7 @@ Inicio: 3 semanas antes del lanzamiento.
 
 ---
 
-## 8. Evaluación y Retroalimentación
+## 9. Evaluación y Retroalimentación
 
 - **Revisión semanal** de métricas clave:
   - Costo por clic (CPC)
@@ -215,7 +323,7 @@ Inicio: 3 semanas antes del lanzamiento.
 
 ---
 
-## 9. Imagen de Marca e Identidad Visual
+## 10. Imagen de Marca e Identidad Visual
 
 La identidad visual de **Infantem** busca transmitir cercanía, confianza y modernidad, reflejando los valores de una app diseñada para acompañar a los padres en el crecimiento de sus hijos.
 
@@ -258,6 +366,6 @@ Todo el contenido gráfico de la marca (redes, app, web, materiales impresos) de
 ---
 
 
-## 10. Conclusión
+## 11. Conclusión
 
 La planificación de marketing para Infantem se centra en generar una comunidad comprometida antes del lanzamiento y sostener el crecimiento mediante campañas relevantes, colaboraciones efectivas y publicidad bien segmentada. La estrategia multicanal se adapta al perfil de los usuarios (padres jóvenes vs. adultos) y asegura una presencia coherente y atractiva de la marca desde el primer contacto.
