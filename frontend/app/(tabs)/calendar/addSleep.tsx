@@ -1,248 +1,205 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Button, Picker, Alert, TextInput, Modal, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Picker, Alert, ActivityIndicator, ScrollView } from 'react-native';
 import { useAuth } from '../../../context/AuthContext';
-import { useNavigation } from '@react-navigation/native'; // Importar el hook de navegación
-import { format } from 'date-fns'; // Importar la función de formateo de date-fns
+import { useNavigation } from '@react-navigation/native';
+import { format } from 'date-fns';
+const gs = require("../../../static/styles/globalStyles"); // Importar estilos globales
+import { router } from "expo-router";
+
 
 const SleepTab = ({ route }: any) => {
     const { token } = useAuth();
     const apiUrl = process.env.EXPO_PUBLIC_API_URL;
-    const navigation = useNavigation(); // Inicializar el hook de navegación
+    const navigation = useNavigation();
 
     const [babies, setBabies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [selectedBaby, setSelectedBaby] = useState<string | null>(null);
-    const [dateStart, setDateStart] = useState<Date | null>(null);
-    const [dateEnd, setDateEnd] = useState<Date | null>(null);
-    const [numWakeups, setNumWakeups] = useState<number | null>(null);
+    const [dateStart, setDateStart] = useState<string>('');
+    const [dateEnd, setDateEnd] = useState<string>('');
+    const [numWakeups, setNumWakeups] = useState<string>('');
     const [dreamType, setDreamType] = useState<string | null>(null);
-    const [selectedDate, setSelectedDate] = useState<string | null>(null);
-
-    const [showStartModal, setShowStartModal] = useState(false);
-    const [showEndModal, setShowEndModal] = useState(false);
 
     useEffect(() => {
-        if (route?.params?.selectedDate) {
-            setSelectedDate(route.params.selectedDate);
-        }
-    }, [route]);
+        const fetchBabies = async () => {
+            try {
+                if (!token) {
+                    console.error('No se encontró el token JWT');
+                    return;
+                }
 
-    const fetchBabies = async () => {
-        try {
-            if (!token) {
-                console.error('No se encontró el token JWT');
-                return;
+                const response = await fetch(`${apiUrl}/api/v1/baby`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error('Error al obtener los datos de los bebés');
+                }
+
+                const data = await response.json();
+                setBabies(data);
+            } catch (error) {
+                console.error('Error al obtener los datos de los bebés:', error);
+            } finally {
+                setLoading(false);
             }
+        };
 
-            const response = await fetch(`${apiUrl}/api/v1/baby`, {
+        fetchBabies();
+    }, [token]);
+
+    const addSleepData = async () => {
+        if (!token || !selectedBaby) {
+            Alert.alert('Error', 'No se encontró el token o no se seleccionó un bebé.');
+            return;
+        }
+
+        // Validar campos requeridos
+        if (!dateStart || !dateEnd) {
+            Alert.alert('Error', 'Por favor ingresa las fechas de inicio y fin.');
+            return;
+        }
+
+        if (!dreamType) {
+            Alert.alert('Error', 'Por favor selecciona un tipo de sueño.');
+            return;
+        }
+
+        if (numWakeups === '') {
+            Alert.alert('Error', 'Por favor ingresa el número de despertares.');
+            return;
+        }
+
+        // Validar que la fecha de inicio sea anterior a la fecha de fin
+        const startDate = new Date(dateStart);
+        const endDate = new Date(dateEnd);
+        if (startDate >= endDate) {
+            Alert.alert('Error', 'La fecha de inicio debe ser anterior a la fecha de fin.');
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            // Formatear las fechas al formato ISO 8601
+            const formattedDateStart = format(startDate, "yyyy-MM-dd'T'HH:mm:ss");
+            const formattedDateEnd = format(endDate, "yyyy-MM-dd'T'HH:mm:ss");
+
+            // Crear el objeto sueño
+            const dreamToSave = {
+                baby: { id: selectedBaby },
+                dateStart: formattedDateStart,
+                dateEnd: formattedDateEnd,
+                numWakeups: parseInt(numWakeups, 10),
+                dreamType,
+            };
+
+            // Realizar la solicitud al backend
+            const response = await fetch(`${apiUrl}/api/v1/dream`, {
+                method: 'POST',
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
                 },
+                body: JSON.stringify(dreamToSave),
             });
 
             if (!response.ok) {
-                throw new Error('Error al obtener los datos de los bebés');
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Error al crear el sueño');
             }
 
-            const data = await response.json();
-            setBabies(data);
+            const createdDream = await response.json();
+
+            // Mostrar mensaje de éxito y redirigir al calendario
+            Alert.alert('Éxito', 'Sueño registrado correctamente.');
+            navigation.navigate('CalendarTab'); // Asegúrate de que este sea el nombre correcto
         } catch (error) {
-            console.error('Error al obtener los datos de los bebés:', error);
+            console.error('Error al registrar el sueño:', error);
+
+            if (error instanceof Error) {
+                Alert.alert('Error', error.message);
+            } else {
+                Alert.alert('Error', 'Ocurrió un error inesperado.');
+            }
         } finally {
             setLoading(false);
         }
     };
 
-    const addSleepData = async () => {
-        if (!selectedBaby || !dateStart || !dateEnd || !dreamType || numWakeups === null) {
-            Alert.alert('Error', 'Por favor completa todos los campos');
-            return;
-        }
-
-        try {
-            // Formatear las fechas usando date-fns
-            const formattedDateStart = format(dateStart, "yyyy-MM-dd'T'HH:mm:ss");
-            const formattedDateEnd = format(dateEnd, "yyyy-MM-dd'T'HH:mm:ss");
-
-
-            const response = await fetch(`${apiUrl}/api/v1/dream`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify({
-                    baby: { id: selectedBaby }, // Enviar el objeto baby con el id
-                    dateStart: formattedDateStart,
-                    dateEnd: formattedDateEnd,
-                    numWakeups,
-                    dreamType,
-                }),
-            });
-
-            if (!response.ok) {
-                throw new Error('Error al crear el sueño');
-            }
-
-            Alert.alert('Éxito', 'Sueño registrado correctamente');
-        } catch (error) {
-            console.error('Error al registrar el sueño:', error);
-            Alert.alert('Error', 'No se pudo registrar el sueño');
-        }
-    };
-
-    const navigateToCalendar = () => {
-        navigation.navigate('calendar');
-    }
-
-    useEffect(() => {
-        fetchBabies();
-    }, []);
-
-    const renderDateModal = (isVisible: boolean, setIsVisible: (visible: boolean) => void, setDate: (date: Date) => void) => (
-        <Modal visible={isVisible} transparent={true} animationType="slide">
-            <View style={styles.modalContainer}>
-                <View style={styles.modalContent}>
-                    <Text style={styles.modalTitle}>Selecciona la fecha y hora</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="YYYY-MM-DD HH:mm"
-                        onChangeText={(text) => {
-                            const parsedDate = new Date(text);
-                            if (!isNaN(parsedDate.getTime())) {
-                                setDate(parsedDate);
-                            }
-                        }}
-                    />
-                    <Button title="Confirmar" onPress={() => setIsVisible(false)} />
-                </View>
-            </View>
-        </Modal>
-    );
-
     if (loading) {
         return (
-            <View style={styles.container}>
-                <Text>Loading...</Text>
+            <View style={[gs.container, { justifyContent: 'center', alignItems: 'center' }]}>
+                <ActivityIndicator size="large" color="#00adf5" />
             </View>
         );
     }
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Añadir Información de Sueño</Text>
+        <ScrollView contentContainerStyle={{ flexGrow: 1, padding: 20 }}>
+            <Text style={{ color: "#1565C0", fontSize: 36, fontWeight: "bold", textAlign: "center", marginBottom: 10 }}>
+                Añadir Sueño
+            </Text>
 
-            <Picker
-                selectedValue={selectedBaby}
-                onValueChange={(itemValue) => setSelectedBaby(itemValue)}
-                style={styles.picker}
-            >
-                <Picker.Item label="Selecciona un bebé" value={null} />
-                {babies.map((baby: any) => (
-                    <Picker.Item key={baby.id} label={baby.name} value={baby.id} />
-                ))}
-            </Picker>
+            <View style={[gs.card, { padding: 20, alignItems: "center", justifyContent: "center", marginBottom: 20 }]}>
+                <Text style={{ alignSelf: 'flex-start', marginLeft: '10%', color: '#1565C0', fontWeight: 'bold', marginBottom: 5 }}>Bebé:</Text>
+                <Picker
+                    selectedValue={selectedBaby}
+                    onValueChange={(itemValue) => setSelectedBaby(itemValue)}
+                    style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "80%" }]}
+                >
+                    <Picker.Item label="Selecciona un bebé" value={null} />
+                    {babies.map((baby: any) => (
+                        <Picker.Item key={baby.id} label={baby.name} value={baby.id} />
+                    ))}
+                </Picker>
 
-            <View style={styles.inputContainer}>
-                <Text>Hora de inicio:</Text>
-                <TouchableOpacity onPress={() => setShowStartModal(true)} style={styles.dateButton}>
-                    <Text>{dateStart ? dateStart.toLocaleString() : 'Selecciona la hora de inicio'}</Text>
-                </TouchableOpacity>
-            </View>
-
-            <View style={styles.inputContainer}>
-                <Text>Hora de fin:</Text>
-                <TouchableOpacity onPress={() => setShowEndModal(true)} style={styles.dateButton}>
-                    <Text>{dateEnd ? dateEnd.toLocaleString() : 'Selecciona la hora de fin'}</Text>
-                </TouchableOpacity>
-            </View>
-
-            {renderDateModal(showStartModal, setShowStartModal, setDateStart)}
-            {renderDateModal(showEndModal, setShowEndModal, setDateEnd)}
-
-            <View style={styles.inputContainer}>
-                <Text>Número de despertares:</Text>
+                <Text style={{ alignSelf: 'flex-start', marginLeft: '10%', color: '#1565C0', fontWeight: 'bold', marginTop: 10, marginBottom: 5 }}>Hora de inicio:</Text>
                 <TextInput
-                    style={styles.input}
-                    keyboardType="numeric"
-                    value={numWakeups?.toString() || ''}
-                    onChangeText={(text) => setNumWakeups(Number(text))}
+                    style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "80%" }]}
+                    placeholder="YYYY-MM-DD HH:mm"
+                    value={dateStart}
+                    onChangeText={setDateStart}
                 />
+
+                <Text style={{ alignSelf: 'flex-start', marginLeft: '10%', color: '#1565C0', fontWeight: 'bold', marginTop: 10, marginBottom: 5 }}>Hora de fin:</Text>
+                <TextInput
+                    style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "80%" }]}
+                    placeholder="YYYY-MM-DD HH:mm"
+                    value={dateEnd}
+                    onChangeText={setDateEnd}
+                />
+
+                <Text style={{ alignSelf: 'flex-start', marginLeft: '10%', color: '#1565C0', fontWeight: 'bold', marginTop: 10, marginBottom: 5 }}>Número de despertares:</Text>
+                <TextInput
+                    style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "80%" }]}
+                    placeholder="Ej. 3"
+                    keyboardType="numeric"
+                    value={numWakeups}
+                    onChangeText={setNumWakeups}
+                />
+
+                <Text style={{ alignSelf: 'flex-start', marginLeft: '10%', color: '#1565C0', fontWeight: 'bold', marginTop: 10, marginBottom: 5 }}>Tipo de sueño:</Text>
+                <Picker
+                    selectedValue={dreamType}
+                    onValueChange={(itemValue) => setDreamType(itemValue)}
+                    style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "80%" }]}
+                >
+                    <Picker.Item label="Selecciona el tipo de sueño" value={null} />
+                    <Picker.Item label="Sueño profundo" value="DEEP" />
+                    <Picker.Item label="Sueño ligero" value="LIGHT" />
+                    <Picker.Item label="REM" value="REM" />
+                    <Picker.Item label="Agitado" value="AGITATED" />
+                </Picker>
+
+                <TouchableOpacity style={[gs.mainButton, { marginTop: 20 }]} onPress={addSleepData}>
+                    <Text style={gs.mainButtonText}>Guardar</Text>
+                </TouchableOpacity>
             </View>
-
-            <Picker
-                selectedValue={dreamType}
-                onValueChange={(itemValue) => setDreamType(itemValue)}
-                style={styles.picker}
-            >
-                <Picker.Item label="Selecciona el tipo de sueño" value={null} />
-                <Picker.Item label="Sueño profundo" value="DEEP" />
-                <Picker.Item label="Sueño ligero" value="LIGHT" />
-                <Picker.Item label="REM" value="REM" />
-                <Picker.Item label="Agitado" value="AGITATED" />
-            </Picker>
-
-            <Button title="Añadir Sueño" onPress={() => { addSleepData(); navigateToCalendar(); }} />
-        </View>
+        </ScrollView>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 16,
-        backgroundColor: '#fff',
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginBottom: 16,
-    },
-    subtitle: {
-        fontSize: 16,
-        marginBottom: 16,
-    },
-    picker: {
-        height: 50,
-        width: '100%',
-        marginBottom: 16,
-    },
-    inputContainer: {
-        marginBottom: 16,
-    },
-    input: {
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 5,
-        padding: 8,
-        marginTop: 8,
-    },
-    dateButton: {
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 5,
-        padding: 10,
-        marginTop: 8,
-        backgroundColor: '#f9f9f9',
-    },
-    modalContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    },
-    modalContent: {
-        backgroundColor: '#fff',
-        padding: 20,
-        borderRadius: 10,
-        width: '80%',
-        alignItems: 'center',
-    },
-    modalTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 10,
-    },
-});
 
 export default SleepTab;

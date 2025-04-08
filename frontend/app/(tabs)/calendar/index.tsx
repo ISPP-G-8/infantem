@@ -278,7 +278,7 @@ const CalendarTab = () => {
               marginTop: 5,
             }}
             onPress={() => {
-              navigation.navigate("sleep"); // Navegar a la pestaña Sleep con la fecha seleccionada
+              navigation.navigate("addSleep"); // Navegar a la pestaña Sleep con la fecha seleccionada
             }}
           >
             <Text style={{ color: "#fff", fontWeight: "bold" }}>Añadir sueños</Text>
@@ -395,16 +395,16 @@ const CalendarTab = () => {
                   {/* Nombre del bebé */}
                   <Text style={[gs.bodyText, { fontWeight: "bold", color: "#1565C0", fontSize: 18 }]}>
                     {babies[babyId] || `Bebé desconocido (${babyId})`}:
-                  </Text>
 
-                  {/* Sueños */}
-                  {events[selectedDate][babyId].dreams.length > 0 && (
+                  </Text>
+                    {/* Sueños */}
+                    {events[selectedDate][babyId].dreams.length > 0 && (
                     <View style={{ marginTop: 10 }}>
                       <Text style={[gs.bodyText, { fontWeight: "bold", marginBottom: 5 }]}>Sueños:</Text>
                       {events[selectedDate][babyId].dreams.map((dream: any, index: number) => {
-                        // Convertir dateStart y dateEnd a objetos Date
-                        const startDate = dream.dateStart ? new Date(...dream.dateStart) : null;
-                        const endDate = dream.dateEnd ? new Date(...dream.dateEnd) : null;
+                      // Convertir dateStart y dateEnd a objetos Date
+                      const startDate = dream.dateStart ? new Date(dream.dateStart[0], dream.dateStart[1] - 1, ...dream.dateStart.slice(2)) : null;
+                      const endDate = dream.dateEnd ? new Date(dream.dateEnd[0], dream.dateEnd[1] - 1, ...dream.dateEnd.slice(2)) : null;
                   
                         return (
                           <Text key={index} style={[gs.bodyText, { marginLeft: 10 }]}>
