@@ -1,6 +1,7 @@
 package com.isppG8.infantem.infantem.user;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -85,6 +86,17 @@ public class UserControllerTest {
     }
 
     @Test
+    public void testGetUserByIdUserNotFound() throws Exception {
+        // Configura el mock para que el token sea válido pero el usuario no exista
+        when(jwtUtils.getIdFromJwtToken("dummy-token")).thenReturn("1");
+        when(userService.getUserById(1L)).thenReturn(null);
+
+        mockMvc.perform(get("/api/v1/users/1").header("Authorization", "Bearer " + token).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("Something went wrong"));
+    }
+
+    @Test
     public void testUpdateUser() throws Exception {
         User updatedUser = new User();
         updatedUser.setId(1);
@@ -151,5 +163,13 @@ public class UserControllerTest {
     public void testDeleteUserNotYourUser() throws Exception {
         mockMvc.perform(delete("/api/v1/users/2").header("Authorization", "Bearer " + token).with(csrf()))
                 .andExpect(status().isBadRequest()).andExpect(jsonPath("$.message").value("Not your user"));
+    }
+
+    @Test
+    public void testDeleteUserSomethingWentWrong() throws Exception {
+        when(userService.deleteUser(1L)).thenReturn(false);
+
+        mockMvc.perform(delete("/api/v1/users/1").header("Authorization", "Bearer " + token).with(csrf()))
+                .andExpect(status().isBadRequest()).andExpect(jsonPath("$.message").value("Something went wrong"));
     }
 }
