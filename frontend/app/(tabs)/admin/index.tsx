@@ -3,14 +3,7 @@ import { useAuth } from "../../../context/AuthContext";
 import { Recipe, User, SignUpRequest } from "../../../types";
 import { View, Text, Image, TextInput } from "react-native";
 import { FlatList, Button, TouchableOpacity } from "react-native";
-
-/*
-    allergen
-    baby
-    disease?
-    recipe
-    user
-*/
+import { router } from "expo-router";
 
 export default function Admin() {
   const [users, setUsers] = useState<User[]>([]);
@@ -26,16 +19,13 @@ export default function Admin() {
   const itemsPerPage = 10;
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
-  const { token } = useAuth();
+  const { token, setUserToModify } = useAuth();
 
   const gs = require("../../../static/styles/globalStyles");
 
   useEffect(() => {
     obtainAllUsers();
     obtainAllRecipes();
-    // obtainAllBabies();
-    // obtainAllDiseases();
-    // obtainAllAllergens();
   }, []);
 
   const obtainAllUsers = async (): Promise<boolean> => {
@@ -103,20 +93,6 @@ export default function Admin() {
 
   const handleInputChange = (field: keyof User, value: string) => {
     setEditedUser((prev) => (prev ? { ...prev, [field]: value } : prev));
-  };
-
-  const handleEditUser = (user: User) => {
-    setOriginalUser(user);
-    setEditedUser({
-      id: user.id,
-      name: user.name,
-      surname: user.surname,
-      username: user.username,
-      password: user.password,
-      email: user.email,
-      profilePhotoRoute: user.profilePhotoRoute || "",
-    });
-    setIsEditing(true);
   };
 
   const handleAddUser = () => {
@@ -228,27 +204,9 @@ export default function Admin() {
     }
   };
 
-  const handleDeleteUser = async (id: number) => {
-    if (!token) return;
-    try {
-      const response = await fetch(`${apiUrl}/api/v1/admin/users/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (!response.ok) {
-        console.error(
-          "Error deleting user !response.ok: ",
-          response.statusText
-        );
-        return;
-      }
-      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
-      console.log("User deleted successfully");
-    } catch (error) {
-      console.error("Error deleting user: ", error);
-    }
+  const handleEditUser = (user: User) => {
+    setUserToModify(user);
+    router.push("/admin/showuser");
   };
 
   return (
@@ -506,18 +464,6 @@ export default function Admin() {
                   }}
                 >
                   <Text style={{ color: "#fff" }}>Modificar</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: "#F44336",
-                    padding: 5,
-                    borderRadius: 5,
-                  }}
-                  onPress={() => {
-                    handleDeleteUser(item.id);
-                  }}
-                >
-                  <Text style={{ color: "#fff" }}>Borrar</Text>
                 </TouchableOpacity>
               </View>
             </View>

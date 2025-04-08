@@ -1,57 +1,35 @@
-import { useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  Modal,
-  TextInput,
-  Alert,
-  ImageBackground,
-} from "react-native";
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  Image,
-  FlatList,
-} from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { Link, router } from "expo-router";
+import { useState } from "react";
+import { TextInput, Alert, ImageBackground } from "react-native";
+import { Text, View, TouchableOpacity, ScrollView } from "react-native";
+import { router } from "expo-router";
 import { useAuth } from "../../../context/AuthContext";
-import { jwtDecode } from "jwt-decode";
-
-const avatarOptions = [
-  require("../../../assets/avatar/avatar1.png"),
-  require("../../../assets/avatar/avatar2.png"),
-];
+import { User } from "../../../types";
 
 export default function ShowUser() {
-  const [modalVisible, setModalVisible] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [subscription, setSubscription] = useState(null);
-  const [userId, setUserId] = useState<number | null>(null);
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const gs = require("../../../static/styles/globalStyles");
-  const { isLoading, user, token, setUser, signOut } = useAuth();
+  const { userToModify, token, setUser, setUserToModify } = useAuth();
 
   const handleEditProfile = () => {
     setIsEditing(true);
   };
 
   const handleSaveChanges = () => {
-    if (!user || !token) return;
+    if (!userToModify || !token) return;
 
     const userData = {
-      id: user.id,
-      name: user.name,
-      surname: user.surname,
-      username: user.username,
-      password: user.password,
-      email: user.email,
-      profilePhotoRoute: user.profilePhotoRoute,
+      id: userToModify.id,
+      name: userToModify.name,
+      surname: userToModify.surname,
+      username: userToModify.username,
+      password: userToModify.password,
+      email: userToModify.email,
+      profilePhotoRoute: userToModify.profilePhotoRoute,
     };
 
-    fetch(`${apiUrl}/api/v1/users/${user.id}`, {
+    fetch(`${apiUrl}/api/v1/users/${userToModify.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +52,7 @@ export default function ShowUser() {
           "Perfil actualizado",
           "Los cambios han sido guardados correctamente"
         );
-        router.push("/account");
+        router.push("/admin");
       })
       .catch((error) => {
         Alert.alert(
@@ -82,6 +60,27 @@ export default function ShowUser() {
           `No se pudo guardar los cambios: ${error.message}`
         );
       });
+  };
+
+  const handleDeleteProfile = async (id: number) => {
+    if (!token || !userToModify) return;
+
+    try {
+      const response = await fetch(`${apiUrl}/api/v1/admin/users/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        return response.json().then((err) => {
+          throw new Error(JSON.stringify(err));
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -114,10 +113,10 @@ export default function ShowUser() {
             marginBottom: 30,
           }}
         >
-          Perfil de {user?.username}
+          Perfil de {userToModify?.username}
         </Text>
 
-        {user && (
+        {userToModify && (
           <>
             <Text
               style={[
@@ -144,9 +143,11 @@ export default function ShowUser() {
                   width: "80%",
                 },
               ]}
-              value={user.name}
+              value={userToModify.name}
               editable={isEditing}
-              onChangeText={(text) => setUser({ ...user, name: text })}
+              onChangeText={(text) =>
+                setUserToModify({ ...userToModify, name: text })
+              }
             />
 
             <Text
@@ -174,9 +175,11 @@ export default function ShowUser() {
                   width: "80%",
                 },
               ]}
-              value={user.surname}
+              value={userToModify.surname}
               editable={isEditing}
-              onChangeText={(text) => setUser({ ...user, surname: text })}
+              onChangeText={(text) =>
+                setUserToModify({ ...userToModify, surname: text })
+              }
             />
 
             <Text
@@ -204,9 +207,11 @@ export default function ShowUser() {
                   width: "80%",
                 },
               ]}
-              value={user.username}
+              value={userToModify.username}
               editable={isEditing}
-              onChangeText={(text) => setUser({ ...user, username: text })}
+              onChangeText={(text) =>
+                setUserToModify({ ...userToModify, username: text })
+              }
             />
 
             <Text
@@ -234,28 +239,34 @@ export default function ShowUser() {
                   width: "80%",
                 },
               ]}
-              value={user.email}
+              value={userToModify.email}
               editable={isEditing}
-              onChangeText={(text) => setUser({ ...user, email: text })}
+              onChangeText={(text) =>
+                setUserToModify({ ...userToModify, email: text })
+              }
             />
           </>
         )}
-
-        <View
-          style={{ flexDirection: "column", alignItems: "center", gap: 10 }}
-        >
-          <TouchableOpacity
-            style={[gs.mainButton, { backgroundColor: "#1565C0" }]}
-            onPress={isEditing ? handleSaveChanges : handleEditProfile}
+        {userToModify && (
+          <View
+            style={{ flexDirection: "column", alignItems: "center", gap: 10 }}
           >
-            <Text style={gs.mainButtonText}>
-              {isEditing ? "Guardar Cambios" : "Editar Perfil"}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[gs.mainButton, { backgroundColor: "red" }]}>
-            <Text style={gs.mainButtonText}>Eliminar Perfil</Text>
-          </TouchableOpacity>
-        </View>
+            <TouchableOpacity
+              style={[gs.mainButton, { backgroundColor: "#1565C0" }]}
+              onPress={isEditing ? handleSaveChanges : handleEditProfile}
+            >
+              <Text style={gs.mainButtonText}>
+                {isEditing ? "Guardar Cambios" : "Editar Perfil"}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[gs.mainButton, { backgroundColor: "red" }]}
+              onPress={() => handleDeleteProfile(userToModify.id)}
+            >
+              <Text style={gs.mainButtonText}>Eliminar Cuenta</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </ScrollView>
     </ImageBackground>
   );
