@@ -75,6 +75,7 @@ export default function ShowUser() {
           throw new Error(JSON.stringify(err));
         });
       }
+      router.push("/admin");
     } catch (error) {
       console.log(error);
     }
