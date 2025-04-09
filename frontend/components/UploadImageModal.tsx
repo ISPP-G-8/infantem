@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
     Modal,
     View,
@@ -7,6 +7,7 @@ import {
     TouchableOpacity,
     StyleSheet
 } from 'react-native';
+import { launchCamera, launchImageLibrary, CameraOptions, ImageLibraryOptions } from 'react-native-image-picker';
 
 const UploadImageModal = ({
     visible,
@@ -14,7 +15,47 @@ const UploadImageModal = ({
 }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const gs = require("../static/styles/globalStyles");
+    const [image, setImage] = useState<any>(null);
 
+    const includeExtra = true;
+
+    interface Action {
+        title: string;
+        type: 'capture' | 'library';
+        options: CameraOptions | ImageLibraryOptions;
+    }
+
+    const actions: Action[] = [
+        {
+            title: 'Take Image',
+            type: 'capture',
+            options: {
+                // saveToPhotos: true,
+                mediaType: 'photo',
+                includeBase64: false,
+                // includeExtra,
+            },
+        },
+        {
+            title: 'Select Image',
+            type: 'library',
+            options: {
+                selectionLimit: 1,
+                mediaType: 'photo',
+                includeBase64: false,
+                // includeExtra,
+            },
+        }
+    ];
+
+    const handleImageUpload = (type, options) => {
+        if (type === 'capture') {
+            // PREGUNTAR PERMISOS EN ANDROID Y IOS
+            launchCamera(options.filter((o) => o.type === 'capture'), setImage);
+        } else if (type === 'library') {
+            launchImageLibrary(options.filter((o) => o.type === 'library'), setImage);
+        }
+    }
 
     return (
         <Modal
@@ -29,25 +70,25 @@ const UploadImageModal = ({
                     <View style={[gs.imageButtonsContainer, { marginBottom: 15 }]}>
                         <TouchableOpacity
                             style={gs.imageButton}
-                            // onPress={}
+                            onPress={() => handleImageUpload('library', actions)}
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none" /><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" /></svg>
                             <Text style={gs.imageButtonTextStyle}>Galería</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity
                             style={gs.imageButton}
-                            // onPress={}
+                            onPress={() => handleImageUpload('library', actions)}
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="3.2"/><path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none" /><circle cx="12" cy="12" r="3.2" /><path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" /></svg>
                             <Text style={gs.imageButtonTextStyle}>Cámara</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity
                             style={gs.imageDeleteButton}
-                            // onPress={}
+                        // onPress={}
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#ff0512"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#ff0512"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z" /></svg>
                             <Text style={gs.imageDeleteButtonTextStyle}>Eliminar</Text>
                         </TouchableOpacity>
                     </View>
