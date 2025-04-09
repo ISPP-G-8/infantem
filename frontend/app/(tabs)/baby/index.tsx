@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity, ImageBackground, ScrollView, Image, TextInput } from "react-native";
 import { getToken } from "../../../utils/jwtStorage";
-import { Link, router } from "expo-router";
 import { Picker } from "@react-native-picker/picker";
 
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
@@ -13,7 +12,7 @@ interface Baby {
   genre?: string;
   weight?: number;
   height?: number;
-  headCircumference?: number;
+  cephalicPerimeter?: number;
   foodPreference?: string;
 }
 
@@ -25,7 +24,7 @@ interface BabyDraft {
   genre: string;
   weight: string;
   height: string;
-  headCircumference: string;
+  cephalicPerimeter: string;
   foodPreference: string;
 }
 
@@ -40,6 +39,12 @@ export default function BabyInfo() {
 
   const [birthDateError, setBirthDateError] = useState<string | null>(null);
   const [isEditing, setIsEditing] = useState(false);
+
+  const [nameError, setNameError] = useState<string | null>(null);
+  const [weightError, setWeightError] = useState<string | null>(null);
+  const [heightError, setHeightError] = useState<string | null>(null);
+  const [cephalicPerimeterError, setCephalicPerimeterError] = useState<string | null>(null);
+  const [foodPreferenceError, setFoodPreferenceError] = useState<string | null>(null);
 
   const isValidDate = (dateString: string) => {
     const dateRegex = /^\d{4}-\d{2}-\d{2}$/; // Format: YYYY-MM-DD
@@ -63,6 +68,47 @@ export default function BabyInfo() {
     }
     setEditedBaby((prev) => prev ? { ...prev, birthDate: text } : prev);
   };
+
+  const validateAllFields = (): boolean => {
+  let valid = true;
+
+  if (!editedBaby) return false;
+
+  if (!editedBaby.name.trim()) {
+    setNameError("El nombre es obligatorio.");
+    valid = false;
+  }
+
+  if (!isValidDate(editedBaby.birthDate)) {
+    setBirthDateError("Fecha inválida. Use AAAA-MM-DD y asegúrese de que la fecha existe.");
+    valid = false;
+  }
+
+  const weight = parseFloat(editedBaby.weight);
+  if (isNaN(weight) || weight <= 0) {
+    setWeightError("Ingrese un peso válido mayor que 0.");
+    valid = false;
+  }
+
+  const height = parseFloat(editedBaby.height);
+  if (isNaN(height) || height <= 0) {
+    setHeightError("Ingrese una altura válida mayor que 0.");
+    valid = false;
+  }
+
+  const cephalic = parseFloat(editedBaby.cephalicPerimeter);
+  if (isNaN(cephalic) || cephalic <= 0) {
+    setCephalicPerimeterError("Ingrese un perímetro cefálico válido mayor que 0.");
+    valid = false;
+  }
+
+  if (!editedBaby.foodPreference.trim()) {
+    setFoodPreferenceError("La preferencia alimentaria es obligatoria.");
+    valid = false;
+  }
+
+  return valid;
+};
 
   useEffect(() => {
     const getUserToken = async () => {
@@ -93,10 +139,15 @@ export default function BabyInfo() {
   const handleSaveBaby = async () => {
     if (!jwt || !editedBaby) return;
 
+    if (!validateAllFields()) {
+      console.log("Errores en el formulario");
+      return;
+    }
+
     const parsedFields = {
       weight: editedBaby.weight ? parseFloat(editedBaby.weight) : undefined,
       height: editedBaby.height ? parseFloat(editedBaby.height) : undefined,
-      headCircumference: editedBaby.headCircumference ? parseFloat(editedBaby.headCircumference) : undefined,
+      cephalicPerimeter: editedBaby.cephalicPerimeter ? parseFloat(editedBaby.cephalicPerimeter) : undefined,
     };
 
     // If we're editing an existing baby, merge the new values with the original data.
@@ -178,7 +229,7 @@ export default function BabyInfo() {
       genre: baby.genre || "OTHER",
       weight: baby.weight ? baby.weight.toString() : "",
       height: baby.height ? baby.height.toString() : "",
-      headCircumference: baby.headCircumference ? baby.headCircumference.toString() : "",
+      cephalicPerimeter: baby.cephalicPerimeter ? baby.cephalicPerimeter.toString() : "",
       foodPreference: baby.foodPreference || "",
     });
     setIsEditing(true);
@@ -192,7 +243,7 @@ export default function BabyInfo() {
       genre: "OTHER",
       weight: "",
       height: "",
-      headCircumference: "",
+      cephalicPerimeter: "",
       foodPreference: "",
     });
     setIsEditing(true);
@@ -202,6 +253,12 @@ export default function BabyInfo() {
     setEditedBaby(null);
     setOriginalBaby(null);
     setIsEditing(false);
+    setNameError(null);
+    setBirthDateError(null);
+    setWeightError(null);
+    setHeightError(null);
+    setCephalicPerimeterError(null);
+    setFoodPreferenceError(null);
   };
 
   return (
@@ -228,12 +285,9 @@ export default function BabyInfo() {
               <Text style={gs.cardTitle}>{editedBaby.id ? "Editar bebé" : "Añadir bebé"}</Text>
               
               <Text style={{ alignSelf: 'flex-start', marginLeft: '10%', color: '#1565C0', fontWeight: 'bold', marginBottom: 5 }}>Nombre:</Text>
-              <TextInput
-                style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width:"80%" }]} 
-                placeholder="Nombre"
-                value={editedBaby.name}
-                onChangeText={(text) => handleInputChange("name", text)}
-              />
+                <TextInput style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width:"80%" }]} 
+                placeholder="Nombre" value={editedBaby.name} onChangeText={(text) => handleInputChange("name", text)} />
+                {nameError && <Text style={{ color: "red" }}>{nameError}</Text>}
               
               <Text style={{ alignSelf: 'flex-start', marginLeft: '10%', color: '#1565C0', fontWeight: 'bold', marginTop: 10, marginBottom: 5 }}>Fecha de nacimiento:</Text>
               <TextInput
@@ -256,39 +310,25 @@ export default function BabyInfo() {
               </Picker>
 
               <Text style={{ alignSelf: 'flex-start', marginLeft: '10%', color: '#1565C0', fontWeight: 'bold', marginTop: 10, marginBottom: 5 }}>Peso (kg):</Text>
-              <TextInput
-                style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width:"80%" }]} 
-                placeholder="Ej. 3.5"
-                keyboardType="decimal-pad"
-                value={editedBaby.weight}
-                onChangeText={(text) => handleInputChange("weight", text)}
-              />
+                <TextInput style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width:"80%" }]} 
+                placeholder="Ej. 3.5" keyboardType="decimal-pad" value={editedBaby.weight} onChangeText={(text) => handleInputChange("weight", text)}/>
+                {weightError && <Text style={{ color: "red" }}>{weightError}</Text>}
 
               <Text style={{ alignSelf: 'flex-start', marginLeft: '10%', color: '#1565C0', fontWeight: 'bold', marginTop: 10, marginBottom: 5 }}>Altura (cm):</Text>
-              <TextInput
-                style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width:"80%" }]} 
-                placeholder="Ej. 50"
-                keyboardType="numeric"
-                value={editedBaby.height}
-                onChangeText={(text) => handleInputChange("height", text)}
-              />
+                <TextInput style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width:"80%" }]} 
+                placeholder="Ej. 50" keyboardType="numeric" value={editedBaby.height} onChangeText={(text) => handleInputChange("height", text)}/>
+                {heightError && <Text style={{ color: "red" }}>{heightError}</Text>}
 
+              
               <Text style={{ alignSelf: 'flex-start', marginLeft: '10%', color: '#1565C0', fontWeight: 'bold', marginTop: 10, marginBottom: 5 }}>Perímetro cefálico (cm):</Text>
-              <TextInput
-                style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width:"80%" }]} 
-                placeholder="Ej. 35"
-                keyboardType="decimal-pad"
-                value={editedBaby.headCircumference}
-                onChangeText={(text) => handleInputChange("headCircumference", text)}
-              />
+                <TextInput style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width:"80%" }]} 
+                placeholder="Ej. 35" keyboardType="decimal-pad" value={editedBaby.cephalicPerimeter} onChangeText={(text) => handleInputChange("cephalicPerimeter", text)}/>
+                {cephalicPerimeterError && <Text style={{ color: "red" }}>{cephalicPerimeterError}</Text>}
 
               <Text style={{ alignSelf: 'flex-start', marginLeft: '10%', color: '#1565C0', fontWeight: 'bold', marginTop: 10, marginBottom: 5 }}>Preferencias alimentarias:</Text>
-              <TextInput
-                style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width:"80%" }]} 
-                placeholder="Ej. Leche materna, fórmula, etc."
-                value={editedBaby.foodPreference}
-                onChangeText={(text) => handleInputChange("foodPreference", text)}
-              />
+                <TextInput style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width:"80%" }]} 
+                placeholder="Ej. Leche materna, fórmula, etc." value={editedBaby.foodPreference} onChangeText={(text) => handleInputChange("foodPreference", text)}/>
+                {foodPreferenceError && <Text style={{ color: "red" }}>{foodPreferenceError}</Text>}
 
               <TouchableOpacity style={[gs.mainButton, { marginTop: 20 }]} onPress={handleSaveBaby}>
                 <Text style={gs.mainButtonText}>{editedBaby.id ? "Actualizar" : "Guardar"}</Text>
@@ -301,13 +341,13 @@ export default function BabyInfo() {
         </View>
 
         {/* LISTADO DE BEBÉS */}
-        {!isEditing && (<Text style={[gs.subHeaderText, { color: "#1565C0", marginBottom: 10, fontWeight: "bold" }]}>Mis bebés registrados</Text>)}
+        <Text style={[gs.subHeaderText, { color: "#1565C0", marginBottom: 10, fontWeight: "bold" }]}>Mis bebés registrados</Text>
 
-        {babies.length === 0 ? !isEditing &&  (
+        {babies.length === 0 ? (
           <Text style={{ textAlign: "center", color: "gray", fontSize: 16 }}>
             No hay bebés registrados aún.
           </Text>
-        ) : !isEditing &&  (
+        ) : (
           babies.map((baby) => (
             <View key={baby.id} style={[gs.card, { width: "100%", flexDirection: "row", alignItems: "center", padding: 15, marginBottom: 10 }]}>
               <Image
@@ -321,12 +361,6 @@ export default function BabyInfo() {
                 <Text style={gs.cardContent}>⚖️ Peso: {baby.weight} kg </Text>
                 <Text style={gs.cardContent}>📏 Altura: {baby.height} cm</Text>
               </View>
-              <View style={{ flexDirection: "column", gap: 10, marginRight: 20}}>
-                <TouchableOpacity style={[gs.mainButton, { backgroundColor: "green" }]} onPress={() => router.push(`/baby/metricas?babyId=${baby.id}`)}>
-                  <Text style={gs.mainButtonText}>Métricas</Text>
-                </TouchableOpacity>
-              </View>
-
               <View style={{ flexDirection: "column", alignItems: "center", gap: 10 }}>
                 <TouchableOpacity style={gs.mainButton} onPress={() => handleEditBaby(baby)}>
                   <Text style={gs.mainButtonText}>Editar</Text>
@@ -335,7 +369,6 @@ export default function BabyInfo() {
                   <Text style={gs.mainButtonText}>Eliminar</Text>
                 </TouchableOpacity>
               </View>
-
             </View>
           ))
         )}

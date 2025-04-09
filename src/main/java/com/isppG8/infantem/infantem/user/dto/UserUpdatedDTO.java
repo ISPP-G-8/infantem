@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserDTO {
+public class UserUpdatedDTO {
 
     private int id;
     private String name;
@@ -16,12 +16,13 @@ public class UserDTO {
     private String email;
     private String profilePhotoRoute;
     private String role;
+    private String jwt;
 
-    public UserDTO() {
+    public UserUpdatedDTO() {
 
     }
 
-    public UserDTO(User user) {
+    public UserUpdatedDTO(User user, String jwt) {
         this.id = user.getId();
         this.name = user.getName();
         this.surname = user.getSurname();
@@ -29,5 +30,6 @@ public class UserDTO {
         this.email = user.getEmail();
         this.profilePhotoRoute = user.getProfilePhotoRoute();
         this.role = (user.getAuthorities() != null) ? user.getAuthorities().getAuthority() : null;
+        this.jwt = jwt;
     }
 }

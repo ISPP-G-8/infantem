@@ -1,8 +1,10 @@
 package com.isppG8.infantem.infantem.auth;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import com.isppG8.infantem.infantem.auth.resetPassword.PasswordResetRepository;
+import com.isppG8.infantem.infantem.auth.resetPassword.PasswordResetService;
+import com.isppG8.infantem.infantem.auth.resetPassword.PasswordResetToken;
+import com.isppG8.infantem.infantem.user.User;
+import com.isppG8.infantem.infantem.user.UserRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,56 +12,69 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.isppG8.infantem.infantem.auth.payload.request.SignupRequest;
-import com.isppG8.infantem.infantem.user.User;
-import com.isppG8.infantem.infantem.user.UserService;
-
-import jakarta.transaction.Transactional;
+import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 @ActiveProfiles("test")
 @Transactional
-class AuthServiceTest {
-
-    private AuthService authService;
-
-    private UserService userService;
-
-    private PasswordEncoder encoder;
+public class AuthServiceTest {
 
     @Autowired
-    public AuthServiceTest(AuthService authService, UserService userService, PasswordEncoder encoder) {
-        this.authService = authService;
-        this.userService = userService;
-        this.encoder = encoder;
-    }
+    private AuthService authService;
 
-    private SignupRequest request;
+    @Autowired
+    private PasswordResetService passwordResetService;
+
+    @Autowired
+    private PasswordResetRepository passwordResetRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    private User user;
 
     @BeforeEach
-    void setUpRequest() {
-        request = new SignupRequest();
-        request.setUsername("testUser");
-        request.setPassword("password123");
-        request.setName("Test");
-        request.setSurname("User");
-        request.setEmail("test@example.com");
-        request.setCode(123456);
+    void setUp() {
+        user = new User();
+        user.setName("Test");
+        user.setSurname("User");
+        user.setEmail("test@example.com");
+        user.setUsername("testuser");
+        user.setPassword(passwordEncoder.encode("initialPass123"));
+        userRepository.save(user);
     }
 
     @Test
-    void testCreateUser() {
-        this.authService.createUser(request);
+    void testInitiatePasswordReset_userExists_sendsEmail() {
+        assertThatCode(() -> authService.initiatePasswordReset("test@example.com")).doesNotThrowAnyException();
 
-        // Get new user
-        User newUser = userService.findByUsername(request.getUsername());
+        PasswordResetToken token = passwordResetRepository.findByUserId(user.getId()).orElse(null);
+        assertThat(token).isNotNull();
+        assertThat(token.getUser().getEmail()).isEqualTo("test@example.com");
+    }
 
-        assertNotNull(newUser, "User should be created successfully");
-        assertEquals("Test", newUser.getName(), "User name should match");
-        assertEquals("user", newUser.getAuthorities().getAuthority(), "User authority should be 'user'");
-        assertTrue(encoder.matches(request.getPassword(), newUser.getPassword()),
-                "Raw password should match the encoded password stored in the user");
+    @Test
+    void testInitiatePasswordReset_userNotFound_doesNothing() {
+        assertThatCode(() -> authService.initiatePasswordReset("noexiste@email.com")).doesNotThrowAnyException();
+    }
 
+    @Test
+    void testResetPassword_validToken_updatesPassword() {
+        String token = passwordResetService.createToken(user);
+        authService.resetPassword(token, "newPassword123");
+
+        User updatedUser = userRepository.findById(user.getId().longValue()).orElseThrow();
+        assertThat(passwordEncoder.matches("newPassword123", updatedUser.getPassword())).isTrue();
+    }
+
+    @Test
+    void testResetPassword_invalidToken_throwsException() {
+        assertThatThrownBy(() -> authService.resetPassword("invalid-token", "anyPass"))
+                .isInstanceOf(RuntimeException.class);
     }
 }
