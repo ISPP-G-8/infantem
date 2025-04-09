@@ -43,7 +43,7 @@ public class MetricControllerTest {
         public MetricService metricService() {
             return Mockito.mock(MetricService.class);
         }
-        
+
         @Bean
         public ObjectMapper objectMapper() {
             ObjectMapper mapper = new ObjectMapper();
@@ -81,19 +81,15 @@ public class MetricControllerTest {
 
         Mockito.when(metricService.getMetricById(1L)).thenReturn(metric);
 
-        mockMvc.perform(get("/api/v1/metrics/1")
-                .header("Authorization", "Bearer " + token))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.armCircumference", is(17.1)));
+        mockMvc.perform(get("/api/v1/metrics/1").header("Authorization", "Bearer " + token)).andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(1))).andExpect(jsonPath("$.armCircumference", is(17.1)));
     }
 
     @Test
     public void testGetMetricById_NotFound() throws Exception {
         Mockito.when(metricService.getMetricById(anyLong())).thenReturn(null);
 
-        mockMvc.perform(get("/api/v1/metrics/999")
-                .header("Authorization", "Bearer " + token))
+        mockMvc.perform(get("/api/v1/metrics/999").header("Authorization", "Bearer " + token))
                 .andExpect(status().isInternalServerError());
     }
 
@@ -121,13 +117,12 @@ public class MetricControllerTest {
         Mockito.when(babyService.findById(1)).thenReturn(baby);
         Mockito.when(metricService.createMetric(any(Metric.class))).thenReturn(createdMetric);
 
-        mockMvc.perform(post("/api/v1/metrics?babyId=1")
-                .header("Authorization", "Bearer " + token)
-                .with(csrf())  // Token CSRF añadido aquí
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(metricRequest)))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id", is(1)))
+        mockMvc.perform(post("/api/v1/metrics?babyId=1").header("Authorization", "Bearer " + token).with(csrf()) // Token
+                                                                                                                 // CSRF
+                                                                                                                 // añadido
+                                                                                                                 // aquí
+                .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(metricRequest)))
+                .andExpect(status().isCreated()).andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.weight", is(3.5)));
     }
 
@@ -139,11 +134,8 @@ public class MetricControllerTest {
 
         Mockito.when(babyService.findById(anyInt())).thenReturn(null);
 
-        mockMvc.perform(post("/api/v1/metrics?babyId=999")
-                .header("Authorization", "Bearer " + token)
-                .with(csrf())
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(metricRequest)))
+        mockMvc.perform(post("/api/v1/metrics?babyId=999").header("Authorization", "Bearer " + token).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(metricRequest)))
                 .andExpect(status().isBadRequest());
     }
 
@@ -159,11 +151,8 @@ public class MetricControllerTest {
         Mockito.when(babyService.findById(1)).thenReturn(baby);
         Mockito.when(metricService.createMetric(any(Metric.class))).thenThrow(new RuntimeException());
 
-        mockMvc.perform(post("/api/v1/metrics?babyId=1")
-                .header("Authorization", "Bearer " + token)
-                .with(csrf())
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(metricRequest)))
+        mockMvc.perform(post("/api/v1/metrics?babyId=1").header("Authorization", "Bearer " + token).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(metricRequest)))
                 .andExpect(status().isInternalServerError());
     }
 
@@ -185,11 +174,8 @@ public class MetricControllerTest {
 
         Mockito.when(metricService.getAllMetricsByBabyId(1)).thenReturn(metrics);
 
-        mockMvc.perform(get("/api/v1/metrics/baby/1")
-                .header("Authorization", "Bearer " + token))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$[0].id", is(1)))
+        mockMvc.perform(get("/api/v1/metrics/baby/1").header("Authorization", "Bearer " + token))
+                .andExpect(status().isOk()).andExpect(jsonPath("$", hasSize(2))).andExpect(jsonPath("$[0].id", is(1)))
                 .andExpect(jsonPath("$[1].id", is(2)));
     }
 
@@ -197,10 +183,8 @@ public class MetricControllerTest {
     public void testGetAllMetricsByBabyId_EmptyList() throws Exception {
         Mockito.when(metricService.getAllMetricsByBabyId(anyInt())).thenReturn(Arrays.asList());
 
-        mockMvc.perform(get("/api/v1/metrics/baby/1")
-                .header("Authorization", "Bearer " + token))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(0)));
+        mockMvc.perform(get("/api/v1/metrics/baby/1").header("Authorization", "Bearer " + token))
+                .andExpect(status().isOk()).andExpect(jsonPath("$", hasSize(0)));
     }
 
     @Test
@@ -213,14 +197,9 @@ public class MetricControllerTest {
 
         Mockito.when(metricService.updateMetric(anyLong(), any(Metric.class))).thenReturn(metric);
 
-        mockMvc.perform(put("/api/v1/metrics/1")
-                .header("Authorization", "Bearer " + token)
-                .with(csrf())
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(metric)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.weight", is(4.0)));
+        mockMvc.perform(put("/api/v1/metrics/1").header("Authorization", "Bearer " + token).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(metric)))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.id", is(1))).andExpect(jsonPath("$.weight", is(4.0)));
     }
 
     @Test
@@ -232,34 +211,29 @@ public class MetricControllerTest {
 
         Mockito.when(metricService.updateMetric(anyLong(), any(Metric.class))).thenReturn(null);
 
-        mockMvc.perform(put("/api/v1/metrics/999")
-                .header("Authorization", "Bearer " + token)
-                .with(csrf())
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(metric)))
+        mockMvc.perform(put("/api/v1/metrics/999").header("Authorization", "Bearer " + token).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(metric)))
                 .andExpect(status().isNotFound());
     }
 
     @Test
     public void testDeleteMetric_Success() throws Exception {
         Mockito.doNothing().when(metricService).deleteMetric(anyLong());
-    
-        mockMvc.perform(delete("/api/v1/metrics/1")
-                .header("Authorization", "Bearer " + token)
-                .with(csrf()))
+
+        mockMvc.perform(delete("/api/v1/metrics/1").header("Authorization", "Bearer " + token).with(csrf()))
                 .andExpect(status().isNoContent());
     }
 
     @Test
     public void testDeleteMetric_NotFound() throws Exception {
         // Configura el mock para lanzar excepción
-        Mockito.doThrow(new ResourceNotFoundException("Metric not found"))
-            .when(metricService)
-            .deleteMetric(anyLong());
+        Mockito.doThrow(new ResourceNotFoundException("Metric not found")).when(metricService).deleteMetric(anyLong());
 
-        mockMvc.perform(delete("/api/v1/metrics/999")
-                .header("Authorization", "Bearer " + token)
-                .with(csrf()))  // Añade el token CSRF aquí
+        mockMvc.perform(delete("/api/v1/metrics/999").header("Authorization", "Bearer " + token).with(csrf())) // Añade
+                                                                                                               // el
+                                                                                                               // token
+                                                                                                               // CSRF
+                                                                                                               // aquí
                 .andExpect(status().isNotFound());
     }
 }

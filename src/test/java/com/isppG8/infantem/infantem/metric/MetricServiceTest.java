@@ -94,7 +94,7 @@ public class MetricServiceTest {
     @Test
     public void testGetMetricById_Success() {
         Metric found = metricService.getMetricById(testMetric.getId().longValue());
-        
+
         assertNotNull(found);
         assertEquals(testMetric.getId(), found.getId());
         assertEquals(8.0, found.getWeight());
@@ -126,12 +126,11 @@ public class MetricServiceTest {
         assertTrue(metrics.stream().anyMatch(m -> m.getId().equals(testMetric.getId())));
     }
 
-
     @Test
     public void testGetAllMetricsByBabyId_Empty() {
         Integer babyIdWithoutMetrics = 999;
         List<Metric> metrics = metricService.getAllMetricsByBabyId(babyIdWithoutMetrics);
-        
+
         assertTrue(metrics.isEmpty());
     }
 
@@ -145,7 +144,7 @@ public class MetricServiceTest {
         updatedData.setDate(LocalDate.now().plusDays(1));
 
         Metric updated = metricService.updateMetric(testMetric.getId().longValue(), updatedData);
-        
+
         assertEquals(testMetric.getId(), updated.getId());
         assertEquals(5.0, updated.getWeight());
         assertEquals(65.0, updated.getHeight());
@@ -166,7 +165,6 @@ public class MetricServiceTest {
             metricService.updateMetric(nonExistentId, updatedData);
         });
     }
-
 
     @Test
     public void testDeleteMetric_Success() {
@@ -194,7 +192,7 @@ public class MetricServiceTest {
         LocalDate endDate = LocalDate.now().plusDays(1);
 
         List<LocalDate> dates = metricService.getMetricsByUserIdAndDate(testBaby.getId(), startDate, endDate);
-        
+
         assertFalse(dates.isEmpty());
         assertTrue(dates.contains(testMetric.getDate()));
     }

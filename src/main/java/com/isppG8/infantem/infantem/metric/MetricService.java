@@ -27,9 +27,8 @@ public class MetricService {
 
     public Metric getMetricById(Long id) {
         return metricRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Metric not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Metric not found with id: " + id));
     }
-    
 
     public List<Metric> getAllMetricsByBabyId(Integer babyId) {
         return metricRepository.findAll().stream().filter(metric -> metric.getBaby().getId().equals(babyId)).toList();
