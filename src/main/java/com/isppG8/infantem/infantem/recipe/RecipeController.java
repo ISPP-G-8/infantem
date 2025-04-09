@@ -139,7 +139,7 @@ public class RecipeController {
     }
 
     @GetMapping("/visible")
-    public ResponseEntity<List<RecipeDTO>> getVisibleRecipesByUserId(
+    public ResponseEntity<Page<RecipeDTO>> getVisibleRecipesByUserId(
             @RequestParam(value = "name", required = false) String name,
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size) {
@@ -154,7 +154,8 @@ public class RecipeController {
         int start = (int) pageable.getOffset();
         int end = Math.min((start + pageable.getPageSize()), recipes.size());
         Page<Recipe> paginatedRecipes = new PageImpl<>(recipes.subList(start, end), pageable, recipes.size());
-        return ResponseEntity.ok(paginatedRecipes.map(RecipeDTO::new).toList());
+
+        return ResponseEntity.ok(paginatedRecipes.map(RecipeDTO::new));
     }
 
     @Operation(summary = "Obtener recetas recomendadas por ID de bebé",
