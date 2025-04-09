@@ -87,7 +87,7 @@ A partir del feedback proporcionado por los usuarios piloto, hemos identificado 
 - Permitir visualizar la contraseña en el login y ofrecer una opción de recuperación de credenciales.
 
 ## Sprint 3
-
+## Semana 1
 ## Navegación y Usabilidad
 - Falta botón de lupa en la búsqueda por edad recomendada, lo cual puede confundir especialmente desde móvil.
 
@@ -173,6 +173,53 @@ A partir del feedback proporcionado por los usuarios piloto, hemos identificado 
 
 - La estética del calendario fue bien recibida, pero se sugiere más claridad en sus usos previstos (vacunas, eventos, etc.).
 
+## Semana 2
+## Navegación y Usabilidad
+- Falta un botón para repetir el cuestionario tras finalizarlo, ya que se queda en la última pantalla sin opción clara de reinicio (hay que recargar manualmente).  
+- Botones para retroceder en el cuestionario de alérgenos no están disponibles, lo cual dificulta corregir errores durante la navegación.  
+- En la edición de bebés, la fecha aparece en formato incorrecto (con comas en lugar de guiones), lo que genera errores y confusión al modificarla.  
+- El campo de edad mínima en el buscador de recetas permite introducir valores negativos, mostrando un error `NaN`.  
+- El filtro por nombre aparece dos veces en la búsqueda de recetas.  
+- El input de búsqueda no indica si hay resultados o errores, ni se da feedback claro si no se encuentran coincidencias.  
+- Algunos usuarios encuentran la organización del contenido algo desordenada o poco estructurada (especialmente en las secciones de tienda y alérgenos).  
+- Se detecta un problema de formato visual con fuentes pequeñas en el correo de verificación.  
+- Sugieren usar un diseño más visual o atractivo en la interfaz, por ejemplo, en el sistema de recetas o filtros de productos.  
+
+## Contenido y Estructura   
+- Falta información complementaria al introducir el código de verificación por correo (pantalla poco descriptiva).  
+- Sería útil mostrar imágenes reales en las recetas (en lugar de una imagen genérica de cuchara).  
+- El contenido de las recetas debería enriquecerse con campos como: duración, dificultad, puntuaciones o número de visitas.  
+- Añadir una fuente más grande en algunas partes para mejorar la legibilidad.  
+- El apartado de beneficios muestra errores ortográficos (“bebé” sin tilde).  
+- La sección de recetas no muestra claramente si los rangos de edad son en meses o en años.  
+- La estructura de la sección de alérgenos podría ser más útil y visual, incorporando más contenido e información esencial.  
+- Faltan vídeos o fotos paso a paso para la elaboración de recetas.  
+- Sería útil incluir etiquetas visuales como "Comida", "Cuidados", "Accesorios" para categorizar productos o elementos.  
+- Incluir filtros por preferencia alimentaria u otros criterios facilitaría la navegación. 
+
+## Funcionalidad  
+- Permitir nombrar los alimentos con los que un bebé ha mostrado alergia, así como asociarlos a un bebé concreto en caso de tener varios registrados.  
+- Permitir guardar un registro de los alimentos que han generado alergias, incluyendo funcionalidad para repetir fácilmente el cuestionario.  
+- Fallos de validación al registrar o editar bebés (ej. se permite introducir nombres con números o texto erróneo en campos como "peso").  
+- El campo "Perímetro cefálico" se percibe como innecesario por algunos usuarios.  
+- El formulario de actualización de métricas muestra error 500 y no valida correctamente los datos negativos o vacíos.  
+- En la edición de recetas, se sugiere restringir los ingredientes a una lista predeterminada para evitar errores ortográficos y mejorar los filtros.  
+- En el caso de tener varios bebés registrados, no se distingue a cuál se está asociando una alergia, lo que puede causar confusión.  
+- Algunos formularios no muestran alertas cuando hay errores, simplemente el botón de "Guardar" no hace nada.  
+- La posibilidad de tener recetas favoritas o guardar historial es una funcionalidad muy demandada.  
+- Sugerencia de mostrar los productos (como en la tienda) en un grid tipo tarjetas (estilo Amazon) en lugar de una lista vertical.  
+- Posible integración con vídeos o instrucciones paso a paso usando almacenamiento externo (Digital Ocean o Google Cloud).  
+
+## Idioma y Accesibilidad 
+- Problemas de accesibilidad con la fuente en correos electrónicos (muy pequeña).  
+- Se sugiere mostrar errores de forma más visual y descriptiva (por ejemplo, si se deja un campo en blanco o se introduce un dato inválido).  
+- La app necesita aclarar si los rangos de edad están en meses o años.  
+- Añadir información más visual y útil para funcionalidades complejas como alérgenos, filtrado de recetas, o seguimiento de métricas.  
+- Revisar errores ortográficos como “bebé” sin tilde.  
+- Mejorar la visibilidad de las funcionalidades en páginas vacías (como alérgenos, que se muestra muy vacía visualmente).  
+- Algunos usuarios proponen tener opción de subir vídeos o imágenes más visuales en secciones clave como recetas.  
+- Se valora positivamente la claridad del calendario, pero se insiste en que se indiquen bien sus funcionalidades previstas (citas médicas, vacunas, etc.).
+
 ## Categorización y Priorización de Problemas Detectados
 
 Este apartado recoge y clasifica los errores funcionales, problemas de usabilidad, mejoras visuales y recomendaciones detectadas durante el uso y revisión de la aplicación Infantem. La categorización se ha realizado según tres niveles de prioridad (alta, media y baja), con el objetivo de facilitar su abordaje en próximos sprints de desarrollo. También se incluyen sugerencias de mejora para optimizar la experiencia del usuario y la funcionalidad de la app.
@@ -257,6 +304,7 @@ Cada metrica se puntuara del 1 al 5 dando lugar a un valor de priorizacion de fe
 
 ---
 ## Sprint 3 
+## Semana 1
 ### 🟥 Prioridad Alta
 - Faltan validaciones en formularios como 'Añadir Receta' y 'Registro', sin mensajes de error ni campos obligatorios. (VPF=24)
 - El campo 'Apellido' en el perfil muestra el nombre, lo que confunde al usuario. (VPF=21) HECHO
@@ -294,5 +342,63 @@ Cada metrica se puntuara del 1 al 5 dando lugar a un valor de priorizacion de fe
 - Mostrar claramente las funcionalidades premium disponibles con ejemplos.
 - Añadir opción de visualizar contraseña en login (si no está ya).
 - Clarificar el seguimiento de crecimiento del bebé dentro de la app.
+
+## Semana 2
+### 🟥 Prioridad Alta
+- Falta validación al registrar/editar bebés: se aceptan datos incorrectos (como nombres numéricos o texto en el peso), y el sistema no da feedback si hay errores. (VPF = 23)
+
+- Formulario de actualización de métricas lanza error 500 sin explicación ni validación de campos como peso/altura negativos. (VPF = 22)
+
+- No queda claro si las edades en las recetas son en meses o años, y el buscador permite valores negativos (NaN). (VPF = 21)
+
+- Falta de alertas visuales en formularios clave: por ejemplo, en registro de bebé, edición de perfil o guardar sin completar campos. (VPF = 22)
+
+- Falta feedback visual al terminar el cuestionario de alérgenos o al completar acciones clave. (VPF = 20)
+
+- El sistema de alérgenos no permite asociar alimentos concretos a cada bebé ni gestionar múltiples registros correctamente. (VPF = 21)
+
+### 🟧 Prioridad Media
+- No hay botones para retroceder en cuestionarios de alérgenos. (VPF = 15)
+
+- Diseño poco atractivo o confuso en algunas secciones, como tienda y alérgenos. (VPF = 16)
+
+- Correos de verificación llegan a spam y el texto es demasiado pequeño. (VPF = 12)
+
+- Falta información contextual en pantallas clave (ej. mensaje “Revisa tu mail” es muy escueto). (VPF = 13)
+
+- Repetición del filtro por nombre en buscador de recetas. (VPF = 11)
+
+- Interfaz visual poco clara: textos pequeños, tipografía poco legible o sin jerarquía visual en algunas secciones. (VPF = 14)
+
+- El apartado de beneficios tiene errores ortográficos (“bebé” sin tilde). (VPF = 10)
+
+### 🟩 Prioridad Baja
+- Algunos usuarios consideran innecesario el campo “perímetro cefálico”. (VPF = 8)
+
+- Sugerencia estética: mostrar productos como tarjetas tipo Amazon en lugar de lista vertical. (VPF = 9)
+
+- Mejorar categorización visual de productos (etiquetas como “Comida”, “Cuidados”, etc.). (VPF = 8)
+
+- Sugerencia de agregar videos o fotos paso a paso en recetas, utilizando hosting externo. (VPF = 7)
+
+- Falta un botón para repetir el cuestionario de alérgenos tras completarlo. (VPF = 6)
+
+### 💡 Recomendaciones
+- Incluir una lista predefinida de ingredientes al crear recetas, para evitar errores de escritura y mejorar los filtros.
+
+- Permitir guardar recetas favoritas o crear historial personal.
+
+- Mostrar duración y nivel de dificultad en cada receta.
+
+- Permitir asociar directamente una alergia a un bebé específico, en caso de múltiples hijos registrados.
+
+- Añadir un modal de confirmación al salir del cuestionario sin guardar.
+
+- Mostrar métricas de seguimiento de forma más clara y visual, con filtros útiles.
+
+- Aumentar la fuente de letra en apartados clave y mejorar la jerarquía visual.
+
+- Añadir ejemplos visuales o textos más amigables para explicar funciones como los alérgenos.
+
 
 > *Este sistema de evaluación sirve como guía para valorar la implicación de los usuarios piloto y tomar decisiones sobre futuras iteraciones y pruebas de usuario.*  
