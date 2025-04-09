@@ -74,7 +74,7 @@ public class UserController {
         }
 
         User updatedUser = userService.updateUser(id, userDetails);
-        String jwt = jwtUtils.generateTokenFromUsername(updatedUser.getUsername(), updatedUser.getAuthorities());
+        String jwt = jwtUtils.generateTokenFromUsername(updatedUser.getUsername(), updatedUser.getAuthorities(),updatedUser.getId());
 
         return ResponseEntity.ok().body(new UserUpdatedDTO(updatedUser, jwt));
 
