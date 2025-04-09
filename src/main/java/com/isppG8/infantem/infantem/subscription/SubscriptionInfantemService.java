@@ -205,6 +205,7 @@ public class SubscriptionInfantemService {
         return null;
     }
 
+    @Transactional
     public void handleCheckoutSessionCompleted(Event event) throws StripeException {
         EventDataObjectDeserializer dataObjectDeserializer = event.getDataObjectDeserializer();
         if (!dataObjectDeserializer.getObject().isPresent())
@@ -250,6 +251,7 @@ public class SubscriptionInfantemService {
     }
 
     // 🔹 Manejar cuando una suscripción es creada
+    @Transactional
     public void handleSubscriptionCreated(Event event) {
         EventDataObjectDeserializer dataObjectDeserializer = event.getDataObjectDeserializer();
         if (!dataObjectDeserializer.getObject().isPresent())
