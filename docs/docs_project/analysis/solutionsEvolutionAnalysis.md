@@ -48,6 +48,22 @@
 - Paula Luna 
   - Reviso el documento
 
+# Índice
+
+- [1. Introducción](#1-introduccion)
+- [2. Frontend](#2-frontend)
+  - [2.1 Incidencia 1](#21-incidencia-1)
+  - [2.2 Incidencia 2](#22-incidencia-2)
+  - [2.3 Incidencia 3](#23-incidencia-3)
+  - [2.4 Incidencia 4](#24-incidencia-4)
+  - [2.5 Incidencia 5](#25-incidencia-5)
+- [3. Backend](#3-backend)
+  - [3.1 Incidencia 1](#31-incidencia-1)
+  - [3.2 Incidencia 2](#32-incidencia-2)
+  - [3.3 Incidencia 3](#33-incidencia-3)
+  - [3.4 Incidencia 4](#34-incidencia-4)
+  - [3.5 Incidencia 5](#35-incidencia-5)
+
 
 ## 1. Introduccion
 
