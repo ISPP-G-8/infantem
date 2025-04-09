@@ -11,9 +11,6 @@ export default function Admin() {
   const [originalUser, setOriginalUser] = useState<User | null>(null);
   const [editedUser, setEditedUser] = useState<User | null>(null);
   const [recipes, setRecipes] = useState<Recipe[]>([]);
-  // const [babies, setBabies] = useState<Baby[]>([]);
-  // const [diseases, setDiseases] = useState<Disease[]>([]);
-  // const [allergens, setAllergens] = useState<Allergen[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
 
   const itemsPerPage = 10;
@@ -30,7 +27,7 @@ export default function Admin() {
 
   const obtainAllUsers = async (): Promise<boolean> => {
     try {
-      const response = await fetch(`${apiUrl}/api/v1/users`, {
+      const response = await fetch(`${apiUrl}/api/v1/admin/users`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -53,7 +50,7 @@ export default function Admin() {
 
   const obtainAllRecipes = async (): Promise<boolean> => {
     try {
-      const response = await fetch(`${apiUrl}/api/v1/recipes`, {
+      const response = await fetch(`${apiUrl}/api/v1/admin/recipes`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -96,7 +93,7 @@ export default function Admin() {
   };
 
   const handleAddUser = () => {
-    setOriginalUser(null);
+    /* setOriginalUser(null);
     setEditedUser({
       name: "",
       surname: "",
@@ -104,7 +101,8 @@ export default function Admin() {
       password: "",
       email: "",
     });
-    setIsEditing(true);
+    setIsEditing(true); */
+    router.push("/admin/adduser");
   };
 
   const handleCancelUser = () => {
