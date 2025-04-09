@@ -9,13 +9,16 @@ import {
 } from 'react-native';
 import { launchCamera, launchImageLibrary, CameraOptions, ImageLibraryOptions } from 'react-native-image-picker';
 
+
 const UploadImageModal = ({
     visible,
+    onCameraPress,
+    onGalleryPress,
+    onDeletePress,
     onClose
 }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const gs = require("../static/styles/globalStyles");
-    const [image, setImage] = useState<any>(null);
 
     const includeExtra = true;
 
@@ -23,38 +26,6 @@ const UploadImageModal = ({
         title: string;
         type: 'capture' | 'library';
         options: CameraOptions | ImageLibraryOptions;
-    }
-
-    const actions: Action[] = [
-        {
-            title: 'Take Image',
-            type: 'capture',
-            options: {
-                // saveToPhotos: true,
-                mediaType: 'photo',
-                includeBase64: false,
-                // includeExtra,
-            },
-        },
-        {
-            title: 'Select Image',
-            type: 'library',
-            options: {
-                selectionLimit: 1,
-                mediaType: 'photo',
-                includeBase64: false,
-                // includeExtra,
-            },
-        }
-    ];
-
-    const handleImageUpload = (type, options) => {
-        if (type === 'capture') {
-            // PREGUNTAR PERMISOS EN ANDROID Y IOS
-            launchCamera(options.filter((o) => o.type === 'capture'), setImage);
-        } else if (type === 'library') {
-            launchImageLibrary(options.filter((o) => o.type === 'library'), setImage);
-        }
     }
 
     return (
@@ -70,7 +41,7 @@ const UploadImageModal = ({
                     <View style={[gs.imageButtonsContainer, { marginBottom: 15 }]}>
                         <TouchableOpacity
                             style={gs.imageButton}
-                            onPress={() => handleImageUpload('library', actions)}
+                            // onPress={() => onGalleryPress()}
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none" /><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" /></svg>
                             <Text style={gs.imageButtonTextStyle}>Galería</Text>
@@ -78,7 +49,7 @@ const UploadImageModal = ({
 
                         <TouchableOpacity
                             style={gs.imageButton}
-                            onPress={() => handleImageUpload('library', actions)}
+                            onPress={() => onCameraPress()}
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none" /><circle cx="12" cy="12" r="3.2" /><path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" /></svg>
                             <Text style={gs.imageButtonTextStyle}>Cámara</Text>

@@ -7,6 +7,9 @@ import { Link, router } from "expo-router";
 import { useAuth } from "../../../context/AuthContext";
 import { jwtDecode } from "jwt-decode";
 import UploadImageModal from "../../../components/UploadImageModal";
+import * as ImagePicker from 'expo-image-picker';
+import { Platform } from 'react-native';
+
 
 const avatarOptions = [
   require("../../../assets/avatar/avatar1.png"),
@@ -23,6 +26,9 @@ export default function Account() {
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const gs = require("../../../static/styles/globalStyles");
   const { isLoading, user, token, setUser, checkAuth, signOut } = useAuth();
+  const [image, setImage] = useState<any>(null);
+
+  const FormData = global.FormData;
 
   useEffect(() => {
     if (!token) return; // Evita ejecutar el efecto si jwt es null o undefined
@@ -128,6 +134,152 @@ export default function Account() {
     );
   }
 
+  // IMAGE UPLOAD
+
+  const validImage = (uri) => {
+    // if (!uri) return false;
+
+    // const lowerUri = uri.toLowerCase();
+    // return lowerUri.endsWith('.jpg') ||
+    //   lowerUri.endsWith('.jpeg') ||
+    //   lowerUri.endsWith('.png');
+    return true;
+  };
+
+  // const base64ToBlob = (base64DataWithHeader, contentType = 'image/png') => {
+  //   const base64Data = base64DataWithHeader.split(',')[1];  // Limpiar cabecera
+
+  //   const byteCharacters = atob(base64Data);
+  //   const byteArrays = [];
+
+  //   for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+  //     const slice = byteCharacters.slice(offset, offset + 512);
+
+  //     const byteNumbers = new Array(slice.length);
+  //     for (let i = 0; i < slice.length; i++) {
+  //       byteNumbers[i] = slice.charCodeAt(i);
+  //     }
+
+  //     const byteArray = new Uint8Array(byteNumbers);
+  //     byteArrays.push(byteArray);
+  //   }
+
+  //   const blob = new Blob(byteArrays, { type: contentType });
+  //   return blob;
+  // };
+
+  const uploadImage = async (mode) => {
+    try {
+      let result;
+      if (mode === "gallery") {
+        const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (!permissionResult.granted) {
+          alert("Permiso denegado para acceder a la galería.");
+          return;
+        }
+  
+        result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
+          allowsEditing: true,
+          aspect: [1, 1],
+          quality: 1,
+        });
+      }
+      //  else if (mode === "camera") {
+      //   const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+      //   if (!permissionResult.granted) {
+      //     alert("Permiso denegado para usar la cámara.");
+      //     return;
+      //   }
+  
+      //   result = await ImagePicker.launchCameraAsync({
+      //     cameraType: ImagePicker.CameraType.front,
+      //     allowsEditing: true,
+      //     aspect: [1, 1],
+      //     quality: 1,
+      //   });
+      // }
+
+      if (!result.canceled) {
+        if (!validImage(result.assets[0].uri)) {
+          alert(
+            "Por favor, selecciona una imagen válida (jpg, jpeg o png)."
+          );
+          setAvatarModalVisible(false);
+        } else {
+          console.log(result.assets[0].uri);
+          saveImage(result.assets[0].uri);
+        }
+      } else if (result == undefined) {
+        console.log("result undefined");
+      }
+    } catch (err) {
+      alert('Error al abrir la cámara: ' + err.message);
+      setAvatarModalVisible(false);
+    }
+  };
+
+  const deleteImage = () => {
+    try {
+      saveImage(null);
+      setAvatarModalVisible(false);
+    } catch ({ message }) {
+      console.log(message);
+      setAvatarModalVisible(false);
+    }
+  }
+
+  const saveImage = async (image) => {
+    try {
+      // const blobImage = base64ToBlob(image);
+      // console.log("AAAAAAAAAAAAAAAAAAA");
+      // console.log(blobImage);
+      console.log(image)
+      setImage(image);
+      sendToBackend(image);
+
+      setAvatarModalVisible(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const sendToBackend = async (image) => {
+    try {
+      const formData = new FormData();
+
+      formData.append("image", {
+        uri: image,
+        name: `${user?.username}_avatar.png`,
+        type: "image/png",
+      });
+
+      // const config = {
+      //   headers: {
+      //     "Content-Type": "multipart/form-data",
+      //     "Authorization": `Bearer ${token}`,
+      //   },
+      //   transformRequest: () => {
+      //     return formData;
+      //   }
+      // }
+
+      const response = await fetch('https://TU_BACKEND_URL/api/users/123/photo', {
+        method: 'POST',
+        body: formData,
+      });
+  
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Imagen subida correctamente:', result);
+      } else {
+        console.log('Error subiendo imagen:', response.status);
+      }
+    } catch (error) {
+      console.log("Error al enviar la imagen al backend:", error);
+    }
+  }
+
   return (
     <ImageBackground
       style={{ flex: 1, width: "100%", height: "100%", justifyContent: "center", backgroundColor: "#E3F2FD" }}
@@ -149,7 +301,7 @@ export default function Account() {
         <TouchableOpacity style={gs.profileImageContainer} onPress={() => isEditing && setAvatarModalVisible(true)} disabled={!isEditing}>
           {/* <Image source={user?.profilePhotoRoute ? { uri: user.profilePhotoRoute } : avatarOptions[0]} style={gs.profileImage} /> */}
           <Image
-            source={require("../../../static/images/avatar2.png")}
+            source={image}
             style={gs.profileImage}
           />
         </TouchableOpacity>
@@ -157,6 +309,9 @@ export default function Account() {
         <UploadImageModal
           visible={avatarModalVisible}
           onClose={() => setAvatarModalVisible(false)}
+          onCameraPress={uploadImage}
+          onGalleryPress={() => uploadImage("gallery")}
+          onDeletePress={deleteImage}
         />
 
         {user && (
