@@ -102,13 +102,11 @@ public class SubscriptionInfantemController {
                     responseCode = "200",
                     description = "Estado de la suscripción actualizado") @ApiResponse(responseCode = "400",
                             description = "Error al actualizar el estado") @PostMapping("/update-status")
-    public ResponseEntity<?> updateSubscriptionStatus(@RequestParam String subscriptionId, @RequestParam boolean isActive) {
+    public ResponseEntity<?> updateSubscriptionStatus(@RequestParam String subscriptionId,
+            @RequestParam boolean isActive) {
         try {
-            Optional<SubscriptionInfantem> optionalSub = subscriptionInfantemRepository
-                .findAll()
-                .stream()
-                .filter(sub -> subscriptionId.equals(sub.getStripeSubscriptionId()))
-                .findFirst();
+            Optional<SubscriptionInfantem> optionalSub = subscriptionInfantemRepository.findAll().stream()
+                    .filter(sub -> subscriptionId.equals(sub.getStripeSubscriptionId())).findFirst();
 
             if (!optionalSub.isPresent()) {
                 return ResponseEntity.badRequest().body("No se encontró ninguna suscripción con ID: " + subscriptionId);
@@ -128,7 +126,6 @@ public class SubscriptionInfantemController {
             return ResponseEntity.badRequest().body("Error al actualizar el estado: " + e.getMessage());
         }
     }
-
 
     @Operation(summary = "Cancelar una suscripción",
             description = "Cancela una suscripción existente y devuelve la información de la misma.") @ApiResponse(
