@@ -132,7 +132,7 @@ public class UserControllerAdmin {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = UserDTO.class))) @ApiResponse(responseCode = "400",
                                     description = "El usuario no es el tuyo") @PutMapping("/{id}")
-    public ResponseEntity<Object> updateUser(@PathVariable Long id, @Valid @RequestBody User userDetails,
+    public ResponseEntity<Object> updateUser(@PathVariable Long id, @Valid @RequestBody UserDTO userDetails,
             @RequestHeader(name = "Authorization") String token) {
         if (authoritiesService.isAdmin()) {
             User updatedUser = userService.updateUser(id, userDetails);

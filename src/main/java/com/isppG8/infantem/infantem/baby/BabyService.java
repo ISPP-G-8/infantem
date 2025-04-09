@@ -124,7 +124,6 @@ public class BabyService {
         existingBaby.setGenre(updatedBaby.getGenre());
         existingBaby.setWeight(updatedBaby.getWeight());
         existingBaby.setHeight(updatedBaby.getHeight());
-        existingBaby.setCephalicPerimeter(updatedBaby.getCephalicPerimeter());
         existingBaby.setFoodPreference(updatedBaby.getFoodPreference());
 
         return babyRepository.save(existingBaby);
