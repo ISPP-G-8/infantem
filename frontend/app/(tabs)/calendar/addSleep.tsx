@@ -4,7 +4,7 @@ import { useAuth } from '../../../context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
 import { format } from 'date-fns';
 const gs = require("../../../static/styles/globalStyles"); // Importar estilos globales
-import { router } from "expo-router";
+
 
 
 const SleepTab = ({ route }: any) => {
@@ -19,6 +19,7 @@ const SleepTab = ({ route }: any) => {
     const [dateEnd, setDateEnd] = useState<string>('');
     const [numWakeups, setNumWakeups] = useState<string>('');
     const [dreamType, setDreamType] = useState<string | null>(null);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null); // Estado para el mensaje de error
 
     useEffect(() => {
         const fetchBabies = async () => {
@@ -51,91 +52,44 @@ const SleepTab = ({ route }: any) => {
     }, [token]);
 
     const addSleepData = async () => {
-        if (!token || !selectedBaby) {
-            Alert.alert('Error', 'No se encontró el token o no se seleccionó un bebé.');
+        if (!selectedBaby || !dateStart || !dateEnd || !dreamType) {
+            setErrorMessage('Por favor, completa todos los campos obligatorios.');
             return;
         }
-
-        // Validar campos requeridos
-        if (!dateStart || !dateEnd) {
-            Alert.alert('Error', 'Por favor ingresa las fechas de inicio y fin.');
-            return;
-        }
-
-        if (!dreamType) {
-            Alert.alert('Error', 'Por favor selecciona un tipo de sueño.');
-            return;
-        }
-
-        if (numWakeups === '') {
-            Alert.alert('Error', 'Por favor ingresa el número de despertares.');
-            return;
-        }
-
-        // Validar que la fecha de inicio sea anterior a la fecha de fin
-        const startDate = new Date(dateStart);
-        const endDate = new Date(dateEnd);
-        if (startDate >= endDate) {
-            Alert.alert('Error', 'La fecha de inicio debe ser anterior a la fecha de fin.');
-            return;
-        }
-
-        setLoading(true);
 
         try {
-            // Formatear las fechas al formato ISO 8601
-            const formattedDateStart = format(startDate, "yyyy-MM-dd'T'HH:mm:ss");
-            const formattedDateEnd = format(endDate, "yyyy-MM-dd'T'HH:mm:ss");
+            // Convertir las fechas al formato ISO 8601
+            const formattedDateStart = format(new Date(dateStart), "yyyy-MM-dd'T'HH:mm");
+            const formattedDateEnd = format(new Date(dateEnd), "yyyy-MM-dd'T'HH:mm");
 
-            // Crear el objeto sueño
-            const dreamToSave = {
-                baby: { id: selectedBaby },
-                dateStart: formattedDateStart,
-                dateEnd: formattedDateEnd,
-                numWakeups: parseInt(numWakeups, 10),
-                dreamType,
-            };
-
-            // Realizar la solicitud al backend
             const response = await fetch(`${apiUrl}/api/v1/dream`, {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
                 },
-                body: JSON.stringify(dreamToSave),
+                body: JSON.stringify({
+                    baby: selectedBaby,
+                    dateStart: formattedDateStart,
+                    dateEnd: formattedDateEnd,
+                    wakeUps: parseInt(numWakeups, 10) || 0,
+                    dreamType: dreamType,
+                }),
             });
-
+    
             if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Error al crear el sueño');
+                const errorData = await response.json(); // Intentar obtener el mensaje de error del backend
+                const errorMessage = errorData.message || 'Error desconocido al guardar los datos del sueño.';
+                throw new Error(errorMessage);
             }
 
-            const createdDream = await response.json();
-
-            // Mostrar mensaje de éxito y redirigir al calendario
-            Alert.alert('Éxito', 'Sueño registrado correctamente.');
-            navigation.navigate('CalendarTab'); // Asegúrate de que este sea el nombre correcto
-        } catch (error) {
-            console.error('Error al registrar el sueño:', error);
-
-            if (error instanceof Error) {
-                Alert.alert('Error', error.message);
-            } else {
-                Alert.alert('Error', 'Ocurrió un error inesperado.');
-            }
-        } finally {
-            setLoading(false);
+            Alert.alert('Éxito', 'Datos del sueño guardados correctamente.');
+            navigation.navigate('calendar'); // Redirigir al calendario
+        } catch (error: any) {
+            console.error('Error al guardar los datos del sueño:', error);
+            setErrorMessage(error.message || 'No se pudo guardar los datos del sueño.');
         }
     };
-
-    if (loading) {
-        return (
-            <View style={[gs.container, { justifyContent: 'center', alignItems: 'center' }]}>
-                <ActivityIndicator size="large" color="#00adf5" />
-            </View>
-        );
-    }
 
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1, padding: 20 }}>
@@ -143,16 +97,16 @@ const SleepTab = ({ route }: any) => {
                 Añadir Sueño
             </Text>
 
-            <View style={[gs.card, { padding: 20, alignItems: "center", justifyContent: "center", marginBottom: 20 }]}>
+            <View style={[gs.card, { padding: 20, alignItems: "center", justifyContent: "center", marginBottom: 20, marginLeft: "5%" }]}>
                 <Text style={{ alignSelf: 'flex-start', marginLeft: '10%', color: '#1565C0', fontWeight: 'bold', marginBottom: 5 }}>Bebé:</Text>
                 <Picker
                     selectedValue={selectedBaby}
-                    onValueChange={(itemValue) => setSelectedBaby(itemValue)}
+                    onValueChange={(itemValue) => setSelectedBaby(itemValue)} // itemValue será el objeto completo del bebé
                     style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "80%" }]}
                 >
                     <Picker.Item label="Selecciona un bebé" value={null} />
                     {babies.map((baby: any) => (
-                        <Picker.Item key={baby.id} label={baby.name} value={baby.id} />
+                        <Picker.Item key={baby.id} label={baby.name} value={baby.id} /> // Enviar el objeto completo del bebé
                     ))}
                 </Picker>
 
@@ -193,6 +147,13 @@ const SleepTab = ({ route }: any) => {
                     <Picker.Item label="REM" value="REM" />
                     <Picker.Item label="Agitado" value="AGITATED" />
                 </Picker>
+
+                {/* Mostrar mensaje de error */}
+                {errorMessage && (
+                    <Text style={{ color: 'red', marginTop: 10, textAlign: 'center' }}>
+                        {errorMessage}
+                    </Text>
+                )}
 
                 <TouchableOpacity style={[gs.mainButton, { marginTop: 20 }]} onPress={addSleepData}>
                     <Text style={gs.mainButtonText}>Guardar</Text>
