@@ -62,7 +62,7 @@ public class DiseaseService {
 
     @Transactional
     public void delete(Long id) {
-        if (this.diseaseRepository.existsById(id)) {
+        if (!this.diseaseRepository.existsById(id)) {
             throw new ResourceNotFoundException("Disease", "id", id);
         }
         diseaseRepository.deleteById(id);

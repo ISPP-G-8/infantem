@@ -1,5 +1,8 @@
 name: Análisis con SonarQube
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main

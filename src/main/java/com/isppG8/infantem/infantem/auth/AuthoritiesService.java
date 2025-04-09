@@ -4,6 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
+
 import java.util.List;
 
 import com.isppG8.infantem.infantem.user.UserService;
@@ -14,12 +18,9 @@ public class AuthoritiesService {
 
     private AuthoritiesRepository authoritiesRepository;
 
-    private UserService userService;
-
     @Autowired
-    public AuthoritiesService(AuthoritiesRepository authoritiesRepository, UserService userService) {
+    public AuthoritiesService(AuthoritiesRepository authoritiesRepository) {
         this.authoritiesRepository = authoritiesRepository;
-        this.userService = userService;
     }
 
     @Transactional(readOnly = true)
@@ -28,16 +29,23 @@ public class AuthoritiesService {
                 .orElseThrow(() -> new RuntimeException("Authority does not exist"));
     }
 
+    @Transactional(readOnly = true)
+    public User findCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null)
+            throw new ResourceNotFoundException("Nobody authenticated!");
+        else
+            return authoritiesRepository.findByUsername(auth.getName());
+    }
+
     public boolean isAdmin() {
 
-        User user = userService.findCurrentUser();
+        // Not pretty, but circular dependency otherwise, sorry
+        User user = this.findCurrentUser();
 
         Authorities authorities = user.getAuthorities();
         Authorities adminAuth = authoritiesRepository.findByAuthority("admin").orElse(null);
 
-        if (authorities.equals(adminAuth)) {
-            return true;
-        }
-        return false;
+        return authorities.equals(adminAuth);
     }
 }
