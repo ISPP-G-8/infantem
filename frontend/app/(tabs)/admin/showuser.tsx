@@ -20,7 +20,6 @@ export default function ShowUser() {
     if (!userToModify || !token) return;
 
     const userData = {
-      id: userToModify.id,
       name: userToModify.name,
       surname: userToModify.surname,
       username: userToModify.username,
@@ -29,7 +28,7 @@ export default function ShowUser() {
       profilePhotoRoute: userToModify.profilePhotoRoute,
     };
 
-    fetch(`${apiUrl}/api/v1/users/${userToModify.id}`, {
+    fetch(`${apiUrl}/api/v1/admin/users/${userToModify.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
