@@ -37,7 +37,8 @@ public class MetricService {
         Metric metric = getMetricById(id);
         metric.setWeight(updatedMetric.getWeight());
         metric.setHeight(updatedMetric.getHeight());
-        metric.setCephalicPerimeter(updatedMetric.getCephalicPerimeter());
+        metric.setHeadCircumference(updatedMetric.getHeadCircumference());
+        metric.setArmCircumference(updatedMetric.getArmCircumference());
         metric.setDate(updatedMetric.getDate());
         return metricRepository.save(metric);
     }
