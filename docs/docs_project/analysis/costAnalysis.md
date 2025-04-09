@@ -345,14 +345,13 @@ En este apartado se presentan los ingresos totales combinados de todas las forma
 
 ### Escenarios de ingresos: Optimista, Realista y Pesimista
 
-### Escenarios de ingresos: Optimista, Realista y Pesimista
-
 | Periodo                 | Optimista (€) | Realista (€) | Pesimista (€) |
 |-------------------------|---------------|--------------|----------------|
 | Semana 15 (lanzamiento) | 3.708,35      | 1.762,82     | 686,62         |
 | Primeros 6 meses        | 167.747,43    | 85.053,18    | 16.502,64      |
-| Primer Año              | 256.659,84    | 340.853,76   | 12.521,75      |
-| Segundo Año             | 513.319,68    | 681.707,52   | 25.043,50      |
+| Primer Año              | 256.659,84    | 100.401,32   | 12.521,75      |
+| Segundo Año             | 513.319,68    | 200.802,64   | 25.043,50      |
+
 
 
 > Los ingresos están divididos en tres fuentes:  
