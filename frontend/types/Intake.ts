@@ -1,16 +1,17 @@
-import { Baby } from "./Baby";
-
 type IntakeSymptom = {
   id: number;
   description: string;
   date: [number, number, number, number, number]; 
 }
 
+type IdRef = { id: number };
+
 export type Intake = {
-  id: number;
-  date: [number, number, number, number, number];
+  id?: number;
+  date: string; 
   quantity: number;
   observations: string;
   intakeSymptom?: IntakeSymptom;
-  baby?: Baby;
+  baby?: IdRef;
+  recipes?: IdRef[];
 }
