@@ -42,6 +42,10 @@
 ## Colaboradores del documento
 - Luis Giraldo
   - Actualizó el documento al sprint 3
+- Paula Luna Navarro
+  - Actualizó el documento al sprint 3
+- Álvaro Jimenez Osuna  
+  - Revisó el documento
 
 ## Índice
 
@@ -90,7 +94,7 @@ Con una media de 26.837 nacimientos al mes en España, la aplicación cuenta con
 | Semana 1           | 4.396     | 12,51      | 4.408,51       | 
 | Semana 5           | 15.415    | 62,55      | 15.477,55      |
 | Semana 10          | 30.830    | 1.950,10   | 32.780,10      |
-| Semana 15          | 43.598    | 2.012,65   | 45.610,65      |
+| Semana 15          | 43.598    | 2.212,65   | 45.810,65      |
 | Primeros 6 meses   | 0         | 13.410,46  | 13.410,46      |
 | Primer Año         | 0         | 54.051,32  | 54.051,32      |
 | Segundo Año        | 0         | 125.148,64 | 125.148,64     |
@@ -236,10 +240,11 @@ Para asegurar visibilidad, descargas y crecimiento sostenido desde el lanzamient
 | Diseño y contenidos           | 25 €                      |
 | Colaboraciones con influencers| 500 €                     |
 | Publicidad física (folletos)  | 150 €                     |
+| Sorteo de lanzamiento            |  200 €                      |
 | Ferias / eventos              | 400 €                     |
-| **Total mensual estimado**    | **1.825 €**               |
+| **Total mensual estimado**    | **2.025 €**               |
 
-Se proyecta mantener este gasto durante **al menos 12 meses**, lo que se traduce en **21.900 € anuales**, incluidos como OPEX en el presupuesto total.
+Se proyecta mantener este gasto durante **al menos 12 meses**, lo que se traduce en **22.100 € anuales**, incluidos como OPEX en el presupuesto total.
 
 Esto es una versión para la tracción inicial, que podrá ser modificada en proximas versiones
 
@@ -277,10 +282,10 @@ En la siguiente tabla se recogen los costes totales del proyecto, incluyendo en 
 | Costes de Hardware y Amortización         | 10.693 €       |
 | Costes de Publicación y Distribución      | 118,95 €       |
 | Costes de Expertos (nutricionistas)       | 2.700 €        |
-|Costes de Marketing y Tracción inicial       | 21.900 €   |
+|Costes de Marketing y Tracción inicial       | 22.100 €   |
 Costes de diseño e identidad visual	| 600,00 €
-| **Total**                                  | **81.082,16** **€**|
-| **Coste del proyecto (+10% contingencias)**| **88.530,38 €**|
+| **Total**                                  | **81.282,16** **€**|
+| **Coste del proyecto (+10% contingencias)**| **88.730,38 €**|
 
 
 
