@@ -4,6 +4,7 @@ import { Picker } from '@react-native-picker/picker';
 import { useAuth } from '../../../context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
 import { format, isValid, parseISO, isAfter } from 'date-fns';
+import { router } from 'expo-router';
 
 const gs = require("../../../static/styles/globalStyles");
 
@@ -127,7 +128,11 @@ const AddVaccine = () => {
             await response.json();
 
             Alert.alert('Éxito', 'Vacuna registrada correctamente.');
-            navigation.navigate('CalendarTab');
+
+            // Aquí navegas a la pantalla 'CalendarTab' y le pasas un parámetro para refrescar
+            // navigation.navigate('CalendarTab', { refresh: true });
+            router.push("/calendar");
+
         } catch (error) {
             console.error('Error al registrar la vacuna:', error);
             Alert.alert('Error', error instanceof Error ? error.message : 'Ocurrió un error inesperado.');
@@ -151,7 +156,6 @@ const AddVaccine = () => {
             </Text>
 
             <View style={[gs.card, { padding: 20, alignItems: "center", justifyContent: "center", marginBottom: 20 }]}>
-
                 <Text style={labelStyle}>Bebé:</Text>
                 <Picker
                     selectedValue={selectedBaby}
@@ -201,5 +205,6 @@ const labelStyle = {
 };
 
 export default AddVaccine;
+
 
 
