@@ -171,4 +171,16 @@ public class RecipeService {
         return this.recipeRepository.findRecipeByName(name, userId);
     }
 
+    @Transactional(readOnly = true)
+    public List<Recipe> getVisibleRecipes() throws ResourceNotFoundException {
+        Integer userId = this.getCurrentUserId();
+        return this.recipeRepository.findVisibleRecipes(userId);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Recipe> getVisibleRecipesByName(String name) throws ResourceNotFoundException {
+        Integer userId = this.getCurrentUserId();
+        return this.recipeRepository.findVisibleRecipesByName(name, userId);
+    }
+
 }
