@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TextInput, Alert, ImageBackground } from "react-native";
 import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import { router } from "expo-router";
 import { useAuth } from "../../../context/AuthContext";
-import { User } from "../../../types";
 
 export default function ShowUser() {
   const [isEditing, setIsEditing] = useState(false);
@@ -23,7 +22,6 @@ export default function ShowUser() {
       name: userToModify.name,
       surname: userToModify.surname,
       username: userToModify.username,
-      password: userToModify.password,
       email: userToModify.email,
       profilePhotoRoute: userToModify.profilePhotoRoute,
     };

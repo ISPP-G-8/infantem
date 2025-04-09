@@ -1,16 +1,18 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import { router } from 'expo-router';
-import { getToken, storeToken, removeToken } from '../utils/jwtStorage';
-import { User, AuthContextType } from '../types';
+import React, { createContext, useState, useContext, useEffect } from "react";
+import { router } from "expo-router";
+import { getToken, storeToken, removeToken } from "../utils/jwtStorage";
+import { User, AuthContextType } from "../types";
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
   isLoading: true,
   isAuthenticated: false,
   token: null,
-  setUser: () => { },
+  userToModify: null,
+  setUserToModify: () => {},
+  setUser: () => {},
   updateToken: async () => {},
-  signOut: async () => { },
+  signOut: async () => {},
   checkAuth: async () => false,
 });
 
@@ -107,7 +109,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const updateToken = async (token: string) => {
     await storeToken(token);
     setToken(token);
-  }
+  };
 
   const value = {
     user,
@@ -115,6 +117,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     isAuthenticated,
     setUser,
     token,
+    userToModify,
+    setUserToModify,
     signOut,
     updateToken,
     checkAuth,
