@@ -48,6 +48,7 @@ public class UserService {
             return findByUsername(auth.getName());
     }
 
+    @Transactional(readOnly = true)
     public Integer findCurrentUserId() {
         return this.findCurrentUser().getId();
     }
@@ -75,6 +76,15 @@ public class UserService {
             user.setEmail(userDetails.getEmail());
             return userRepository.save(user);
         }).orElse(null);
+    }
+
+    @Transactional
+    public User updatePassword(Long userId, String encodedPassword) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "Id", userId));
+
+        user.setPassword(encodedPassword);
+        return userRepository.save(user);
     }
 
     @Transactional
