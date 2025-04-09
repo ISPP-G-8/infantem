@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isppG8.infantem.infantem.user.UserService;
+
 @RestController
 @RequestMapping("api/v1/advertisements")
 public class AdvertisementController {
@@ -21,7 +23,7 @@ public class AdvertisementController {
     private AdvertisementService advertisementService;
 
     @Autowired
-    public AdvertisementController(AdvertisementService advertisementService) {
+    public AdvertisementController(AdvertisementService advertisementService, UserService userService) {
         this.advertisementService = advertisementService;
     }
 

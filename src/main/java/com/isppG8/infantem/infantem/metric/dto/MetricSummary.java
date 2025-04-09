@@ -9,12 +9,12 @@ public class MetricSummary {
     private Integer id;
     private Double weight;
     private Double height;
-    private Integer cephalicPerimeter;
+    private Double headCircumference;
 
-    public MetricSummary(Integer id, Double weight, Double height, Integer cephalicPerimeter) {
+    public MetricSummary(Integer id, Double weight, Double height, Double headCircumference) {
         this.id = id;
         this.weight = weight;
         this.height = height;
-        this.cephalicPerimeter = cephalicPerimeter;
+        this.headCircumference = headCircumference;
     }
 }

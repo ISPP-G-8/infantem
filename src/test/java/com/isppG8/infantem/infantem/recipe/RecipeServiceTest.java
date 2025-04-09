@@ -256,9 +256,43 @@ public class RecipeServiceTest {
     }
 
     @Test
+    public void visbleRecipeFilterByNameTest() {
+        Mockito.when(userService.findCurrentUserId()).thenReturn(1);
+        final String EXISTING_NAME = "Batata";
+        final String NON_EXISTING_NAME = "Unexisting Recipe";
+        final String EMPTY_NAME = "";
+
+        List<Recipe> recipesWithName = recipeService.getVisibleRecipesByName(EXISTING_NAME);
+        recipesWithName.forEach(r -> r.setIngredients(r.getName().toLowerCase()));
+        assertTrue(recipesWithName.size() > 0, "Recipes containing the name should exist." + recipesWithName);
+
+        boolean allRecipesContainIngredient = recipesWithName.stream()
+                .allMatch(recipe -> recipe.getName().toLowerCase().contains(EXISTING_NAME.toLowerCase()));
+
+        assertTrue(allRecipesContainIngredient,
+                "All returned recipes should contain the name " + recipesWithName + EXISTING_NAME);
+
+        List<Recipe> recipesWithNonExistingName = recipeService.getVisibleRecipesByName(NON_EXISTING_NAME);
+        assertTrue(recipesWithNonExistingName.isEmpty(), "No recipes should contain the name " + NON_EXISTING_NAME);
+
+        List<Recipe> recipesWithEmptyName = recipeService.getVisibleRecipesByName(EMPTY_NAME);
+        assertTrue(recipesWithEmptyName.isEmpty(),
+                "No recipes should be returned for empty name." + recipesWithEmptyName);
+    }
+
+    @Test
     public void getAllRecommendedRecipesTest() {
         List<Recipe> recommendRecipes = recipeService.getAllRecommendedRecipes();
-        assertEquals(7, recommendRecipes.size(), "Number of recommended recipes should be 7");
+        assertEquals(16, recommendRecipes.size(), "Number of recommended recipes should be 16");
+    }
+
+    @Test
+    public void getAllVisibleRecipesTest() {
+        Mockito.when(userService.findCurrentUserId()).thenReturn(1);
+        List<Recipe> visibleRecipes = recipeService.getVisibleRecipes();
+        assertEquals(21, visibleRecipes.size(), "Number of visible recipes should be 21");
+        assertTrue(visibleRecipes.stream().filter(r -> r.getId() == 1L).findFirst().isPresent(),
+                "Recipe with id 1 should be present in the visible recipes");
     }
 
     @Test

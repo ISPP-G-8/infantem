@@ -2,6 +2,7 @@ package com.isppG8.infantem.infantem.disease;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -39,10 +40,12 @@ public class Disease {
 
     @NotNull
     @PastOrPresent
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 
     @NotNull
     @PastOrPresent
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 
     @NotBlank
