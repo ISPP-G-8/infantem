@@ -167,16 +167,6 @@ public class RecipeController {
         return ResponseEntity.ok(recipes.stream().map(RecipeDTO::new).toList());
     }
 
-    @Operation(summary = "Obtener recetas recomendadas por edad",
-            description = "Recupera las recetas recomendadas para un bebé según su edad.") @ApiResponse(
-                    responseCode = "200", description = "Recetas recomendadas por edad encontradas",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = RecipeDTO.class))) @GetMapping("/recommended/age/{age}")
-    public ResponseEntity<List<RecipeDTO>> getRecommendedRecipesByAge(@PathVariable Integer age) {
-        List<Recipe> recipes = recipeService.getRecommendedRecipesByAge(age);
-        return ResponseEntity.ok(recipes.stream().map(RecipeDTO::new).toList());
-    }
-
     @Operation(summary = "Obtener receta por ID",
             description = "Recupera los detalles de una receta utilizando su ID.") @ApiResponse(responseCode = "200",
                     description = "Receta encontrada", content = @Content(mediaType = "application/json",
