@@ -324,6 +324,7 @@ Cada metrica se puntuara del 1 al 5 dando lugar a un valor de priorizacion de fe
 - No está claro el propósito del sistema de alérgenos para el usuario. (VPF=16)
 - El diseño del carrusel de recetas en inicio puede mostrar demasiadas recetas de golpe. (VPF=15)
 - No se indica el tiempo de elaboración ni dificultad en las recetas. (VPF=13)
+- Falta de respuesta tras completar el cuestionario de alérgenos: solo se muestra un mensaje genérico de agradecimiento, sin feedback útil o análisis. (VPF = 14)
 
 ### 🟩 Prioridad Baja
 - Falta un botón de cancelar en la sección 'Hazte Premium'. (VPF=9)
@@ -333,6 +334,9 @@ Cada metrica se puntuara del 1 al 5 dando lugar a un valor de priorizacion de fe
 - Sugerencia de modal de confirmación al salir sin guardar receta. (VPF=8)
 - El calendario podría tener más funciones específicas como compartir eventos. (VPF=9)
 - Estéticamente la interfaz ha mejorado mucho y la experiencia es positiva. (VPF=6)
+- El nombre de las recetas es poco atractivo o genérico: se sugiere desarrollar mejor los títulos para que resulten más interesantes y fomenten su exploración. (VPF = 6)
+- Falta de variedad en el contenido actual: aunque no es un fallo funcional, implica una percepción de escasez en la oferta, que afecta a la motivación del usuario. (VPF = 9)
+
 
 ### 💡 Recomendaciones
 - Permitir sincronizar eventos del calendario con Google Calendar (descargar .ics).
@@ -342,6 +346,8 @@ Cada metrica se puntuara del 1 al 5 dando lugar a un valor de priorizacion de fe
 - Mostrar claramente las funcionalidades premium disponibles con ejemplos.
 - Añadir opción de visualizar contraseña en login (si no está ya).
 - Clarificar el seguimiento de crecimiento del bebé dentro de la app.
+- Sugerencia de incluir vídeos cortos o contenido visual complementario en las recetas, para mejorar la comprensión de su preparación. (VPF = 8)
+- Sugerencia de filtrar por preferencias alimenticias desde el inicio o en el perfil. (VPF = 9)
 
 ## Semana 2
 ### 🟥 Prioridad Alta
@@ -356,6 +362,24 @@ Cada metrica se puntuara del 1 al 5 dando lugar a un valor de priorizacion de fe
 - Falta feedback visual al terminar el cuestionario de alérgenos o al completar acciones clave. (VPF = 20)
 
 - El sistema de alérgenos no permite asociar alimentos concretos a cada bebé ni gestionar múltiples registros correctamente. (VPF = 21)
+
+- Problemas con el método de pago: Los campos de pago aparecen solapados y mal adaptados visualmente, y no está activado el modo de prueba, lo que dificulta la validación en entorno de desarrollo. (VPF = 21)
+
+- Imposibilidad de registrar un bebé: En algunos casos, el botón "Guardar" no funciona sin indicar motivo; salta error de consola. (VPF = 23)
+
+- El cuestionario de alérgenos no indica claramente a qué bebé se refiere, lo cual genera confusión si hay varios registrados. (VPF = 20)
+
+- Errores en el sistema de registro de usuario: la contraseña no se acepta pese a cumplir los requisitos, el formulario se cierra sin aviso, y llegan múltiples códigos de verificación inválidos. El usuario no puede completar el proceso fácilmente. (VPF = 24)
+
+- El sistema permite edad mínima mayor que la máxima en los filtros de búsqueda de recetas sin validación ni mensajes de error. (VPF = 22)
+
+- No se puede registrar un bebé correctamente a pesar de introducir datos válidos (se recibe 400 Bad Request). (VPF = 23)
+
+- Falta de validación y feedback visual en edición de perfil y formularios clave: no se indica si se está editando, si hay errores o si la acción ha tenido éxito. (VPF = 21)
+
+- Formulario de creación de recetas demasiado genérico: pasos poco detallados y elaboración pobre para recetas dirigidas a bebés. (VPF = 20)
+
+
 
 ### 🟧 Prioridad Media
 - No hay botones para retroceder en cuestionarios de alérgenos. (VPF = 15)
@@ -372,6 +396,21 @@ Cada metrica se puntuara del 1 al 5 dando lugar a un valor de priorizacion de fe
 
 - El apartado de beneficios tiene errores ortográficos (“bebé” sin tilde). (VPF = 10)
 
+- No hay opción de “¿Olvidaste tu contraseña?” en la pantalla de login. (VPF = 14)
+
+- Falta información clara tras completar cuestionarios como el de alérgenos: no hay resultado, hipótesis ni sugerencia alguna. (VPF = 15)
+
+- Texto y diseño poco claros en el proceso de pago premium: los campos están mal posicionados y el espacio no está optimizado. (VPF = 13)
+
+- El campo “apellido” muestra el nombre, y hay confusión en algunos formularios sobre qué se espera introducir. (VPF = 11)
+- El buscador de recetas (general y “Mis recetas”) no funciona correctamente. No devuelve resultados ni indica si hay error. (VPF = 15)
+
+- No se especifica visualmente si las edades son en meses o años dentro de los formularios, lo cual genera confusión. (VPF = 14)
+
+- El formulario de alérgenos sigue siendo confuso: no queda claro dónde se almacena la información o si se ha enviado correctamente. (VPF = 15)
+
+- Visualización incorrecta de fechas en perfil de bebé (202311), lo que dificulta su lectura y comprensión. (VPF = 13)
+
 ### 🟩 Prioridad Baja
 - Algunos usuarios consideran innecesario el campo “perímetro cefálico”. (VPF = 8)
 
@@ -381,7 +420,25 @@ Cada metrica se puntuara del 1 al 5 dando lugar a un valor de priorizacion de fe
 
 - Sugerencia de agregar videos o fotos paso a paso en recetas, utilizando hosting externo. (VPF = 7)
 
+- Sugerencia de añadir etiquetas visuales para categorizar productos del marketplace (ej. "alimento", "accesorio", "higiene"). (VPF = 9)
+
+- Añadir explicación o guía sobre el uso del campo "perímetro cefálico", ya que varios usuarios indican no entender su utilidad. (VPF = 7)
+
+- Agregar más detalle visual y funcional a la sección de recetas: duración, dificultad, alérgenos, nivel nutricional, etc. (VPF = 9)
+
+- Permitir al usuario volver atrás en flujos como el cuestionario de productos/alérgenos (no es funcional actualmente). (VPF = 6)
+
+- Uso de enlaces de afiliación de Amazon en la tienda como sugerencia de monetización para el modelo de negocio. (VPF = 5)
+
 - Falta un botón para repetir el cuestionario de alérgenos tras completarlo. (VPF = 6)
+
+- La interfaz de pagos se ve desordenada y poco optimizada. (VPF = 9)
+
+- El diseño general sigue resultando poco intuitivo o “chungo” para algunos usuarios. (VPF = 8)
+
+- Falta de diferenciación clara entre funcionalidades premium y gratuitas, lo que genera confusión. (VPF = 9)
+
+- Sugerencia de clasificar productos por tipo (cuidado, higiene, comida...) para mejorar la navegación en la tienda. (VPF = 8)
 
 ### 💡 Recomendaciones
 - Incluir una lista predefinida de ingredientes al crear recetas, para evitar errores de escritura y mejorar los filtros.
