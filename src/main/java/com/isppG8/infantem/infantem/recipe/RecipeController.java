@@ -30,6 +30,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import com.isppG8.infantem.infantem.recipe.dto.RecipeDTO;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.RequestPart;
+import java.io.IOException;
+import org.springframework.web.multipart.MultipartFile;
 
 @Tag(name = "Recipes", description = "Gestión de recetas para la alimentación de bebés")
 @RestController
@@ -172,17 +175,23 @@ public class RecipeController {
             description = "Recupera los detalles de una receta utilizando su ID.") @ApiResponse(responseCode = "200",
                     description = "Receta encontrada", content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Recipe.class))) @GetMapping("/{id}")
-    public ResponseEntity<Recipe> getRecipeById(@PathVariable Long id) {
+    public ResponseEntity<RecipeDTO> getRecipeById(@PathVariable Long id) {
 
         Recipe recipe = recipeService.getRecipeById(id);
-        return ResponseEntity.ok(recipe);
+        return ResponseEntity.ok(new RecipeDTO(recipe));
     }
 
     @Operation(summary = "Crear una receta", description = "Crea una nueva receta para un bebé.") @ApiResponse(
             responseCode = "201", description = "Receta creada con éxito",
             content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = Recipe.class))) @PostMapping
-    public ResponseEntity<Recipe> createRecipe(@Valid @RequestBody Recipe recipe) {
+    public ResponseEntity<Recipe> createRecipe(@Valid @RequestBody Recipe recipe,
+            @RequestPart("recipePhoto") MultipartFile multipartFile) throws IOException {
+        if (!multipartFile.isEmpty()) {
+            recipe.setRecipePhoto(multipartFile.getBytes());
+        } else {
+            recipe.setRecipePhoto(null);
+        }
         Recipe createdRecipe = recipeService.createRecipe(recipe);
         return ResponseEntity.status(201).body(createdRecipe);
     }
@@ -191,8 +200,14 @@ public class RecipeController {
             description = "Actualiza los detalles de una receta existente.") @ApiResponse(responseCode = "200",
                     description = "Receta actualizada con éxito", content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Recipe.class))) @PutMapping("/{id}")
-    public ResponseEntity<Recipe> updateRecipe(@PathVariable Long id, @Valid @RequestBody Recipe recipeDetails) {
+    public ResponseEntity<Recipe> updateRecipe(@PathVariable Long id, @Valid @RequestBody RecipeDTO recipeDetails,
+            @RequestPart("recipePhoto") MultipartFile multipartFile) throws IOException {
         User user = userService.findCurrentUser();
+        if (!multipartFile.isEmpty()) {
+            recipeDetails.setRecipePhoto(multipartFile.getBytes());
+        } else {
+            recipeDetails.setRecipePhoto(null);
+        }
         Recipe updatedRecipe = recipeService.updateRecipe(id, recipeDetails, user.getId());
         return ResponseEntity.ok(updatedRecipe);
     }

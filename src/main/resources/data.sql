@@ -87,31 +87,31 @@ INSERT INTO milestone_completed (baby_id, milestone_id, date) VALUES
 (1, 1, '2024-01-01');
 
 -- Inserción de recetas
-INSERT INTO recipe_table(max_recommended_age, min_recommended_age, user_id, description, elaboration, ingredients, name, photo_route) VALUES
-(8, 6, 1, 'Puré de zanahoria y batata', 'Cocinar zanahoria y batata al vapor, triturar.', 'Zanahoria, batata', 'Puré de Zanahoria y Batata', 'a'),
-(7, 5, 2, 'Compota de manzana y pera', 'Cocinar manzana y pera a fuego lento, triturar.', 'Manzana, pera', 'Compota de Manzana y Pera', 'a'),
-(9, 6, 2, 'Puré de aguacate y plátano', 'Triturar aguacate y plátano maduros.', 'Aguacate, plátano', 'Puré de Aguacate y Plátano', 'a'),
-(8, 6, 1, 'Crema de calabaza y calabacín', 'Cocinar calabaza y calabacín al vapor, triturar.', 'Calabaza, calabacín', 'Crema de Calabaza y Calabacín', 'a'),
-(7, 5, 1, 'Puré de guisantes y zanahoria', 'Cocinar guisantes y zanahoria al vapor, triturar.', 'Guisantes, zanahoria', 'Puré de Guisantes y Zanahoria', 'a'),
-(10, 7, null, 'Puré de pollo con verduras', 'Cocinar pollo y verduras al vapor, triturar.', 'Pollo, verduras mixtas', 'Puré de Pollo con Verduras', 'a'),
-(10, 7, null, 'Tortilla francesa con espinacas', 'Batir huevo con espinacas cocidas, cocinar.', 'Huevo, espinacas', 'Tortilla con Espinacas', 'a'),
-(12, 8, null, 'Croquetas de pescado blanco', 'Cocinar pescado, mezclar con puré de patata, formar croquetas y hornear.', 'Pescado blanco, patata', 'Croquetas de Pescado', 'a'),
-(11, 8, null, 'Arroz con pollo y verduras', 'Cocinar arroz, pollo y verduras al vapor, triturar ligeramente.', 'Arroz, pollo, verduras', 'Arroz con Pollo y Verduras', 'a'),
-(9, 7, 1, 'Yogur natural con fruta', 'Mezclar yogur natural con fruta triturada.', 'Yogur natural, fruta', 'Yogur con Fruta', 'a'),
-(8, 6, 2, 'Huevo revuelto con aguacate', 'Revuelto de huevo con aguacate triturado.', 'Huevo, aguacate', 'Revuelto con Aguacate', 'a'),
-(7, 5, 1, 'Puré de lentejas con zanahoria', 'Cocinar lentejas y zanahoria, triturar.', 'Lentejas, zanahoria', 'Puré de Lentejas', 'a'),
-(10, 7, null, 'Pescado blanco al vapor con verduras', 'Cocinar pescado blanco y verduras al vapor.', 'Pescado blanco, verduras', 'Pescado al Vapor', 'a'),
-(12, 9, null, 'Mini hamburguesas de ternera', 'Carne de ternera picada, formar mini hamburguesas y cocinar a la plancha.', 'Ternera picada', 'Mini Hamburguesas', 'a'),
-(11, 8, null, 'Pasta corta con verduras', 'Cocinar pasta corta, mezclar con verduras al vapor y triturar ligeramente.', 'Pasta corta, verduras', 'Pasta con Verduras', 'a'),
-(12, 9, null, 'Mini hamburguesas de ternera', 'Carne de ternera picada, formar mini hamburguesas y cocinar a la plancha.', 'Ternera picada', 'Mini Hamburguesas', 'a'),
-(9, 6, null, 'Cocer brócoli y patata al vapor, triturar hasta obtener una crema suave.', 'Cocer brócoli y patata al vapor, triturar.', 'Brócoli, patata', 'Crema de Brócoli y Patata', 'a'),
-(10, 7, null, 'Cocer calabacín y arroz, triturar hasta conseguir una papilla homogénea.', 'Cocer calabacín y arroz, triturar.', 'Calabacín, arroz', 'Papilla de Calabacín y Arroz', 'a'),
-(11, 8, null, 'Saltear calabaza y lentejas cocidas, triturar para obtener un puré.', 'Cocer calabaza y lentejas, triturar.', 'Calabaza, lentejas', 'Puré de Calabaza y Lentejas', 'a'),
-(12, 9, null, 'Hervir pasta pequeña con brócoli y triturar ligeramente.', 'Cocer pasta pequeña y brócoli, triturar.', 'Pasta pequeña, brócoli', 'Pasta con Brócoli', 'a'),
-(9, 7, null, 'Cocer pera y ciruela, triturar para obtener una compota suave.', 'Cocer pera y ciruela, triturar.', 'Pera, ciruela', 'Compota de Pera y Ciruela', 'a'),
-(10, 7, null, 'Cocer arroz con leche vegetal y manzana, triturar.', 'Cocer arroz con leche vegetal y manzana, triturar.', 'Arroz, leche vegetal, manzana', 'Papilla de Arroz y Manzana', 'a'),
-(11, 8, null, 'Cocer garbanzos y calabacín, triturar para formar un puré.', 'Cocer garbanzos y calabacín, triturar.', 'Garbanzos, calabacín', 'Puré de Garbanzos y Calabacín', 'a'),
-(12, 9, null, 'Tostar pan integral, untar con aguacate y huevo cocido triturado.', 'Tostar pan integral, untar con aguacate y huevo cocido.', 'Pan integral, aguacate, huevo', 'Tostada Nutritiva', 'a');
+INSERT INTO recipe_table(max_recommended_age, min_recommended_age, user_id, description, elaboration, ingredients, name, recipe_photo) VALUES
+(8, 6, 1, 'Puré de zanahoria y batata', 'Cocinar zanahoria y batata al vapor, triturar.', 'Zanahoria, batata', 'Puré de Zanahoria y Batata', ''),
+(7, 5, 2, 'Compota de manzana y pera', 'Cocinar manzana y pera a fuego lento, triturar.', 'Manzana, pera', 'Compota de Manzana y Pera', ''),
+(9, 6, 2, 'Puré de aguacate y plátano', 'Triturar aguacate y plátano maduros.', 'Aguacate, plátano', 'Puré de Aguacate y Plátano', ''),
+(8, 6, 1, 'Crema de calabaza y calabacín', 'Cocinar calabaza y calabacín al vapor, triturar.', 'Calabaza, calabacín', 'Crema de Calabaza y Calabacín', ''),
+(7, 5, 1, 'Puré de guisantes y zanahoria', 'Cocinar guisantes y zanahoria al vapor, triturar.', 'Guisantes, zanahoria', 'Puré de Guisantes y Zanahoria', ''),
+(10, 7, null, 'Puré de pollo con verduras', 'Cocinar pollo y verduras al vapor, triturar.', 'Pollo, verduras mixtas', 'Puré de Pollo con Verduras', ''),
+(10, 7, null, 'Tortilla francesa con espinacas', 'Batir huevo con espinacas cocidas, cocinar.', 'Huevo, espinacas', 'Tortilla con Espinacas', ''),
+(12, 8, null, 'Croquetas de pescado blanco', 'Cocinar pescado, mezclar con puré de patata, formar croquetas y hornear.', 'Pescado blanco, patata', 'Croquetas de Pescado', ''),
+(11, 8, null, 'Arroz con pollo y verduras', 'Cocinar arroz, pollo y verduras al vapor, triturar ligeramente.', 'Arroz, pollo, verduras', 'Arroz con Pollo y Verduras', ''),
+(9, 7, 1, 'Yogur natural con fruta', 'Mezclar yogur natural con fruta triturada.', 'Yogur natural, fruta', 'Yogur con Fruta', ''),
+(8, 6, 2, 'Huevo revuelto con aguacate', 'Revuelto de huevo con aguacate triturado.', 'Huevo, aguacate', 'Revuelto con Aguacate', ''),
+(7, 5, 1, 'Puré de lentejas con zanahoria', 'Cocinar lentejas y zanahoria, triturar.', 'Lentejas, zanahoria', 'Puré de Lentejas', ''),
+(10, 7, null, 'Pescado blanco al vapor con verduras', 'Cocinar pescado blanco y verduras al vapor.', 'Pescado blanco, verduras', 'Pescado al Vapor', ''),
+(12, 9, null, 'Mini hamburguesas de ternera', 'Carne de ternera picada, formar mini hamburguesas y cocinar a la plancha.', 'Ternera picada', 'Mini Hamburguesas', ''),
+(11, 8, null, 'Pasta corta con verduras', 'Cocinar pasta corta, mezclar con verduras al vapor y triturar ligeramente.', 'Pasta corta, verduras', 'Pasta con Verduras', ''),
+(12, 9, null, 'Mini hamburguesas de ternera', 'Carne de ternera picada, formar mini hamburguesas y cocinar a la plancha.', 'Ternera picada', 'Mini Hamburguesas', ''),
+(9, 6, null, 'Cocer brócoli y patata al vapor, triturar hasta obtener una crema suave.', 'Cocer brócoli y patata al vapor, triturar.', 'Brócoli, patata', 'Crema de Brócoli y Patata', ''),
+(10, 7, null, 'Cocer calabacín y arroz, triturar hasta conseguir una papilla homogénea.', 'Cocer calabacín y arroz, triturar.', 'Calabacín, arroz', 'Papilla de Calabacín y Arroz', ''),
+(11, 8, null, 'Saltear calabaza y lentejas cocidas, triturar para obtener un puré.', 'Cocer calabaza y lentejas, triturar.', 'Calabaza, lentejas', 'Puré de Calabaza y Lentejas', ''),
+(12, 9, null, 'Hervir pasta pequeña con brócoli y triturar ligeramente.', 'Cocer pasta pequeña y brócoli, triturar.', 'Pasta pequeña, brócoli', 'Pasta con Brócoli', ''),
+(9, 7, null, 'Cocer pera y ciruela, triturar para obtener una compota suave.', 'Cocer pera y ciruela, triturar.', 'Pera, ciruela', 'Compota de Pera y Ciruela', ''),
+(10, 7, null, 'Cocer arroz con leche vegetal y manzana, triturar.', 'Cocer arroz con leche vegetal y manzana, triturar.', 'Arroz, leche vegetal, manzana', 'Papilla de Arroz y Manzana', ''),
+(11, 8, null, 'Cocer garbanzos y calabacín, triturar para formar un puré.', 'Cocer garbanzos y calabacín, triturar.', 'Garbanzos, calabacín', 'Puré de Garbanzos y Calabacín', ''),
+(12, 9, null, 'Tostar pan integral, untar con aguacate y huevo cocido triturado.', 'Tostar pan integral, untar con aguacate y huevo cocido.', 'Pan integral, aguacate, huevo', 'Tostada Nutritiva', '');
 
 
 -- Inserción de anuncios
