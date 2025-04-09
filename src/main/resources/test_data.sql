@@ -1,25 +1,25 @@
 -- Inserción de roles
-INSERT INTO authorities (id, authority) VALUES (1, 'user'), (2, 'admin');
+INSERT INTO authorities (id, authority) VALUES (1, 'user'), (2, 'admin'),(3,'premium');
 
 -- Inserción de usuarios con contraseñas encriptadas
 -- La contraseña que se ha codificado es: user
 
-INSERT INTO user_table (name, surname, username, password, email, profile_photo_route, authority_id) VALUES
-('user', 'user', 'user1', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'user1@example.com', 'a', 1),
-('user', 'user', 'user2', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'user2@example.com', 'a', 1),
-('admin', 'admin', 'admin1', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'admin1@example.com', 'a', 2),
-('Ana', 'García', 'anagarcia', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'ana.garcia@email.com', 'a', 1),
-('Carlos', 'Pérez', 'carlosperez', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'carlos.perez@email.com', 'a', 1),
-('Laura', 'Martínez', 'lauramartinez', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'laura.martinez@email.com', 'a', 1),
-('Javier', 'Sánchez', 'javiersanchez', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'javier.sanchez@email.com', 'a', 1),
-('Sofía', 'Rodríguez', 'sofiarodriguez', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'sofia.rodriguez@email.com', 'a', 1),
-('Miguel', 'López', 'miguelopez', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'miguel.lopez@email.com', 'a', 1),
-('Elena', 'Fernández', 'elenafernandez', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'elena.fernandez@email.com', 'a', 1),
-('David', 'González', 'davidgonzalez', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'david.gonzalez@email.com', 'a', 1),
-('Isabel', 'Ruiz', 'isabelruiz', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'isabel.ruiz@email.com', 'a', 1),
-('Pablo', 'Jiménez', 'pablojimenez', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'pablo.jimenez@email.com', 'a', 1),
-('Marta', 'Díaz', 'martadiaz', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'marta.diaz@email.com', 'a', 1),
-('Sergio', 'Álvarez', 'sergioalvarez', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'sergio.alvarez@email.com', 'a', 1);
+INSERT INTO user_table (name, surname, username, password, email, profile_photo, authority_id) VALUES
+('user', 'user', 'user1', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'user1@example.com', '', 1),
+('user', 'user', 'user2', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'user2@example.com', '', 1),
+('admin', 'admin', 'admin1', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'admin1@example.com', '', 2),
+('Ana', 'García', 'anagarcia', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'ana.garcia@email.com', '', 1),
+('Carlos', 'Pérez', 'carlosperez', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'carlos.perez@email.com', '', 1),
+('Laura', 'Martínez', 'lauramartinez', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'laura.martinez@email.com', '', 1),
+('Javier', 'Sánchez', 'javiersanchez', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'javier.sanchez@email.com', '', 1),
+('Sofía', 'Rodríguez', 'sofiarodriguez', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'sofia.rodriguez@email.com', '', 1),
+('Miguel', 'López', 'miguelopez', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'miguel.lopez@email.com', '', 1),
+('Elena', 'Fernández', 'elenafernandez', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'elena.fernandez@email.com', '', 1),
+('David', 'González', 'davidgonzalez', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'david.gonzalez@email.com', '', 1),
+('Isabel', 'Ruiz', 'isabelruiz', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'isabel.ruiz@email.com', '', 1),
+('Pablo', 'Jiménez', 'pablojimenez', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'pablo.jimenez@email.com', '', 1),
+('Marta', 'Díaz', 'martadiaz', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'marta.diaz@email.com', '', 1),
+('Sergio', 'Álvarez', 'sergioalvarez', '$2a$10$quXOAFytwj43GJuecSaM7.nrieG6RG4GVUZASDEefCcEfzk.lPMo6', 'sergio.alvarez@email.com', '', 1);
 
 -- Inserción de alérgenos
 INSERT INTO allergen (name, description) VALUES

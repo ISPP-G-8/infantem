@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { router } from 'expo-router';
-import { getToken, removeToken } from '../utils/jwtStorage';
+import { getToken, storeToken, removeToken } from '../utils/jwtStorage';
 import { User, AuthContextType } from '../types';
 
 const AuthContext = createContext<AuthContextType>({
@@ -9,6 +9,7 @@ const AuthContext = createContext<AuthContextType>({
   isAuthenticated: false,
   token: null,
   setUser: () => { },
+  updateToken: async () => {},
   signOut: async () => { },
   checkAuth: async () => false,
 });
@@ -102,13 +103,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const updateToken = async (token: string) => {
+    await storeToken(token);
+    setToken(token);
+  }
+
   const value = {
     user,
     isLoading,
     isAuthenticated,
-    token,
     setUser,
+    token,
     signOut,
+    updateToken,
     checkAuth,
   };
 

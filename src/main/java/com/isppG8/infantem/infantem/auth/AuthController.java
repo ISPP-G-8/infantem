@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import jakarta.validation.Valid;
 
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.isppG8.infantem.infantem.user.User;
@@ -25,6 +27,7 @@ import com.isppG8.infantem.infantem.auth.email.EmailValidationService;
 import com.isppG8.infantem.infantem.auth.dto.AuthDTO;
 import com.isppG8.infantem.infantem.auth.jwt.JwtUtils;
 import com.isppG8.infantem.infantem.auth.payload.request.LoginRequest;
+import com.isppG8.infantem.infantem.auth.payload.request.ResetPasswordRequest;
 import com.isppG8.infantem.infantem.auth.payload.request.SignupRequest;
 import com.isppG8.infantem.infantem.auth.payload.request.EmailRequest;
 import com.isppG8.infantem.infantem.auth.payload.response.MessageResponse;
@@ -38,8 +41,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestPart;
 
 import org.springframework.security.authentication.BadCredentialsException;
+
+import java.io.IOException;
 
 @Tag(name = "Authentication", description = "Gestión de la autenticación de usuarios")
 @RestController
@@ -128,7 +134,8 @@ public class AuthController {
                     content = @Content(schema = @Schema(implementation = JwtResponse.class))) @ApiResponse(
                             responseCode = "400",
                             description = "Usuario o email ya en uso o código de validación incorrecto") @PostMapping("/signup")
-    public ResponseEntity<Object> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+    public ResponseEntity<Object> registerUser(@Valid @RequestBody SignupRequest signUpRequest,
+            @RequestPart("profilePhoto") MultipartFile multipartFile) throws IOException {
         boolean existingUser = (userService.findByUsername(signUpRequest.getUsername()) == null);
         boolean existingEmail = (userService.findByEmail(signUpRequest.getEmail()) == null);
         if (!(existingUser && existingEmail)) {
@@ -147,7 +154,7 @@ public class AuthController {
         if (!emailValidationService.validateCode(signUpRequest.getEmail(), signUpRequest.getCode())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Wrong validation code"));
         }
-        authService.createUser(signUpRequest);
+        authService.createUser(signUpRequest, multipartFile);
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(signUpRequest.getUsername(), signUpRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -174,6 +181,37 @@ public class AuthController {
             return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
         }
         return ResponseEntity.ok().body(new MessageResponse("Code sent successfully!"));
+    }
+
+    @Operation(summary = "Solicitar recuperación de contraseña",
+            description = "Envía un correo con un enlace para restablecer la contraseña si el correo está registrado.") @ApiResponses(
+                    value = {
+                            @ApiResponse(responseCode = "200",
+                                    description = "Solicitud procesada (aunque no se revele si el correo existe)",
+                                    content = @Content(schema = @Schema(implementation = MessageResponse.class))),
+                            @ApiResponse(responseCode = "400", description = "Solicitud malformada",
+                                    content = @Content) }) @PostMapping("/recover-password")
+    public ResponseEntity<?> recoverPassword(@RequestBody EmailRequest emailRequest) {
+        if (emailRequest.getEmail() == null) {
+            return ResponseEntity.badRequest().body("El email es nulo");
+        }
+        authService.initiatePasswordReset(emailRequest.getEmail());
+        return ResponseEntity.ok(new MessageResponse(
+                "Si el correo está registrado, se ha enviado un enlace para restablecer la contraseña."));
+    }
+
+    @Operation(summary = "Restablecer contraseña",
+            description = "Permite restablecer la contraseña de un usuario utilizando un token recibido por correo electrónico.") @ApiResponses(
+                    value = {
+                            @ApiResponse(responseCode = "200", description = "Contraseña restablecida correctamente",
+                                    content = @Content(schema = @Schema(implementation = MessageResponse.class))),
+                            @ApiResponse(responseCode = "400", description = "Token inválido o expirado",
+                                    content = @Content),
+                            @ApiResponse(responseCode = "500", description = "Error interno",
+                                    content = @Content) }) @PostMapping("/reset-password")
+    public ResponseEntity<?> resetPassword(@RequestBody @Valid ResetPasswordRequest request) {
+        authService.resetPassword(request.getToken(), request.getNewPassword());
+        return ResponseEntity.ok(new MessageResponse("Contraseña restablecida correctamente."));
     }
 
 }

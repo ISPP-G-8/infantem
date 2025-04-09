@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Modal, TextInput, Alert, ImageBackground } from "react-native";
 import { Text, View, TouchableOpacity, ScrollView, Image, FlatList } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { Ionicons } from "@expo/vector-icons";
-import { Link, router } from "expo-router";
+import { Link } from "expo-router";
 import { useAuth } from "../../../context/AuthContext";
 import { jwtDecode } from "jwt-decode";
 import UploadImageModal from "../../../components/UploadImageModal";
@@ -19,19 +17,19 @@ const avatarOptions = [
 export default function Account() {
   const [avatarModalVisible, setAvatarModalVisible] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const navigation = useNavigation();
   const [subscription, setSubscription] = useState(null);
   const [userId, setUserId] = useState<number | null>(null);
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const gs = require("../../../static/styles/globalStyles");
-  const { isLoading, user, token, setUser, checkAuth, signOut } = useAuth();
+  const { isLoading, user, token, setUser, updateToken, checkAuth, signOut } = useAuth();
   const [image, setImage] = useState<any>(null);
+  const [imageBase64, setImageBase64] = useState<any>(null);
 
   const FormData = global.FormData;
 
   useEffect(() => {
-    if (!token) return; // Evita ejecutar el efecto si jwt es null o undefined
+    if (!token) return;
     console.log(token);
     try {
       const decodedToken: any = jwtDecode(token);
@@ -41,13 +39,13 @@ export default function Account() {
     }
   }, [token]);
 
-  // Mueve el useEffect al nivel superior del componente
+
   useEffect(() => {
     if (!user || !token) return;
 
     const fetchSubscription = async () => {
       try {
-        const response = await fetch(`${apiUrl}/api/v1/subscriptions/user/${userId}`, {
+        const response = await fetch(`${apiUrl}/api/v1/subscriptions/user/${user.id}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -64,75 +62,68 @@ export default function Account() {
         setSubscription(data);
       } catch (error) {
         console.error("Error fetching subscription:", error);
-        setSubscription(null); // Asegúrate de resetear el estado si hay un error
+        setSubscription(null);
       }
     };
 
     fetchSubscription();
-  }, [user, token]);
+  }, []);
 
   const handleEditProfile = () => {
     setIsEditing(true);
   };
 
-  const handleSaveChanges = () => {
-    if (!user || !token) return;
-
-    const userData = {
-      id: user.id,
-      name: user.name,
-      surname: user.surname,
-      username: user.username,
-      password: user.password,
-      email: user.email,
-      profilePhotoRoute: user.profilePhotoRoute
-    };
-
-    fetch(`${apiUrl}/api/v1/users/${user.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
-      body: JSON.stringify(userData)
-    })
-      .then(response => {
-        if (!response.ok) {
-          return response.json().then(err => { throw new Error(JSON.stringify(err)); });
-        }
-        return response.json();
-      })
-      .then(data => {
-        setUser(data);
-        setIsEditing(false);
-        Alert.alert("Perfil actualizado", "Los cambios han sido guardados correctamente");
-        router.push("/account");
-      })
-      .catch(error => {
-        Alert.alert("Error", `No se pudo guardar los cambios: ${error.message}`);
+  const handleSaveChanges = async () => {
+    if (!user) {
+      console.log("No hay usuario disponible.");
+      return;
+    }
+  
+    if (!token) return;
+  
+    try {
+      const formData = new FormData();
+  
+      if (image) {
+        const fileToUpload = new File(
+          [image], 
+          `${user.username}_avatar.png`, 
+          { type: image.type || "image/png" }
+        );
+  
+        formData.append('profilePhoto', fileToUpload);
+      }
+  
+      formData.append('user', JSON.stringify(user));
+  
+      const response = await fetch(`${apiUrl}/api/v1/users/${user.id}`, {
+        method: "PUT",
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          
+        },
+        body: formData,
       });
-  };
-  const handleLogout = signOut;
-
-  const handleAvatarSelection = (avatar: any) => {
-    if (user && isEditing) {
-      const avatarUri = typeof avatar === "number"
-        ? Image.resolveAssetSource(avatar).uri
-        : avatar;
-
-      setUser({ ...user, profilePhotoRoute: avatarUri });
-      setAvatarModalVisible(false);
+  
+      if (!response.ok) {
+        const err = await response.json();
+        console.error("Error del servidor:", err);
+        throw new Error(JSON.stringify(err));
+      }
+  
+      const data = await response.json();
+      await updateToken(data.jwt);
+  
+      setIsEditing(false);
+      Alert.alert("Perfil actualizado", "Los cambios han sido guardados correctamente");
+  
+    } catch (error) {
+      console.error("Error al guardar cambios:", error);
+      Alert.alert("Error", `No se pudo guardar los cambios: ${error.message}`);
     }
   };
-
-  if (isLoading) {
-    return (
-      <View style={gs.loadingContainer}>
-        <ActivityIndicator size="large" color="#00446a" />
-        <Text style={gs.loadingText}>Cargando perfil...</Text>
-      </View>
-    );
-  }
+  
+  
 
   // IMAGE UPLOAD
 
@@ -146,27 +137,22 @@ export default function Account() {
     return true;
   };
 
-  // const base64ToBlob = (base64DataWithHeader, contentType = 'image/png') => {
-  //   const base64Data = base64DataWithHeader.split(',')[1];  // Limpiar cabecera
-
-  //   const byteCharacters = atob(base64Data);
-  //   const byteArrays = [];
-
-  //   for (let offset = 0; offset < byteCharacters.length; offset += 512) {
-  //     const slice = byteCharacters.slice(offset, offset + 512);
-
-  //     const byteNumbers = new Array(slice.length);
-  //     for (let i = 0; i < slice.length; i++) {
-  //       byteNumbers[i] = slice.charCodeAt(i);
-  //     }
-
-  //     const byteArray = new Uint8Array(byteNumbers);
-  //     byteArrays.push(byteArray);
-  //   }
-
-  //   const blob = new Blob(byteArrays, { type: contentType });
-  //   return blob;
-  // };
+  function base64toBlob(base64Data, contentType = 'image/png') {
+    const byteCharacters = atob(base64Data);
+    const byteArrays = [];
+  
+    for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+      const slice = byteCharacters.slice(offset, offset + 512);
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+  
+    return new Blob(byteArrays, { type: contentType });
+  }
 
   const uploadImage = async (mode) => {
     try {
@@ -183,41 +169,33 @@ export default function Account() {
           allowsEditing: true,
           aspect: [1, 1],
           quality: 1,
+          base64: false, // da igual, web da base64 como uri
         });
       }
-      //  else if (mode === "camera") {
-      //   const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
-      //   if (!permissionResult.granted) {
-      //     alert("Permiso denegado para usar la cámara.");
-      //     return;
-      //   }
-  
-      //   result = await ImagePicker.launchCameraAsync({
-      //     cameraType: ImagePicker.CameraType.front,
-      //     allowsEditing: true,
-      //     aspect: [1, 1],
-      //     quality: 1,
-      //   });
-      // }
 
       if (!result.canceled) {
-        if (!validImage(result.assets[0].uri)) {
-          alert(
-            "Por favor, selecciona una imagen válida (jpg, jpeg o png)."
-          );
-          setAvatarModalVisible(false);
+        let imageUri = result.assets[0].uri;
+  
+        if (imageUri.startsWith('data:image')) {
+          const base64Data = imageUri.split(',')[1];
+  
+          const blob = base64toBlob(base64Data);
+          console.log("Blob creado:", blob);
+          
+          saveImage(blob);
         } else {
-          console.log(result.assets[0].uri);
-          saveImage(result.assets[0].uri);
+          console.log("Imagen URI válida:", imageUri);
+          saveImage(imageUri);
         }
       } else if (result == undefined) {
         console.log("result undefined");
       }
     } catch (err) {
-      alert('Error al abrir la cámara: ' + err.message);
+      alert('Error al abrir la galería: ' + err.message);
       setAvatarModalVisible(false);
     }
   };
+  
 
   const deleteImage = () => {
     try {
@@ -231,54 +209,26 @@ export default function Account() {
 
   const saveImage = async (image) => {
     try {
-      // const blobImage = base64ToBlob(image);
-      // console.log("AAAAAAAAAAAAAAAAAAA");
-      // console.log(blobImage);
-      console.log(image)
       setImage(image);
-      sendToBackend(image);
-
+      const base64Image = await blobToBase64(image);
+      setImageBase64(base64Image);
+      console.log("Imagen base64:", base64Image);
+      // sendToBackend(image);
       setAvatarModalVisible(false);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const sendToBackend = async (image) => {
-    try {
-      const formData = new FormData();
+  const blobToBase64 = (blob) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  };
 
-      formData.append("image", {
-        uri: image,
-        name: `${user?.username}_avatar.png`,
-        type: "image/png",
-      });
-
-      // const config = {
-      //   headers: {
-      //     "Content-Type": "multipart/form-data",
-      //     "Authorization": `Bearer ${token}`,
-      //   },
-      //   transformRequest: () => {
-      //     return formData;
-      //   }
-      // }
-
-      const response = await fetch('https://TU_BACKEND_URL/api/users/123/photo', {
-        method: 'POST',
-        body: formData,
-      });
-  
-      if (response.ok) {
-        const result = await response.json();
-        console.log('Imagen subida correctamente:', result);
-      } else {
-        console.log('Error subiendo imagen:', response.status);
-      }
-    } catch (error) {
-      console.log("Error al enviar la imagen al backend:", error);
-    }
-  }
 
   return (
     <ImageBackground
@@ -299,9 +249,8 @@ export default function Account() {
 
 
         <TouchableOpacity style={gs.profileImageContainer} onPress={() => isEditing && setAvatarModalVisible(true)} disabled={!isEditing}>
-          {/* <Image source={user?.profilePhotoRoute ? { uri: user.profilePhotoRoute } : avatarOptions[0]} style={gs.profileImage} /> */}
           <Image
-            source={image}
+            source={{ uri: imageBase64 }}
             style={gs.profileImage}
           />
         </TouchableOpacity>
@@ -346,50 +295,10 @@ export default function Account() {
           <Text style={[gs.mainButtonText, { fontSize: 20, color: "black" }]}>¡Felicidades, eres premium!</Text>
         )}
 
-        <TouchableOpacity style={[gs.secondaryButton, { marginTop: 10 }]} onPress={handleLogout}>
+        <TouchableOpacity style={[gs.secondaryButton, { marginTop: 10 }]} onPress={signOut}>
           <Text style={[gs.secondaryButtonText]}>Cerrar Sesión</Text>
         </TouchableOpacity>
 
-        {/* <Modal visible={modalVisible} animationType="fade" transparent={true}>
-          <View style={[gs.modalOverlay, { marginTop: 110, width: "80%", marginHorizontal: "18%" }]}>
-            <View style={[gs.modalContent, { alignItems: "center", justifyContent: "center" }]}>
-              <Text style={[gs.modalTitle, { color: "#1565C0" }]}>Selecciona tu avatar</Text>
-              <FlatList
-                data={avatarOptions}
-                keyExtractor={(item, index) => index.toString()}
-                numColumns={2}
-                renderItem={({ item }) => (
-                  <TouchableOpacity onPress={() => handleAvatarSelection(item)}>
-                    <Image source={item} style={gs.avatarOption} />
-                  </TouchableOpacity>
-                )}
-              />
-              <TouchableOpacity
-                style={{
-                  backgroundColor: "#1565C0",
-                  paddingVertical: 10,
-                  paddingHorizontal: 20,
-                  borderRadius: 8,
-                  alignItems: "center",
-                  alignSelf: "center",
-                  marginTop: 20,
-                }}
-                onPress={() => setModalVisible(false)}
-              >
-                <Text
-                  style={{
-                    color: "white",
-                    fontSize: 12,
-                    fontFamily: "Loubag-Medium", // Elimínalo si no usas fuente personalizada
-                  }}
-                >
-                  Cerrar
-                </Text>
-              </TouchableOpacity>
-
-            </View>
-          </View>
-        </Modal> */}
       </ScrollView>
     </ImageBackground>
   );
