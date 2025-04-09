@@ -300,36 +300,19 @@ const CalendarTab = () => {
             <Text style={{ color: "#fff", fontWeight: "bold" }}>Añadir enfermedades</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={{
-              backgroundColor: "#00adf5",
-              padding: 10,
-              borderRadius: 5,
-              alignItems: "center",
-              marginLeft: 5,
-              marginTop: 5,
-            }}
-            onPress={() => {
-              // Navegar a la pestaña de creación de métricas de vacunas
-              navigateToVaccineMetricsTab(); // Reemplaza con la función correspondiente
-            }}
-          >
-            <Text style={{ color: "#fff", fontWeight: "bold" }}>Añadir vacunas</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              backgroundColor: "#00adf5",
-              padding: 10,
-              borderRadius: 5,
-              alignItems: "center",
-              marginLeft: 5,
-              marginTop: 5,
-            }}
-            onPress={() => {
-              // Navegar a la pestaña de creación de métricas de ingestas
-              navigateToIntakeMetricsTab(); // Reemplaza con la función correspondiente
-            }}
-          >
-            <Text style={{ color: "#fff", fontWeight: "bold" }}>Añadir ingestas</Text>
+              style={{
+                backgroundColor: "#00adf5",
+                padding: 10,
+                borderRadius: 5,
+                alignItems: "center",
+                marginLeft: 5,
+                marginTop: 5,
+              }}
+              onPress={() => {
+                navigation.navigate("addVaccine", { selectedDate });
+              }}
+            >
+              <Text style={{ color: "#fff", fontWeight: "bold" }}>Añadir vacunas</Text>
           </TouchableOpacity>
         </View>
         <Calendar
