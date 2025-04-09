@@ -38,6 +38,25 @@ export default function Intakes() {
     fetchIntakes();
   }, []);
 
+  const handleDelete = async (id: number) => {
+    try {
+      const response = await fetch(`${apiUrl}/api/v1/intake/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok)
+        throw new Error("Something went wrong removing the intake");
+
+      setIntakes(intakes.filter((intake) => intake.id !== id));
+
+    } catch (error) {
+      console.error('Error fetching the delete of intake: ', error);
+    }
+  }
+
   return (
     <View style={gs.container}> 
       <Text style={{ color: "#1565C0", fontSize: 36, fontWeight: "bold", textAlign: "center", marginBottom: 10 }}>Ingestas</Text>
@@ -76,12 +95,20 @@ export default function Intakes() {
                 )}
                 
                 <View style={{ alignItems: 'flex-end', marginTop: 10 }}>
-                  <Link 
-                    style={{ backgroundColor: '#1565C0', paddingVertical: 5, paddingHorizontal: 12, borderRadius: 5 }}
-                    href={`/calendar/intakeDetail?intake=${intake.id}`}
-                  >
-                    <Text style={{ color: 'white', fontWeight: 'bold' }}>Detalles</Text>
-                  </Link>
+                  <View style={{flexDirection: 'row', gap: 6}}>
+                    <TouchableOpacity 
+                      style={{ backgroundColor: 'red', paddingVertical: 5, paddingHorizontal: 12, borderRadius: 5 }}
+                      onPress={() => handleDelete(intake.id)}
+                    >
+                      <Text style={{ color: 'white', fontWeight: 'bold' }}>Eliminar</Text>
+                    </TouchableOpacity>
+                    <Link 
+                      style={{ backgroundColor: '#1565C0', paddingVertical: 5, paddingHorizontal: 12, borderRadius: 5 }}
+                      href={`/calendar/intakeDetail?intake=${intake.id}`}
+                    >
+                      <Text style={{ color: 'white', fontWeight: 'bold' }}>Detalles</Text>
+                    </Link>
+                  </View>
                 </View>
               </View>
             </TouchableOpacity>
