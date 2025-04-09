@@ -8,7 +8,11 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+
+import com.isppG8.infantem.infantem.baby.BabyService;
+
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -30,11 +34,14 @@ public class MetricControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    // Dummy token to simulate authentication
-    private final String token = "dummy-token";
+    @MockitoBean
+    private BabyService babyService;
 
     @Autowired
     private MetricService metricService;
+
+    // Dummy token to simulate authentication
+    private final String token = "dummy-token";
 
     @Test
     public void testGetMetricById() throws Exception {

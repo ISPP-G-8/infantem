@@ -189,11 +189,6 @@ INSERT INTO metric_table (id, weight, height, head_circumference, arm_circumfere
 (12, 8.0, 73.0, 43.5, 13, '2025-04-05', 7),
 (13, 3.5, 51, 35, 12.5, '2025-04-06', 8);
 
--- Inserción de suscripciones
-
-INSERT INTO subscription_table (user_id, stripe_subscription_id, stripe_customer_id, stripe_payment_method_id, start_date, active, end_date, current_period_end) VALUES 
-(14,'sub_123456789', 'cus_987654321', 'pm_abcdef123456', '2025-04-07', true, null, '2025-05-07');
-
 -- Inserción de productos
 
 INSERT INTO product (title, description, image_url, shop_url) VALUES

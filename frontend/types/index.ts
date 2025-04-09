@@ -6,3 +6,4 @@ export * from "./Question";
 export * from "./Recipe";
 export * from "./Ad";
 export * from "./MarketItem";
+export * from "./RecipeFilter";

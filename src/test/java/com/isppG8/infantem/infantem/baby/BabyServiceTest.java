@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.isppG8.infantem.infantem.baby.dto.BabyDTO;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
+import com.isppG8.infantem.infantem.exceptions.ResourceNotOwnedException;
 import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserService;
 
@@ -83,6 +84,28 @@ public class BabyServiceTest {
 
         babyService.updateBaby(1, baby);
         assertEquals("Pedro", baby.getName(), "The name should be Pedro");
+        assertThrows(ResourceNotFoundException.class, () -> babyService.updateBaby(999, baby));
+    }
+
+    @Test
+    public void TestUpdateBabyNotFound() {
+        Integer id = 999;
+        BabyDTO baby = new BabyDTO();
+        baby.setId(2);
+        assertThrows(ResourceNotFoundException.class, () -> babyService.updateBaby(id, baby));
+    }
+
+    @Test
+    public void TestUpdateBbayIdNotOwned() {
+
+        BabyDTO babyNotOwned = new BabyDTO();
+        babyNotOwned.setId(2);
+
+        BabyDTO baby = new BabyDTO();
+        baby.setId(1);
+        baby.setName("Pedro");
+
+        assertThrows(ResourceNotOwnedException.class, () -> babyService.updateBaby(babyNotOwned.getId(), baby));
     }
 
     @Test
@@ -105,19 +128,23 @@ public class BabyServiceTest {
 
     @Test
     public void TestFindbabyById() {
-        BabyDTO baby = new BabyDTO();
-        baby.setId(2);
-        baby.setName("Pedro");
-        baby.setBirthDate(LocalDate.of(2021, 12, 31));
-        baby.setGenre(Genre.MALE);
-        baby.setWeight(7.0);
-        baby.setHeight(50);
-        baby.setHeadCircumference(30);
-        baby.setFoodPreference("Leche materna");
-        Baby createdBaby = babyService.createBaby(baby);
+        Baby baby = babyService.findById(currentUser.getBabies().get(0).getId());
+        assertEquals("Juan", baby.getName(), "The name should be Juan");
+    }
 
-        Baby baby2 = babyService.findById(createdBaby.getId());
-        assertEquals("Pedro", baby2.getName(), "The name should be Pedro");
+    @Test
+    public void TestFindbabyByIdNotFound() {
+        Integer id = 999;
+        assertThrows(ResourceNotFoundException.class, () -> babyService.findById(id));
+    }
+
+    @Test
+    public void TestFindbabyByIdNotOwned() {
+
+        Baby babyNotOwned = new Baby();
+        babyNotOwned.setId(2);
+
+        assertThrows(ResourceNotOwnedException.class, () -> babyService.findById(babyNotOwned.getId()));
     }
 
     @Test
@@ -139,9 +166,17 @@ public class BabyServiceTest {
     }
 
     @Test
-    public void TestDeleteBaby_NotFOund() {
+    public void TestDeleteBabyNotFOund() {
         Integer id = 999;
         assertThrows(ResourceNotFoundException.class, () -> babyService.deleteBaby(id));
+    }
+
+    @Test
+    public void TestDeleteBabyNotOwned() {
+        Baby babyNotOwned = new Baby();
+        babyNotOwned.setId(2);
+
+        assertThrows(ResourceNotOwnedException.class, () -> babyService.deleteBaby(babyNotOwned.getId()));
     }
 
 }

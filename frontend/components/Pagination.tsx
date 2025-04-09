@@ -10,7 +10,7 @@ const Pagination: React.FC<PaginationProps> = ({ totalPages, page, setPage }) =>
   return (
     <View style={{ flexDirection: 'row', justifyContent: 'center', margin: 10 }}>
       {Array.from({ length: totalPages }).map((_, index) => {
-        const num = index + 1; // We want to show an 1-indexed array 
+        const num = index +1; // We want to show an 1-indexed array 
         return (
           <TouchableOpacity key={num} onPress={() => setPage(num)}>
             <View

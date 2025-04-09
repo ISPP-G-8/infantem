@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
+import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserService;
 
 @Service
@@ -45,6 +46,10 @@ public class AdvertisementService {
     }
 
     public Optional<Advertisement> getAdvertisementToShow() {
+        User user = userService.findCurrentUser();
+        if (user.getAuthorities().getAuthority().equals("premium")) {
+            return Optional.empty();
+        }
         Optional<Advertisement> adToShow = this.advertisementRepository.findAdvertisementToShow();
         return adToShow;
     }

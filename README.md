@@ -1,320 +1,150 @@
-# Infantem 
 
-Welcome to the Infantem project! The documentation for the app will appear here. Thanks for checking it out!
+<h1 align="center">Infantem</h1>
+<h3 align="center">Recetas para bebés, tranquilidad para papás</h3>
+<p align="center">
 
-## Index
-- [Introduction](#infantem)
-- [Setup guide](#setup-guide)
-  - [Linux setup](#linux-setup)
-  - [Windows setup](#windows-setup)
-  - [Mac setup](#mac-setup)
-- [Checking Everything Works](#checking-everything-works)
-- [Contributing](#contributing)
+  <img src="docs/imagenes/Infantem.png" alt="Infantem" width="700"/>
+</p>
 
-## Setup guide
+## 📚 Índice
 
-### Linux setup
+- [🧠 ¿Qué es Infantem?](#-qué-es-infantem)
+- [🚀 MVP – Producto Mínimo Viable](#-mvp--producto-mínimo-viable)
+- [💳 Comparativa entre Plan Básico y Plan Premium](#-comparativa-entre-plan-básico-y-plan-premium)
+- [🛠️ Tecnologías utilizadas](#️-tecnologías-utilizadas)
+- [👥 Equipo](#-equipo)
+- [📦 Setup del Proyecto](#-setup-del-proyecto)
+- [📊 Métricas de Calidad (SonarCloud)](#-métricas-de-calidad-sonarcloud)
+- [🔗 Redes Sociales](#-redes-sociales)
 
-Follow these steps to set up the project on a Linux machine:
 
-#### 1. Clone the repository
-```sh
-git clone https://github.com/ISPP-G-8/infantem.git  # With HTTP or SSH 
-cd infantem 
-```
+## 🧠 ¿Qué es Infantem?
 
-#### 2. Backend Setup 
+**Infantem** es una aplicación innovadora diseñada para ayudar a los padres en la introducción de alimentos en bebés, desde sus primeros meses hasta la alimentación complementaria. Con un enfoque basado en **evidencia científica** y respaldado por nutricionistas pediatras, proporciona una guía personalizada y adaptada al desarrollo del bebé.
 
-- Install Java (Recommended: Java 21):
-  - **Ubuntu/Debian**:
-    ```sh
-    sudo apt update && sudo apt install openjdk-21-jdk
-    java --version
-    ```
-  - **Fedora**:
-    ```sh
-    sudo dnf install java-21-openjdk
-    java --version
-    ```
-  - **Arch Linux**:
-    ```sh
-    sudo pacman -S jdk-openjdk
-    java --version
-    ```
 
-- Install MySQL:
-  ```sh
-  sudo apt install mysql-server  # For Ubuntu/Debian
-  sudo dnf install mysql-server  # For Fedora
-  sudo pacman -S mysql  # For Arch Linux
-  ```
-- Secure MySQL installation:
-  ```sh
-  sudo mysql_secure_installation
-  ```
-  Follow the prompts to set a root password and disable insecure settings.
+> 🎯 Ideal para madres, padres y cuidadores que buscan una herramienta científica y automatizada para cuidar la salud infantil desde el primer año de vida.
 
-- Create the database and user:
-  ```sh
-  sudo mysql -u root -p
-  CREATE DATABASE infantem_db;
-  CREATE USER 'spring_user'@'localhost' IDENTIFIED BY 'StrongPassword123!';
-  GRANT ALL PRIVILEGES ON infantem_db.* TO 'spring_user'@'localhost';
-  FLUSH PRIVILEGES;
-  EXIT;
-  ```
+---
 
-- Build and run the backend:
-  ```sh
-  ./mvnw spring-boot:run
-  ```
+## 🚀 MVP – Producto Mínimo Viable
 
-#### 3. Frontend Setup 
+El MVP de **Infantem** incluye las funcionalidades esenciales que cubren las necesidades más importantes de los padres y madres durante la alimentación y seguimiento del crecimiento de sus hijos. Este conjunto de características permite validar el valor de la app desde las primeras versiones.
 
-- Install Node.js and npm:
-  - **Ubuntu/Debian**:
-    ```sh
-    sudo apt install nodejs npm
-    ```
-  - **Fedora**:
-    ```sh
-    sudo dnf install nodejs npm
-    ```
-  - **Arch Linux**:
-    ```sh
-    sudo pacman -S nodejs npm
-    ```
-  - Verify installation:
-    ```sh
-    node -v && npm -v
-    ```
-- Install dependencies:
-  ```sh
-  cd frontend
-  npm install
-  ```
-- Install Expo CLI:
-  ```sh
-  npm install -g expo-cli
-  ```
-- Start the development server:
-  ```sh
-  npm start < --ios | --android | --web >
-  ```
-  Running `npm start` without options will show the Expo developer tools where you can select the platform manually.
+### 🧩 Funcionalidades incluidas en el MVP:
 
-### Windows setup
+- 🍽️ **Recomendaciones de recetas personalizadas**
+  - Basadas en la edad del bebé y alimentos permitidos.
+  - Adaptación automática si se marca un alimento como alérgeno o intolerante.
 
-To set up the project on a Windows machine, follow these steps:
+- ⚠️ **Detección de alergias e intolerancias**
+  - Sistema de preguntas tras cada introducción de un alimento.
+  - Recomendaciones médicas si se detecta un posible riesgo.
+  - Registro de sospechas para identificar patrones en el futuro.
 
-#### 1. Clone the repository
-Open **PowerShell** (or **Command Prompt**) and run the following commands to clone the repository:
-```sh
-git clone https://github.com/ISPP-G-8/infantem.git  # With HTTP or SSH 
-cd infantem 
- ```
+- 📝 **Registro de alimentación**
+  - Registro diario de comidas para cada bebé.
+  - Posibilidad de revisar el historial alimenticio y patrones.
 
-#### 2. Backend Setup
+- 🛒 **Marketplace**
+  - Acceso a productos recomendados para bebés.
+  - Redirección a tiendas de empresas afiliadas.
 
-- Install Java (Recommended: Java 21):
-  - Download and install **OpenJDK 21** from the [AdoptOpenJDK website](https://adoptopenjdk.net/).
-  - After installation, verify the installation with:
-    ```powershell
-    java --version
-    ```
+- 📆 **Calendario + Recordatorios inteligentes + Sistema de hitos**
+  - Calendario con programación de recetas diarias.
+  - Recordatorios inteligentes para ayudar con tareas repetitivas.
+  - Registro de hitos importantes en el desarrollo (ej. "primeros pasos").
 
-- Install MySQL:
-  - Download the **MySQL Installer** from the [official MySQL website](https://dev.mysql.com/downloads/installer/).
-  - Run the installer and select the **MySQL Server** option.
-  - Follow the installation wizard to install MySQL. During installation, make sure you set a root password.
-  - After installation, ensure MySQL is running by checking the **MySQL Workbench** or using:
-    ```powershell
-    mysql -u root -p
-    ```
-    Enter your root password when prompted.
+- 📊 **Seguimiento del crecimiento**
+  - Introducción de datos como altura, peso y edad.
+  - Visualización de percentiles y evolución del bebé.
 
-- Create the database and user:
-  - Run the following in **PowerShell**:
-    ```powershell
-    mysql -u root -p
-    ```
-  - Enter the root password and execute the following SQL commands:
-    ```sql
-    CREATE DATABASE infantem_db;
-    CREATE USER 'spring_user'@'localhost' IDENTIFIED BY 'StrongPassword123!';
-    GRANT ALL PRIVILEGES ON infantem_db.* TO 'spring_user'@'localhost';
-    FLUSH PRIVILEGES;
-    EXIT;
-    ```
+### 🧠 En resumen:
+El MVP de Infantem permite a las familias:
+- Obtener recetas seguras y adaptadas.
+- Detectar y prevenir alergias.
+- Registrar la evolución de sus hijos.
+- Acceder a productos útiles.
+- Sentirse acompañados y guiados en el día a día.
 
-- Build and run the backend:
-  - Open **PowerShell** in the `infantem` directory (or in VSC).
-  - Run the following command to build and start the backend:
-    ```powershell
-    .\mvnw spring-boot:run
-    ```
 
-#### 3. Frontend Setup
+---
+## 💳 Comparativa entre Plan Básico y Plan Premium
 
-- Install Node.js and npm:
-  - Download and install **Node.js** from the [official website](https://nodejs.org/).
-  - Verify the installation by running:
-    ```powershell
-    node -v 
-    npm -v
-    ```
+| Característica                                                                 | 🍼 Plan Básico | 👑 Plan Premium |
+|--------------------------------------------------------------------------------|:--------------:|:---------------:|
+| Detección de alergias e intolerancias                                          | ✅ Sí          | ✅ Sí           |
+| Recetas creadas por especialistas filtradas por edad                          | ✅ Sí          | ✅ Sí           |
+| MarketPlace                                                                    | ✅ Sí          | ✅ Sí           |
+| Registro de alimentación                                                       | ✅ Sí          | ✅ Sí           |
+| Calendario                                                                     | ✅ Sí          | ✅ Sí           |
+| Sistema de hitos del bebé                                                      | ✅ Sí          | ✅ Sí           |
+| Seguimiento del crecimiento (métricas básicas)                                 | ✅ Sí          | ✅ Sí           |
+| Foro comunitario                                                               | ✅ Sí          | ✅ Sí           |
+| Recordatorios inteligentes                                                     | ❌ No          | ✅ Sí           |
+| Seguimiento avanzado del crecimiento (percentiles, altura, peso)              | ❌ No          | ✅ Sí           |
+| Recetas personalizadas por métricas avanzadas                                  | ❌ No          | ✅ Sí           |
+| Eliminación de anuncios                                                        | ❌ No          | ✅ Sí           |
+| Cupones de descuento en el Marketplace                                         | ❌ No          | ✅ Sí           |
 
-- Install dependencies:
-  - Change to the **frontend** directory:
-    ```powershell
-    cd frontend
-    ```
-  - Run the following command to install the required dependencies:
-    ```powershell
-    npm install
-    ```
+## 🛠️ Tecnologías utilizadas
 
-- Install Expo CLI:
-  ```powershell
-  npm install -g expo-cli
-  ```
+| Parte         | Tecnología                                                                 |
+|---------------|----------------------------------------------------------------------------|
+| Backend       | [Spring Boot](https://spring.io/projects/spring-boot), [Lombok](https://projectlombok.org/), [Maven](https://maven.apache.org/), [Swagger](https://swagger.io/) |
+| Frontend      | [React Native (TypeScript)](https://reactnative.dev/), [Expo](https://expo.dev) |
+| Base de Datos | [MySQL](https://www.mysql.com/)                                            |
+| Pagos         | [Stripe](https://stripe.com/)                                              |
+| DevOps        | GitHub Actions, Docker, integración CI/CD                                  |
 
-- Start the development server:
-  - For the web:
-    ```powershell
-    npm expo start --web
-    ```
-  - For iOS (if using a macOS machine with a simulator):
-    ```powershell
-    npm expo start --ios
-    ```
-  - For Android (if you have an emulator set up):
-    ```powershell
-    npm expo start --android
-    ```
+---
+## 👥 Equipo
 
-Running `npm expo start` without options will show the **Expo Developer Tools**, where you can select the platform manually.
+- <img src="https://github.com/Luis-Giraldo-Santiago.png" width="80px" style="border-radius: 50%;" /> **[Luis-Giraldo-Santiago](https://github.com/Luis-Giraldo-Santiago)**
+- <img src="https://github.com/Migueel0.png" width="80px" style="border-radius: 50%;" /> **[Migueel0](https://github.com/Migueel0)**
+- <img src="https://github.com/santos-404.png" width="80px" style="border-radius: 50%;" /> **[santos-404](https://github.com/santos-404)**
+- <img src="https://github.com/DavidFuentelsazRodriguez.png" width="80px" style="border-radius: 50%;" /> **[DavidFuentelsazRodriguez](https://github.com/DavidFuentelsazRodriguez)**
+- <img src="https://github.com/dedece65.png" width="80px" style="border-radius: 50%;" /> **[dedece65](https://github.com/dedece65)**
+- <img src="https://github.com/JosueRodLop.png" width="80px" style="border-radius: 50%;" /> **[JosueRodLop](https://github.com/JosueRodLop)**
+- <img src="https://github.com/Olivfhan.png" width="80px" style="border-radius: 50%;" /> **[Olivfhan](https://github.com/Olivfhan)**
+- <img src="https://github.com/Alvar0j.png" width="80px" style="border-radius: 50%;" /> **[Alvar0j](https://github.com/Alvar0j)**
+- <img src="https://github.com/antjimort.png" width="80px" style="border-radius: 50%;" /> **[antjimort](https://github.com/antjimort)**
+- <img src="https://github.com/josemorgado.png" width="80px" style="border-radius: 50%;" /> **[josemorgado](https://github.com/josemorgado)**
+- <img src="https://github.com/paulalunanavarro.png" width="80px" style="border-radius: 50%;" /> **[paulalunanavarro](https://github.com/paulalunanavarro)**
+- <img src="https://github.com/javulegar.png" width="80px" style="border-radius: 50%;" /> **[javulegar](https://github.com/javulegar)**
+- <img src="https://github.com/Enrgaraba.png" width="80px" style="border-radius: 50%;" /> **[Enrgaraba](https://github.com/Enrgaraba)**
+- <img src="https://github.com/lucianoya.png" width="80px" style="border-radius: 50%;" /> **[lucianoya](https://github.com/lucianoya)**
+- <img src="https://github.com/davvarmun.png" width="80px" style="border-radius: 50%;" /> **[davvarmun](https://github.com/davvarmun)**
+- <img src="https://github.com/Fsolis19.png" width="80px" style="border-radius: 50%;" /> **[Fsolis19](https://github.com/Fsolis19)**
+- <img src="https://github.com/JoseGTD.png" width="80px" style="border-radius: 50%;" /> **[JoseGTD](https://github.com/JoseGTD)**
 
-### Mac setup
 
-Follow these steps to set up the project on a macOS machine:
+## 📦 Setup del Proyecto
 
-#### 1. Clone the repository
-```sh
-git clone https://github.com/ISPP-G-8/infantem.git  # With HTTP or SSH
-cd infantem
-```
+Consulta la guía paso a paso para instalar y configurar correctamente el proyecto:
 
-#### 2. Backend Setup
+👉 [docs/Setup-Project.md](docs/Setup-Project.md)
 
-- Install Java (Recommended: Java 21):
-  ```sh
-  brew install openjdk@21
-  ```
-  Configure `JAVA_HOME`:
-  ```sh
-  echo 'export JAVA_HOME="/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home"' >> ~/.zshrc
-  echo 'export PATH="$JAVA_HOME/bin:$PATH"' >> ~/.zshrc
-  source ~/.zshrc
-  ```
-  Verify installation:
-  ```sh
-  java -version
-  ```
 
-- Install MySQL:
-  ```sh
-  brew install mysql
-  ```
-  Start MySQL service:
-  ```sh
-  brew services start mysql
-  ```
-  Verify MySQL installation:
-  ```sh
-  mysql -u root -p
-  ```
-  Secure MySQL installation:
-  ```sh
-  mysql_secure_installation
-  ```
+## 📊 Métricas de Calidad (SonarCloud)
 
-- Create the database and user:
-  ```sh
-  mysql -u root -p
-  ```
-  Enter the root password and execute:
-  ```sql
-  CREATE DATABASE infantem_db;
-  CREATE USER 'spring_user'@'localhost' IDENTIFIED BY 'StrongPassword123!';
-  GRANT ALL PRIVILEGES ON infantem_db.* TO 'spring_user'@'localhost';
-  FLUSH PRIVILEGES;
-  EXIT;
-  ```
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ISPP-G-8_infantem&metric=alert_status)](https://sonarcloud.io/dashboard?id=ISPP-G-8_infantem)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ISPP-G-8_infantem&metric=coverage)](https://sonarcloud.io/dashboard?id=ISPP-G-8_infantem)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=ISPP-G-8_infantem&metric=bugs)](https://sonarcloud.io/dashboard?id=ISPP-G-8_infantem)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=ISPP-G-8_infantem&metric=code_smells)](https://sonarcloud.io/dashboard?id=ISPP-G-8_infantem)
+[![Duplicated Lines](https://sonarcloud.io/api/project_badges/measure?project=ISPP-G-8_infantem&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=ISPP-G-8_infantem)
 
-- Build and run the backend:
-  ```sh
-  ./mvnw spring-boot:run
-  ```
+## 🔗 Redes Sociales
 
-#### 3. Frontend Setup
-
-- Install Node.js and npm:
-  ```sh
-  brew install node
-  ```
-  Verify installation:
-  ```sh
-  node -v && npm -v
-  ```
-
-- Install dependencies:
-  ```sh
-  cd frontend
-  npm install
-  ```
-
-- Install Expo CLI:
-  ```sh
-  npm install -g expo-cli
-  ```
-
-- Start the development server:
-  - For the web:
-    ```sh
-    npx expo start --web
-    ```
-  - For iOS (if you have Xcode installed and a simulator set up):
-    ```sh
-    npx expo start --ios
-    ```
-  - For Android (if you have an Android emulator set up with Android Studio):
-    ```sh
-    npx expo start --android
-    ```
-
-Running `npx expo start` without options will show the Expo developer tools where you can select the platform manually.
-
-## Checking Everything Works
-
-1. Start the backend and ensure it runs without errors (Default port is 8080).
-2. Start the frontend and verify that it compiles successfully (Default port is 8081).
-3. Open the app in a web browser, emulator, or physical device and check that it loads correctly.
-4. Ensure that the frontend can communicate with the backend:
-   - The `App` component in the frontend makes a request to `${apiUrl}/api/v1/example`.
-   - If the backend is running correctly, the app should display:
-     ```
-     Backend is up and running! :D
-     ```
-   - If the connection fails, it will display:
-     ```
-     Failed to connect to the backend.
-     ```
-   - If the request is still in progress, it will display:
-     ```
-     Checking backend status...
-     ```
-
-## Contributing
-If you have experience setting up the project on Windows or macOS, please help complete those sections! Feel free to update the README. 
+<p align="center">
+  <a href="https://www.instagram.com/infantemapp?igsh=MW02OTZ5dDFkcnYwNA==" target="_blank">
+    <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram"/>
+  </a>
+  <a href="https://www.linkedin.com/in/infantem-app-de-nutrici%C3%B3n-infantil-inteligente-03834435a/" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
+  </a>
+  <a href="https://www.tiktok.com/@infantemapp" target="_blank">
+    <img src="https://img.shields.io/badge/TikTok-000000?style=for-the-badge&logo=tiktok&logoColor=white" alt="TikTok"/>
+  </a>
+</p>
 
