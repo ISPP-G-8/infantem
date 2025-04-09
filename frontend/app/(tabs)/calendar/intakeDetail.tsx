@@ -97,6 +97,7 @@ export default function intakeDetail() {
   const handleSaveIntake = async () => {
     if (!intake.baby) {
       setErrorMessage("Tienes que asociar un bebé a la ingesta"); 
+      return
     } else {
       setErrorMessage("");
     }
@@ -110,8 +111,7 @@ export default function intakeDetail() {
     };
 
     try {
-      const url = `${apiUrl}/api/v1/intakes`;
-      const response = await fetch(url, {
+      const response = await fetch(`${apiUrl}/api/v1/intake`, {
         method: intake.id ? 'PUT' : 'POST',
         headers: {
           'Content-Type': 'application/json',
