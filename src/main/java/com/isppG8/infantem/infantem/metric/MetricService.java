@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 import com.isppG8.infantem.infantem.metric.dto.MetricSummary;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -26,8 +27,9 @@ public class MetricService {
 
     public Metric getMetricById(Long id) {
         return metricRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Metric not found with id: " + id));
+            .orElseThrow(() -> new ResourceNotFoundException("Metric not found with id: " + id));
     }
+    
 
     public List<Metric> getAllMetricsByBabyId(Integer babyId) {
         return metricRepository.findAll().stream().filter(metric -> metric.getBaby().getId().equals(babyId)).toList();
@@ -44,8 +46,10 @@ public class MetricService {
     }
 
     public void deleteMetric(Long id) {
-        Metric metric = getMetricById(id);
-        metricRepository.delete(metric);
+        if (!metricRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Metric not found with id: " + id);
+        }
+        metricRepository.deleteById(id);
     }
 
     // Methods for calendar
