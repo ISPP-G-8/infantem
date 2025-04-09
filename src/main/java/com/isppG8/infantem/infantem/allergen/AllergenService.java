@@ -47,6 +47,14 @@ public class AllergenService {
     }
 
     @Transactional(readOnly = true)
+    public List<Allergen> getAllAllergensByBabyId(Integer babyId) {
+        // checks ownership for us
+        Baby baby = babyService.findById(babyId);
+
+        return allergenRepository.findAllByBabyId(babyId);
+    }
+
+    @Transactional(readOnly = true)
     public Allergen getAllergenById(Long id) {
         return allergenRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Allergen", "id", id));
     }
