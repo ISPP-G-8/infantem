@@ -293,8 +293,7 @@ const CalendarTab = () => {
               marginTop: 5,
             }}
             onPress={() => {
-              // Navegar a la pestaña de creación de métricas de enfermedades
-              navigateToDiseaseMetricsTab(); // Reemplaza con la función correspondiente
+              navigation.navigate("addDisease"); // Reemplaza con la función correspondiente
             }}
           >
             <Text style={{ color: "#fff", fontWeight: "bold" }}>Añadir enfermedades</Text>
