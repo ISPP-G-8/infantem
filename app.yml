@@ -9,7 +9,6 @@ env_variables:
   STRIPE_WEBHOOK_SECRET: $STRIPE_WEBHOOK_SECRET
   DB_PASSWORD: $DB_PASSWORD
   
-
 handlers:
 # Serve all API calls to Spring
 - url: /api/.*
