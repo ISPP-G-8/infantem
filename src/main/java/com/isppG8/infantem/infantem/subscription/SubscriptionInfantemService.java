@@ -68,13 +68,18 @@ public class SubscriptionInfantemService {
         }
     }
 
-    public void updateSubscriptionStatus(String stripeSubscriptionId, boolean isActive) {
-        Optional<SubscriptionInfantem> subOpt = subscriptionInfantemRepository
-                .findByStripeSubscriptionId(stripeSubscriptionId);
+    @Transactional
+    public void desactivateSubscription(User user, String subscriptionId) {
+        Optional<SubscriptionInfantem> subOpt = subscriptionInfantemRepository.findByUser(user);
 
         if (subOpt.isPresent()) {
+            Authorities authorities = authoritiesService.findByAuthority("user");
+            user.setAuthorities(authorities);
+            userService.updateUser((long) user.getId(), user);
+
             SubscriptionInfantem subscription = subOpt.get();
-            subscription.setActive(isActive);
+            subscription.setStripeSubscriptionId(subscriptionId);
+            subscription.setActive(false);
             subscriptionInfantemRepository.save(subscription);
         }
     }
@@ -226,28 +231,37 @@ public class SubscriptionInfantemService {
         EventDataObjectDeserializer dataObjectDeserializer = event.getDataObjectDeserializer();
         if (!dataObjectDeserializer.getObject().isPresent())
             return;
-
+    
         Invoice invoice = (Invoice) dataObjectDeserializer.getObject().get();
         String subscriptionId = invoice.getSubscription();
         if (subscriptionId == null)
             return;
-
-        updateSubscriptionStatus(subscriptionId, true);
+    
+        userService.getUserByStripeCustomerId(subscriptionId)
+            .ifPresent(user -> activateSubscription(user, subscriptionId));
     }
+    
 
     // 🔹 Manejar cuando una suscripción es cancelada
     public void handleSubscriptionCanceled(Event event) {
         EventDataObjectDeserializer dataObjectDeserializer = event.getDataObjectDeserializer();
         if (!dataObjectDeserializer.getObject().isPresent())
             return;
-
+    
         Subscription subscription = (Subscription) dataObjectDeserializer.getObject().get();
         String subscriptionId = subscription.getId();
         if (subscriptionId == null)
             return;
-
-        updateSubscriptionStatus(subscriptionId, false);
+    
+        Optional<User> optionalUser = userService.getUserByStripeCustomerId(subscriptionId);
+        if (!optionalUser.isPresent())
+            return;
+    
+        User user = optionalUser.get();
+        desactivateSubscription(user, subscriptionId);
     }
+    
+    
 
     // 🔹 Manejar cuando una suscripción es creada
     public void handleSubscriptionCreated(Event event) {
