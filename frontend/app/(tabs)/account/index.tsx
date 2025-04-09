@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Modal, TextInput, Alert, ImageBackground } from "react-native";
 import { Text, View, TouchableOpacity, ScrollView, Image, FlatList } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { Ionicons } from "@expo/vector-icons";
-import { Link, router } from "expo-router";
+import { Link } from "expo-router";
 import { useAuth } from "../../../context/AuthContext";
-import { jwtDecode } from "jwt-decode";
-import { storeToken, getToken } from "../../../utils/jwtStorage"; 
 
 const avatarOptions = [
   require("../../../assets/avatar/avatar1.png"),
@@ -16,31 +12,19 @@ const avatarOptions = [
 export default function Account() {
   const [modalVisible, setModalVisible] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const navigation = useNavigation();
   const [subscription, setSubscription] = useState(null);
-  const [userId, setUserId] = useState<number | null>(null);
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const gs = require("../../../static/styles/globalStyles");
-  const { isLoading, user, token, setUser, checkAuth, signOut } = useAuth();
+  const { isLoading, user, token, updateToken, setUser, signOut } = useAuth();
 
   useEffect(() => {
-    if (!token) return; 
-    console.log(token);
-    try {
-      const decodedToken: any = jwtDecode(token);
-      setUserId(decodedToken.jti);
-    } catch (error) {
-      console.error("Error al decodificar el token:", error);
-    }
-  }, [token]);
-
-  useEffect(() => {
-    if (!user || !token) return;
+    if (!user)
+      return;
 
     const fetchSubscription = async () => {
       try {
-        const response = await fetch(`${apiUrl}/api/v1/subscriptions/user/${userId}`, {
+        const response = await fetch(`${apiUrl}/api/v1/subscriptions/user/${user.id}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -62,13 +46,11 @@ export default function Account() {
     };
 
     fetchSubscription();
-  }, [user, token]);
+  }, []);
 
   const handleEditProfile = () => {
     setIsEditing(true);
   };
-
-
 
   const handleSaveChanges = async () => {
     if (!user) {
@@ -76,32 +58,8 @@ export default function Account() {
       return;
     }
   
-    console.log("Guardando cambios...");
-  
-    const token = await getToken(); 
-  
-    if (!token) {
-      console.log("Token no disponible. No se puede guardar los cambios.");
+    if (!token)
       return;
-    }
-  
-    const userData = {
-      id: user.id,
-      name: user.name,
-      surname: user.surname,
-      username: user.username,
-      password: user.password ? user.password : "placeholderPassword",
-      email: user.email,
-      profilePhotoRoute: user.profilePhotoRoute
-    };
-
-    const decodedToken = jwtDecode(token);
-    console.log("Token antes de enviar:", decodedToken);
-
-    if (!decodedToken.jti) {
-      console.error("Token inválido: no contiene jti");
-      return;
-    }
   
     try {
       const response = await fetch(`${apiUrl}/api/v1/users/${user.id}`, {
@@ -110,7 +68,7 @@ export default function Account() {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}` 
         },
-        body: JSON.stringify(userData)
+        body: JSON.stringify(user)
       });
   
       if (!response.ok) {
@@ -118,15 +76,10 @@ export default function Account() {
         console.error("Error del servidor:", err);
         throw new Error(JSON.stringify(err));
       }
-  
+
       const data = await response.json();
-      console.log("Datos actualizados correctamente:", data);
-  
-      const newToken = data.jwt;
-  
-      await storeToken(newToken); 
-  
-      setUser({ ...user, ...data, token: newToken }); 
+      await updateToken(data.jwt);
+
       setIsEditing(false);
       Alert.alert("Perfil actualizado", "Los cambios han sido guardados correctamente");
   
@@ -135,9 +88,6 @@ export default function Account() {
       Alert.alert("Error", `No se pudo guardar los cambios: ${error.message}`);
     }
   };
-
-
-  const handleLogout = signOut;
 
   const handleAvatarSelection = (avatar: any) => {
     if (user && isEditing) {
@@ -217,7 +167,7 @@ export default function Account() {
           <Text style={[gs.mainButtonText, { fontSize: 20, color: "black" }]}>¡Felicidades, eres premium!</Text>
         )}
 
-        <TouchableOpacity style={[gs.secondaryButton, { marginTop: 10 }]} onPress={handleLogout}>
+        <TouchableOpacity style={[gs.secondaryButton, { marginTop: 10 }]} onPress={signOut}>
           <Text style={[gs.secondaryButtonText]}>Cerrar Sesión</Text>
         </TouchableOpacity>
 
