@@ -72,7 +72,10 @@ public class UserController {
         if (!(jwtId.equals(id.toString()))) {
             return ResponseEntity.badRequest().body(new MessageResponse("Not your user"));
         }
-
+	User newUsernameUser = userService.findByUsername(userDetails.getUsername());
+	if (newUsernameUser!=null && !newUsernameUser.getId().toString().equals(jwtId)) {
+	    return ResponseEntity.badRequest().body(new MessageResponse("New username is already taken"));
+	}
         User updatedUser = userService.updateUser(id, userDetails);
         String jwt = jwtUtils.generateTokenFromUsername(updatedUser.getUsername(), updatedUser.getAuthorities(),
                 updatedUser.getId());
