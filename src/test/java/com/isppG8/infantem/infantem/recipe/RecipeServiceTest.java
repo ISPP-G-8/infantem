@@ -19,6 +19,7 @@ import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotOwnedException;
 import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserService;
+import com.isppG8.infantem.infantem.recipe.dto.RecipeDTO;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -365,7 +366,7 @@ public class RecipeServiceTest {
 
     @Test
     public void updateRecipeTest() {
-        Recipe recipe = new Recipe();
+        RecipeDTO recipe = new RecipeDTO();
         recipe.setName("Updated Recipe");
         recipe.setDescription("Updated Description");
         recipe.setIngredients("Updated Ingredients");
@@ -389,7 +390,7 @@ public class RecipeServiceTest {
 
     @Test
     public void updateRecipeNotFoundTest() {
-        Recipe recipe = new Recipe();
+        RecipeDTO recipe = new RecipeDTO();
         recipe.setName("Updated Recipe");
         recipe.setDescription("Updated Description");
         recipe.setIngredients("Updated Ingredients");
@@ -403,7 +404,7 @@ public class RecipeServiceTest {
 
     @Test
     public void updateRecipeNotOwnedTest() {
-        Recipe recipe = new Recipe();
+        RecipeDTO recipe = new RecipeDTO();
         recipe.setName("Updated Recipe");
         recipe.setDescription("Updated Description");
         recipe.setIngredients("Updated Ingredients");

@@ -43,9 +43,8 @@ public class Recipe {
     @Column(nullable = true)
     private String description;
 
-    // TODO string??? -.-
     @Column(nullable = true)
-    private String photo_route;
+    private byte[] recipePhoto;
 
     @Column(nullable = true)
     private String ingredients;
