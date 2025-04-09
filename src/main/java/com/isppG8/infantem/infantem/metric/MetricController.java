@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.isppG8.infantem.infantem.baby.Baby;
 import com.isppG8.infantem.infantem.baby.BabyService;
+import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 import com.isppG8.infantem.infantem.metric.dto.MetricDTO;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -102,16 +103,23 @@ public class MetricController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Metric.class))) @ApiResponse(responseCode = "404",
                                     description = "Métrica no encontrada") @PutMapping("/{id}")
-    public ResponseEntity<Metric> updateMetric(@PathVariable Long id, @RequestBody Metric metric) {
-        Metric updatedMetric = metricService.updateMetric(id, metric);
-        return ResponseEntity.ok(updatedMetric);
-    }
+        public ResponseEntity<Metric> updateMetric(@PathVariable Long id, @RequestBody Metric metric) {
+                Metric updatedMetric = metricService.updateMetric(id, metric);
+                if (updatedMetric == null) {
+                        return ResponseEntity.notFound().build();
+                }
+                return ResponseEntity.ok(updatedMetric);
+        }
 
     @Operation(summary = "Eliminar una métrica", description = "Elimina una métrica del sistema.") @ApiResponse(
             responseCode = "204", description = "Métrica eliminada con éxito") @ApiResponse(responseCode = "404",
                     description = "Métrica no encontrada") @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMetric(@PathVariable Long id) {
-        metricService.deleteMetric(id);
-        return ResponseEntity.noContent().build();
-    }
+        public ResponseEntity<Void> deleteMetric(@PathVariable Long id) {
+                try {
+                        metricService.deleteMetric(id);
+                        return ResponseEntity.noContent().build();
+                } catch (ResourceNotFoundException e) {
+                        return ResponseEntity.notFound().build();
+                }
+        }
 }
