@@ -11,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 import com.isppG8.infantem.infantem.subscription.SubscriptionInfantemRepository;
+import com.isppG8.infantem.infantem.auth.AuthoritiesService;
+import com.isppG8.infantem.infantem.auth.Authorities;
+
 import com.isppG8.infantem.infantem.user.dto.UserDTO;
 
 @Service
@@ -21,6 +24,9 @@ public class UserService {
 
     @Autowired
     private SubscriptionInfantemRepository subscriptionInfantemRepository;
+
+    @Autowired
+    private AuthoritiesService authoritiesService;
 
     @Transactional(readOnly = true)
     public List<User> getAllUsers() {
@@ -101,4 +107,9 @@ public class UserService {
         return subscriptionInfantemRepository.findByStripeCustomerId(stripeCustomerId);
     }
 
+    public void upgradeToPremium(User user) {
+        Authorities authorities = authoritiesService.findByAuthority("premium");
+        user.setAuthorities(authorities);
+        userRepository.save(user);
+    }
 }

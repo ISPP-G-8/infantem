@@ -57,9 +57,7 @@ public class SubscriptionInfantemService {
         Optional<SubscriptionInfantem> subOpt = subscriptionInfantemRepository.findByUser(user);
 
         if (subOpt.isPresent()) {
-            Authorities authorities = authoritiesService.findByAuthority("premium");
-            user.setAuthorities(authorities);
-            userService.updateUser((long) user.getId(), user);
+            userService.upgradeToPremium(user);
 
             SubscriptionInfantem subscription = subOpt.get();
             subscription.setStripeSubscriptionId(subscriptionId);
