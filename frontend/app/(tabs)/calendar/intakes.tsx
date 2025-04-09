@@ -61,9 +61,10 @@ export default function Intakes() {
               <View style={{ flex: 1 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5 }}>
                   <Text style={{ fontWeight: 'bold', color: '#333' }}>{formattedDate}</Text>
-                  <Text style={{ fontWeight: 'bold', color: '#1565C0' }}>{intake.quantity}g</Text>
+                  <Text style={{ fontWeight: 'bold', color: '#1565C0' }}> Bebé: {intake.baby.name}</Text>
                 </View>
                 <Text style={gs.cardContent} numberOfLines={2}>{intake.observations}</Text>
+                <Text style={gs.cardContent}>Cantidad: {intake.quantity}g</Text>
                 
                 {intake.intakeSymptom && (
                   <View style={{ backgroundColor: '#f5f5f5', padding: 8, borderRadius: 5, marginTop: 8 }}>
