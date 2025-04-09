@@ -107,7 +107,7 @@ public class UserControllerTest {
         String password = SecureRandom.getInstanceStrong().toString();
         updatedUser.setPassword(password);
 
-        when(userService.updateUser(eq(1L), any(User.class))).thenReturn(updatedUser);
+        when(userService.updateUser(eq(1L), any(UserDTO.class))).thenReturn(updatedUser);
 
         String userJson = """
                 {
