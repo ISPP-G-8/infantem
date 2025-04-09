@@ -18,6 +18,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import org.springframework.web.multipart.MultipartFile;
+
 @Service
 public class AuthService {
 
@@ -46,7 +49,7 @@ public class AuthService {
     }
 
     @Transactional
-    public void createUser(@Valid SignupRequest request) {
+    public void createUser(@Valid SignupRequest request, MultipartFile multipartFile) throws IOException {
         User user = new User();
         user.setUsername(request.getUsername());
         user.setPassword(encoder.encode(request.getPassword()));
@@ -56,6 +59,9 @@ public class AuthService {
         user.setEmail(request.getEmail());
         Authorities authority = authoritiesService.findByAuthority("user");
         user.setAuthorities(authority);
+        if (!multipartFile.isEmpty()) {
+            user.setProfilePhoto(multipartFile.getBytes());
+        }
         userService.save(user);
 
     }

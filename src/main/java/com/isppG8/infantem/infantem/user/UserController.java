@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.isppG8.infantem.infantem.auth.jwt.JwtUtils;
 import com.isppG8.infantem.infantem.auth.payload.response.MessageResponse;
@@ -25,6 +27,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
+import java.io.IOException;
 import java.util.List;
 
 @Tag(name = "Users", description = "Gestión de usuarios")
@@ -83,8 +86,9 @@ public class UserController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = UserDTO.class))) @ApiResponse(responseCode = "400",
                                     description = "El usuario no es el tuyo") @PutMapping("/{id}")
-    public ResponseEntity<Object> updateUser(@PathVariable Long id, @Valid @RequestBody UserDTO userDetails,
-            @RequestHeader(name = "Authorization") String token) {
+    public ResponseEntity<Object> updateUser(@RequestPart("profilePhoto") MultipartFile multipartFile,
+            @PathVariable Long id, @Valid @RequestBody UserDTO userDetails,
+            @RequestHeader(name = "Authorization") String token) throws IOException {
 
         String jwtId = jwtUtils.getIdFromJwtToken(token.substring(6));
 
@@ -94,6 +98,11 @@ public class UserController {
         User newUsernameUser = userService.findByUsername(userDetails.getUsername());
         if (newUsernameUser != null && !newUsernameUser.getId().toString().equals(jwtId)) {
             return ResponseEntity.badRequest().body(new MessageResponse("New username is already taken"));
+        }
+        if (!multipartFile.isEmpty()) {
+            userDetails.setProfilePhoto(multipartFile.getBytes());
+        } else {
+            userDetails.setProfilePhoto(null);
         }
         User updatedUser = userService.updateUser(id, userDetails);
         String jwt = jwtUtils.generateTokenFromUsername(updatedUser.getUsername(), updatedUser.getAuthorities(),

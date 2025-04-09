@@ -14,7 +14,7 @@ public class UserUpdatedDTO {
     private String surname;
     private String username;
     private String email;
-    private String profilePhotoRoute;
+    private byte[] profilePhoto;
     private String role;
     private String jwt;
 
@@ -28,7 +28,7 @@ public class UserUpdatedDTO {
         this.surname = user.getSurname();
         this.username = user.getUsername();
         this.email = user.getEmail();
-        this.profilePhotoRoute = user.getProfilePhotoRoute();
+        this.profilePhoto = user.getProfilePhoto();
         this.role = (user.getAuthorities() != null) ? user.getAuthorities().getAuthority() : null;
         this.jwt = jwt;
     }
