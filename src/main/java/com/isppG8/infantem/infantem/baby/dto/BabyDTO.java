@@ -2,8 +2,7 @@ package com.isppG8.infantem.infantem.baby.dto;
 
 import java.time.LocalDate;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.isppG8.infantem.infantem.baby.Baby;
 import com.isppG8.infantem.infantem.baby.Genre;
 
@@ -28,7 +27,7 @@ public class BabyDTO {
     @Size(min = 3, max = 50)
     private String name;
 
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @PastOrPresent
     private LocalDate birthDate;
 
@@ -46,7 +45,7 @@ public class BabyDTO {
 
     @NotNull
     @Min(0)
-    private Integer cephalicPerimeter;
+    private Integer headCircumference;
 
     @NotBlank
     private String foodPreference;
@@ -61,7 +60,7 @@ public class BabyDTO {
         this.genre = baby.getGenre();
         this.weight = baby.getWeight();
         this.height = baby.getHeight();
-        this.cephalicPerimeter = baby.getCephalicPerimeter();
+        this.headCircumference = baby.getHeadCircumference();
         this.foodPreference = baby.getFoodPreference();
     }
 }

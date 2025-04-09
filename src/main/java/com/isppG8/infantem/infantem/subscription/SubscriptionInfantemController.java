@@ -9,11 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@Tag(name = "Subscriptions", description = "Gestión de suscripciones de Infantem")
 @RestController
 @RequestMapping("/api/v1/subscriptions")
 public class SubscriptionInfantemController {
@@ -21,8 +28,13 @@ public class SubscriptionInfantemController {
     @Autowired
     private SubscriptionInfantemService subscriptionService;
 
-    // Crear una suscripción
-    @PostMapping("/create")
+    @Operation(summary = "Crear una nueva suscripción",
+            description = "Crea una nueva suscripción asociada a un usuario.") @ApiResponse(responseCode = "200",
+                    description = "Suscripción creada exitosamente",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = SubscriptionInfantem.class))) @ApiResponse(
+                                    responseCode = "400",
+                                    description = "Error al crear la suscripción") @PostMapping("/create")
     public ResponseEntity<?> createSubscription(@RequestParam String userId, // Ahora se recibe el ID del usuario
             @RequestParam String customerId, @RequestParam String priceId, @RequestParam String paymentMethodId) {
         try {
@@ -35,7 +47,13 @@ public class SubscriptionInfantemController {
         }
     }
 
-    @PostMapping("/create/new")
+    @Operation(summary = "Crear una nueva suscripción (versión nueva)",
+            description = "Crea una nueva suscripción asociada a un usuario, versión nueva.") @ApiResponse(
+                    responseCode = "200", description = "Suscripción creada exitosamente",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = SubscriptionInfantem.class))) @ApiResponse(
+                                    responseCode = "400",
+                                    description = "Error al crear la suscripción") @PostMapping("/create/new")
     public ResponseEntity<?> createSubscriptionNew(@RequestParam String userId, @RequestParam String priceId,
             @RequestParam String paymentMethodId) {
         try {
@@ -47,8 +65,11 @@ public class SubscriptionInfantemController {
         }
     }
 
-    // Obtener cliente por email
-    @GetMapping("/customers")
+    @Operation(summary = "Obtener cliente por email",
+            description = "Recupera los detalles de un cliente a partir de su email y últimos 4 dígitos del método de pago.") @ApiResponse(
+                    responseCode = "200", description = "Cliente encontrado",
+                    content = @Content(mediaType = "application/json")) @ApiResponse(responseCode = "400",
+                            description = "Error al obtener el cliente") @GetMapping("/customers")
     public ResponseEntity<?> getCustomersByEmail(@RequestParam String email, @RequestParam Integer lasts4) {
         try {
             Map<String, Object> customerFinal = null;
@@ -71,8 +92,11 @@ public class SubscriptionInfantemController {
         }
     }
 
-    // Actualizar estado de una suscripción
-    @PostMapping("/update-status")
+    @Operation(summary = "Actualizar estado de una suscripción",
+            description = "Actualiza el estado de una suscripción, activándola o desactivándola.") @ApiResponse(
+                    responseCode = "200",
+                    description = "Estado de la suscripción actualizado") @ApiResponse(responseCode = "400",
+                            description = "Error al actualizar el estado") @PostMapping("/update-status")
     public ResponseEntity<?> updateSubscriptionStatus(@RequestParam String subscriptionId,
             @RequestParam boolean isActive) {
         try {
@@ -83,8 +107,13 @@ public class SubscriptionInfantemController {
         }
     }
 
-    // Cancelar una suscripción
-    @PostMapping("/cancel")
+    @Operation(summary = "Cancelar una suscripción",
+            description = "Cancela una suscripción existente y devuelve la información de la misma.") @ApiResponse(
+                    responseCode = "200", description = "Suscripción cancelada exitosamente",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = SubscriptionInfantem.class))) @ApiResponse(
+                                    responseCode = "400",
+                                    description = "Error al cancelar la suscripción") @PostMapping("/cancel")
     public ResponseEntity<?> cancelSubscription(@RequestParam String subscriptionId) {
         try {
             SubscriptionInfantem cancelledSubscription = subscriptionService.cancelSubscription(subscriptionId);
@@ -100,7 +129,13 @@ public class SubscriptionInfantemController {
         }
     }
 
-    @GetMapping("/user/{id}")
+    @Operation(summary = "Obtener una suscripción de un usuario por ID",
+            description = "Recupera la suscripción de un usuario por su ID.") @ApiResponse(responseCode = "200",
+                    description = "Suscripción encontrada",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = SubscriptionInfantem.class))) @ApiResponse(
+                                    responseCode = "404",
+                                    description = "Suscripción no encontrada") @GetMapping("/user/{id}")
     public ResponseEntity<Object> getSubscription(@PathVariable Long id) {
         Optional<SubscriptionInfantem> subscriptionUser = subscriptionService.getSubscriptionUserById(id);
 

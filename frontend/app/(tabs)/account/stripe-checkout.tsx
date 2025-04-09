@@ -16,7 +16,7 @@ function StripeCheckoutForm() {
   const [loading, setLoading] = useState(false);
   const [jwt, setJwt] = useState<string | "">("");
   const [userId, setUserId] = useState<number | null>(null);
-  const [priceId, setPriceId] = useState("price_1R4hyZRD1fD8EiuBaXzXdw9p");
+  const [priceId, setPriceId] = useState("price_1R7NfNImCCGaknJ7116zw3Vb");
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   
 

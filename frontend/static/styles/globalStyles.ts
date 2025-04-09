@@ -44,7 +44,7 @@ module.exports = StyleSheet.create({
   },
 
   mainButton: {
-    backgroundColor: "#007AFF", 
+    backgroundColor: "#1565C0", 
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 10,
@@ -63,14 +63,14 @@ module.exports = StyleSheet.create({
   secondaryButton: {
     backgroundColor: "white",
     borderWidth: 2,
-    borderColor: "#007AFF",
+    borderColor: "#1565C0",
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 10,
     alignItems: "center",
   },
   secondaryButtonText: {
-    color: "#007AFF",
+    color: "#1565C0",
     fontSize: 16,
     fontWeight: "bold",
   },
@@ -272,6 +272,30 @@ module.exports = StyleSheet.create({
     flex: 1,
     paddingTop: 80, // Ajuste para que no quede oculto en iPhone
   }, 
+
+  bannerContainer: {
+    backgroundColor: "#f9f9f9",
+    padding: 16,
+    borderRadius: 12,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 3 },
+    elevation: 3,
+    margin: 16,
+    alignItems: "center",
+  },
+  brandText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#333",
+    marginBottom: 8,
+  },
+  sentenceText: {
+    fontSize: 16,
+    color: "#666",
+    textAlign: "center",
+  },
   
 
   // Prueba alvjimosu
@@ -369,4 +393,58 @@ module.exports = StyleSheet.create({
     color: "#007AFF",
     textDecorationLine: "underline",
   },
+
+  //// Estilos para la sección de métricas
+
+  containerMetric: {
+    flexGrow: 1,
+    alignItems: 'center',
+    paddingVertical: 10,
+    backgroundColor: '#f5f5f5',
+  },
+  cardMetric: {
+    backgroundColor: '#fff',
+    marginBottom: 25,
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 5,
+    padding: 15,
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#333',
+    marginBottom: 5,
+    width: '100%',
+  },
+  imageContainer: {
+    width: '100%',
+    alignItems: 'center',
+    marginBottom: 15,
+    position: "relative", // Para permitir posicionar el bebé dentro
+  },
+  imageMetric: {
+    width: '100%',
+    backgroundColor: '#fff',
+  },
+  babyImage: {
+    width: 22,
+    height: 22,
+    position: 'absolute',
+  },
+  description: {
+    fontSize: 15,
+    textAlign: 'center',
+    color: '#555',
+    paddingHorizontal: 10,
+    marginTop: 10,
+    lineHeight: 20,
+  },
+
+
 });

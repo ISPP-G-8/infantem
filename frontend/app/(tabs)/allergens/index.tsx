@@ -1,7 +1,7 @@
-import { Link } from "expo-router";
 import { Text, View, ScrollView, TouchableOpacity, TextInput,ImageBackground } from "react-native";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { questions } from "../../../hardcoded_data/questionsData";
+import AdvertisementFetcher from "../../../components/AdvertisementFetcher";
 
 export default function Allergens() {
   
@@ -72,6 +72,7 @@ export default function Allergens() {
           </View>
         )}
       </ScrollView>
+      <AdvertisementFetcher />
       </ImageBackground>
     </View>
   );

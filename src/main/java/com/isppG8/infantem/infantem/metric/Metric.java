@@ -31,16 +31,20 @@ public class Metric {
     private Integer id;
 
     @Min(0)
-    @Max(100)
+    @Max(30)
     private Double weight;
 
     @Min(0)
-    @Max(200)
+    @Max(130)
     private Double height;
 
     @Min(0)
-    @Max(100)
-    private Integer cephalicPerimeter;
+    @Max(60)
+    private Double headCircumference;
+
+    @Min(0)
+    @Max(21)
+    private Double armCircumference;
 
     @PastOrPresent
     private LocalDate date;

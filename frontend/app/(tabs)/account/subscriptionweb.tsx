@@ -15,7 +15,7 @@ export default function SubscriptionWeb() {
     const [jwt, setJwt] = useState<string | "">("");
     const apiUrl = process.env.EXPO_PUBLIC_API_URL;
     const [accepted, setAccepted] = useState(false);
-    const [priceId, setPriceId] = useState("price_1R4hyZRD1fD8EiuBaXzXdw9p");
+    const [priceId, setPriceId] = useState("price_1R7NfNImCCGaknJ7116zw3Vb");
     const [userId, setUserId] = useState<number | null>(null);
 
     useEffect(() => {

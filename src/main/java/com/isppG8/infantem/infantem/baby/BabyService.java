@@ -1,6 +1,5 @@
 package com.isppG8.infantem.infantem.baby;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,14 +55,11 @@ public class BabyService {
         baby.setGenre(babyDTO.getGenre());
         baby.setWeight(babyDTO.getWeight());
         baby.setHeight(babyDTO.getHeight());
-        baby.setCephalicPerimeter(babyDTO.getCephalicPerimeter());
+        baby.setHeadCircumference(babyDTO.getHeadCircumference());
         baby.setFoodPreference(babyDTO.getFoodPreference());
 
         // Añadir el usuario actual
         User currentUser = userService.findCurrentUser();
-        if (baby.getUsers() == null) {
-            baby.setUsers(new ArrayList<>());
-        }
         baby.getUsers().add(currentUser);
 
         return babyRepository.save(baby);
@@ -86,7 +82,7 @@ public class BabyService {
         existingBaby.setGenre(updatedBaby.getGenre());
         existingBaby.setWeight(updatedBaby.getWeight());
         existingBaby.setHeight(updatedBaby.getHeight());
-        existingBaby.setCephalicPerimeter(updatedBaby.getCephalicPerimeter());
+        existingBaby.setHeadCircumference(updatedBaby.getHeadCircumference());
         existingBaby.setFoodPreference(updatedBaby.getFoodPreference());
 
         return babyRepository.save(existingBaby);
