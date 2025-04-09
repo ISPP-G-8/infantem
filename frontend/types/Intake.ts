@@ -1,10 +1,13 @@
 type IntakeSymptom = {
   id: number;
   description: string;
-  date: [number, number, number, number, number]; 
+  date: string;
 }
 
-type IdRef = { id: number };
+type AuxType= { 
+  id: number; 
+  name?: string;
+};
 
 export type Intake = {
   id?: number;
@@ -12,6 +15,6 @@ export type Intake = {
   quantity: number;
   observations: string;
   intakeSymptom?: IntakeSymptom;
-  baby?: IdRef;
-  recipes?: IdRef[];
+  baby: AuxType | null;
+  recipes: AuxType[];
 }

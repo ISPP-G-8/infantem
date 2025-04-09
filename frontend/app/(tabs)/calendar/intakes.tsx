@@ -50,8 +50,6 @@ export default function Intakes() {
         {intakes.map((intake, index) => {
 
           // Waiting backend to add the name of the baby
-          const dateArray = intake.date;
-          const formattedDate = `${dateArray[2].toString().padStart(2, '0')}/${dateArray[1].toString().padStart(2, '0')}/${dateArray[0]} ${dateArray[3].toString().padStart(2, '0')}:${dateArray[4].toString().padStart(2, '0')}`;
           
           return (
             <TouchableOpacity 
@@ -60,8 +58,10 @@ export default function Intakes() {
             >
               <View style={{ flex: 1 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5 }}>
-                  <Text style={{ fontWeight: 'bold', color: '#333' }}>{formattedDate}</Text>
-                  <Text style={{ fontWeight: 'bold', color: '#1565C0' }}> Bebé: {intake.baby.name}</Text>
+                  <Text style={{ fontWeight: 'bold', color: '#333' }}>{intake.date}</Text>
+                  { intake.baby?.name &&
+                    <Text style={{ fontWeight: 'bold', color: '#1565C0' }}> Bebé: {intake.baby.name}</Text>
+                  }
                 </View>
                 <Text style={gs.cardContent} numberOfLines={2}>{intake.observations}</Text>
                 <Text style={gs.cardContent}>Cantidad: {intake.quantity}g</Text>

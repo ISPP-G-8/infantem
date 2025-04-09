@@ -1,25 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, FlatList, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, FlatList, ScrollView, useWindowDimensions } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useAuth } from '../../../context/AuthContext';
 import { router } from 'expo-router';
 import { Baby, Intake, Recipe } from '../../../types';
+import Pagination from '../../../components/Pagination';
 
 export default function intakeDetail() {
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const gs = require("../../../static/styles/globalStyles");
   const { token } = useAuth();
-
+  const { width } = useWindowDimensions();
+  const cardWidth = width < 500 ?350 :600;
+ 
   const [errorMessage, setErrorMessage] = useState('');
   const [babies, setBabies] = useState<Baby[]>([]);
+
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [tempSearchQuery, setTempSearchQuery] = useState("");
+  const [recipesPage, setRecipesPage] = useState<number>(1);
+  const [recipesTotalPages, setRecipesTotalPages] = useState<number | null>(null);
+
   const [intake, setIntake] = useState<Intake>({
     date: '', 
     quantity: 0,
     observations: '',
-    baby: undefined, 
+    baby: null, 
     recipes: []
   });
 
@@ -52,7 +59,7 @@ export default function intakeDetail() {
 
   useEffect(() => {
     const fetchRecipes= async (): Promise<boolean> => {
-      const url = `${apiUrl}/api/v1/recipes/visible${searchQuery? `?name=${searchQuery}` : ''}`;
+      const url = `${apiUrl}/api/v1/recipes/visible?page=${recipesPage-1}${searchQuery? `&name=${searchQuery}` : ''}`;
       try {
         const response = await fetch(url, {
           method: 'GET',
@@ -66,7 +73,8 @@ export default function intakeDetail() {
         } 
 
         const data = await response.json();
-        setRecipes(data);
+        setRecipes(data.content);
+        setRecipesTotalPages(data.totalPages);
         return true;
 
       } catch (error) {
@@ -76,7 +84,7 @@ export default function intakeDetail() {
     };
 
     fetchRecipes();
-  }, [searchQuery]);
+  }, [searchQuery, recipesPage]);
 
   const handleDateChange = (text: string) => {
     setIntake({...intake, date: text});
@@ -90,7 +98,7 @@ export default function intakeDetail() {
     }
   };
 
-  const handleInputChange = (field, value) => {
+  const handleInputChange = (field: string, value: any) => {
     setIntake({...intake, [field]: value});
   };
 
@@ -140,7 +148,7 @@ export default function intakeDetail() {
       <Text style={{ color: "#1565C0", fontSize: 36, fontWeight: "bold", textAlign: "center", marginBottom: 10 }}>
         Añade una ingesta
       </Text>
-          <ScrollView contentContainerStyle={[gs.card, { alignItems: "center", justifyContent: "center", marginBottom: 20, borderRadius: 15, shadowColor: "#000", shadowOpacity: 0.1, shadowRadius: 10, elevation: 5 }]}>
+          <ScrollView contentContainerStyle={[gs.card, { width: cardWidth, alignItems: "center", justifyContent: "center", marginBottom: 19, borderRadius: 15, shadowColor: "#000", shadowOpacity: 0.1, shadowRadius: 10, elevation: 5 }]}>
             
             
             <Text style={{ alignSelf: 'flex-start', marginLeft: '10%', color: '#1565C0', fontWeight: 'bold', marginBottom: 5 }}>Fecha y hora:</Text>
@@ -162,10 +170,9 @@ export default function intakeDetail() {
 
             <Text style={{ alignSelf: 'flex-start', marginLeft: '10%', color: '#1565C0', fontWeight: 'bold', marginTop: 10, marginBottom: 5 }}>Observaciones:</Text>
             <TextInput
-              style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width:"80%", height: 100, textAlignVertical: 'top' }]} 
+              style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width:"80%", textAlignVertical: 'top' }]} 
               placeholder="Ej. Tomó bien la leche"
               multiline={true}
-              numberOfLines={4}
               value={intake.observations}
               onChangeText={(text) => handleInputChange("observations", text)}
             />
@@ -265,6 +272,14 @@ export default function intakeDetail() {
                   keyExtractor={item => item.id.toString()}
                   style={{ maxHeight: 200 }}
                 />
+              {recipesTotalPages&& (
+                <Pagination 
+                  totalPages={recipesTotalPages} 
+                  page={recipesPage} 
+                  setPage={setRecipesPage} 
+                />
+              )}
+
               </View>
             </View>
           )}
