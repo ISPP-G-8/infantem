@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity, ImageBackground, ScrollView, Image, TextInput } from "react-native";
 import { getToken } from "../../../utils/jwtStorage";
 import { Picker } from "@react-native-picker/picker";
+import { useRouter } from "expo-router";
 
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
@@ -32,6 +33,7 @@ export default function BabyInfo() {
   const gs = require("../../../static/styles/globalStyles");
   const [babies, setBabies] = useState<Baby[]>([]);
   const [jwt, setJwt] = useState<string | null>(null);
+  const router = useRouter();
 
   // We need the originalBaby because we don't fetch a DTO. Waiting for the DTO
   const [originalBaby, setOriginalBaby] = useState<Baby | null>(null);
@@ -375,6 +377,7 @@ export default function BabyInfo() {
                   <Text style={gs.mainButtonText}>Eliminar</Text>
                 </TouchableOpacity>
               </View>
+            </View>
             </View>
           ))
         )}

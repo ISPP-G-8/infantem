@@ -79,7 +79,7 @@ export default function Metricas() {
     useEffect(() => {
         if (!token) return; // Evita ejecutar el efecto si jwt es null o undefined
             try {
-                const decodedToken: any = jwtDecode(token);
+                const decodedToken: any = jwtDecode(token); // Verifica el contenido del token decodificado
                 setUserId(decodedToken.jti);
             } catch (error) {
                 console.error("Error al decodificar el token:", error);
@@ -131,13 +131,17 @@ export default function Metricas() {
                 if (response.ok) {
                     const data = await response.json();
                     setBaby(data);
-                    setYear(data.birthDate[0]);
-                    setMonth(data.birthDate[1]);
-                    if(data.birthDate[2] == 31){
+
+                    const [year, month, day] = data.birthDate.split("-").map(Number);
+                    setYear(year);
+                    setMonth(month);
+
+                    if (day === 31) {
                         setDay(30);
-                    } else{
-                        setDay(data.birthDate[2]);
+                    } else {
+                        setDay(day);
                     }
+
                     
                 } else {
                     console.error("Error en la suscripción:", response.statusText);
@@ -175,7 +179,7 @@ export default function Metricas() {
     }, [token, userId]);
 
     return (
-        console.log(),
+        console.log(( baby )),
         <ScrollView contentContainerStyle={gs.containerMetric} showsVerticalScrollIndicator={false}>
 
             <Text style={gs.headerText}>Gráficas de crecimiento</Text>
