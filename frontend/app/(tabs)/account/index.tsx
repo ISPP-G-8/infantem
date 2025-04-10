@@ -280,7 +280,7 @@ export default function Account() {
         alert("Permiso denegado para acceder a la galería.");
         return;
       }
-
+  
       result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
@@ -288,22 +288,28 @@ export default function Account() {
         quality: 1,
         base64: false, // da igual, web da base64 como uri
       });
-
+  
       if (!result.canceled) {
         let imageUri = result.assets[0].uri;
+  
+        // NUEVO: Validar que sea PNG
+        if (!imageUri.toLowerCase().endsWith(".png")) {
+          alert("Por favor, selecciona una imagen en formato PNG.");
+          return;
+        }
   
         if (imageUri.startsWith('data:image')) {
           const base64Data = imageUri.split(',')[1];
   
           const blob = base64toBlob(base64Data);
           console.log("Blob creado:", blob);
-          
+  
           saveImage(blob);
         } else {
           console.log("Imagen URI válida:", imageUri);
           saveImage(imageUri);
         }
-      } else if (result == undefined) {
+      } else if (result === undefined) {
         console.log("result undefined");
       }
     } catch (err) {
@@ -311,6 +317,7 @@ export default function Account() {
       setAvatarModalVisible(false);
     }
   };
+  
   
 
   const deleteImage = () => {

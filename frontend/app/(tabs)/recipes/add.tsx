@@ -239,6 +239,12 @@ export default function AddBaby() {
       if (!result.canceled) {
         let imageUri = result.assets[0].uri;
 
+        // NUEVO: Validar que sea PNG
+        if (!imageUri.toLowerCase().endsWith(".png")) {
+          alert("Por favor, selecciona una imagen en formato PNG.");
+          return;
+        }
+
         if (imageUri.startsWith('data:image')) {
           const base64Data = imageUri.split(',')[1];
 
