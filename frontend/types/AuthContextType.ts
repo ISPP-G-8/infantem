@@ -7,6 +7,7 @@ export type AuthContextType = {
   token: string | null;
   setUser: (user: User | null) => void;
   signOut: () => Promise<void>;
+  updateToken: (token: string) => Promise<void>;
   checkAuth: () => Promise<boolean>;
 };
 

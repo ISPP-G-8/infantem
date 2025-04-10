@@ -13,7 +13,6 @@ import com.stripe.param.PaymentMethodListParams;
 import com.stripe.param.SubscriptionCreateParams;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.isppG8.infantem.infantem.auth.Authorities;
 import com.isppG8.infantem.infantem.auth.AuthoritiesService;
 import com.isppG8.infantem.infantem.config.StripeConfig;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
@@ -57,9 +56,7 @@ public class SubscriptionInfantemService {
         Optional<SubscriptionInfantem> subOpt = subscriptionInfantemRepository.findByUser(user);
 
         if (subOpt.isPresent()) {
-            Authorities authorities = authoritiesService.findByAuthority("premium");
-            user.setAuthorities(authorities);
-            userService.updateUser((long) user.getId(), user);
+            userService.upgradeToPremium(user);
 
             SubscriptionInfantem subscription = subOpt.get();
             subscription.setStripeSubscriptionId(subscriptionId);
@@ -205,6 +202,7 @@ public class SubscriptionInfantemService {
         return null;
     }
 
+    @Transactional
     public void handleCheckoutSessionCompleted(Event event) throws StripeException {
         EventDataObjectDeserializer dataObjectDeserializer = event.getDataObjectDeserializer();
         if (!dataObjectDeserializer.getObject().isPresent())
@@ -250,6 +248,7 @@ public class SubscriptionInfantemService {
     }
 
     // 🔹 Manejar cuando una suscripción es creada
+    @Transactional
     public void handleSubscriptionCreated(Event event) {
         EventDataObjectDeserializer dataObjectDeserializer = event.getDataObjectDeserializer();
         if (!dataObjectDeserializer.getObject().isPresent())
