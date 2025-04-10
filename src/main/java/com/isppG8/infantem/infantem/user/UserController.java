@@ -144,6 +144,23 @@ public class UserController {
         }
     }
 
+    @DeleteMapping("/{id}/profile-photo")
+    public ResponseEntity<MessageResponse> deleteProfilePhoto(@PathVariable Long id,
+            @RequestHeader(name = "Authorization") String token) {
+        String jwtId = jwtUtils.getIdFromJwtToken(token.substring(6));
+        if (!(jwtId.equals(id.toString()))) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Not your user"));
+        }
+        User user = userService.getUserById(id);
+        if (user == null) {
+            return ResponseEntity.badRequest().body(new MessageResponse("User not found"));
+        }
+        UserDTO userDTO = new UserDTO(user);
+        userDTO.setProfilePhoto(null);
+        userService.updateUser(id, userDTO);
+        return ResponseEntity.ok().body(new MessageResponse("Photo delete successfully"));
+    }
+
     @Operation(summary = "Eliminar un usuario por su ID", description = "Elimina un usuario por su ID.") @ApiResponse(
             responseCode = "200", description = "Usuario eliminado exitosamente",
             content = @Content(mediaType = "application/json",

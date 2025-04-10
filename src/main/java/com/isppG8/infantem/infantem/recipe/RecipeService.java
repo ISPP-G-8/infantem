@@ -28,7 +28,7 @@ public class RecipeService {
         this.babyService = babyService;
     }
 
-    private Integer getCurrentUserId() {
+    public Integer getCurrentUserId() {
         return this.userService.findCurrentUserId();
     }
 
