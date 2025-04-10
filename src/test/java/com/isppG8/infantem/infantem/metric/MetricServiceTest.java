@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.isppG8.infantem.infantem.InfantemApplication;
 import com.isppG8.infantem.infantem.baby.Baby;
-import com.isppG8.infantem.infantem.baby.BabyRepository;
 import com.isppG8.infantem.infantem.baby.BabyService;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 import com.isppG8.infantem.infantem.user.User;
@@ -53,11 +52,6 @@ public class MetricServiceTest {
 
     @Autowired
     private MetricService metricService;
-
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private BabyService babyService;
 
     private User currentUser;
     private Baby testBaby;
