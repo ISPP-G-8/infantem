@@ -12,7 +12,12 @@ const avatarOptions = [
 export default function Account() {
   const [modalVisible, setModalVisible] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [subscription, setSubscription] = useState(null);
+  interface Subscription {
+    active: boolean;
+    [key: string]: any; // Add other properties as needed
+  }
+
+  const [subscription, setSubscription] = useState<Subscription | null>(null);
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const gs = require("../../../static/styles/globalStyles");
@@ -120,10 +125,12 @@ export default function Account() {
         Perfil</Text>
   
 
-        {user && (subscription ? (
+        {user && (subscription ? ( (subscription && subscription.active ? (
           <Link href={"/account/premiumplan"} style={[gs.mainButton, { marginVertical: 10, textAlign: "center", width: "20%", backgroundColor: "red" }]}>
-            <Text style={[gs.mainButtonText, { fontSize: 20 }]}>Cancelar sususcripcion</Text>
+            <Text style={[gs.mainButtonText, { fontSize: 20 }]}>Cancelar suscripcion</Text>
           </Link>
+        ) : (
+          <Text style={[gs.text, { fontSize: 20 }]}>Hasta el final de la suscripción no puede volver a suscribirse</Text>))
         ): (
           <Link href={"/account/premiumplan"} style={[gs.mainButton, { marginVertical: 10, textAlign: "center", width: "80%" }]}>
             <Text style={[gs.mainButtonText, { fontSize: 20 }]}>¡HAZTE PREMIUM!</Text>
