@@ -19,6 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.isppG8.infantem.infantem.InfantemApplication;
+import com.isppG8.infantem.infantem.user.dto.UserDTO;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 
 import jakarta.transaction.Transactional;
@@ -156,8 +157,9 @@ public class UserServiceTest {
         updatedDetails.setSurname("User");
         updatedDetails.setUsername("updatedUsername");
         updatedDetails.setEmail("updated@example.com");
+        updatedDetails.setId(1);
 
-        User updatedUser = userService.updateUser((long) 1, updatedDetails);
+        User updatedUser = userService.updateUser((long) 1, new UserDTO(updatedDetails));
 
         assertNotNull(updatedUser);
         assertEquals("Updated", updatedUser.getName());
