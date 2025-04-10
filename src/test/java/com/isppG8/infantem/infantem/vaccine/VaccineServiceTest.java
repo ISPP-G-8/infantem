@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.isppG8.infantem.infantem.baby.Baby;
 import com.isppG8.infantem.infantem.baby.BabyService;
@@ -91,5 +92,10 @@ public class VaccineServiceTest {
     public void TestDeleteVaccine() {
         vaccineService.delete(1L);
         assertThrows(ResourceNotFoundException.class, () -> vaccineService.getById(1L));
+    }
+
+    @Test
+    public void testDeleteVaccineNotFound() {
+        assertThrows(ResourceNotFoundException.class, () -> vaccineService.delete(999L));
     }
 }
