@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
-import { Text, View, TextInput, TouchableOpacity,ScrollView } from "react-native";
+import { Text, View, TextInput, TouchableOpacity, ScrollView, Image } from "react-native";
 import { useRouter } from "expo-router";
 import { getToken } from "../../../utils/jwtStorage";
 import { Picker } from "@react-native-picker/picker";
+import { useAuth } from "../../../context/AuthContext";
+import * as ImagePicker from 'expo-image-picker';
+import UploadImageModal from "../../../components/UploadImageModal";
+
 
 export default function AddBaby() {
   const gs = require("../../../static/styles/globalStyles");
@@ -35,6 +39,15 @@ export default function AddBaby() {
   const [maxAgeError, setMaxAgeError] = useState<string | null>(null);
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+
+  /////////////////////////////////////////
+
+  const [imageModalVisible, setImageModalVisible] = useState(false);
+  const [image, setImage] = useState<any>(null);
+  const [imageBase64, setImageBase64] = useState<any>(null);
+  const { isLoading, user, token, setUser, updateToken, checkAuth, signOut } = useAuth();
+
+  ////////////////////////////////////////
 
   useEffect(() => {
     const getUserToken = async () => {
@@ -117,6 +130,108 @@ export default function AddBaby() {
     }
   };
 
+  ////////////////////////////////
+
+  // fetch POST HAY QUE MODIFICARLO PARA QUE INCLUYA LA IMAGEN
+
+  function base64toBlob(base64Data, contentType = 'image/png') {
+    const byteCharacters = atob(base64Data);
+    const byteArrays = [];
+  
+    for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+      const slice = byteCharacters.slice(offset, offset + 512);
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+  
+    return new Blob(byteArrays, { type: contentType });
+  }
+
+  const uploadImage = async (mode) => {
+    try {
+      let result;
+      if (mode === "gallery") {
+        const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (!permissionResult.granted) {
+          alert("Permiso denegado para acceder a la galería.");
+          return;
+        }
+  
+        result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
+          allowsEditing: true,
+          aspect: [1, 1],
+          quality: 1,
+          base64: false, // da igual, web da base64 como uri
+        });
+      }
+
+      if (!result.canceled) {
+        let imageUri = result.assets[0].uri;
+  
+        if (imageUri.startsWith('data:image')) {
+          const base64Data = imageUri.split(',')[1];
+  
+          const blob = base64toBlob(base64Data);
+          console.log("Blob creado:", blob);
+          
+          saveImage(blob);
+        } else {
+          console.log("Imagen URI válida:", imageUri);
+          saveImage(imageUri);
+        }
+      } else if (result == undefined) {
+        console.log("result undefined");
+      }
+    } catch (err) {
+      alert('Error al abrir la galería: ' + err.message);
+      setAvatarModalVisible(false);
+    }
+  };
+
+
+  const deleteImage = () => {
+    try {
+      saveImage(null);
+      setAvatarModalVisible(false);
+    } catch ({ message }) {
+      console.log(message);
+      setAvatarModalVisible(false);
+    }
+  }
+
+  const saveImage = async (image) => {
+    try {
+      setImage(image);
+      const base64Image = await blobToBase64(image);
+      setImageBase64(base64Image);
+      console.log("Imagen base64:", base64Image);
+      // sendToBackend(image);
+      setAvatarModalVisible(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const blobToBase64 = (blob) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  };
+
+
+
+  ////////////////////////////////
+
+
+
   return (
     <View style={{ flex: 1, backgroundColor: "#E3F2FD" }}>
       <ScrollView contentContainerStyle={{ padding: 30, paddingBottom: 30 }}>
@@ -138,6 +253,23 @@ export default function AddBaby() {
           <Text style={[gs.headerText, { textAlign: "center", marginBottom: 24, color: "#1565C0" }]}>
             Añadir una receta
           </Text>
+
+          <TouchableOpacity style={gs.profileImageContainer} onPress={() => setImageModalVisible(true)}>
+            <Image
+              source={imageBase64 
+                ? { uri: imageBase64 } 
+                : require("../../../assets/avatar/avatar1.png")}
+              style={gs.profileImage}
+            />
+          </TouchableOpacity>
+
+          <UploadImageModal
+            visible={imageModalVisible}
+            onClose={() => setImageModalVisible(false)}
+            onCameraPress={uploadImage}
+            onGalleryPress={() => uploadImage("gallery")}
+            onDeletePress={deleteImage}
+          />
 
           <TextInput
             style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "90%" }]}

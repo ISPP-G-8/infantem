@@ -129,7 +129,8 @@ module.exports = StyleSheet.create({
   },
   imageButtonsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
+    gap: 30,
     alignItems: 'center',
     width: '100%'
   },
