@@ -167,7 +167,9 @@ export default function PremiumPlan() {
                 shadowOpacity: 0.15,
                 shadowRadius: 6,
                 elevation: 5,
+                
               }}
+               showsVerticalScrollIndicator={false}
             >
               <Text
                 style={{
@@ -262,6 +264,8 @@ export default function PremiumPlan() {
                 shadowRadius: 6,
                 elevation: 5,
               }}
+              showsVerticalScrollIndicator={false}
+
             >
               <Text
                 style={{

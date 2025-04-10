@@ -185,61 +185,77 @@ export default function MetricasAvanzadas() {
     }
 
     return (
-        
-        <ScrollView contentContainerStyle={gs.containerMetric} showsVerticalScrollIndicator={false}>
 
-            <Text style={gs.headerText}>Gráficas de crecimiento</Text>
-            <view style={gs.separator}/>
-            {baby && metrics && (
-                <View style={[gs.cardMetric, { flex: 6 }]}>
-                    <Text style={[gs.cardTitle, { fontSize: 18 }]}>{baby.name}</Text>
-                    <Text style={gs.cardContent}>💪 Circunferencia del brazo: {metrics.armCircumference}</Text>
-                    <Text style={gs.cardContent}>👶 Circunferencia de la cabeza: {metrics.headCircumference}</Text>
-                    <Text style={gs.cardContent}>📏 Altura: {metrics.height} cm</Text>
-                    <Text style={gs.cardContent}>⚖️ Peso: {metrics.weight} kg </Text>
-                    <Text style={gs.cardContent}>📆 Fecha de las métricas: 
-                        {` ${metrics.date[2].toString().padStart(2, '0')}/${metrics.date[1].toString().padStart(2, '0')}/${metrics.date[0]}`}
-                    </Text>
-                    <view style={gs.separator}/>
-                    {metrics.date[0] !== nowYear || metrics.date[1] !== nowMonth || metrics.date[2] !== nowDay ? (
-                        <View>
-                            <Text style={gs.cardContent}>La medida del bebe no están actualizadas, 
-                            por lo tanto las graficas no estarán actualizadas. Por favor, actualícelas</Text>
-                            <view style={gs.separator}/>
-                            <TouchableOpacity style={[gs.mainButton, { backgroundColor: "green" }]} onPress={() => router.push(`/baby/addmetricas?babyId=${babyId}`)}>
-                                <Text style={gs.mainButtonText}>Actualizar métricas</Text>
-                            </TouchableOpacity>
-                        </View>
-                    ) : (
-                        <View>
-                            <view style={gs.separator}/>
-                            <view style={gs.separator}/>
-                            <Text style={gs.cardContent}>La medida del bebe están actualizadas, 
-                            pero las puede volver actualizar.</Text>
-                            <view style={gs.separator}/>
-                            <view style={gs.separator}/>
-                            <TouchableOpacity style={[gs.mainButton, { backgroundColor: "green" }]} onPress={() => router.push(`/baby/addmetricas?babyId=${babyId}`)}>
-                                <Text style={gs.mainButtonText}>Actualizar métricas</Text>
-                            </TouchableOpacity>
-                        </View>
-                    )}  
-                    <view style={gs.separator}/>
-                    {subscription && (
-                        <View>
-                            <view style={gs.separator}/>
-                            <view style={gs.separator}/>
-                            <Text style={gs.cardContent}>La medida del bebe están actualizadas, 
-                            pero las puede volver actualizar.</Text>
-                            <view style={gs.separator}/>
-                            <view style={gs.separator}/>
-                            <TouchableOpacity style={[gs.mainButton, { backgroundColor: "blue" }]} onPress={() => router.push(`/baby/metricas?babyId=${babyId}`)}>
-                                <Text style={gs.mainButtonText}>Métricas básicas</Text>
-                            </TouchableOpacity>
-                        </View>
-                        )
-                    }
-                </View>
-            )}
+       <View style={{ flex: 1, backgroundColor: "#E3F2FD" }}>
+
+        <ScrollView contentContainerStyle={[gs.containerMetric,{backgroundColor:"transparent"}]} showsVerticalScrollIndicator={false}>
+
+        <Text style={[gs.headerText, { marginBottom: 20 }]}>📈 Gráficas de crecimiento</Text>
+
+<View style={gs.separator} />
+
+{baby && metrics && (
+  <View style={[gs.cardMetric, { flex: 6, padding: 20, backgroundColor: "#ffffff", borderRadius: 16 }]}>
+    <Text style={[gs.cardTitle, { fontSize: 20, marginBottom: 10, color: "#1565C0" }]}>
+      👶 {baby.name}
+    </Text>
+
+    <Text style={gs.cardContent}>💪 Circunferencia del brazo: {metrics.armCircumference} cm</Text>
+    <Text style={gs.cardContent}>🧠 Circunferencia de la cabeza: {metrics.headCircumference} cm</Text>
+    <Text style={gs.cardContent}>📏 Altura: {metrics.height} cm</Text>
+    <Text style={gs.cardContent}>⚖️ Peso: {metrics.weight} kg</Text>
+    <Text style={gs.cardContent}>
+      📅 Fecha de las métricas:{" "}
+      {`${metrics.date[2].toString().padStart(2, '0')}/${metrics.date[1].toString().padStart(2, '0')}/${metrics.date[0]}`}
+    </Text>
+
+    <View style={gs.separator} />
+
+    {metrics.date[0] !== nowYear || metrics.date[1] !== nowMonth || metrics.date[2] !== nowDay ? (
+      <View style={{ marginTop: 20 }}>
+        <Text style={[gs.cardContent, { color: "#E53935", marginBottom: 10 }]}>
+          ⚠️ Las métricas del bebé no están actualizadas, por lo tanto las gráficas no reflejan los últimos datos. Por favor, actualízalas.
+        </Text>
+
+        <TouchableOpacity
+          style={[gs.mainButton, { backgroundColor: "#0D47A1", marginTop: 10 }]}
+          onPress={() => router.push(`/baby/addmetricas?babyId=${babyId}`)}
+        >
+          <Text style={gs.mainButtonText}>Actualizar métricas</Text>
+        </TouchableOpacity>
+      </View>
+    ) : (
+      <View style={{ marginTop: 20 }}>
+        <Text style={[gs.cardContent, { color: "#388E3C", marginBottom: 10 }]}>
+          ✅ Las métricas están actualizadas, pero puedes volver a actualizarlas si lo deseas.
+        </Text>
+
+        <TouchableOpacity
+          style={[gs.mainButton, { backgroundColor: "#0D47A1", marginTop: 10 }]}
+          onPress={() => router.push(`/baby/addmetricas?babyId=${babyId}`)}
+        >
+          <Text style={gs.mainButtonText}>Actualizar métricas</Text>
+        </TouchableOpacity>
+      </View>
+    )}
+
+    {subscription && (
+      <View style={{ marginTop: 30 }}>
+        <Text style={[gs.cardContent, { color: "#0D47A1", marginBottom: 10 }]}>
+          🔍 Puedes acceder a métricas avanzadas para un análisis más detallado del crecimiento.
+        </Text>
+
+        <TouchableOpacity
+          style={[gs.mainButton, { backgroundColor: "#1565C0" }]}
+          onPress={() => router.push(`/baby/metricasavanzadas?babyId=${babyId}`)}
+        >
+          <Text style={gs.mainButtonText}>Métricas avanzadas</Text>
+        </TouchableOpacity>
+      </View>
+    )}
+  </View>
+)}
+
             {baby?.genre == 'OTHER' && (
                 <View style={[gs.cardMetric, { flex: 3 }]}>
                         <Text style={gs.cardContent}>Como en el género del bebe se puso otro, a continuación se le van a motrar las graficas 
@@ -1222,5 +1238,6 @@ export default function MetricasAvanzadas() {
                 </View>
             }
         </ScrollView>
+        </View>
     );
 }
