@@ -13,6 +13,7 @@ import com.stripe.param.PaymentMethodListParams;
 import com.stripe.param.SubscriptionCreateParams;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.isppG8.infantem.infantem.auth.AuthoritiesService;
 import com.isppG8.infantem.infantem.config.StripeConfig;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 import com.isppG8.infantem.infantem.user.User;
@@ -40,18 +41,23 @@ public class SubscriptionInfantemService {
 
     private final UserService userService;
     private final SubscriptionInfantemRepository subscriptionInfantemRepository;
+    private AuthoritiesService authoritiesService;
 
     public SubscriptionInfantemService(SubscriptionInfantemRepository subscriptionRepository, StripeConfig stripeConfig,
-            UserService userService) {
+            UserService userService, AuthoritiesService authoritiesService) {
         this.subscriptionInfantemRepository = subscriptionRepository;
         this.stripeConfig = stripeConfig;
         this.userService = userService;
+        this.authoritiesService = authoritiesService;
     }
 
+    @Transactional
     public void activateSubscription(User user, String subscriptionId) {
         Optional<SubscriptionInfantem> subOpt = subscriptionInfantemRepository.findByUser(user);
 
         if (subOpt.isPresent()) {
+            userService.upgradeToPremium(user);
+
             SubscriptionInfantem subscription = subOpt.get();
             subscription.setStripeSubscriptionId(subscriptionId);
             subscription.setActive(true);
@@ -59,13 +65,18 @@ public class SubscriptionInfantemService {
         }
     }
 
-    public void updateSubscriptionStatus(String stripeSubscriptionId, boolean isActive) {
-        Optional<SubscriptionInfantem> subOpt = subscriptionInfantemRepository
-                .findByStripeSubscriptionId(stripeSubscriptionId);
+    @Transactional
+    public void desactivateSubscription(User user, String subscriptionId) {
+        Optional<SubscriptionInfantem> subOpt = subscriptionInfantemRepository.findByUser(user);
 
         if (subOpt.isPresent()) {
+            Authorities authorities = authoritiesService.findByAuthority("user");
+            user.setAuthorities(authorities);
+            userService.updateUser((long) user.getId(), user);
+
             SubscriptionInfantem subscription = subOpt.get();
-            subscription.setActive(isActive);
+            subscription.setStripeSubscriptionId(subscriptionId);
+            subscription.setActive(false);
             subscriptionInfantemRepository.save(subscription);
         }
     }
@@ -196,6 +207,7 @@ public class SubscriptionInfantemService {
         return null;
     }
 
+    @Transactional
     public void handleCheckoutSessionCompleted(Event event) throws StripeException {
         EventDataObjectDeserializer dataObjectDeserializer = event.getDataObjectDeserializer();
         if (!dataObjectDeserializer.getObject().isPresent())
@@ -223,7 +235,8 @@ public class SubscriptionInfantemService {
         if (subscriptionId == null)
             return;
 
-        updateSubscriptionStatus(subscriptionId, true);
+        userService.getUserByStripeCustomerId(subscriptionId)
+                .ifPresent(user -> activateSubscription(user, subscriptionId));
     }
 
     // 🔹 Manejar cuando una suscripción es cancelada
@@ -237,10 +250,16 @@ public class SubscriptionInfantemService {
         if (subscriptionId == null)
             return;
 
-        updateSubscriptionStatus(subscriptionId, false);
+        Optional<User> optionalUser = userService.getUserByStripeCustomerId(subscriptionId);
+        if (!optionalUser.isPresent())
+            return;
+
+        User user = optionalUser.get();
+        desactivateSubscription(user, subscriptionId);
     }
 
     // 🔹 Manejar cuando una suscripción es creada
+    @Transactional
     public void handleSubscriptionCreated(Event event) {
         EventDataObjectDeserializer dataObjectDeserializer = event.getDataObjectDeserializer();
         if (!dataObjectDeserializer.getObject().isPresent())

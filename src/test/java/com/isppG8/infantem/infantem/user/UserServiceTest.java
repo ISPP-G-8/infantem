@@ -9,8 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
-import org.checkerframework.checker.units.qual.A;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -21,6 +19,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.isppG8.infantem.infantem.InfantemApplication;
+import com.isppG8.infantem.infantem.user.dto.UserDTO;
+import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 
 import jakarta.transaction.Transactional;
 
@@ -50,11 +50,39 @@ public class UserServiceTest {
     }
 
     @Test
+    public void TestFindById() {
+
+        User user = userService.getUserById(1L);
+        assertNotNull(user);
+        assertEquals(1, user.getId());
+    }
+
+    @Test
+    public void TestfindByNonExistingId() {
+        User nullUser = userService.getUserById(999L);
+        assertNull(nullUser);
+    }
+
+    @Test
     public void TestFindByUsername() {
 
         User user = userService.findByUsername("user1");
         assertNotNull(user);
         assertEquals("user1", user.getUsername());
+    }
+
+    @Test
+    public void TestFindByEmail() {
+
+        User user = userService.findByEmail("user1@example.com");
+        assertNotNull(user);
+        assertEquals("user1@example.com", user.getEmail());
+    }
+
+    @Test
+    public void TestfindByNonExistingEmail() {
+        User nullUser = userService.findByEmail("none@existing.email");
+        assertNull(nullUser);
     }
 
     @Test
@@ -114,6 +142,12 @@ public class UserServiceTest {
         User user = userService.findCurrentUser();
         assertNotNull(user);
         assertEquals("user1", user.getUsername());
+        assertEquals(user.getId(), userService.findCurrentUserId());
+    }
+
+    @Test
+    public void TestFindCurrentUserNonAuthenticated() {
+        assertThrows(ResourceNotFoundException.class, () -> userService.findCurrentUser());
     }
 
     @Test
@@ -123,8 +157,9 @@ public class UserServiceTest {
         updatedDetails.setSurname("User");
         updatedDetails.setUsername("updatedUsername");
         updatedDetails.setEmail("updated@example.com");
+        updatedDetails.setId(1);
 
-        User updatedUser = userService.updateUser((long) 1, updatedDetails);
+        User updatedUser = userService.updateUser((long) 1, new UserDTO(updatedDetails));
 
         assertNotNull(updatedUser);
         assertEquals("Updated", updatedUser.getName());
@@ -142,6 +177,12 @@ public class UserServiceTest {
     public void TestDeleteUserNotFound() {
         boolean result = userService.deleteUser((long) 100);
         assertFalse(result);
+    }
+
+    @Test
+    public void TestGetUserByStripeCustomerId() {
+        User user = userService.getUserByStripeCustomerId("cus_test").orElse(null);
+        assertNull(user);
     }
 
 }

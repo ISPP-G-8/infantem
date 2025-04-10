@@ -1,6 +1,5 @@
 package com.isppG8.infantem.infantem.baby;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,9 +60,6 @@ public class BabyService {
 
         // Añadir el usuario actual
         User currentUser = userService.findCurrentUser();
-        if (baby.getUsers() == null) {
-            baby.setUsers(new ArrayList<>());
-        }
         baby.getUsers().add(currentUser);
 
         return babyRepository.save(baby);

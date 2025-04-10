@@ -53,7 +53,7 @@ public class DiseaseController {
             description = "Registra una nueva enfermedad en el sistema.") @ApiResponse(responseCode = "200",
                     description = "Enfermedad creada exitosamente",
                     content = @Content(schema = @Schema(implementation = Disease.class))) @PostMapping
-    public ResponseEntity<Disease> create(@RequestBody Disease disease) {
+    public ResponseEntity<Disease> create(@Valid @RequestBody Disease disease) {
         return ResponseEntity.ok(diseaseService.save(disease));
     }
 

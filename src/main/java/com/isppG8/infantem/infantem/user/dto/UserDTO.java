@@ -17,6 +17,10 @@ public class UserDTO {
     private String profilePhotoRoute;
     private String role;
 
+    public UserDTO() {
+
+    }
+
     public UserDTO(User user) {
         this.id = user.getId();
         this.name = user.getName();

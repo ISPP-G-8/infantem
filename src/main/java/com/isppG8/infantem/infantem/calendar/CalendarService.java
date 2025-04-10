@@ -18,6 +18,7 @@ import com.isppG8.infantem.infantem.intake.IntakeService;
 import com.isppG8.infantem.infantem.intake.dto.IntakeSummary;
 import com.isppG8.infantem.infantem.metric.MetricService;
 import com.isppG8.infantem.infantem.metric.dto.MetricSummary;
+import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserService;
 import com.isppG8.infantem.infantem.vaccine.VaccineService;
 import com.isppG8.infantem.infantem.vaccine.dto.VaccineSummary;
@@ -44,24 +45,27 @@ public class CalendarService {
     }
 
     public List<CalendarEvents> getCalendarByUserId(LocalDate start, LocalDate end) {
-        List<Integer> babiesId = this.userService.findCurrentUser().getBabies().stream().map(baby -> baby.getId())
-                .toList();
+        User user = this.userService.findCurrentUser();
+        List<Integer> babiesId = user.getBabies().stream().map(baby -> baby.getId()).toList();
 
         List<CalendarEvents> calendar = new ArrayList<>();
 
         for (Integer babyId : babiesId) {
             CalendarEvents babyCalendar = new CalendarEvents(babyId);
-            // Check dream events
-            Set<LocalDate> dreamDates = this.dreamService.getDreamsByBabyIdAndDate(babyId, start, end);
-            babyCalendar.addDreamEvents(dreamDates);
 
-            // Check diseases events
-            Set<LocalDate> diseaseDates = this.diseaseService.getDiseasesByBabyIdAndDate(babyId, start, end);
-            babyCalendar.addDiseaseEvents(diseaseDates);
+            if (user.getAuthorities().getAuthority().equals("premium")) {
+                // Check dream events
+                Set<LocalDate> dreamDates = this.dreamService.getDreamsByBabyIdAndDate(babyId, start, end);
+                babyCalendar.addDreamEvents(dreamDates);
 
-            // Check vaccines events
-            List<LocalDate> vaccineDates = this.vaccineService.getVaccinesByBabyIdAndDate(babyId, start, end);
-            babyCalendar.addVaccineEvents(vaccineDates);
+                // Check diseases events
+                Set<LocalDate> diseaseDates = this.diseaseService.getDiseasesByBabyIdAndDate(babyId, start, end);
+                babyCalendar.addDiseaseEvents(diseaseDates);
+
+                // Check vaccines events
+                List<LocalDate> vaccineDates = this.vaccineService.getVaccinesByBabyIdAndDate(babyId, start, end);
+                babyCalendar.addVaccineEvents(vaccineDates);
+            }
 
             // Check intake events
             List<LocalDate> intakeDates = this.intakeService.getIntakesByBabyIdAndDate(babyId, start, end);
@@ -77,23 +81,11 @@ public class CalendarService {
     }
 
     public List<CalendarDay> getCalendarDayByUserId(LocalDate day) {
-        List<Integer> babiesId = this.userService.findCurrentUser().getBabies().stream().map(baby -> baby.getId())
-                .toList();
+        User user = this.userService.findCurrentUser();
+        List<Integer> babiesId = user.getBabies().stream().map(baby -> baby.getId()).toList();
         List<CalendarDay> events = new ArrayList<>();
         for (Integer babyId : babiesId) {
             CalendarDay calendarDay = new CalendarDay(babyId);
-
-            // Get dream summary
-            List<DreamSummary> dreamSummary = this.dreamService.getDreamSummaryByBabyIdAndDate(babyId, day);
-            calendarDay.setDreams(dreamSummary);
-
-            // Get diseases summary
-            List<DiseaseSummary> diseaseSummary = this.diseaseService.getDiseaseSummaryByBabyIdAndDate(babyId, day);
-            calendarDay.setDiseases(diseaseSummary);
-
-            // Get vaccine summary
-            List<VaccineSummary> vaccineSummary = this.vaccineService.getVaccineSummaryByBabyIdAndDate(babyId, day);
-            calendarDay.setVaccines(vaccineSummary);
 
             // Get intake summary
             List<IntakeSummary> intakeSummary = this.intakeService.getIntakeSummaryByBabyIdAndDate(babyId, day);
@@ -102,6 +94,21 @@ public class CalendarService {
             // Get metric summary
             List<MetricSummary> metricSummary = this.metricService.getMetricSummaryByBabyIdAndDate(babyId, day);
             calendarDay.setMetrics(metricSummary);
+
+            // Only premium users can see dream, disease and vaccine summaries
+            if (user.getAuthorities().getAuthority().equals("premium")) {
+                // Get dream summary
+                List<DreamSummary> dreamSummary = this.dreamService.getDreamSummaryByBabyIdAndDate(babyId, day);
+                calendarDay.setDreams(dreamSummary);
+
+                // Get diseases summary
+                List<DiseaseSummary> diseaseSummary = this.diseaseService.getDiseaseSummaryByBabyIdAndDate(babyId, day);
+                calendarDay.setDiseases(diseaseSummary);
+
+                // Get vaccine summary
+                List<VaccineSummary> vaccineSummary = this.vaccineService.getVaccineSummaryByBabyIdAndDate(babyId, day);
+                calendarDay.setVaccines(vaccineSummary);
+            }
 
             events.add(calendarDay);
         }
