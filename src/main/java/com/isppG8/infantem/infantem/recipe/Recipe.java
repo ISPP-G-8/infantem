@@ -6,6 +6,7 @@ import java.util.List;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.Lob;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.isppG8.infantem.infantem.allergen.Allergen;
@@ -43,9 +44,8 @@ public class Recipe {
     @Column(nullable = true)
     private String description;
 
-    // TODO string??? -.-
-    @Column(nullable = true)
-    private String photo_route;
+    @Lob
+    private byte[] recipePhoto;
 
     @Column(nullable = true)
     private String ingredients;

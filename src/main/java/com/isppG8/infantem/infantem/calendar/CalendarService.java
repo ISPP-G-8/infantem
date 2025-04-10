@@ -53,19 +53,17 @@ public class CalendarService {
         for (Integer babyId : babiesId) {
             CalendarEvents babyCalendar = new CalendarEvents(babyId);
 
-            if (user.getAuthorities().getAuthority().equals("premium")) {
-                // Check dream events
-                Set<LocalDate> dreamDates = this.dreamService.getDreamsByBabyIdAndDate(babyId, start, end);
-                babyCalendar.addDreamEvents(dreamDates);
+            // Check dream events
+            Set<LocalDate> dreamDates = this.dreamService.getDreamsByBabyIdAndDate(babyId, start, end);
+            babyCalendar.addDreamEvents(dreamDates);
 
-                // Check diseases events
-                Set<LocalDate> diseaseDates = this.diseaseService.getDiseasesByBabyIdAndDate(babyId, start, end);
-                babyCalendar.addDiseaseEvents(diseaseDates);
+            // Check diseases events
+            Set<LocalDate> diseaseDates = this.diseaseService.getDiseasesByBabyIdAndDate(babyId, start, end);
+            babyCalendar.addDiseaseEvents(diseaseDates);
 
-                // Check vaccines events
-                List<LocalDate> vaccineDates = this.vaccineService.getVaccinesByBabyIdAndDate(babyId, start, end);
-                babyCalendar.addVaccineEvents(vaccineDates);
-            }
+            // Check vaccines events
+            List<LocalDate> vaccineDates = this.vaccineService.getVaccinesByBabyIdAndDate(babyId, start, end);
+            babyCalendar.addVaccineEvents(vaccineDates);
 
             // Check intake events
             List<LocalDate> intakeDates = this.intakeService.getIntakesByBabyIdAndDate(babyId, start, end);
@@ -96,19 +94,17 @@ public class CalendarService {
             calendarDay.setMetrics(metricSummary);
 
             // Only premium users can see dream, disease and vaccine summaries
-            if (user.getAuthorities().getAuthority().equals("premium")) {
-                // Get dream summary
-                List<DreamSummary> dreamSummary = this.dreamService.getDreamSummaryByBabyIdAndDate(babyId, day);
-                calendarDay.setDreams(dreamSummary);
+            // Get dream summary
+            List<DreamSummary> dreamSummary = this.dreamService.getDreamSummaryByBabyIdAndDate(babyId, day);
+            calendarDay.setDreams(dreamSummary);
 
-                // Get diseases summary
-                List<DiseaseSummary> diseaseSummary = this.diseaseService.getDiseaseSummaryByBabyIdAndDate(babyId, day);
-                calendarDay.setDiseases(diseaseSummary);
+            // Get diseases summary
+            List<DiseaseSummary> diseaseSummary = this.diseaseService.getDiseaseSummaryByBabyIdAndDate(babyId, day);
+            calendarDay.setDiseases(diseaseSummary);
 
-                // Get vaccine summary
-                List<VaccineSummary> vaccineSummary = this.vaccineService.getVaccineSummaryByBabyIdAndDate(babyId, day);
-                calendarDay.setVaccines(vaccineSummary);
-            }
+            // Get vaccine summary
+            List<VaccineSummary> vaccineSummary = this.vaccineService.getVaccineSummaryByBabyIdAndDate(babyId, day);
+            calendarDay.setVaccines(vaccineSummary);
 
             events.add(calendarDay);
         }

@@ -3,7 +3,6 @@ package com.isppG8.infantem.infantem.auth;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.isppG8.infantem.infantem.auth.payload.request.EmailRequest;
 import com.isppG8.infantem.infantem.auth.payload.request.ResetPasswordRequest;
-import com.isppG8.infantem.infantem.auth.payload.response.MessageResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

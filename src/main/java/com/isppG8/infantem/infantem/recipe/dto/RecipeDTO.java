@@ -28,6 +28,8 @@ public class RecipeDTO {
 
     private String elaboration;
 
+    private byte[] recipePhoto;
+
     private Integer user;
 
     private List<AllergenDTO> allergens = new ArrayList<>();
@@ -44,6 +46,7 @@ public class RecipeDTO {
         this.ingredients = recipe.getIngredients();
         this.minRecommendedAge = recipe.getMinRecommendedAge();
         this.maxRecommendedAge = recipe.getMaxRecommendedAge();
+        this.recipePhoto = recipe.getRecipePhoto();
         this.elaboration = recipe.getElaboration();
         if (recipe.getUser() == null) {
             this.user = null;

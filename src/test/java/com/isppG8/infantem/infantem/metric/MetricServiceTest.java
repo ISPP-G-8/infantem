@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.isppG8.infantem.infantem.InfantemApplication;
 import com.isppG8.infantem.infantem.baby.Baby;
-import com.isppG8.infantem.infantem.baby.BabyRepository;
 import com.isppG8.infantem.infantem.baby.BabyService;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 import com.isppG8.infantem.infantem.user.User;
@@ -54,11 +53,6 @@ public class MetricServiceTest {
     @Autowired
     private MetricService metricService;
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private BabyService babyService;
-
     private User currentUser;
     private Baby testBaby;
     private Metric testMetric;
@@ -70,7 +64,6 @@ public class MetricServiceTest {
     public void setUp() {
         metricRepository.deleteAll();
         // Reinicia la secuencia de la columna id en la tabla metric_table
-        entityManager.createNativeQuery("ALTER TABLE metric_table ALTER COLUMN id RESTART WITH 1").executeUpdate();
 
         currentUser = new User();
         currentUser.setId(1);

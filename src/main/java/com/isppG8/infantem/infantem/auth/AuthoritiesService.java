@@ -8,9 +8,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 
-import java.util.List;
-
-import com.isppG8.infantem.infantem.user.UserService;
 import com.isppG8.infantem.infantem.user.User;
 
 @Service
