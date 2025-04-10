@@ -120,7 +120,7 @@ export default function Admin() {
 
   const handleEditRecipe = (recipe: Recipe) => {
     setRecipeToModify(recipe);
-    router.push("/admin/showrecipe");
+    router.push(`/admin/showrecipe`);
   };
 
   return (
