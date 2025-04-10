@@ -103,7 +103,7 @@ public class SubscriptionInfantemController {
                     description = "Estado de la suscripción actualizado") @ApiResponse(responseCode = "400",
                             description = "Error al actualizar el estado") @PostMapping("/update-status")
     public ResponseEntity<?> updateSubscriptionStatus(@RequestParam String subscriptionId,
-            @RequestParam boolean isActive) {
+            @RequestParam boolean active) {
         try {
             Optional<SubscriptionInfantem> optionalSub = subscriptionInfantemRepository.findAll().stream()
                     .filter(sub -> subscriptionId.equals(sub.getStripeSubscriptionId())).findFirst();
@@ -115,7 +115,7 @@ public class SubscriptionInfantemController {
             SubscriptionInfantem subscription = optionalSub.get();
             User user = subscription.getUser();
 
-            if (isActive) {
+            if (active) {
                 subscriptionService.activateSubscription(user, subscriptionId);
             } else {
                 subscriptionService.desactivateSubscription(user, subscriptionId);

@@ -131,12 +131,15 @@ export default function MetricasAvanzadas() {
                 if (response.ok) {
                     const data = await response.json();
                     setBaby(data);
-                    setYear(data.birthDate[0]);
-                    setMonth(data.birthDate[1]);
-                    if(data.birthDate[2] == 31){
+
+                    const [year, month, day] = data.birthDate.split("-").map(Number);
+                    setYear(year);
+                    setMonth(month);
+
+                    if (day === 31) {
                         setDay(30);
-                    } else{
-                        setDay(data.birthDate[2]);
+                    } else {
+                        setDay(day);
                     }
                     
                 } else {

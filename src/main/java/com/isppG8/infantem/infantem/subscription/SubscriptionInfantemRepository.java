@@ -33,4 +33,6 @@ public interface SubscriptionInfantemRepository extends JpaRepository<Subscripti
     @Query("SELECT s FROM SubscriptionInfantem s WHERE s.user.id = :userId")
     Optional<SubscriptionInfantem> findSubscriptionByUserId(@Param("userId") Long userId);
 
+    List<SubscriptionInfantem> findByEndDateBefore(LocalDate date);
+
 }
