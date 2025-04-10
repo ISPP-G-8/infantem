@@ -83,6 +83,7 @@ public class EmailValidationService {
         }
     }
 
+    @Transactional
     public Boolean validateCode(String email, Integer code) {
         try {
             EmailValidation currentEmailValidation = emailValidationRepository.findByEmail(email).orElse(null);

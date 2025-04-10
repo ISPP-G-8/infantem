@@ -128,7 +128,7 @@ const RecipeFilterComponent = ({
 
             <View style={styles.rowContainer}>
               <View style={styles.halfInputContainer}>
-                <Text style={styles.label}>Edad mínima</Text>
+                <Text style={styles.label}>Edad mínima en meses</Text>
                 <TextInput
                   style={styles.input}
                   placeholder="Min"
@@ -142,7 +142,7 @@ const RecipeFilterComponent = ({
                 />
               </View>
               <View style={styles.halfInputContainer}>
-                <Text style={styles.label}>Edad máxima</Text>
+                <Text style={styles.label}>Edad máxima en meses</Text>
                 <TextInput
                   style={styles.input}
                   placeholder="Máx"

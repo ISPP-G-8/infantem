@@ -156,11 +156,6 @@ public class RecipeService {
     }
 
     @Transactional(readOnly = true)
-    public List<Recipe> getRecommendedRecipesByAge(Integer age) {
-        return this.recipeRepository.findRecommendedRecipesByAge(age);
-    }
-
-    @Transactional(readOnly = true)
     public List<Recipe> getRecommendedRecipesByName(String name) {
         return this.recipeRepository.findRecipeRecommendedByName(name);
     }
@@ -169,6 +164,18 @@ public class RecipeService {
     public List<Recipe> getRecipesByName(String name) throws ResourceNotFoundException {
         Integer userId = this.getCurrentUserId();
         return this.recipeRepository.findRecipeByName(name, userId);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Recipe> getVisibleRecipes() throws ResourceNotFoundException {
+        Integer userId = this.getCurrentUserId();
+        return this.recipeRepository.findVisibleRecipes(userId);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Recipe> getVisibleRecipesByName(String name) throws ResourceNotFoundException {
+        Integer userId = this.getCurrentUserId();
+        return this.recipeRepository.findVisibleRecipesByName(name, userId);
     }
 
 }
