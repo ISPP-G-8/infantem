@@ -34,6 +34,7 @@ jobs:
         env:
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
           STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         with:
           app_yaml_path: "app.yml"
 

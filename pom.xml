@@ -138,6 +138,13 @@
     		<version>2.15.0</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+			<scope>compile</scope>
+		</dependency>
+
 
 		<dependency>
 			<groupId>com.github.ulisesbocchio</groupId>
