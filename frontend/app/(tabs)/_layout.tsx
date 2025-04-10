@@ -102,7 +102,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="admin"
         options={{
-          href: null, // This prevents it from showing in the tab bar
+          href: null, 
         }}
       />
     </Tabs>

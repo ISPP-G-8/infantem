@@ -8,6 +8,18 @@ import { useSearchParams } from "expo-router/build/hooks";
 export default function AddMetricas() {
   const gs = require("../../../static/styles/globalStyles");
   const router = useRouter();
+  const limits = {
+    weight: { min: 0, max: 30 },
+    height: { min: 0, max: 130 },
+    armCircumference: { min: 0, max: 23 },
+    headCircumference: { min: 0, max: 60 },
+  }
+  const [errors, setErrors] = useState({
+    armCircumference: "",
+    headCircumference: "",
+    height: "",
+    weight: "",
+  });
   const [armCircumference, setArmCircumference] = useState<number>(0.0);
   const [headCircumference, setHeadCircumference] = useState<number>(0.0);
   const [height, setHeight] = useState<number>(0.0);
@@ -30,6 +42,40 @@ export default function AddMetricas() {
     date: [number, number, number];
   }
   const [metrics, setMetrics] = useState<Metrics | null>(null);
+  const validateField = (field: keyof typeof errors, value: number) => {
+    const { min, max } = limits[field];
+    if (value < min || value > max) {
+      setErrors((prev) => ({
+        ...prev,
+        [field]: `Debe estar entre ${min} y ${max}`,
+      }));
+    } else {
+      setErrors((prev) => ({
+        ...prev,
+        [field]: "",
+      }));
+    }
+  };
+  
+  const isValid = () => {
+    let hasError = false;
+    const values = { armCircumference, headCircumference, height, weight };
+  
+    Object.entries(values).forEach(([field, value]) => {
+      const { min, max } = limits[field as keyof typeof limits];
+      if (value < min || value > max) {
+        setErrors((prev) => ({
+          ...prev,
+          [field]: `Debe estar entre ${min} y ${max}`,
+        }));
+        hasError = true;
+      }
+    });
+  
+    return !hasError;
+  };
+  
+  
 
   useEffect(() => {
           if (!token) return;
@@ -78,6 +124,11 @@ export default function AddMetricas() {
       }, []);
 
       const handleSave = async () => {
+        if (!isValid()) {
+          Alert.alert("Error", "Revisa los campos con errores.");
+          return;
+        }
+        
         if (token && babyId) {
           try {
             const formattedDate = `${date[0]}-${date[1].toString().padStart(2, '0')}-${date[2].toString().padStart(2, '0')}`;
@@ -144,57 +195,126 @@ export default function AddMetricas() {
           Circunferencia del brazo (cm)
         </Text>
         <TextInput
-          style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "90%" }]}
+          style={[
+            gs.input,
+            {
+              padding: 12,
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: errors.armCircumference ? "red" : "#1565C0",
+              opacity: 0.8,
+              width: "90%",
+            },
+          ]}
           placeholder="Circunferencia del brazo"
           value={armCircumference.toString()}
           keyboardType="numeric"
           onChangeText={(text) => {
             const newValue = parseFloat(text) || 0;
             setArmCircumference(newValue);
+            validateField("armCircumference", newValue);
           }}
         />
+        {errors.armCircumference !== "" && (
+          <Text style={{ color: "red", fontSize: 12, alignSelf: "flex-start", marginLeft: 80 }}>
+            {errors.armCircumference}
+          </Text>
+        )}
+
 
         <Text style={{ alignSelf: "flex-start", marginLeft: 80, marginTop: 10, color: "#1565C0" }}>
           Circunferencia de la cabeza (cm)
         </Text>
         <TextInput
-          style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "90%" }]}
+          style={[
+            gs.input,
+            {
+              padding: 12,
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: errors.headCircumference ? "red" : "#1565C0",
+              opacity: 0.8,
+              width: "90%",
+            },
+          ]}
           placeholder="Circunferencia de la cabeza"
           value={headCircumference.toString()}
           keyboardType="numeric"
           onChangeText={(text) => {
             const newValue = parseFloat(text) || 0;
             setHeadCircumference(newValue);
+            validateField("headCircumference", newValue);
           }}
         />
+        {errors.headCircumference !== "" && (
+          <Text style={{ color: "red", fontSize: 12, alignSelf: "flex-start", marginLeft: 80 }}>
+            {errors.headCircumference}
+          </Text>
+        )}
+
 
         <Text style={{ alignSelf: "flex-start", marginLeft: 80, marginTop: 10, color: "#1565C0" }}>
           Altura (cm)
         </Text>
         <TextInput
-          style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "90%" }]}
+          style={[
+            gs.input,
+            {
+              padding: 12,
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: errors.height ? "red" : "#1565C0",
+              opacity: 0.8,
+              width: "90%",
+            },
+          ]}
           placeholder="Altura"
           value={height.toString()}
           keyboardType="numeric"
           onChangeText={(text) => {
             const newValue = parseFloat(text) || 0;
             setHeight(newValue);
+            validateField("height", newValue);
           }}
         />
+        {errors.height !== "" && (
+          <Text style={{ color: "red", fontSize: 12, alignSelf: "flex-start", marginLeft: 80 }}>
+            {errors.height}
+          </Text>
+        )}
+
 
         <Text style={{ alignSelf: "flex-start", marginLeft: 80, marginTop: 10, color: "#1565C0" }}>
           Peso (kg)
         </Text>
         <TextInput
-          style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "90%" }]}
+          style={[
+            gs.input,
+            {
+              padding: 12,
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: errors.weight ? "red" : "#1565C0",
+              opacity: 0.8,
+              width: "90%",
+            },
+          ]}
           placeholder="Peso"
           value={weight.toString()}
           keyboardType="numeric"
           onChangeText={(text) => {
             const newValue = parseFloat(text) || 0;
             setWeight(newValue);
+            validateField("weight", newValue);
           }}
         />
+        {errors.weight !== "" && (
+          <Text style={{ color: "red", fontSize: 12, alignSelf: "flex-start", marginLeft: 80 }}>
+            {errors.weight}
+          </Text>
+        )}
+
+
 
         <TouchableOpacity style={[gs.mainButton, { alignSelf: "center", marginTop: 10 }]} onPress={handleSave}>
           <Text style={[gs.mainButtonText, { paddingHorizontal: 24 }]}>Guardar</Text>

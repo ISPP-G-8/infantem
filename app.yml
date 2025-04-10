@@ -7,8 +7,8 @@ env_variables:
   SPRING_PROFILES_ACTIVE: production
   STRIPE_SECRET_KEY: $STRIPE_SECRET_KEY
   STRIPE_WEBHOOK_SECRET: $STRIPE_WEBHOOK_SECRET
+  DB_PASSWORD: $DB_PASSWORD
   
-
 handlers:
 # Serve all API calls to Spring
 - url: /api/.*

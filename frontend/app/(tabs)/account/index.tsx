@@ -12,7 +12,12 @@ const avatarOptions = [
 export default function Account() {
   const [modalVisible, setModalVisible] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [subscription, setSubscription] = useState(null);
+  interface Subscription {
+    active: boolean;
+    [key: string]: any; // Add other properties as needed
+  }
+
+  const [subscription, setSubscription] = useState<Subscription | null>(null);
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const gs = require("../../../static/styles/globalStyles");
@@ -46,7 +51,7 @@ export default function Account() {
     };
 
     fetchSubscription();
-  }, []);
+  }, [user, token]);
 
   const handleEditProfile = () => {
     setIsEditing(true);
@@ -120,13 +125,18 @@ export default function Account() {
         Perfil</Text>
   
 
-        {user && !subscription && (
+        {user && (subscription ? ( (subscription && subscription.active ? (
+          <Link href={"/account/premiumplan"} style={[gs.mainButton, { marginVertical: 10, textAlign: "center", width: "20%", backgroundColor: "red" }]}>
+            <Text style={[gs.mainButtonText, { fontSize: 20 }]}>Cancelar suscripcion</Text>
+          </Link>
+        ) : (
+          <Text style={[gs.text, { fontSize: 20 }]}>Hasta el final de la suscripción no puede volver a suscribirse</Text>))
+        ): (
           <Link href={"/account/premiumplan"} style={[gs.mainButton, { marginVertical: 10, textAlign: "center", width: "80%" }]}>
             <Text style={[gs.mainButtonText, { fontSize: 20 }]}>¡HAZTE PREMIUM!</Text>
           </Link>
-        )}
-
-
+        ))}
+        
         <TouchableOpacity style={gs.profileImageContainer} onPress={() => isEditing && setModalVisible(true)} disabled={!isEditing}>
            {/* <Image source={user?.profilePhotoRoute ? { uri: user.profilePhotoRoute } : avatarOptions[0]} style={gs.profileImage} /> */}
           <Image
@@ -162,10 +172,6 @@ export default function Account() {
         <TouchableOpacity style={[gs.mainButton, { backgroundColor: "#1565C0" }]} onPress={isEditing ? handleSaveChanges : handleEditProfile}>
           <Text style={gs.mainButtonText}>{isEditing ? "Guardar Cambios" : "Editar Perfil"}</Text>
         </TouchableOpacity>
-
-        {user && subscription && (
-          <Text style={[gs.mainButtonText, { fontSize: 20, color: "black" }]}>¡Felicidades, eres premium!</Text>
-        )}
 
         <TouchableOpacity style={[gs.secondaryButton, { marginTop: 10 }]} onPress={signOut}>
           <Text style={[gs.secondaryButtonText]}>Cerrar Sesión</Text>

@@ -10,3 +10,5 @@ export * from "./MarketItem";
 export * from "./RecipeFilter";
 export * from "./SignupRequest";
 export * from "./AdminContext";
+export * from "./Intake";
+export * from "./Baby";

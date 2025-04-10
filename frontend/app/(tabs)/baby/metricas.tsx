@@ -14,6 +14,7 @@ import WBPD from "../../../static/data/boys/weight-boys-0-5.json";
 import WGPD from "../../../static/data/girls/weight-girls-0-5.json";
 import WFHBPD from "../../../static/data/boys/weight-for-height-boys-0-5.json";
 import WFHGPD from "../../../static/data/girls/weight-for-height-girls-0-5.json";
+import { jwtDecode } from "jwt-decode";
 
 export default function Metricas() {
     const gs = require("../../../static/styles/globalStyles");
@@ -55,6 +56,13 @@ export default function Metricas() {
     const WFHGP = metrics ? getWFHGP({ weight: metrics.weight, height: metrics.height }) : null;
     const [genreBoy, setGenreBoy] = useState(false);
     const [genreGirl, setGenreGirl] = useState(false);
+    const [userId, setUserId] = useState<number | null>(null);
+    const [subscription, setSubscription] = useState(null);
+    type Edad = {
+        years: number;
+        months: number;
+        days: number;
+    };
 
     useEffect(() => {
         const fetchToken = async () => {
@@ -72,6 +80,16 @@ export default function Metricas() {
         };
         fetchToken();
     }, []);
+
+    useEffect(() => {
+        if (!token) return; // Evita ejecutar el efecto si jwt es null o undefined
+            try {
+                const decodedToken: any = jwtDecode(token); // Verifica el contenido del token decodificado
+                setUserId(decodedToken.jti);
+            } catch (error) {
+                console.error("Error al decodificar el token:", error);
+            }
+    }, [token]);
 
     useEffect(() => {
         if (!token) return;
@@ -118,13 +136,17 @@ export default function Metricas() {
                 if (response.ok) {
                     const data = await response.json();
                     setBaby(data);
-                    setYear(data.birthDate[0]);
-                    setMonth(data.birthDate[1]);
-                    if(data.birthDate[2] == 31){
+
+                    const [year, month, day] = data.birthDate.split("-").map(Number);
+                    setYear(year);
+                    setMonth(month);
+
+                    if (day === 31) {
                         setDay(30);
-                    } else{
-                        setDay(data.birthDate[2]);
+                    } else {
+                        setDay(day);
                     }
+
                     
                 } else {
                     console.error("Error en la suscripción:", response.statusText);
@@ -137,15 +159,63 @@ export default function Metricas() {
         fetchBaby();
     }, [token, babyId]);
 
+    useEffect(() => {
+        if (!token) return;
+        const fetchSubscription = async () => {
+            try {
+                const response = await fetch(`${apiUrl}/api/v1/subscriptions/user/${userId}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+                if (!response.ok) {
+                    throw new Error("Error fetching subscription");
+                }
+                const data = await response.json();
+                setSubscription(data);
+            } catch (error) {
+                console.error("Error fetching subscription:", error);
+                setSubscription(null);
+            }
+        };
+        fetchSubscription();
+    }, [token, userId]);
 
+    function calcularEdad(año: number, mes: number, dia: number): Edad {
+        const hoy = new Date();
+        const nacimiento = new Date(año, mes - 1, dia); // mes - 1 porque Date usa 0-11
+      
+        let years = hoy.getFullYear() - nacimiento.getFullYear();
+        let months = hoy.getMonth() - nacimiento.getMonth();
+        let days = hoy.getDate() - nacimiento.getDate();
+      
+        // Ajustamos si el día de nacimiento aún no se ha cumplido este mes
+        if (days < 0) {
+            months -= 1;
+          // Obtenemos el último día del mes anterior
+          const ultimoDiaMesAnterior = new Date(hoy.getFullYear(), hoy.getMonth(), 0).getDate();
+          days += ultimoDiaMesAnterior;
+        }
+      
+        // Ajustamos si el mes de nacimiento aún no se ha cumplido este año
+        if (months < 0) {
+            years -= 1;
+            months += 12;
+        }
+      
+        return { years, months, days };
+      }
 
     return (
+        console.log(calcularEdad(year,month,day).years, calcularEdad(year,month,day).months, calcularEdad(year,month,day).days),
         <ScrollView contentContainerStyle={gs.containerMetric} showsVerticalScrollIndicator={false}>
 
             <Text style={gs.headerText}>Gráficas de crecimiento</Text>
             <view style={gs.separator}/>
             {baby && metrics && (
-                <View style={[gs.cardMetric, { flex: 3 }]}>
+                <View style={[gs.cardMetric, { flex: 6   }]}>
                     <Text style={[gs.cardTitle, { fontSize: 18 }]}>{baby.name}</Text>
                     <Text style={gs.cardContent}>💪 Circunferencia del brazo: {metrics.armCircumference}</Text>
                     <Text style={gs.cardContent}>👶 Circunferencia de la cabeza: {metrics.headCircumference}</Text>
@@ -166,8 +236,11 @@ export default function Metricas() {
                         </View>
                     ) : (
                         <View>
+                            <view style={gs.separator}/>
+                            <view style={gs.separator}/>
                             <Text style={gs.cardContent}>La medida del bebe están actualizadas, 
                             pero las puede volver actualizar.</Text>
+                            <view style={gs.separator}/>
                             <view style={gs.separator}/>
                             <TouchableOpacity style={[gs.mainButton, { backgroundColor: "green" }]} onPress={() => router.push(`/baby/addmetricas?babyId=${babyId}`)}>
                                 <Text style={gs.mainButtonText}>Actualizar métricas</Text>
@@ -175,10 +248,24 @@ export default function Metricas() {
                         </View>
                     )}  
                     <view style={gs.separator}/>
+                    {subscription && (
+                        <View>
+                            <view style={gs.separator}/>
+                            <view style={gs.separator}/>
+                            <Text style={gs.cardContent}>La medida del bebe están actualizadas, 
+                            pero las puede volver actualizar.</Text>
+                            <view style={gs.separator}/>
+                            <view style={gs.separator}/>
+                            <TouchableOpacity style={[gs.mainButton, { backgroundColor: "blue" }]} onPress={() => router.push(`/baby/metricasavanzadas?babyId=${babyId}`)}>
+                                <Text style={gs.mainButtonText}>Métricas avanzadas</Text>
+                            </TouchableOpacity>
+                        </View>
+                        )
+                    }
                 </View>
             )}
             {baby?.genre == 'OTHER' && (
-                <View style={[gs.cardMetric, { flex: 2 }]}>
+                <View style={[gs.cardMetric, { flex: 3 }]}>
                         <Text style={gs.cardContent}>Como el género del bebe se puso otro, a continuación se le van a motrar las graficas 
                             tanto para niña como para niño, pero si prefiere solo ver una de las dos, pulse el botón correspondiente.
                         </Text>
@@ -200,12 +287,12 @@ export default function Metricas() {
                         </View>
                 </View>
             )}
-            {(Math.abs(nowMonth - month) < 3 || Math.abs(nowYear - year) < 1) && (
+            {(calcularEdad(year,month,day).months < 3 && calcularEdad(year,month,day).years < 1) && (
                 <View style={[gs.cardMetric, { width: screenWidth * 0.95 }]}>
                     <Text style={gs.title}>El percentil de la circunferencia del brazo solo abarca datos a partir de los 3 meses de edad</Text>
                 </View>
             )}
-            {(Math.abs(nowMonth - month) > 3 || Math.abs(nowYear - year) >= 1) && ((baby?.genre == 'MALE' || (baby?.genre == 'OTHER' && !genreBoy)) &&
+            {(calcularEdad(year,month,day).months > 3 || calcularEdad(year,month,day).years >= 1) && ((baby?.genre == 'MALE' || (baby?.genre == 'OTHER' && !genreBoy)) && ACBP && ACBPD &&
                 <View style={[gs.cardMetric, { width: screenWidth * 0.95 }]}>
                     <Text style={gs.title}>{ACBP.title}</Text>
                     <View style={gs.imageContainer}>
@@ -223,17 +310,17 @@ export default function Metricas() {
                             style={[
                                 gs.babyImage,
                                 {
-                                    right: imageSize.width * ACBP.cuadrante[Math.abs(nowYear - year)] - (13*Math.abs(nowMonth - month)) - 0.43*Math.abs(nowDay - day),  // Ajusta según la posición deseada
+                                    right: imageSize.width * ACBP.cuadrante[calcularEdad(year,month,day).years] - (13*(calcularEdad(year,month,day).months - 3)) - 0.43*calcularEdad(year,month,day).days,  // Ajusta según la posición deseada
                                     top: imageSize.height * 0.844 - (57.8*(((metrics?.armCircumference ?? 11.5) < 11.5 ? 0 : 
-                                    (metrics?.armCircumference ?? 11.5) > 20 ? 20 : ((metrics?.armCircumference ?? 11.5) - 11.5)))),
+                                    (metrics?.armCircumference ?? 11.5) > 20 ? 20 - 11.5: ((metrics?.armCircumference ?? 11.5) - 11.5)))),
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
-                                    tintColor: ((metrics?.armCircumference ?? 11.5) < ACBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3 
-                                                || (metrics?.armCircumference ?? 11.5) > ACBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month) - 3)].P97) ? 'red': 
-                                                (((metrics?.armCircumference ?? 11.5) < ACBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P15 
-                                                && (metrics?.armCircumference ?? 11.5) > ACBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3)
-                                                || ((metrics?.armCircumference ?? 11.5) < ACBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P97 
-                                                && (metrics?.armCircumference ?? 11.5) > ACBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P85 ) ? '#BE6B00' : 'green'),
+                                    tintColor: ((metrics?.armCircumference ?? 11.5) < ACBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3 
+                                                || (metrics?.armCircumference ?? 11.5) > ACBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months - 3)].P97) ? 'red': 
+                                                (((metrics?.armCircumference ?? 11.5) < ACBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P15 
+                                                && (metrics?.armCircumference ?? 11.5) > ACBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3)
+                                                || ((metrics?.armCircumference ?? 11.5) < ACBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P97 
+                                                && (metrics?.armCircumference ?? 11.5) > ACBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P85 ) ? '#BE6B00' : 'green'),
                                 },
                             ]}
                         />
@@ -249,7 +336,7 @@ export default function Metricas() {
                     )]}</Text>
                 </View>
             )}
-            {(Math.abs(nowMonth - month) > 3 || Math.abs(nowYear - year) >= 1) && ((baby?.genre == 'FEMALE' ||  (baby?.genre == 'OTHER' && !genreGirl)) &&
+            {(calcularEdad(year,month,day).months > 3 || calcularEdad(year,month,day).years >= 1) && ((baby?.genre == 'FEMALE' ||  (baby?.genre == 'OTHER' && !genreGirl)) && ACBP && ACBPD  &&
                 <View style={[gs.cardMetric, { width: screenWidth * 0.95 }]}>
                     <Text style={gs.title}>{ACGP.title}</Text>
                     <View style={gs.imageContainer}>
@@ -267,17 +354,17 @@ export default function Metricas() {
                             style={[
                                 gs.babyImage,
                                 {
-                                    right: imageSize.width * ACGP.cuadrante[Math.abs(nowYear - year)] - (12*Math.abs(nowMonth - month)) - 0.43*Math.abs(nowDay - day),
-                                    top: imageSize.height * 0.843 - (47*(((metrics?.armCircumference ?? 11) < 11 ? 0 : 
-                                    (metrics?.armCircumference ?? 11.5) > 21.5 ? 21.5 : ((metrics?.armCircumference ?? 11.5) - 11)))),
+                                    right: imageSize.width *ACBP.cuadrante[calcularEdad(year,month,day).years] - (12*(calcularEdad(year,month,day).months - 3)) - 0.43*calcularEdad(year,month,day).days,
+                                    top: imageSize.height * 0.843 - (51.6*(((metrics?.armCircumference ?? 11) < 11 ? 0 : 
+                                    (metrics?.armCircumference ?? 11.5) > 20.5 ? 20.5 - 11 : ((metrics?.armCircumference ?? 11.5) - 11)))),
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
-                                    tintColor: ((metrics?.armCircumference ?? 11.5) < ACGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3 
-                                    || (metrics?.armCircumference ?? 11.5) > ACGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month) -  3)].P97) ? 'red': 
-                                    (((metrics?.armCircumference ?? 11.5) < ACGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P15 
-                                    && (metrics?.armCircumference ?? 11.5) > ACGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3)
-                                    || ((metrics?.armCircumference ?? 11.5) < ACGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P97 
-                                    && (metrics?.armCircumference ?? 11.5) > ACGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P85 ) ? '#BE6B00' : 'green'),  // Cambia las líneas negras a rojo
+                                    tintColor: ((metrics?.armCircumference ?? 11.5) < ACGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3 
+                                    || (metrics?.armCircumference ?? 11.5) > ACGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months -  3)].P97) ? 'red': 
+                                    (((metrics?.armCircumference ?? 11.5) < ACGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P15 
+                                    && (metrics?.armCircumference ?? 11.5) > ACGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3)
+                                    || ((metrics?.armCircumference ?? 11.5) < ACGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P97 
+                                    && (metrics?.armCircumference ?? 11.5) > ACGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P85 ) ? '#BE6B00' : 'green'),  // Cambia las líneas negras a rojo
                                 },
                             ]}
                         />
@@ -293,14 +380,14 @@ export default function Metricas() {
                     )]}</Text>
                 </View>
             )}
-            {(baby?.genre == 'MALE' ||  (baby?.genre == 'OTHER' && !genreBoy)) && HCBP &&
+            {(baby?.genre == 'MALE' ||  (baby?.genre == 'OTHER' && !genreBoy)) && HCBP && HCBPD &&
                 <View style={[gs.cardMetric, { width: screenWidth * 0.95 }]}>
                     <Text style={gs.title}>{HCBP.title}</Text>
                     <View style={gs.imageContainer}>
                         <Image 
                             source={HCBP.image[
-                                (Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3) ? 0 :
-                                (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)]}
+                                (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3) ? 0 :
+                                (calcularEdad(year,month,day).years <= 2 ? 1 : 2)]}
                             style={[gs.imageMetric, { height: screenWidth * 0.48 }]} 
                             resizeMode="contain"
                             onLayout={(event) => {
@@ -313,48 +400,47 @@ export default function Metricas() {
                             style={[
                                 gs.babyImage,
                                 {
-                                    right: imageSize.width * HCBP.cuadrante[
-                                        (Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3) ? 0 :
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)][
-                                            (Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3) ? Math.abs(nowMonth - month) * 4 + Math.floor((nowDay - day) / 7)
-                                            : Math.abs(nowYear - year)
-                                        ] -((Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3) ? 8 * Math.abs(nowDay - day) : 
-                                        (12.6*Math.abs(nowMonth - month)) + 0.43*Math.abs(nowDay - day))
-                                        ,  // Ajusta según la posición deseada
+                                    right: imageSize.width * (HCBP.cuadrante[
+                                        (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3) ? 0 :
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)][
+                                            calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? calcularEdad(year,month,day).months * 4 + Math.floor(calcularEdad(year,month,day).days / 7)
+                                            : calcularEdad(year,month,day).years
+                                        ] - 0.0217*(calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? 0.26* (calcularEdad(year,month,day).days - (Math.floor(calcularEdad(year,month,day).days / 7)*7)) : 
+                                        (calcularEdad(year,month,day).months + 0.01*(calcularEdad(year,month,day).days)))),  // Ajusta según la posición deseada
                                     top: imageSize.height * 0.843 - HCBP.metrica[
-                                        (Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 3) ? 0 :
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)],  // Ajusta según la posición deseada
+                                        (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 3) ? 0 :
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)],  // Ajusta según la posición deseada
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
-                                    tintColor: ((metrics?.headCircumference ?? 30.5) < HCBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3 
-                                    || (metrics?.headCircumference ?? 30.5) > HCBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P97) ? 'red': 
-                                    (((metrics?.headCircumference ?? 30.5) < HCBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P15 
-                                    && (metrics?.headCircumference ?? 30.5) > HCBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3)
-                                    || ((metrics?.headCircumference ?? 30.5) < HCBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P97 
-                                    && (metrics?.headCircumference ?? 30.5) >= HCBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P85 ) ? '#BE6B00' : 'green'),  // Cambia las líneas negras a rojo
+                                    tintColor: ((metrics?.headCircumference ?? 30.5) < HCBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3 
+                                    || (metrics?.headCircumference ?? 30.5) > HCBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P97) ? 'red': 
+                                    (((metrics?.headCircumference ?? 30.5) < HCBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P15 
+                                    && (metrics?.headCircumference ?? 30.5) > HCBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3)
+                                    || ((metrics?.headCircumference ?? 30.5) < HCBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P97 
+                                    && (metrics?.headCircumference ?? 30.5) >= HCBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P85 ) ? '#BE6B00' : 'green'),  // Cambia las líneas negras a rojo
                                 },
                             ]}
                         />
                     </View>
                     <Text style={gs.description}>{HCBP.description[(
-                        (metrics?.headCircumference ?? 30.5) < HCBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3 ? 0:
-                        ((metrics?.headCircumference ?? 30.5) > HCBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3 
-                        && (metrics?.headCircumference ?? 30.5) < HCBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P15) ? 1: 
-                        ((metrics?.headCircumference ?? 30.5) > HCBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P15 
-                        && (metrics?.headCircumference ?? 30.5) < HCBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P85) ? 2:
-                        ((metrics?.headCircumference ?? 30.5) >= HCBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P85 
-                        && (metrics?.headCircumference ?? 30.5) < HCBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P97)? 3 : 4
+                        (metrics?.headCircumference ?? 30.5) < HCBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3 ? 0:
+                        ((metrics?.headCircumference ?? 30.5) > HCBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3 
+                        && (metrics?.headCircumference ?? 30.5) < HCBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P15) ? 1: 
+                        ((metrics?.headCircumference ?? 30.5) > HCBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P15 
+                        && (metrics?.headCircumference ?? 30.5) < HCBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P85) ? 2:
+                        ((metrics?.headCircumference ?? 30.5) >= HCBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P85 
+                        && (metrics?.headCircumference ?? 30.5) < HCBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P97)? 3 : 4
                     )]}</Text>
                 </View>
             }
-            {(baby?.genre == 'FEMALE' || (baby?.genre == 'OTHER' && !genreGirl)) && HCGP &&
+            {(baby?.genre == 'FEMALE' || (baby?.genre == 'OTHER' && !genreGirl)) && HCGP && HCGPD &&
                 <View style={[gs.cardMetric, { width: screenWidth * 0.95 }]}>
                     <Text style={gs.title}>{HCGP.title}</Text>
                     <View style={gs.imageContainer}>
                         <Image 
                             source={HCGP.image[
-                                (Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3) ? 0 :
-                                (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)]}
+                                (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3) ? 0 :
+                                (calcularEdad(year,month,day).years <= 2 ? 1 : 2)]}
                             style={[gs.imageMetric, { height: screenWidth * 0.48 }]} 
                             resizeMode="contain"
                             onLayout={(event) => {
@@ -368,46 +454,46 @@ export default function Metricas() {
                                 gs.babyImage,
                                 {
                                     right: imageSize.width * (HCGP.cuadrante[
-                                        (Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3) ? 0 :
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)][
-                                            Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3 ? Math.abs(nowMonth - month) * 4 + Math.floor((nowDay - day) / 7)
-                                            : Math.abs(nowYear - year)
-                                        ] - 0.0217*(Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3 ? 0.26 * Math.abs(nowDay - day) : 
-                                        Math.abs(nowMonth - month) + 0.01*(Math.abs(nowDay - day)))),  // Ajusta según la posición deseada
+                                        (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3) ? 0 :
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)][
+                                            calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? calcularEdad(year,month,day).months * 4 + Math.floor(calcularEdad(year,month,day).days / 7)
+                                            : calcularEdad(year,month,day).years
+                                        ] - 0.0217*(calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? 0.26* (calcularEdad(year,month,day).days - (Math.floor(calcularEdad(year,month,day).days / 7)*7)) : 
+                                        (calcularEdad(year,month,day).months + 0.01*(calcularEdad(year,month,day).days)))),  // Ajusta según la posición deseada
                                     top: imageSize.height * 0.843 - HCGP.metrica[
-                                        (Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3) ? 0 :
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)],  // Ajusta según la posición deseada
+                                        (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3) ? 0 :
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)],  // Ajusta según la posición deseada
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
-                                    tintColor: ((metrics?.headCircumference ?? 30.5) < HCGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3 
-                                    || (metrics?.headCircumference ?? 30.5) > HCGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P97) ? 'red': 
-                                    (((metrics?.headCircumference ?? 30.5) < HCGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P15 
-                                    && (metrics?.headCircumference ?? 30.5) > HCGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3)
-                                    || ((metrics?.headCircumference ?? 30.5) < HCGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P97 
-                                    && (metrics?.headCircumference ?? 30.5) > HCGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P85 ) ? '#BE6B00' : 'green'),  // Cambia las líneas negras a rojo
+                                    tintColor: ((metrics?.headCircumference ?? 30.5) < HCGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3 
+                                    || (metrics?.headCircumference ?? 30.5) > HCGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P97) ? 'red': 
+                                    (((metrics?.headCircumference ?? 30.5) < HCGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P15 
+                                    && (metrics?.headCircumference ?? 30.5) > HCGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3)
+                                    || ((metrics?.headCircumference ?? 30.5) < HCGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P97 
+                                    && (metrics?.headCircumference ?? 30.5) > HCGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P85 ) ? '#BE6B00' : 'green'),  // Cambia las líneas negras a rojo
                                 },
                             ]}
                         />
                     </View>
                     <Text style={gs.description}>{HCGP.description[(
-                        (metrics?.headCircumference ?? 30.5) < HCGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3 ? 0:
-                        ((metrics?.headCircumference ?? 30.5) > HCGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3 
-                        && (metrics?.headCircumference ?? 30.5) < HCGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P15) ? 1: 
-                        ((metrics?.headCircumference ?? 30.5) > HCGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P15 
-                        && (metrics?.headCircumference ?? 30.5) < HCGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P85) ? 2:
-                        ((metrics?.headCircumference ?? 30.5) > HCGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P85 
-                        && (metrics?.headCircumference ?? 30.5) < HCGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P97)? 3 : 4
+                        (metrics?.headCircumference ?? 30.5) < HCGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3 ? 0:
+                        ((metrics?.headCircumference ?? 30.5) > HCGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3 
+                        && (metrics?.headCircumference ?? 30.5) < HCGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P15) ? 1: 
+                        ((metrics?.headCircumference ?? 30.5) > HCGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P15 
+                        && (metrics?.headCircumference ?? 30.5) < HCGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P85) ? 2:
+                        ((metrics?.headCircumference ?? 30.5) > HCGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P85 
+                        && (metrics?.headCircumference ?? 30.5) < HCGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P97)? 3 : 4
                     )]}</Text>
                 </View>
             }
-            {(baby?.genre == 'MALE' ||  (baby?.genre == 'OTHER' && !genreBoy)) && HBP &&
+            {(baby?.genre == 'MALE' ||  (baby?.genre == 'OTHER' && !genreBoy)) && HBP && HBPD &&
                 <View style={[gs.cardMetric, { width: screenWidth * 0.95 }]}>
                 <Text style={gs.title}>{HBP.title}</Text>
                 <View style={gs.imageContainer}>
                     <Image 
                         source={HBP.image[
-                            (Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                            (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)]}
+                            (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                            (calcularEdad(year,month,day).years <= 2? 1 : 2)]}
                         style={[gs.imageMetric, { height: screenWidth * 0.48 }]} 
                         resizeMode="contain"
                         onLayout={(event) => {
@@ -421,48 +507,47 @@ export default function Metricas() {
                             gs.babyImage,
                             {
                                 right: imageSize.width * (HBP.cuadrante[
-                                    (Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                                    (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)
-                                ][
-                                    Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 6 ? Math.abs(nowMonth - month) * 4 + Math.floor((nowDay - day) / 7)
-                                    : (Math.abs(nowYear - year) - 2)])
-                                    - (Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 6 ? 3.5 * Math.abs(nowDay - day) : 
-                                    (22*Math.abs(nowMonth - month)) - 0.43*Math.abs(nowDay - day)), 
+                                    (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                    (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)][
+                                        calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? calcularEdad(year,month,day).months * 4 + Math.floor(calcularEdad(year,month,day).days / 7)
+                                        : calcularEdad(year,month,day).years
+                                    ] - 0.0217*(calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? 0.12 * (calcularEdad(year,month,day).days - (Math.floor(calcularEdad(year,month,day).days / 7)*7))  : 
+                                    calcularEdad(year,month,day).months + 0.01*(calcularEdad(year,month,day).days))),
                                 top: imageSize.height * 0.84 - HBP.metrica[
-                                    (Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                                    (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)
+                                    (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                    (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)
                                 ],  // Ajusta según la posición deseada
                                 width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                 height: imageSize.width * 0.01, // Mantiene proporción
-                                tintColor: ((metrics?.height ?? 45) < HBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3 
-                                || (metrics?.height ?? 45) > HBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P97) ? 'red': 
-                                (((metrics?.height ?? 45) < HBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P15 
-                                && (metrics?.height ?? 45) > HBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3)
-                                || ((metrics?.height ?? 45) < HBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P97 
-                                && (metrics?.height ?? 45) > HBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P85 ) ? '#BE6B00' : 'green'),  // Cambia las líneas negras a rojo
+                                tintColor: ((metrics?.height ?? 45) < HBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3 
+                                || (metrics?.height ?? 45) > HBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P97) ? 'red': 
+                                (((metrics?.height ?? 45) < HBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P15 
+                                && (metrics?.height ?? 45) > HBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3)
+                                || ((metrics?.height ?? 45) < HBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P97 
+                                && (metrics?.height ?? 45) > HBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P85 ) ? '#BE6B00' : 'green'),  // Cambia las líneas negras a rojo
                             },
                         ]}
                     />
                 </View>
                 <Text style={gs.description}>{HBP.description[(
-                        (metrics?.height ?? 45) < HBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3 ? 0:
-                        ((metrics?.height ?? 45) > HBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3 
-                        && (metrics?.height ?? 45) < HBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P15) ? 1: 
-                        ((metrics?.height ?? 45) > HBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P15 
-                        && (metrics?.height ?? 45) < HBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P85) ? 2:
-                        ((metrics?.height ?? 45) > HBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P85 
-                        && (metrics?.height ?? 45) < HBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P97)? 3 : 4
+                        (metrics?.height ?? 45) < HBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3 ? 0:
+                        ((metrics?.height ?? 45) > HBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3 
+                        && (metrics?.height ?? 45) < HBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P15) ? 1: 
+                        ((metrics?.height ?? 45) > HBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P15 
+                        && (metrics?.height ?? 45) < HBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P85) ? 2:
+                        ((metrics?.height ?? 45) > HBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P85 
+                        && (metrics?.height ?? 45) < HBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P97)? 3 : 4
                     )]}</Text>
                 </View>
             }
-            {(baby?.genre == 'FEMALE' || (baby?.genre == 'OTHER' && !genreGirl)) && HGP &&
+            {(baby?.genre == 'FEMALE' || (baby?.genre == 'OTHER' && !genreGirl)) && HGP && HGPD &&
                 <View style={[gs.cardMetric, { width: screenWidth * 0.95 }]}>
                     <Text style={gs.title}>{HGP.title}</Text>
                     <View style={gs.imageContainer}>
                         <Image 
                             source={HGP.image[
-                                (Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                                (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)]}
+                                (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                (calcularEdad(year,month,day).years <= 2 ? 1 : 2)]}
                             style={[gs.imageMetric, { height: screenWidth * 0.48 }]} 
                             resizeMode="contain"
                             onLayout={(event) => {
@@ -476,47 +561,47 @@ export default function Metricas() {
                                 gs.babyImage,
                                 {
                                     right: imageSize.width * (HGP.cuadrante[
-                                        (Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)][
-                                            Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3 ? Math.abs(nowMonth - month) * 4 + Math.floor((nowDay - day) / 7)
-                                            : Math.abs(nowYear - year)
-                                        ] - 0.0217*(Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3 ? 0.12 * Math.abs(nowDay - day) : 
-                                        Math.abs(nowMonth - month) + 0.01*(Math.abs(nowDay - day)))),
+                                        (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)][
+                                            calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? calcularEdad(year,month,day).months * 4 + Math.floor(calcularEdad(year,month,day).days / 7)
+                                            : calcularEdad(year,month,day).years
+                                        ] - 0.0217*(calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? 0.12 * (calcularEdad(year,month,day).days - (Math.floor(calcularEdad(year,month,day).days / 7)*7))  : 
+                                        calcularEdad(year,month,day).months + 0.01*(calcularEdad(year,month,day).days))),
                                     top: imageSize.height * 0.84 - HGP.metrica[
-                                        (Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)
+                                        (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)
                                     ],  // Ajusta según la posición deseada
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
-                                    tintColor: ((metrics?.height ?? 45) < HGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3 
-                                            || (metrics?.height ?? 45) > HGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P97) ? 'red': 
-                                            (((metrics?.height ?? 45) < HGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P15 
-                                            && (metrics?.height ?? 45) > HGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3)
-                                            || ((metrics?.height ?? 45) < HGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P97 
-                                            && (metrics?.height ?? 45) > HGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P85 ) ? '#BE6B00' : 'green'),  // Cambia las líneas negras a rojo
+                                    tintColor: ((metrics?.height ?? 45) < HGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3 
+                                            || (metrics?.height ?? 45) > HGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P97) ? 'red': 
+                                            (((metrics?.height ?? 45) < HGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P15 
+                                            && (metrics?.height ?? 45) > HGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3)
+                                            || ((metrics?.height ?? 45) < HGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P97 
+                                            && (metrics?.height ?? 45) > HGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P85 ) ? '#BE6B00' : 'green'),  // Cambia las líneas negras a rojo
                             },
                             ]}
                         />
                     </View>
                     <Text style={gs.description}>{HGP.description[(
-                        (metrics?.height ?? 45) < HGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3 ? 0:
-                        ((metrics?.height ?? 45) > HGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3 
-                        && (metrics?.height ?? 45) < HGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P15) ? 1: 
-                        ((metrics?.height ?? 45) > HGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P15 
-                        && (metrics?.height ?? 45) < HGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P85) ? 2:
-                        ((metrics?.height ?? 45) > HGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P85 
-                        && (metrics?.height ?? 45) < HGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P97)? 3 : 4
+                        (metrics?.height ?? 45) < HGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3 ? 0:
+                        ((metrics?.height ?? 45) > HGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3 
+                        && (metrics?.height ?? 45) < HGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P15) ? 1: 
+                        ((metrics?.height ?? 45) > HGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P15 
+                        && (metrics?.height ?? 45) < HGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P85) ? 2:
+                        ((metrics?.height ?? 45) > HGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P85 
+                        && (metrics?.height ?? 45) < HGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P97)? 3 : 4
                     )]}</Text>
                 </View>
             }
-            {(baby?.genre == 'MALE' || (baby?.genre == 'OTHER' && !genreBoy)) && WBP &&
+            {(baby?.genre == 'MALE' || (baby?.genre == 'OTHER' && !genreBoy)) && WBP && WBPD &&
                 <View style={[gs.cardMetric, { width: screenWidth * 0.95 }]}>
                     <Text style={gs.title}>{WBP.title}</Text>
                     <View style={gs.imageContainer}>
                         <Image 
                             source={WBP.image[
-                                (Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                                (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)]}
+                                (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                (calcularEdad(year,month,day).years <= 2 ? 1 : 2)]}
                             style={[gs.imageMetric, { height: screenWidth * 0.48 }]} 
                             resizeMode="contain"
                             onLayout={(event) => {
@@ -530,48 +615,47 @@ export default function Metricas() {
                                 gs.babyImage,
                                 {
                                     right: imageSize.width * (WBP.cuadrante[
-                                        (Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)
-                                    ][
-                                        Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 6 ? Math.abs(nowMonth - month) * 4 + Math.floor((nowDay - day) / 7)
-                                        : (Math.abs(nowYear - year) - 2)])
-                                        - (Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 6 ? 3.5 * Math.abs(nowDay - day) : 
-                                        (22*Math.abs(nowMonth - month)) - 0.43*Math.abs(nowDay - day)),
+                                        (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)][
+                                            calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? calcularEdad(year,month,day).months * 4 + Math.floor(calcularEdad(year,month,day).days / 7)
+                                            : calcularEdad(year,month,day).years
+                                        ] - 0.0217*(calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? 0.12 * (calcularEdad(year,month,day).days - (Math.floor(calcularEdad(year,month,day).days / 7)*7))  : 
+                                        (calcularEdad(year,month,day).months + 0.01*(calcularEdad(year,month,day).days)))),
                                     top: imageSize.height * 0.84 - WBP.metrica[
-                                        (Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)
+                                        (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)
                                     ],
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
-                                    tintColor: ((metrics?.weight ?? 1) < WBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3 
-                                            || (metrics?.weight ?? 1) > WBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P97) ? 'red': 
-                                            (((metrics?.weight ?? 1) < WBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P15 
-                                            && (metrics?.weight ?? 1) > WBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3)
-                                            || ((metrics?.weight ?? 1) < WBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P97 
-                                            && (metrics?.weight ?? 1) > WBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P85 ) ? '#BE6B00' : 'green'),  // Cambia las líneas negras a rojo
+                                    tintColor: ((metrics?.weight ?? 1) < WBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3 
+                                            || (metrics?.weight ?? 1) > WBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P97) ? 'red': 
+                                            (((metrics?.weight ?? 1) < WBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P15 
+                                            && (metrics?.weight ?? 1) > WBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3)
+                                            || ((metrics?.weight ?? 1) < WBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P97 
+                                            && (metrics?.weight ?? 1) > WBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P85 ) ? '#BE6B00' : 'green'),  // Cambia las líneas negras a rojo
                             },
                             ]}
                         />
                     </View>
                     <Text style={gs.description}>{WBP.description[(
-                        (metrics?.weight ?? 1) < WBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3 ? 0:
-                        ((metrics?.weight ?? 1) > WBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3 
-                        && (metrics?.weight ?? 1) < WBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P15) ? 1: 
-                        ((metrics?.weight ?? 1) > WBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P15 
-                        && (metrics?.weight ?? 1) < WBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P85) ? 2:
-                        ((metrics?.weight ?? 1) > WBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P85 
-                        && (metrics?.weight ?? 1) < WBPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P97)? 3 : 4
+                        (metrics?.weight ?? 1) < WBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3 ? 0:
+                        ((metrics?.weight ?? 1) > WBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3 
+                        && (metrics?.weight ?? 1) < WBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P15) ? 1: 
+                        ((metrics?.weight ?? 1) > WBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P15 
+                        && (metrics?.weight ?? 1) < WBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P85) ? 2:
+                        ((metrics?.weight ?? 1) > WBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P85 
+                        && (metrics?.weight ?? 1) < WBPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P97)? 3 : 4
                     )]}</Text>
                 </View>
             }
-            {(baby?.genre == 'FEMALE' || (baby?.genre == 'OTHER' && !genreGirl)) && WGP &&
+            {(baby?.genre == 'FEMALE' || (baby?.genre == 'OTHER' && !genreGirl)) && WGP && WBPD &&
                 <View style={[gs.cardMetric, { width: screenWidth * 0.95 }]}>
                     <Text style={gs.title}>{WGP.title}</Text>
                     <View style={gs.imageContainer}>
                         <Image 
                             source={WGP.image[
-                                (Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                                (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)]}
+                                (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                (calcularEdad(year,month,day).years <= 2 ? 1 : 2)]}
                             style={[gs.imageMetric, { height: screenWidth * 0.48 }]}
                             resizeMode="contain"
                             onLayout={(event) => {
@@ -585,46 +669,46 @@ export default function Metricas() {
                                 gs.babyImage,
                                 {
                                     right: imageSize.width * (WGP.cuadrante[
-                                        (Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)][
-                                            Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3 ? Math.abs(nowMonth - month) * 4 + Math.floor((nowDay - day) / 7)
-                                            : Math.abs(nowYear - year)
-                                        ] - 0.0217*(Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3 ? 0.12 * Math.abs(nowDay - day) : 
-                                        Math.abs(nowMonth - month) + 0.01*(Math.abs(nowDay - day)))),
+                                        (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)][
+                                            calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? calcularEdad(year,month,day).months * 4 + Math.floor(calcularEdad(year,month,day).days / 7)
+                                            : calcularEdad(year,month,day).years
+                                        ] - 0.0217*(calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? 0.12 * (calcularEdad(year,month,day).days - (Math.floor(calcularEdad(year,month,day).days / 7)*7))  : 
+                                        (calcularEdad(year,month,day).months + 0.01*(calcularEdad(year,month,day).days)))),
                                     top: imageSize.height * 0.84 - WGP.metrica[
-                                        (Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)
+                                        (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)
                                     ], 
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
-                                    tintColor: ((metrics?.weight ?? 1) < WGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3 
-                                            || (metrics?.weight ?? 1) > WGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P97) ? 'red': 
-                                            (((metrics?.weight ?? 1) < WGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P15 
-                                            && (metrics?.weight ?? 1) > WGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3)
-                                            || ((metrics?.weight ?? 1) < WGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P97 
-                                            && (metrics?.weight ?? 1) > WGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P85 ) ? '#BE6B00' : 'green'),  // Cambia las líneas negras a rojo
+                                    tintColor: ((metrics?.weight ?? 1) < WGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3 
+                                            || (metrics?.weight ?? 1) > WGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P97) ? 'red': 
+                                            (((metrics?.weight ?? 1) < WGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P15 
+                                            && (metrics?.weight ?? 1) > WGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3)
+                                            || ((metrics?.weight ?? 1) < WGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P97 
+                                            && (metrics?.weight ?? 1) > WGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P85 ) ? '#BE6B00' : 'green'),  // Cambia las líneas negras a rojo
                             },
                             ]}
                         />
                     </View>
                     <Text style={gs.description}>{WGP.description[(
-                        (metrics?.weight ?? 1) < WGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3 ? 0:
-                        ((metrics?.weight ?? 1) > WGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P3 
-                        && (metrics?.weight ?? 1) < WGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P15) ? 1: 
-                        ((metrics?.weight ?? 1) > WGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P15 
-                        && (metrics?.weight ?? 1) < WGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P85) ? 2:
-                        ((metrics?.weight ?? 1) > WGPD[((nowYear - year)*12 + Math.abs(nowMonth - month))].P85 
-                        && (metrics?.weight ?? 1) < WGPD[(Math.abs(nowYear - year)*12 + Math.abs(nowMonth - month))].P97)? 3 : 4
+                        (metrics?.weight ?? 1) < WGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3 ? 0:
+                        ((metrics?.weight ?? 1) > WGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P3 
+                        && (metrics?.weight ?? 1) < WGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P15) ? 1: 
+                        ((metrics?.weight ?? 1) > WGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P15 
+                        && (metrics?.weight ?? 1) < WGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P85) ? 2:
+                        ((metrics?.weight ?? 1) > WGPD[((nowYear - year)*12 + calcularEdad(year,month,day).months)].P85 
+                        && (metrics?.weight ?? 1) < WGPD[(calcularEdad(year,month,day).years*12 + calcularEdad(year,month,day).months)].P97)? 3 : 4
                     )]}</Text>
                 </View>
             }
-            {(baby?.genre == 'MALE' ||  (baby?.genre == 'OTHER' && !genreBoy)) && WFHBP &&
+            {(baby?.genre == 'MALE' ||  (baby?.genre == 'OTHER' && !genreBoy)) && WFHBP && WFHBPD &&
                 <View style={[gs.cardMetric, { width: screenWidth * 0.95 }]}>
                     <Text style={gs.title}>{WFHBP.title}</Text>
                     <View style={gs.imageContainer}>
                         <Image 
                             source={WFHBP.image[
-                                (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 0 : 1)
+                                (calcularEdad(year,month,day).years <= 2 ? 0 : 1)
                             ]}
                             style={[gs.imageMetric, { height: screenWidth * 0.48 }]} 
                             resizeMode="contain"
@@ -639,41 +723,54 @@ export default function Metricas() {
                                 gs.babyImage,
                                 {
                                     right: imageSize.width * 0.764 - WFHBP.height[
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 0 : 1)
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 0 : 1)
                                     ],  // Ajusta según la posición deseada
                                     top: imageSize.height * 0.84 -  WFHBP.weight[
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 0 : 1)
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 0 : 1)
                                     ],  // Ajusta según la posición deseada
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
-                                    tintColor: ((metrics?.weight ?? 1) < WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P3 
-                                            || (metrics?.weight ?? 1) > WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P97) ? 'red': 
-                                            (((metrics?.weight ?? 1) < WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P15  
-                                            && (metrics?.weight ?? 1) > WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P3 )
-                                            || ((metrics?.weight ?? 1) < WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P97  
-                                            && (metrics?.weight ?? 1) > WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P85) ? '#BE6B00' : 'green'),  // Cambia las líneas negras a rojo
+                                    tintColor: ((metrics?.weight ?? 1) < WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                                        Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P3 
+                                            || (metrics?.weight ?? 1) > WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                                                Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P97) ? 'red': 
+                                            (((metrics?.weight ?? 1) < WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                                                Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P15  
+                                            && (metrics?.weight ?? 1) > WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                                                Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P3 )
+                                            || ((metrics?.weight ?? 1) < WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                                                Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P97  
+                                            && (metrics?.weight ?? 1) > WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                                                Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P85) ? '#BE6B00' : 'green'),  // Cambia las líneas negras a rojo
                                 },
                             ]}
                         />
                     </View>
                     <Text style={gs.description}>{WFHBP.description[(
-                        (metrics?.weight ?? 1) < WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P3 ? 0:
-                        ((metrics?.weight ?? 1) > WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P3 
-                        && (metrics?.weight ?? 1) < WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P15) ? 1: 
-                        ((metrics?.weight ?? 1) > WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P15 
-                        && (metrics?.weight ?? 1) < WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P85) ? 2:
-                        ((metrics?.weight ?? 1) > WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P85 
-                        && (metrics?.weight ?? 1) < WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P97)? 3 : 4
+                        (metrics?.weight ?? 1) < WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                            Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P3 ? 0:
+                        ((metrics?.weight ?? 1) > WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                            Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P3 
+                        && (metrics?.weight ?? 1) < WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                            Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P15) ? 1: 
+                        ((metrics?.weight ?? 1) > WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                            Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P15 
+                        && (metrics?.weight ?? 1) < WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                            Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P85) ? 2:
+                        ((metrics?.weight ?? 1) > WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                            Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P85 
+                        && (metrics?.weight ?? 1) < WFHBPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                            Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P97)? 3 : 4
                     )]}</Text>
                 </View>
             }
-            {(baby?.genre == 'FEMALE' || (baby?.genre == 'OTHER' && !genreGirl)) && WFHGP &&
+            {(baby?.genre == 'FEMALE' || (baby?.genre == 'OTHER' && !genreGirl)) && WFHGP && WFHGPD &&
                 <View style={[gs.cardMetric, { width: screenWidth * 0.95 }]}>
                     <Text style={gs.title}>{WFHGP.title}</Text>
                     <View style={gs.imageContainer}>
                         <Image 
                             source={WFHGP.image[
-                                (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 0 : 1)
+                                (calcularEdad(year,month,day).years <= 2? 0 : 1)
                             ]}
                             style={[gs.imageMetric, { height: screenWidth * 0.48 }]} 
                             resizeMode="contain"
@@ -688,31 +785,44 @@ export default function Metricas() {
                                 gs.babyImage,
                                 {
                                     right: imageSize.width * 0.764 - WFHGP.height[
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 0 : 1)
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 0 : 1)
                                     ],  // Ajusta según la posición deseada
                                     top: imageSize.height * 0.84 -  WFHGP.weight[
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 0 : 1)
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 0 : 1)
                                     ],
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
-                                    tintColor: ((metrics?.weight ?? 1) < WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P3 
-                                            || (metrics?.weight ?? 1) > WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P97) ? 'red': 
-                                            (((metrics?.weight ?? 1) < WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P15  
-                                            && (metrics?.weight ?? 1) > WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P3 )
-                                            || ((metrics?.weight ?? 1) < WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P97  
-                                            && (metrics?.weight ?? 1) > WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P85) ? '#BE6B00' : 'green'),  // Cambia las líneas negras a rojo
+                                    tintColor: ((metrics?.weight ?? 1) < WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                                        Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P3 
+                                            || (metrics?.weight ?? 1) > WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                                                Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P97) ? 'red': 
+                                            (((metrics?.weight ?? 1) < WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                                                Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P15  
+                                            && (metrics?.weight ?? 1) > WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                                                Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P3 )
+                                            || ((metrics?.weight ?? 1) < WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                                                Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P97  
+                                            && (metrics?.weight ?? 1) > WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                                                Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P85) ? '#BE6B00' : 'green'),  // Cambia las líneas negras a rojo
                                 },
                             ]}
                         />
                     </View>
                     <Text style={gs.description}>{WFHGP.description[(
-                        (metrics?.weight ?? 1) < WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P3 ? 0:
-                        ((metrics?.weight ?? 1) > WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P3 
-                        && (metrics?.weight ?? 1) < WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P15) ? 1: 
-                        ((metrics?.weight ?? 1) > WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P15 
-                        && (metrics?.weight ?? 1) < WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P85) ? 2:
-                        ((metrics?.weight ?? 1) > WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P85 
-                        && (metrics?.weight ?? 1) < WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2)].P97)? 3 : 4
+                        (metrics?.weight ?? 1) < WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                            Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P3 ? 0:
+                        ((metrics?.weight ?? 1) > WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                            Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P3 
+                        && (metrics?.weight ?? 1) < WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                            Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P15) ? 1: 
+                        ((metrics?.weight ?? 1) > WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                            Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P15 
+                        && (metrics?.weight ?? 1) < WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                            Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P85) ? 2:
+                        ((metrics?.weight ?? 1) > WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                            Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P85 
+                        && (metrics?.weight ?? 1) < WFHGPD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : 
+                            Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].P97)? 3 : 4
                     )]}</Text>
                 </View>
             }

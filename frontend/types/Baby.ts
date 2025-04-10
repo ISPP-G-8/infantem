@@ -1,10 +1,10 @@
 export type Baby = {
-    id?: number;
-    name: string;
-    birthDate: string;
-    genre?: string;
-    weight?: number;
-    height?: number;
-    cephalicPerimeter?: number;
-    foodPreference?: string;
+  id?: number;
+  name: string;
+  birthDate: string;
+  genre?: string;
+  weight?: number;
+  height?: number;
+  headCircumference?: number;
+  foodPreference?: string;
 }
