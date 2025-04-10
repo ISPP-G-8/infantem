@@ -28,8 +28,6 @@ export default function TabLayout() {
       screenOptions={{
         tabBarStyle: {
           borderWidth: 1, 
-          borderColor: "blue", 
-          borderRadius: 10, 
         },
       }}
     >
@@ -58,12 +56,8 @@ export default function TabLayout() {
       <Tabs.Screen
         name="baby"
         options={{
-          lazy: true,
           headerShown: false,
-          tabBarLabel: "Bebé",
-          tabBarIcon: ({ color }) => (
-            <Ionicons name='body' color={color} size={24} />
-          ),
+          href: null, // This prevents it from showing in the tab bar
         }}
       />
       <Tabs.Screen

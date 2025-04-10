@@ -313,6 +313,21 @@ const CalendarTab = () => {
             >
               <Text style={{ color: "#fff", fontWeight: "bold" }}>Añadir vacunas</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+              style={{
+                backgroundColor: "#00adf5",
+                padding: 10,
+                borderRadius: 5,
+                alignItems: "center",
+                marginLeft: 5,
+                marginTop: 5,
+              }}
+              onPress={() => {
+                navigation.navigate("intakes");
+              }}
+            >
+              <Text style={{ color: "#fff", fontWeight: "bold" }}>Tus ingestas</Text>
+          </TouchableOpacity>
         </View>
         <Calendar
           current={currentMonth}
