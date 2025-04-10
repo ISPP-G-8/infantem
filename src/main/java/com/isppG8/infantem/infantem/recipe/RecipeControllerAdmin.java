@@ -3,10 +3,6 @@ package com.isppG8.infantem.infantem.recipe;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,7 +43,7 @@ public class RecipeControllerAdmin {
         this.authoritiesService = authoritiesService;
     }
 
-    @Operation(summary = "Obtener todas las recetas",
+    /* @Operation(summary = "Obtener todas las recetas",
             description = "Recupera todas las recetas filtradas por parámetros opcionales como edad, ingredientes, y alérgenos.") @ApiResponse(
                     responseCode = "200", description = "Lista de recetas encontrada",
                     content = @Content(mediaType = "application/json",
@@ -66,7 +62,22 @@ public class RecipeControllerAdmin {
             return ResponseEntity.ok(paginatedRecipes.map(RecipeDTO::new));
         }
         return null;
+    } */
+
+    @Operation(summary = "Obtener todas las recetas",
+    description = "Recupera todas las recetas filtradas por parámetros opcionales como edad, ingredientes, y alérgenos.") @ApiResponse(
+            responseCode = "200", description = "Lista de recetas encontrada",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = RecipeDTO.class))) @GetMapping
+    public List<RecipeDTO> getAllRecipes(@RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "10") Integer size) {
+        if (authoritiesService.isAdmin()) {
+            List<RecipeDTO> recipes = new ArrayList<>(recipeService.getAll().stream().map(RecipeDTO::new).toList());
+            return recipes;
+        }
+        return null;
     }
+
 
     @Operation(summary = "Obtener receta por ID",
             description = "Recupera los detalles de una receta utilizando su ID.") @ApiResponse(responseCode = "200",

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import { Recipe, User } from "../../../types";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import { FlatList, Button, TouchableOpacity } from "react-native";
 import { router } from "expo-router";
 import { useAdmin } from "../../../context/AdminContext";
@@ -125,180 +125,182 @@ export default function Admin() {
 
   return (
     <View style={{ flex: 1, backgroundColor: "#E3F2FD" }}>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          marginBottom: 8,
-          marginLeft: 10,
-          marginTop: 20,
-        }}
-      >
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: "bold",
-            marginBottom: 10,
-            marginRight: 20,
-          }}
-        >
-          Todos los usuarios:
-        </Text>
-        <Text
-          style={{ color: "#1565C0", fontSize: 14 }}
-          onPress={handleAddUser}
-        >
-          Crear nuevo usuario
-        </Text>
-        <View
-          style={{
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 20,
-          }}
-        ></View>
-      </View>
-      <View style={{ padding: 10 }}>
-        <FlatList
-          data={paginatedUsers}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: 10,
-                borderBottomWidth: 1,
-                borderBottomColor: "#ccc",
-              }}
-            >
-              <Text>{item.username}</Text>
-              <View style={{ flexDirection: "row" }}>
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: "#4CAF50",
-                    padding: 5,
-                    marginRight: 5,
-                    borderRadius: 5,
-                  }}
-                  onPress={() => {
-                    handleEditUser(item);
-                  }}
-                >
-                  <Text style={{ color: "#fff" }}>Modificar</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          )}
-        />
+      <ScrollView contentContainerStyle={{ padding: 0, paddingBottom: 0 }}>
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "space-between",
-            marginTop: 10,
-          }}
-        >
-          <Button
-            title="Anterior"
-            onPress={handlePreviousUserPage}
-            disabled={currentUserPage === 1}
-          />
-          <Text>Página {currentUserPage}</Text>
-          <Button
-            title="Siguiente"
-            onPress={handleNextUserPage}
-            disabled={currentUserPage * itemsPerPage >= users.length}
-          />
-        </View>
-      </View>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          marginBottom: 8,
-          marginLeft: 10,
-          marginTop: 20,
-        }}
-      >
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: "bold",
-            marginBottom: 10,
-            marginRight: 20,
-          }}
-        >
-          Todas las recetas:
-        </Text>
-        <Text
-          style={{ color: "#1565C0", fontSize: 14 }}
-          onPress={handleAddRecipe}
-        >
-          Crear nueva receta
-        </Text>
-        <View
-          style={{
             alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 20,
+            marginBottom: 8,
+            marginLeft: 10,
+            marginTop: 20,
           }}
-        ></View>
-      </View>
-      <View style={{ padding: 10 }}>
-        <FlatList
-          data={paginatedRecipes}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: 10,
-                borderBottomWidth: 1,
-                borderBottomColor: "#ccc",
-              }}
-            >
-              <Text>{item.name}</Text>
-              <View style={{ flexDirection: "row" }}>
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: "#4CAF50",
-                    padding: 5,
-                    marginRight: 5,
-                    borderRadius: 5,
-                  }}
-                  onPress={() => {
-                    handleEditRecipe(item);
-                  }}
-                >
-                  <Text style={{ color: "#fff" }}>Modificar</Text>
-                </TouchableOpacity>
+        >
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: "bold",
+              marginBottom: 10,
+              marginRight: 20,
+            }}
+          >
+            Todos los usuarios:
+          </Text>
+          <Text
+            style={{ color: "#1565C0", fontSize: 14 }}
+            onPress={handleAddUser}
+          >
+            Crear nuevo usuario
+          </Text>
+          <View
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: 20,
+            }}
+          ></View>
+        </View>
+        <View style={{ padding: 10 }}>
+          <FlatList
+            data={paginatedUsers}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => (
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  padding: 10,
+                  borderBottomWidth: 1,
+                  borderBottomColor: "#ccc",
+                }}
+              >
+                <Text>{item.username}</Text>
+                <View style={{ flexDirection: "row" }}>
+                  <TouchableOpacity
+                    style={{
+                      backgroundColor: "#4CAF50",
+                      padding: 5,
+                      marginRight: 5,
+                      borderRadius: 5,
+                    }}
+                    onPress={() => {
+                      handleEditUser(item);
+                    }}
+                  >
+                    <Text style={{ color: "#fff" }}>Modificar</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
-            </View>
-          )}
-        />
+            )}
+          />
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 10,
+            }}
+          >
+            <Button
+              title="Anterior"
+              onPress={handlePreviousUserPage}
+              disabled={currentUserPage === 1}
+            />
+            <Text>Página {currentUserPage}</Text>
+            <Button
+              title="Siguiente"
+              onPress={handleNextUserPage}
+              disabled={currentUserPage * itemsPerPage >= users.length}
+            />
+          </View>
+        </View>
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "space-between",
-            marginTop: 10,
+            alignItems: "center",
+            marginBottom: 8,
+            marginLeft: 10,
+            marginTop: 20,
           }}
         >
-          <Button
-            title="Anterior"
-            onPress={handlePreviousRecipePage}
-            disabled={currentUserPage === 1}
-          />
-          <Text>Página {currentUserPage}</Text>
-          <Button
-            title="Siguiente"
-            onPress={handleNextRecipePage}
-            disabled={currentUserPage * itemsPerPage >= users.length}
-          />
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: "bold",
+              marginBottom: 10,
+              marginRight: 20,
+            }}
+          >
+            Todas las recetas:
+          </Text>
+          <Text
+            style={{ color: "#1565C0", fontSize: 14 }}
+            onPress={handleAddRecipe}
+          >
+            Crear nueva receta
+          </Text>
+          <View
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: 20,
+            }}
+          ></View>
         </View>
-      </View>
+        <View style={{ padding: 10 }}>
+          <FlatList
+            data={paginatedRecipes}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => (
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  padding: 10,
+                  borderBottomWidth: 1,
+                  borderBottomColor: "#ccc",
+                }}
+              >
+                <Text>{item.name}</Text>
+                <View style={{ flexDirection: "row" }}>
+                  <TouchableOpacity
+                    style={{
+                      backgroundColor: "#4CAF50",
+                      padding: 5,
+                      marginRight: 5,
+                      borderRadius: 5,
+                    }}
+                    onPress={() => {
+                      handleEditRecipe(item);
+                    }}
+                  >
+                    <Text style={{ color: "#fff" }}>Modificar</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            )}
+          />
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 10,
+            }}
+          >
+            <Button
+              title="Anterior"
+              onPress={handlePreviousRecipePage}
+              disabled={currentRecipePage === 1}
+            />
+            <Text>Página {currentRecipePage}</Text>
+            <Button
+              title="Siguiente"
+              onPress={handleNextRecipePage}
+              disabled={currentRecipePage * itemsPerPage >= recipes.length}
+            />
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 }
