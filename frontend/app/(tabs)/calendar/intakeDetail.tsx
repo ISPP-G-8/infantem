@@ -176,7 +176,7 @@ export default function intakeDetail() {
       });
 
 
-      router.push("/calendar/intakes");
+      router.replace("/calendar/intakes");
 
     } catch (error) {
       console.error('Error saving intake:', error);
@@ -191,7 +191,7 @@ export default function intakeDetail() {
       baby: null, 
       recipes: []
     });
-    router.push("/calendar/intakes");
+    router.replace("/calendar/intakes");
   };
 
   return (
