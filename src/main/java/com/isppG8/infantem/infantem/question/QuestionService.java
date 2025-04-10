@@ -10,7 +10,6 @@ import com.isppG8.infantem.infantem.exceptions.ResourceNotOwnedException;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Optional;
 
 @Service
 public class QuestionService {

@@ -14,11 +14,9 @@ import com.isppG8.infantem.infantem.question.Question;
 import com.isppG8.infantem.infantem.question.QuestionService;
 import com.isppG8.infantem.infantem.baby.Baby;
 import com.isppG8.infantem.infantem.baby.BabyService;
-import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 @Service

@@ -2,15 +2,12 @@ package com.isppG8.infantem.infantem.question;
 
 import com.isppG8.infantem.infantem.intake.Intake;
 import com.isppG8.infantem.infantem.baby.Baby;
-import java.util.List;
-import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.persistence.Table;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

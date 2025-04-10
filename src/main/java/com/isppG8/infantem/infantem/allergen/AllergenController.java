@@ -15,8 +15,6 @@ import com.isppG8.infantem.infantem.allergen.dto.AllergenQuestionsDTO;
 import com.isppG8.infantem.infantem.allergen.dto.AllergenAnswerDTO;
 import jakarta.validation.Valid;
 
-import jakarta.persistence.EntityNotFoundException;
-
 import java.util.List;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
