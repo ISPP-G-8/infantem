@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isppG8.infantem.infantem.user.User;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -27,6 +29,9 @@ public class SubscriptionInfantemController {
 
     @Autowired
     private SubscriptionInfantemService subscriptionService;
+
+    @Autowired
+    private SubscriptionInfantemRepository subscriptionInfantemRepository;
 
     @Operation(summary = "Crear una nueva suscripción",
             description = "Crea una nueva suscripción asociada a un usuario.") @ApiResponse(responseCode = "200",
@@ -98,9 +103,24 @@ public class SubscriptionInfantemController {
                     description = "Estado de la suscripción actualizado") @ApiResponse(responseCode = "400",
                             description = "Error al actualizar el estado") @PostMapping("/update-status")
     public ResponseEntity<?> updateSubscriptionStatus(@RequestParam String subscriptionId,
-            @RequestParam boolean isActive) {
+            @RequestParam boolean active) {
         try {
-            subscriptionService.updateSubscriptionStatus(subscriptionId, isActive);
+            Optional<SubscriptionInfantem> optionalSub = subscriptionInfantemRepository.findAll().stream()
+                    .filter(sub -> subscriptionId.equals(sub.getStripeSubscriptionId())).findFirst();
+
+            if (!optionalSub.isPresent()) {
+                return ResponseEntity.badRequest().body("No se encontró ninguna suscripción con ID: " + subscriptionId);
+            }
+
+            SubscriptionInfantem subscription = optionalSub.get();
+            User user = subscription.getUser();
+
+            if (active) {
+                subscriptionService.activateSubscription(user, subscriptionId);
+            } else {
+                subscriptionService.desactivateSubscription(user, subscriptionId);
+            }
+
             return ResponseEntity.ok("Estado de la suscripción actualizado.");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error al actualizar el estado: " + e.getMessage());

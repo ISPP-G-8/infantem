@@ -63,6 +63,23 @@ public class DreamService {
     }
 
     @Transactional
+    public Dream createDreamAdmin(Dream dream) {
+        return dreamRepository.save(dream);
+    }
+
+    @Transactional
+    public Dream updateDreamAdmin(Long id, Dream dreamDetails) {
+        return dreamRepository.findById(id).map(dream -> {
+            dream.setDateStart(dreamDetails.getDateStart());
+            dream.setDateEnd(dreamDetails.getDateEnd());
+            dream.setNumWakeups(dreamDetails.getNumWakeups());
+            dream.setDreamType(dreamDetails.getDreamType());
+            dream.setBaby(dreamDetails.getBaby());
+            return dreamRepository.save(dream);
+        }).orElseThrow(() -> new ResourceNotFoundException("Dream", "id", id));
+    }
+
+    @Transactional
     public void deleteDream(Long id) {
         if (!dreamRepository.existsById(id)) {
             throw new ResourceNotFoundException("Dream", "id", id);
