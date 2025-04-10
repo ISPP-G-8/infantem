@@ -11,6 +11,7 @@ import com.stripe.param.CustomerListParams;
 import com.stripe.param.PaymentMethodAttachParams;
 import com.stripe.param.PaymentMethodListParams;
 import com.stripe.param.SubscriptionCreateParams;
+import com.stripe.service.SubscriptionService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.isppG8.infantem.infantem.auth.Authorities;
@@ -21,10 +22,16 @@ import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserService;
 import com.stripe.model.checkout.Session;
 import com.stripe.exception.StripeException;
+
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -150,17 +157,25 @@ public class SubscriptionInfantemService {
     @Transactional
     public SubscriptionInfantem cancelSubscription(String subscriptionId) {
         try {
-            // 1. Cancelar en Stripe
+            // 1. Cancelar en Stripe (programar cancelación al final del periodo actual)
             Subscription stripeSubscription = Subscription.retrieve(subscriptionId);
-            stripeSubscription.cancel();
+            stripeSubscription = stripeSubscription.update(Map.of(
+                "cancel_at_period_end", true
+            ));
+
+            // Obtener la fecha exacta de finalización del periodo actual
+            Long periodEndUnix = stripeSubscription.getCurrentPeriodEnd(); // en segundos
+            LocalDate endDate = Instant.ofEpochSecond(periodEndUnix)
+                                    .atZone(ZoneId.systemDefault())
+                                    .toLocalDate();
 
             // 2. Actualizar en base de datos local
             SubscriptionInfantem localSubscription = subscriptionInfantemRepository
                     .findByStripeSubscriptionId(subscriptionId)
                     .orElseThrow(() -> new ResourceNotFoundException("Suscripción no encontrada"));
 
-            localSubscription.setActive(false); // ← Aquí establecemos active a false
-            localSubscription.setEndDate(LocalDateTime.now().toLocalDate());
+            localSubscription.setActive(false); // Marcar como inactiva
+            localSubscription.setEndDate(endDate); // Guardar fecha real de finalización
 
             return subscriptionInfantemRepository.save(localSubscription);
 
@@ -168,6 +183,17 @@ public class SubscriptionInfantemService {
             throw new RuntimeException("Error al cancelar suscripción en Stripe: " + e.getMessage());
         }
     }
+
+    @Transactional
+    public void deleteExpiredSubscriptions() {
+        LocalDate today = LocalDate.now();
+        List<SubscriptionInfantem> expiredSubscriptions =
+                subscriptionInfantemRepository.findByEndDateBefore(today);
+
+        subscriptionInfantemRepository.deleteAll(expiredSubscriptions);
+    }
+
+
 
     // 6. Conseguir usuarios por email
     @SuppressWarnings("unchecked")
