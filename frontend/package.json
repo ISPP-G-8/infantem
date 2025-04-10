@@ -17,6 +17,7 @@
     "@stripe/stripe-js": "^5.2.0",
     "@stripe/stripe-react-native": "0.38.6",
     "app-infantem-frontend": "file:",
+    "date-fns": "^4.1.0",
     "eslint-plugin-import": "^2.31.0",
     "expo": "~52.0.31",
     "expo-constants": "~17.0.7",
