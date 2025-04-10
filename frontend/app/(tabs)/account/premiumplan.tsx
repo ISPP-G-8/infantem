@@ -9,6 +9,7 @@ export default function PremiumPlan() {
     const [loading, setLoading] = useState(false);
     const [token, setToken] = useState<string | null>(null);
     interface Subscription {
+        stripeSubscriptionId: any;
         id: string;
         active: boolean;
         // Add other properties as needed
@@ -74,7 +75,32 @@ export default function PremiumPlan() {
             Alert.alert("Error", "No se encontró una suscripción activa.");
             return;
         }
-        fetch(`${apiUrl}/api/v1/subscriptions/cancel/${subscription.id}`, {
+        fetch(`${apiUrl}/api/v1/subscriptions/cancel?subscriptionId=${subscription.stripeSubscriptionId}`, {
+            method: "POST",          
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error("Error fetching subscription");
+            }
+            return response.json();
+        }).then(data => {
+            setSubscription(data);
+            router.push('/account')
+        }).catch(error => {
+            Alert.alert("Error", `No se pudo realizar los cambios: ${error.message}`);
+        });
+    };
+    
+
+    const handleResubscribe = () => {
+        if (!subscription) {
+            Alert.alert("Error", "No se encontró una suscripción activa.");
+            return;
+        }
+        fetch(`${apiUrl}/api/v1/subscriptions/update-status?subscriptionId=${subscription.stripeSubscriptionId}&active=true`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -87,28 +113,9 @@ export default function PremiumPlan() {
             return response.json();
         }).then(data => {
             setSubscription(data);
+            router.push('/account')
         }).catch(error => {
-            Alert.alert("Error", `No se pudo realizar los cambios: ${error.message}`);
-        });
-    };
-    
-
-    const handleResubscribe = () => {
-        fetch(`${apiUrl}/api/v1/subscriptions/user/${userId}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            }
-        }).then(response => {
-            if (!response.ok) {
-                throw new Error("Error fetching subscription");
-            }
-            return response.json();
-        }).then(data => {
-            setSubscription(data);
-        }).catch(error => {
-            Alert.alert("Error", `No se pudo realizar los cambios: ${error.message}`);
+            Alert.alert("Error", `No se pudo realizar la activación: ${error.message}`);
         });
     };
 
@@ -117,7 +124,7 @@ export default function PremiumPlan() {
     };
 
     return (
-        console.log("Subscription:", subscription),
+        console.log(subscription),
         <View style={{ flex: 1, justifyContent: "center", padding: 40, backgroundColor: "#f4f4f4" }}>
             {subscription ? (
                 <ScrollView style={{ backgroundColor: "#fff", padding: 40, borderRadius: 10, shadowColor: "#000", shadowOpacity: 0.2, shadowRadius: 5 }}>
@@ -128,8 +135,7 @@ export default function PremiumPlan() {
                     <Text style={{ fontSize: 15, marginBottom: 8 }}>🔹 Cupones de descuentos en productos del Marketplace.</Text>
                     <Text style={{ fontSize: 15, marginBottom: 8 }}>🔹 Seguimiento del crecimiento del bebe mediante métricas avanzadas</Text>
                     <Text style={{ fontSize: 15, marginBottom: 20 }}>🔹 Recetas personalizadas mediante filtrado por diferentes métricas adicionales</Text>
-
-                    {subscription.active ? (
+                    
                         <TouchableOpacity
                             onPress={handleDesubscribe}
                             style={{ backgroundColor: "red", padding: 15, borderRadius: 10, alignItems: "center" }}
@@ -141,19 +147,6 @@ export default function PremiumPlan() {
                                 <Text style={{ color: "white", fontSize: 20, fontWeight: "bold" }}>Dejar de estar suscrito</Text>
                             )}
                         </TouchableOpacity>
-                    ) : (
-                        <TouchableOpacity
-                            onPress={handleResubscribe}
-                            style={{ backgroundColor: "green", padding: 15, borderRadius: 10, alignItems: "center" }}
-                            disabled={loading}
-                        >
-                            {loading ? (
-                                <ActivityIndicator color="white" />
-                            ) : (
-                                <Text style={{ color: "white", fontSize: 20, fontWeight: "bold" }}>volver a suscribirme</Text>
-                            )}
-                        </TouchableOpacity>
-                    )}
                 </ScrollView>
             ) : (
                 <ScrollView style={{ backgroundColor: "#fff", padding: 40, borderRadius: 10, shadowColor: "#000", shadowOpacity: 0.2, shadowRadius: 5 }}>
