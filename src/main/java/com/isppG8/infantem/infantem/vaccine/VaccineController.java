@@ -49,7 +49,8 @@ public class VaccineController {
                             schema = @Schema(implementation = VaccineDTO.class))) @ApiResponse(responseCode = "404",
                                     description = "Vacuna no encontrada") @GetMapping("/{id}")
     public ResponseEntity<VaccineDTO> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(new VaccineDTO(this.service.getById(id)));
+        Vaccine vaccine = this.service.getById(id);
+        return ResponseEntity.ok(new VaccineDTO(vaccine));
     }
 
     @Operation(summary = "Crear una nueva vacuna", description = "Crea una nueva vacuna.") @ApiResponse(
