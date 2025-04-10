@@ -99,6 +99,12 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="admin"
+        options={{
+          href: null, // This prevents it from showing in the tab bar
+        }}
+      />
     </Tabs>
   );
   // We should return this if the user is not logged in
