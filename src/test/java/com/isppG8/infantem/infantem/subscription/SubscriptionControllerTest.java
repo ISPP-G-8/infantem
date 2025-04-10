@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.isppG8.infantem.infantem.config.StripeConfig;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
+import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserRepository;
 import com.isppG8.infantem.infantem.user.UserService;
 
@@ -28,9 +29,11 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.hamcrest.Matchers.containsString;
 
 @WebMvcTest(SubscriptionInfantemController.class)
 @WithMockUser(username = "testUser", roles = { "USER" })
@@ -64,6 +67,9 @@ public class SubscriptionControllerTest {
 
     @MockitoBean
     private StripeConfig stripeConfig;
+
+    @MockitoBean
+    private SubscriptionInfantemRepository subscriptionInfantemRepository;
 
     @Test
     public void testCreateSubscription() throws Exception {
@@ -119,21 +125,63 @@ public class SubscriptionControllerTest {
     }
 
     @Test
-    public void testUpdateSubscriptionStatus() throws Exception {
-        // Configura el mock
-        doNothing().when(subscriptionService).updateSubscriptionStatus(eq("sub_123"), eq(true));
+    public void testUpdateSubscriptionStatus_Activate() throws Exception {
+        // Configuración de mocks
+        User mockUser = new User();
+        SubscriptionInfantem mockSubscription = new SubscriptionInfantem();
+        mockSubscription.setUser(mockUser);
+        mockSubscription.setStripeSubscriptionId("sub_123");
+
+        // Mock del repositorio
+        when(subscriptionInfantemRepository.findAll()).thenReturn(List.of(mockSubscription));
+
+        // Mock del servicio (no es necesario mockearlo ya que el controlador llama a activate/desactivate)
 
         // Ejecuta y verifica
-        mockMvc.perform(post("/api/v1/subscriptions/update-status").with(csrf()).param("subscriptionId", "sub_123") // Asegúrate
-                                                                                                                    // que
-                                                                                                                    // coincida
-                                                                                                                    // con
-                                                                                                                    // @RequestParam
-                .param("isActive", "true").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+        mockMvc.perform(post("/api/v1/subscriptions/update-status").with(csrf()).param("subscriptionId", "sub_123")
+                .param("active", "true").contentType(MediaType.APPLICATION_FORM_URLENCODED)).andExpect(status().isOk())
                 .andExpect(content().string("Estado de la suscripción actualizado."));
 
-        // Verifica que el servicio fue llamado correctamente
-        verify(subscriptionService, times(1)).updateSubscriptionStatus("sub_123", true);
+        // Verifica que se llamó al método correcto del servicio
+        verify(subscriptionService, times(1)).activateSubscription(mockUser, "sub_123");
+        verify(subscriptionService, never()).desactivateSubscription(any(), any());
+    }
+
+    @Test
+    public void testUpdateSubscriptionStatus_Deactivate() throws Exception {
+        // Configuración de mocks
+        User mockUser = new User();
+        SubscriptionInfantem mockSubscription = new SubscriptionInfantem();
+        mockSubscription.setUser(mockUser);
+        mockSubscription.setStripeSubscriptionId("sub_123");
+
+        // Mock del repositorio
+        when(subscriptionInfantemRepository.findAll()).thenReturn(List.of(mockSubscription));
+
+        // Ejecuta y verifica
+        mockMvc.perform(post("/api/v1/subscriptions/update-status").with(csrf()).param("subscriptionId", "sub_123")
+                .param("active", "false").contentType(MediaType.APPLICATION_FORM_URLENCODED)).andExpect(status().isOk())
+                .andExpect(content().string("Estado de la suscripción actualizado."));
+
+        // Verifica que se llamó al método correcto del servicio
+        verify(subscriptionService, times(1)).desactivateSubscription(mockUser, "sub_123");
+        verify(subscriptionService, never()).activateSubscription(any(), any());
+    }
+
+    @Test
+    public void testUpdateSubscriptionStatus_NotFound() throws Exception {
+        // Mock del repositorio (sin suscripciones)
+        when(subscriptionInfantemRepository.findAll()).thenReturn(List.of());
+
+        // Ejecuta y verifica
+        mockMvc.perform(post("/api/v1/subscriptions/update-status").with(csrf()).param("subscriptionId", "sub_123")
+                .param("active", "true").contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string(containsString("No se encontró ninguna suscripción con ID")));
+
+        // Verifica que no se llamó a ningún método del servicio
+        verify(subscriptionService, never()).activateSubscription(any(), any());
+        verify(subscriptionService, never()).desactivateSubscription(any(), any());
     }
 
     @Test

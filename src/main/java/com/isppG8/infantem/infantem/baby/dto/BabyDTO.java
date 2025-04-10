@@ -1,11 +1,12 @@
 package com.isppG8.infantem.infantem.baby.dto;
 
 import java.time.LocalDate;
+import java.util.List;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.isppG8.infantem.infantem.baby.Baby;
 import com.isppG8.infantem.infantem.baby.Genre;
+import com.isppG8.infantem.infantem.allergen.Allergen;
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -28,7 +29,7 @@ public class BabyDTO {
     @Size(min = 3, max = 50)
     private String name;
 
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @PastOrPresent
     private LocalDate birthDate;
 
@@ -51,6 +52,8 @@ public class BabyDTO {
     @NotBlank
     private String foodPreference;
 
+    private List<String> allergies;
+
     public BabyDTO() {
     }
 
@@ -63,5 +66,6 @@ public class BabyDTO {
         this.height = baby.getHeight();
         this.headCircumference = baby.getHeadCircumference();
         this.foodPreference = baby.getFoodPreference();
+        this.allergies = baby.getAllergen().stream().map(Allergen::getName).toList();
     }
 }

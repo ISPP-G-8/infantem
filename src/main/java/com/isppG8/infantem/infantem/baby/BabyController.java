@@ -1,5 +1,6 @@
 package com.isppG8.infantem.infantem.baby;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isppG8.infantem.infantem.baby.dto.BabyDTO;
+import com.isppG8.infantem.infantem.metric.Metric;
+import com.isppG8.infantem.infantem.metric.MetricService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -30,9 +33,12 @@ public class BabyController {
 
     private final BabyService babyService;
 
+    private final MetricService metricService;
+
     @Autowired
-    public BabyController(BabyService babyService) {
+    public BabyController(BabyService babyService, MetricService metricService) {
         this.babyService = babyService;
+        this.metricService = metricService;
     }
 
     @Operation(summary = "Obtener lista de bebés",
@@ -63,7 +69,16 @@ public class BabyController {
             @ApiResponse(responseCode = "400",
                     description = "Datos inválidos para la creación") }) @PostMapping @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<BabyDTO> createBaby(@RequestBody @Valid BabyDTO babyDTO) {
+        LocalDate date = LocalDate.now();
         Baby createdBaby = babyService.createBaby(babyDTO);
+        Metric metric = new Metric();
+        metric.setBaby(createdBaby);
+        metric.setWeight((double) babyDTO.getWeight());
+        metric.setHeight((double) babyDTO.getHeight());
+        metric.setHeadCircumference((double) babyDTO.getHeadCircumference());
+        metric.setArmCircumference(0.0);
+        metric.setDate(date);
+        metricService.createMetric(metric);
         return ResponseEntity.status(201).body(new BabyDTO(createdBaby));
     }
 
