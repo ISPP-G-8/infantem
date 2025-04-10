@@ -41,11 +41,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestPart;
 
 import org.springframework.security.authentication.BadCredentialsException;
-
-import java.io.IOException;
 
 @Tag(name = "Authentication", description = "Gestión de la autenticación de usuarios")
 @RestController
@@ -134,11 +131,10 @@ public class AuthController {
                     content = @Content(schema = @Schema(implementation = JwtResponse.class))) @ApiResponse(
                             responseCode = "400",
                             description = "Usuario o email ya en uso o código de validación incorrecto") @PostMapping("/signup")
-    public ResponseEntity<Object> registerUser(@Valid @RequestBody SignupRequest signUpRequest,
-            @RequestPart("profilePhoto") MultipartFile multipartFile) throws IOException {
-        boolean existingUser = (userService.findByUsername(signUpRequest.getUsername()) == null);
-        boolean existingEmail = (userService.findByEmail(signUpRequest.getEmail()) == null);
-        if (!(existingUser && existingEmail)) {
+    public ResponseEntity<Object> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+        boolean existingUser = (userService.findByUsername(signUpRequest.getUsername()) != null);
+        boolean existingEmail = (userService.findByEmail(signUpRequest.getEmail()) != null);
+        if (existingUser || existingEmail) {
             String e = "";
             if (existingEmail) {
                 if (existingUser) {
@@ -154,7 +150,7 @@ public class AuthController {
         if (!emailValidationService.validateCode(signUpRequest.getEmail(), signUpRequest.getCode())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Wrong validation code"));
         }
-        authService.createUser(signUpRequest, multipartFile);
+        authService.createUser(signUpRequest);
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(signUpRequest.getUsername(), signUpRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
