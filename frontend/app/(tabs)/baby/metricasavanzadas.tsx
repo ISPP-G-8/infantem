@@ -58,6 +58,11 @@ export default function MetricasAvanzadas() {
     const [genreGirl, setGenreGirl] = useState(false);
     const [userId, setUserId] = useState<number | null>(null);
     const [subscription, setSubscription] = useState(null);
+    type Edad = {
+        years: number;
+        months: number;
+        days: number;
+    };
 
     useEffect(() => {
         const fetchToken = async () => {
@@ -184,6 +189,31 @@ export default function MetricasAvanzadas() {
         return (Math.pow(X / M, L) - 1) / (L * S);
     }
 
+    function calcularEdad(año: number, mes: number, dia: number): Edad {
+        const hoy = new Date();
+        const nacimiento = new Date(año, mes - 1, dia); // mes - 1 porque Date usa 0-11
+      
+        let years = hoy.getFullYear() - nacimiento.getFullYear();
+        let months = hoy.getMonth() - nacimiento.getMonth();
+        let days = hoy.getDate() - nacimiento.getDate();
+      
+        // Ajustamos si el día de nacimiento aún no se ha cumplido este mes
+        if (days < 0) {
+            months -= 1;
+          // Obtenemos el último día del mes anterior
+          const ultimoDiaMesAnterior = new Date(hoy.getFullYear(), hoy.getMonth(), 0).getDate();
+          days += ultimoDiaMesAnterior;
+        }
+      
+        // Ajustamos si el mes de nacimiento aún no se ha cumplido este año
+        if (months < 0) {
+            years -= 1;
+            months += 12;
+        }
+      
+        return { years, months, days };
+      }
+
     return (
         
         <ScrollView contentContainerStyle={gs.containerMetric} showsVerticalScrollIndicator={false}>
@@ -263,12 +293,12 @@ export default function MetricasAvanzadas() {
                         </View>
                 </View>
             )}
-            {(Math.abs(nowMonth - month) < 3 && Math.abs(nowYear - year) < 1) && (
+            {(calcularEdad(year,month,day).months < 3 && calcularEdad(year,month,day).years < 1) && (
                 <View style={[gs.cardMetric, { width: screenWidth * 0.95 }]}>
                     <Text style={gs.title}>Las puntuaciones z de la circunferencia del brazo solo abarca datos a partir de los 3 meses de edad</Text>
                 </View>
             )}
-            {(Math.abs(nowMonth - month) > 3 || Math.abs(nowYear - year) >= 1) && ((baby?.genre == 'MALE' || (baby?.genre == 'OTHER' && !genreBoy)) && ACBZ != null &&
+            {(calcularEdad(year,month,day).months > 3 || calcularEdad(year,month,day).years >= 1) && ((baby?.genre == 'MALE' || (baby?.genre == 'OTHER' && !genreBoy)) && ACBZ != null &&
                 <View style={[gs.cardMetric, { width: screenWidth * 0.95 }]}>
                     <Text style={gs.title}>{ACBZ.title}</Text>
                     <View style={gs.imageContainer}>
@@ -286,7 +316,7 @@ export default function MetricasAvanzadas() {
                             style={[
                                 gs.babyImage,
                                 {
-                                    right: imageSize.width * ACBZ.cuadrante[Math.abs(nowYear - year)] - (13*Math.abs(nowMonth - month)) - 0.43*Math.abs(nowDay - day),  // Ajusta según la posición deseada
+                                    right: imageSize.width * ACBZ.cuadrante[calcularEdad(year,month,day).years] - (13*calcularEdad(year,month,day).months) - 0.43*calcularEdad(year,month,day).days,  // Ajusta según la posición deseada
                                     top: imageSize.height * 0.844 - (37.80*(((metrics?.armCircumference ?? 10) < 10 ? 0 : 
                                     (metrics?.armCircumference ?? 10) > 23 ? 23 : ((metrics?.armCircumference ?? 10) - 10)))),
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
@@ -347,7 +377,7 @@ export default function MetricasAvanzadas() {
                     )]}</Text>
                 </View>
             )}
-            {(Math.abs(nowMonth - month) > 3 || Math.abs(nowYear - year) >= 1) && ((baby?.genre == 'FEMALE' ||  (baby?.genre == 'OTHER' && !genreGirl)) && ACGZ != null &&
+            {(calcularEdad(year,month,day).months > 3 || calcularEdad(year,month,day).years >= 1) && ((baby?.genre == 'FEMALE' ||  (baby?.genre == 'OTHER' && !genreGirl)) && ACGZ != null &&
                 <View style={[gs.cardMetric, { width: screenWidth * 0.95 }]}>
                     <Text style={gs.title}>{ACGZ.title}</Text>
                     <View style={gs.imageContainer}>
@@ -365,7 +395,7 @@ export default function MetricasAvanzadas() {
                             style={[
                                 gs.babyImage,
                                 {
-                                    right: imageSize.width * ACGZ.cuadrante[Math.abs(nowYear - year)] - (12*Math.abs(nowMonth - month)) - 0.43*Math.abs(nowDay - day),
+                                    right: imageSize.width * ACGZ.cuadrante[calcularEdad(year,month,day).years] - (12*calcularEdad(year,month,day).months) - 0.43*calcularEdad(year,month,day).days,
                                     top: imageSize.height * 0.844 - (37.80*(((metrics?.armCircumference ?? 10) < 10 ? 0 : 
                                     (metrics?.armCircumference ?? 10) > 23 ? 23 : ((metrics?.armCircumference ?? 10) - 10)))),
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
@@ -432,8 +462,8 @@ export default function MetricasAvanzadas() {
                     <View style={gs.imageContainer}>
                         <Image 
                             source={HCBZ.image[
-                                (Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3) ? 0 :
-                                (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)]}
+                                (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3) ? 0 :
+                                (calcularEdad(year,month,day).years <= 2 ? 1 : 2)]}
                             style={[gs.imageMetric, { height: screenWidth * 0.48 }]} 
                             resizeMode="contain"
                             onLayout={(event) => {
@@ -447,16 +477,16 @@ export default function MetricasAvanzadas() {
                                 gs.babyImage,
                                 {
                                     right: imageSize.width * HCBZ.cuadrante[
-                                        (Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3) ? 0 :
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)][
-                                            (Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3) ? Math.abs(nowMonth - month) * 4 + Math.floor(Math.abs(nowDay - day) / 7)
-                                            : Math.abs(nowYear - year)
-                                        ] - ((Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3) ? 8 * (Math.abs(nowDay - day) - (Math.floor(Math.abs(nowDay - day) / 7)*7)) : 
-                                        (12.6*Math.abs(nowMonth - month)) + 0.43*Math.abs(nowDay - day))
+                                        (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3) ? 0 :
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)][
+                                            (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3) ? calcularEdad(year,month,day).months * 4 + Math.floor(calcularEdad(year,month,day).days / 7)
+                                            : calcularEdad(year,month,day).years
+                                        ] - ((calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3) ? 8 * (calcularEdad(year,month,day).days - (Math.floor(calcularEdad(year,month,day).days / 7)*7)) : 
+                                        (12.6*calcularEdad(year,month,day).months) + 0.43*calcularEdad(year,month,day).days)
                                         ,  // Ajusta según la posición deseada
                                     top: imageSize.height * 0.843 - HCBZ.metrica[
-                                        (Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 3) ? 0 :
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)],  // Ajusta según la posición deseada
+                                        (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 3) ? 0 :
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)],  // Ajusta según la posición deseada
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
                                     tintColor: (
@@ -521,8 +551,8 @@ export default function MetricasAvanzadas() {
                     <View style={gs.imageContainer}>
                         <Image 
                             source={HCGZ.image[
-                                (Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3) ? 0 :
-                                (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)]}
+                                (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3) ? 0 :
+                                (calcularEdad(year,month,day).years <= 2 ? 1 : 2)]}
                             style={[gs.imageMetric, { height: screenWidth * 0.48 }]} 
                             resizeMode="contain"
                             onLayout={(event) => {
@@ -536,15 +566,15 @@ export default function MetricasAvanzadas() {
                                 gs.babyImage,
                                 {
                                     right: imageSize.width * (HCGZ.cuadrante[
-                                        (Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3) ? 0 :
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)][
-                                            Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3 ? Math.abs(nowMonth - month) * 4 + Math.floor(Math.abs(nowDay - day) / 7)
-                                            : Math.abs(nowYear - year)
-                                        ] - 0.0217*(Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3 ? 0.26* (Math.abs(nowDay - day) - (Math.floor(Math.abs(nowDay - day) / 7)*7)) : 
-                                        Math.abs(nowMonth - month) + 0.01*(Math.abs(nowDay - day)))),  // Ajusta según la posición deseada
+                                        (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3) ? 0 :
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)][
+                                            calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? calcularEdad(year,month,day).months * 4 + Math.floor(calcularEdad(year,month,day).days / 7)
+                                            : calcularEdad(year,month,day).years
+                                        ] - 0.0217*(calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? 0.26* (calcularEdad(year,month,day).days - (Math.floor(calcularEdad(year,month,day).days / 7)*7)) : 
+                                        calcularEdad(year,month,day).months + 0.01*(calcularEdad(year,month,day).days))),  // Ajusta según la posición deseada
                                     top: imageSize.height * 0.843 - HCGZ.metrica[
-                                        (Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3) ? 0 :
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)],  // Ajusta según la posición deseada
+                                        (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3) ? 0 :
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)],  // Ajusta según la posición deseada
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
                                     tintColor: (
@@ -609,8 +639,8 @@ export default function MetricasAvanzadas() {
                 <View style={gs.imageContainer}>
                     <Image 
                         source={HBZ.image[
-                            (Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                            (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)]}
+                            (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                            (calcularEdad(year,month,day).years <= 2 ? 1 : 2)]}
                         style={[gs.imageMetric, { height: screenWidth * 0.48 }]} 
                         resizeMode="contain"
                         onLayout={(event) => {
@@ -624,16 +654,16 @@ export default function MetricasAvanzadas() {
                             gs.babyImage,
                             {
                                 right: imageSize.width * (HBZ.cuadrante[
-                                    (Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                                    (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)
+                                    (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                    (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)
                                 ][
-                                    Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 6 ? Math.abs(nowMonth - month) * 4 + Math.floor(Math.abs(nowDay - day) / 7)
-                                    : (Math.abs(nowYear - year) - 2)])
-                                    - (Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 6 ? 3.5 * (Math.abs(nowDay - day) - (Math.floor(Math.abs(nowDay - day) / 7)*7))  : 
-                                    (26*Math.abs(nowMonth - month)) + 0.43*Math.abs(nowDay - day)), 
+                                    calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6 ? calcularEdad(year,month,day).months * 4 + Math.floor(calcularEdad(year,month,day).days / 7)
+                                    : (calcularEdad(year,month,day).years - 2)])
+                                    - (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6 ? 3.5 * (calcularEdad(year,month,day).days - (Math.floor(calcularEdad(year,month,day).days / 7)*7))  : 
+                                    (26*calcularEdad(year,month,day).months) + 0.43*calcularEdad(year,month,day).days), 
                                 top: imageSize.height * 0.84 - HBZ.metrica[
-                                    (Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                                    (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)
+                                    (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                    (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)
                                 ],  // Ajusta según la posición deseada
                                 width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                 height: imageSize.width * 0.01, // Mantiene proporción
@@ -699,8 +729,8 @@ export default function MetricasAvanzadas() {
                     <View style={gs.imageContainer}>
                         <Image 
                             source={HGZ.image[
-                                (Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                                (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)]}
+                                (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                (calcularEdad(year,month,day).years <= 2 ? 1 : 2)]}
                             style={[gs.imageMetric, { height: screenWidth * 0.48 }]} 
                             resizeMode="contain"
                             onLayout={(event) => {
@@ -714,15 +744,15 @@ export default function MetricasAvanzadas() {
                                 gs.babyImage,
                                 {
                                     right: imageSize.width * (HGZ.cuadrante[
-                                        (Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)][
-                                            Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3 ? Math.abs(nowMonth - month) * 4 + Math.floor(Math.abs(nowDay - day) / 7)
-                                            : Math.abs(nowYear - year)
-                                        ] - 0.0217*(Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3 ? 0.12 * (Math.abs(nowDay - day) - (Math.floor(Math.abs(nowDay - day) / 7)*7))  : 
-                                        Math.abs(nowMonth - month) + 0.01*(Math.abs(nowDay - day)))),
+                                        (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)][
+                                            calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? calcularEdad(year,month,day).months * 4 + Math.floor(calcularEdad(year,month,day).days / 7)
+                                            : calcularEdad(year,month,day).years
+                                        ] - 0.0217*(calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? 0.12 * (calcularEdad(year,month,day).days - (Math.floor(calcularEdad(year,month,day).days / 7)*7))  : 
+                                        calcularEdad(year,month,day).months + 0.01*(calcularEdad(year,month,day).days))),
                                     top: imageSize.height * 0.84 - HGZ.metrica[
-                                        (Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)
+                                        (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)
                                     ],  // Ajusta según la posición deseada
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
@@ -788,8 +818,8 @@ export default function MetricasAvanzadas() {
                     <View style={gs.imageContainer}>
                         <Image 
                             source={WBZ.image[
-                                (Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                                (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)]}
+                                (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                (calcularEdad(year,month,day).years <= 2 ? 1 : 2)]}
                             style={[gs.imageMetric, { height: screenWidth * 0.48 }]} 
                             resizeMode="contain"
                             onLayout={(event) => {
@@ -803,16 +833,16 @@ export default function MetricasAvanzadas() {
                                 gs.babyImage,
                                 {
                                     right: imageSize.width * (WBZ.cuadrante[
-                                        (Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)
+                                        (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)
                                     ][
-                                        Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 6 ? Math.abs(nowMonth - month) * 4 + Math.floor(Math.abs(nowDay - day) / 7)
-                                        : (Math.abs(nowYear - year) - 2)])
-                                        - (Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 6 ? 3.5 * (Math.abs(nowDay - day) - (Math.floor(Math.abs(nowDay - day) / 7)*7))  : 
-                                        (22*Math.abs(nowMonth - month)) - 0.43*Math.abs(nowDay - day)),
+                                        calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6 ? calcularEdad(year,month,day).months * 4 + Math.floor(calcularEdad(year,month,day).days / 7)
+                                        : (calcularEdad(year,month,day).years - 2)])
+                                        - (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6 ? 3.5 * (calcularEdad(year,month,day).days - (Math.floor(calcularEdad(year,month,day).days / 7)*7))  : 
+                                        (22*calcularEdad(year,month,day).months) - 0.43*calcularEdad(year,month,day).days),
                                     top: imageSize.height * 0.84 - WBZ.metrica[
-                                        (Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)
+                                        (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)
                                     ],
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
@@ -878,8 +908,8 @@ export default function MetricasAvanzadas() {
                     <View style={gs.imageContainer}>
                         <Image 
                             source={WGZ.image[
-                                (Math.abs(nowYear - year) <= 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                                (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)]}
+                                (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                (calcularEdad(year,month,day).years <= 2 ? 1 : 2)]}
                             style={[gs.imageMetric, { height: screenWidth * 0.48 }]}
                             resizeMode="contain"
                             onLayout={(event) => {
@@ -893,15 +923,15 @@ export default function MetricasAvanzadas() {
                                 gs.babyImage,
                                 {
                                     right: imageSize.width * (WGZ.cuadrante[
-                                        (Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)][
-                                            Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3 ? Math.abs(nowMonth - month) * 4 + Math.floor(Math.abs(nowDay - day) / 7)
-                                            : Math.abs(nowYear - year)
-                                        ] - 0.0217*(Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 3 ? 0.12 * (Math.abs(nowDay - day) - (Math.floor(Math.abs(nowDay - day) / 7)*7))  : 
-                                        Math.abs(nowMonth - month) + 0.01*(Math.abs(nowDay - day)))),
+                                        (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)][
+                                            calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? calcularEdad(year,month,day).months * 4 + Math.floor(calcularEdad(year,month,day).days / 7)
+                                            : calcularEdad(year,month,day).years
+                                        ] - 0.0217*(calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? 0.12 * (calcularEdad(year,month,day).days - (Math.floor(calcularEdad(year,month,day).days / 7)*7))  : 
+                                        calcularEdad(year,month,day).months + 0.01*(calcularEdad(year,month,day).days))),
                                     top: imageSize.height * 0.84 - WGZ.metrica[
-                                        (Math.abs(nowYear - year) == 0 && Math.abs(nowMonth - month) <= 6) ? 0 :
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 1 : 2)
+                                        (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 1 : 2)
                                     ], 
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
@@ -967,7 +997,7 @@ export default function MetricasAvanzadas() {
                     <View style={gs.imageContainer}>
                         <Image 
                             source={WFHBZ.image[
-                                (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 0 : 1)
+                                (calcularEdad(year,month,day).years <= 2 ? 0 : 1)
                             ]}
                             style={[gs.imageMetric, { height: screenWidth * 0.48 }]} 
                             resizeMode="contain"
@@ -982,10 +1012,10 @@ export default function MetricasAvanzadas() {
                                 gs.babyImage,
                                 {
                                     right: imageSize.width * 0.764 - WFHBZ.height[
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 0 : 1)
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 0 : 1)
                                     ],  // Ajusta según la posición deseada
                                     top: imageSize.height * 0.84 -  WFHBZ.weight[
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 0 : 1)
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 0 : 1)
                                     ],  // Ajusta según la posición deseada
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
@@ -1097,7 +1127,7 @@ export default function MetricasAvanzadas() {
                     <View style={gs.imageContainer}>
                         <Image 
                             source={WFHGZ.image[
-                                (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 0 : 1)
+                                (calcularEdad(year,month,day).years <= 2 ? 0 : 1)
                             ]}
                             style={[gs.imageMetric, { height: screenWidth * 0.48 }]} 
                             resizeMode="contain"
@@ -1112,10 +1142,10 @@ export default function MetricasAvanzadas() {
                                 gs.babyImage,
                                 {
                                     right: imageSize.width * 0.764 - WFHGZ.height[
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 0 : 1)
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 0 : 1)
                                     ],  // Ajusta según la posición deseada
                                     top: imageSize.height * 0.84 -  WFHGZ.weight[
-                                        (Math.abs(nowYear - year) <= 2 || Math.abs(nowMonth - month) <= 0 ? 0 : 1)
+                                        (calcularEdad(year,month,day).years <= 2 || calcularEdad(year,month,day).months <= 0 ? 0 : 1)
                                     ],
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
