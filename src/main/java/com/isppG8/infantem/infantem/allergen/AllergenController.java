@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import com.isppG8.infantem.infantem.allergen.dto.AllergenDTO;
+import com.isppG8.infantem.infantem.allergen.dto.AllergenQuestionsDTO;
+import com.isppG8.infantem.infantem.allergen.dto.AllergenAnswerDTO;
 import jakarta.validation.Valid;
+
 import java.util.List;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -34,6 +37,15 @@ public class AllergenController {
                             array = @ArraySchema(schema = @Schema(implementation = AllergenDTO.class)))) @GetMapping
     public List<AllergenDTO> getAllAllergens() {
         return allergenService.getAllAllergens().stream().map(AllergenDTO::new).toList();
+    }
+
+    @Operation(summary = "Obtener todos los alérgenos del bebé",
+            description = "Devuelve una lista de todos los alérgenos a los que un bebé sea alérgico.") @ApiResponse(
+                    responseCode = "200", description = "Lista obtenida con éxito",
+                    content = @Content(array = @ArraySchema(
+                            schema = @Schema(implementation = AllergenDTO.class)))) @GetMapping("baby/{babyId}")
+    public List<AllergenDTO> getAllAllergensByBabyId(@PathVariable Integer babyId) {
+        return allergenService.getAllAllergensByBabyId(babyId).stream().map(AllergenDTO::new).toList();
     }
 
     @Operation(summary = "Obtener un alérgeno por ID",
@@ -73,4 +85,15 @@ public class AllergenController {
         allergenService.deleteAllergen(id);
         return ResponseEntity.noContent().build();
     }
+
+    @Operation(summary = "Analizar nuevas respuestas",
+            description = "Recibe una lista de respuestas a preguntas, las guarda y recalcula posibles alergias") @ApiResponse(
+                    responseCode = "200", description = "Guardado y cálculo hecho sin problemas",
+                    content = @Content(schema = @Schema(implementation = AllergenAnswerDTO.class))) @ApiResponse(
+                            responseCode = "404", description = "Bebé no encontrado") @PostMapping("/answers")
+    public ResponseEntity<AllergenAnswerDTO> analyzeAnswersAllergen(@Valid @RequestBody AllergenQuestionsDTO answers) {
+        AllergenAnswerDTO calculatedAllergies = allergenService.calculateAllergies(answers);
+        return ResponseEntity.ok(calculatedAllergies);
+    }
+
 }
