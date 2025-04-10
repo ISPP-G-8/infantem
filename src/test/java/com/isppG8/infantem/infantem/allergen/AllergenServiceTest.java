@@ -9,10 +9,15 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
-import jakarta.persistence.EntityNotFoundException;
+import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
+
+import jakarta.transaction.Transactional;
 
 @SpringBootTest
+@ActiveProfiles("test")
+@Transactional
 public class AllergenServiceTest {
     private AllergenService allergenService;
 
@@ -41,7 +46,7 @@ public class AllergenServiceTest {
 
     @Test
     public void testGetAllAllergensWrongID() {
-        assertThrows(EntityNotFoundException.class, () -> allergenService.getAllergenById(Long.valueOf(1)));
+        assertThrows(ResourceNotFoundException.class, () -> allergenService.getAllergenById(Long.valueOf(1000)));
     }
 
     @Test
@@ -88,7 +93,7 @@ public class AllergenServiceTest {
     public void testUpdateAllergenWrongID() {
         Allergen updatedAllergen = new Allergen("Medicamentos y jarabes",
                 "Presente en medicamentos y fármacos. También en jarabes.");
-        assertThrows(EntityNotFoundException.class, () -> allergenService.updateAllergen(1000L, updatedAllergen));
+        assertThrows(ResourceNotFoundException.class, () -> allergenService.updateAllergen(1000L, updatedAllergen));
     }
 
     @Test
@@ -96,15 +101,12 @@ public class AllergenServiceTest {
         Allergen allergen = new Allergen("Prueba", "Prueba");
         Allergen createdAllergen = this.allergenService.createAllergen(allergen);
         this.allergenService.deleteAllergen(createdAllergen.getId());
-        Allergen deletedAllergen = this.allergenService.getAllergenById(createdAllergen.getId());
-        assertEquals(null, deletedAllergen);
-        // Next line is commented until we implement the exception handling in the service
-        // assertThrows(EntityNotFoundException.class, () -> allergenService.getAllergenById(createdAllergen.getId()));
+        assertThrows(ResourceNotFoundException.class, () -> allergenService.getAllergenById(createdAllergen.getId()));
     }
 
     @Test
     public void testDeleteAllergenWrongID() {
-        assertThrows(EntityNotFoundException.class, () -> allergenService.deleteAllergen(1000L));
+        assertThrows(ResourceNotFoundException.class, () -> allergenService.deleteAllergen(1000L));
     }
 
 }
