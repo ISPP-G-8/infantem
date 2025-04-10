@@ -36,6 +36,10 @@ public class IntakeService {
         return this.intakeRepository.findAllByUser(user);
     }
 
+    public List<Intake> getAllIntakesAdmin() {
+        return this.intakeRepository.getAll();
+    }
+
     @Transactional(readOnly = true)
     public Intake getIntakeById(Long id) {
         Intake intake = this.intakeRepository.findById(id)
@@ -44,9 +48,21 @@ public class IntakeService {
         return intake;
     }
 
+    @Transactional(readOnly = true)
+    public Intake getIntakeByIdAdmin(Long id) {
+        Intake intake = this.intakeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Intake", "id", id)); // Ensure this is executed first
+        return intake;
+    }
+
     @Transactional
     public Intake saveIntake(Intake intake) {
         checkOwnerShip(intake);
+        return this.intakeRepository.save(intake);
+    }
+
+    @Transactional
+    public Intake saveIntakeAdmin(Intake intake) {
         return this.intakeRepository.save(intake);
     }
 
@@ -64,12 +80,34 @@ public class IntakeService {
     }
 
     @Transactional
+    public Intake updateIntakeAdmin(Long id, Intake intake) {
+        return this.intakeRepository.findById(id).map(existingIntake -> {
+            existingIntake.setDate(intake.getDate());
+            existingIntake.setQuantity(intake.getQuantity());
+            existingIntake.setObservations(intake.getObservations());
+            existingIntake.setRecipes(intake.getRecipes());
+            existingIntake.setIntakeSymptom(intake.getIntakeSymptom());
+            return this.intakeRepository.save(existingIntake);
+        }).orElseThrow(() -> new ResourceNotFoundException("Intake", "id", intake.getId()));
+    }
+
+    @Transactional
     public void deleteIntake(Long id) {
         if (!this.intakeRepository.existsById(id)) {
             throw new ResourceNotFoundException("Intake", "id", id);
         } else {
             Intake intake = this.intakeRepository.findById(id).get();
             checkOwnerShip(intake);
+            this.intakeRepository.deleteById(id);
+        }
+    }
+
+    @Transactional
+    public void deleteIntakeAdmin(Long id) {
+        if (!this.intakeRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Intake", "id", id);
+        } else {
+            Intake intake = this.intakeRepository.findById(id).get();
             this.intakeRepository.deleteById(id);
         }
     }
@@ -98,7 +136,12 @@ public class IntakeService {
         return intakes.stream().map(IntakeSummary::new).toList();
     }
 
+    public List<Intake> getAll() {
+        return intakeRepository.getAll();
+    }
+
     public Intake getLastIntake(Integer babyId) {
         return intakeRepository.getLastIntake(babyId);
+
     }
 }

@@ -65,7 +65,7 @@ public class Recipe {
     @JsonBackReference
     private User user;
 
-    @ManyToMany(mappedBy = "recipes")
+    @ManyToMany(mappedBy = "recipes", cascade = CascadeType.REMOVE)
     private List<Allergen> allergens = new ArrayList<>();
 
     @ManyToMany(mappedBy = "recipes", cascade = CascadeType.ALL)

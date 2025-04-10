@@ -1,9 +1,9 @@
-export type User = {
+export type SignUpRequest = {
   id?: any;
   name: string;
   surname: string;
   username: string;
   password: string;
   email: string;
-  profilePhotoRoute?: string;
+  code: number;
 };
