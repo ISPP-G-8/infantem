@@ -89,7 +89,7 @@ export default function Account() {
       }
       
       const userData = await response.json();
-      
+    
       // Si hay foto de perfil, convertirla a base64 para mostrarla
       if (userData.profilePhoto) {
         // Si la respuesta ya viene en formato base64
@@ -272,24 +272,22 @@ export default function Account() {
     return new Blob(byteArrays, { type: contentType });
   }
 
-  const uploadImage = async (mode) => {
+  const uploadImage = async () => {
     try {
       let result;
-      if (mode === "gallery") {
-        const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (!permissionResult.granted) {
-          alert("Permiso denegado para acceder a la galería.");
-          return;
-        }
-  
-        result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.Images,
-          allowsEditing: true,
-          aspect: [1, 1],
-          quality: 1,
-          base64: false, // da igual, web da base64 como uri
-        });
+      const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (!permissionResult.granted) {
+        alert("Permiso denegado para acceder a la galería.");
+        return;
       }
+
+      result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 1,
+        base64: false, // da igual, web da base64 como uri
+      });
 
       if (!result.canceled) {
         let imageUri = result.assets[0].uri;
@@ -378,8 +376,7 @@ export default function Account() {
         <UploadImageModal
           visible={avatarModalVisible}
           onClose={() => setAvatarModalVisible(false)}
-          onCameraPress={uploadImage}
-          onGalleryPress={() => uploadImage("gallery")}
+          onGalleryPress={() => uploadImage()}
           onDeletePress={deleteImage}
         />
 

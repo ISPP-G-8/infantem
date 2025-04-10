@@ -19,8 +19,8 @@ export default function AddBaby() {
   // TODO: Let the user add a photo from files
   //const [photoRoute, setPhotoRoute] = useState<string>("male");
   const [ingredients, setIngredients] = useState<string>("");
-  const [minRecommendedAge, setMinRecommendedAge] = useState<number | null>(null);  
-  const [maxRecommendedAge, setMaxRecommendedAge] = useState<number | null>(null);  
+  const [minRecommendedAge, setMinRecommendedAge] = useState<number | null>(null);
+  const [maxRecommendedAge, setMaxRecommendedAge] = useState<number | null>(null);
   const [elaboration, setElaboration] = useState<string>("");
   // As this is an array of Intakes this couldn't be implemented this fast 
   // and I can not let the user to specify the intakes without a type validation.
@@ -38,16 +38,14 @@ export default function AddBaby() {
   const [minAgeError, setMinAgeError] = useState<string | null>(null);
   const [maxAgeError, setMaxAgeError] = useState<string | null>(null);
 
-  const apiUrl = process.env.EXPO_PUBLIC_API_URL;
-
-  /////////////////////////////////////////
-
   const [imageModalVisible, setImageModalVisible] = useState(false);
   const [image, setImage] = useState<any>(null);
   const [imageBase64, setImageBase64] = useState<any>(null);
-  const { isLoading, user, token, setUser, updateToken, checkAuth, signOut } = useAuth();
+  const { user, token, updateToken } = useAuth();
+  const [createdRecipe, setCreatedRecipe] = useState(null);
 
-  ////////////////////////////////////////
+  const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+
 
   useEffect(() => {
     const getUserToken = async () => {
@@ -55,7 +53,7 @@ export default function AddBaby() {
       setJwt(token);
     };
     getUserToken();
-  },[]);
+  }, []);
 
   const validateForm = () => {
     let isValid = true;
@@ -102,25 +100,36 @@ export default function AddBaby() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${jwt}`, 
+            "Authorization": `Bearer ${jwt}`,
           },
           body: JSON.stringify({
             name: name,
             description: description,
-            photo_route: "", //TODO: Change this
+            photo_route: "",
             ingredients: ingredients,
             minRecommendedAge: minRecommendedAge,
             maxRecommendedAge: maxRecommendedAge,
             elaboration: elaboration,
-            //TODO: Change this
             intakes: [],
             allergens: [],
             alimentoNutriente: [],
           }),
         });
-    
+
         if (response.ok) {
-          router.push("/recipes"); 
+          
+          const data = await response.json();
+          setCreatedRecipe(data);
+  
+          console.log("Recipe created successfully:", data);
+  
+          if (image) {
+            await uploadRecipePhoto(data.id); 
+          } else {
+            console.log("FALLOOOOOOOO")
+          }
+  
+          router.push("/recipes");
         } else {
           console.error("Error creating recipe:", response.statusText);
         }
@@ -130,14 +139,10 @@ export default function AddBaby() {
     }
   };
 
-  ////////////////////////////////
-
-  // fetch POST HAY QUE MODIFICARLO PARA QUE INCLUYA LA IMAGEN
-
   function base64toBlob(base64Data, contentType = 'image/png') {
     const byteCharacters = atob(base64Data);
     const byteArrays = [];
-  
+
     for (let offset = 0; offset < byteCharacters.length; offset += 512) {
       const slice = byteCharacters.slice(offset, offset + 512);
       const byteNumbers = new Array(slice.length);
@@ -147,38 +152,99 @@ export default function AddBaby() {
       const byteArray = new Uint8Array(byteNumbers);
       byteArrays.push(byteArray);
     }
-  
+
     return new Blob(byteArrays, { type: contentType });
   }
 
-  const uploadImage = async (mode) => {
+  const uploadRecipePhoto = async (createdRecipeId) => {
+    if (!user || !token) return;
+
+    try {
+      const formData = new FormData();
+
+      if (image) {
+        // Si tenemos un blob
+        // @ts-ignore
+        formData.append('recipePhoto', image);
+        console.log("Subiendo imagen como blob");
+      }
+      else if (imageBase64) {
+        // Preparar la imagen para subirla
+        let imageUri = imageBase64;
+        let imageName = 'profile.jpg';
+        let imageType = 'image/jpeg';
+
+        // Verificar formato base64
+        if (imageBase64.startsWith('data:image')) {
+          imageType = imageBase64.split(';')[0].split(':')[1];
+        }
+
+        // @ts-ignore - React Native maneja FormData diferente
+        formData.append('recipePhoto', {
+          uri: imageUri,
+          type: imageType,
+          name: imageName
+        });
+
+        console.log("Subiendo imagen desde base64");
+      }
+
+      // Usar el nuevo endpoint específico para la foto de perfil
+      console.log(`Enviando foto al endpoint ${apiUrl}/api/v1/recipes/${createdRecipeId}/recipe-photo`);
+      const response = await fetch(`${apiUrl}/api/v1/recipes/${createdRecipeId}/recipe-photo`, {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${jwt}`
+        },
+        body: formData
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Error al subir la foto:", errorText);
+        throw new Error(errorText);
+      }
+
+      const photoData = await response.json();
+      console.log("Foto subida exitosamente:", photoData);
+
+      if (photoData.jwt) {
+        await updateToken(photoData.jwt);
+      }
+
+      return photoData;
+    } catch (error) {
+      console.error("Error al subir la foto de perfil:", error);
+    }
+  };
+
+  const uploadImage = async () => {
     try {
       let result;
-      if (mode === "gallery") {
-        const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (!permissionResult.granted) {
-          alert("Permiso denegado para acceder a la galería.");
-          return;
-        }
-  
-        result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.Images,
-          allowsEditing: true,
-          aspect: [1, 1],
-          quality: 1,
-          base64: false, // da igual, web da base64 como uri
-        });
+      const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (!permissionResult.granted) {
+        alert("Permiso denegado para acceder a la galería.");
+        return;
       }
+
+      result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 1,
+        base64: false, // da igual, web da base64 como uri
+      });
+      
 
       if (!result.canceled) {
         let imageUri = result.assets[0].uri;
-  
+
         if (imageUri.startsWith('data:image')) {
           const base64Data = imageUri.split(',')[1];
-  
+
           const blob = base64toBlob(base64Data);
           console.log("Blob creado:", blob);
-          
+
           saveImage(blob);
         } else {
           console.log("Imagen URI válida:", imageUri);
@@ -189,7 +255,7 @@ export default function AddBaby() {
       }
     } catch (err) {
       alert('Error al abrir la galería: ' + err.message);
-      setAvatarModalVisible(false);
+      setImageModalVisible(false);
     }
   };
 
@@ -197,12 +263,12 @@ export default function AddBaby() {
   const deleteImage = () => {
     try {
       saveImage(null);
-      setAvatarModalVisible(false);
-    } catch ({ message }) {
-      console.log(message);
-      setAvatarModalVisible(false);
+      setImageModalVisible(false);
+    } catch (err) {
+      console.log(err.message);
+      setImageModalVisible(false);
     }
-  }
+  };
 
   const saveImage = async (image) => {
     try {
@@ -211,7 +277,7 @@ export default function AddBaby() {
       setImageBase64(base64Image);
       console.log("Imagen base64:", base64Image);
       // sendToBackend(image);
-      setAvatarModalVisible(false);
+      setImageModalVisible(false);
     } catch (error) {
       console.log(error);
     }
@@ -225,11 +291,6 @@ export default function AddBaby() {
       reader.readAsDataURL(blob);
     });
   };
-
-
-
-  ////////////////////////////////
-
 
 
   return (
@@ -256,8 +317,8 @@ export default function AddBaby() {
 
           <TouchableOpacity style={gs.profileImageContainer} onPress={() => setImageModalVisible(true)}>
             <Image
-              source={imageBase64 
-                ? { uri: imageBase64 } 
+              source={imageBase64
+                ? { uri: imageBase64 }
                 : require("../../../assets/avatar/avatar1.png")}
               style={gs.profileImage}
             />
@@ -266,8 +327,7 @@ export default function AddBaby() {
           <UploadImageModal
             visible={imageModalVisible}
             onClose={() => setImageModalVisible(false)}
-            onCameraPress={uploadImage}
-            onGalleryPress={() => uploadImage("gallery")}
+            onGalleryPress={() => uploadImage()}
             onDeletePress={deleteImage}
           />
 

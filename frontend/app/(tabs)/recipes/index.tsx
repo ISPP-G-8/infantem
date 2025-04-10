@@ -81,9 +81,8 @@ export default function Page() {
   };
 
   const fetchUserRecipes = async (searchQuery?: string): Promise<boolean> => {
-
-    const url = `${apiUrl}/api/v1/recipes?page=${userPage-1}${searchQuery? `&name=${searchQuery}` : ''}`;
-
+    const url = `${apiUrl}/api/v1/recipes?page=${userPage - 1}${searchQuery ? `&name=${searchQuery}` : ''}`;
+  
     try {
       const response = await fetch(url, {
         method: 'GET',
@@ -91,20 +90,44 @@ export default function Page() {
           'Authorization': `Bearer ${token}`,
         },
       });
-
+  
       if (!response.ok)
         throw new Error("Error fetching recipes");
-
+  
       const recipesData = await response.json();
-      setUserRecipes(recipesData.content);
+  
+      // Convertir las imágenes de cada receta a base64
+      const recipesWithBase64Photos = recipesData.content.map(recipe => {
+        if (recipe.recipePhoto) {
+          if (typeof recipe.recipePhoto === 'string') {
+            recipe.recipePhoto = recipe.recipePhoto.startsWith('data:image')
+              ? recipe.recipePhoto
+              : `data:image/jpeg;base64,${recipe.recipePhoto}`;
+          } else if (Array.isArray(recipe.recipePhoto)) {
+            const bytes = new Uint8Array(recipe.recipePhoto);
+            let binary = '';
+            for (let i = 0; i < bytes.byteLength; i++) {
+              binary += String.fromCharCode(bytes[i]);
+            }
+            const base64 = btoa(binary);
+            recipe.recipePhoto = `data:image/jpeg;base64,${base64}`;
+          }
+        }
+        return recipe;
+      });
+  
+      // Guardamos en el estado las recetas ya procesadas
+      setUserRecipes(recipesWithBase64Photos);
+  
       setUserTotalPages(recipesData.totalPages);
-      return true
-
+      return true;
+  
     } catch (error) {
       console.error('Error fetching user recipes: ', error);
       return false;
     }
   };
+  
 
   return (
 
@@ -342,7 +365,9 @@ export default function Page() {
                         marginBottom: 30,
                       }}>
                       <Image
-                        source={require("frontend/assets/adaptive-icon.png")}
+                        source={userRecipes[index].recipePhoto 
+                          ? { uri: userRecipes[index].recipePhoto } 
+                          : require("../../../assets/avatar/avatar1.png")}
                         style={{ width: "100%", height: 150 }}
                         resizeMode="cover"
                       />

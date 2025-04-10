@@ -44,7 +44,6 @@ public class Recipe {
     @Column(nullable = true)
     private String description;
 
-    @Column(nullable = true)
     @Lob
     private byte[] recipePhoto;
 
