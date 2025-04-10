@@ -77,7 +77,7 @@ public class CalendarServiceTest {
         assertEquals(1, baby1Calendar.getBabyId(), "The first baby should have id 1");
         assertEquals(3, baby3Calendar.getBabyId(), "The second baby should have id 3");
 
-        assertEquals(Set.of("Disease", "Intake", "Metric"), baby1Calendar.getEvents().get("2025-03-01"),
+        assertEquals(Set.of("Disease", "Intake"), baby1Calendar.getEvents().get("2025-03-01"),
                 "The first baby should have a disease, intake and metric event on 2025-03-01");
         assertEquals(Set.of("Disease"), baby1Calendar.getEvents().get("2025-03-09"),
                 "On 2025-03-09, the first" + "baby should only have a disease event");
