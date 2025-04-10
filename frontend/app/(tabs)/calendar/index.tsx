@@ -266,7 +266,7 @@ const CalendarTab = () => {
             }}
             onPress={navigateToBabyTab} // Llama a la función de navegación
           >
-            <Text style={{ color: "#fff", fontWeight: "bold" }}>Añadir metricas de tamaños</Text>
+            <Text style={{ color: "#fff", fontWeight: "bold" }}>Tus metricas de tamaños</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
@@ -281,7 +281,7 @@ const CalendarTab = () => {
               navigation.navigate("addSleep"); // Navegar a la pestaña Sleep con la fecha seleccionada
             }}
           >
-            <Text style={{ color: "#fff", fontWeight: "bold" }}>Añadir sueños</Text>
+            <Text style={{ color: "#fff", fontWeight: "bold" }}>Tus sueños</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
@@ -296,7 +296,7 @@ const CalendarTab = () => {
               navigation.navigate("addDisease"); // Reemplaza con la función correspondiente
             }}
           >
-            <Text style={{ color: "#fff", fontWeight: "bold" }}>Añadir enfermedades</Text>
+            <Text style={{ color: "#fff", fontWeight: "bold" }}>Tus enfermedades</Text>
           </TouchableOpacity>
           <TouchableOpacity
               style={{
@@ -311,7 +311,22 @@ const CalendarTab = () => {
                 navigation.navigate("addVaccine", { selectedDate });
               }}
             >
-              <Text style={{ color: "#fff", fontWeight: "bold" }}>Añadir vacunas</Text>
+              <Text style={{ color: "#fff", fontWeight: "bold" }}>Tus vacunas</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+              style={{
+                backgroundColor: "#00adf5",
+                padding: 10,
+                borderRadius: 5,
+                alignItems: "center",
+                marginLeft: 5,
+                marginTop: 5,
+              }}
+              onPress={() => {
+                navigation.navigate("intakes");
+              }}
+            >
+              <Text style={{ color: "#fff", fontWeight: "bold" }}>Tus ingestas</Text>
           </TouchableOpacity>
         </View>
         <Calendar

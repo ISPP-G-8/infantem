@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.isppG8.infantem.infantem.user.User;
+import com.isppG8.infantem.infantem.intake.dto.IntakeQueryRewriter;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -21,4 +22,8 @@ public interface IntakeRepository extends JpaRepository<Intake, Long> {
 
     @Query("SELECT i FROM Intake i WHERE i.baby.id IN (SELECT b.id FROM Baby b WHERE :user MEMBER OF b.users)")
     List<Intake> findAllByUser(@Param("user") User user);
+
+    @Query(value = "SELECT i FROM Intake i WHERE i.baby.id = :babyId ORDER BY i.date",
+            queryRewriter = IntakeQueryRewriter.class)
+    Intake getLastIntake(Integer babyId);
 }

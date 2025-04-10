@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.isppG8.infantem.infantem.baby.dto.BabyDTO;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
+import com.isppG8.infantem.infantem.metric.MetricService;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -38,6 +39,11 @@ public class BabyControllerTest {
         @Bean
         public BabyService babyService() {
             return Mockito.mock(BabyService.class);
+        }
+
+        @Bean
+        public MetricService metricService() {
+            return Mockito.mock(MetricService.class);
         }
     }
 

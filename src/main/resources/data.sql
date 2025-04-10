@@ -1,5 +1,5 @@
 -- Inserción de roles
-INSERT INTO authorities (id, authority) VALUES (1, 'user'), (2, 'admin');
+INSERT INTO authorities (id, authority) VALUES (1, 'user'), (2, 'admin'),(3,'premium');
 
 -- Inserción de usuarios con contraseñas encriptadas
 -- La contraseña que se ha codificado es: user
@@ -239,3 +239,6 @@ INSERT INTO product (title, description, image_url, shop_url) VALUES
   'https://www.amazon.es/Lictin-Babero-Mangas-Impermeable-Ajustable/dp/B0BZVLJGQ9'
 );
 
+-- Inserción preguntas
+INSERT INTO question (id,answer,question,intake_id,baby_id) VALUES
+(1,1,1,1,1);
