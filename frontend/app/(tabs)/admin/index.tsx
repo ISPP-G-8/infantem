@@ -4,7 +4,6 @@ import { Recipe, User } from "../../../types";
 import { View, Text, ScrollView } from "react-native";
 import { FlatList, Button, TouchableOpacity } from "react-native";
 import { router } from "expo-router";
-import { useAdmin } from "../../../context/AdminContext";
 
 export default function Admin() {
   const [users, setUsers] = useState<User[]>([]);
@@ -15,8 +14,7 @@ export default function Admin() {
   const itemsPerPage = 10;
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
-  const { token } = useAuth();
-  const { setUserToModify, setRecipeToModify } = useAdmin();
+  const { token, setUserToModify, setRecipeToModify } = useAuth();
 
   const gs = require("../../../static/styles/globalStyles");
 
@@ -120,7 +118,7 @@ export default function Admin() {
 
   const handleEditRecipe = (recipe: Recipe) => {
     setRecipeToModify(recipe);
-    router.push(`/admin/showrecipe`);
+    router.push("/admin/showrecipe");
   };
 
   return (

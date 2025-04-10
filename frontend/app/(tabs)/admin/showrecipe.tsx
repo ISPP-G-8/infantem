@@ -25,8 +25,11 @@ export default function RecipeDetails() {
 
   const gs = require("../../../static/styles/globalStyles");
 
-  const { token, user } = useAuth();
-  const { recipeToModify, setRecipeToModify } = useAdmin();
+  const { token, recipeToModify, setRecipeToModify } = useAuth();
+
+  useEffect(() => {
+    console.log("recipeToModify", recipeToModify);
+  }, []);
 
   const handleEditRecipe = () => {
     setIsEditing(true);

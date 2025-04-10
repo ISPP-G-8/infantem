@@ -1,13 +1,17 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { router } from "expo-router";
 import { getToken, storeToken, removeToken } from "../utils/jwtStorage";
-import { User, AuthContextType } from "../types";
+import { User, AuthContextType, Recipe } from "../types";
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
   isLoading: true,
   isAuthenticated: false,
   token: null,
+  userToModify: null,
+  recipeToModify: null,
+  setUserToModify: () => {},
+  setRecipeToModify: () => {},
   setUser: () => {},
   updateToken: async () => {},
   signOut: async () => {},
@@ -19,6 +23,8 @@ export const useAuth = () => useContext(AuthContext);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [userToModify, setUserToModify] = useState<User | null>(null);
+  const [recipeToModify, setRecipeToModify] = useState<Recipe | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [token, setToken] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -112,6 +118,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     user,
     isLoading,
     isAuthenticated,
+    userToModify,
+    recipeToModify,
+    setUserToModify,
+    setRecipeToModify,
     setUser,
     token,
     signOut,
