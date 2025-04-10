@@ -13,17 +13,22 @@ import com.stripe.param.PaymentMethodListParams;
 import com.stripe.param.SubscriptionCreateParams;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.isppG8.infantem.infantem.auth.Authorities;
 import com.isppG8.infantem.infantem.auth.AuthoritiesService;
 import com.isppG8.infantem.infantem.config.StripeConfig;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserService;
+import com.isppG8.infantem.infantem.user.dto.UserDTO;
 import com.stripe.model.checkout.Session;
 import com.stripe.exception.StripeException;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -53,16 +58,12 @@ public class SubscriptionInfantemService {
 
     @Transactional
     public void activateSubscription(User user, String subscriptionId) {
-        Optional<SubscriptionInfantem> subOpt = subscriptionInfantemRepository.findByUser(user);
-
-        if (subOpt.isPresent()) {
-            userService.upgradeToPremium(user);
-
-            SubscriptionInfantem subscription = subOpt.get();
-            subscription.setStripeSubscriptionId(subscriptionId);
-            subscription.setActive(true);
-            subscriptionInfantemRepository.save(subscription);
-        }
+        SubscriptionInfantem subscription = subscriptionInfantemRepository.findByUser(user)
+                .orElseThrow(() -> new ResourceNotFoundException("Suscripción no encontrada"));
+        userService.upgradeToPremium(user);
+        subscription.setStripeSubscriptionId(subscriptionId);
+        subscription.setActive(true);
+        subscriptionInfantemRepository.save(subscription);
     }
 
     @Transactional
@@ -72,7 +73,8 @@ public class SubscriptionInfantemService {
         if (subOpt.isPresent()) {
             Authorities authorities = authoritiesService.findByAuthority("user");
             user.setAuthorities(authorities);
-            userService.updateUser((long) user.getId(), user);
+            UserDTO userDTO = new UserDTO(user);
+            userService.updateUser((long) user.getId(), userDTO);
 
             SubscriptionInfantem subscription = subOpt.get();
             subscription.setStripeSubscriptionId(subscriptionId);
@@ -109,6 +111,7 @@ public class SubscriptionInfantemService {
         // Crear la suscripción en Stripe
         Subscription stripeSubscription = Subscription.create(params);
         User user = userService.getUserById(userId);
+        userService.upgradeToPremium(user);
 
         // Crear la suscripción en la base de datos
         SubscriptionInfantem newSubscription = new SubscriptionInfantem();
@@ -152,23 +155,44 @@ public class SubscriptionInfantemService {
     @Transactional
     public SubscriptionInfantem cancelSubscription(String subscriptionId) {
         try {
-            // 1. Cancelar en Stripe
+            // 1. Cancelar en Stripe (programar cancelación al final del periodo actual)
             Subscription stripeSubscription = Subscription.retrieve(subscriptionId);
-            stripeSubscription.cancel();
+            stripeSubscription = stripeSubscription.update(Map.of("cancel_at_period_end", true));
+
+            // Obtener la fecha exacta de finalización del periodo actual
+            Long periodEndUnix = stripeSubscription.getCurrentPeriodEnd(); // en segundos
+            LocalDate endDate = Instant.ofEpochSecond(periodEndUnix).atZone(ZoneId.systemDefault()).toLocalDate();
 
             // 2. Actualizar en base de datos local
             SubscriptionInfantem localSubscription = subscriptionInfantemRepository
                     .findByStripeSubscriptionId(subscriptionId)
                     .orElseThrow(() -> new ResourceNotFoundException("Suscripción no encontrada"));
 
-            localSubscription.setActive(false); // ← Aquí establecemos active a false
-            localSubscription.setEndDate(LocalDateTime.now().toLocalDate());
+            Authorities authorities = authoritiesService.findByAuthority("user");
+            User user = userService.getUserById((long) localSubscription.getUser().getId());
+            if (user == null) {
+                throw new NullPointerException("User cannot be null");
+            }
+            user.setAuthorities(authorities);
+            UserDTO userDTO = new UserDTO(user);
+            userService.updateUser((long) user.getId(), userDTO);
+
+            localSubscription.setActive(false); // Marcar como inactiva
+            localSubscription.setEndDate(endDate); // Guardar fecha real de finalización
 
             return subscriptionInfantemRepository.save(localSubscription);
 
         } catch (StripeException e) {
             throw new RuntimeException("Error al cancelar suscripción en Stripe: " + e.getMessage());
         }
+    }
+
+    @Transactional
+    public void deleteExpiredSubscriptions() {
+        LocalDate today = LocalDate.now();
+        List<SubscriptionInfantem> expiredSubscriptions = subscriptionInfantemRepository.findByEndDateBefore(today);
+
+        subscriptionInfantemRepository.deleteAll(expiredSubscriptions);
     }
 
     // 6. Conseguir usuarios por email
