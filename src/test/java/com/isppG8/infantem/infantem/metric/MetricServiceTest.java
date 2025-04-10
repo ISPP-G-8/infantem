@@ -70,7 +70,6 @@ public class MetricServiceTest {
     public void setUp() {
         metricRepository.deleteAll();
         // Reinicia la secuencia de la columna id en la tabla metric_table
-        entityManager.createNativeQuery("ALTER TABLE metric_table ALTER COLUMN id RESTART WITH 1").executeUpdate();
 
         currentUser = new User();
         currentUser.setId(1);
