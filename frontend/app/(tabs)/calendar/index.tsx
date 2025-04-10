@@ -504,7 +504,7 @@ const CalendarTab = () => {
           Calendario
         </Text>
         <Text style={[gs.bodyText, { textAlign: "center", color: "#1565C0" }]}>
-          Selecciona una fecha para ver información{'\n'}Las métricas de sueño, enfermedades y vacunas solo están disponibles para el plan Premium.
+          Selecciona una fecha para ver información
         </Text>
         {loading ? (
           <ActivityIndicator size="large" color="#00adf5" />
