@@ -1,13 +1,13 @@
 # PROMPTS
 
-![Portada](../../../frontend/assets/Documentos/Infantem.png)
+![Portada](../../images/Infantem.png)
 
-**Fecha:** 18/02/2025
-**Grupo 8:** Infantem
-**Sprint 1**
+
+**Fecha:** 31/03/2025  
+**Grupo 8:** Infantem  
+**Sprint 3**
 
 ## Integrantes del Grupo
-
 <div style="display: flex; justify-content: space-between; gap: 2px;">
   <div>
     <ul style="padding-left: 0; list-style: none;">
@@ -23,7 +23,7 @@
     </ul>
   </div>
 
-<div>
+  <div>
     <ul style="padding-left: 0; list-style: none;">
     <li>Javier Ulecia García</li>
       <li>José García de Tejada Delgado</li>
@@ -39,15 +39,15 @@
 
 ---
 
-## Índice
-
-- [Colaboradores del documento](#colaboradores-del-documento)
-- [Prompts de cada miembro](#prompts-de-cada-miembro)
-
 ## Colaboradores del documento
 
-- Luis Giraldo
+- Luis Giraldo  
   - Creó el documento en md.
+  - Actualizó el documento al sprint 3.
+
+## Índice
+- [Prompts de cada miembro](#prompts-de-cada-miembro)
+
 
 ## Prompts de cada miembro
 
