@@ -76,6 +76,10 @@ export default function Signin() {
 
           {errorMessage ? <Text style={{ color: "red", marginVertical: 10, textAlign: "center" }}>{errorMessage}</Text> : null}
 
+          <Link href={"/recover"} style={{ marginTop: 10, textAlign: "center" }}>
+            <Text style={{ color: "#007AFF", fontSize: 14 }}>Recuperar Contraseña</Text>
+          </Link>
+
           <Link href={"/signup"} style={{ marginTop: 10, textAlign: "center" }}>
             <Text style={{ color: "#007AFF", fontSize: 14 }}>¿No tienes cuenta? ¡Regístrate!</Text>
           </Link>

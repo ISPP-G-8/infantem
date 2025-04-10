@@ -139,7 +139,7 @@ public class RecipeController {
     }
 
     @GetMapping("/visible")
-    public ResponseEntity<List<RecipeDTO>> getVisibleRecipesByUserId(
+    public ResponseEntity<Page<RecipeDTO>> getVisibleRecipesByUserId(
             @RequestParam(value = "name", required = false) String name,
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size) {
@@ -154,7 +154,8 @@ public class RecipeController {
         int start = (int) pageable.getOffset();
         int end = Math.min((start + pageable.getPageSize()), recipes.size());
         Page<Recipe> paginatedRecipes = new PageImpl<>(recipes.subList(start, end), pageable, recipes.size());
-        return ResponseEntity.ok(paginatedRecipes.map(RecipeDTO::new).toList());
+
+        return ResponseEntity.ok(paginatedRecipes.map(RecipeDTO::new));
     }
 
     @Operation(summary = "Obtener recetas recomendadas por ID de bebé",
@@ -164,16 +165,6 @@ public class RecipeController {
                             schema = @Schema(implementation = RecipeDTO.class))) @GetMapping("/recommended/{babyId}")
     public ResponseEntity<List<RecipeDTO>> getRecommendedRecipes(@PathVariable Integer babyId) {
         List<Recipe> recipes = recipeService.getRecommendedRecipes(babyId);
-        return ResponseEntity.ok(recipes.stream().map(RecipeDTO::new).toList());
-    }
-
-    @Operation(summary = "Obtener recetas recomendadas por edad",
-            description = "Recupera las recetas recomendadas para un bebé según su edad.") @ApiResponse(
-                    responseCode = "200", description = "Recetas recomendadas por edad encontradas",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = RecipeDTO.class))) @GetMapping("/recommended/age/{age}")
-    public ResponseEntity<List<RecipeDTO>> getRecommendedRecipesByAge(@PathVariable Integer age) {
-        List<Recipe> recipes = recipeService.getRecommendedRecipesByAge(age);
         return ResponseEntity.ok(recipes.stream().map(RecipeDTO::new).toList());
     }
 

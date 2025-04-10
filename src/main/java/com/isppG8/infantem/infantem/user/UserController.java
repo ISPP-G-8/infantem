@@ -16,6 +16,7 @@ import com.isppG8.infantem.infantem.auth.jwt.JwtUtils;
 import com.isppG8.infantem.infantem.auth.payload.response.MessageResponse;
 
 import com.isppG8.infantem.infantem.user.dto.UserDTO;
+import com.isppG8.infantem.infantem.user.dto.UserUpdatedDTO;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -82,7 +83,7 @@ public class UserController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = UserDTO.class))) @ApiResponse(responseCode = "400",
                                     description = "El usuario no es el tuyo") @PutMapping("/{id}")
-    public ResponseEntity<Object> updateUser(@PathVariable Long id, @Valid @RequestBody User userDetails,
+    public ResponseEntity<Object> updateUser(@PathVariable Long id, @Valid @RequestBody UserDTO userDetails,
             @RequestHeader(name = "Authorization") String token) {
 
         String jwtId = jwtUtils.getIdFromJwtToken(token.substring(6));
@@ -90,9 +91,15 @@ public class UserController {
         if (!(jwtId.equals(id.toString()))) {
             return ResponseEntity.badRequest().body(new MessageResponse("Not your user"));
         }
-
+        User newUsernameUser = userService.findByUsername(userDetails.getUsername());
+        if (newUsernameUser != null && !newUsernameUser.getId().toString().equals(jwtId)) {
+            return ResponseEntity.badRequest().body(new MessageResponse("New username is already taken"));
+        }
         User updatedUser = userService.updateUser(id, userDetails);
-        return ResponseEntity.ok().body(new UserDTO(updatedUser));
+        String jwt = jwtUtils.generateTokenFromUsername(updatedUser.getUsername(), updatedUser.getAuthorities(),
+                updatedUser.getId());
+
+        return ResponseEntity.ok().body(new UserUpdatedDTO(updatedUser, jwt));
 
     }
 
