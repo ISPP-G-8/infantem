@@ -3,6 +3,11 @@ import { ActivityIndicator, Modal, TextInput, Alert, ImageBackground } from "rea
 import { Text, View, TouchableOpacity, ScrollView, Image, FlatList } from "react-native";
 import { Link, useRouter } from "expo-router";
 import { useAuth } from "../../../context/AuthContext";
+import { jwtDecode } from "jwt-decode";
+import UploadImageModal from "../../../components/UploadImageModal";
+import * as ImagePicker from 'expo-image-picker';
+import { Platform } from 'react-native';
+
 
 const avatarOptions = [
   require("../../../assets/avatar/avatar1.png"),
@@ -10,7 +15,7 @@ const avatarOptions = [
 ];
 
 export default function Account() {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [avatarModalVisible, setAvatarModalVisible] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const router = useRouter();
 
@@ -23,11 +28,15 @@ export default function Account() {
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const gs = require("../../../static/styles/globalStyles");
-  const { isLoading, user, token, updateToken, setUser, signOut } = useAuth();
+  const { isLoading, user, token, setUser, updateToken, checkAuth, signOut } = useAuth();
+  const [image, setImage] = useState<any>(null);
+  const [imageBase64, setImageBase64] = useState<any>(null);
+
+  const FormData = global.FormData;
+
 
   useEffect(() => {
-    if (!user)
-      return;
+    if (!user || !token) return;
 
     const fetchSubscription = async () => {
       try {
@@ -53,7 +62,52 @@ export default function Account() {
     };
 
     fetchSubscription();
-  }, [user, token]);
+    
+    // Si el usuario tiene una foto de perfil, obtenerla y mostrarla
+    fetchProfilePhoto();
+  }, []);
+  
+  // Función para obtener la foto de perfil del usuario
+  const fetchProfilePhoto = async () => {
+    if (!user || !token) return;
+    
+    try {
+      const response = await fetch(`${apiUrl}/api/v1/users/${user.id}`, {
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error("Error al obtener datos del usuario");
+      }
+      
+      const userData = await response.json();
+    
+      // Si hay foto de perfil, convertirla a base64 para mostrarla
+      if (userData.profilePhoto) {
+        // Si la respuesta ya viene en formato base64
+        if (typeof userData.profilePhoto === 'string') {
+          setImageBase64(userData.profilePhoto.startsWith('data:image') 
+            ? userData.profilePhoto 
+            : `data:image/jpeg;base64,${userData.profilePhoto}`);
+        } 
+        // Si viene como array de bytes, convertirlo a base64
+        else if (Array.isArray(userData.profilePhoto)) {
+          const bytes = new Uint8Array(userData.profilePhoto);
+          let binary = '';
+          for (let i = 0; i < bytes.byteLength; i++) {
+            binary += String.fromCharCode(bytes[i]);
+          }
+          const base64 = btoa(binary);
+          setImageBase64(`data:image/jpeg;base64,${base64}`);
+        }
+      }
+    } catch (error) {
+      console.error("Error al obtener la foto de perfil:", error);
+    }
+  };
 
   const handleEditProfile = () => {
     setIsEditing(true);
@@ -69,52 +123,231 @@ export default function Account() {
       return;
   
     try {
+      // Primero enviemos solo los datos del usuario en JSON
+      console.log(`Enviando petición a ${apiUrl}/api/v1/users/${user.id}`);
       const response = await fetch(`${apiUrl}/api/v1/users/${user.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}` 
+          "Authorization": `Bearer ${token}`
         },
-        body: JSON.stringify(user)
+        body: JSON.stringify({
+          id: user.id,
+          name: user.name,
+          surname: user.surname,
+          username: user.username,
+          email: user.email
+        })
       });
-  
+      
+      // Log para verificar la respuesta
+      console.log("Respuesta status:", response.status);
+      
       if (!response.ok) {
-        const err = await response.json();
-        console.error("Error del servidor:", err);
-        throw new Error(JSON.stringify(err));
+        const responseText = await response.text();
+        console.error("Error del servidor (texto):", responseText);
+        
+        try {
+          const err = JSON.parse(responseText);
+          console.error("Error del servidor (JSON):", err);
+          throw new Error(JSON.stringify(err));
+        } catch (parseError) {
+          throw new Error(responseText || "Error desconocido");
+        }
       }
 
       const data = await response.json();
       await updateToken(data.jwt);
+      
+      // Si se ha seleccionado una imagen, enviarla en una petición separada
+      if (image) {
+        await uploadProfilePhoto();
+      }
 
       setIsEditing(false);
       Alert.alert("Perfil actualizado", "Los cambios han sido guardados correctamente");
   
     } catch (error: any) {
-      console.error("Error al guardar cambios:", error);
+      console.error("Error completo:", error);
       Alert.alert("Error", `No se pudo guardar los cambios: ${error.message}`);
     }
   };
-
-  const handleAvatarSelection = (avatar: any) => {
-    if (user && isEditing) {
-      const avatarUri = typeof avatar === "number"
-        ? Image.resolveAssetSource(avatar).uri
-        : avatar;
-
-      setUser({ ...user, profilePhotoRoute: avatarUri });
-      setModalVisible(false);
+  
+  // Función para subir la foto de perfil
+  const uploadProfilePhoto = async () => {
+    if (!user || !token) return;
+    
+    try {
+      const formData = new FormData();
+      
+      if (image) {
+        // Si tenemos un blob
+        // @ts-ignore
+        formData.append('profilePhoto', image);
+        console.log("Subiendo imagen como blob");
+      } 
+      else if (imageBase64) {
+        // Preparar la imagen para subirla
+        let imageUri = imageBase64;
+        let imageName = 'profile.jpg';
+        let imageType = 'image/jpeg';
+        
+        // Verificar formato base64
+        if (!imageUri.startsWith("data:image/png")) {
+          alert("Por favor, selecciona una imagen en formato PNG.");
+          return;
+        }
+        
+        // @ts-ignore - React Native maneja FormData diferente
+        formData.append('profilePhoto', {
+          uri: imageUri,
+          type: imageType,
+          name: imageName
+        });
+        
+        console.log("Subiendo imagen desde base64");
+      }
+      
+      // Usar el nuevo endpoint específico para la foto de perfil
+      console.log(`Enviando foto al endpoint ${apiUrl}/api/v1/users/${user.id}/profile-photo`);
+      const response = await fetch(`${apiUrl}/api/v1/users/${user.id}/profile-photo`, {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${token}`
+        },
+        body: formData
+      });
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Error al subir la foto:", errorText);
+        throw new Error(errorText);
+      }
+      
+      const photoData = await response.json();
+      console.log("Foto subida exitosamente:", photoData);
+      
+      // Actualizar el token con el nuevo
+      if (photoData.jwt) {
+        await updateToken(photoData.jwt);
+      }
+      
+      return photoData;
+    } catch (error) {
+      console.error("Error al subir la foto de perfil:", error);
+      // No lanzamos error para que no afecte al flujo principal
     }
   };
 
-  if (isLoading) {
-    return (
-      <View style={gs.loadingContainer}>
-        <ActivityIndicator size="large" color="#00446a" />
-        <Text style={gs.loadingText}>Cargando perfil...</Text>
-      </View>
-    );
+  // IMAGE UPLOAD
+
+  const validImage = (uri) => {
+    // if (!uri) return false;
+
+    // const lowerUri = uri.toLowerCase();
+    // return lowerUri.endsWith('.jpg') ||
+    //   lowerUri.endsWith('.jpeg') ||
+    //   lowerUri.endsWith('.png');
+    return true;
+  };
+
+  function base64toBlob(base64Data, contentType = 'image/png') {
+    const byteCharacters = atob(base64Data);
+    const byteArrays = [];
+  
+    for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+      const slice = byteCharacters.slice(offset, offset + 512);
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+  
+    return new Blob(byteArrays, { type: contentType });
   }
+
+  const uploadImage = async () => {
+    try {
+      let result;
+      const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (!permissionResult.granted) {
+        alert("Permiso denegado para acceder a la galería.");
+        return;
+      }
+  
+      result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 1,
+        base64: false, // da igual, web da base64 como uri
+      });
+  
+      if (!result.canceled) {
+        let imageUri = result.assets[0].uri;
+        
+        // NUEVO: Validar que sea PNG
+        if (!imageUri.startsWith("data:image/png")) {
+          alert("Por favor, selecciona una imagen en formato PNG.");
+          return;
+        }
+        
+        if (imageUri.startsWith('data:image')) {
+          const base64Data = imageUri.split(',')[1];
+  
+          const blob = base64toBlob(base64Data);
+          console.log("Blob creado:", blob);
+  
+          saveImage(blob);
+        } else {
+          console.log("Imagen URI válida:", imageUri);
+          saveImage(imageUri);
+        }
+      } else if (result === undefined) {
+        console.log("result undefined");
+      }
+    } catch (err) {
+      alert('Error al abrir la galería: ' + err.message);
+      setAvatarModalVisible(false);
+    }
+  };
+  
+  
+
+  const deleteImage = () => {
+    try {
+      saveImage(null);
+      setAvatarModalVisible(false);
+    } catch ({ message }) {
+      console.log(message);
+      setAvatarModalVisible(false);
+    }
+  }
+
+  const saveImage = async (image) => {
+    try {
+      setImage(image);
+      const base64Image = await blobToBase64(image);
+      setImageBase64(base64Image);
+      console.log("Imagen base64:", base64Image);
+      // sendToBackend(image);
+      setAvatarModalVisible(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const blobToBase64 = (blob) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  };
+
 
   return (
     <ImageBackground
@@ -122,10 +355,10 @@ export default function Account() {
       imageStyle={{ resizeMode: "cover", opacity: 0.9 }}
     >
       <ScrollView contentContainerStyle={[gs.container, { paddingTop: 20, paddingBottom: 100, backgroundColor: "transparent" }]}>
-        <Text 
-         style={{ color: "#1565C0", fontSize: 36, fontWeight: "bold", textAlign: "center", marginBottom: 30 }}>
-        Perfil</Text>
-  
+        <Text
+          style={{ color: "#1565C0", fontSize: 36, fontWeight: "bold", textAlign: "center", marginBottom: 30 }}>
+          Perfil</Text>
+
 
         {user && (subscription ? ( (subscription && subscription.active ? (
           <Link href={"/account/premiumplan"} style={[gs.mainButton, { marginVertical: 10, textAlign: "center", width: "20%", backgroundColor: "red" }]}>
@@ -138,14 +371,23 @@ export default function Account() {
             <Text style={[gs.mainButtonText, { fontSize: 20 }]}>¡HAZTE PREMIUM!</Text>
           </Link>
         ))}
-        
-        <TouchableOpacity style={gs.profileImageContainer} onPress={() => isEditing && setModalVisible(true)} disabled={!isEditing}>
-           {/* <Image source={user?.profilePhotoRoute ? { uri: user.profilePhotoRoute } : avatarOptions[0]} style={gs.profileImage} /> */}
+
+
+        <TouchableOpacity style={gs.profileImageContainer} onPress={() => isEditing && setAvatarModalVisible(true)} disabled={!isEditing}>
           <Image
-            source={require("../../../static/images/avatar2.png")}
+            source={imageBase64 
+              ? { uri: imageBase64 } 
+              : require("../../../assets/avatar/avatar1.png")}
             style={gs.profileImage}
           />
         </TouchableOpacity>
+
+        <UploadImageModal
+          visible={avatarModalVisible}
+          onClose={() => setAvatarModalVisible(false)}
+          onGalleryPress={() => uploadImage()}
+          onDeletePress={deleteImage}
+        />
 
         {user && (
           <>
@@ -186,46 +428,6 @@ export default function Account() {
         </View>
 
 
-        <Modal visible={modalVisible} animationType="fade" transparent={true}>
-          <View style={[gs.modalOverlay,{marginTop: 110,width: "80%",marginHorizontal: "18%"}]}>
-            <View style={[gs.modalContent,{ alignItems: "center", justifyContent: "center" }]}>
-              <Text style={[gs.modalTitle,{color: "#1565C0"}]}>Selecciona tu avatar</Text>
-              <FlatList
-                data={avatarOptions}
-                keyExtractor={(item, index) => index.toString()}
-                numColumns={2}
-                renderItem={({ item }) => (
-                  <TouchableOpacity onPress={() => handleAvatarSelection(item)}>
-                    <Image source={item} style={gs.avatarOption} />
-                  </TouchableOpacity>
-                )}
-              />
-            <TouchableOpacity
-                style={{
-                backgroundColor: "#1565C0",
-                paddingVertical: 10,
-                paddingHorizontal: 20,
-                borderRadius: 8,
-                alignItems: "center",
-                alignSelf: "center",
-                marginTop: 20,
-                }}
-                  onPress={() => setModalVisible(false)}
-                  >
-              <Text
-                style={{
-                color: "white",
-                fontSize: 12,
-                fontFamily: "Loubag-Medium", // Elimínalo si no usas fuente personalizada
-              }}
-              >
-              Cerrar
-              </Text>
-            </TouchableOpacity>
-
-            </View>
-          </View>
-        </Modal>
       </ScrollView>
     </ImageBackground>
   );

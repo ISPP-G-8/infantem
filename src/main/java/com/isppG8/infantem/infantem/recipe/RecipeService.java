@@ -12,6 +12,7 @@ import com.isppG8.infantem.infantem.exceptions.ResourceNotOwnedException;
 import com.isppG8.infantem.infantem.user.UserService;
 import java.time.LocalDate;
 import java.time.Period;
+import com.isppG8.infantem.infantem.recipe.dto.RecipeDTO;
 
 @Service
 public class RecipeService {
@@ -27,7 +28,7 @@ public class RecipeService {
         this.babyService = babyService;
     }
 
-    private Integer getCurrentUserId() {
+    public Integer getCurrentUserId() {
         return this.userService.findCurrentUserId();
     }
 
@@ -71,7 +72,7 @@ public class RecipeService {
     }
 
     @Transactional
-    public Recipe updateRecipe(Long recipeId, Recipe recipeDetails, Integer userId) {
+    public Recipe updateRecipe(Long recipeId, RecipeDTO recipeDetails, Integer userId) {
         Recipe recipe = this.recipeRepository.findById(recipeId)
                 .orElseThrow(() -> new ResourceNotFoundException("Recipe", "id", recipeId));
 
@@ -83,6 +84,7 @@ public class RecipeService {
         recipe.setName(recipeDetails.getName());
         recipe.setDescription(recipeDetails.getDescription());
         recipe.setIngredients(recipeDetails.getIngredients());
+        recipe.setRecipePhoto(recipeDetails.getRecipePhoto());
         recipe.setMinRecommendedAge(recipeDetails.getMinRecommendedAge());
         recipe.setMaxRecommendedAge(recipeDetails.getMaxRecommendedAge());
         recipe.setElaboration(recipeDetails.getElaboration());
