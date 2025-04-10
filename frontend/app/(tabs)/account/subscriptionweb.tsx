@@ -15,7 +15,7 @@ export default function SubscriptionWeb() {
     const [jwt, setJwt] = useState<string | "">("");
     const apiUrl = process.env.EXPO_PUBLIC_API_URL;
     const [accepted, setAccepted] = useState(false);
-    const [priceId, setPriceId] = useState("price_1R4hyZRD1fD8EiuBaXzXdw9p");
+    const [priceId, setPriceId] = useState("price_1R7NfNImCCGaknJ7116zw3Vb");
     const [userId, setUserId] = useState<number | null>(null);
 
     useEffect(() => {
@@ -137,7 +137,7 @@ export default function SubscriptionWeb() {
             ) : (
             <>
                 <View>
-                    <Text>Para registrar tu pago en Stripe antes tendremos qeu asociar tu método de pago a un usuario, para ello, vamos a usar los datos de tu usuario en nuetsra aplicación</Text>
+                    <Text>Para registrar tu pago en Stripe antes tendremos que asociar tu método de pago a un usuario, para ello, vamos a usar los datos de tu usuario en nuestra aplicación</Text>
                     <TouchableOpacity onPress={() => setAccepted(!accepted)} style={{ flexDirection: "row", alignItems: "center", marginVertical: 10 }}>
                         <View style={{
                             width: 20,

@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.isppG8.infantem.infantem.baby.dto.BabyDTO;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
+import com.isppG8.infantem.infantem.metric.MetricService;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -39,6 +40,11 @@ public class BabyControllerTest {
         public BabyService babyService() {
             return Mockito.mock(BabyService.class);
         }
+
+        @Bean
+        public MetricService metricService() {
+            return Mockito.mock(MetricService.class);
+        }
     }
 
     @Autowired
@@ -57,7 +63,7 @@ public class BabyControllerTest {
         baby.setGenre(Genre.MALE);
         baby.setWeight(10.0);
         baby.setHeight(10);
-        baby.setCephalicPerimeter(10);
+        baby.setHeadCircumference(10);
         baby.setFoodPreference("Test food preference");
         return baby;
     }
@@ -70,7 +76,7 @@ public class BabyControllerTest {
         baby.setGenre(Genre.MALE);
         baby.setWeight(10.0);
         baby.setHeight(10);
-        baby.setCephalicPerimeter(10);
+        baby.setHeadCircumference(10);
         baby.setFoodPreference("Test food preference");
         return baby;
     }
@@ -85,6 +91,13 @@ public class BabyControllerTest {
         mockMvc.perform(get("/api/v1/baby").header("Authorization", "Bearer " + token)).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2))).andExpect(jsonPath("$[0].id", is(1)))
                 .andExpect(jsonPath("$[1].id", is(2)));
+    }
+
+    @Test
+    public void TestFindBabies_NoContent() throws Exception {
+        Mockito.when(babyService.findBabiesByUser()).thenReturn(List.of());
+        mockMvc.perform(get("/api/v1/baby").header("Authorization", "Bearer " + token))
+                .andExpect(status().isNoContent());
     }
 
     @Test
@@ -105,7 +118,7 @@ public class BabyControllerTest {
                     "genre": "MALE",
                     "weight": 10.0,
                     "height": 10,
-                    "cephalicPerimeter": 10,
+                    "headCircumference": 10,
                     "foodPreference": "Test food preference"
                 }
                 """;
@@ -126,7 +139,7 @@ public class BabyControllerTest {
                     "genre": "MALE",
                     "weight": 20.0,
                     "height": 10,
-                    "cephalicPerimeter": 10,
+                    "headCircumference": 10,
                     "foodPreference": "Updated food preference"
                 }
                 """;
@@ -177,7 +190,7 @@ public class BabyControllerTest {
                     "genre": "MALE",
                     "weight": -20.0,
                     "height": -10,
-                    "cephalicPerimeter": 10,
+                    "headCircumference": 10,
                     "foodPreference": "Updated food preference",
                     "allergens": [
                         { "id": 1 },

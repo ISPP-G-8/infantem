@@ -2,6 +2,8 @@ package com.isppG8.infantem.infantem.intake.dto;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.isppG8.infantem.infantem.baby.dto.BabyNameDTO;
 import com.isppG8.infantem.infantem.intake.Intake;
 import com.isppG8.infantem.infantem.intake.IntakeSymptom;
 
@@ -20,6 +22,8 @@ public class IntakeDTO {
 
     @NotNull
     @PastOrPresent
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+
     private LocalDateTime date;
 
     @NotNull
@@ -31,15 +35,18 @@ public class IntakeDTO {
 
     private IntakeSymptom IntakeSymptom;
 
+    private BabyNameDTO baby;
+
     public IntakeDTO() {
     }
 
-    public IntakeDTO(Intake Intake) {
-        this.id = Intake.getId();
-        this.date = Intake.getDate();
-        this.quantity = Intake.getQuantity();
-        this.observations = Intake.getObservations();
-        this.IntakeSymptom = Intake.getIntakeSymptom();
+    public IntakeDTO(Intake intake) {
+        this.id = intake.getId();
+        this.date = intake.getDate();
+        this.quantity = intake.getQuantity();
+        this.observations = intake.getObservations();
+        this.IntakeSymptom = intake.getIntakeSymptom();
+        this.baby = new BabyNameDTO(intake.getBaby());
     }
 
 }

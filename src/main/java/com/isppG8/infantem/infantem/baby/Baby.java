@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,7 +21,6 @@ import com.isppG8.infantem.infantem.dream.Dream;
 import com.isppG8.infantem.infantem.intake.Intake;
 import com.isppG8.infantem.infantem.metric.Metric;
 import com.isppG8.infantem.infantem.milestoneCompleted.MilestoneCompleted;
-import com.isppG8.infantem.infantem.nutritionalContribution.NutritionalContribution;
 import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.vaccine.Vaccine;
 
@@ -35,7 +35,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -56,6 +55,7 @@ public class Baby {
     private String name;
 
     @NotNull
+    @PastOrPresent
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate birthDate;
 
@@ -73,16 +73,12 @@ public class Baby {
 
     @NotNull
     @Min(0)
-    private Integer cephalicPerimeter;
+    private Integer headCircumference;
 
     @NotBlank
     private String foodPreference;
 
     // Relaciones
-
-    @OneToOne
-    private NutritionalContribution nutritionalContribution;
-
     @OneToMany(mappedBy = "baby", cascade = CascadeType.ALL)
     private List<Dream> sleep = new ArrayList<>();
 
@@ -105,7 +101,8 @@ public class Baby {
     private List<Allergen> allergen = new ArrayList<>();
 
     @ManyToMany
-    @JoinTable(name = "user_baby", joinColumns = @JoinColumn(name = "baby_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @JoinTable(name = "user_baby", joinColumns = @JoinColumn(name = "baby_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
     @Size(min = 1, max = 2, message = "A baby should have 1 or 2 users")
     private List<User> users = new ArrayList<>();
 }

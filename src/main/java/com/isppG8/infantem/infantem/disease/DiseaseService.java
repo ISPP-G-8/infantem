@@ -62,7 +62,7 @@ public class DiseaseService {
 
     @Transactional
     public void delete(Long id) {
-        if (this.diseaseRepository.existsById(id)) {
+        if (!this.diseaseRepository.existsById(id)) {
             throw new ResourceNotFoundException("Disease", "id", id);
         }
         diseaseRepository.deleteById(id);
@@ -103,5 +103,17 @@ public class DiseaseService {
     @Transactional(readOnly = true)
     public List<DiseaseSummary> getDiseaseSummaryByBabyIdAndDate(Integer babyId, LocalDate day) {
         return diseaseRepository.findDiseaseSummaryByBabyIdAndDate(babyId, day);
+    }
+
+    @Transactional
+    public Disease updateAdmin(Long id, Disease disease) {
+        return diseaseRepository.findById(id).map(existingDisease -> {
+            existingDisease.setName(disease.getName());
+            existingDisease.setStartDate(disease.getStartDate());
+            existingDisease.setEndDate(disease.getEndDate());
+            existingDisease.setSymptoms(disease.getSymptoms());
+            existingDisease.setExtraObservations(disease.getExtraObservations());
+            return diseaseRepository.save(existingDisease);
+        }).orElseThrow(() -> new ResourceNotFoundException("Disease", "id", id));
     }
 }

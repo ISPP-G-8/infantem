@@ -16,11 +16,18 @@ import com.isppG8.infantem.infantem.auth.jwt.JwtUtils;
 import com.isppG8.infantem.infantem.auth.payload.response.MessageResponse;
 
 import com.isppG8.infantem.infantem.user.dto.UserDTO;
+import com.isppG8.infantem.infantem.user.dto.UserUpdatedDTO;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 import java.util.List;
 
+@Tag(name = "Users", description = "Gestión de usuarios")
 @RestController
 @RequestMapping("api/v1/users")
 public class UserController {
@@ -36,14 +43,22 @@ public class UserController {
         this.jwtUtils = jwtUtils;
     }
 
-    @PreAuthorize("hasAuthority('admin')")
-    @GetMapping
+    @Operation(summary = "Obtener todos los usuarios",
+            description = "Recupera la lista de todos los usuarios.") @ApiResponse(responseCode = "200",
+                    description = "Lista de usuarios obtenida exitosamente",
+                    content = @Content(mediaType = "application/json", schema = @Schema(
+                            implementation = UserDTO.class))) @PreAuthorize("hasAuthority('admin')") @GetMapping
     public List<UserDTO> getAllUsers() {
         List<UserDTO> users = this.userService.getAllUsers().stream().map(UserDTO::new).toList();
         return users;
     }
 
-    @GetMapping("/{id}")
+    @Operation(summary = "Obtener un usuario por su ID",
+            description = "Recupera los detalles de un usuario por su ID.") @ApiResponse(responseCode = "200",
+                    description = "Usuario encontrado",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UserDTO.class))) @ApiResponse(responseCode = "400",
+                                    description = "El usuario no es el tuyo o no existe") @GetMapping("/{id}")
     public ResponseEntity<Object> getUserById(@PathVariable Long id,
             @RequestHeader(name = "Authorization") String token) {
 
@@ -62,8 +77,13 @@ public class UserController {
 
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Object> updateUser(@PathVariable Long id, @Valid @RequestBody User userDetails,
+    @Operation(summary = "Actualizar un usuario por su ID",
+            description = "Actualiza la información de un usuario por su ID.") @ApiResponse(responseCode = "200",
+                    description = "Usuario actualizado exitosamente",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UserDTO.class))) @ApiResponse(responseCode = "400",
+                                    description = "El usuario no es el tuyo") @PutMapping("/{id}")
+    public ResponseEntity<Object> updateUser(@PathVariable Long id, @Valid @RequestBody UserDTO userDetails,
             @RequestHeader(name = "Authorization") String token) {
 
         String jwtId = jwtUtils.getIdFromJwtToken(token.substring(6));
@@ -71,13 +91,23 @@ public class UserController {
         if (!(jwtId.equals(id.toString()))) {
             return ResponseEntity.badRequest().body(new MessageResponse("Not your user"));
         }
-
+        User newUsernameUser = userService.findByUsername(userDetails.getUsername());
+        if (newUsernameUser != null && !newUsernameUser.getId().toString().equals(jwtId)) {
+            return ResponseEntity.badRequest().body(new MessageResponse("New username is already taken"));
+        }
         User updatedUser = userService.updateUser(id, userDetails);
-        return ResponseEntity.ok().body(new UserDTO(updatedUser));
+        String jwt = jwtUtils.generateTokenFromUsername(updatedUser.getUsername(), updatedUser.getAuthorities(),
+                updatedUser.getId());
+
+        return ResponseEntity.ok().body(new UserUpdatedDTO(updatedUser, jwt));
 
     }
 
-    @DeleteMapping("/{id}")
+    @Operation(summary = "Eliminar un usuario por su ID", description = "Elimina un usuario por su ID.") @ApiResponse(
+            responseCode = "200", description = "Usuario eliminado exitosamente",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = MessageResponse.class))) @ApiResponse(responseCode = "400",
+                            description = "El usuario no es el tuyo") @DeleteMapping("/{id}")
     public ResponseEntity<MessageResponse> deleteUser(@PathVariable Long id,
             @RequestHeader(name = "Authorization") String token) {
 

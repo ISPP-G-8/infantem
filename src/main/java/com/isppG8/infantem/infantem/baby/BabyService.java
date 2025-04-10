@@ -1,6 +1,5 @@
 package com.isppG8.infantem.infantem.baby;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,14 +55,11 @@ public class BabyService {
         baby.setGenre(babyDTO.getGenre());
         baby.setWeight(babyDTO.getWeight());
         baby.setHeight(babyDTO.getHeight());
-        baby.setCephalicPerimeter(babyDTO.getCephalicPerimeter());
+        baby.setHeadCircumference(babyDTO.getHeadCircumference());
         baby.setFoodPreference(babyDTO.getFoodPreference());
 
         // Añadir el usuario actual
         User currentUser = userService.findCurrentUser();
-        if (baby.getUsers() == null) {
-            baby.setUsers(new ArrayList<>());
-        }
         baby.getUsers().add(currentUser);
 
         return babyRepository.save(baby);
@@ -86,7 +82,7 @@ public class BabyService {
         existingBaby.setGenre(updatedBaby.getGenre());
         existingBaby.setWeight(updatedBaby.getWeight());
         existingBaby.setHeight(updatedBaby.getHeight());
-        existingBaby.setCephalicPerimeter(updatedBaby.getCephalicPerimeter());
+        existingBaby.setHeadCircumference(updatedBaby.getHeadCircumference());
         existingBaby.setFoodPreference(updatedBaby.getFoodPreference());
 
         return babyRepository.save(existingBaby);
@@ -105,5 +101,42 @@ public class BabyService {
 
     private Boolean checkOwnership(Baby baby, Integer userId) {
         return baby.getUsers().stream().anyMatch(user -> user.getId().equals(userId));
+    }
+
+    @Transactional(readOnly = true)
+    public Baby findByIdAdmin(int id) throws ResourceNotFoundException, ResourceNotOwnedException {
+
+        Optional<Baby> optionalBaby = babyRepository.findById(id);
+
+        Baby baby = optionalBaby.orElseThrow(() -> new ResourceNotFoundException("Baby", "id", id));
+
+        return baby;
+    }
+
+    @Transactional
+    public Baby updateBabyAdmin(int id, BabyDTO updatedBaby) {
+
+        Baby existingBaby = babyRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Baby", "id", id));
+
+        existingBaby.setName(updatedBaby.getName());
+        existingBaby.setBirthDate(updatedBaby.getBirthDate());
+        existingBaby.setGenre(updatedBaby.getGenre());
+        existingBaby.setWeight(updatedBaby.getWeight());
+        existingBaby.setHeight(updatedBaby.getHeight());
+        existingBaby.setFoodPreference(updatedBaby.getFoodPreference());
+
+        return babyRepository.save(existingBaby);
+    }
+
+    @Transactional
+    public void deleteBabyAdmin(int id) {
+        babyRepository.deleteById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Baby> getAll() {
+        List<Baby> babies = babyRepository.getAll();
+        return babies;
     }
 }

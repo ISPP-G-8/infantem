@@ -1,11 +1,12 @@
 package com.isppG8.infantem.infantem.baby.dto;
 
 import java.time.LocalDate;
+import java.util.List;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.isppG8.infantem.infantem.baby.Baby;
 import com.isppG8.infantem.infantem.baby.Genre;
+import com.isppG8.infantem.infantem.allergen.Allergen;
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -13,6 +14,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +29,8 @@ public class BabyDTO {
     @Size(min = 3, max = 50)
     private String name;
 
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @PastOrPresent
     private LocalDate birthDate;
 
     @NotNull
@@ -44,10 +47,12 @@ public class BabyDTO {
 
     @NotNull
     @Min(0)
-    private Integer cephalicPerimeter;
+    private Integer headCircumference;
 
     @NotBlank
     private String foodPreference;
+
+    private List<String> allergies;
 
     public BabyDTO() {
     }
@@ -59,7 +64,8 @@ public class BabyDTO {
         this.genre = baby.getGenre();
         this.weight = baby.getWeight();
         this.height = baby.getHeight();
-        this.cephalicPerimeter = baby.getCephalicPerimeter();
+        this.headCircumference = baby.getHeadCircumference();
         this.foodPreference = baby.getFoodPreference();
+        this.allergies = baby.getAllergen().stream().map(Allergen::getName).toList();
     }
 }
