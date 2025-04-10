@@ -361,7 +361,13 @@ export default function BabyInfo() {
                 <Text style={gs.cardContent}>⚖️ Peso: {baby.weight} kg </Text>
                 <Text style={gs.cardContent}>📏 Altura: {baby.height} cm</Text>
               </View>
+
               <View style={{ flexDirection: "column", alignItems: "center", gap: 10 }}>
+                <TouchableOpacity style={[gs.mainButton, { backgroundColor: "green" }]} onPress={() => router.push(`/baby/metricas?babyId=${baby.id}`)}>
+                  <Text style={gs.mainButtonText}>Métricas</Text>
+                </TouchableOpacity>
+              <View style={{ flexDirection: "column", alignItems: "center", gap: 10 }}>
+
                 <TouchableOpacity style={gs.mainButton} onPress={() => handleEditBaby(baby)}>
                   <Text style={gs.mainButtonText}>Editar</Text>
                 </TouchableOpacity>
