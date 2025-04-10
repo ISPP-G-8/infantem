@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Text, View, TextInput, TouchableOpacity,ScrollView} from "react-native";
 import { Elements, CardElement, useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement } from "@stripe/react-stripe-js";
 import { loadStripe, Stripe } from "@stripe/stripe-js";
 import { useRouter } from "expo-router";
@@ -94,78 +95,147 @@ function StripeCheckoutForm() {
     setLoading(false);
   };
 
-  // Reemplaza tu return principal por este
 
   return (
-    <div
-      style={{minHeight: "100vh", display: "flex", justifyContent: "center", 
-        backgroundColor: "#f5f5f5", padding: "40px 20px", overflowY: "auto",
-      }}
-    >
-      <div
-        style={{backgroundColor: "white", borderRadius: "12px", padding: "30px", boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-          maxWidth: "400px", width: "100%", display: "flex", flexDirection: "column", gap: "20px", maxHeight: "90vh",
-          overflowY: "auto",
+    <View style={{ flex: 1, backgroundColor: "#E3F2FD" }}>
+      <ScrollView
+        contentContainerStyle={{
+          flexGrow: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          padding: 20,
         }}
       >
-        <h2 style={{ textAlign: "center", marginBottom: "10px" }}>Completa tu pago</h2>
-        <form
-          onSubmit={handleSubmit}
-          style={{display: "flex", flexDirection: "column", gap: "16px", width: "100%", }}
+        <View
+          style={{
+            backgroundColor: "white",
+            borderRadius: 16,
+            padding: 30,
+            width: "100%",
+            maxWidth: 420,
+            shadowColor: "#000",
+            shadowOpacity: 0.15,
+            shadowRadius: 6,
+            elevation: 5,
+          }}
         >
-          <label>
-            Número de tarjeta
-            <div style={inputWrapperStyle}>
-              <CardNumberElement options={cardStyleOptions} />
-            </div>
-          </label>
-
-          <label>
-            Fecha de expiración
-            <div style={inputWrapperStyle}>
-              <CardExpiryElement options={cardStyleOptions} />
-            </div>
-          </label>
-
-          <label>
-            CVC
-            <div style={inputWrapperStyle}>
-              <CardCvcElement options={cardStyleOptions} />
-            </div>
-          </label>
-
-          <label>
-            Código postal
-            <input
-              type="text"
-              placeholder="Código postal"
-              value={postalCode}
-              onChange={(e) => setPostalCode(e.target.value)}
-              style={textInputStyle}
-            />
-          </label>
-
-          <button
-            type="submit"
-            disabled={!stripe || loading}
-            style={payButtonStyle}
+          <Text
+            style={{
+              fontSize: 24,
+              fontWeight: "bold",
+              color: "#0D47A1",
+              textAlign: "center",
+              marginBottom: 20,
+            }}
           >
-            {loading ? "Procesando..." : "Pagar"}
-          </button>
-
-          {/* Placeholder para Apple Pay o Google Pay */}
-          <div style={{ marginTop: "20px", textAlign: "center", color: "#888" }}>
-            Pronto podrás pagar con Google Pay y Apple Pay
-          </div>
-        </form>
-        {error && (
-          <div style={{ color: "red", textAlign: "center", marginTop: "10px" }}>
-            {error}
-          </div>
-        )}
-      </div>
-    </div>
+            💳 Completa tu pago
+          </Text>
+  
+          <View style={{ marginBottom: 18 }}>
+            <Text style={{ fontWeight: "600", color: "#1565C0", marginBottom: 6 }}>
+              Número de tarjeta
+            </Text>
+            <View style={{
+              padding: 10, // sin comillas
+              marginTop: 10,
+              borderWidth: 1,
+              borderColor: "#ccc",
+              borderRadius: 8,}}>
+              <CardNumberElement options={cardStyleOptions} />
+            </View>
+          </View>
+  
+          <View style={{ marginBottom: 18 }}>
+            <Text style={{ fontWeight: "600", color: "#1565C0", marginBottom: 6 }}>
+              Fecha de expiración
+            </Text>
+            <View style={{
+              padding: 10, // sin comillas
+              marginTop: 10,
+              borderWidth: 1,
+              borderColor: "#ccc",
+              borderRadius: 8,}}>
+              <CardExpiryElement options={cardStyleOptions} />
+            </View>
+          </View>
+  
+          <View style={{ marginBottom: 18 }}>
+            <Text style={{ fontWeight: "600", color: "#1565C0", marginBottom: 6 }}>
+              CVC
+            </Text>
+            <View style={{
+              padding: 10, // sin comillas
+              marginTop: 10,
+              borderWidth: 1,
+              borderColor: "#ccc",
+              borderRadius: 8,}}>
+              <CardCvcElement options={cardStyleOptions} />
+            </View>
+          </View>
+  
+          <View style={{ marginBottom: 24 }}>
+            <Text style={{ fontWeight: "600", color: "#1565C0", marginBottom: 6 }}>
+              Código postal
+            </Text>
+            <TextInput
+              placeholder="Ej. 28001"
+              value={postalCode}
+              onChangeText={setPostalCode}
+              style={{
+                borderWidth: 1,
+                borderColor: "#ccc",
+                borderRadius: 8,
+                padding: 10,
+                fontSize: 14,
+                color: "#333",
+              }}
+            />
+          </View>
+  
+          <TouchableOpacity
+            onPress={handleSubmit}
+            disabled={!stripe || loading}
+            style={{
+              backgroundColor: "#1565C0",
+              paddingVertical: 14,
+              borderRadius: 10,
+              alignItems: "center",
+              opacity: !stripe || loading ? 0.6 : 1,
+            }}
+          >
+            <Text
+              style={{
+                color: "white",
+                fontSize: 16,
+                fontWeight: "bold",
+              }}
+            >
+              {loading ? "Procesando..." : "💰 Pagar"}
+            </Text>
+          </TouchableOpacity>
+  
+          <Text
+            style={{
+              marginTop: 20,
+              textAlign: "center",
+              fontSize: 14,
+              color: "#888",
+            }}
+          >
+            Pronto podrás pagar con Google Pay y Apple Pay 🍎💳
+          </Text>
+  
+          {error && (
+            <Text style={{ color: "#D32F2F", textAlign: "center", marginTop: 15 }}>
+              {error}
+            </Text>
+          )}
+        </View>
+      </ScrollView>
+    </View>
   );
+  
+  
 
 }
 
