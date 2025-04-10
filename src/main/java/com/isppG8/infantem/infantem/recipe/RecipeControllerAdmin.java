@@ -43,32 +43,24 @@ public class RecipeControllerAdmin {
         this.authoritiesService = authoritiesService;
     }
 
-    /* @Operation(summary = "Obtener todas las recetas",
+    /*
+     * @Operation(summary = "Obtener todas las recetas", description =
+     * "Recupera todas las recetas filtradas por parámetros opcionales como edad, ingredientes, y alérgenos."
+     * ) @ApiResponse( responseCode = "200", description = "Lista de recetas encontrada", content = @Content(mediaType =
+     * "application/json", schema = @Schema(implementation = RecipeDTO.class))) @GetMapping public
+     * ResponseEntity<Page<RecipeDTO>> getAllRecipes(@RequestParam(value = "page", defaultValue = "0") Integer page,
+     * @RequestParam(value = "size", defaultValue = "10") Integer size) { if (authoritiesService.isAdmin()) { Pageable
+     * pageable = PageRequest.of(page, size); List<Recipe> recipes = new ArrayList<>(recipeService.getAll()); int start
+     * = (int) pageable.getOffset(); int end = Math.min((start + pageable.getPageSize()), recipes.size()); Page<Recipe>
+     * paginatedRecipes = new PageImpl<>(recipes.subList(start, end), pageable, recipes.size()); return
+     * ResponseEntity.ok(paginatedRecipes.map(RecipeDTO::new)); } return null; }
+     */
+
+    @Operation(summary = "Obtener todas las recetas",
             description = "Recupera todas las recetas filtradas por parámetros opcionales como edad, ingredientes, y alérgenos.") @ApiResponse(
                     responseCode = "200", description = "Lista de recetas encontrada",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = RecipeDTO.class))) @GetMapping
-    public ResponseEntity<Page<RecipeDTO>> getAllRecipes(@RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "size", defaultValue = "10") Integer size) {
-        if (authoritiesService.isAdmin()) {
-
-            Pageable pageable = PageRequest.of(page, size);
-            List<Recipe> recipes = new ArrayList<>(recipeService.getAll());
-
-            int start = (int) pageable.getOffset();
-            int end = Math.min((start + pageable.getPageSize()), recipes.size());
-            Page<Recipe> paginatedRecipes = new PageImpl<>(recipes.subList(start, end), pageable, recipes.size());
-
-            return ResponseEntity.ok(paginatedRecipes.map(RecipeDTO::new));
-        }
-        return null;
-    } */
-
-    @Operation(summary = "Obtener todas las recetas",
-    description = "Recupera todas las recetas filtradas por parámetros opcionales como edad, ingredientes, y alérgenos.") @ApiResponse(
-            responseCode = "200", description = "Lista de recetas encontrada",
-            content = @Content(mediaType = "application/json",
-                    schema = @Schema(implementation = RecipeDTO.class))) @GetMapping
     public List<RecipeDTO> getAllRecipes(@RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size) {
         if (authoritiesService.isAdmin()) {
@@ -77,7 +69,6 @@ public class RecipeControllerAdmin {
         }
         return null;
     }
-
 
     @Operation(summary = "Obtener receta por ID",
             description = "Recupera los detalles de una receta utilizando su ID.") @ApiResponse(responseCode = "200",
