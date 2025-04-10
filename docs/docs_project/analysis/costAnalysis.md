@@ -44,6 +44,7 @@
   - Actualizó el documento al sprint 3
 - Paula Luna Navarro
   - Actualizó el documento al sprint 3
+  - Revisó el documento
 - Álvaro Jimenez Osuna  
   - Revisó el documento
   - Actualizó el documento al sprint 3
