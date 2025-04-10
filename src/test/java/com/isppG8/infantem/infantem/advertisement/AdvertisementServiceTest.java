@@ -159,13 +159,6 @@ public class AdvertisementServiceTest {
         assertTrue(result.isEmpty());
     }
 
-    /*
-     * @Test public void testGetAdvertisementToShow() {
-     * Mockito.when(advertisementRepository.findAll()).thenReturn(Collections.singletonList(testAdvertisement));
-     * Mockito.when(userService.findCurrentUser()).thenReturn(currentUser); Optional<Advertisement> result =
-     * advertisementService.getAdvertisementToShow(); assertTrue(result.isPresent());
-     * assertEquals(testAdvertisement.getId(), result.get().getId()); }
-     */
     @Test
     public void testGetAdvertisementToShow_NoAds() {
         advertisementRepository.deleteAll();
@@ -217,12 +210,6 @@ public class AdvertisementServiceTest {
         });
     }
 
-    /*
-     * @Test public void testStartViewingAdvertisement() { advertisementRepository.save(testAdvertisement);
-     * org.mockito.Mockito.when(userService.findCurrentUser()).thenReturn(currentUser);
-     * advertisementService.startViewingAdvertisement(testAdvertisement.getId());
-     * assertTrue(advertisementService.getAllAdvertisements().get(0).getTimeSeen() > 0); }
-     */
     @Test
     public void testStopViewingAdvertisement() {
         advertisementRepository.save(testAdvertisement);
@@ -243,13 +230,6 @@ public class AdvertisementServiceTest {
             advertisementService.stopViewingAdvertisement(nonExistentId);
         });
     }
-
-    /*
-     * @Test public void testCompleteAdvertisement() { advertisementRepository.save(testAdvertisement);
-     * org.mockito.Mockito.when(userService.findCurrentUser()).thenReturn(currentUser);
-     * advertisementService.completeAdvertisement(testAdvertisement.getId());
-     * assertTrue(advertisementService.getAllAdvertisements().get(0).getIsCompleted()); }
-     */
 
     @Test
     public void testCompleteAdvertisement_NotFound() {
