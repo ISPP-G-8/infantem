@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, FlatList, ScrollView, useWindowDimensions } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useAuth } from '../../../context/AuthContext';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { Baby, Intake, Recipe } from '../../../types';
 import Pagination from '../../../components/Pagination';
 
@@ -12,6 +12,7 @@ export default function intakeDetail() {
   const { token } = useAuth();
   const { width } = useWindowDimensions();
   const cardWidth = width < 500 ?350 :600;
+  const { intakeId } = useLocalSearchParams();
  
   const [errorMessage, setErrorMessage] = useState('');
   const [babies, setBabies] = useState<Baby[]>([]);
@@ -49,12 +50,37 @@ export default function intakeDetail() {
         return true;
 
       } catch (error) {
-        console.error('Error fetching recipes: ', error);
+        console.error('Error fetching babies: ', error);
+        return false;
+      }
+    };
+    
+    const fetchIntake = async (): Promise<boolean> => {
+      try {
+        const response = await fetch(`${apiUrl}/api/v1/intake/${intakeId}`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Error fetching intake");
+        } 
+
+        const data = await response.json();
+        const { intakeSymptoms, ...rest } = data;
+        setIntake({ ...rest, recipes: [] });
+        return true;
+
+      } catch (error) {
+        console.error('Error fetching intake: ', error);
         return false;
       }
     };
 
     fetchBabies();
+    if (intakeId) fetchIntake();
   }, []);
 
   useEffect(() => {
@@ -106,6 +132,15 @@ export default function intakeDetail() {
     if (!intake.baby) {
       setErrorMessage("Tienes que asociar un bebé a la ingesta"); 
       return
+    } else if(!intake.quantity) {
+      setErrorMessage("Tienes que asociar una cantidad a la ingesta"); 
+      return
+    } else if(!intake.observations) {
+      setErrorMessage("Tienes que asociar una observacion a la ingesta"); 
+      return
+    } else if(intake.recipes.length < 1) {
+      setErrorMessage("Tienes que asociar al menos una receta a la ingesta"); 
+      return
     } else {
       setErrorMessage("");
     }
@@ -119,7 +154,8 @@ export default function intakeDetail() {
     };
 
     try {
-      const response = await fetch(`${apiUrl}/api/v1/intake`, {
+      const url = `${apiUrl}/api/v1/intake${intake.id ? `/${intakeId}`:''}`;
+      const response = await fetch(url, {
         method: intake.id ? 'PUT' : 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -131,6 +167,15 @@ export default function intakeDetail() {
       if (!response.ok)
         throw new Error('Error al guardar la ingesta');
 
+      setIntake({
+        date: '', 
+        quantity: 0,
+        observations: '',
+        baby: null, 
+        recipes: []
+      });
+
+
       router.push("/calendar/intakes");
 
     } catch (error) {
@@ -139,6 +184,13 @@ export default function intakeDetail() {
   };
 
   const handleCancel = () => {
+    setIntake({
+      date: '', 
+      quantity: 0,
+      observations: '',
+      baby: null, 
+      recipes: []
+    });
     router.push("/calendar/intakes");
   };
 

@@ -2,12 +2,13 @@ import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { useAuth } from "../../../context/AuthContext";
 import { useEffect, useState } from "react";
 import { Intake } from "../../../types";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 
 export default function Intakes() {
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const gs = require("../../../static/styles/globalStyles");
   const { token } = useAuth();
+  const router = useRouter();
 
   const [intakes, setIntakes] = useState<Intake[]>([]);
 
@@ -102,12 +103,13 @@ export default function Intakes() {
                     >
                       <Text style={{ color: 'white', fontWeight: 'bold' }}>Eliminar</Text>
                     </TouchableOpacity>
-                    <Link 
+                  <TouchableOpacity 
+                      key={index} 
+                      onPress={() => router.push(`/calendar/intakeDetail?intakeId=${intake.id}`)}
                       style={{ backgroundColor: '#1565C0', paddingVertical: 5, paddingHorizontal: 12, borderRadius: 5 }}
-                      href={`/calendar/intakeDetail?intake=${intake.id}`}
                     >
                       <Text style={{ color: 'white', fontWeight: 'bold' }}>Detalles</Text>
-                    </Link>
+                    </TouchableOpacity>
                   </View>
                 </View>
               </View>
