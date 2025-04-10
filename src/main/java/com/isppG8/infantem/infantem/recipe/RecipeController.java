@@ -185,13 +185,7 @@ public class RecipeController {
             responseCode = "201", description = "Receta creada con éxito",
             content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = Recipe.class))) @PostMapping
-    public ResponseEntity<Recipe> createRecipe(@Valid @RequestBody Recipe recipe,
-            @RequestPart("recipePhoto") MultipartFile multipartFile) throws IOException {
-        if (!multipartFile.isEmpty()) {
-            recipe.setRecipePhoto(multipartFile.getBytes());
-        } else {
-            recipe.setRecipePhoto(null);
-        }
+    public ResponseEntity<Recipe> createRecipe(@Valid @RequestBody Recipe recipe) {
         Recipe createdRecipe = recipeService.createRecipe(recipe);
         return ResponseEntity.status(201).body(createdRecipe);
     }
