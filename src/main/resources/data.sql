@@ -109,11 +109,6 @@ INSERT INTO recipe_table(max_recommended_age, min_recommended_age, user_id, desc
 (9, 6, null, 'Cocer brócoli y patata al vapor, triturar hasta obtener una crema suave.', 'Cocer brócoli y patata al vapor, triturar.', 'Brócoli, patata', 'Crema de Brócoli y Patata', ''),
 (10, 7, null, 'Cocer calabacín y arroz, triturar hasta conseguir una papilla homogénea.', 'Cocer calabacín y arroz, triturar.', 'Calabacín, arroz', 'Papilla de Calabacín y Arroz', ''),
 (11, 8, null, 'Saltear calabaza y lentejas cocidas, triturar para obtener un puré.', 'Cocer calabaza y lentejas, triturar.', 'Calabaza, lentejas', 'Puré de Calabaza y Lentejas', ''),
-(12, 9, null, 'Hervir pasta pequeña con brócoli y triturar ligeramente.', 'Cocer pasta pequeña y brócoli, triturar.', 'Pasta pequeña, brócoli', 'Pasta con Brócoli', ''),
-(9, 7, null, 'Cocer pera y ciruela, triturar para obtener una compota suave.', 'Cocer pera y ciruela, triturar.', 'Pera, ciruela', 'Compota de Pera y Ciruela', ''),
-(10, 7, null, 'Cocer arroz con leche vegetal y manzana, triturar.', 'Cocer arroz con leche vegetal y manzana, triturar.', 'Arroz, leche vegetal, manzana', 'Papilla de Arroz y Manzana', ''),
-(11, 8, null, 'Cocer garbanzos y calabacín, triturar para formar un puré.', 'Cocer garbanzos y calabacín, triturar.', 'Garbanzos, calabacín', 'Puré de Garbanzos y Calabacín', ''),
-(12, 9, null, 'Tostar pan integral, untar con aguacate y huevo cocido triturado.', 'Tostar pan integral, untar con aguacate y huevo cocido.', 'Pan integral, aguacate, huevo', 'Tostada Nutritiva', '');
 
 
 -- Inserción de anuncios
