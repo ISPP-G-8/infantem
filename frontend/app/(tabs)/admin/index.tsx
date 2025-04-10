@@ -272,7 +272,7 @@ export default function Admin() {
                       handleEditRecipe(item);
                     }}
                   >
-                    <Text style={{ color: "#fff" }}>Modificar</Text>
+                    <Text style={{ color: "#fff" }}>Ver receta</Text>
                   </TouchableOpacity>
                 </View>
               </View>

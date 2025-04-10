@@ -187,7 +187,7 @@ export default function RecipeDetails() {
             </Text>
 
             {/* Botones de acción */}
-            {!isEditing && (
+            {/* {!isEditing && (
               <TouchableOpacity
                 style={[gs.mainButton, { marginTop: 30 }]}
                 onPress={handleEditRecipe}
@@ -202,7 +202,7 @@ export default function RecipeDetails() {
               >
                 <Text style={gs.mainButtonText}>Guardar Cambios</Text>
               </TouchableOpacity>
-            )}
+            )} */}
           </View>
         </View>
       </ScrollView>
