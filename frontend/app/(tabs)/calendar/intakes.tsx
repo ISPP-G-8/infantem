@@ -103,13 +103,13 @@ export default function Intakes() {
                     >
                       <Text style={{ color: 'white', fontWeight: 'bold' }}>Eliminar</Text>
                     </TouchableOpacity>
-                  <TouchableOpacity 
+                    {/*<TouchableOpacity 
                       key={index} 
                       onPress={() => router.push(`/calendar/intakeDetail?intakeId=${intake.id}`)}
                       style={{ backgroundColor: '#1565C0', paddingVertical: 5, paddingHorizontal: 12, borderRadius: 5 }}
                     >
                       <Text style={{ color: 'white', fontWeight: 'bold' }}>Detalles</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity>*/}
                   </View>
                 </View>
               </View>
