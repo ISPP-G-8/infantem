@@ -136,9 +136,9 @@ public class AuthController {
                             description = "Usuario o email ya en uso o código de validación incorrecto") @PostMapping("/signup")
     public ResponseEntity<Object> registerUser(@Valid @RequestBody SignupRequest signUpRequest,
             @RequestPart("profilePhoto") MultipartFile multipartFile) throws IOException {
-        boolean existingUser = (userService.findByUsername(signUpRequest.getUsername()) == null);
-        boolean existingEmail = (userService.findByEmail(signUpRequest.getEmail()) == null);
-        if (!(existingUser && existingEmail)) {
+        boolean existingUser = (userService.findByUsername(signUpRequest.getUsername()) != null);
+        boolean existingEmail = (userService.findByEmail(signUpRequest.getEmail()) != null);
+        if (existingUser || existingEmail) {
             String e = "";
             if (existingEmail) {
                 if (existingUser) {

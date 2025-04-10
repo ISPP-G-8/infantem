@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
+import com.isppG8.infantem.infantem.auth.payload.response.MessageResponse;
 
 import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserService;
@@ -38,8 +40,6 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/api/v1/recipes")
 public class RecipeController {
-
-    // TODO: add validation for only owner of the recipe can update or delete
 
     private RecipeService recipeService;
 
@@ -200,16 +200,44 @@ public class RecipeController {
             description = "Actualiza los detalles de una receta existente.") @ApiResponse(responseCode = "200",
                     description = "Receta actualizada con éxito", content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Recipe.class))) @PutMapping("/{id}")
-    public ResponseEntity<Recipe> updateRecipe(@PathVariable Long id, @Valid @RequestBody RecipeDTO recipeDetails,
-            @RequestPart("recipePhoto") MultipartFile multipartFile) throws IOException {
+    public ResponseEntity<Recipe> updateRecipe(@PathVariable Long id, @Valid @RequestBody RecipeDTO recipeDetails) {
         User user = userService.findCurrentUser();
-        if (!multipartFile.isEmpty()) {
-            recipeDetails.setRecipePhoto(multipartFile.getBytes());
-        } else {
-            recipeDetails.setRecipePhoto(null);
-        }
+        Recipe recipe = recipeService.getRecipeById(id);
+        recipeDetails.setRecipePhoto(recipe.getRecipePhoto());
         Recipe updatedRecipe = recipeService.updateRecipe(id, recipeDetails, user.getId());
         return ResponseEntity.ok(updatedRecipe);
+    }
+
+    @Operation(summary = "Actualizar la foto de perfil de un usuario",
+            description = "Actualiza la foto de perfil de un usuario por su ID.") @ApiResponse(responseCode = "200",
+                    description = "Foto de perfil actualizada exitosamente") @ApiResponse(responseCode = "400",
+                            description = "El usuario no es el tuyo") @PutMapping(value = "/{id}/recipe-photo",
+                                    consumes = { "multipart/form-data" })
+    public ResponseEntity<Object> updateRecipePhoto(@RequestPart(name = "recipePhoto") MultipartFile multipartFile,
+            @PathVariable Long id, @RequestHeader(name = "Authorization") String token) throws IOException {
+
+        Recipe recipe = recipeService.getRecipeById(id);
+
+        if (multipartFile != null && !multipartFile.isEmpty()) {
+            RecipeDTO recipeDTO = new RecipeDTO(recipe);
+            recipeDTO.setRecipePhoto(multipartFile.getBytes());
+            Integer userId = recipeService.getCurrentUserId();
+            Recipe updatedRecipe = recipeService.updateRecipe(id, recipeDTO, userId);
+            return ResponseEntity.ok().body(new RecipeDTO(updatedRecipe));
+        } else {
+            return ResponseEntity.badRequest().body(new MessageResponse("Recipe photo is empty"));
+        }
+    }
+
+    @DeleteMapping("/{id}/recipe-photo")
+    public ResponseEntity<MessageResponse> deleteRecipePhoto(@PathVariable Long id,
+            @RequestHeader(name = "Authorization") String token) {
+        Integer userId = recipeService.getCurrentUserId();
+        Recipe recipe = recipeService.getRecipeById(id);
+        RecipeDTO recipeDTO = new RecipeDTO(recipe);
+        recipeDTO.setRecipePhoto(null);
+        recipeService.updateRecipe(id, recipeDTO, userId);
+        return ResponseEntity.ok().body(new MessageResponse("Photo deleted successfully"));
     }
 
     @Operation(summary = "Eliminar una receta", description = "Elimina una receta existente por su ID.") @ApiResponse(
