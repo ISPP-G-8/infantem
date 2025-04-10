@@ -5,8 +5,6 @@ export type AuthContextType = {
   isLoading: boolean;
   isAuthenticated: boolean;
   token: string | null;
-  userToModify: User | null;
-  setUserToModify: (user: User | null) => void;
   setUser: (user: User | null) => void;
   signOut: () => Promise<void>;
   updateToken: (token: string) => Promise<void>;

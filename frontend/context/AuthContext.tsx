@@ -8,8 +8,6 @@ const AuthContext = createContext<AuthContextType>({
   isLoading: true,
   isAuthenticated: false,
   token: null,
-  userToModify: null,
-  setUserToModify: () => {},
   setUser: () => {},
   updateToken: async () => {},
   signOut: async () => {},
@@ -21,7 +19,6 @@ export const useAuth = () => useContext(AuthContext);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [userToModify, setUserToModify] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [token, setToken] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -117,8 +114,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     isAuthenticated,
     setUser,
     token,
-    userToModify,
-    setUserToModify,
     signOut,
     updateToken,
     checkAuth,

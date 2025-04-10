@@ -3,13 +3,15 @@ import { TextInput, Alert, ImageBackground } from "react-native";
 import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import { router } from "expo-router";
 import { useAuth } from "../../../context/AuthContext";
+import { useAdmin } from "../../../context/AdminContext";
 
 export default function ShowUser() {
   const [isEditing, setIsEditing] = useState(false);
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const gs = require("../../../static/styles/globalStyles");
-  const { userToModify, token, setUser, setUserToModify } = useAuth();
+  const { token, setUser } = useAuth();
+  const { userToModify, setUserToModify } = useAdmin();
 
   const handleEditProfile = () => {
     setIsEditing(true);
