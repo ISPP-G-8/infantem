@@ -138,6 +138,7 @@ public class IntakeService {
 
     public List<Intake> getAll() {
         return intakeRepository.getAll();
+    }
 
     public Intake getLastIntake(Integer babyId) {
         return intakeRepository.getLastIntake(babyId);
