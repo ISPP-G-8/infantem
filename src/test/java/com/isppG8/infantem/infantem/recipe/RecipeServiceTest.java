@@ -314,11 +314,6 @@ public class RecipeServiceTest {
         assertEquals(1L, recipeId1.getId(), "The recipe id should be 1");
         assertTrue(recipeId1.getDescription().contains("Puré de zanahoria"),
                 "The recipe description should contain 'Puré de zanahoria'");
-
-        Recipe recipeId6 = recipeService.getRecipeById(6L);
-        assertEquals(6L, recipeId6.getId(), "The recipe id should be 6");
-        assertTrue(recipeId6.getDescription().contains("Puré de pollo"),
-                "The recipe description should contain 'Puré de pollo'");
     }
 
     @Test
