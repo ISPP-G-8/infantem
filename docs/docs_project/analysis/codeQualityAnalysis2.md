@@ -5,7 +5,7 @@
 
 **Fecha:** 31/03/2025  
 **Grupo 8:** Infantem  
-**Sprint 3**
+**Sprint 2**
 
 ## Integrantes del Grupo
 <div style="display: flex; justify-content: space-between; gap: 2px;">
