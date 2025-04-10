@@ -4,12 +4,13 @@ import { MarketItem } from '../../../types';
 import MarketItemComponent from '../../../components/MarketItem';
 import { useAuth } from '../../../context/AuthContext';
 import Pagination from '../../../components/Pagination';
+import { useWindowDimensions } from "react-native"; 
 
 export default function Marketplace() {
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const gs = require("../../../static/styles/globalStyles");
   const { token } = useAuth();
-
+  const { width } = useWindowDimensions();
   const [marketItems, setMarketItems] = useState<MarketItem[]>([]);
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number | null>(null);
@@ -44,24 +45,81 @@ export default function Marketplace() {
   }, [page]);
 
   return (
-    <View style={gs.container}>
-      <Text style={{ color: "#1565C0", fontSize: 36, fontWeight: "bold", textAlign: "center", marginBottom: 10 }}>Tienda</Text>
-        <Text style={[gs.bodyText, { textAlign: "center",color:"#1565C0" }]}>Compra todos lo que necesites para tu bebé</Text>
+    <ScrollView contentContainerStyle={{ padding: 0, paddingBottom: 0 }}>
 
-      <ScrollView style={{maxWidth:600}}>
-        {marketItems.map((item, index) => (
-          <MarketItemComponent key={index} item={item} />
-        ))}
-      </ScrollView>
+    <View style={[gs.container, { paddingTop: 60, paddingHorizontal: 20, backgroundColor: "#E3F2FD" }]}>
 
-      {totalPages && (
-        <Pagination 
-          totalPages={totalPages} 
-          page={page} 
-          setPage={setPage} 
-        />
-      )}
-
+{/* Título */}
+<Text style={{
+          color: "#1565C0",
+          fontSize: 36,
+          fontWeight: "bold",
+          textAlign: "center",
+          marginBottom: 10,
+        }}>
+          Tienda
+        </Text>
+  
+        {/* Subtítulo */}
+        <Text style={{
+          fontSize: 16,
+          color: "#1565C0",
+          textAlign: "center",
+          marginBottom: 24,
+        }}>
+          Compra todo lo que necesites para tu bebé
+        </Text>
+      <View
+        style={{
+          backgroundColor: "white",
+          padding: 24,
+          borderRadius: 16,
+          maxWidth: 1200,
+          width: "100%",
+          alignSelf: "center",
+          shadowColor: "#000",
+          shadowOpacity: 0.1,
+          shadowRadius: 10,
+          elevation: 5,
+        }}
+      >
+        
+  
+        {/* Lista de productos en grid responsivo */}
+        <View
+          style={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: width < 768 ? "center" : "flex-start",
+            gap: 12,
+          }}
+        >
+          {marketItems.map((item, index) => (
+            <View
+              key={index}
+              style={{
+                width: width < 768 ? "100%" : "23%", // 4 por fila con espacio entre
+                marginBottom: 16,
+              }}
+            >
+              <MarketItemComponent item={item} />
+            </View>
+          ))}
+        </View>
+  
+        {/* Paginación */}
+        {totalPages && (
+          <View style={{ marginTop: 30 }}>
+            <Pagination
+              totalPages={totalPages}
+              page={page}
+              setPage={setPage}
+            />
+          </View>
+        )}
+      </View>
     </View>
+    </ScrollView>
+
   );
 }
