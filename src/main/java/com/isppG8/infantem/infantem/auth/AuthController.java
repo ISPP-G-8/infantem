@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import jakarta.validation.Valid;
 
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
