@@ -10,8 +10,7 @@ export default function ShowUser() {
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const gs = require("../../../static/styles/globalStyles");
-  const { token, setUser } = useAuth();
-  const { userToModify, setUserToModify } = useAdmin();
+  const { token, setUser, userToModify, setUserToModify } = useAuth();
 
   const handleEditProfile = () => {
     setIsEditing(true);
