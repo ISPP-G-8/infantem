@@ -3,7 +3,6 @@ package com.isppG8.infantem.infantem.intake.dto;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.isppG8.infantem.infantem.baby.Baby;
 import com.isppG8.infantem.infantem.baby.dto.BabyNameDTO;
 import com.isppG8.infantem.infantem.intake.Intake;
 import com.isppG8.infantem.infantem.intake.IntakeSymptom;

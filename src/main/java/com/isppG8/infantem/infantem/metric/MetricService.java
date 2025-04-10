@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 import com.isppG8.infantem.infantem.metric.dto.MetricSummary;
 
-import jakarta.persistence.EntityNotFoundException;
-
 @Service
 public class MetricService {
 

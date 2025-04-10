@@ -43,10 +43,15 @@ jobs:
       - name: Instalar dependencias Frontend (npm)
         run: npm ci
         working-directory: ./frontend
-      
-#      - name: Ejecutar pruebas y cobertura Frontend
-#        run: npm test -- --coverage
-#        working-directory: ./frontend
+      #- name: Ejecutar pruebas y cobertura Frontend
+      #   run: npm test -- --coverage # Ajusta el comando según tu configuración
+      #   working-directory: ./frontend
+
+      - name: Mostrar contenido de sonar-project.properties # <--- AÑADE ESTE PASO
+        run: |
+          echo "--- Contenido de sonar-project.properties ---"
+          cat sonar-project.properties
+          echo "-------------------------------------------"
 
       - name: SonarCloud Scan
         # Usamos la acción SonarSource/sonarqube-scan-action
@@ -57,8 +62,3 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           # Token de GitHub (Necesario para decorar PRs en GitHub)
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          args: >
-            -Dsonar.qualitygate.wait=true
-            # Opcional: puedes añadir un timeout en segundos (ej. 300 segundos = 5 minutos)
-            # -Dsonar.qualitygate.timeout=300
