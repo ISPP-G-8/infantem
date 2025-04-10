@@ -34,17 +34,6 @@ export default function Account() {
 
   const FormData = global.FormData;
 
-  useEffect(() => {
-    if (!token) return;
-    console.log(token);
-    try {
-      const decodedToken: any = jwtDecode(token);
-      setUser(decodedToken.jti);
-    } catch (error) {
-      console.error("Error al decodificar el token:", error);
-    }
-  }, [token]);
-
 
   useEffect(() => {
     if (!user || !token) return;
@@ -171,7 +160,7 @@ export default function Account() {
       await updateToken(data.jwt);
       
       // Si se ha seleccionado una imagen, enviarla en una petición separada
-      if (image || imageBase64) {
+      if (image) {
         await uploadProfilePhoto();
       }
 
@@ -204,8 +193,9 @@ export default function Account() {
         let imageType = 'image/jpeg';
         
         // Verificar formato base64
-        if (imageBase64.startsWith('data:image')) {
-          imageType = imageBase64.split(';')[0].split(':')[1];
+        if (!imageUri.startsWith("data:image/png")) {
+          alert("Por favor, selecciona una imagen en formato PNG.");
+          return;
         }
         
         // @ts-ignore - React Native maneja FormData diferente
@@ -297,13 +287,13 @@ export default function Account() {
   
       if (!result.canceled) {
         let imageUri = result.assets[0].uri;
-  
+        
         // NUEVO: Validar que sea PNG
-        if (!imageUri.toLowerCase().endsWith(".png")) {
+        if (!imageUri.startsWith("data:image/png")) {
           alert("Por favor, selecciona una imagen en formato PNG.");
           return;
         }
-  
+        
         if (imageUri.startsWith('data:image')) {
           const base64Data = imageUri.split(',')[1];
   
