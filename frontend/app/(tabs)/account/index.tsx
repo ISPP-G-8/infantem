@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Modal, TextInput, Alert, ImageBackground } from "react-native";
 import { Text, View, TouchableOpacity, ScrollView, Image, FlatList } from "react-native";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { useAuth } from "../../../context/AuthContext";
 
 const avatarOptions = [
@@ -12,6 +12,8 @@ const avatarOptions = [
 export default function Account() {
   const [modalVisible, setModalVisible] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const router = useRouter();
+
   interface Subscription {
     active: boolean;
     [key: string]: any; // Add other properties as needed
@@ -169,13 +171,20 @@ export default function Account() {
           </>
         )}
 
-        <TouchableOpacity style={[gs.mainButton, { backgroundColor: "#1565C0" }]} onPress={isEditing ? handleSaveChanges : handleEditProfile}>
+        <TouchableOpacity style={[gs.mainButton, { backgroundColor: "#1565C0" }]} onPress={() => router.push("/baby")}>
+          <Text style={gs.mainButtonText}>Tus bebés</Text>
+        </TouchableOpacity>
+
+        <View style={{flexDirection:"row", gap:10}}> 
+        <TouchableOpacity style={[gs.mainButton, { marginTop: 10, backgroundColor: "#1565C0" }]} onPress={isEditing ? handleSaveChanges : handleEditProfile}>
           <Text style={gs.mainButtonText}>{isEditing ? "Guardar Cambios" : "Editar Perfil"}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={[gs.secondaryButton, { marginTop: 10 }]} onPress={signOut}>
           <Text style={[gs.secondaryButtonText]}>Cerrar Sesión</Text>
         </TouchableOpacity>
+        </View>
+
 
         <Modal visible={modalVisible} animationType="fade" transparent={true}>
           <View style={[gs.modalOverlay,{marginTop: 110,width: "80%",marginHorizontal: "18%"}]}>
