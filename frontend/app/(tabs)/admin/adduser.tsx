@@ -1,4 +1,3 @@
-import { router } from "expo-router";
 import { useState } from "react";
 import {
   Text,
@@ -8,9 +7,10 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import { storeToken } from "../../../utils/jwtStorage";
 import { Ionicons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
+import { useAuth } from "../../../context/AuthContext";
+import { router } from "expo-router";
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -19,14 +19,14 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [code] = useState(111);
   const [errorMessage, setErrorMessage] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar contraseña
-
-  const [askForEmailToken, setAskForEmailToken] = useState(false);
-  const [emailToken, setEmailToken] = useState<string>("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const gs = require("../../../static/styles/globalStyles");
+
+  const { token } = useAuth();
 
   const [fieldErrors, setFieldErrors] = useState({
     name: false,
@@ -118,58 +118,30 @@ export default function Signup() {
     }
 
     try {
-      const validEmailResponse = await fetch(`${apiUrl}/api/v1/auth/email`, {
+      const response = await fetch(`${apiUrl}/api/v1/admin/users/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          username: username,
-          email: email,
+          name,
+          surname,
+          username,
+          email,
+          password,
+          code,
         }),
       });
-
-      if (!validEmailResponse.ok) {
-        const data = await validEmailResponse.json();
-        setErrorMessage(data.message);
+      if (!response.ok) {
+        const errorData = await response.json();
+        setErrorMessage(errorData.message || "Error al registrar el usuario.");
         return;
       }
-      setAskForEmailToken(true);
+      router.push("/admin");
     } catch (error) {
-      console.error("An error ocurred: ", error);
-    }
-  };
-
-  const handleConfirmToken = async () => {
-    try {
-      const signupResponse = await fetch(
-        `${apiUrl}/api/v1/admin/users/signup`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: name,
-            surname: surname,
-            username: username,
-            email: email,
-            password: password,
-            code: emailToken,
-          }),
-        }
-      );
-
-      if (!signupResponse.ok) {
-        setErrorMessage("Algo no ha ido bien.");
-        return;
-      }
-
-      const data = await signupResponse.json();
-      await storeToken(data.token);
-      router.push("/recipes");
-    } catch (error) {
-      console.error("An error ocurred: ", error);
+      console.log(error);
+      setErrorMessage("Error al registrar el usuario. Inténtalo de nuevo.");
     }
   };
 
@@ -200,25 +172,124 @@ export default function Signup() {
           }}
         />
 
-        {askForEmailToken ? (
-          <View
+        <View
+          style={[
+            gs.card,
+            {
+              maxWidth: 400,
+              width: "90%",
+              padding: 25,
+              borderRadius: 15,
+              backgroundColor: "white",
+              shadowColor: "#000",
+              shadowOpacity: 0.1,
+              shadowRadius: 10,
+              elevation: 5,
+            },
+          ]}
+        >
+          <Text
+            style={{
+              fontSize: 24,
+              fontWeight: "bold",
+              color: "#1565C0",
+              textAlign: "center",
+              marginBottom: 15,
+            }}
+          >
+            Añadir nuevo usuario
+          </Text>
+
+          <TextInput
             style={[
-              gs.card,
+              gs.input,
               {
-                fontFamily: "Loubag-Light",
-                maxWidth: 400,
+                padding: 12,
+                borderRadius: 8,
+                borderWidth: 1,
+                borderColor: fieldErrors.name ? "red" : "#1565C0",
+                opacity: 0.6,
                 width: "90%",
-                padding: 25,
-                borderRadius: 15,
-                backgroundColor: "white",
-                shadowColor: "#000",
-                shadowOpacity: 0.1,
-                shadowRadius: 10,
-                elevation: 5,
+                alignSelf: "center",
               },
             ]}
-          >
-            Revisa tu email
+            placeholder="Nombre"
+            placeholderTextColor={fieldErrors.name ? "red" : "#999"}
+            value={name}
+            onChangeText={(text) => {
+              setName(text);
+              setFieldErrors((prev) => ({ ...prev, name: false }));
+            }}
+          />
+          <TextInput
+            style={[
+              gs.input,
+              {
+                padding: 12,
+                borderRadius: 8,
+                borderWidth: 1,
+                borderColor: fieldErrors.surname ? "red" : "#1565C0",
+                opacity: 0.6,
+                width: "90%",
+                alignSelf: "center",
+              },
+            ]}
+            placeholder="Apellido"
+            placeholderTextColor={fieldErrors.surname ? "red" : "#999"}
+            value={surname}
+            onChangeText={(text) => {
+              setSurname(text);
+              setFieldErrors((prev) => ({ ...prev, surname: false }));
+            }}
+          />
+          <TextInput
+            style={[
+              gs.input,
+              {
+                padding: 12,
+                borderRadius: 8,
+                borderWidth: 1,
+                borderColor: fieldErrors.username ? "red" : "#1565C0",
+                opacity: 0.6,
+                width: "90%",
+                alignSelf: "center",
+              },
+            ]}
+            placeholder="Nombre de usuario"
+            placeholderTextColor={fieldErrors.username ? "red" : "#999"}
+            value={username}
+            onChangeText={(text) => {
+              setUsername(text);
+              setFieldErrors((prev) => ({ ...prev, username: false }));
+            }}
+            autoCapitalize="none"
+          />
+
+          <TextInput
+            style={[
+              gs.input,
+              {
+                padding: 12,
+                borderRadius: 8,
+                borderWidth: 1,
+                borderColor: fieldErrors.email ? "red" : "#1565C0",
+                opacity: 0.6,
+                width: "90%",
+                alignSelf: "center",
+              },
+            ]}
+            placeholder="Email"
+            placeholderTextColor={fieldErrors.email ? "red" : "#999"}
+            value={email}
+            onChangeText={(text) => {
+              setEmail(text);
+              setFieldErrors((prev) => ({ ...prev, email: false }));
+            }}
+            autoCapitalize="none"
+            keyboardType="email-address"
+          />
+
+          <View style={{ position: "relative" }}>
             <TextInput
               style={[
                 gs.input,
@@ -226,262 +297,104 @@ export default function Signup() {
                   padding: 12,
                   borderRadius: 8,
                   borderWidth: 1,
-                  borderColor: "#1565C0",
+                  borderColor: fieldErrors.password ? "red" : "#1565C0",
                   opacity: 0.6,
+                  width: "90%",
+                  alignSelf: "center",
                 },
               ]}
-              placeholder="Código de validación"
-              value={emailToken}
-              onChangeText={setEmailToken}
+              placeholder="Contraseña"
+              placeholderTextColor={fieldErrors.password ? "red" : "#999"}
+              value={password}
+              onChangeText={(text) => {
+                setPassword(text);
+                setFieldErrors((prev) => ({ ...prev, password: false }));
+              }}
+              secureTextEntry={!showPassword}
             />
             <TouchableOpacity
-              style={{
-                marginTop: 20,
-                backgroundColor: "#1565C0",
-                padding: 14,
-                borderRadius: 8,
-                alignItems: "center",
-                shadowColor: "#000",
-                shadowOpacity: 0.2,
-                shadowRadius: 5,
-                elevation: 3,
-              }}
-              onPress={handleConfirmToken}
+              onPress={() => setShowPassword(!showPassword)}
+              style={{ position: "absolute", right: 30, top: 22 }}
             >
-              <Text
-                style={{ color: "#FFFFFF", fontSize: 16, fontWeight: "bold" }}
-              >
-                Confirmar
-              </Text>
+              <Ionicons
+                name={showPassword ? "eye-off" : "eye"}
+                size={24}
+                color="#1565C0"
+              />
             </TouchableOpacity>
           </View>
-        ) : (
-          <View
-            style={[
-              gs.card,
-              {
-                maxWidth: 400,
-                width: "90%",
-                padding: 25,
-                borderRadius: 15,
-                backgroundColor: "white",
-                shadowColor: "#000",
-                shadowOpacity: 0.1,
-                shadowRadius: 10,
-                elevation: 5,
-              },
-            ]}
-          >
+
+          <View style={{ position: "relative" }}>
+            <TextInput
+              style={[
+                gs.input,
+                {
+                  padding: 12,
+                  borderRadius: 8,
+                  borderWidth: 1,
+                  borderColor: fieldErrors.repeatPassword ? "red" : "#1565C0",
+                  opacity: 0.6,
+                  width: "90%",
+                  alignSelf: "center",
+                },
+              ]}
+              placeholder="Repite la contraseña"
+              placeholderTextColor={fieldErrors.repeatPassword ? "red" : "#999"}
+              value={repeatPassword}
+              onChangeText={(text) => {
+                setRepeatPassword(text);
+                setFieldErrors((prev) => ({
+                  ...prev,
+                  repeatPassword: false,
+                }));
+              }}
+              secureTextEntry={!showPassword}
+            />
+            <TouchableOpacity
+              onPress={() => setShowPassword(!showPassword)}
+              style={{ position: "absolute", right: 30, top: 22 }}
+            >
+              <Ionicons
+                name={showPassword ? "eye-off" : "eye"}
+                size={24}
+                color="#1565C0"
+              />
+            </TouchableOpacity>
+          </View>
+
+          {errorMessage ? (
             <Text
               style={{
-                fontSize: 24,
-                fontWeight: "bold",
-                color: "#1565C0",
+                color: "red",
+                marginVertical: 10,
                 textAlign: "center",
-                marginBottom: 15,
               }}
             >
-              Regístrate
+              {errorMessage}
             </Text>
+          ) : null}
 
-            <TextInput
-              style={[
-                gs.input,
-                {
-                  padding: 12,
-                  borderRadius: 8,
-                  borderWidth: 1,
-                  borderColor: fieldErrors.name ? "red" : "#1565C0",
-                  opacity: 0.6,
-                  width: "90%",
-                  alignSelf: "center",
-                },
-              ]}
-              placeholder="Nombre"
-              placeholderTextColor={fieldErrors.name ? "red" : "#999"}
-              value={name}
-              onChangeText={(text) => {
-                setName(text);
-                setFieldErrors((prev) => ({ ...prev, name: false }));
-              }}
-            />
-            <TextInput
-              style={[
-                gs.input,
-                {
-                  padding: 12,
-                  borderRadius: 8,
-                  borderWidth: 1,
-                  borderColor: fieldErrors.surname ? "red" : "#1565C0",
-                  opacity: 0.6,
-                  width: "90%",
-                  alignSelf: "center",
-                },
-              ]}
-              placeholder="Apellido"
-              placeholderTextColor={fieldErrors.surname ? "red" : "#999"}
-              value={surname}
-              onChangeText={(text) => {
-                setSurname(text);
-                setFieldErrors((prev) => ({ ...prev, surname: false }));
-              }}
-            />
-            <TextInput
-              style={[
-                gs.input,
-                {
-                  padding: 12,
-                  borderRadius: 8,
-                  borderWidth: 1,
-                  borderColor: fieldErrors.username ? "red" : "#1565C0",
-                  opacity: 0.6,
-                  width: "90%",
-                  alignSelf: "center",
-                },
-              ]}
-              placeholder="Nombre de usuario"
-              placeholderTextColor={fieldErrors.username ? "red" : "#999"}
-              value={username}
-              onChangeText={(text) => {
-                setUsername(text);
-                setFieldErrors((prev) => ({ ...prev, username: false }));
-              }}
-              autoCapitalize="none"
-            />
-
-            <TextInput
-              style={[
-                gs.input,
-                {
-                  padding: 12,
-                  borderRadius: 8,
-                  borderWidth: 1,
-                  borderColor: fieldErrors.email ? "red" : "#1565C0",
-                  opacity: 0.6,
-                  width: "90%",
-                  alignSelf: "center",
-                },
-              ]}
-              placeholder="Email"
-              placeholderTextColor={fieldErrors.email ? "red" : "#999"}
-              value={email}
-              onChangeText={(text) => {
-                setEmail(text);
-                setFieldErrors((prev) => ({ ...prev, email: false }));
-              }}
-              autoCapitalize="none"
-              keyboardType="email-address"
-            />
-
-            <View style={{ position: "relative" }}>
-              <TextInput
-                style={[
-                  gs.input,
-                  {
-                    padding: 12,
-                    borderRadius: 8,
-                    borderWidth: 1,
-                    borderColor: fieldErrors.password ? "red" : "#1565C0",
-                    opacity: 0.6,
-                    width: "90%",
-                    alignSelf: "center",
-                  },
-                ]}
-                placeholder="Contraseña"
-                placeholderTextColor={fieldErrors.password ? "red" : "#999"}
-                value={password}
-                onChangeText={(text) => {
-                  setPassword(text);
-                  setFieldErrors((prev) => ({ ...prev, password: false }));
-                }}
-                secureTextEntry={!showPassword}
-              />
-              <TouchableOpacity
-                onPress={() => setShowPassword(!showPassword)}
-                style={{ position: "absolute", right: 30, top: 22 }}
-              >
-                <Ionicons
-                  name={showPassword ? "eye-off" : "eye"}
-                  size={24}
-                  color="#1565C0"
-                />
-              </TouchableOpacity>
-            </View>
-
-            <View style={{ position: "relative" }}>
-              <TextInput
-                style={[
-                  gs.input,
-                  {
-                    padding: 12,
-                    borderRadius: 8,
-                    borderWidth: 1,
-                    borderColor: fieldErrors.repeatPassword ? "red" : "#1565C0",
-                    opacity: 0.6,
-                    width: "90%",
-                    alignSelf: "center",
-                  },
-                ]}
-                placeholder="Repite la contraseña"
-                placeholderTextColor={
-                  fieldErrors.repeatPassword ? "red" : "#999"
-                }
-                value={repeatPassword}
-                onChangeText={(text) => {
-                  setRepeatPassword(text);
-                  setFieldErrors((prev) => ({
-                    ...prev,
-                    repeatPassword: false,
-                  }));
-                }}
-                secureTextEntry={!showPassword}
-              />
-              <TouchableOpacity
-                onPress={() => setShowPassword(!showPassword)}
-                style={{ position: "absolute", right: 30, top: 22 }}
-              >
-                <Ionicons
-                  name={showPassword ? "eye-off" : "eye"}
-                  size={24}
-                  color="#1565C0"
-                />
-              </TouchableOpacity>
-            </View>
-
-            {errorMessage ? (
-              <Text
-                style={{
-                  color: "red",
-                  marginVertical: 10,
-                  textAlign: "center",
-                }}
-              >
-                {errorMessage}
-              </Text>
-            ) : null}
-
-            <TouchableOpacity
-              style={{
-                marginTop: 20,
-                backgroundColor: "#1565C0",
-                padding: 14,
-                borderRadius: 8,
-                alignItems: "center",
-                shadowColor: "#000",
-                shadowOpacity: 0.2,
-                shadowRadius: 5,
-                elevation: 3,
-              }}
-              onPress={handleSubmit}
+          <TouchableOpacity
+            style={{
+              marginTop: 20,
+              backgroundColor: "#1565C0",
+              padding: 14,
+              borderRadius: 8,
+              alignItems: "center",
+              shadowColor: "#000",
+              shadowOpacity: 0.2,
+              shadowRadius: 5,
+              elevation: 3,
+            }}
+            onPress={handleSubmit}
+          >
+            <Text
+              style={{ color: "#FFFFFF", fontSize: 16, fontWeight: "bold" }}
             >
-              <Text
-                style={{ color: "#FFFFFF", fontSize: 16, fontWeight: "bold" }}
-              >
-                Registrar nuevo usuario
-              </Text>
-            </TouchableOpacity>
-          </View>
-        )}
+              Registrar nuevo usuario
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );
