@@ -241,3 +241,6 @@ INSERT INTO product (title, description, image_url, shop_url) VALUES
   'https://www.amazon.es/Lictin-Babero-Mangas-Impermeable-Ajustable/dp/B0BZVLJGQ9'
 );
 
+-- Inserción preguntas
+INSERT INTO question (id,answer,question,intake_id,baby_id) VALUES
+(1,1,1,1,1);
