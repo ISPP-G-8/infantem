@@ -40,10 +40,10 @@ public class JwtUtils {
                 .signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
     }
 
-    public String generateTokenFromUsername(String username, Authorities authority) {
+    public String generateTokenFromUsername(String username, Authorities authority, Integer userId) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("authorities", authority.getAuthority());
-        return Jwts.builder().setClaims(claims).setSubject(username).setIssuedAt(new Date())
+        return Jwts.builder().setClaims(claims).setSubject(username).setIssuedAt(new Date()).setId(userId.toString())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
     }
