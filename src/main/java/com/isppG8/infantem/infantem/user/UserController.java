@@ -86,8 +86,7 @@ public class UserController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = UserDTO.class))) @ApiResponse(responseCode = "400",
                                     description = "El usuario no es el tuyo") @PutMapping("/{id}")
-    public ResponseEntity<Object> updateUser(@RequestPart("profilePhoto") MultipartFile multipartFile,
-            @PathVariable Long id, @Valid @RequestBody UserDTO userDetails,
+    public ResponseEntity<Object> updateUser(@PathVariable Long id, @Valid @RequestBody UserDTO userDetails,
             @RequestHeader(name = "Authorization") String token) throws IOException {
 
         String jwtId = jwtUtils.getIdFromJwtToken(token.substring(6));
@@ -99,17 +98,50 @@ public class UserController {
         if (newUsernameUser != null && !newUsernameUser.getId().toString().equals(jwtId)) {
             return ResponseEntity.badRequest().body(new MessageResponse("New username is already taken"));
         }
-        if (!multipartFile.isEmpty()) {
-            userDetails.setProfilePhoto(multipartFile.getBytes());
-        } else {
-            userDetails.setProfilePhoto(null);
+
+        // Mantén la foto de perfil existente
+        User existingUser = userService.getUserById(id);
+        if (existingUser != null) {
+            userDetails.setProfilePhoto(existingUser.getProfilePhoto());
         }
+
         User updatedUser = userService.updateUser(id, userDetails);
         String jwt = jwtUtils.generateTokenFromUsername(updatedUser.getUsername(), updatedUser.getAuthorities(),
                 updatedUser.getId());
 
         return ResponseEntity.ok().body(new UserUpdatedDTO(updatedUser, jwt));
+    }
 
+    @Operation(summary = "Actualizar la foto de perfil de un usuario",
+            description = "Actualiza la foto de perfil de un usuario por su ID.") @ApiResponse(responseCode = "200",
+                    description = "Foto de perfil actualizada exitosamente") @ApiResponse(responseCode = "400",
+                            description = "El usuario no es el tuyo") @PutMapping(value = "/{id}/profile-photo",
+                                    consumes = { "multipart/form-data" })
+    public ResponseEntity<Object> updateProfilePhoto(@RequestPart(name = "profilePhoto") MultipartFile multipartFile,
+            @PathVariable Long id, @RequestHeader(name = "Authorization") String token) throws IOException {
+
+        String jwtId = jwtUtils.getIdFromJwtToken(token.substring(6));
+
+        if (!(jwtId.equals(id.toString()))) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Not your user"));
+        }
+
+        User user = userService.getUserById(id);
+        if (user == null) {
+            return ResponseEntity.badRequest().body(new MessageResponse("User not found"));
+        }
+
+        if (multipartFile != null && !multipartFile.isEmpty()) {
+            UserDTO userDTO = new UserDTO(user);
+            userDTO.setProfilePhoto(multipartFile.getBytes());
+            User updatedUser = userService.updateUser(id, userDTO);
+            String jwt = jwtUtils.generateTokenFromUsername(updatedUser.getUsername(), updatedUser.getAuthorities(),
+                    updatedUser.getId());
+
+            return ResponseEntity.ok().body(new UserUpdatedDTO(updatedUser, jwt));
+        } else {
+            return ResponseEntity.badRequest().body(new MessageResponse("Profile photo is empty"));
+        }
     }
 
     @Operation(summary = "Eliminar un usuario por su ID", description = "Elimina un usuario por su ID.") @ApiResponse(

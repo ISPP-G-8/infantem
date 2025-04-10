@@ -67,7 +67,52 @@ export default function Account() {
     };
 
     fetchSubscription();
+    
+    // Si el usuario tiene una foto de perfil, obtenerla y mostrarla
+    fetchProfilePhoto();
   }, []);
+  
+  // Función para obtener la foto de perfil del usuario
+  const fetchProfilePhoto = async () => {
+    if (!user || !token) return;
+    
+    try {
+      const response = await fetch(`${apiUrl}/api/v1/users/${user.id}`, {
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error("Error al obtener datos del usuario");
+      }
+      
+      const userData = await response.json();
+      
+      // Si hay foto de perfil, convertirla a base64 para mostrarla
+      if (userData.profilePhoto) {
+        // Si la respuesta ya viene en formato base64
+        if (typeof userData.profilePhoto === 'string') {
+          setImageBase64(userData.profilePhoto.startsWith('data:image') 
+            ? userData.profilePhoto 
+            : `data:image/jpeg;base64,${userData.profilePhoto}`);
+        } 
+        // Si viene como array de bytes, convertirlo a base64
+        else if (Array.isArray(userData.profilePhoto)) {
+          const bytes = new Uint8Array(userData.profilePhoto);
+          let binary = '';
+          for (let i = 0; i < bytes.byteLength; i++) {
+            binary += String.fromCharCode(bytes[i]);
+          }
+          const base64 = btoa(binary);
+          setImageBase64(`data:image/jpeg;base64,${base64}`);
+        }
+      }
+    } catch (error) {
+      console.error("Error al obtener la foto de perfil:", error);
+    }
+  };
 
   const handleEditProfile = () => {
     setIsEditing(true);
@@ -79,51 +124,124 @@ export default function Account() {
       return;
     }
   
-    if (!token) return;
+    if (!token)
+      return;
   
     try {
-      const formData = new FormData();
-  
-      if (image) {
-        const fileToUpload = new File(
-          [image], 
-          `${user.username}_avatar.png`, 
-          { type: image.type || "image/png" }
-        );
-  
-        formData.append('profilePhoto', fileToUpload);
-      }
-  
-      formData.append('user', JSON.stringify(user));
-  
+      // Primero enviemos solo los datos del usuario en JSON
+      console.log(`Enviando petición a ${apiUrl}/api/v1/users/${user.id}`);
       const response = await fetch(`${apiUrl}/api/v1/users/${user.id}`, {
         method: "PUT",
         headers: {
-          'Authorization': `Bearer ${token}`,
-          
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
-        body: formData,
+        body: JSON.stringify({
+          id: user.id,
+          name: user.name,
+          surname: user.surname,
+          username: user.username,
+          email: user.email
+        })
       });
-  
+      
+      // Log para verificar la respuesta
+      console.log("Respuesta status:", response.status);
+      
       if (!response.ok) {
-        const err = await response.json();
-        console.error("Error del servidor:", err);
-        throw new Error(JSON.stringify(err));
+        const responseText = await response.text();
+        console.error("Error del servidor (texto):", responseText);
+        
+        try {
+          const err = JSON.parse(responseText);
+          console.error("Error del servidor (JSON):", err);
+          throw new Error(JSON.stringify(err));
+        } catch (parseError) {
+          throw new Error(responseText || "Error desconocido");
+        }
       }
-  
+
       const data = await response.json();
       await updateToken(data.jwt);
-  
+      
+      // Si se ha seleccionado una imagen, enviarla en una petición separada
+      if (image || imageBase64) {
+        await uploadProfilePhoto();
+      }
+
       setIsEditing(false);
       Alert.alert("Perfil actualizado", "Los cambios han sido guardados correctamente");
   
-    } catch (error) {
-      console.error("Error al guardar cambios:", error);
+    } catch (error: any) {
+      console.error("Error completo:", error);
       Alert.alert("Error", `No se pudo guardar los cambios: ${error.message}`);
     }
   };
   
-  
+  // Función para subir la foto de perfil
+  const uploadProfilePhoto = async () => {
+    if (!user || !token) return;
+    
+    try {
+      const formData = new FormData();
+      
+      if (image) {
+        // Si tenemos un blob
+        // @ts-ignore
+        formData.append('profilePhoto', image);
+        console.log("Subiendo imagen como blob");
+      } 
+      else if (imageBase64) {
+        // Preparar la imagen para subirla
+        let imageUri = imageBase64;
+        let imageName = 'profile.jpg';
+        let imageType = 'image/jpeg';
+        
+        // Verificar formato base64
+        if (imageBase64.startsWith('data:image')) {
+          imageType = imageBase64.split(';')[0].split(':')[1];
+        }
+        
+        // @ts-ignore - React Native maneja FormData diferente
+        formData.append('profilePhoto', {
+          uri: imageUri,
+          type: imageType,
+          name: imageName
+        });
+        
+        console.log("Subiendo imagen desde base64");
+      }
+      
+      // Usar el nuevo endpoint específico para la foto de perfil
+      console.log(`Enviando foto al endpoint ${apiUrl}/api/v1/users/${user.id}/profile-photo`);
+      const response = await fetch(`${apiUrl}/api/v1/users/${user.id}/profile-photo`, {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${token}`
+        },
+        body: formData
+      });
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Error al subir la foto:", errorText);
+        throw new Error(errorText);
+      }
+      
+      const photoData = await response.json();
+      console.log("Foto subida exitosamente:", photoData);
+      
+      // Actualizar el token con el nuevo
+      if (photoData.jwt) {
+        await updateToken(photoData.jwt);
+      }
+      
+      return photoData;
+    } catch (error) {
+      console.error("Error al subir la foto de perfil:", error);
+      // No lanzamos error para que no afecte al flujo principal
+    }
+  };
 
   // IMAGE UPLOAD
 
@@ -250,7 +368,9 @@ export default function Account() {
 
         <TouchableOpacity style={gs.profileImageContainer} onPress={() => isEditing && setAvatarModalVisible(true)} disabled={!isEditing}>
           <Image
-            source={{ uri: imageBase64 }}
+            source={imageBase64 
+              ? { uri: imageBase64 } 
+              : require("../../../assets/avatar/avatar1.png")}
             style={gs.profileImage}
           />
         </TouchableOpacity>
