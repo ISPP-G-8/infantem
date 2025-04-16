@@ -3,8 +3,6 @@ package com.isppG8.infantem.infantem.subscription;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
-import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.assertj.core.api.Assertions.assertThat;
 
 import com.isppG8.infantem.infantem.auth.Authorities;
 import com.isppG8.infantem.infantem.auth.AuthoritiesService;
@@ -14,7 +12,6 @@ import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserService;
 import com.isppG8.infantem.infantem.user.dto.UserDTO;
 import com.stripe.Stripe;
-import com.stripe.exception.StripeException;
 import com.stripe.model.*;
 import com.stripe.param.*;
 import org.junit.jupiter.api.BeforeEach;

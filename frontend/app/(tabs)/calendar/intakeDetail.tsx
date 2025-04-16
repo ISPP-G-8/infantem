@@ -229,28 +229,34 @@ export default function intakeDetail() {
               onChangeText={(text) => handleInputChange("observations", text)}
             />
 
-            <Text style={{ alignSelf: 'flex-start', marginLeft: '10%', color: '#1565C0', fontWeight: 'bold', marginBottom: 5 }}>Bebé:</Text>
-            {babies &&
-              <View style={{ borderWidth: 1, borderColor: "#1565C0", borderRadius: 8, width: "80%", marginBottom: 16 }}> 
-            <Picker
-            selectedValue={intake.baby}
-            style={{ opacity: 0.8 }}
-            onValueChange={(babyId) => {
-            // IDK why the backend ask for a JSON like this. :O
-            setIntake((prevIntake) => ({ ...prevIntake, baby: { id: parseInt(babyId) } }));
-            }}
-            >
-            <Picker.Item label="Seleccionar un bebé" value={null} />
-            {babies.map((baby) => (
-              <Picker.Item 
-              key={baby.id} 
-              label={baby.name} 
-              value={baby.id} 
-              />
-            ))}
-            </Picker>
-            </View>
-            }
+<Text style={{ alignSelf: 'flex-start', marginLeft: '10%', color: '#1565C0', fontWeight: 'bold', marginBottom: 5 }}>
+  Bebé:
+</Text>
+
+{babies && (
+  <View style={{ borderWidth: 1, borderColor: "#1565C0", borderRadius: 8, width: "80%", marginBottom: 16 }}>
+    <Picker
+      selectedValue={intake.baby?.id ?? null}
+      style={{ opacity: 0.8 }}
+      onValueChange={(babyId) => {
+        setIntake((prevIntake) => ({
+          ...prevIntake,
+          baby: babyId ? { id: parseInt(babyId) } : null
+        }));
+      }}
+    >
+      <Picker.Item label="Seleccionar un bebé" value={null} />
+      {babies.map((baby) => (
+        <Picker.Item 
+          key={baby.id} 
+          label={baby.name} 
+          value={baby.id} 
+        />
+      ))}
+    </Picker>
+  </View>
+)}
+  
 
           <Text style={{ alignSelf: 'flex-start', marginLeft: '10%', color: '#1565C0', fontWeight: 'bold', marginBottom: 5 }}>Recetas:</Text>
           {recipes && (

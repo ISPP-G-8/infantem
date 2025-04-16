@@ -2,8 +2,6 @@ package com.isppG8.infantem.infantem.advertisement;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,9 +11,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.isppG8.infantem.infantem.InfantemApplication;
-import com.isppG8.infantem.infantem.baby.Baby;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
-import com.isppG8.infantem.infantem.intake.Intake;
 import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserService;
 import com.isppG8.infantem.infantem.auth.Authorities;
@@ -24,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Collections;
 
 import jakarta.transaction.Transactional;
 

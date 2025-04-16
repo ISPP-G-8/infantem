@@ -18,7 +18,7 @@ export default function RecipeDetails() {
   const [isLoading, setIsLoading] = useState(true);
   const { width } = useWindowDimensions();
   const isMobile = width < 768; // Puedes ajustar este umbral según tu diseño
-
+  const [imageBase64, setImageBase64] = useState<any>(null);
 
 
   const gs = require('../../../static/styles/globalStyles');
@@ -33,6 +33,7 @@ export default function RecipeDetails() {
     handleOwnership();
   }, [isLoading]);
 
+
   const obtainRecipeAndUserRecipes = async (): Promise<boolean> => {
     try {
       const response = await fetch(`${apiUrl}/api/v1/recipes/${recipeId}`, {
@@ -41,9 +42,30 @@ export default function RecipeDetails() {
           'Authorization': `Bearer ${token}`,
         },
       });
-
+    
       if (response.ok) {
         const recipeData = await response.json();
+    
+        // Convertir la foto si existe
+        if (recipeData.recipePhoto) {
+          if (typeof recipeData.recipePhoto === 'string') {
+            const base64Image = recipeData.recipePhoto.startsWith('data:image')
+              ? recipeData.recipePhoto
+              : `data:image/jpeg;base64,${recipeData.recipePhoto}`;
+            setImageBase64(base64Image); // <-- AQUÍ
+          } else if (Array.isArray(recipeData.recipePhoto)) {
+            const bytes = new Uint8Array(recipeData.recipePhoto);
+            let binary = '';
+            for (let i = 0; i < bytes.byteLength; i++) {
+              binary += String.fromCharCode(bytes[i]);
+            }
+            const base64 = btoa(binary);
+            setImageBase64(`data:image/jpeg;base64,${base64}`); // <-- AQUÍ
+          }
+        } else {
+          setImageBase64(null); // No hay imagen -> limpiamos
+        }
+    
         setRecipe({
           id: recipeData.id,
           name: recipeData.name,
@@ -51,13 +73,15 @@ export default function RecipeDetails() {
           minRecommendedAge: recipeData.minRecommendedAge,
           maxRecommendedAge: recipeData.maxRecommendedAge,
           ingredients: recipeData.ingredients,
-          elaboration: recipeData.elaboration
+          elaboration: recipeData.elaboration,
         });
       }
     } catch (error) {
       console.error('Error fetching recipe: ', error);
       setRecipe(null);
     }
+    
+    
     try {
       let responseReceived = false;
       if (token && user) {
@@ -165,7 +189,9 @@ export default function RecipeDetails() {
 
           {/* COLUMNA IZQUIERDA - Imagen */}
           <Image
-            source={require("frontend/assets/adaptive-icon.png")} 
+            source={imageBase64 
+              ? { uri: imageBase64 } 
+              : require("../../../assets/avatar/avatar1.png")}
             style={{
               width: 300,
               height: 300,
