@@ -42,8 +42,10 @@
   - Creó el documento.
   - Actualizó el documento para el sprint 2.
   - Actualizó el documento para el sprint 3.
+  - Actualizó el documento para el PPL.
 - Felipe Solís Agudo
   - Añadió información respecto al feedback proporcionado a los grupos
+  - Recolectó la información y la organizó.
   - Revisó el documento
 
 ---
@@ -53,7 +55,7 @@ Enlace a la base de conocimiento común, [sección del grupo 8](https://bcc2425.
 
 
 ## Índice
-- [Aportaciones del Grupo 8 para el Sprint 2](#aportaciones-del-grupo-8-para-el-sprint-2)
+- [Aportaciones del Grupo 8 para el PPL](#aportaciones-del-grupo-8-para-el-ppl)
   - [Grupo 8 - Infantem](#grupo-8---infantem)
   - [Grupo 7 - Map Your World](#grupo-7---map-your-world)
   - [Grupo 9 - Caronte](#grupo-9---caronte)
@@ -65,319 +67,159 @@ Enlace a la base de conocimiento común, [sección del grupo 8](https://bcc2425.
 
 
 
-## Aportaciones del Grupo 8 para el Sprint 2
+## Aportaciones del Grupo 8 para el PPL
 
 ### Grupo 8 - Infantem
 
-Para nuestro propio grupo se recibió el sigunete feedback en la semana del 7 de marzo.
-
-#### Semana 5
+#### Semana 07/04
 ##### Feedback relacionado con la presentación
-- Si tenemos que hacer demo/enseñar video:
-  - Asegurarnos de que se vea todo.
-  - No enseñar el login/register.
-  - Contar una historia: Humanizar la experiencia, usar una persona real para que todo tenga un hilo argumental.
-  - Recetas y usuarios realistas, no enseñar receta1, receta2 .. user1.. etc.
-  - SOLO ENSEÑAR Y DARLE IMPORTANCIA A LO CORE.
-- Tener un mejor killer opener (QUE VUELVA EL BEBE), muy neutro hay que llamar más la atención .
-- Tardar menos tiempo en explicar el proyecto (hemos tardado 3.50).
-- Los bebés de la presentación están bien pero quizás sobran algunos que no dicen nada del epígrafe.
-- Las X de los competidores que sean rojas para que impacte más.
-- Seguir analizando la estructura jerárquica del equipo (Mejor hablar de responsabilidades que de roles).
-- El feedback tenemos que seguir priorizando.
-- Buscar más usuarios piloto.
-- Super importante mostrar algún prompt como el de las dos últimas presentaciones (caronte o map Your World).
-- Falta explicar cómo hemos calculado las notas.
+- David ha mejorado su forma de presentar, aunque a veces solapa frases o abarca demasiado contenido. Se recomienda reducir el alcance de algunas secciones.
+- Se sugiere incluir más metáforas visuales y reducir la cantidad de texto en las diapositivas.
+- El killer opener está mucho mejor alineado con la temática del proyecto.
+- El anuncio de freemium y premium debería unificarse en una sola pieza para mayor claridad.
+- Aunque el análisis del rendimiento y del plan de contingencia fue muy sólido, algunas diapositivas contenían demasiado texto.
+
+##### Feedback relacionado con el desarrollo del proyecto
+- En el vídeo de inversores, es necesario incluir las fuentes de los datos además de las cifras, que por cierto, se pueden abreviar (ej. “1k” en lugar de “1.000”).
+- Adaptar la estrategia de marketing considerando que la edad media de los padres primerizos ha aumentado. Justificar el enfoque hacia distintos segmentos del mercado.
+- Las métricas sobre bebés provienen de la OMS, pero convendría adaptarlas al contexto local.
+- Se debe clarificar el código duplicado diferenciando claramente entre frontend y backend.
+- Las métricas de Sonar deben interpretarse (algunas son buenas si suben, otras si bajan); usar metáforas o separarlas visualmente para facilitar su comprensión.
+- Buen trabajo priorizando el feedback del usuario piloto, aunque se recomienda reforzar el apoyo visual en esa sección.
+- El análisis de amenazas fue adecuado, pero el título debería ser más específico. Ej.: “Amenazas críticas del sistema”.
+- Las métricas usadas para calcular el diferencial de notas son poco informativas actualmente; hay que detallarlas mejor.
+
+#### Semana 21/04
+##### Feedback relacionado con la presentación
+
 
 
 ##### Feedback relacionado con el desarrollo del proyecto
-- Poner datos de prueba realistas, no receta 1 receta 2, user1 user2.
-- No estamos usando sonar ni herramientas para comprobar el código que haya que refactorizar (podemos analizar la evolución de las métricas de sonar a lo largo de los siguiente sprints).
-- Analizar cuando “alucinan” las IAs que estamos usando y marcarlo en el documento de prompts para cuando se haga el análisis.
-
-#### Semana 6
-##### Feedback relacionado con la presentación
-- Hacer que el inicio efectivo sea aún más impactante y conectarlo con la demo y otras partes de la presentación para "cerrar el círculo".
-- No referirse a los inversores en tercera persona, sino hablarles directamente.
-- Mejorar el killer opener y asegurarse de que esté bien integrado con el final.
-- La demo combina el estado actual con lo que se tendrá en el futuro, pero está bien presentada.
-- Indicar claramente qué herramientas de IA se utilizan y presentar casos de uso reales.
-- Reemplazar "papás primerizos" por "padres".
-- Copiarle la gráfica de rendimiento a caronte
-- Impacto legal, menos texto y quedarse con lo más importante
-- INICIO EFECTIVO Y mejorar presentación. Mejorar el killer opener, hilar con la demo y el final, importante "cerrar el círculo".
-- Asegurar que las fotos del equipo sean homogéneas.
 
 
-##### Feedback relacionado con el desarrollo del proyecto
-- En el storyboard dirigido a inversores, no hablar de la persona usuaria, sino centrarse en los beneficios que pueden obtener los inversores.
-- Al presentar cifras, destacar el rendimiento y datos atractivos para incentivar el pago.
-- Justificar la parte premium con un enfoque claro: la personalización de recetas y dietas a medida.
-- Incluir un coste extra para posibles revisiones de los planes de nutrición.
-- Ajustar mejor la estrategia de negocio, asegurando que los pagos de los clientes sean viables y sostenibles.
-- Incorporar métricas clave como TAC (coste de adquisición de clientes) y LGV (lifetime value) para analizar hasta qué punto es rentable seguir adquiriendo clientes.
-- No hacer que el producto aparezca "mágicamente" en el storyboard. Se recomienda involucrar a terceros, como que alguien lo descubra en la farmacia o en otro contexto realista.
-- Agregar una tabla con escenarios pesimista, realista y optimista en una misma diapositiva, asegurando que las cifras estén correctamente formateadas con puntos en los miles.
-- No hacer que el producto aparezca "mágicamente" en el storyboard. Se recomienda involucrar a terceros, como que alguien lo descubra en la farmacia o en otro contexto realista.
-- Mantener coherencia en la historia, llevando al personaje principal (ej. Laura) desde el inicio hasta el final de la presentación.
-- Agrupar las gráficas de costes en una sola diapositiva para mejorar la claridad.
-- Utilizar fotos homogéneas en el equipo (IMPORTANTE).
-- El rendimiento individual del equipo debe mostrarse de forma más visual, con barras de horas por persona.
-- Incluir métricas de impacto legal con menos texto y solo la información clave.
-- No incluir información innecesaria o en lugares donde no corresponda.
-- Mejorar la cobertura de testing, actualmente en 0%. Es fundamental incluir pruebas.
-- Incluir planes de refactorización y detallar qué patrones de diseño se van a implementar.
-- La última diapositiva contiene una URL antigua del despliegue; actualizarla.
-- El informe de métricas es excelente y destaca sobre los otros grupos. Sin embargo, no es necesario incluir archivos específicos solo para el equipo interno.
 
 
 ### Grupo 7 - Map Your World
-#### Semana 5
+#### Semana 07/04
 ##### Feedback relacionado con la presentación
-- Hacer una demo en directo es arriesgado; mejor usar un video grabado.
+- Excelente energía al presentar, aunque el ritmo acelerado hace que el nombre se entienda como “Marioworld”.
+- El vídeo para usuario transmite muy bien el propósito de la app, mostrando a la persona en movimiento.
+- Se recomienda que los datos utilizados en el vídeo del inversor estén incluidos ahí mismo y no repetidos en la presentación.
+- El testing fue exhaustivo, pero sería necesario incluir los bugs detectados en la presentación de forma detallada.
 
-- La demo de escritorio no aporta valor, ya que la aplicación está enfocada a dispositivos móviles.
+##### Feedback relacionado con el desarrollo del proyecto
+- El vídeo de inversores está a contraluz; conviene mejorar la iluminación y claridad del mismo.
+- Es importante incluir cifras que respalden el potencial de negocio de MapYourWorld, tanto actuales como proyectadas.
+- Aportar datos combinados con las acciones de marketing planeadas fortalecerá la estrategia de cara a inversores.
+- Deben contemplar el impacto legal a nivel regional y nacional, y considerar posibles restricciones legales.
 
-- Los enlaces a la demo deben ubicarse al final de la presentación.
 
-- Se debe evitar dar respuestas vagas al explicar los problemas enfrentados
+#### Semana 21/04
+##### Feedback relacionado con la presentación
 
 
 ##### Feedback relacionado con el desarrollo del proyecto
-- Es necesario actualizar el registro de riesgos; no se pudo hacer a tiempo debido a múltiples problemas.
 
-- Faltan métricas de productividad consolidadas, y se deberían mostrar de manera clara para entender cómo se calculan las evaluaciones.
 
-- La planificación del Sprint 2 se entendería mejor con un diagrama de Gantt.
-
-- Buen uso de la IA exponiendo casos reales.
-
-#### Semana 6
-##### Feedback relacionado con la presentación
-- La introducción carece de energía, lo que afecta la credibilidad del personaje y la historia presentada. Se recomienda mejorar la entrega para captar mejor la atención del público.
-- Durante la demo, se realizaron demasiados logins, lo que ralentizó la presentación. Se sugiere optimizar este proceso para que fluya mejor.
-- El tiempo fue demasiado ajustado. Es importante gestionar mejor los tiempos para evitar prisas al final y garantizar que toda la información clave se presente con claridad.
-
-##### Feedback relacionado con el desarrollo del proyecto
-- Las soluciones presentadas deben ser efectivas y aplicadas correctamente, no solo propuestas teóricas.
-- La tabla de competidores y su análisis no encajan bien con el resto de la presentación. Se recomienda replantear su inclusión o presentarla de una forma más integrada con el discurso general.
-- A la hora de hablar sobre el equipo, es importante no mencionar fotos ni nombres, manteniendo un enfoque más profesional y general.
 
 ### Grupo 9 - Caronte
-#### Semana 5
+#### Semana 07/04
 ##### Feedback relacionado con la presentación
-- La presentación tiene un diseño muy cuidado. Se recomienda que las barras de progreso indiquen claramente hasta dónde llega el porcentaje.
-
-- En la gráfica del equipo de trabajo:
-  - Pasar más rápido por esta diapositiva.
-  - En lugar de usar bolas con números, mostrar imágenes de las personas y sus responsabilidades.
-
-- En la diapositiva 14:
-  - Los decimales en el número de horas no aportan valor.
-  - Dividir la información por sprint con una línea.Las horas totales no son tan relevantes; es mejor mostrar la media de horas.
+- Excelente gestión del tiempo. Sin embargo, la demo fue demasiado rápida; no es necesario mostrar todos los casos de uso.
+- Quizás hubo demasiado uso de zoom en la demo. Recordar que también se presenta ante profesores, no solo usuarios.
+- Las gráficas de rendimiento, especialmente las de horas y burn-up, son difíciles de interpretar. Se recomienda rediseñarlas para que transmitan el mensaje de forma más clara.
 
 ##### Feedback relacionado con el desarrollo del proyecto
-- En la diapositiva 7, la transparencia refleja datos mes a mes, pero no de manera acumulativa. Se debería mostrar de forma acumulativa e incluir pérdidas y ganancias.
+- Excelente gestión del tiempo. Sin embargo, la demo fue demasiado rápida; no es necesario mostrar todos los casos de uso.
+- Quizás hubo demasiado uso de zoom en la demo. Recordar que también se presenta ante profesores, no solo usuarios.
+- Las gráficas de rendimiento, especialmente las de horas y burn-up, son difíciles de interpretar. Se recomienda rediseñarlas para que transmitan el mensaje de forma más clara.
 
-- Anticipar el problema de gestión de pagos desde el inicio, ya que incluso el equipo cree que puede ser un inconveniente. La PoC (prueba de concepto) debería haberse realizado en el Sprint 1.
 
-#### Semana 6
+#### Semana 21/04
 ##### Feedback relacionado con la presentación
-- La presentación debe ser autocontenida, incluyendo pequeñas explicaciones que permitan entenderla sin necesidad de aclaraciones adicionales.
-- Es recomendable anunciar previamente el propósito del video, explicando que se debe a las pruebas realizadas con usuarios piloto, sin desvelar sus comentarios antes de tiempo.
-- El "killer opener" fue efectivo en concepto, pero su ejecución podría mejorarse. Sería útil incluir un elemento visual que lo haga más motivador.
-- La diapositiva 7 está muy bien lograda, con gran cantidad de información en poco espacio y un uso correcto de colores.
-- La diapositiva 30 también está bien, pero se sugiere incluir elementos en "In Progress" e "In Review", además de visualizar las "issues" y su estado, identificando cuánto tiempo permanecen en el backlog sin moverse.
-- Es recomendable incluir un video en la demo para explicar el proceso, ya que en presentaciones en línea pueden surgir más fallos.
-- Incluir una medición clara sobre el impacto y la efectividad de las soluciones aplicadas.
 
 
 ##### Feedback relacionado con el desarrollo del proyecto
-- El storyboard está bien planteado y tiene un enfoque emotivo. Sin embargo, cuando se convierta en un anuncio, es recomendable reformularlo para incluir información sobre precios, que actualmente se echa en falta.
-- Aspectos legales (GDPR): Es necesario asegurarse de que se cumple con la normativa GDPR, incluir un mecanismo para borrar datos de usuarios, tener un plan de acción en caso de recibir una denuncia relacionada con el GDPR y no automatizar procesos sin evaluar las implicaciones legales y éticas, pero se recomienda añadir un botón o formulario para gestionar estos aspectos.
-- Se han destinado demasiadas horas para una sola semana dentro del sprint. Sería conveniente reducir el alcance o replantear la estrategia.
-- Es fundamental mejorar la planificación teniendo en cuenta los periodos de exámenes.
-- Es importante realizar mediciones periódicas para evaluar si las soluciones implementadas están funcionando correctamente.
-- Se recomienda incluir información sobre ingresos y gastos en lugar de ingresos y pérdidas.
-- Reflejar el rendimiento del equipo a lo largo del tiempo, ya que es un aspecto obligatorio en la evaluación.
-- Aprovechar mejor la tecnología disponible para optimizar procesos.
-- El uso de Codacy ha sido correcto, y sería útil incluir una gráfica de evolución.
+
 
 
 ### Grupo 10 - Go 4 Surprise
-#### Semana 5
+#### Semana 07/04
 ##### Feedback relacionado con la presentación
-- Excelente presentación por parte del ponente, con un punto extra por entusiasmo en el killer opener. Sin embargo, cuidado al lanzar preguntas al público asumiendo que la respuesta será afirmativa.
+- El killer opener ya no genera tanto impacto como antes; sería recomendable innovar y buscar uno que encaje mejor con el WPL.
+- La sección de roles del equipo podría unificarse en una sola diapositiva, en lugar de dividirla entre varias personas.
+- El presentador no entró en detalle al explicar el primer problema del proyecto; sería útil profundizar en las causas para llegar a la raíz del mismo.
+- Buena explicación del resto de problemas, aunque da la sensación de que actualmente no enfrentan ninguno. Sería útil clarificar si realmente es así o simplemente no se abordaron.
+- La matriz de rendimiento del equipo fue muy clara y está bien explicada.
 
-- Mencionar alcohol en la presentación puede ser arriesgado dependiendo del tipo de público.
+##### Feedback relacionado con el desarrollo del proyecto
+- El vídeo dirigido a inversores parece más un anuncio comercial. Se recomienda cambiar el título y desarrollar un storyboard específico para el enfoque de inversión.
+- El anuncio para cliente es un poco largo; convendría hacerlo más conciso.
+- El anuncio comercial o para inversores debe ser autocontenido y ofrecer suficiente contexto para ser entendido por sí solo.
+- En las demos, aunque el contenido es bueno, se echa en falta un mayor enfoque (zoom) en ciertos momentos clave. Además, sería interesante incluir al personaje "Sorpresín" explicando elementos de la demo.
+- No se ha explicado de forma clara la diferenciación respecto a la competencia, especialmente sobre si los demás también ofrecen experiencias sorpresa.
+- El test realizado con Locust se ha hecho en local, no en producción; hay que tener cuidado con este tipo de pruebas.
 
-- La transición entre las diapositivas 6 y 7 podría ser más fluida; se recomienda presentarlas juntas. Además, hay inconsistencias en las escalas de las gráficas (una en semanas y otra en meses).
 
-- Buena estrategia al definir los roles del equipo (mayoría full-stack). Se recomienda homogeneizar el formato de las fotos.
-
-- Se debe mejorar la sincronización entre el video y el presentador, así como mayor zoom en el video.
-
-- Para el análisis del sprint, sería mejor dividir la presentación en tres diapositivas:
-  - Lo que ha funcionado bien
-  - Lo que ha fallado
-  - Lo que se debe mejorar
-
-- Además, se recomienda adelantar los problemas en la presentación en lugar de mencionarlos más adelante.
+#### Semana 21/04
+##### Feedback relacionado con la presentación
 
 
 ##### Feedback relacionado con el desarrollo del proyecto
-- Es preferible hablar de estimación esperada de ingresos en lugar de estimación media.
-
-- En la demo, la parte de registro y login no es necesaria; lo más importante es mostrar la funcionalidad de los casos de uso core.
-
-- Diagramas de Gantt bien utilizados para visualizar el desarrollo de tareas.
-
-- Se ha echado en falta información sobre cómo se ha tenido en cuenta el feedback de los usuarios piloto.
-
-#### Semana 6
-##### Feedback relacionado con la presentación
-- La diapositiva sobre el rendimiento del equipo está muy bien trabajada.
-- La introducción debe organizarse mejor: actualmente se explica quiénes son sin aclarar qué hacen.
-- Se recomienda orientar el discurso inicial en torno a una palabra clave que refuerce el mensaje central.
-- No hacer preguntas abiertas al inicio; en su lugar, plantear una situación clara con la que todos puedan identificarse.
-- En la diapositiva 40 sobre la planificación de usuarios piloto, las letras con fondo rojo dificultan la lectura. Se recomienda cambiar los colores para mejorar la visibilidad.
-- En general, se debe prestar más atención a la combinación de colores de fondo para garantizar una buena legibilidad.
-- En la demo, hay un momento en el que el ritmo se vuelve demasiado rápido, lo que dificulta la comprensión. Es importante mantener un ritmo constante y claro.
-- El términos generales, el presentador lo hizo muy bien en todo momento.
-
-
-##### Feedback relacionado con el desarrollo del proyecto
-- La presentación explica quiénes son, pero no deja claro qué hacen exactamente. Es importante organizar mejor la estructura para que el mensaje sea más claro.
-- El concepto de "experiencia" es clave para el proyecto, pero se menciona muy poco. Se recomienda reforzar su presencia en el discurso.
-- Se sugiere mantener el factor sorpresa como un punto fuerte, pero de manera contenida y bien dosificada. En el inicio de la presentación, se puede potenciar este aspecto de forma efectiva.
-- Es importante transmitir que el equipo es una inversión, no un coste.
-- La fórmula de ingresos es complicada y puede generar confusión; en su lugar, es mejor explicar los factores clave sin centrarse demasiado en los cálculos.
-- La licencia del software permite ver el código fuente, pero en este caso, mostrarlo no tiene sentido. Se recomienda no incluirlo en la presentación.
-- Se ha implementado una estrategia para evitar la reventa de entradas asignando nombres y entregándolas 24 horas antes del evento.
-- El storyboard es sólido, pero se recomienda eliminar la "magia" del momento en que aparece la marca Go4Surprise, haciéndolo más natural y menos repentino.
-- Lo ideal es ir directamente a los casos de uso principales sin desviarse en explicaciones innecesarias.
-- En retrospectiva, la falta de comunicación dentro del equipo se ha reflejado en la dificultad para informar sobre el avance de tareas.
 
 
 
 ### Grupo 11 - Pawtel
-#### Semana 5
+#### Semana 07/04
 ##### Feedback relacionado con la presentación
-- El killer opening parece más un anuncio que una forma de atraer a la audiencia, ser más imaginativo y dejar claro que hay un problema a resolver.
-- Evitar hacer la demo en directo para prevenir errores técnicos (pantalla azul de Windows). Es preferible usar un video con zoom.
-- Buena idea incluir un Hall of Fame y Hall of Shame.
+- En los anuncios, mejorar el uso de la IA para mantener una coherencia lingüística, aunque la inclusión de subtítulos es muy acertada para facilitar la comprensión.
+- El inicio está bien conectado, pero se necesita un orden más claro y lineal en las secciones para una presentación más fluida y dinámica.
+- La presentación debe durar entre 14 y 15 minutos, evitando añadir contenido innecesario para alargarla.
+- Mejorar gráficos y tablas: ejes legibles, uso de abreviaciones (“K”) y evitar enlaces poco estéticos.
+- Usar un vocabulario comprensible, evitar tecnicismos en exceso, expresiones condescendientes y mezclar idiomas sin necesidad.
+- Tratar la parte legal de forma natural y no como un añadido forzado que rompa el ritmo narrativo.
+- Gran diferenciación frente a competidores, excelente storyboard y anuncios profesionales reutilizables.
+
+##### Feedback relacionado con el desarrollo del proyecto
+- Si todos los usuarios obtienen una puntuación de 10, puede que la métrica no sea útil; se recomienda revisar el sistema de evaluación.
+- Limitar las calificaciones a un máximo de 10 puede indicar problemas en el diseño de la escala.
+- Priorizar el feedback de los usuarios piloto en cada iteración.
+- Los usuarios piloto no deben actuar como beta testers; los errores técnicos deberían haberse detectado y corregido previamente.
+
+
+#### Semana 21/04
+##### Feedback relacionado con la presentación
 
 
 ##### Feedback relacionado con el desarrollo del proyecto
-- La gráfica de usuarios de alojamiento para mascotas carece de información a partir de 2025.
 
-- La gráfica de costes no puede mantenerse constante durante 24 meses. Aunque los costes de desarrollo sean altos, en producción también aumentan (mantenimiento y despliegue).
-
-- Se detecta cierta confusión entre OPEX y CAPEX.
-
-- El modelo de negocio podría ser vulnerable a cookie stuffing, revisar posibles riesgos.
-
-- Es importante optimizar las llamadas a la API para mejorar la comunicación entre el backend y el frontend.
-
-- Se recomienda mejorar el sistema CI/CD.
-
-#### Semana 6
-##### Feedback relacionado con la presentación
-- El presentador ha sido excelente, y el killer opener ha estado muy bien ejecutado. Sin embargo, en algunos momentos habla demasiado rápido, lo que dificulta la comprensión. Se recomienda moderar el ritmo.
-- No es necesario explicar en el video pasos básicos como "se registra, se loggea", ya que son procesos intuitivos para la audiencia.
-- El término mascota debe repetirse con más frecuencia para reforzar su presencia en el discurso.
-- Se debe indicar claramente qué casos de uso se están presentando y cuáles se van a ver a continuación.
-- Es recomendable incluir un email de contacto al final de la presentación para facilitar el seguimiento.
-
-
-##### Feedback relacionado con el desarrollo del proyecto
-- Es fundamental hilar mejor la introducción con la explicación de lo que es el proyecto para que el mensaje sea más fluido y claro.
-- La presentación debe ser autocontenida, asegurando que toda la información necesaria esté incluida sin depender de explicaciones externas.
-- El primer storyboard es muy bueno. Aunque no haya un modelo de precios definido aún, es recomendable explicar este aspecto de todas maneras para dar contexto.
-- Es crucial que el storyboard sea completamente autocontenido.
-- Es importante unificar el análisis del rendimiento del equipo, en lugar de separarlo en backend y frontend.
-- La consistencia en el code style es clave: tener 600 code style issues es demasiado y debe corregirse.
-- En cuanto a la UI, debe estar o completamente perfecta o al menos al 90%, pero no ambas cosas a la vez. Se debe elegir una postura clara sobre su estado.
 
 
 ## Apartado grupal
 
-### Sección de Killer opener
+### Sección de Presentaciones
 
-- Si durante la narrativa hemos usado un objeto de apoyo visaul, no dejarlo mucho tiempo después del inicio ya que solo quitara atención y dificultará la comunicación con el público.
-
-
-### Sección de desarrollo del producto
-
-
-- No reinventar la rueda no ser necesario, por ejemplo, en vez de desarrollar una pagina de registro e inicio de sesión, utilizar un inicio de sesión social, para que puedan usar su cunata de google y asi no tener qeu crear un usurio y contraseña desde cero.
-
-- Garantizar que el usuario pone un correo que le pertenece y que no hace uso de APIs para so¡implemnete crearse el usuario en la palicación, para ello se puede enviar correos después de un tiempo y comprobar la existencia del mismo, de no existir se bloquearía la cuenta.
-
-### Sección de Storyboards
-
-- No explicar en tercera persona las storyboard, por ejemplo si te diriges a los inversores, haz de protagonista y enseña tu producto y explicalo hacia estos.
+- Se tiene que elaborar dos presentaciones diferetes.
+- Hay que contar el proyecto de cara a inversores, no centrandote tanto en el como, sino más en el que. 
+- Una presentación igual a la que llevamos presentando hasta hoara, la otra vamos a ir iterando sobre ella de cara al World Project Launch.
+- La presentación para el WPL debe durar en torno a los 10 min. La otra unos 5 minutos, este tiempo no se puede repartir, es fijo.
+- La primera sección de la presentación para el WPL, tienen que tener un killer opener y un primer anuncio orientado a clientes, todo esto unido.
+- La segunda sección, que hace exactamente (demo del proyecto), contar casos de uso basados en una historia, solo cosas importantes, y consistente con killer opener y el video.
+- La tercera sección hay que hablar de la competencia, explicar competidores como siempre.
+- La cuarta sección hablar del equipo.
+- La quinta sección tartar de como la idea podría ser rentable. Enfatizando en los puntos principales del modelo de negocio.(fuentes de ingresos, costes, plan de negocio y una seccion que sea oportunidades de inversion donde ponemos e video maximo de 1 minuto para inversores).
+- Última sección, donde se puede ver mas informacion, link a landinpgage, qr y un enlace al sistema de produccion (producto).
+- La primera sección de la sección de 5 minutos, debe tratar sobre el modelo de segmentacion, a que segmentos de nuestro público objetivo vamos a orientar la campaña, y poner un par de protopersonas, definir campañas para cada segmentación.
+- La segunda sección, debe tratar del posicionamiento en los motores de busqueda (palabras clave para encontrarnos).
+- La tercera sección, la camapaña de lanzamiento, esta tiene que tener algun evento antes del WPL, enfocado a ganar visibilidad y clientes (aliados, partnership).
+- Hay que definir rol community manager, tratar sobre la planificacion publicaciones (cuando se va a publicar).
+- Hablar de los costes de marketing (desglosar de la primera presentacion estos costes)
+- Por último, los anuncios dirigidos (banners, etc.) requerirán actualizar la landing page para incluirlos.
 
 ## Acciones de consolidación
 
-A partir del feedback recibido sobre nuestra presentación, se han implementado las siguientes mejoras:
-
-- Presentación
-
-  - Optimizar la demo/vídeo: Asegurar que todo sea visible, evitar login/register y contar una historia con datos realistas y humanizados.
-
-  - Killer Opener más llamativo: Recuperar elementos impactantes y reducir neutralidad.
-
-  - Reducir el tiempo de explicación del proyecto a menos de 3 minutos.
-
-  - Ajustar elementos visuales: Menos imágenes innecesarias, resaltar competidores con X rojas y mantener fotos homogéneas.
-
-  - Estructura del equipo: Enfatizar responsabilidades más que roles.
-
-  - Seguir priorizando feedback y aumentar usuarios piloto.
-
-  - Mostrar prompts representativos en la presentación.
-
-  - Para inversores: No hablar del usuario final en el storyboard, enfocarse en beneficios.
-
-  - Unificar gráficas de costos en una diapositiva y mejorar la de rendimiento.
-
-  - Impacto legal: Reducir el texto a lo esencial.
-
-- Desarrollo del proyecto
-
-  - Usar datos de prueba realistas en todas las pruebas y demostraciones.
-
-  - Implementar SonarQube y analizar métricas en cada sprint.
-
-  - Registrar y analizar casos en los que la IA “alucina”.
-
-  - Refinar el modelo de negocio para garantizar pagos y evitar impagos.
 
 
 ### Aprendizajes generales de otros grupos
 
-Además, gracias al feedback recibido en otros equipos, hemos identificado mejoras adicionales que aplicaremos en futuras iteraciones:
-
-- Mejorar el Killer Opener y el Elevator Pitch para captar la atención rápidamente. (Caronte, PawTel, Go 4 Surprise)
-
-- Reducir el texto en las diapositivas y usar elementos visuales para mayor claridad. (Map Your World, Go 4 Surprise, Caronte)
-
-- Estandarizar el formato de la presentación, asegurando coherencia en estilos y títulos. (Caronte)
-
-- Evitar anglicismos innecesarios, priorizando términos en español. (PawTel)
-
-- Usar datos realistas en las demos y evitar Lorem Ipsum o información ficticia. (Map Your World, Go 4 Surprise)
-
-- Optimizar la estructura del equipo, evitando jerarquías innecesarias y fomentando la colaboración. (Go 4 Surprise, Map Your World, PawTel)
-
-- Implementar herramientas como SonarQube para medir deuda técnica y rechazar pull requests de baja calidad. (Map Your World, Go 4 Surprise)
-
-- Centrar la demostración en el core de la aplicación, sin incluir detalles como la gestión de usuarios. (Caronte)
-
-- Actualizar riesgos y medidas tomadas a lo largo del desarrollo para un mejor control del proyecto. (Caronte)
-
-- Mejorar la gestión de usuarios piloto, obteniendo más testers reales y priorizando su feedback. (Go 4 Surprise, PawTel)
-
-Estos aprendizajes nos permitirán mejorar la calidad de nuestras presentaciones y la documentación en futuras fases del proyecto.
 
