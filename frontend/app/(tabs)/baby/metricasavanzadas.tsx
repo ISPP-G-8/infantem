@@ -63,6 +63,10 @@ export default function MetricasAvanzadas() {
         months: number;
         days: number;
     };
+    const height = metrics?.height ?? 45;
+    const { M, L, S } = getLMSForHeight(height);
+    const weight = metrics?.weight ?? 3.5;
+    const zScore = calcularZ(weight, M, L, S);
 
     useEffect(() => {
         const fetchToken = async () => {
@@ -187,6 +191,19 @@ export default function MetricasAvanzadas() {
             return Math.log(X / M) / S;
         }
         return (Math.pow(X / M, L) - 1) / (L * S);
+    }
+    
+    // Función para obtener los parámetros LMS según la altura
+    function getLMSForHeight(height: number) {
+        // Asegurarnos que la altura esté dentro del rango
+        const minHeight = 45.0;
+        const maxHeight = 120.0; // Ajustar según tu JSON completo
+        const clampedHeight = Math.max(minHeight, Math.min(maxHeight, height));
+        
+        // Calcular el índice exacto (cada 0.5 cm)
+        const index = Math.round((clampedHeight - minHeight) * 2);
+        
+        return WFHBZD[index];
     }
 
     function calcularEdad(año: number, mes: number, dia: number): Edad {
@@ -1019,106 +1036,23 @@ export default function MetricasAvanzadas() {
                                     ],  // Ajusta según la posición deseada
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
-                                    tintColor: (
-                                        calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -3.0 ? "black":
-                                        (calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -2.0
-                                        && calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -3.0) ? "red": 
-                                        (calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -1.0
-                                        && calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -2.0) ? "#BE6B00" :
-                                        (calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 1.0
-                                        && calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -1.0) ? "green" : 
-                                        (calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 2.0
-                                        && calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= 1.0) ? "#BE6B00" : 
-                                        (calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 3.0
-                                        && calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= 2.0) ? "red" : "black"
-                                    ),
+                                    tintColor: zScore < -3.0 ? "black":
+                                        (zScore < -2.0 && zScore >= -3.0) ? "red":
+                                        (zScore < -1.0 && zScore >= -2.0) ? "#BE6B00":
+                                        (zScore < 1.0 && zScore >= -1.0) ? "green":
+                                        (zScore < 2.0 && zScore >= 1.0) ? "#BE6B00":
+                                        (zScore < 3.0 && zScore >= 2.0) ? "red": "black"
                                 },
                             ]}
                         />
                     </View>
-                    <Text style={gs.description}>La puntuación z de tu niño es: {calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S).toFixed(2)}, por lo cual llegamos a la siguente conclusión.</Text>
-                    <Text style={gs.description}>{WFHBZ.description[(
-                        calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -3.0 ? 0:
-                        (calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -2.0
-                        && calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -3.0) ? 1: 
-                        (calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -1.0
-                        && calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -2.0) ? 2:
-                        (calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 1.0
-                        && calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -1.0) ? 3 : 
-                        (calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 2.0
-                        && calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= 1.0) ? 4 : 
-                        (calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 3.0
-                        && calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= 2.0) ? 5 : 6
-                    )]}</Text>
+                    <Text style={gs.description}>La puntuación z de tu niño es: {zScore.toFixed(2)}, por lo cual llegamos a la siguente conclusión.</Text>
+                    <Text style={gs.description}>{WFHBZ.description[(zScore < -3.0 ? 0:
+                                        (zScore < -2.0 && zScore >= -3.0) ? 1:
+                                        (zScore < -1.0 && zScore >= -2.0) ? 2:
+                                        (zScore < 1.0 && zScore >= -1.0) ? 3:
+                                        (zScore < 2.0 && zScore >= 1.0) ? 4:
+                                        (zScore < 3.0 && zScore >= 2.0) ? 5: 6)]}</Text>
                 </View>
             }
             {(baby?.genre == 'FEMALE' || (baby?.genre == 'OTHER' && !genreGirl)) && WFHGZ != null &&
@@ -1149,108 +1083,34 @@ export default function MetricasAvanzadas() {
                                     ],
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
-                                    tintColor: (
-                                        calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -3.0 ? "black":
-                                        (calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -2.0
-                                        && calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -3.0) ? "red": 
-                                        (calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -1.0
-                                        && calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -2.0) ? "#BE6B00" :
-                                        (calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 1.0
-                                        && calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -1.0) ? "green" : 
-                                        (calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 2.0
-                                        && calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= 1.0) ? "#BE6B00" : 
-                                        (calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 3.0
-                                        && calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= 2.0) ? "red" : "black"
-                                    ),
+                                    tintColor: zScore < -3.0 ? "black":
+                                    (zScore < -2.0 && zScore >= -3.0) ? "red":
+                                    (zScore < -1.0 && zScore >= -2.0) ? "#BE6B00":
+                                    (zScore < 1.0 && zScore >= -1.0) ? "green":
+                                    (zScore < 2.0 && zScore >= 1.0) ? "#BE6B00":
+                                    (zScore < 3.0 && zScore >= 2.0) ? "red": "black"
                                 },
                             ]}
                         />
                     </View>
-                    <Text style={gs.description}>La puntuación z de tu niño es: {calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S).toFixed(2)}, por lo cual llegamos a la siguente conclusión.</Text>
-                    <Text style={gs.description}>{WFHGZ.description[(
-                        calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -3.0 ? 0:
-                        (calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -2.0
-                        && calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -3.0) ? 1: 
-                        (calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -1.0
-                        && calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -2.0) ? 2:
-                        (calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 1.0
-                        && calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -1.0) ? 3 : 
-                        (calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 2.0
-                        && calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= 1.0) ? 4 : 
-                        (calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 3.0
-                        && calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= 2.0) ? 5 : 6
-                    )]}</Text>
+                    <Text style={gs.description}>La puntuación z de tu niño es: {zScore.toFixed(2)}, por lo cual llegamos a la siguente conclusión.</Text>
+                    <Text style={gs.description}>{WFHGZ.description[(zScore < -3.0 ? 0:
+                                        (zScore < -2.0 && zScore >= -3.0) ? 1:
+                                        (zScore < -1.0 && zScore >= -2.0) ? 2:
+                                        (zScore < 1.0 && zScore >= -1.0) ? 3:
+                                        (zScore < 2.0 && zScore >= 1.0) ? 4:
+                                        (zScore < 3.0 && zScore >= 2.0) ? 5: 6)]}</Text>
                 </View>
             }
+            <View style={[gs.cardMetric, { width: screenWidth * 0.95 }]}>
+                <Text style={gs.title}>Los datos de las puntuaciones z salen de la OMS</Text>
+                <Text style={gs.description}>Hemos obtenido las tablas, las cuales son comunes a cualquier niño o niña del mundo de 
+                    entre 0 a 5 años, y las hemos traducido para un mejor entendimiento. Si desean saber más información o informarse 
+                    pueden visitar la página oficial de la OMS, se les advierte que está en su mayoria en inglés.</Text>
+                <a href="https://www.who.int/publications/i/item/924154693X" target="_blank" rel="noopener noreferrer">
+                    Patrones de crecimiento infantil de la OMS
+                </a>
+            </View>
         </ScrollView>
     );
 }
