@@ -55,6 +55,7 @@
 - [Estrategia de posicionamiento en redes sociales](#estrategia-de-posicionamiento-en-redes-sociales)
   - [Presencia](#presencia)
   - [Estrategia de contenido en redes sociales](#estrategia-de-contenido-en-redes-sociales)
+- [Palabras clave](#palabras-clave)
 
 ### Estrategias para mejorar el posicionamiento SEO
 
@@ -82,6 +83,7 @@ Es recomendable la creación de estos dos archivos:
 Aunque es prioritario el uso de estrategias gratuitas, también es necesario definir alguna estrategias de pago.
 - **Publicidad en Google Ads**: Campañas específicas para palabras clave de alta conversión, por ejemplo, "app alimentación bebé" o "control alergias infantil".
 - **Uso de herramientas premium**: Ahrefs, SEMrush o Ubersuggest para análisis de competencia y búsqueda de palabras clave.
+<br>
 
 ### Estrategia de posicionamiento en redes sociales
 #### Presencia
@@ -132,7 +134,57 @@ En LinkedIn se buscará posicionar la aplicación desde una perspectiva profesio
 - **Publicaciones institucionales**, presentando al equipo, sus valores y su compromiso con la salud infantil.
 - **Conexiones estratégicas** con asociaciones, fundaciones, profesionales de la salud e instituciones relacionadas.
 - **Muestras de impacto social**, como mejoras en la vida de familias o colaboración con especialistas.
+<br>
+
+### Palabras clave
+
+Las palabras clave elegidas son "alimentacion bebe", "papilla", "alergia alimentaria" y "recetas para bebes".
+Usando estas herramientas se analizará el potencial de las palabras elegidas:
+- [Google Trends](https://trends.google.es/trends/)
+- [Ubersuggest](https://neilpatel.com/es/ubersuggest/)
+- [AnswerThePublic](https://answerthepublic.com/es/a39yva/member/searches)
 
 
-### para luego 
-  enlace para ver que palabras clave usar: https://es.semrush.com/blog/herramientas-de-palabras-clave-gratis/
+En **Google Trends** al escribir las palabras, obtenemos una gráfica con el interes a lo largo del tiempo.
+
+![Tendencia de busquedas](../../images/GoogleTrends.png)
+
+<br>
+
+En **Ubersuggest** obtenemos los siguientes datos: 
+
+| Palabras clave            | Volumen de búsqueda | Dificultad SEO | Dificultad pagada | Coste por clic (CPC) |
+|---------------------------|---------------------|----------------|------------------|-----------------------|
+| recetas para bebés        | 1.900 (global)      | 9 (baja)       | 67               | 0,05 €                |
+| alimentacion bebe         | 720 (global)        | 19 (baja)      | 72               | 0,23 €                |
+| papilla                   | 2400 (global)       | 18 (baja)      | 78               | 0,09 €                |
+| alergia alimentaria       | 1.300 (global)      | 34 (medio-baja)| 3                | 0,29 €                |
+
+Siendo cada uno de los terminos:
+- **Volumen de búsqueda**: Cantidad total de veces que se busca esa frase al mes
+- **Dificultad SEO**: Competencia en la busqueda orgánica. Cuanto mayor es el número, más competencia.
+-**Dificultad pagada**: Competencia en busqueda de pago. Cuanto mayor es el número más competencia.
+- **Coste por clic (CPC)**: Coste si se quisiese pagar a Google para publicar un anuncio en los resultados de búsqueda.
+<br>
+
+En **AnswerThePublic** al escribir las palabras obtenemos una serie de busquedas reales de otros usuarios.
+
+- Escribiendo "Alimentos para bebes", las busquedas con mayor volumen son "alimentos para bebes sin leche", "alimentos para bebes para subir de peso", "alimentos para bebes con diarrea", "alimentos para bebes intolerantes a la lactosa".
+- Escribiendo "papilla", "qué papilla se le puede dar a un bebe de 6 meses", "cuando dar papilla a un bebe"
+- Escribiendo "recetas para bebes", "recetas para bebes sin huevo", "recetas para bebes de 6 meses", "recetas para bebes con avena"
+- Escribiendo "alergia alimentaria", "cual es la alergia alimentaria mas comun", "cuando aparece la alergia alimentaria"
+
+#### Conclusiones
+1. **Papilla** es la palabra más buscada.
+    - Volumen global más alto: 2400.
+    - En Google Trends, es la que mantiene un interés más constante y alto en España.
+    - Conclusión: palabra ideal para posicionarse.
+2. **Recetas para bebes** es buen nicho.
+    - Volumen global medio: 1900, pero con muy baja dificultad SEO y CPC muy bajo.
+    - Conclusión: Buena oportunidad para crear contenido.
+3. **Alimentación bebe** tiene potencial edicativo.
+    - Volumen bajo-medio pero con muchas búsquedas relacionadas con "alimentos sin leche", "para la diarrea" o "para subir de peso".
+    - Conclusión: Aunque no tenga tanto volumen, es ideal para atraer búsquedas especificas. Además tiene un CPC bajo (0,23€).
+4. **Alergia alimentaria** está en crecimiento.
+    - Volumen de 1300 y dificultad SEO media (34) pero CPC alto (0,29€), las busquedas relacionadas reflejan interes en causas, sintomas o tipos de alergias.
+    - Conclusión: Ideal para crear contenido informativo y posicionarse como app confiable en temas de salud.
