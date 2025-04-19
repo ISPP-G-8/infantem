@@ -47,9 +47,9 @@
 ## Índice
 - [Introducción](#introduccion)
 - [Análisis de condiciones de fallo](#analisis-condiciones-fallo)
-- [Listado de problemas](#listado-problemas)
+- [Listado de errores](#listado-errores)
 - [Metodología de desarrollo y roles del equipo](#metodologia-roles-equipo)
-- [Análisis de los problemas](#analisis-problemas)
+- [Análisis individual de errores](#analisis-individual-errores)
 
 ## Introducción
 Este documento recoge un análisis detallado de las condiciones de fallo detectadas en el entregable del Sprint 2, así como las acciones planteadas para resolverlas y prevenir que se repitan en futuros sprints.
@@ -81,7 +81,7 @@ En concreto, se detectaron fallos vinculados a:
 
 Estos errores serán descritos con mayor nivel de detalle en la sección correspondiente al listado de errores.
 
-##  Lista de errores y su relación con las condiciones de fallo
+##  Listado de errores
 
 A continuación, se recoge un listado de los errores detectados en relación con las condiciones de fallo T-9 y T-10, organizados según el momento en que fueron identificados y por quién.
 
@@ -94,13 +94,13 @@ A continuación, se recoge un listado de los errores detectados en relación con
 ### Errores identificados por el equipo **después** de la entrega:
 
 - El vídeo de demostración no era accesible desde la rama `main` ni estaba vinculado a un `tag`.
-- Faltaban validaciones en formularios que provocaban errores HTTP no controlados.
+- Faltaban validaciones en formularios que provocaban errores HTTP no controlados (por ejemplo, fecha de nacimiento de los bebés).
 - Algunas vistas importantes no contenían datos visuales (por ejemplo, imágenes en las recetas).
 
 ### Errores identificados por el **revisor del entregable (profesor)**:
 
 - El archivo `revision.md` no incluía una explicación detallada de los casos de uso ni una vinculación clara con las interacciones reales del software.
-- Error HTTP 400 al introducir una edad máxima inválida, sin mensaje de error visible.
+- Error HTTP 400 al introducir una edad máxima de `9999` en el campo de creación de recetas.
 - Imposibilidad de editar recetas una vez creadas.
 - Formulario de edición del perfil permite correos con formato incorrecto, generando errores en consola.
 - En el formulario de alérgenos no se puede identificar a cuál se refiere cada campo.
@@ -110,7 +110,7 @@ A continuación, se recoge un listado de los errores detectados en relación con
 
 Cada uno de estos errores será analizado en profundidad en la siguiente sección.
 
-## 3. Metodología de desarrollo y roles del equipo
+## Metodología de desarrollo y roles del equipo
 
 Durante el Sprint 2 se siguió una metodología de trabajo basada en **Scrum**, adaptada a la dinámica del grupo. Las principales actividades fueron:
 
@@ -121,7 +121,7 @@ Durante el Sprint 2 se siguió una metodología de trabajo basada en **Scrum**, 
 
 ### Organización del equipo
 
-El equipo "Infantem" está formado por 17 miembros, distribuidos en subgrupos según su especialización. La estructura organizativa incluye:
+El equipo de trabajo está formado por 17 miembros, distribuidos en subgrupos según su especialización. La estructura organizativa incluye:
 
 - **Directores de Proyecto**:  
   - **Luis Giraldo Santiago**  
@@ -203,6 +203,183 @@ El equipo "Infantem" está formado por 17 miembros, distribuidos en subgrupos se
   - Lucía Noya Cano  
   - Ángela López Oliva  
   - Javier Ulecia García
+
+## 4. Análisis individual de errores
+
+### Error 1: El sistema de pago no estaba completamente configurado para funcionar con tarjetas reales, pero no se documentó adecuadamente esta limitación.
+
+- **Origen técnico**: La pasarela de pago fue configurada inicialmente para entorno de pruebas, pero en producción no se adaptó correctamente al entorno real. 
+- **Origen en el proceso**: No se realizó una comprobación final de que el sistema de pago estuviera completamente adaptado al entorno real antes de la entrega. La tarea fue marcada como finalizada sin validar su comportamiento en condiciones reales.
+- **Fuente del error**: Luis Giraldo Santiago (responsable de la integración del sistema de pago)
+- **Responsable(s)**: Luis Giraldo Santiago (desarrollo e integración), y el equipo de documentación por no reflejar esta limitación técnica en el `revision.md`.
+- **Acciones de mitigación**:
+  - **Técnica**: Comprobación explícita del entorno antes de cada entrega. Pruebas de pago con tarjetas válidas de test si no se desea utilizar entorno real
+  - **De proceso**: Añadir a la checklist de revisión previa la validación funcional de todos los módulos sensibles, incluyendo pagos.
+- **Estado del error**: En progreso  
+  - **Justificación**: Se ha reconfigurado la pasarela, pero aún no se ha probado en entorno de entrega con éxito completo.
+
+### Error 2: Edición de bebé: la fecha de nacimiento se muestra en formato `2023,3,1` en modo edición y `202331` en el listado
+
+- **Origen técnico**: El valor de la fecha de nacimiento del bebé se manejaba de forma inconsistente entre distintas vistas. En el formulario de edición se cargaba con el formato `2023,3,1`, mientras que en el listado se mostraba como un string concatenado (`202331`), sin separación de componentes ni formato reconocible. No se aplicó ninguna conversión ni normalización del dato al mostrarlo.
+
+- **Origen en el proceso**: No se realizaron pruebas de visualización completas sobre esta funcionalidad antes de la entrega.
+
+- **Fuente del error**: Grupos de frontend y backend, por la forma en que se renderizaba y enviaba la información respectivamente.
+
+- **Responsable(s)**: Equipo de QA e ingeniería de pruebas. 
+
+- **Acciones de mitigación**:
+  - **Técnica**: Asegurar que todos los valores de tipo fecha se convierten al formato ISO `yyyy-mm-dd` antes de mostrarlos en pantalla. 
+  - **De proceso**: Añadir revisión visual obligatoria de formularios y listados en el checklist de QA.
+
+- **Estado del error**: Resuelto  
+ 
+
+### Error 3: El vídeo de demostración no era accesible desde la rama `main` ni estaba vinculado a un `tag`
+
+- **Origen técnico**: Aunque el vídeo fue subido al repositorio el mismo día de la entrega, no quedó accesible desde el `tag` `v2.0.0`, el cual era el punto de referencia oficial para la evaluación. El archivo estaba incluido en un commit correcto, pero tras resolver un conflicto, ese contenido no quedó visible desde la versión etiquetada.
+
+- **Origen en el proceso**: No se realizó una validación posterior a la creación del `tag` para asegurar que el vídeo estuviera correctamente accesible desde la rama `main`. Tampoco se comprobó de forma colectiva que el vídeo cumpliera con los criterios establecidos.
+
+- **Fuente del error**: Antonio Jiménez Ortega (responsable de subir el vídeo al repositorio).
+
+- **Responsable(s)**: Todo el equipo, por no verificar en conjunto la accesibilidad del vídeo como parte del proceso de revisión final antes de la entrega.
+
+- **Acciones de mitigación**:
+  - **Técnica**: Verificar manualmente que los archivos obligatorios estén presentes y accesibles en la rama `main` y en el `tag` de entrega. Comprobar la funcionalidad del enlace o archivo multimedia.
+  - **De proceso**: Incluir en el checklist de entrega la validación explícita de todos los archivos requeridos por parte de QA y del responsable asignado. Establecer una revisión final del repositorio justo después de crear el `tag`.
+
+- **Estado del error**: Resuelto  
+
+
+### Error 4: Error 400 al introducir una fecha de nacimiento futura en el formulario del bebé, sin validación previa ni mensaje visible
+
+- **Origen técnico**: Los formularios de creación y edición del bebé permitían introducir una fecha de nacimiento en el futuro. Esta entrada, al enviarse al backend, resultaba en un error HTTP 400 con un mensaje de respuesta indicando que la fecha era inválida. Sin embargo, el frontend no realizaba ninguna validación previa ni mostraba el mensaje de error recibido, por lo que el usuario no recibía retroalimentación alguna.
+
+- **Origen en el proceso**: No se gestionó adecuadamente los errores devueltos por el servidor 
+debido a que no se probó a introducir una fecha de nacimiento en el futuro en los formularios de creación y edición de bebés.
+
+- **Fuente del error**: Grupo de frontend (falta de validación y gestión de errores en la interfaz) y backend (respuesta técnica correcta pero sin coordinación con la capa visual).
+
+- **Responsable(s)**: Equipo de QA e ingeniería de pruebas, por no haber identificado el caso durante las pruebas funcionales previas a la entrega.
+
+- **Acciones de mitigación**:
+  - **Técnica**: Añadir validaciones en el frontend que impidan introducir fechas de nacimiento posteriores al día actual. Implementar manejo de errores del backend para mostrar mensajes comprensibles y accesibles desde el formulario.
+  - **De proceso**: Actualizar los criterios de aceptación de tareas para incluir la validación de fechas lógicas. Incluir casos límite en las pruebas de QA.
+
+- **Estado del error**: En progreso  
+  - **Justificación**: Se ha detectado el problema y se están incorporando validaciones en el frontend, pero aún no se ha completado la gestión visual de los errores del backend en todos los formularios afectados.
+
+### Error 5: Las recetas no mostraban imágenes en la vista correspondiente
+
+- **Origen técnico**: En la vista de recetas, los elementos visuales que debían mostrar las imágenes asociadas a cada receta aparecían con un placeholder. En particular, las recetas recomendadas por expertos —que deberían incluir siempre una imagen— se mostraban sin contenido visual, lo que afectaba negativamente a la experiencia del usuario.
+
+- **Origen en el proceso**: La funcionalidad relacionada con las imágenes se dejó para el final del sprint, y se priorizaron otras tareas consideradas más urgentes. Como resultado, no se completó adecuadamente la integración.
+
+- **Fuente del error**: Grupo de frontend (presentación y renderizado de las recetas) y backend (almacenamiento y recuperación de los datos de imagen).
+
+- **Responsable(s)**: Equipo de QA e ingeniería de pruebas.
+
+- **Acciones de mitigación**:
+  - **Técnica**: Asegurar que las recetas recomendadas por expertos tengan siempre una imagen asociada. Implementar comprobaciones en frontend para verificar que se renderiza correctamente. Las recetas creadas por usuarios pueden mantenerse como opcionales en cuanto a imagen.
+  - **De proceso**: Incluir en los criterios de revisión visual la comprobación explícita de que las recetas recomendadas contienen imagen. 
+
+- **Estado del error**: Resuelto
+
+### Error 6: Error 400 al introducir una edad máxima de `9999` en el formulario de creación de recetas, sin validación previa ni mensaje visible
+
+- **Origen técnico**: El formulario de creación de recetas permitía introducir valores extremos en los campos de edad mínima y edad máxima recomendada. En concreto, al introducir `9999` como edad máxima, el backend devolvía un error HTTP 400 indicando que el valor era inválido. Sin embargo, el frontend no realizaba ninguna validación previa ni mostraba el mensaje de error recibido, dejando al usuario sin retroalimentación.
+
+- **Origen en el proceso**: No se gestionaron adecuadamente los errores devueltos por el servidor, debido a que no se probó a introducir valores extremos en los campos de edad durante la validación del formulario de creación de recetas.
+
+- **Fuente del error**: Grupo de frontend (falta de validación y gestión de errores en la interfaz) y backend (respuesta técnica correcta pero sin coordinación con la capa visual).
+
+- **Responsable(s)**: Equipo de QA e ingeniería de pruebas, por no haber identificado el caso durante las pruebas funcionales previas a la entrega.
+
+- **Acciones de mitigación**:
+  - **Técnica**: Añadir validaciones en el frontend que impidan introducir edades fuera de un rango lógico (por ejemplo, entre 0 y 36 meses). Implementar el manejo de errores del backend para mostrar mensajes comprensibles y accesibles desde el formulario.
+  - **De proceso**: Actualizar los criterios de aceptación de tareas para incluir validaciones de rangos lógicos en formularios. Incluir casos límite en las pruebas de QA.
+
+- **Estado del error**: En progreso  
+  - **Justificación**: Se ha detectado el problema y se están incorporando validaciones en el frontend, pero aún no se ha completado la gestión visual de los errores del backend en todos los formularios afectados.
+
+### Error 7: El archivo `revision.md` no incluía una explicación detallada de los casos de uso ni los datos necesarios para revisar la pasarela de pago
+
+- **Origen técnico**: El archivo `revision.md`, incluido como parte del entregable, se limitaba a enumerar los casos de uso sin explicar cómo estaban implementados ni cómo se relacionaban con las funcionalidades reales del sistema. Además, no incluía los datos necesarios para revisar la pasarela de pago que eran imprescindibles para validar esta funcionalidad en la evaluación.
+
+- **Origen en el proceso**: Esta tarea se dejó para el final del sprint y, debido a la carga de trabajo en otras funcionalidades más críticas, no se completó con el nivel de detalle requerido. La sección correspondiente a la pasarela de pago quedó incompleta y sin verificación previa.
+
+- **Fuente del error**: Antonio Jiménez Ortega, responsable directo de la redacción del archivo.
+
+- **Responsable(s)**: Equipo de documentación, por no revisar el contenido ni asegurar que se cumplían los requisitos mínimos exigidos para la evaluación.
+
+- **Acciones de mitigación**:
+  - **Técnica**: Incluir una descripción clara y detallada de cómo cada caso de uso se refleja en el sistema. Añadir también todos los datos requeridos para probar funcionalidades sensibles, como la pasarela de pago.
+  - **De proceso**: Asegurar que el `revision.md` se complete con antelación suficiente y que sea revisado por varios miembros del equipo antes de la entrega. Incluir su revisión como ítem obligatorio en el checklist final de QA.
+
+- **Estado del error**: Resuelto
+
+### Error 8: Imposibilidad de editar recetas una vez creadas
+
+- **Origen técnico**: Aunque la funcionalidad de edición de recetas estaba implementada, los botones de editar y eliminar no se mostraban en la interfaz debido a un fallo en la lógica de visibilidad asociada a la propiedad `isOwned`. Este valor determinaba si una receta pertenecía al usuario o no, pero al activarlo correctamente, los botones desaparecían incluso para las recetas propias. Como consecuencia, no era posible acceder a la edición desde la interfaz.
+
+- **Origen en el proceso**: Se detectó el fallo en la lógica de visibilidad cerca de la fecha de entrega y no se resolvió a tiempo. Tampoco se incluyó una verificación de esta funcionalidad como parte del protocolo de QA, por lo que su fallo no fue detectado antes de entregar el sistema.
+
+- **Fuente del error**: David Vargas Muñiz, responsable directo de la implementación de esta funcionalidad.
+
+- **Responsable(s)**: Equipo de QA e ingeniería de pruebas, por no verificar que los botones de edición aparecieran y funcionaran correctamente solo para las recetas propias del usuario.
+
+- **Acciones de mitigación**:
+  - **Técnica**: Corregir la lógica de visibilidad basada en `isOwned` para asegurar que los botones se muestren únicamente cuando el usuario sea el propietario de la receta. Validar también que las acciones de editar y eliminar se bloqueen adecuadamente en backend para recetas ajenas.
+  - **De proceso**: Añadir casos de uso relacionados con permisos y control de visibilidad en el checklist de QA. Verificar funcionalidad completa (visual y lógica) para acciones restringidas según usuario.
+
+- **Estado del error**: En progreso  
+  - **Justificación**: La funcionalidad está implementada, pero requiere ajustes en la lógica de visibilidad para que esté correctamente operativa.
+
+### Error 9: El formulario de edición del perfil permite correos con formato incorrecto, generando errores en consola y provocando un error 500 en el backend
+
+- **Origen técnico**: El formulario de edición del perfil de usuario permitía introducir correos electrónicos con un formato incorrecto (por ejemplo, sin `@` o sin dominio). Al enviarse al backend, estos valores no eran interceptados ni validados previamente en el frontend. Como resultado, se producía un fallo en la lógica de persistencia de datos que terminaba con un error HTTP 500 del servidor (`Could not commit JPA transaction`). Este fallo se reflejaba también como error en la consola del navegador, pero sin ningún tipo de retroalimentación visual para el usuario.
+
+- **Origen en el proceso**: No se establecieron validaciones mínimas en los formularios del perfil, ni se consideró el tratamiento de errores graves derivados de entradas inválidas. Este formulario no fue incluido en los tests de QA ni validado durante la revisión previa a la entrega.
+
+- **Fuente del error**: Grupo de frontend (por permitir entradas inválidas sin validación) y backend (por no controlar excepciones en la capa de persistencia).
+
+- **Responsable(s)**: Equipo de QA e ingeniería de pruebas, por no incluir la edición del perfil como parte del recorrido funcional básico a validar antes de la entrega.
+
+- **Acciones de mitigación**:
+  - **Técnica**: Añadir validaciones en el frontend mediante expresiones regulares o validadores nativos para asegurar el formato correcto del correo electrónico. En backend, capturar errores de persistencia y devolver un mensaje controlado al cliente sin romper la ejecución.
+  - **De proceso**: Incluir todos los formularios de usuario en los criterios de revisión de QA. Establecer un estándar mínimo de validaciones obligatorias para campos sensibles como el email.
+
+- **Estado del error**: En progreso  
+  - **Justificación**: Se ha detectado el fallo y se están aplicando validaciones en el formulario de edición, además de implementar un mejor manejo de errores en backend.
+
+### Error 10: El formulario de alérgenos no se sabe a cuál de ellos se refiere. No tiene sentido
+
+- **Origen técnico**: El formulario de alérgenos requería que el usuario seleccionara previamente a uno de sus bebés registrados para poder asociar la información correctamente. Sin embargo, esta selección no estaba contemplada en la interfaz, por lo que el formulario no indicaba a qué bebé se estaban asignando los alérgenos. Como resultado, el flujo carecía de sentido funcional y no permitía completar la acción correctamente.
+
+- **Origen en el proceso**: No se definió ni validó el flujo completo de uso para la funcionalidad de alérgenos. Se asumió que el usuario ya habría seleccionado un contexto (el bebé), pero no se implementó esa lógica ni se reflejó en la interfaz ni en el diseño de la navegación.
+
+- **Fuente del error**: Grupo de frontend, por no incluir el mecanismo de selección del bebé antes de mostrar el formulario de alérgenos.
+
+- **Responsable(s)**: Equipo de QA e ingeniería de pruebas, por no haber detectado que la funcionalidad era incoherente sin ese paso previo obligatorio.
+
+- **Acciones de mitigación**:
+  - **Técnica**: Añadir un selector obligatorio que permita al usuario elegir al bebé antes de acceder al formulario de alérgenos.
+  - **De proceso**: Revisar el flujo completo de las funcionalidades asociadas a cada entidad (en este caso, bebés) para verificar que se implementan todos los pasos necesarios. Incluir validación de coherencia funcional y contexto de uso en QA.
+
+- **Estado del error**: Resuelto
+
+
+
+
+
+
+
+
+
+  
+
+
 
 
 
