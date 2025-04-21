@@ -1,12 +1,8 @@
 import { useState, useEffect } from "react";
-import { Text, View, TextInput, TouchableOpacity, ScrollView, Image } from "react-native";
+import { Text, View, TextInput, TouchableOpacity,ScrollView } from "react-native";
 import { useRouter } from "expo-router";
 import { getToken } from "../../../utils/jwtStorage";
 import { Picker } from "@react-native-picker/picker";
-import { useAuth } from "../../../context/AuthContext";
-import * as ImagePicker from 'expo-image-picker';
-import UploadImageModal from "../../../components/UploadImageModal";
-
 
 export default function AddBaby() {
   const gs = require("../../../static/styles/globalStyles");
@@ -19,8 +15,8 @@ export default function AddBaby() {
   // TODO: Let the user add a photo from files
   //const [photoRoute, setPhotoRoute] = useState<string>("male");
   const [ingredients, setIngredients] = useState<string>("");
-  const [minRecommendedAge, setMinRecommendedAge] = useState<number | null>(null);
-  const [maxRecommendedAge, setMaxRecommendedAge] = useState<number | null>(null);
+  const [minRecommendedAge, setMinRecommendedAge] = useState<number | null>(null);  
+  const [maxRecommendedAge, setMaxRecommendedAge] = useState<number | null>(null);  
   const [elaboration, setElaboration] = useState<string>("");
   // As this is an array of Intakes this couldn't be implemented this fast 
   // and I can not let the user to specify the intakes without a type validation.
@@ -38,14 +34,7 @@ export default function AddBaby() {
   const [minAgeError, setMinAgeError] = useState<string | null>(null);
   const [maxAgeError, setMaxAgeError] = useState<string | null>(null);
 
-  const [imageModalVisible, setImageModalVisible] = useState(false);
-  const [image, setImage] = useState<any>(null);
-  const [imageBase64, setImageBase64] = useState<any>(null);
-  const { user, token, updateToken } = useAuth();
-  const [createdRecipe, setCreatedRecipe] = useState(null);
-
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
-
 
   useEffect(() => {
     const getUserToken = async () => {
@@ -53,41 +42,51 @@ export default function AddBaby() {
       setJwt(token);
     };
     getUserToken();
-  }, []);
+  },[]);
 
   const validateForm = () => {
     let isValid = true;
-
+  
     setNameError(null);
     setIngredientsError(null);
     setMinAgeError(null);
     setMaxAgeError(null);
-
+  
     if (!name.trim()) {
       setNameError("El nombre es obligatorio.");
       isValid = false;
     }
-
+  
     if (!ingredients.trim()) {
       setIngredientsError("Los ingredientes son obligatorios.");
       isValid = false;
     }
-
-    if (minRecommendedAge !== null && isNaN(minRecommendedAge)) {
+  
+    if (minRecommendedAge === null || isNaN(minRecommendedAge)) {
       setMinAgeError("La edad mínima recomendada debe ser un número válido.");
       isValid = false;
-    }
-
-    if (maxRecommendedAge !== null && isNaN(maxRecommendedAge)) {
-      setMaxAgeError("La edad máxima recomendada debe ser un número válido.");
+    } else if (minRecommendedAge < 1) {
+      setMinAgeError("La edad mínima recomendada debe ser al menos 1 (mes)");
       isValid = false;
     }
-
-    if (minRecommendedAge !== null && maxRecommendedAge !== null && minRecommendedAge > maxRecommendedAge) {
+  
+    if (maxRecommendedAge === null || isNaN(maxRecommendedAge)) {
+      setMaxAgeError("La edad máxima recomendada debe ser un número válido");
+      isValid = false;
+    } else if (maxRecommendedAge > 50) {
+      setMaxAgeError("La edad máxima recomendada no puede ser mayor que 50 (meses)");
+      isValid = false;
+    }
+  
+    if (
+      minRecommendedAge !== null &&
+      maxRecommendedAge !== null &&
+      minRecommendedAge > maxRecommendedAge
+    ) {
       setMinAgeError("La edad mínima no puede ser mayor que la edad máxima.");
       isValid = false;
     }
-
+  
     return isValid;
   };
 
@@ -100,36 +99,25 @@ export default function AddBaby() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${jwt}`,
+            "Authorization": `Bearer ${jwt}`, 
           },
           body: JSON.stringify({
             name: name,
             description: description,
-            photo_route: "",
+            photo_route: "", //TODO: Change this
             ingredients: ingredients,
             minRecommendedAge: minRecommendedAge,
             maxRecommendedAge: maxRecommendedAge,
             elaboration: elaboration,
+            //TODO: Change this
             intakes: [],
             allergens: [],
             alimentoNutriente: [],
           }),
         });
-
+    
         if (response.ok) {
-          
-          const data = await response.json();
-          setCreatedRecipe(data);
-  
-          console.log("Recipe created successfully:", data);
-  
-          if (image) {
-            await uploadRecipePhoto(data.id); 
-          } else {
-            console.log("FALLOOOOOOOO")
-          }
-  
-          router.push("/recipes");
+          router.push("/recipes"); 
         } else {
           console.error("Error creating recipe:", response.statusText);
         }
@@ -138,166 +126,6 @@ export default function AddBaby() {
       }
     }
   };
-
-  function base64toBlob(base64Data, contentType = 'image/png') {
-    const byteCharacters = atob(base64Data);
-    const byteArrays = [];
-
-    for (let offset = 0; offset < byteCharacters.length; offset += 512) {
-      const slice = byteCharacters.slice(offset, offset + 512);
-      const byteNumbers = new Array(slice.length);
-      for (let i = 0; i < slice.length; i++) {
-        byteNumbers[i] = slice.charCodeAt(i);
-      }
-      const byteArray = new Uint8Array(byteNumbers);
-      byteArrays.push(byteArray);
-    }
-
-    return new Blob(byteArrays, { type: contentType });
-  }
-
-  const uploadRecipePhoto = async (createdRecipeId) => {
-    if (!user || !token) return;
-
-    try {
-      const formData = new FormData();
-
-      if (image) {
-        // Si tenemos un blob
-        // @ts-ignore
-        formData.append('recipePhoto', image);
-        console.log("Subiendo imagen como blob");
-      }
-      else if (imageBase64) {
-        // Preparar la imagen para subirla
-        let imageUri = imageBase64;
-        let imageName = 'profile.jpg';
-        let imageType = 'image/jpeg';
-
-        // Verificar formato base64
-        if (imageBase64.startsWith('data:image')) {
-          imageType = imageBase64.split(';')[0].split(':')[1];
-        }
-
-        // @ts-ignore - React Native maneja FormData diferente
-        formData.append('recipePhoto', {
-          uri: imageUri,
-          type: imageType,
-          name: imageName
-        });
-
-        console.log("Subiendo imagen desde base64");
-      }
-
-      // Usar el nuevo endpoint específico para la foto de perfil
-      console.log(`Enviando foto al endpoint ${apiUrl}/api/v1/recipes/${createdRecipeId}/recipe-photo`);
-      const response = await fetch(`${apiUrl}/api/v1/recipes/${createdRecipeId}/recipe-photo`, {
-        method: "PUT",
-        headers: {
-          "Authorization": `Bearer ${jwt}`
-        },
-        body: formData
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("Error al subir la foto:", errorText);
-        throw new Error(errorText);
-      }
-
-      const photoData = await response.json();
-      console.log("Foto subida exitosamente:", photoData);
-
-      if (photoData.jwt) {
-        await updateToken(photoData.jwt);
-      }
-
-      return photoData;
-    } catch (error) {
-      console.error("Error al subir la foto de perfil:", error);
-    }
-  };
-
-  const uploadImage = async () => {
-    try {
-      let result;
-      const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-      if (!permissionResult.granted) {
-        alert("Permiso denegado para acceder a la galería.");
-        return;
-      }
-
-      result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [1, 1],
-        quality: 1,
-        base64: false, // da igual, web da base64 como uri
-      });
-      
-
-      if (!result.canceled) {
-        let imageUri = result.assets[0].uri;
-
-        // NUEVO: Validar que sea PNG
-        if (!imageUri.startsWith("data:image/png")) {
-          alert("Por favor, selecciona una imagen en formato PNG.");
-          return;
-        }
-
-        if (imageUri.startsWith('data:image')) {
-          const base64Data = imageUri.split(',')[1];
-
-          const blob = base64toBlob(base64Data);
-          console.log("Blob creado:", blob);
-
-          saveImage(blob);
-        } else {
-          console.log("Imagen URI válida:", imageUri);
-          saveImage(imageUri);
-        }
-      } else if (result == undefined) {
-        console.log("result undefined");
-      }
-    } catch (err) {
-      alert('Error al abrir la galería: ' + err.message);
-      setImageModalVisible(false);
-    }
-  };
-
-
-  const deleteImage = () => {
-    try {
-      saveImage(null);
-      setImageModalVisible(false);
-    } catch (err) {
-      console.log(err.message);
-      setImageModalVisible(false);
-    }
-  };
-
-  const saveImage = async (image) => {
-    try {
-      setImage(image);
-      const base64Image = await blobToBase64(image);
-      setImageBase64(base64Image);
-      console.log("Imagen base64:", base64Image);
-      // sendToBackend(image);
-      setImageModalVisible(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const blobToBase64 = (blob) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = () => resolve(reader.result);
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
-    });
-  };
-
 
   return (
     <View style={{ flex: 1, backgroundColor: "#E3F2FD" }}>
@@ -320,23 +148,7 @@ export default function AddBaby() {
           <Text style={[gs.headerText, { textAlign: "center", marginBottom: 24, color: "#1565C0" }]}>
             Añadir una receta
           </Text>
-
-          <TouchableOpacity style={gs.profileImageContainer} onPress={() => setImageModalVisible(true)}>
-            <Image
-              source={imageBase64
-                ? { uri: imageBase64 }
-                : require("../../../assets/avatar/avatar1.png")}
-              style={gs.profileImage}
-            />
-          </TouchableOpacity>
-
-          <UploadImageModal
-            visible={imageModalVisible}
-            onClose={() => setImageModalVisible(false)}
-            onGalleryPress={() => uploadImage()}
-            onDeletePress={deleteImage}
-          />
-
+  
           <TextInput
             style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "90%" }]}
             placeholder="Nombre"
@@ -344,14 +156,14 @@ export default function AddBaby() {
             onChangeText={setName}
           />
           {nameError && <Text style={{ color: "red", marginBottom: 5 }}>{nameError}</Text>}
-
+  
           <TextInput
             style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "90%" }]}
             placeholder="Descripción"
             value={description}
             onChangeText={setDescription}
           />
-
+  
           <TextInput
             style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "90%" }]}
             placeholder="Ingredientes"
@@ -359,31 +171,31 @@ export default function AddBaby() {
             onChangeText={setIngredients}
           />
           {ingredientsError && <Text style={{ color: "red", marginBottom: 5 }}>{ingredientsError}</Text>}
-
+  
           <TextInput
             style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "90%" }]}
-            placeholder="Edad mínima recomendada"
-            value={minRecommendedAge?.toString()}
+            placeholder="Edad mínima recomendada (meses)"
+            value={minRecommendedAge?.toString() ?? ""}
             keyboardType="numeric"
             onChangeText={(text) => {
-              const newValue = parseFloat(text) || 0;
+              const newValue = text.trim() === "" ? null : parseFloat(text);
               setMinRecommendedAge(newValue);
             }}
           />
           {minAgeError && <Text style={{ color: "red", marginBottom: 5 }}>{minAgeError}</Text>}
-
+  
           <TextInput
             style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "90%" }]}
-            placeholder="Edad máxima recomendada"
-            value={maxRecommendedAge?.toString()}
+            placeholder="Edad máxima recomendada (meses)"
+            value={maxRecommendedAge?.toString() ?? ""}
             keyboardType="numeric"
             onChangeText={(text) => {
-              const newValue = parseFloat(text) || 0;
+              const newValue = text.trim() === "" ? null : parseFloat(text);
               setMaxRecommendedAge(newValue);
             }}
           />
           {maxAgeError && <Text style={{ color: "red", marginBottom: 5 }}>{maxAgeError}</Text>}
-
+  
           <TextInput
             style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "90%" }]}
             placeholder="Elaboración"
@@ -391,7 +203,7 @@ export default function AddBaby() {
             onChangeText={setElaboration}
             multiline
           />
-
+  
           <TouchableOpacity style={[gs.mainButton, { alignSelf: "center", marginTop: 10 }]} onPress={handleSave}>
             <Text style={[gs.mainButtonText, { paddingHorizontal: 24 }]}>Guardar</Text>
           </TouchableOpacity>
