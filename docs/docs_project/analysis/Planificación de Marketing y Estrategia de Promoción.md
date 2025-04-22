@@ -67,7 +67,8 @@ Contribuyó en completar el contenido del documento
 8. [Herramientas a Utilizar](#8-herramientas-a-utilizar)
 9. [Evaluación y Retroalimentación](#9-evaluación-y-retroalimentación)
 10. [Imagen de Marca e Identidad Visual](#10-imagen-de-marca-e-identidad-visual)
-11. [Conclusión](#11-conclusión)
+11. [Uso de IA para Marketing](#11-uso-de-ia-para-marketing)
+12. [Conclusión](#11-conclusión)
 
 ---
 ## 1. Introducción y Objetivos
@@ -452,8 +453,45 @@ Todo el contenido gráfico de la marca (redes, app, web, materiales impresos) de
 - **Personalidad:** Cuidada, accesible, moderna, con autoridad sin ser impositiva.
 
 ---
+## 11. Uso de IA para Marketing
 
+La inteligencia artificial (IA) se incorporará como recurso transversal para potenciar la eficiencia y la personalización de las campañas de marketing de *Infantem*. Su aplicación permitirá mejorar tanto la planificación como la ejecución de las acciones promocionales, optimizando recursos y resultados.
 
-## 11. Conclusión
+#### Aplicaciones previstas:
+
+- **Generación de contenido asistido**  
+  Utilización de herramientas de IA (como ChatGPT) para redactar copys, correos, descripciones y mensajes promocionales adaptados al tono de la marca.
+    - **Ejemplo de prompt usado**:
+      - *“¿Dónde encajaría mejor este bloque de texto dentro del plan de Marketing?”*
+      - *“Revisa este apartado del plan de marketing y reescríbelo con un lenguaje más formal y profesional.”* 
+      -  *“Quiero integrar SEO y redes sociales en el documento de marketing, dime cómo lo harías y si es viable.”* 
+      - *“Dame un lema para la app Infantem que sea cercano y profesional.”*
+
+- **Segmentación inteligente de audiencias**  
+  Análisis automático de patrones de comportamiento y preferencias de los usuarios en redes sociales o en la app para personalizar campañas y anuncios según el perfil.
+    - **Ejemplo de prompt usado**: 
+      - *“Dime qué tipo de segmentación podemos aplicar a padres mayores de 40 con hijos.”*  
+      - *“¿Cómo adaptar una campaña publicitaria en TikTok para un público de 40 a 50 años?”*
+
+- **Optimización de campañas publicitarias**  
+  Uso de algoritmos para realizar A/B testing, ajustar dinámicamente la inversión en Meta Ads o Google Ads, y seleccionar las mejores creatividades en función del rendimiento.
+  - **Ejemplo de prompt usado**:
+    - *“Dame ideas de copys para una campaña en Instagram con foco en salud infantil.”*
+
+- **Atención al cliente y automatización de respuestas**  
+  Implementación futura de chatbots inteligentes en la app y en redes sociales para resolver dudas frecuentes de forma inmediata y eficaz.
+  - **Ejemplo de prompt usado**:
+    - *“Genera una lista de preguntas frecuentes y respuestas breves para padres que usen la app por primera vez.”* 
+
+- **Análisis predictivo**  
+  Modelos de IA para prever picos de uso, estimar conversión de campañas o predecir qué contenidos generan mayor engagement en cada red.
+  - **Ejemplo de prompt usado**:
+    - *“Según el perfil de usuarios de 25 a 34 años, ¿qué tipo de publicaciones generan más engagement en Instagram?”*  
+    - *“¿Cuáles son los mejores días y horas para publicar según nuestro target?”*
+
+El uso estratégico de la inteligencia artificial permite al equipo de marketing de *Infantem* tomar decisiones más informadas, optimizar recursos y ofrecer experiencias más personalizadas. Gracias a su integración, se mejora no solo la eficacia de las campañas publicitarias, sino también la conexión con el público objetivo, anticipando sus necesidades y generando mayor valor desde el primer contacto.
+
+---
+## 12. Conclusión
 
 La planificación de marketing para Infantem se centra en generar una comunidad comprometida antes del lanzamiento y sostener el crecimiento mediante campañas relevantes, colaboraciones efectivas y publicidad bien segmentada. La estrategia multicanal se adapta al perfil de los usuarios (padres jóvenes vs. adultos) y asegura una presencia coherente y atractiva de la marca desde el primer contacto.
