@@ -42,6 +42,7 @@
 ## Colaboradores del documento
 - David Fuentelsaz Rodríguez
 - Enrique García Abadía
+- Paula Luna Navarro: Revisó el documento.
 
 
 ## Índice
