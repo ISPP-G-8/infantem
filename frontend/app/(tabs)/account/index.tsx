@@ -62,15 +62,15 @@ export default function Account() {
     };
 
     fetchSubscription();
-    
+
     // Si el usuario tiene una foto de perfil, obtenerla y mostrarla
     fetchProfilePhoto();
   }, []);
-  
+
   // Función para obtener la foto de perfil del usuario
   const fetchProfilePhoto = async () => {
     if (!user || !token) return;
-    
+
     try {
       const response = await fetch(`${apiUrl}/api/v1/users/${user.id}`, {
         method: "GET",
@@ -78,21 +78,21 @@ export default function Account() {
           "Authorization": `Bearer ${token}`
         }
       });
-      
+
       if (!response.ok) {
         throw new Error("Error al obtener datos del usuario");
       }
-      
+
       const userData = await response.json();
-    
+
       // Si hay foto de perfil, convertirla a base64 para mostrarla
       if (userData.profilePhoto) {
         // Si la respuesta ya viene en formato base64
         if (typeof userData.profilePhoto === 'string') {
-          setImageBase64(userData.profilePhoto.startsWith('data:image') 
-            ? userData.profilePhoto 
+          setImageBase64(userData.profilePhoto.startsWith('data:image')
+            ? userData.profilePhoto
             : `data:image/jpeg;base64,${userData.profilePhoto}`);
-        } 
+        }
         // Si viene como array de bytes, convertirlo a base64
         else if (Array.isArray(userData.profilePhoto)) {
           const bytes = new Uint8Array(userData.profilePhoto);
@@ -102,6 +102,9 @@ export default function Account() {
           }
           const base64 = btoa(binary);
           setImageBase64(`data:image/jpeg;base64,${base64}`);
+        }
+        else if (userData.profilePhoto == null) {
+          setImageBase64(null);
         }
       }
     } catch (error) {
@@ -118,10 +121,10 @@ export default function Account() {
       console.log("No hay usuario disponible.");
       return;
     }
-  
+
     if (!token)
       return;
-  
+
     try {
       // Primero enviemos solo los datos del usuario en JSON
       console.log(`Enviando petición a ${apiUrl}/api/v1/users/${user.id}`);
@@ -139,14 +142,14 @@ export default function Account() {
           email: user.email
         })
       });
-      
+
       // Log para verificar la respuesta
       console.log("Respuesta status:", response.status);
-      
+
       if (!response.ok) {
         const responseText = await response.text();
         console.error("Error del servidor (texto):", responseText);
-        
+
         try {
           const err = JSON.parse(responseText);
           console.error("Error del servidor (JSON):", err);
@@ -158,58 +161,58 @@ export default function Account() {
 
       const data = await response.json();
       await updateToken(data.jwt);
-      
-      // Si se ha seleccionado una imagen, enviarla en una petición separada
-      if (image) {
-        await uploadProfilePhoto();
-      }
+
+      await uploadProfilePhoto();
 
       setIsEditing(false);
       Alert.alert("Perfil actualizado", "Los cambios han sido guardados correctamente");
-  
+
     } catch (error: any) {
       console.error("Error completo:", error);
       Alert.alert("Error", `No se pudo guardar los cambios: ${error.message}`);
     }
   };
-  
+
   // Función para subir la foto de perfil
   const uploadProfilePhoto = async () => {
     if (!user || !token) return;
-    
+  
     try {
       const formData = new FormData();
-      
-      if (image) {
-        // Si tenemos un blob
-        // @ts-ignore
-        formData.append('profilePhoto', image);
-        console.log("Subiendo imagen como blob");
-      } 
-      else if (imageBase64) {
-        // Preparar la imagen para subirla
-        let imageUri = imageBase64;
-        let imageName = 'profile.jpg';
-        let imageType = 'image/jpeg';
-        
-        // Verificar formato base64
-        if (!imageUri.startsWith("data:image/png")) {
-          alert("Por favor, selecciona una imagen en formato PNG.");
-          return;
-        }
-        
-        // @ts-ignore - React Native maneja FormData diferente
-        formData.append('profilePhoto', {
-          uri: imageUri,
-          type: imageType,
-          name: imageName
+  
+      if (image === null && imageBase64 === null) {
+        const response = await fetch(`${apiUrl}/api/v1/users/${user.id}/profile-photo`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            profilePhoto: null
+          })
         });
-        
-        console.log("Subiendo imagen desde base64");
-      }
       
-      // Usar el nuevo endpoint específico para la foto de perfil
-      console.log(`Enviando foto al endpoint ${apiUrl}/api/v1/users/${user.id}/profile-photo`);
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error("Error al eliminar foto:", errorText);
+          throw new Error(errorText);
+        }
+      
+        console.log("Foto eliminada correctamente");
+        return;
+      }
+  
+      // Si hay imagen, la subimos
+      if (image) {
+        formData.append('profilePhoto', image);
+      } else if (imageBase64) {
+        formData.append('profilePhoto', {
+          uri: imageBase64,
+          type: "image/png",
+          name: "profile.png"
+        });
+      }
+  
       const response = await fetch(`${apiUrl}/api/v1/users/${user.id}/profile-photo`, {
         method: "PUT",
         headers: {
@@ -217,44 +220,30 @@ export default function Account() {
         },
         body: formData
       });
-      
+  
       if (!response.ok) {
         const errorText = await response.text();
-        console.error("Error al subir la foto:", errorText);
         throw new Error(errorText);
       }
-      
-      const photoData = await response.json();
-      console.log("Foto subida exitosamente:", photoData);
-      
-      // Actualizar el token con el nuevo
-      if (photoData.jwt) {
-        await updateToken(photoData.jwt);
+  
+      const data = await response.json();
+      if (data.jwt) {
+        await updateToken(data.jwt);
       }
-      
-      return photoData;
+  
+      await fetchProfilePhoto();
+      return data;
     } catch (error) {
-      console.error("Error al subir la foto de perfil:", error);
-      // No lanzamos error para que no afecte al flujo principal
+      console.error("Error al subir/eliminar la foto de perfil:", error);
     }
   };
+  
 
-  // IMAGE UPLOAD
-
-  const validImage = (uri) => {
-    // if (!uri) return false;
-
-    // const lowerUri = uri.toLowerCase();
-    // return lowerUri.endsWith('.jpg') ||
-    //   lowerUri.endsWith('.jpeg') ||
-    //   lowerUri.endsWith('.png');
-    return true;
-  };
 
   function base64toBlob(base64Data, contentType = 'image/png') {
     const byteCharacters = atob(base64Data);
     const byteArrays = [];
-  
+
     for (let offset = 0; offset < byteCharacters.length; offset += 512) {
       const slice = byteCharacters.slice(offset, offset + 512);
       const byteNumbers = new Array(slice.length);
@@ -264,76 +253,77 @@ export default function Account() {
       const byteArray = new Uint8Array(byteNumbers);
       byteArrays.push(byteArray);
     }
-  
+
     return new Blob(byteArrays, { type: contentType });
   }
 
-  const uploadImage = async () => {
-    try {
-      let result;
-      const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-      if (!permissionResult.granted) {
-        alert("Permiso denegado para acceder a la galería.");
-        return;
-      }
-  
-      result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [1, 1],
-        quality: 1,
-        base64: false, // da igual, web da base64 como uri
-      });
-  
-      if (!result.canceled) {
-        let imageUri = result.assets[0].uri;
-        
-        // NUEVO: Validar que sea PNG
-        if (!imageUri.startsWith("data:image/png")) {
-          alert("Por favor, selecciona una imagen en formato PNG.");
+  const uploadImage = async (action) => {
+    console.log("Acción seleccionada:", action);
+    if (action === 'update') {
+      try {
+        let result;
+        const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (!permissionResult.granted) {
+          alert("Permiso denegado para acceder a la galería.");
           return;
         }
-        
-        if (imageUri.startsWith('data:image')) {
-          const base64Data = imageUri.split(',')[1];
-  
-          const blob = base64toBlob(base64Data);
-          console.log("Blob creado:", blob);
-  
-          saveImage(blob);
-        } else {
-          console.log("Imagen URI válida:", imageUri);
-          saveImage(imageUri);
+
+        result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
+          allowsEditing: true,
+          aspect: [1, 1],
+          quality: 1,
+          base64: false, // da igual, web da base64 como uri
+        });
+
+        if (!result.canceled) {
+          let imageUri = result.assets[0].uri;
+
+          // NUEVO: Validar que sea PNG
+          if (!imageUri.startsWith("data:image/png")) {
+            alert("Por favor, selecciona una imagen en formato PNG.");
+            return;
+          }
+
+          if (imageUri.startsWith('data:image')) {
+            const base64Data = imageUri.split(',')[1];
+
+            const blob = base64toBlob(base64Data);
+            console.log("Blob creado:", blob);
+
+            saveImage(blob);
+          } else {
+            console.log("Imagen URI válida:", imageUri);
+            saveImage(imageUri);
+          }
+        } else if (result === undefined) {
+          console.log("result undefined");
         }
-      } else if (result === undefined) {
-        console.log("result undefined");
+      } catch (err) {
+        alert('Error al abrir la galería: ' + err.message);
+        setAvatarModalVisible(false);
       }
-    } catch (err) {
-      alert('Error al abrir la galería: ' + err.message);
-      setAvatarModalVisible(false);
+    } else {
+      console.log("Eliminando imagen");
+      saveImage(null);
     }
   };
-  
-  
 
-  const deleteImage = () => {
-    try {
-      saveImage(null);
-      setAvatarModalVisible(false);
-    } catch ({ message }) {
-      console.log(message);
-      setAvatarModalVisible(false);
-    }
-  }
 
   const saveImage = async (image) => {
     try {
-      setImage(image);
-      const base64Image = await blobToBase64(image);
-      setImageBase64(base64Image);
-      console.log("Imagen base64:", base64Image);
-      // sendToBackend(image);
-      setAvatarModalVisible(false);
+      if (image) {
+        setImage(image);
+        const base64Image = await blobToBase64(image);
+        setImageBase64(base64Image);
+        console.log("Imagen base64:", base64Image);
+        setAvatarModalVisible(false);
+      } else {
+        setImage(null);
+        setImageBase64(null);
+        console.log("Imagen eliminada");
+        setAvatarModalVisible(false);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -360,13 +350,13 @@ export default function Account() {
           Perfil</Text>
 
 
-        {user && (subscription ? ( (subscription && subscription.active ? (
+        {user && (subscription ? ((subscription && subscription.active ? (
           <Link href={"/account/premiumplan"} style={[gs.mainButton, { marginVertical: 10, textAlign: "center", width: "20%", backgroundColor: "red" }]}>
             <Text style={[gs.mainButtonText, { fontSize: 20 }]}>Cancelar suscripcion</Text>
           </Link>
         ) : (
           <Text style={[gs.text, { fontSize: 20 }]}>Hasta el final de la suscripción no puede volver a suscribirse</Text>))
-        ): (
+        ) : (
           <Link href={"/account/premiumplan"} style={[gs.mainButton, { marginVertical: 10, textAlign: "center", width: "80%" }]}>
             <Text style={[gs.mainButtonText, { fontSize: 20 }]}>¡HAZTE PREMIUM!</Text>
           </Link>
@@ -375,9 +365,9 @@ export default function Account() {
 
         <TouchableOpacity style={gs.profileImageContainer} onPress={() => isEditing && setAvatarModalVisible(true)} disabled={!isEditing}>
           <Image
-            source={imageBase64 
-              ? { uri: imageBase64 } 
-              : require("../../../assets/avatar/avatar1.png")}
+            source={imageBase64 != null
+              ? { uri: imageBase64 }
+              : require("../../../assets/avatar/avatar2.png")}
             style={gs.profileImage}
           />
         </TouchableOpacity>
@@ -385,8 +375,8 @@ export default function Account() {
         <UploadImageModal
           visible={avatarModalVisible}
           onClose={() => setAvatarModalVisible(false)}
-          onGalleryPress={() => uploadImage()}
-          onDeletePress={deleteImage}
+          onGalleryPress={() => uploadImage('update')}
+          onDeletePress={() => uploadImage('delete')}
         />
 
         {user && (
@@ -417,14 +407,14 @@ export default function Account() {
           <Text style={gs.mainButtonText}>Tus bebés</Text>
         </TouchableOpacity>
 
-        <View style={{flexDirection:"row", gap:10}}> 
-        <TouchableOpacity style={[gs.mainButton, { marginTop: 10, backgroundColor: "#1565C0" }]} onPress={isEditing ? handleSaveChanges : handleEditProfile}>
-          <Text style={gs.mainButtonText}>{isEditing ? "Guardar Cambios" : "Editar Perfil"}</Text>
-        </TouchableOpacity>
+        <View style={{ flexDirection: "row", gap: 10 }}>
+          <TouchableOpacity style={[gs.mainButton, { marginTop: 10, backgroundColor: "#1565C0" }]} onPress={isEditing ? handleSaveChanges : handleEditProfile}>
+            <Text style={gs.mainButtonText}>{isEditing ? "Guardar Cambios" : "Editar Perfil"}</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity style={[gs.secondaryButton, { marginTop: 10 }]} onPress={signOut}>
-          <Text style={[gs.secondaryButtonText]}>Cerrar Sesión</Text>
-        </TouchableOpacity>
+          <TouchableOpacity style={[gs.secondaryButton, { marginTop: 10 }]} onPress={signOut}>
+            <Text style={[gs.secondaryButtonText]}>Cerrar Sesión</Text>
+          </TouchableOpacity>
         </View>
 
 
