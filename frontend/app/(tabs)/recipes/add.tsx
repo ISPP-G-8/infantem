@@ -218,50 +218,59 @@ export default function AddBaby() {
     }
   };
 
-  const uploadImage = async () => {
-    try {
-      let result;
-      const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-      if (!permissionResult.granted) {
-        alert("Permiso denegado para acceder a la galería.");
-        return;
-      }
-
-      result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [1, 1],
-        quality: 1,
-        base64: false, // da igual, web da base64 como uri
-      });
-      
-
-      if (!result.canceled) {
-        let imageUri = result.assets[0].uri;
-
-        // NUEVO: Validar que sea PNG
-        if (!imageUri.startsWith("data:image/png")) {
-          alert("Por favor, selecciona una imagen en formato PNG.");
+  const uploadImage = async (action) => {
+    if (action === 'load') {
+      try {
+        let result;
+        const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (!permissionResult.granted) {
+          alert("Permiso denegado para acceder a la galería.");
           return;
         }
-
-        if (imageUri.startsWith('data:image')) {
-          const base64Data = imageUri.split(',')[1];
-
-          const blob = base64toBlob(base64Data);
-          console.log("Blob creado:", blob);
-
-          saveImage(blob);
-        } else {
-          console.log("Imagen URI válida:", imageUri);
-          saveImage(imageUri);
+  
+        result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
+          allowsEditing: true,
+          aspect: [1, 1],
+          quality: 1,
+          base64: false, // da igual, web da base64 como uri
+        });
+        
+  
+        if (!result.canceled) {
+          let imageUri = result.assets[0].uri;
+  
+          // NUEVO: Validar que sea PNG
+          if (!imageUri.startsWith("data:image/png")) {
+            alert("Por favor, selecciona una imagen en formato PNG.");
+            return;
+          }
+  
+          if (imageUri.startsWith('data:image')) {
+            const base64Data = imageUri.split(',')[1];
+  
+            const blob = base64toBlob(base64Data);
+            console.log("Blob creado:", blob);
+  
+            saveImage(blob);
+          } else {
+            console.log("Imagen URI válida:", imageUri);
+            saveImage(imageUri);
+          }
+        } else if (result == undefined) {
+          console.log("result undefined");
         }
-      } else if (result == undefined) {
-        console.log("result undefined");
+      } catch (err) {
+        alert('Error al abrir la galería: ' + err.message);
+        setImageModalVisible(false);
       }
-    } catch (err) {
-      alert('Error al abrir la galería: ' + err.message);
-      setImageModalVisible(false);
+    } else if (action === 'delete') {
+      try {
+        saveImage(null);
+      } catch (err) {
+        alert('Error eliminar imagen: ' + err.message);
+        setImageModalVisible(false);
+      }
     }
   };
 
@@ -277,15 +286,16 @@ export default function AddBaby() {
   };
 
   const saveImage = async (image) => {
-    try {
+    if (image != null) {
       setImage(image);
       const base64Image = await blobToBase64(image);
       setImageBase64(base64Image);
       console.log("Imagen base64:", base64Image);
-      // sendToBackend(image);
       setImageModalVisible(false);
-    } catch (error) {
-      console.log(error);
+    } else {
+      setImage(null);
+      setImageBase64(null);
+      setImageModalVisible(false);
     }
   };
 
@@ -333,8 +343,8 @@ export default function AddBaby() {
           <UploadImageModal
             visible={imageModalVisible}
             onClose={() => setImageModalVisible(false)}
-            onGalleryPress={() => uploadImage()}
-            onDeletePress={deleteImage}
+            onGalleryPress={() => uploadImage('load')}
+            onDeletePress={() => uploadImage('delete')}
           />
 
           <TextInput
