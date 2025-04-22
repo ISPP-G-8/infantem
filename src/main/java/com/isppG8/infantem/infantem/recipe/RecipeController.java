@@ -296,4 +296,17 @@ public class RecipeController {
         customRecipeRequestService.deleteRequest(id);
     }
 
+    @Operation(summary = "Cerrar una solicitud de receta personalizada",
+            description = "Cierra una solicitud de receta personalizada por su ID.") @ApiResponse(responseCode = "200",
+                    description = "Solicitud de receta personalizada cerrada con éxito") @ApiResponse(
+                            responseCode = "403",
+                            description = "No tienes permiso para cerrar esta solicitud") @ApiResponse(
+                                    responseCode = "404",
+                                    description = "Solicitud no encontrada")
+    @PostMapping("/custom-requests/{id}/close")
+    public ResponseEntity<CustomRecipeRequest> closeRequest(Long id) {
+        CustomRecipeRequest request = customRecipeRequestService.closeRequest(id);
+        return ResponseEntity.ok(request);
+    }
+
 }
