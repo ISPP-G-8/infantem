@@ -196,6 +196,25 @@ El equipo "Infantem" está formado por 17 miembros, distribuidos en subgrupos se
   - Ángela López Oliva  
   - Javier Ulecia García
 
+## 4. Análisis individual de errores
+
+### Error 1: Imposibilidad de editar recetas una vez creadas
+
+- **Origen técnico**: Aunque la funcionalidad de edición de recetas estaba implementada, los botones de editar y eliminar no se mostraban en la interfaz debido a un fallo en la lógica de visibilidad asociada a la propiedad `isOwned`. Este valor determinaba si una receta pertenecía al usuario o no, pero al activarlo correctamente, los botones desaparecían incluso para las recetas propias. Como consecuencia, no era posible acceder a la edición desde la interfaz.
+
+- **Origen en el proceso**: Se detectó el fallo en la lógica de visibilidad cerca de la fecha de entrega y no se resolvió a tiempo.
+
+- **Fuente del error**: David Vargas Muñiz, responsable directo de la implementación de esta funcionalidad.
+
+- **Responsable(s)**: Grupo de frontend, por no resolver el problema de visibilidad de los botones de edición pese a haberlo identificado antes de la entrega.
+
+- **Acciones de mitigación**:
+  - **Técnica**: Corregir la lógica de visibilidad basada en `isOwned` para asegurar que los botones se muestren únicamente cuando el usuario sea el propietario de la receta. 
+  
+  - **De proceso**: Añadir casos de uso relacionados con permisos y control de visibilidad en el checklist de QA. Verificar funcionalidad completa (visual y lógica) para acciones restringidas según usuario.
+
+- **Estado del error**: En progreso  
+  - **Justificación**: La funcionalidad está implementada, pero requiere ajustes en la lógica de visibilidad para que esté correctamente operativa.
 
 
 
