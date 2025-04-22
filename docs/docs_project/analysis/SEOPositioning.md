@@ -40,12 +40,10 @@
 ---
 
 ## Colaboradores del documento
-- Luis Giraldo
-  - Creó la plantilla de los documentos
-  - Actualiza el documento al sprint 2.
-  - Actualizó el documento al sprint 3.
 - Javier Ulecia García
   - añadir información al documento
+- Paula Luna Navarro
+  - Revisó el documento
 
 
 ## Índice
@@ -163,7 +161,7 @@ En **Ubersuggest** obtenemos los siguientes datos:
 Siendo cada uno de los terminos:
 - **Volumen de búsqueda**: Cantidad total de veces que se busca esa frase al mes
 - **Dificultad SEO**: Competencia en la busqueda orgánica. Cuanto mayor es el número, más competencia.
--**Dificultad pagada**: Competencia en busqueda de pago. Cuanto mayor es el número más competencia.
+- **Dificultad pagada**: Competencia en busqueda de pago. Cuanto mayor es el número más competencia.
 - **Coste por clic (CPC)**: Coste si se quisiese pagar a Google para publicar un anuncio en los resultados de búsqueda.
 <br>
 
