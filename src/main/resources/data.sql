@@ -244,6 +244,6 @@ INSERT INTO product (title, description, image_url, shop_url) VALUES
 INSERT INTO question (id,answer,question,intake_id,baby_id) VALUES
 (1,1,1,1,1);
 
-INSERT INTO custom_recipe_request_table (id, details, created_at, user_id ) VALUES
-(1, 'Necesito una receta sin gluten para mis niños de 4 y 5 años', '2025-04-06', 1);
+INSERT INTO custom_recipe_request_table (id, details, created_at, user_id, status ) VALUES
+(1, 'Necesito una receta sin gluten para mis niños de 4 y 5 años', '2025-04-06', 1, 'OPEN');
 

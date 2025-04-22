@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.isppG8.infantem.infantem.user.User;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,6 +38,10 @@ public class CustomRecipeRequest {
     @PastOrPresent
     @NotNull
     private LocalDateTime createdAt;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private RequestStatus status;
 
     @ManyToOne(optional = false)
     @JsonBackReference

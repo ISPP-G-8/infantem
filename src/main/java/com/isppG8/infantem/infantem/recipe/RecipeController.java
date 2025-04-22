@@ -248,7 +248,14 @@ public class RecipeController {
 
     // Custom Recipe Request
 
-    @GetMapping("/custom-requests")
+    @GetMapping("/custom-requests") @Operation(summary = "Obtener todas las solicitudes de recetas personalizadas",
+            description = "Recupera todas las solicitudes de recetas personalizadas.") @ApiResponse(
+                    responseCode = "200", description = "Lista de solicitudes de recetas personalizadas encontrada",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CustomRecipeRequest.class))) @ApiResponse(
+                                    responseCode = "403",
+                                    description = "No tienes permiso para acceder a esta ruta") @ApiResponse(
+                                            responseCode = "404", description = "No se encontraron solicitudes")
     public ResponseEntity<Page<CustomRecipeRequest>> getAllCustomRecipeRequests(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size) {
@@ -262,6 +269,20 @@ public class RecipeController {
                 requests.size());
 
         return ResponseEntity.ok(paginatedRequests);
+    }
+
+    @Operation(summary = "Obtener una solicitud de receta personalizada por ID",
+            description = "Recupera los detalles de una solicitud de receta personalizada utilizando su ID.") @ApiResponse(
+                    responseCode = "200", description = "Solicitud de receta personalizada encontrada",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CustomRecipeRequest.class))) @ApiResponse(
+                                    responseCode = "403",
+                                    description = "No se tiene acceso al recurso o ya se han sobrepasado el numero de solicitudes") @PostMapping("/custom-requests")
+    public ResponseEntity<CustomRecipeRequest> createCustomRecipeRequest(
+            @Valid @RequestBody CustomRecipeRequest request) {
+        request.setStatus(RequestStatus.OPEN);
+        CustomRecipeRequest createdRequest = customRecipeRequestService.createRequest(request);
+        return ResponseEntity.status(201).body(createdRequest);
     }
 
 }
