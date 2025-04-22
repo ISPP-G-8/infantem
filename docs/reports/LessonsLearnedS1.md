@@ -293,7 +293,7 @@ Tras verificar el tag correspondiente al despliegue del Sprint 1 y probar su fun
 
 Durante el Sprint 1 se evidenciaron múltiples errores funcionales y técnicos que comprometieron seriamente la calidad percibida del entregable. A pesar de que muchos de estos errores fueron detectados y corregidos posteriormente, la causa principal del suspenso fue el fallo en el despliegue de la aplicación.
 
-El sistema evaluado por el profesorado no coincidía con la versión correcta indicada por el tag de entrega, y además presentaba una caída crítica del servicio de base de datos. Esto impidió que se ejecutaran los casos de uso básicos y provocó la aparición de errores que no estaban presentes en la versión esperada. Como resultado, gran parte del trabajo funcional completado por el equipo no pudo ser valorado adecuadamente.
+El sistema evaluado por el profesorado no coincidía con la versión correcta indicada por el tag de entrega. Esto impidió que se ejecutaran los casos de uso básicos y provocó la aparición de errores que no estaban presentes en la versión esperada. Como resultado, gran parte del trabajo funcional completado por el equipo no pudo ser valorado adecuadamente.
 
 Este incidente pone de manifiesto la necesidad urgente de establecer mecanismos más rigurosos de revisión y control en el proceso de despliegue, especialmente en los momentos previos a una entrega. Asimismo, resalta la importancia de validar en condiciones reales todas las funcionalidades clave, asegurando que el entorno productivo sea representativo del estado real del desarrollo.
 
