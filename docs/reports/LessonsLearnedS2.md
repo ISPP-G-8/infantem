@@ -46,11 +46,11 @@
 
 
 ## Índice
-- [Introducción](#introduccion)
-- [Análisis de condiciones de fallo](#analisis-condiciones-fallo)
-- [Listado de errores](#listado-errores)
-- [Metodología de desarrollo y roles del equipo](#metodologia-roles-equipo)
-- [Análisis individual de errores](#analisis-individual-errores)
+- [Introducción](#introducción)
+- [Análisis de condiciones de fallo](#análisis-de-condiciones-de-fallo)
+- [Listado de errores](#listado-de-errores)
+- [Metodología de desarrollo y roles del equipo](#metodología-de-desarrollo-y-roles-del-equipo)
+- [Análisis individual de errores](#4-análisis-individual-de-errores)
 
 ## Introducción
 Este documento recoge un análisis detallado de las condiciones de fallo detectadas en el entregable del Sprint 2, así como las acciones planteadas para resolverlas y prevenir que se repitan en futuros sprints.

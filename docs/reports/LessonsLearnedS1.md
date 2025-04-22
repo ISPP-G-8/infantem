@@ -1,6 +1,6 @@
 # Informe de lecciones aprendidas - Sprint 1
 
-![Portada](../../images/Infantem.png)
+![Portada](../images/Infantem.png)
 
 
 **Fecha:** 19/04/2025  
@@ -46,17 +46,18 @@
 
 
 ## Índice
-- [Introducción](#introduccion)
-- [Análisis de condiciones de fallo](#analisis-condiciones-fallo)
-- [Listado de problemas](#listado-problemas)
-- [Metodología de desarrollo y roles del equipo](#metodologia-roles-equipo)
-- [Análisis de los problemas](#analisis-problemas)
+- [Introducción](#1-introducción)
+- [Análisis de condiciones de fallo](#2-análisis-de-condiciones-de-fallo)
+- [Listado de problemas](#3-lista-de-errores-y-su-relación-con-las-condiciones-de-fallo)
+- [Metodología de desarrollo y roles del equipo](#4-metodología-de-desarrollo-y-roles-del-equipo)
+- [Análisis de los problemas](#5-análisis-individual-de-errores)
+- [Conclusión](#6-conclusiones)
 
-## Introducción
+## 1. Introducción
 Este documento recoge un análisis detallado de las condiciones de fallo detectadas en el entregable del Sprint 1, así como las acciones planteadas para resolverlas y prevenir que se repitan en futuros sprints.
 
 
-## Análisis de condiciones de fallo
+## 2. Análisis de condiciones de fallo
 
 Durante la revisión del segundo entregable se identificaron incumplimientos en la condicion T-10, de acuerdo con los criterios establecidos en el documento oficial “Deliverable Failure Conditions v2.1”.
 
@@ -74,7 +75,7 @@ En concreto, se detectaron fallos vinculados a:
 
 Estos errores serán descritos con mayor nivel de detalle en la sección correspondiente al listado de errores.
 
-##  Lista de errores y su relación con las condiciones de fallo
+## 3. Lista de errores y su relación con las condiciones de fallo
 
 A continuación, se recoge un listado de los errores detectados en relación con la condicion de fallo T-10, organizados según el momento en que fueron identificados y por quién.
 
@@ -100,7 +101,7 @@ Mas adelante se explicara el porque de la aparicion de estos ultimos errores det
 
 Cada uno de estos errores será analizado en profundidad en la sección 4.
 
-## 3. Metodología de desarrollo y roles del equipo
+## 4. Metodología de desarrollo y roles del equipo
 
 Durante el Sprint 1 se siguió una metodología de trabajo basada en **Scrum**, adaptada a la dinámica del grupo. Las principales actividades fueron:
 
@@ -194,98 +195,109 @@ El equipo "Infantem" está formado por 17 miembros, distribuidos en subgrupos se
   - Ángela López Oliva  
   - Javier Ulecia García
 
-## 4. Análisis individual de errores
+## 5. Análisis individual de errores
 
-Para analizar los errores encontrados en este Sprint podemos casificarlos en dos clases, errores provocados por problemas en el despliegue y otro tipo de errores. Se a decidido usar esta clasificacion ya que despues de analizar el feedback obtenido por los profesores en la revision, se ha llegado a la conclusion de que en el momento de la correccion, la base de datos del despliegue estaba caida y por eso han surgido gran cantidad de errores en la correccion.
+Para una mejor comprensión, los errores se agrupan en dos grandes categorías: aquellos derivados de problemas en el despliegue y otros de índole funcional. Esta clasificación responde al análisis del feedback recibido, que señala que durante la corrección el despliegue no contaba con la version que correspondia con el tag de la entrega, lo cual generó múltiples fallos funcionales.
 
-Ademas para comprobar esto, se ha usado el tag del despliegue que se entrego en el Sprint 1 y se han probado todas las funcionalidades disponibles de la aplicación en aquel momento. Despues de probar el despliegue, se ha confirmado que casi con total certeza existio un problema a la hora de desplegar porque actualmenet funciona correctamente el despliegue del Sprint 1.
+Tras verificar el tag correspondiente al despliegue del Sprint 1 y probar su funcionamiento en condiciones controladas, se concluye que probablemente el fallo se debió a un error en el despliegue, ya que actualmente dicha versión opera correctamente.
 
-### Error 1: Las recetas registradas no se muestran correctamente en el buscador.
+### Error 1: Las recetas registradas no se muestran en el buscador
 
-- **Origen técnico**: En la pantalla de recetas no se muestra ninguna receta por defecto de la aplicacion ni las registradas por el usuario.
-
-- **Origen en el proceso**: Se detecto este error antes de la entrega, no pudiendo resolverlo por falta tiempo y priorización de otras tareas.
-
-- **Fuente del error**: Felipe Solis Agudo, persona asignada a la tarea de implementacion de recomendacion de recetas en frontend.
-
-- **Responsable(s)**: Equipo de frontend por no organizar las tareas de forma eficiente para llegar a los objetivois marcados en el Sprint 1.
-
+- **Origen técnico**: La interfaz no muestra recetas registradas por el usuario ni recetas predefinidas.
+- **Origen en el proceso**: Detectado antes de la entrega, no se resolvió por falta de tiempo.
+- **Fuente**: Felipe Solís Agudo.
+- **Responsables**: Equipo de Frontend.
 - **Acciones de mitigación**:
-  - **Técnica**: Implementar en la vista de recetas una conexion con el backend en la que se pida la informacion de las recetas del usuario para mostrarselas. 
-  
-  - **De proceso**: Mejorar la organizacion de las tareas para no tener que descartar tareas y priorizar otras, generando errores o falta de funcionalidad en la aplicación.
+  - *Técnica*: Establecer correctamente la comunicación con el backend para recuperar recetas del usuario.
+  - *Proceso*: Priorizar mejor las tareas para evitar exclusiones de funcionalidad crítica.
+- **Estado**: Resuelto.
 
-- **Estado del error**: Resuelto.
+### Error 2: Pestaña de recetas favoritas sin funcionalidad
 
-### Error 2: Pestaña de recetas favoritas.
-
-- **Origen técnico**: Cuando se pulsa el boton de recetas favoritas, se te redirije a una pantalla la cual se mantiene cargando de forma indefinida.
-
-- **Origen en el proceso**: Se detecto este error antes de la entrega a la hora de probar la aplicación.
-
-- **Fuente del error**: Equipo de Frontend.
-
-- **Responsable(s)**: Equipo de Frontend por no asignar esta tarea a nadie en el Sprint 1, imposibilitando su desarrollo.
-
+- **Origen técnico**: La vista queda en carga infinita al acceder.
+- **Origen en el proceso**: Detectado antes de la entrega.
+- **Fuente**: Equipo de Frontend.
+- **Responsables**: Equipo de Frontend.
 - **Acciones de mitigación**:
-  - **Técnica**: Implementar la vista de recetas favoritas, ademas de poder añadir una propiedad a las recetas para ponerlas en favoritos. 
-  
-  - **De proceso**: Asegurarse al inicio del Sprint que las tareas que se han fijado esten asignadas a algun miembro del equipo.
+  - *Técnica*: Implementar lógica y visualización de recetas favoritas.
+  - *Proceso*: Garantizar la asignación de todas las tareas planificadas al inicio del sprint.
+- **Estado**: Resuelto.
 
-- **Estado del error**: Resuelto.
+### Error 3: URIs codificadas de forma fija en el frontend
 
-### Error 3: URIs hard codeadas en Frontend.
-
-- **Origen técnico**: Algunas de las URIs de la aplicacion se hard codearon en las pestañas del frontend. Durante la revision previa al despliegue de la aplicacion, se detectaron que algunas de estas URIs aun seguian hard codeadas.
-
-- **Origen en el proceso**: Se detecto este error antes de la entrega, no pudiendo resolverlo por falta tiempo.
-
-- **Fuente del error**: Equipo de Frontend.
-
-- **Responsable(s)**: Equipo de frontend por no asegurarse de eliminar los datos hard codeados en el Frontend previamente de la entrega del Sprint 1
-
+- **Origen técnico**: Presencia de enlaces codificados manualmente.
+- **Origen en el proceso**: Detectado antes de la entrega.
+- **Fuente**: Equipo de Frontend.
+- **Responsables**: Equipo de Frontend.
 - **Acciones de mitigación**:
-  - **Técnica**: Eliminar todos los dtos que se encentren hard codeados en culquier pestaña del frontend. 
-  
-  - **De proceso**: Asegurarse de asignar mas personas para revisar el codigo generado, para prevenir este tipo de errores.
+  - *Técnica*: Eliminar referencias hardcoded y utilizar configuraciones dinámicas.
+  - *Proceso*: Incrementar la revisión de código y control de calidad previo a entregas.
+- **Estado**: Resuelto.
 
-- **Estado del error**: Resuelto.
+### Error 4: Problemas en el despliegue
 
-### Error 4: Las recetas registradas no se muestran correctamente en el buscador.
-
-- **Origen técnico**: En la pantalla de recetas no se muestra ninguna receta por defecto de la aplicacion ni las registradas por el usuario.
-
-- **Origen en el proceso**: Se detecto este error antes de la entrega, no pudiendo resolverlo por falta tiempo y priorización de otras tareas.
-
-- **Fuente del error**: Felipe Solis Agudo, persona asignada a la tarea de implementacion de recomendacion de recetas en frontend.
-
-- **Responsable(s)**: Equipo de frontend por no organizar las tareas de forma eficiente para llegar a los objetivois marcados en el Sprint 1.
-
+- **Origen técnico**: El sistema desplegado no correspondía con la versión adecuada.
+- **Origen en el proceso**: Detectado inmediatamente tras la entrega.
+- **Fuente**: Miguel Galán Lerate.
+- **Responsables**: Miguel Galán Lerate y equipo de desarrollo.
 - **Acciones de mitigación**:
-  - **Técnica**: Implementar en la vista de recetas una conexion con el backend en la que se pida la informacion de las recetas del usuario para mostrarselas. 
-  
-  - **De proceso**: Mejorar la organizacion de las tareas para no tener que descartar tareas y priorizar otras, generando errores o falta de funcionalidad en la aplicación.
+  - *Técnica*: Reemplazar la versión desplegada por la correspondiente al tag correcto.
+  - *Proceso*: Establecer una revisión final del despliegue antes de cada entrega.
+- **Estado**: Resuelto.
 
-- **Estado del error**: Resuelto.
+#### Error 4.1: Imposibilidad de registrar bebés
 
-### Errores del despliegue
-
-- **Origen técnico**: Casi la totalidad de los casos de uso de la aplicacion no pudieron ser probados por el profesorado ya que a la hora de desplegar, se desplego una version que no correspondia con la que deberia ser entregada en el Sprint 1, generando esto errores no esperados.
-
-- **Origen en el proceso**: Se detectó el fallo en el despliegue justo despues de realizar la entrega y no se pudo solucionar para la entrega del Sprint 1.
-
-- **Fuente del error**: Miguel Galán Lerate, responsable de la gestion del despliegue de la aplicación.
-
-- **Responsable(s)**: Miguel Galán Lerate, por desplegar una version de la aplicacion erronea. Ademas el equipo de desarrollo deberia de haber revisado lo desplegado antes de realizar la entrega.
-
+- **Origen técnico**: El formulario de alta de bebés no enviaba correctamente los datos al backend.
+- **Origen en el proceso**: Detectado por el revisor del entregable.
+- **Fuente**: Revisión docente.
+- **Responsables**: Equipo de Backend.
 - **Acciones de mitigación**:
-  - **Técnica**: Cambiar la version del despliegue por la que corresponde con el tag adecuado para la entrega. 
-  
-  - **De proceso**: Asignar a un grupo de personas que se encarguen antes de las entregas de revisar que version de la aplicacion se despliega y que todo funcione como deberia.
+  - *Técnica*: Corregir la lógica de backend y asegurar la persistencia de datos.
+  - *Proceso*: Verificar exhaustivamente los formularios críticos antes de la entrega.
+- **Estado**: Resuelto.
 
-- **Estado del error**: Resuelto.
+#### Error 4.2: Falta de validación con mensajes claros
 
+- **Origen técnico**: Formularios sin retroalimentación adecuada para el usuario ante errores.
+- **Origen en el proceso**: Detectado por el revisor del entregable.
+- **Fuente**: Revisión docente.
+- **Responsables**: Equipo de Frontend.
+- **Acciones de mitigación**:
+  - *Técnica*: Incluir validaciones visuales y mensajes informativos.
+  - *Proceso*: Integrar pruebas de experiencia de usuario antes de cada entrega.
+- **Estado**: Resuelto.
 
+#### Error 4.3: Confusión en el formulario de alérgenos
+
+- **Origen técnico**: El formulario no indicaba de forma clara a qué bebé se refería.
+- **Origen en el proceso**: Detectado por el revisor del entregable.
+- **Fuente**: Revisión docente.
+- **Responsables**: Equipos de Backend y Frontend.
+- **Acciones de mitigación**:
+  - *Técnica*: Añadir identificación explícita del bebé asociado.
+  - *Proceso*: Ampliar las pruebas funcionales desde una perspectiva del usuario.
+- **Estado**: Resuelto.
+
+#### Error 4.4: Imposibilidad de dar de alta recetas
+
+- **Origen técnico**: La funcionalidad no estaba correctamente implementada o generaba errores.
+- **Origen en el proceso**: Detectado por el revisor del entregable.
+- **Fuente**: Revisión docente.
+- **Responsables**: Equipo de Backend.
+- **Acciones de mitigación**:
+  - *Técnica*: Revisar e implementar correctamente el flujo de alta de recetas.
+  - *Proceso*: Priorizar funcionalidades esenciales desde los primeros días del sprint.
+- **Estado**: Resuelto.
+
+## 6. Conclusiones
+
+Durante el Sprint 1 se evidenciaron múltiples errores funcionales y técnicos que comprometieron seriamente la calidad percibida del entregable. A pesar de que muchos de estos errores fueron detectados y corregidos posteriormente, la causa principal del suspenso fue el fallo en el despliegue de la aplicación.
+
+El sistema evaluado por el profesorado no coincidía con la versión correcta indicada por el tag de entrega, y además presentaba una caída crítica del servicio de base de datos. Esto impidió que se ejecutaran los casos de uso básicos y provocó la aparición de errores que no estaban presentes en la versión esperada. Como resultado, gran parte del trabajo funcional completado por el equipo no pudo ser valorado adecuadamente.
+
+Este incidente pone de manifiesto la necesidad urgente de establecer mecanismos más rigurosos de revisión y control en el proceso de despliegue, especialmente en los momentos previos a una entrega. Asimismo, resalta la importancia de validar en condiciones reales todas las funcionalidades clave, asegurando que el entorno productivo sea representativo del estado real del desarrollo.
+
+Para próximos sprints, el equipo ha tomado conciencia de estas deficiencias y se ha comprometido a aplicar medidas correctivas tanto a nivel técnico como organizativo, con el fin de garantizar entregas más estables, verificadas y alineadas con los criterios de evaluación.
 
 
 
