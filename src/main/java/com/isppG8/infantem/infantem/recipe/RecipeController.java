@@ -302,8 +302,7 @@ public class RecipeController {
                             responseCode = "403",
                             description = "No tienes permiso para cerrar esta solicitud") @ApiResponse(
                                     responseCode = "404",
-                                    description = "Solicitud no encontrada")
-    @PostMapping("/custom-requests/{id}/close")
+                                    description = "Solicitud no encontrada") @PostMapping("/custom-requests/{id}/close")
     public ResponseEntity<CustomRecipeRequest> closeRequest(Long id) {
         CustomRecipeRequest request = customRecipeRequestService.closeRequest(id);
         return ResponseEntity.ok(request);

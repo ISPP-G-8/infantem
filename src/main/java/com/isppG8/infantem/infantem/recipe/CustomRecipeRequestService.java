@@ -76,8 +76,7 @@ public class CustomRecipeRequestService {
         CustomRecipeRequest request = requestRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Request not found"));
         User user = userService.findCurrentUser();
-        if (request.getStatus().equals(RequestStatus.OPEN)
-                || request.getStatus().equals(RequestStatus.IN_PROGRESS)) {
+        if (request.getStatus().equals(RequestStatus.OPEN) || request.getStatus().equals(RequestStatus.IN_PROGRESS)) {
             if (request.getUser().getId().equals(user.getId())) {
                 request.setStatus(RequestStatus.CLOSED);
                 return requestRepository.save(request);
