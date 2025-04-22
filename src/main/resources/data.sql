@@ -1,5 +1,5 @@
 -- Inserción de roles
-INSERT INTO authorities (id, authority) VALUES (1, 'user'), (2, 'admin'),(3,'premium');
+INSERT INTO authorities (id, authority) VALUES (1, 'user'), (2, 'admin'),(3,'premium'),(4,'nutritionist');
 
 -- Inserción de usuarios con contraseñas encriptadas
 -- La contraseña que se ha codificado es: user

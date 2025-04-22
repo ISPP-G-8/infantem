@@ -45,10 +45,13 @@ public class RecipeController {
 
     private UserService userService;
 
+    private CustomRecipeRequestService customRecipeRequestService;
+
     @Autowired
-    public RecipeController(RecipeService recipeService, UserService userService) {
+    public RecipeController(RecipeService recipeService, UserService userService, CustomRecipeRequestService customRecipeRequestService) {
         this.recipeService = recipeService;
         this.userService = userService;
+        this.customRecipeRequestService = customRecipeRequestService;
     }
 
     @Operation(summary = "Obtener todas las recetas",
@@ -240,6 +243,24 @@ public class RecipeController {
         User user = userService.findCurrentUser();
         recipeService.deleteRecipe(id, user.getId());
         return ResponseEntity.ok().build();
+    }
+
+
+    // Custom Recipe Request
+
+    @GetMapping("/custom-requests")
+    public ResponseEntity<Page<CustomRecipeRequest>> getAllCustomRecipeRequests(
+        @RequestParam(value = "page", defaultValue = "0") Integer page,
+        @RequestParam(value = "size", defaultValue = "10") Integer size) {
+
+        List<CustomRecipeRequest> requests = customRecipeRequestService.getAllRequests();
+        Pageable pageable = PageRequest.of(page, size);
+
+        int start = (int) pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), requests.size());
+        Page<CustomRecipeRequest> paginatedRequests = new PageImpl<>(requests.subList(start, end), pageable, requests.size());
+
+        return ResponseEntity.ok(paginatedRequests);
     }
 
 }
