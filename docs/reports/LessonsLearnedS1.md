@@ -80,28 +80,25 @@ A continuación, se recoge un listado de los errores detectados en relación con
 
 ### Errores identificados por el equipo **antes** de la entrega:
 
-- El sistema de pago no estaba completamente configurado para funcionar con tarjetas reales, pero no se documentó adecuadamente esta limitación.
-- Algunos campos mostraban datos en formatos incoherentes en la interfaz (como la fecha del bebé).
+- Las recetas registradas no se muestran correctamente en el buscador.
+- La pestaña de recetas favoritas no muestra nada.
+- Varias URI de la aplicacion fueron hard codeadas en el frontend y algunas no se corrigieron antes de la entrega.
 
 
 ### Errores identificados por el equipo **después** de la entrega:
 
-- El vídeo de demostración no era accesible desde la rama `main` ni estaba vinculado a un `tag`.
-- Faltaban validaciones en formularios que provocaban errores HTTP no controlados.
-- Algunas vistas importantes no contenían datos visuales (por ejemplo, imágenes en las recetas).
+- La version del despliegue disponible para la correccion no era la adecuada.
 
 ### Errores identificados por el **revisor del entregable (profesor)**:
 
-- El archivo `revision.md` no incluía una explicación detallada de los casos de uso ni una vinculación clara con las interacciones reales del software.
-- Error HTTP 400 al introducir una edad máxima inválida, sin mensaje de error visible.
-- Imposibilidad de editar recetas una vez creadas.
-- Formulario de edición del perfil permite correos con formato incorrecto, generando errores en consola.
-- En el formulario de alérgenos no se puede identificar a cuál se refiere cada campo.
-- Fallo en la prueba de pago: el sistema rechaza la tarjeta de prueba utilizada en entorno real.
-- La interfaz de la pasarela de pago no se visualiza correctamente.
-- El vídeo no fue accesible ni entregado conforme a las normas establecidas (tag y rama `main`).
+- Imposibilidad de registrar bebes
+- Validaciones de formularios no ofrecían informacion de los errores.
+- En el fromulario de alergenos no se comprende correctamente a que bebe va dirijido.
+- Imposibilidad de dar de alta recetas
 
-Cada uno de estos errores será analizado en profundidad en la siguiente sección.
+Mas adelante se explicara el porque de la aparicion de estos ultimos errores detectados por el revisor del entregable.
+
+Cada uno de estos errores será analizado en profundidad en la sección 4.
 
 ## 3. Metodología de desarrollo y roles del equipo
 
@@ -199,23 +196,95 @@ El equipo "Infantem" está formado por 17 miembros, distribuidos en subgrupos se
 
 ## 4. Análisis individual de errores
 
-### Error 1: Imposibilidad de editar recetas una vez creadas
+Para analizar los errores encontrados en este Sprint podemos casificarlos en dos clases, errores provocados por problemas en el despliegue y otro tipo de errores. Se a decidido usar esta clasificacion ya que despues de analizar el feedback obtenido por los profesores en la revision, se ha llegado a la conclusion de que en el momento de la correccion, la base de datos del despliegue estaba caida y por eso han surgido gran cantidad de errores en la correccion.
 
-- **Origen técnico**: Aunque la funcionalidad de edición de recetas estaba implementada, los botones de editar y eliminar no se mostraban en la interfaz debido a un fallo en la lógica de visibilidad asociada a la propiedad `isOwned`. Este valor determinaba si una receta pertenecía al usuario o no, pero al activarlo correctamente, los botones desaparecían incluso para las recetas propias. Como consecuencia, no era posible acceder a la edición desde la interfaz.
+Ademas para comprobar esto, se ha usado el tag del despliegue que se entrego en el Sprint 1 y se han probado todas las funcionalidades disponibles de la aplicación en aquel momento. Despues de probar el despliegue, se ha confirmado que casi con total certeza existio un problema a la hora de desplegar porque actualmenet funciona correctamente el despliegue del Sprint 1.
 
-- **Origen en el proceso**: Se detectó el fallo en la lógica de visibilidad cerca de la fecha de entrega y no se resolvió a tiempo.
+### Error 1: Las recetas registradas no se muestran correctamente en el buscador.
 
-- **Fuente del error**: David Vargas Muñiz, responsable directo de la implementación de esta funcionalidad.
+- **Origen técnico**: En la pantalla de recetas no se muestra ninguna receta por defecto de la aplicacion ni las registradas por el usuario.
 
-- **Responsable(s)**: Grupo de frontend, por no resolver el problema de visibilidad de los botones de edición pese a haberlo identificado antes de la entrega.
+- **Origen en el proceso**: Se detecto este error antes de la entrega, no pudiendo resolverlo por falta tiempo y priorización de otras tareas.
+
+- **Fuente del error**: Felipe Solis Agudo, persona asignada a la tarea de implementacion de recomendacion de recetas en frontend.
+
+- **Responsable(s)**: Equipo de frontend por no organizar las tareas de forma eficiente para llegar a los objetivois marcados en el Sprint 1.
 
 - **Acciones de mitigación**:
-  - **Técnica**: Corregir la lógica de visibilidad basada en `isOwned` para asegurar que los botones se muestren únicamente cuando el usuario sea el propietario de la receta. 
+  - **Técnica**: Implementar en la vista de recetas una conexion con el backend en la que se pida la informacion de las recetas del usuario para mostrarselas. 
   
-  - **De proceso**: Añadir casos de uso relacionados con permisos y control de visibilidad en el checklist de QA. Verificar funcionalidad completa (visual y lógica) para acciones restringidas según usuario.
+  - **De proceso**: Mejorar la organizacion de las tareas para no tener que descartar tareas y priorizar otras, generando errores o falta de funcionalidad en la aplicación.
 
-- **Estado del error**: En progreso  
-  - **Justificación**: La funcionalidad está implementada, pero requiere ajustes en la lógica de visibilidad para que esté correctamente operativa.
+- **Estado del error**: Resuelto.
+
+### Error 2: Pestaña de recetas favoritas.
+
+- **Origen técnico**: Cuando se pulsa el boton de recetas favoritas, se te redirije a una pantalla la cual se mantiene cargando de forma indefinida.
+
+- **Origen en el proceso**: Se detecto este error antes de la entrega a la hora de probar la aplicación.
+
+- **Fuente del error**: Equipo de Frontend.
+
+- **Responsable(s)**: Equipo de Frontend por no asignar esta tarea a nadie en el Sprint 1, imposibilitando su desarrollo.
+
+- **Acciones de mitigación**:
+  - **Técnica**: Implementar la vista de recetas favoritas, ademas de poder añadir una propiedad a las recetas para ponerlas en favoritos. 
+  
+  - **De proceso**: Asegurarse al inicio del Sprint que las tareas que se han fijado esten asignadas a algun miembro del equipo.
+
+- **Estado del error**: Resuelto.
+
+### Error 3: URIs hard codeadas en Frontend.
+
+- **Origen técnico**: Algunas de las URIs de la aplicacion se hard codearon en las pestañas del frontend. Durante la revision previa al despliegue de la aplicacion, se detectaron que algunas de estas URIs aun seguian hard codeadas.
+
+- **Origen en el proceso**: Se detecto este error antes de la entrega, no pudiendo resolverlo por falta tiempo.
+
+- **Fuente del error**: Equipo de Frontend.
+
+- **Responsable(s)**: Equipo de frontend por no asegurarse de eliminar los datos hard codeados en el Frontend previamente de la entrega del Sprint 1
+
+- **Acciones de mitigación**:
+  - **Técnica**: Eliminar todos los dtos que se encentren hard codeados en culquier pestaña del frontend. 
+  
+  - **De proceso**: Asegurarse de asignar mas personas para revisar el codigo generado, para prevenir este tipo de errores.
+
+- **Estado del error**: Resuelto.
+
+### Error 4: Las recetas registradas no se muestran correctamente en el buscador.
+
+- **Origen técnico**: En la pantalla de recetas no se muestra ninguna receta por defecto de la aplicacion ni las registradas por el usuario.
+
+- **Origen en el proceso**: Se detecto este error antes de la entrega, no pudiendo resolverlo por falta tiempo y priorización de otras tareas.
+
+- **Fuente del error**: Felipe Solis Agudo, persona asignada a la tarea de implementacion de recomendacion de recetas en frontend.
+
+- **Responsable(s)**: Equipo de frontend por no organizar las tareas de forma eficiente para llegar a los objetivois marcados en el Sprint 1.
+
+- **Acciones de mitigación**:
+  - **Técnica**: Implementar en la vista de recetas una conexion con el backend en la que se pida la informacion de las recetas del usuario para mostrarselas. 
+  
+  - **De proceso**: Mejorar la organizacion de las tareas para no tener que descartar tareas y priorizar otras, generando errores o falta de funcionalidad en la aplicación.
+
+- **Estado del error**: Resuelto.
+
+### Errores del despliegue
+
+- **Origen técnico**: Casi la totalidad de los casos de uso de la aplicacion no pudieron ser probados por el profesorado ya que a la hora de desplegar, se desplego una version que no correspondia con la que deberia ser entregada en el Sprint 1, generando esto errores no esperados.
+
+- **Origen en el proceso**: Se detectó el fallo en el despliegue justo despues de realizar la entrega y no se pudo solucionar para la entrega del Sprint 1.
+
+- **Fuente del error**: Miguel Galán Lerate, responsable de la gestion del despliegue de la aplicación.
+
+- **Responsable(s)**: Miguel Galán Lerate, por desplegar una version de la aplicacion erronea. Ademas el equipo de desarrollo deberia de haber revisado lo desplegado antes de realizar la entrega.
+
+- **Acciones de mitigación**:
+  - **Técnica**: Cambiar la version del despliegue por la que corresponde con el tag adecuado para la entrega. 
+  
+  - **De proceso**: Asignar a un grupo de personas que se encarguen antes de las entregas de revisar que version de la aplicacion se despliega y que todo funcione como deberia.
+
+- **Estado del error**: Resuelto.
+
 
 
 
