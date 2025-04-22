@@ -12,7 +12,7 @@ const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
 export default function Page() {
   const gs = require("../../../static/styles/globalStyles");
-  const { token } = useAuth();
+  const { token, user } = useAuth();
   const router = useRouter();
   const screenWidth = Dimensions.get('window').width;
   const cardWidth = screenWidth < 500 ? 170 : 250;
@@ -363,10 +363,24 @@ export default function Page() {
             </TouchableOpacity>
           </View>
 
-          <View style={{ gap: 10, marginVertical: 20, alignSelf: "flex-start", alignItems: "center", width: "100%" }}>
+          <View style={{ gap: 10, marginVertical: 20, justifyContent:"center", alignItems: "center", flexDirection: "row",  width: "100%" }}>
             <Link style={[gs.mainButton, { backgroundColor: "#1565C0" }]} href={"/recipes/add"}>
-              <Text style={gs.mainButtonText}>Añade una receta</Text>
+              <Text style={gs.mainButtonText}>Crear receta</Text>
             </Link>
+            {/* Sorry for this :D */}
+            {user?.role === "nutritionist" 
+              ?             
+              <Link style={gs.secondaryButton} href={"/customRecipes/requests"}>
+                <Text style={gs.secondaryButtonText}>Crear recetas personalizadas</Text>
+              </Link>
+              : user?.role === "premium"
+                ?               
+                <Link style={gs.secondaryButton} href={"/customRecipes/ask"}>
+                  <Text style={gs.secondaryButtonText}>Solicita recetas personalizadas</Text>
+                </Link>
+                : null
+            }
+
           </View>
 
           {userRecipes.length === 0 ? (
