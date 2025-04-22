@@ -34,6 +34,4 @@ public class CustomRecipeRequestService {
         return requestRepository.save(request);
     }
 
-    
-    
 }

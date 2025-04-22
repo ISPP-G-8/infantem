@@ -21,7 +21,8 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "custom_recipe_request_table")
-@JsonIdentityInfo(scope = CustomRecipeRequest.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(scope = CustomRecipeRequest.class, generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Getter
 @Setter
 public class CustomRecipeRequest {
