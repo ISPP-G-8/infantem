@@ -285,4 +285,15 @@ public class RecipeController {
         return ResponseEntity.status(201).body(createdRequest);
     }
 
+    @Operation(summary = "Eliminar una solicitud de receta personalizada",
+            description = "Elimina una solicitud de receta personalizada por su ID.") @ApiResponse(responseCode = "200",
+                    description = "Solicitud de receta personalizada eliminada con éxito") @ApiResponse(
+                            responseCode = "403",
+                            description = "No tienes permiso para eliminar esta solicitud") @ApiResponse(
+                                    responseCode = "404",
+                                    description = "Solicitud no encontrada") @DeleteMapping("/custom-requests/{id}")
+    public void deleteCustomRecipeRequest(Long id) {
+        customRecipeRequestService.deleteRequest(id);
+    }
+
 }

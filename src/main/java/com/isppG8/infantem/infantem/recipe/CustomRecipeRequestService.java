@@ -56,4 +56,20 @@ public class CustomRecipeRequestService {
         }
     }
 
+    public void deleteRequest(Long id) {
+        CustomRecipeRequest request = requestRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Request not found"));
+        User user = userService.findCurrentUser();
+        if (!(request.getStatus().equals(RequestStatus.IN_PROGRESS)
+                || request.getStatus().equals(RequestStatus.CLOSED))) {
+            if (request.getUser().getId().equals(user.getId())) {
+                this.requestRepository.delete(request);
+            } else {
+                throw new ResourceNotFoundException("You are not authorized to delete this request");
+            }
+        } else {
+            throw new IllegalArgumentException("Request cannot be deleted when it is in progress or closed");
+        }
+    }
+
 }
