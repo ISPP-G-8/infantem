@@ -26,8 +26,9 @@ import lombok.Setter;
 @Setter
 @JsonIdentityInfo(scope = Metric.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Metric {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "entity_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Min(0)
