@@ -367,6 +367,12 @@ export default function Account() {
           />
         </TouchableOpacity>
 
+        {isEditing &&
+          <TouchableOpacity onPress={() => isEditing && setAvatarModalVisible(true)} disabled={!isEditing}>
+            <Text style={gs.changeImageText}>Cambiar foto de perfil</Text>
+          </TouchableOpacity>
+        }
+
         <UploadImageModal
           visible={avatarModalVisible}
           onClose={() => setAvatarModalVisible(false)}

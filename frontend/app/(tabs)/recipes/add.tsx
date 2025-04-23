@@ -330,6 +330,10 @@ export default function AddBaby() {
             />
           </TouchableOpacity>
 
+          <TouchableOpacity onPress={() => setImageModalVisible(true)}>
+            <Text style={gs.changeImageText}>Cambiar imagen</Text>
+          </TouchableOpacity>
+
           <UploadImageModal
             visible={imageModalVisible}
             onClose={() => setImageModalVisible(false)}
