@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Text,
   View,
@@ -8,21 +8,20 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuth } from "../../../context/AuthContext";
+import { Recipe } from "../../../types";
 
 export default function AddBaby() {
   const gs = require("../../../static/styles/globalStyles");
   const router = useRouter();
 
-  const [name, setName] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [ingredients, setIngredients] = useState<string>("");
-  const [minRecommendedAge, setMinRecommendedAge] = useState<number | null>(
-    null
-  );
-  const [maxRecommendedAge, setMaxRecommendedAge] = useState<number | null>(
-    null
-  );
-  const [elaboration, setElaboration] = useState<string>("");
+  const [recipe, setRecipe] = useState<Recipe>({
+    name: "",
+    description: "",
+    ingredients: "",
+    minRecommendedAge: 1,
+    maxRecommendedAge: null,
+    elaboration: "",
+  });
 
   const { token } = useAuth();
 
@@ -41,30 +40,30 @@ export default function AddBaby() {
     setMinAgeError(null);
     setMaxAgeError(null);
 
-    if (!name.trim()) {
+    if (recipe && !recipe.name.trim()) {
       setNameError("El nombre es obligatorio.");
       isValid = false;
     }
 
-    if (!ingredients.trim()) {
+    if (recipe && !recipe.ingredients.trim()) {
       setIngredientsError("Los ingredientes son obligatorios.");
       isValid = false;
     }
 
-    if (minRecommendedAge !== null && isNaN(minRecommendedAge)) {
-      setMinAgeError("La edad mínima recomendada debe ser un número válido.");
-      isValid = false;
-    }
-
-    if (maxRecommendedAge !== null && isNaN(maxRecommendedAge)) {
+    if (
+      recipe &&
+      recipe.maxRecommendedAge !== null &&
+      recipe.maxRecommendedAge <= 1
+    ) {
       setMaxAgeError("La edad máxima recomendada debe ser un número válido.");
       isValid = false;
     }
 
     if (
-      minRecommendedAge !== null &&
-      maxRecommendedAge !== null &&
-      minRecommendedAge > maxRecommendedAge
+      recipe &&
+      recipe.minRecommendedAge &&
+      recipe.maxRecommendedAge &&
+      recipe.minRecommendedAge > recipe.maxRecommendedAge
     ) {
       setMinAgeError("La edad mínima no puede ser mayor que la edad máxima.");
       isValid = false;
@@ -85,13 +84,13 @@ export default function AddBaby() {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            name: name,
-            description: description,
+            name: recipe.name,
+            description: recipe.description,
             photo_route: "", //TODO: Change this
-            ingredients: ingredients,
-            minRecommendedAge: minRecommendedAge,
-            maxRecommendedAge: maxRecommendedAge,
-            elaboration: elaboration,
+            ingredients: recipe.ingredients,
+            minRecommendedAge: recipe.minRecommendedAge,
+            maxRecommendedAge: recipe.maxRecommendedAge,
+            elaboration: recipe.elaboration,
             //TODO: Change this
             intakes: [],
             allergens: [],
@@ -150,8 +149,8 @@ export default function AddBaby() {
               },
             ]}
             placeholder="Nombre"
-            value={name}
-            onChangeText={setName}
+            value={recipe.name}
+            onChangeText={(text) => setRecipe({ ...recipe, name: text })}
           />
           {nameError && (
             <Text style={{ color: "red", marginBottom: 5 }}>{nameError}</Text>
@@ -170,8 +169,8 @@ export default function AddBaby() {
               },
             ]}
             placeholder="Descripción"
-            value={description}
-            onChangeText={setDescription}
+            value={recipe.description}
+            onChangeText={(text) => setRecipe({ ...recipe, description: text })}
           />
 
           <TextInput
@@ -187,8 +186,8 @@ export default function AddBaby() {
               },
             ]}
             placeholder="Ingredientes"
-            value={ingredients}
-            onChangeText={setIngredients}
+            value={recipe.ingredients}
+            onChangeText={(text) => setRecipe({ ...recipe, ingredients: text })}
           />
           {ingredientsError && (
             <Text style={{ color: "red", marginBottom: 5 }}>
@@ -209,11 +208,11 @@ export default function AddBaby() {
               },
             ]}
             placeholder="Edad mínima recomendada"
-            value={minRecommendedAge?.toString()}
+            value={recipe.minRecommendedAge.toString()}
             keyboardType="numeric"
             onChangeText={(text) => {
               const newValue = parseFloat(text) || 0;
-              setMinRecommendedAge(newValue);
+              setRecipe({ ...recipe, minRecommendedAge: newValue });
             }}
           />
           {minAgeError && (
@@ -233,11 +232,11 @@ export default function AddBaby() {
               },
             ]}
             placeholder="Edad máxima recomendada"
-            value={maxRecommendedAge?.toString()}
+            value={recipe.maxRecommendedAge?.toString()}
             keyboardType="numeric"
             onChangeText={(text) => {
               const newValue = parseFloat(text) || 0;
-              setMaxRecommendedAge(newValue);
+              setRecipe({ ...recipe, maxRecommendedAge: newValue });
             }}
           />
           {maxAgeError && (
@@ -257,8 +256,8 @@ export default function AddBaby() {
               },
             ]}
             placeholder="Elaboración"
-            value={elaboration}
-            onChangeText={setElaboration}
+            value={recipe.elaboration}
+            onChangeText={(text) => setRecipe({ ...recipe, elaboration: text })}
             multiline
           />
 
