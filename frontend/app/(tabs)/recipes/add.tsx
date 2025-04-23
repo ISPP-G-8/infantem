@@ -275,16 +275,6 @@ export default function AddBaby() {
   };
 
 
-  const deleteImage = () => {
-    try {
-      saveImage(null);
-      setImageModalVisible(false);
-    } catch (err) {
-      console.log(err.message);
-      setImageModalVisible(false);
-    }
-  };
-
   const saveImage = async (image) => {
     if (image != null) {
       setImage(image);
