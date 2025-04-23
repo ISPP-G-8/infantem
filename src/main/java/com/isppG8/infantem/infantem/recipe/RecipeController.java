@@ -272,6 +272,25 @@ public class RecipeController {
         return ResponseEntity.ok(paginatedRequests.map(CustomRecipeRequestDTO::new));
     }
 
+    @Operation(summary = "Obtener todas las solicitudes de recetas personalizadas de un usuario",
+            description = "Recupera todas las solicitudes de recetas personalizadas de un usuario.") @ApiResponse(
+                    responseCode = "200", description = "Lista de solicitudes de recetas personalizadas encontrada",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CustomRecipeRequest.class))) @GetMapping("/custom-requests/user")
+    public ResponseEntity<Page<CustomRecipeRequestDTO>> getRequestsByUser(
+        @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "10") Integer size) {
+        List<CustomRecipeRequest> requests = customRecipeRequestService.getRequestsByUser();
+
+        Pageable pageable = PageRequest.of(page, size);
+        int start = (int) pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), requests.size());
+        Page<CustomRecipeRequest> paginatedRequests = new PageImpl<>(requests.subList(start, end), pageable,
+                requests.size());
+
+        return ResponseEntity.ok(paginatedRequests.map(CustomRecipeRequestDTO::new));
+    }
+
     @Operation(summary = "Obtener una solicitud de receta personalizada por ID",
             description = "Recupera los detalles de una solicitud de receta personalizada utilizando su ID.") @ApiResponse(
                     responseCode = "200", description = "Solicitud de receta personalizada encontrada",

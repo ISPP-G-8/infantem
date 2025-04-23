@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.isppG8.infantem.infantem.exceptions.CustomRecipeRequestLimitException;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
+import com.isppG8.infantem.infantem.exceptions.ResourceNotOwnedException;
 import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserService;
 
@@ -44,10 +45,20 @@ public class CustomRecipeRequestService {
         }
     }
 
+    public List<CustomRecipeRequest> getRequestsByUser() {
+        User user = userService.findCurrentUser();
+        if (user.getAuthorities().getAuthority().equals("premium")) {
+            return requestRepository.findByUserId(user.getId());
+        } else {
+            throw new ResourceNotOwnedException("You are not authorized to access this resource");
+        }
+    }
+
+
     public CustomRecipeRequest createRequest(CustomRecipeRequest request) {
         User user = userService.findCurrentUser();
         if (!user.getAuthorities().getAuthority().equals("premium")) {
-            throw new ResourceNotFoundException("You are not authorized to create a request");
+            throw new ResourceNotOwnedException("You are not authorized to create a request");
         } else if (getNumRequestsByUserIdActualMonth(user.getId()) >= 5) {
             throw new CustomRecipeRequestLimitException();
         } else {
@@ -65,7 +76,7 @@ public class CustomRecipeRequestService {
             if (request.getUser().getId().equals(user.getId())) {
                 this.requestRepository.delete(request);
             } else {
-                throw new ResourceNotFoundException("You are not authorized to delete this request");
+                throw new ResourceNotOwnedException("You are not authorized to delete this request");
             }
         } else {
             throw new IllegalArgumentException("Request cannot be deleted when it is in progress or closed");
@@ -81,7 +92,7 @@ public class CustomRecipeRequestService {
                 request.setStatus(RequestStatus.CLOSED);
                 return requestRepository.save(request);
             } else {
-                throw new ResourceNotFoundException("You are not authorized to close this request");
+                throw new ResourceNotOwnedException("You are not authorized to close this request");
             }
         } else {
             throw new IllegalArgumentException("Request is already closed");
