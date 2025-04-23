@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.isppG8.infantem.infantem.allergen.Allergen;
-import com.isppG8.infantem.infantem.allergen.dto.AllergenDTO;
 import com.isppG8.infantem.infantem.intake.dto.IntakeDTO;
 import com.isppG8.infantem.infantem.recipe.Recipe;
 
