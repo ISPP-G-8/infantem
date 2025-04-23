@@ -61,7 +61,8 @@ public class Recipe {
     @Column(nullable = true)
     private String elaboration;
 
-    private boolean isCustom;
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT false")
+    private boolean isCustom = false;
 
     // Recipes made by nutritionists are not associated with any user
     @ManyToOne(optional = true)
@@ -73,6 +74,9 @@ public class Recipe {
 
     @ManyToMany(mappedBy = "recipes", cascade = CascadeType.ALL)
     private List<Intake> intakes = new ArrayList<>();
+
+    public Recipe() {
+    }
 
     public Recipe(CustomRecipeDTO custom) {
         this.name = custom.getName();

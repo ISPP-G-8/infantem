@@ -1,7 +1,9 @@
 package com.isppG8.infantem.infantem.recipe;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -14,12 +16,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
-import com.isppG8.infantem.infantem.auth.payload.response.MessageResponse;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.isppG8.infantem.infantem.auth.payload.response.MessageResponse;
+import com.isppG8.infantem.infantem.recipe.dto.CustomRecipeDTO;
+import com.isppG8.infantem.infantem.recipe.dto.CustomRecipeRequestDTO;
+import com.isppG8.infantem.infantem.recipe.dto.RecipeDTO;
 import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserService;
 
@@ -28,14 +35,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
-import com.isppG8.infantem.infantem.recipe.dto.RecipeDTO;
-import com.isppG8.infantem.infantem.recipe.dto.CustomRecipeRequestDTO;
-
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.RequestPart;
-import java.io.IOException;
-import org.springframework.web.multipart.MultipartFile;
 
 @Tag(name = "Recipes", description = "Gestión de recetas para la alimentación de bebés")
 @RestController
@@ -198,8 +198,8 @@ public class RecipeController {
     @Operation(summary = "Crear una receta personalizada",
             description = "Crea una nueva receta personalizada para un bebé.") @ApiResponse(responseCode = "201",
                     description = "Receta personalizada creada con éxito",
-                    content = @Content(mediaType = "application/json", schema = @Schema(
-                            implementation = Recipe.class))) @PostMapping("/custom") @PostMapping("/custom")
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Recipe.class))) @PostMapping("/custom")
     public ResponseEntity<Recipe> createCustomRecipe(@Valid @RequestBody CustomRecipeDTO customRecipe) {
         Recipe recipe = this.recipeService.createCustomRecipe(customRecipe);
         return ResponseEntity.status(201).body(recipe);

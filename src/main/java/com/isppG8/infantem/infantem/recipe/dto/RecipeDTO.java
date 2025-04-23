@@ -50,7 +50,7 @@ public class RecipeDTO {
         this.maxRecommendedAge = recipe.getMaxRecommendedAge();
         this.recipePhoto = recipe.getRecipePhoto();
         this.elaboration = recipe.getElaboration();
-        this.isCustom = recipe.getIsCustom();
+        this.isCustom = recipe.isCustom();
         if (recipe.getUser() == null) {
             this.user = null;
         } else {

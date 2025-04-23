@@ -3,6 +3,7 @@ package com.isppG8.infantem.infantem.recipe.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.isppG8.infantem.infantem.allergen.Allergen;
 import com.isppG8.infantem.infantem.allergen.dto.AllergenDTO;
 import com.isppG8.infantem.infantem.intake.dto.IntakeDTO;
 import com.isppG8.infantem.infantem.recipe.Recipe;
@@ -44,7 +45,7 @@ public class CustomRecipeDTO {
     @NotNull
     private Long requestId;
 
-    private List<AllergenDTO> allergens = new ArrayList<>();
+    private List<Allergen> allergens = new ArrayList<>();
 
     private List<IntakeDTO> intakes = new ArrayList<>();
 
@@ -59,13 +60,13 @@ public class CustomRecipeDTO {
         this.maxRecommendedAge = recipe.getMaxRecommendedAge();
         this.recipePhoto = recipe.getRecipePhoto();
         this.elaboration = recipe.getElaboration();
-        this.isCustom = recipe.getIsCustom();
+        this.isCustom = recipe.isCustom();
         if (recipe.getUser() == null) {
             this.user = null;
         } else {
             this.user = recipe.getUser().getId();
         }
-        this.allergens = recipe.getAllergens().stream().map(AllergenDTO::new).toList();
+        this.allergens = recipe.getAllergens();
         this.intakes = recipe.getIntakes().stream().map(IntakeDTO::new).toList();
     }
 

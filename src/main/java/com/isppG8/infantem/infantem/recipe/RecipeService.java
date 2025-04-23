@@ -83,7 +83,8 @@ public class RecipeService {
         User nutritionist = userService.findCurrentUser();
         if (nutritionist.getAuthorities().getAuthority().equals("nutritionist")) {
             Recipe recipe = new Recipe(dto);
-            User user = this.userService.findById(dto.getUser());
+            User user = this.userService.getUserById((long) dto.getUser());
+            recipe.setUser(user);
             this.customRecipeRequestService.closeRequest(dto.getRequestId());
             return this.recipeRepository.save(recipe);
         } else {
