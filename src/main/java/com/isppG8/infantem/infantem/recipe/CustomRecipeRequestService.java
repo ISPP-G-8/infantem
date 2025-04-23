@@ -54,7 +54,6 @@ public class CustomRecipeRequestService {
         }
     }
 
-
     public CustomRecipeRequest createRequest(CustomRecipeRequest request) {
         User user = userService.findCurrentUser();
         if (!user.getAuthorities().getAuthority().equals("premium")) {

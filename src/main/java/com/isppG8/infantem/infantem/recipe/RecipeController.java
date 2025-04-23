@@ -275,10 +275,10 @@ public class RecipeController {
     @Operation(summary = "Obtener todas las solicitudes de recetas personalizadas de un usuario",
             description = "Recupera todas las solicitudes de recetas personalizadas de un usuario.") @ApiResponse(
                     responseCode = "200", description = "Lista de solicitudes de recetas personalizadas encontrada",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = CustomRecipeRequest.class))) @GetMapping("/custom-requests/user")
+                    content = @Content(mediaType = "application/json", schema = @Schema(
+                            implementation = CustomRecipeRequest.class))) @GetMapping("/custom-requests/user")
     public ResponseEntity<Page<CustomRecipeRequestDTO>> getRequestsByUser(
-        @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size) {
         List<CustomRecipeRequest> requests = customRecipeRequestService.getRequestsByUser();
 

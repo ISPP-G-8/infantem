@@ -16,6 +16,4 @@ public interface CustomRecipeRequestRepository extends JpaRepository<CustomRecip
     @Query("SELECT r FROM CustomRecipeRequest r WHERE r.user.id = ?1")
     List<CustomRecipeRequest> findByUserId(Integer id);
 
-
-
 }
