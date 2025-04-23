@@ -197,9 +197,9 @@ public class RecipeController {
 
     @Operation(summary = "Crear una receta personalizada",
             description = "Crea una nueva receta personalizada para un bebé.") @ApiResponse(responseCode = "201",
-                    description = "Receta personalizada creada con éxito", content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Recipe.class))) @PostMapping("/custom")
-    @PostMapping("/custom")
+                    description = "Receta personalizada creada con éxito",
+                    content = @Content(mediaType = "application/json", schema = @Schema(
+                            implementation = Recipe.class))) @PostMapping("/custom") @PostMapping("/custom")
     public ResponseEntity<Recipe> createCustomRecipe(@Valid @RequestBody CustomRecipeDTO customRecipe) {
         Recipe recipe = this.recipeService.createCustomRecipe(customRecipe);
         return ResponseEntity.status(201).body(recipe);

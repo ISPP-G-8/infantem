@@ -27,7 +27,7 @@ public class RecipeService {
     private CustomRecipeRequestService customRecipeRequestService;
 
     @Autowired
-    public RecipeService(RecipeRepository recipeRepository, UserService userService, BabyService babyService, 
+    public RecipeService(RecipeRepository recipeRepository, UserService userService, BabyService babyService,
             CustomRecipeRequestService customRecipeRequestService) {
         this.recipeRepository = recipeRepository;
         this.userService = userService;
@@ -205,7 +205,6 @@ public class RecipeService {
     public Recipe createRecipeAdmin(Recipe recipe) {
         return this.recipeRepository.save(recipe);
     }
-
 
     @Transactional
     public Recipe updateRecipeAdmin(Long recipeId, Recipe recipeDetails) {
