@@ -48,10 +48,10 @@ public class CustomRecipeDTO {
 
     private List<IntakeDTO> intakes = new ArrayList<>();
 
-    public RecipeDTO() {
+    public CustomRecipeDTO() {
     }
 
-    public RecipeDTO(Recipe recipe) {
+    public CustomRecipeDTO(Recipe recipe) {
         this.name = recipe.getName();
         this.description = recipe.getDescription();
         this.ingredients = recipe.getIngredients();
