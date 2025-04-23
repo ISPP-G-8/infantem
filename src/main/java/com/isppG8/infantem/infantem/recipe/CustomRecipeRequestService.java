@@ -24,6 +24,7 @@ public class CustomRecipeRequestService {
         this.userService = userService;
     }
 
+    @Transactional(readOnly = true)
     public List<CustomRecipeRequest> getAllRequests() {
         User user = userService.findCurrentUser();
         if (user.getAuthorities().getAuthority().equals("nutritionist")) {
@@ -33,6 +34,7 @@ public class CustomRecipeRequestService {
         }
     }
 
+    @Transactional(readOnly = true)
     public Integer getNumRequestsByUserIdActualMonth(Integer userId) {
         User user = userService.findCurrentUser();
         if (user.getAuthorities().getAuthority().equals("nutritionist")) {
@@ -45,6 +47,7 @@ public class CustomRecipeRequestService {
         }
     }
 
+    @Transactional(readOnly = true)
     public List<CustomRecipeRequest> getRequestsByUser() {
         User user = userService.findCurrentUser();
         if (user.getAuthorities().getAuthority().equals("premium")) {
@@ -54,6 +57,7 @@ public class CustomRecipeRequestService {
         }
     }
 
+    @Transactional
     public CustomRecipeRequest createRequest(CustomRecipeRequest request) {
         User user = userService.findCurrentUser();
         if (!user.getAuthorities().getAuthority().equals("premium")) {
@@ -66,6 +70,7 @@ public class CustomRecipeRequestService {
         }
     }
 
+    @Transactional
     public void deleteRequest(Long id) {
         CustomRecipeRequest request = requestRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Request not found"));
@@ -82,6 +87,7 @@ public class CustomRecipeRequestService {
         }
     }
 
+    @Transactional
     public CustomRecipeRequest closeRequest(Long id) {
         CustomRecipeRequest request = requestRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Request not found"));

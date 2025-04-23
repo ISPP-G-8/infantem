@@ -72,6 +72,18 @@ public class RecipeService {
     }
 
     @Transactional
+    public Recipe createCustomRecipe(Recipe recipe) {
+        User nutritionist = userService.findCurrentUser();
+        if (nutritionist.getAuthorities().getAuthority().equals("nutritionist")) {
+            User user = recipe.getUser();
+            recipe.setIsCustom(true);   
+            return this.recipeRepository.save(recipe);
+        } else {
+            throw new ResourceNotOwnedException("You are not authorized to create a custom recipe");
+        }
+    }
+
+    @Transactional
     public Recipe updateRecipe(Long recipeId, RecipeDTO recipeDetails, Integer userId) {
         Recipe recipe = this.recipeRepository.findById(recipeId)
                 .orElseThrow(() -> new ResourceNotFoundException("Recipe", "id", recipeId));
@@ -185,6 +197,7 @@ public class RecipeService {
     public Recipe createRecipeAdmin(Recipe recipe) {
         return this.recipeRepository.save(recipe);
     }
+
 
     @Transactional
     public Recipe updateRecipeAdmin(Long recipeId, Recipe recipeDetails) {

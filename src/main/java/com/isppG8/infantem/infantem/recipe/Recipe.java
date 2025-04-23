@@ -59,6 +59,8 @@ public class Recipe {
 
     @Column(nullable = true)
     private String elaboration;
+    
+    private boolean isCustom;
 
     // Recipes made by nutritionists are not associated with any user
     @ManyToOne(optional = true)
