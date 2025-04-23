@@ -19,10 +19,10 @@ export default function Page() {
 
   const [userRecipes, setUserRecipes] = useState<Recipe[]>([]);
   const [userPage, setUserPage] = useState<number>(1);
-  const [userTotalPages, setUserTotalPages] = useState<number | null>(null);
+  const [userTotalPages, setUserTotalPages] = useState<number>(0);
   const [recommendedRecipes, setRecommendedRecipes] = useState<Recipe[]>([]);
   const [recommendedPage, setRecommendedPage] = useState<number>(1);
-  const [recommendedTotalPages, setRecommendedTotalPages] = useState<number | null>(null);
+  const [recommendedTotalPages, setRecommendedTotalPages] = useState<number>(0);
 
   const [filters, setFilters] = useState<RecipeFilter>({});
   const [userRecipesSearchQuery, setUserRecipesSearchQuery] = useState<string | undefined>();
@@ -295,7 +295,7 @@ export default function Page() {
           </View>
         )}
 
-        {recommendedTotalPages && (
+        {recommendedTotalPages > 1 && (
           <Pagination 
           totalPages={recommendedTotalPages} 
           page={recommendedPage} 
@@ -375,7 +375,7 @@ export default function Page() {
               </Link>
               : user?.role === "premium"
                 ?               
-                <Link style={gs.secondaryButton} href={"/customRecipes/ask"}>
+                <Link style={gs.secondaryButton} href={"/customRecipes/requests"}>
                   <Text style={gs.secondaryButtonText}>Solicita recetas personalizadas</Text>
                 </Link>
                 : null
@@ -422,7 +422,7 @@ export default function Page() {
                 ))}
             </View>
           )}
-          {userTotalPages && userTotalPages > 1 && (
+          {userTotalPages > 1 && (
             <Pagination 
             totalPages={userTotalPages} 
             page={userPage} 
