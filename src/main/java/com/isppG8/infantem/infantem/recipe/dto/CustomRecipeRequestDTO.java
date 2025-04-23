@@ -2,7 +2,6 @@ package com.isppG8.infantem.infantem.recipe.dto;
 
 import java.time.LocalDateTime;
 
-import com.google.api.services.sqladmin.model.User;
 import com.isppG8.infantem.infantem.recipe.CustomRecipeRequest;
 import com.isppG8.infantem.infantem.recipe.RequestStatus;
 import com.isppG8.infantem.infantem.user.dto.UserSummaryDTO;

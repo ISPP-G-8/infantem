@@ -375,7 +375,7 @@ export default function Page() {
               </Link>
               : user?.role === "premium"
                 ?               
-                <Link style={gs.secondaryButton} href={"/customRecipes/ask"}>
+                <Link style={gs.secondaryButton} href={"/customRecipes/requests"}>
                   <Text style={gs.secondaryButtonText}>Solicita recetas personalizadas</Text>
                 </Link>
                 : null
