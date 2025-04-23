@@ -14,7 +14,7 @@ export default function Admin() {
   const itemsPerPage = 10;
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
-  const { token, setUserToModify, setRecipeToModify } = useAuth();
+  const { user, token, setUserToModify, setRecipeToModify } = useAuth();
 
   const gs = require("../../../static/styles/globalStyles");
 
@@ -120,6 +120,10 @@ export default function Admin() {
     setRecipeToModify(recipe);
     router.push("/admin/showrecipe");
   };
+
+  if (user && user.role !== "admin") {
+    router.push("/recipes");
+  }
 
   return (
     <View style={{ flex: 1, backgroundColor: "#E3F2FD" }}>
