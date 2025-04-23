@@ -66,6 +66,8 @@ public class CustomRecipeRequestService {
             throw new CustomRecipeRequestLimitException();
         } else {
             request.setUser(user);
+            request.setStatus(RequestStatus.OPEN);
+            request.setCreatedAt(LocalDateTime.now());
             return requestRepository.save(request);
         }
     }

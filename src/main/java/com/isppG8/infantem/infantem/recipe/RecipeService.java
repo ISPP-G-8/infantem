@@ -1,18 +1,22 @@
 package com.isppG8.infantem.infantem.recipe;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.isppG8.infantem.infantem.baby.Baby;
 import com.isppG8.infantem.infantem.baby.BabyService;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotOwnedException;
-import com.isppG8.infantem.infantem.user.UserService;
-import java.time.LocalDate;
-import java.time.Period;
+import com.isppG8.infantem.infantem.recipe.dto.CustomRecipeDTO;
 import com.isppG8.infantem.infantem.recipe.dto.RecipeDTO;
+import com.isppG8.infantem.infantem.user.User;
+import com.isppG8.infantem.infantem.user.UserService;
 
 @Service
 public class RecipeService {
@@ -20,12 +24,15 @@ public class RecipeService {
     private RecipeRepository recipeRepository;
     private UserService userService;
     private BabyService babyService;
+    private CustomRecipeRequestService customRecipeRequestService;
 
     @Autowired
-    public RecipeService(RecipeRepository recipeRepository, UserService userService, BabyService babyService) {
+    public RecipeService(RecipeRepository recipeRepository, UserService userService, BabyService babyService, 
+            CustomRecipeRequestService customRecipeRequestService) {
         this.recipeRepository = recipeRepository;
         this.userService = userService;
         this.babyService = babyService;
+        this.customRecipeRequestService = customRecipeRequestService;
     }
 
     public Integer getCurrentUserId() {
@@ -72,11 +79,12 @@ public class RecipeService {
     }
 
     @Transactional
-    public Recipe createCustomRecipe(Recipe recipe) {
+    public Recipe createCustomRecipe(CustomRecipeDTO dto) {
         User nutritionist = userService.findCurrentUser();
         if (nutritionist.getAuthorities().getAuthority().equals("nutritionist")) {
-            User user = recipe.getUser();
-            recipe.setIsCustom(true);
+            Recipe recipe = new Recipe(dto);
+            User user = this.userService.findById(dto.getUser());
+            this.customRecipeRequestService.closeRequest(dto.getRequestId());
             return this.recipeRepository.save(recipe);
         } else {
             throw new ResourceNotOwnedException("You are not authorized to create a custom recipe");
@@ -197,6 +205,7 @@ public class RecipeService {
     public Recipe createRecipeAdmin(Recipe recipe) {
         return this.recipeRepository.save(recipe);
     }
+
 
     @Transactional
     public Recipe updateRecipeAdmin(Long recipeId, Recipe recipeDetails) {

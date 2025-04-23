@@ -195,6 +195,16 @@ public class RecipeController {
         return ResponseEntity.status(201).body(createdRecipe);
     }
 
+    @Operation(summary = "Crear una receta personalizada",
+            description = "Crea una nueva receta personalizada para un bebé.") @ApiResponse(responseCode = "201",
+                    description = "Receta personalizada creada con éxito", content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Recipe.class))) @PostMapping("/custom")
+    @PostMapping("/custom")
+    public ResponseEntity<Recipe> createCustomRecipe(@Valid @RequestBody CustomRecipeDTO customRecipe) {
+        Recipe recipe = this.recipeService.createCustomRecipe(customRecipe);
+        return ResponseEntity.status(201).body(recipe);
+    }
+
     @Operation(summary = "Actualizar una receta",
             description = "Actualiza los detalles de una receta existente.") @ApiResponse(responseCode = "200",
                     description = "Receta actualizada con éxito", content = @Content(mediaType = "application/json",
@@ -298,7 +308,6 @@ public class RecipeController {
                             description = "No tienes permiso para crear una solicitud de receta personalizada") @PostMapping("/custom-requests")
     public ResponseEntity<CustomRecipeRequest> createCustomRecipeRequest(
             @Valid @RequestBody CustomRecipeRequest request) {
-        request.setStatus(RequestStatus.OPEN);
         CustomRecipeRequest createdRequest = customRecipeRequestService.createRequest(request);
         return ResponseEntity.status(201).body(createdRequest);
     }
