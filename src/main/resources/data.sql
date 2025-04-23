@@ -45,7 +45,9 @@ INSERT INTO baby_table (name, birth_date, genre, weight, height, head_circumfere
 ('Carlos', '2023-05-01', 'MALE', 3.4, 49, 34, 'Leche'),
 ('Luffy', '2022-03-20', 'MALE', 3.4, 49, 34, 'Carne'),
 ('Nami', '2024-01-02', 'FEMALE', 3.4, 49, 34, 'Dinero'),
-('Chopper', '2025-04-01', 'OTHER', 3.5, 51, 35, 'Algodón de azucar');
+('Chopper', '2025-04-01', 'OTHER', 3.5, 51, 35, 'Algodón de azucar'),
+('Sofía', '2023-06-15', 'FEMALE', 3.3, 47, 33, 'Leche'),
+('Pedro', '2023-07-20', 'MALE', 3.7, 50, 36, 'Leche');
 
 -- Inserción de relaciones entre bebés y alérgenos
 INSERT INTO baby_allergen (allergen_id, baby_id) VALUES
@@ -78,7 +80,7 @@ INSERT INTO vaccine_table (type, vaccination_date, baby_id) VALUES
 
 -- Relación entre usuarios y bebés
 INSERT INTO user_baby (user_id, baby_id) VALUES
-(1, 1), (2, 2), (1,3), (14,6), (14,7), (14,8);
+(1, 1), (2, 2), (1,3), (14,6), (14,7), (14,8), (16, 9), (16, 10);
 
 -- Inserción de hitos
 INSERT INTO milestone (name, description) VALUES

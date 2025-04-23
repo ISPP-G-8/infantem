@@ -113,14 +113,26 @@ export default function Allergens() {
                 marginTop: 20,
               }}
             >
-              <Text
-                style={[
-                  gs.subheaderText,
-                  { paddingBottom: 40, color: "#1565C0" },
-                ]}
-              >
-                Seleccione a qué bebé desea detectar alérgenos.
-              </Text>
+              {babies.length > 0 ? 
+                <Text
+                  style={[
+                    gs.subheaderText,
+                    { paddingBottom: 40, color: "#1565C0" },
+                  ]}
+                >
+                  Seleccione a qué bebé desea detectar alérgenos.
+                </Text>
+              :
+                <Text
+                  style={[
+                    gs.subheaderText,
+                    { paddingBottom: 40, color: "#1565C0" },
+                  ]}
+                >
+                  No tiene bebés registrados. Por favor registre uno para
+                  continuar.
+                </Text>
+              }
 
               {babies.map((baby) => (
                 <View>
@@ -202,7 +214,7 @@ export default function Allergens() {
                       { paddingBottom: 40, color: "#1565C0" },
                     ]}
                   >
-                    Realizaremos una serie de preguntas para buscar a qué es
+                    Realizaremos una serie de preguntas para averiguar a qué es
                     alérgico su bebé.
                   </Text>
 
