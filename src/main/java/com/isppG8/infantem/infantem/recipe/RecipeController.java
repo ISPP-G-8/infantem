@@ -291,13 +291,11 @@ public class RecipeController {
         return ResponseEntity.ok(paginatedRequests.map(CustomRecipeRequestDTO::new));
     }
 
-    @Operation(summary = "Obtener una solicitud de receta personalizada por ID",
-            description = "Recupera los detalles de una solicitud de receta personalizada utilizando su ID.") @ApiResponse(
-                    responseCode = "200", description = "Solicitud de receta personalizada encontrada",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = CustomRecipeRequest.class))) @ApiResponse(
-                                    responseCode = "403",
-                                    description = "No se tiene acceso al recurso o ya se han sobrepasado el numero de solicitudes") @PostMapping("/custom-requests")
+    @Operation(summary = "Crear una solicitud de receta personalizada",
+            description = "Crea una nueva solicitud de receta personalizada.") @ApiResponse(responseCode = "201",
+                    description = "Solicitud de receta personalizada creada con éxito") @ApiResponse(
+                            responseCode = "403",
+                            description = "No tienes permiso para crear una solicitud de receta personalizada") @PostMapping("/custom-requests")
     public ResponseEntity<CustomRecipeRequest> createCustomRecipeRequest(
             @Valid @RequestBody CustomRecipeRequest request) {
         request.setStatus(RequestStatus.OPEN);
