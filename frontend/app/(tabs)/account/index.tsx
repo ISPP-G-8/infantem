@@ -9,11 +9,6 @@ import * as ImagePicker from 'expo-image-picker';
 import { Platform } from 'react-native';
 
 
-const avatarOptions = [
-  require("../../../assets/avatar/avatar1.png"),
-  require("../../../assets/avatar/avatar2.png")
-];
-
 export default function Account() {
   const [avatarModalVisible, setAvatarModalVisible] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
