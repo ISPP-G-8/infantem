@@ -76,7 +76,7 @@ public class RecipeService {
         User nutritionist = userService.findCurrentUser();
         if (nutritionist.getAuthorities().getAuthority().equals("nutritionist")) {
             User user = recipe.getUser();
-            recipe.setIsCustom(true);   
+            recipe.setIsCustom(true);
             return this.recipeRepository.save(recipe);
         } else {
             throw new ResourceNotOwnedException("You are not authorized to create a custom recipe");
@@ -197,7 +197,6 @@ public class RecipeService {
     public Recipe createRecipeAdmin(Recipe recipe) {
         return this.recipeRepository.save(recipe);
     }
-
 
     @Transactional
     public Recipe updateRecipeAdmin(Long recipeId, Recipe recipeDetails) {
