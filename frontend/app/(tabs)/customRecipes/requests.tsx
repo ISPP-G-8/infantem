@@ -58,7 +58,10 @@ export default function requests() {
       <ScrollView style={{maxWidth:600}}>
         {requests.map((req) => (
           <TouchableOpacity style={[gs.card, width < 500 ? { maxWidth: 400 } : null]}>
-            {/*<Text style={gs.cardTitle} numberOfLines={1}>{req.user.username}</Text>*/}
+            <Text style={[gs.cardContent, {marginBottom: 10}]} numberOfLines={2}>
+              <Text style={{fontWeight: 'bold'}}>Usuario: </Text>
+              {req.user.username}
+            </Text>
             <Text style={[gs.cardContent, {marginBottom: 10}]} numberOfLines={2}>
               <Text style={{fontWeight: 'bold'}}>Descripción: </Text>
               {req.details}

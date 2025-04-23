@@ -30,6 +30,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.isppG8.infantem.infantem.recipe.dto.RecipeDTO;
+import com.isppG8.infantem.infantem.recipe.dto.CustomRecipeRequestDTO;
 
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -256,7 +257,7 @@ public class RecipeController {
                                     responseCode = "403",
                                     description = "No tienes permiso para acceder a esta ruta") @ApiResponse(
                                             responseCode = "404", description = "No se encontraron solicitudes")
-    public ResponseEntity<Page<CustomRecipeRequest>> getAllCustomRecipeRequests(
+    public ResponseEntity<Page<CustomRecipeRequestDTO>> getAllCustomRecipeRequests(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size) {
 
@@ -268,7 +269,7 @@ public class RecipeController {
         Page<CustomRecipeRequest> paginatedRequests = new PageImpl<>(requests.subList(start, end), pageable,
                 requests.size());
 
-        return ResponseEntity.ok(paginatedRequests);
+        return ResponseEntity.ok(paginatedRequests.map(CustomRecipeRequestDTO::new));
     }
 
     @Operation(summary = "Obtener una solicitud de receta personalizada por ID",
