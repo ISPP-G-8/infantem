@@ -1,28 +1,34 @@
-import { useState, useEffect } from "react";
-import { Text, View, TextInput, TouchableOpacity, ScrollView, Image } from "react-native";
+import { useState } from "react";
+import {
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+  Image,
+} from "react-native";
 import { useRouter } from "expo-router";
-import { getToken } from "../../../utils/jwtStorage";
-import { Picker } from "@react-native-picker/picker";
 import { useAuth } from "../../../context/AuthContext";
-import * as ImagePicker from 'expo-image-picker';
+import * as ImagePicker from "expo-image-picker";
 import UploadImageModal from "../../../components/UploadImageModal";
-
+import { Recipe } from "../../../types";
+import { set } from "date-fns";
 
 export default function AddBaby() {
   const gs = require("../../../static/styles/globalStyles");
   const router = useRouter();
+  const { user, token, updateToken } = useAuth();
 
-  const [name, setName] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  // The photo state is commented because I have no time to learn how to implment
-  // this on react native. This must be done in S2
-  // TODO: Let the user add a photo from files
-  //const [photoRoute, setPhotoRoute] = useState<string>("male");
-  const [ingredients, setIngredients] = useState<string>("");
-  const [minRecommendedAge, setMinRecommendedAge] = useState<number | null>(null);
-  const [maxRecommendedAge, setMaxRecommendedAge] = useState<number | null>(null);
-  const [elaboration, setElaboration] = useState<string>("");
-  // As this is an array of Intakes this couldn't be implemented this fast 
+  const [recipe, setRecipe] = useState<Recipe>({
+    name: "",
+    description: "",
+    ingredients: "",
+    minRecommendedAge: null,
+    maxRecommendedAge: null,
+    elaboration: "",
+  });
+
+  // As this is an array of Intakes this couldn't be implemented this fast
   // and I can not let the user to specify the intakes without a type validation.
   // Same for allergens and alimentoNutriente
   // TODO: Implement this
@@ -30,8 +36,6 @@ export default function AddBaby() {
   //const [allergens, setAllergens] = useState<Allergen[]>(null);
   //Idk why this is in spanish
   //const [alimentoNutriente, setAlimentoNutriente] = useState<AlimentoNutriente[]>(null);
-
-  const [jwt, setJwt] = useState<string | null>(null);
 
   const [nameError, setNameError] = useState<string | null>(null);
   const [ingredientsError, setIngredientsError] = useState<string | null>(null);
@@ -41,19 +45,8 @@ export default function AddBaby() {
   const [imageModalVisible, setImageModalVisible] = useState(false);
   const [image, setImage] = useState<any>(null);
   const [imageBase64, setImageBase64] = useState<any>(null);
-  const { user, token, updateToken } = useAuth();
-  const [createdRecipe, setCreatedRecipe] = useState(null);
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
-
-
-  useEffect(() => {
-    const getUserToken = async () => {
-      const token = await getToken();
-      setJwt(token);
-    };
-    getUserToken();
-  }, []);
 
   const validateForm = () => {
     let isValid = true;
@@ -63,27 +56,31 @@ export default function AddBaby() {
     setMinAgeError(null);
     setMaxAgeError(null);
 
-    if (!name.trim()) {
+    if (!recipe.name.trim()) {
       setNameError("El nombre es obligatorio.");
       isValid = false;
     }
 
-    if (!ingredients.trim()) {
+    if (!recipe.ingredients.trim()) {
       setIngredientsError("Los ingredientes son obligatorios.");
       isValid = false;
     }
 
-    if (minRecommendedAge !== null && isNaN(minRecommendedAge)) {
+    if (recipe.minRecommendedAge !== null && isNaN(recipe.minRecommendedAge)) {
       setMinAgeError("La edad mínima recomendada debe ser un número válido.");
       isValid = false;
     }
 
-    if (maxRecommendedAge !== null && isNaN(maxRecommendedAge)) {
+    if (recipe.maxRecommendedAge !== null && isNaN(recipe.maxRecommendedAge)) {
       setMaxAgeError("La edad máxima recomendada debe ser un número válido.");
       isValid = false;
     }
 
-    if (minRecommendedAge !== null && maxRecommendedAge !== null && minRecommendedAge > maxRecommendedAge) {
+    if (
+      recipe.minRecommendedAge !== null &&
+      recipe.maxRecommendedAge !== null &&
+      recipe.minRecommendedAge > recipe.maxRecommendedAge
+    ) {
       setMinAgeError("La edad mínima no puede ser mayor que la edad máxima.");
       isValid = false;
     }
@@ -94,22 +91,22 @@ export default function AddBaby() {
   const handleSave = async () => {
     if (!validateForm()) return;
 
-    if (jwt) {
+    if (token) {
       try {
         const response = await fetch(`${apiUrl}/api/v1/recipes`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${jwt}`,
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            name: name,
-            description: description,
+            name: recipe.name,
+            description: recipe.description,
             photo_route: "",
-            ingredients: ingredients,
-            minRecommendedAge: minRecommendedAge,
-            maxRecommendedAge: maxRecommendedAge,
-            elaboration: elaboration,
+            ingredients: recipe.ingredients,
+            minRecommendedAge: recipe.minRecommendedAge,
+            maxRecommendedAge: recipe.maxRecommendedAge,
+            elaboration: recipe.elaboration,
             intakes: [],
             allergens: [],
             alimentoNutriente: [],
@@ -117,18 +114,14 @@ export default function AddBaby() {
         });
 
         if (response.ok) {
-          
           const data = await response.json();
-          setCreatedRecipe(data);
-  
           console.log("Recipe created successfully:", data);
-  
           if (image) {
-            await uploadRecipePhoto(data.id); 
+            await uploadRecipePhoto(data.id);
           } else {
-            console.log("FALLOOOOOOOO")
+            console.log("FALLOOOOOOOO");
           }
-  
+
           router.push("/recipes");
         } else {
           console.error("Error creating recipe:", response.statusText);
@@ -139,7 +132,7 @@ export default function AddBaby() {
     }
   };
 
-  function base64toBlob(base64Data, contentType = 'image/png') {
+  function base64toBlob(base64Data: string, contentType = "image/png") {
     const byteCharacters = atob(base64Data);
     const byteArrays = [];
 
@@ -156,7 +149,7 @@ export default function AddBaby() {
     return new Blob(byteArrays, { type: contentType });
   }
 
-  const uploadRecipePhoto = async (createdRecipeId) => {
+  const uploadRecipePhoto = async (createdRecipeId: number) => {
     if (!user || !token) return;
 
     try {
@@ -165,39 +158,43 @@ export default function AddBaby() {
       if (image) {
         // Si tenemos un blob
         // @ts-ignore
-        formData.append('recipePhoto', image);
+        formData.append("recipePhoto", image);
         console.log("Subiendo imagen como blob");
-      }
-      else if (imageBase64) {
+      } else if (imageBase64) {
         // Preparar la imagen para subirla
         let imageUri = imageBase64;
-        let imageName = 'profile.jpg';
-        let imageType = 'image/jpeg';
+        let imageName = "profile.jpg";
+        let imageType = "image/jpeg";
 
         // Verificar formato base64
-        if (imageBase64.startsWith('data:image')) {
-          imageType = imageBase64.split(';')[0].split(':')[1];
+        if (imageBase64.startsWith("data:image")) {
+          imageType = imageBase64.split(";")[0].split(":")[1];
         }
 
         // @ts-ignore - React Native maneja FormData diferente
-        formData.append('recipePhoto', {
+        formData.append("recipePhoto", {
           uri: imageUri,
           type: imageType,
-          name: imageName
+          name: imageName,
         });
 
         console.log("Subiendo imagen desde base64");
       }
 
       // Usar el nuevo endpoint específico para la foto de perfil
-      console.log(`Enviando foto al endpoint ${apiUrl}/api/v1/recipes/${createdRecipeId}/recipe-photo`);
-      const response = await fetch(`${apiUrl}/api/v1/recipes/${createdRecipeId}/recipe-photo`, {
-        method: "PUT",
-        headers: {
-          "Authorization": `Bearer ${jwt}`
-        },
-        body: formData
-      });
+      console.log(
+        `Enviando foto al endpoint ${apiUrl}/api/v1/recipes/${createdRecipeId}/recipe-photo`
+      );
+      const response = await fetch(
+        `${apiUrl}/api/v1/recipes/${createdRecipeId}/recipe-photo`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        }
+      );
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -218,16 +215,17 @@ export default function AddBaby() {
     }
   };
 
-  const uploadImage = async (action) => {
-    if (action === 'load') {
+  const uploadImage = async (action: string) => {
+    if (action === "load") {
       try {
         let result;
-        const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        const permissionResult =
+          await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (!permissionResult.granted) {
           alert("Permiso denegado para acceder a la galería.");
           return;
         }
-  
+
         result = await ImagePicker.launchImageLibraryAsync({
           mediaTypes: ImagePicker.MediaTypeOptions.Images,
           allowsEditing: true,
@@ -235,23 +233,22 @@ export default function AddBaby() {
           quality: 1,
           base64: false, // da igual, web da base64 como uri
         });
-        
-  
+
         if (!result.canceled) {
           let imageUri = result.assets[0].uri;
-  
+
           // NUEVO: Validar que sea PNG
           if (!imageUri.startsWith("data:image/png")) {
             alert("Por favor, selecciona una imagen en formato PNG.");
             return;
           }
-  
-          if (imageUri.startsWith('data:image')) {
-            const base64Data = imageUri.split(',')[1];
-  
+
+          if (imageUri.startsWith("data:image")) {
+            const base64Data = imageUri.split(",")[1];
+
             const blob = base64toBlob(base64Data);
             console.log("Blob creado:", blob);
-  
+
             saveImage(blob);
           } else {
             console.log("Imagen URI válida:", imageUri);
@@ -261,21 +258,28 @@ export default function AddBaby() {
           console.log("result undefined");
         }
       } catch (err) {
-        alert('Error al abrir la galería: ' + err.message);
+        if (err instanceof Error) {
+          alert("Error al abrir la galería: " + err.message);
+        } else {
+          alert("Error al abrir la galería.");
+        }
         setImageModalVisible(false);
       }
-    } else if (action === 'delete') {
+    } else if (action === "delete") {
       try {
         saveImage(null);
       } catch (err) {
-        alert('Error eliminar imagen: ' + err.message);
+        if (err instanceof Error) {
+          alert("Error al eliminar la imagen: " + err.message);
+        } else {
+          alert("Error al eliminar la imagen.");
+        }
         setImageModalVisible(false);
       }
     }
   };
 
-
-  const saveImage = async (image) => {
+  const saveImage = async (image: any) => {
     if (image != null) {
       setImage(image);
       const base64Image = await blobToBase64(image);
@@ -289,7 +293,7 @@ export default function AddBaby() {
     }
   };
 
-  const blobToBase64 = (blob) => {
+  const blobToBase64 = (blob: Blob) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onloadend = () => resolve(reader.result);
@@ -297,7 +301,6 @@ export default function AddBaby() {
       reader.readAsDataURL(blob);
     });
   };
-
 
   return (
     <View style={{ flex: 1, backgroundColor: "#E3F2FD" }}>
@@ -317,15 +320,25 @@ export default function AddBaby() {
             marginTop: 20,
           }}
         >
-          <Text style={[gs.headerText, { textAlign: "center", marginBottom: 24, color: "#1565C0" }]}>
+          <Text
+            style={[
+              gs.headerText,
+              { textAlign: "center", marginBottom: 24, color: "#1565C0" },
+            ]}
+          >
             Añadir una receta
           </Text>
 
-          <TouchableOpacity style={gs.profileImageContainer} onPress={() => setImageModalVisible(true)}>
+          <TouchableOpacity
+            style={gs.profileImageContainer}
+            onPress={() => setImageModalVisible(true)}
+          >
             <Image
-              source={imageBase64
-                ? { uri: imageBase64 }
-                : require("../../../assets/avatar/avatar1.png")}
+              source={
+                imageBase64
+                  ? { uri: imageBase64 }
+                  : require("../../../assets/avatar/avatar1.png")
+              }
               style={gs.profileImage}
             />
           </TouchableOpacity>
@@ -337,67 +350,142 @@ export default function AddBaby() {
           <UploadImageModal
             visible={imageModalVisible}
             onClose={() => setImageModalVisible(false)}
-            onGalleryPress={() => uploadImage('load')}
-            onDeletePress={() => uploadImage('delete')}
+            onGalleryPress={() => uploadImage("load")}
+            onDeletePress={() => uploadImage("delete")}
           />
 
           <TextInput
-            style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "90%" }]}
+            style={[
+              gs.input,
+              {
+                padding: 12,
+                borderRadius: 8,
+                borderWidth: 1,
+                borderColor: "#1565C0",
+                opacity: 0.8,
+                width: "90%",
+              },
+            ]}
             placeholder="Nombre"
-            value={name}
-            onChangeText={setName}
+            value={recipe.name}
+            onChangeText={(text) => setRecipe({ ...recipe, name: text })}
           />
-          {nameError && <Text style={{ color: "red", marginBottom: 5 }}>{nameError}</Text>}
+          {nameError && (
+            <Text style={{ color: "red", marginBottom: 5 }}>{nameError}</Text>
+          )}
 
           <TextInput
-            style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "90%" }]}
+            style={[
+              gs.input,
+              {
+                padding: 12,
+                borderRadius: 8,
+                borderWidth: 1,
+                borderColor: "#1565C0",
+                opacity: 0.8,
+                width: "90%",
+              },
+            ]}
             placeholder="Descripción"
-            value={description}
-            onChangeText={setDescription}
+            value={recipe.description}
+            onChangeText={(text) => setRecipe({ ...recipe, description: text })}
           />
 
           <TextInput
-            style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "90%" }]}
+            style={[
+              gs.input,
+              {
+                padding: 12,
+                borderRadius: 8,
+                borderWidth: 1,
+                borderColor: "#1565C0",
+                opacity: 0.8,
+                width: "90%",
+              },
+            ]}
             placeholder="Ingredientes"
-            value={ingredients}
-            onChangeText={setIngredients}
+            value={recipe.ingredients}
+            onChangeText={(text) => setRecipe({ ...recipe, ingredients: text })}
           />
-          {ingredientsError && <Text style={{ color: "red", marginBottom: 5 }}>{ingredientsError}</Text>}
+          {ingredientsError && (
+            <Text style={{ color: "red", marginBottom: 5 }}>
+              {ingredientsError}
+            </Text>
+          )}
 
           <TextInput
-            style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "90%" }]}
+            style={[
+              gs.input,
+              {
+                padding: 12,
+                borderRadius: 8,
+                borderWidth: 1,
+                borderColor: "#1565C0",
+                opacity: 0.8,
+                width: "90%",
+              },
+            ]}
             placeholder="Edad mínima recomendada"
-            value={minRecommendedAge?.toString()}
+            value={recipe.minRecommendedAge?.toString()}
             keyboardType="numeric"
             onChangeText={(text) => {
               const newValue = parseFloat(text) || 0;
-              setMinRecommendedAge(newValue);
+              setRecipe({ ...recipe, minRecommendedAge: newValue });
             }}
           />
-          {minAgeError && <Text style={{ color: "red", marginBottom: 5 }}>{minAgeError}</Text>}
+          {minAgeError && (
+            <Text style={{ color: "red", marginBottom: 5 }}>{minAgeError}</Text>
+          )}
 
           <TextInput
-            style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "90%" }]}
+            style={[
+              gs.input,
+              {
+                padding: 12,
+                borderRadius: 8,
+                borderWidth: 1,
+                borderColor: "#1565C0",
+                opacity: 0.8,
+                width: "90%",
+              },
+            ]}
             placeholder="Edad máxima recomendada"
-            value={maxRecommendedAge?.toString()}
+            value={recipe.maxRecommendedAge?.toString()}
             keyboardType="numeric"
             onChangeText={(text) => {
               const newValue = parseFloat(text) || 0;
-              setMaxRecommendedAge(newValue);
+              setRecipe({ ...recipe, maxRecommendedAge: newValue });
             }}
           />
-          {maxAgeError && <Text style={{ color: "red", marginBottom: 5 }}>{maxAgeError}</Text>}
+          {maxAgeError && (
+            <Text style={{ color: "red", marginBottom: 5 }}>{maxAgeError}</Text>
+          )}
 
           <TextInput
-            style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, width: "90%" }]}
+            style={[
+              gs.input,
+              {
+                padding: 12,
+                borderRadius: 8,
+                borderWidth: 1,
+                borderColor: "#1565C0",
+                opacity: 0.8,
+                width: "90%",
+              },
+            ]}
             placeholder="Elaboración"
-            value={elaboration}
-            onChangeText={setElaboration}
+            value={recipe.elaboration}
+            onChangeText={(text) => setRecipe({ ...recipe, elaboration: text })}
             multiline
           />
 
-          <TouchableOpacity style={[gs.mainButton, { alignSelf: "center", marginTop: 10 }]} onPress={handleSave}>
-            <Text style={[gs.mainButtonText, { paddingHorizontal: 24 }]}>Guardar</Text>
+          <TouchableOpacity
+            style={[gs.mainButton, { alignSelf: "center", marginTop: 10 }]}
+            onPress={handleSave}
+          >
+            <Text style={[gs.mainButtonText, { paddingHorizontal: 24 }]}>
+              Guardar
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

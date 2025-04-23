@@ -18,7 +18,7 @@ export default function AddBaby() {
     name: "",
     description: "",
     ingredients: "",
-    minRecommendedAge: 1,
+    minRecommendedAge: null,
     maxRecommendedAge: null,
     elaboration: "",
   });
@@ -50,11 +50,12 @@ export default function AddBaby() {
       isValid = false;
     }
 
-    if (
-      recipe &&
-      recipe.maxRecommendedAge !== null &&
-      recipe.maxRecommendedAge <= 1
-    ) {
+    if (recipe.minRecommendedAge !== null && isNaN(recipe.minRecommendedAge)) {
+      setMinAgeError("La edad mínima recomendada debe ser un número válido.");
+      isValid = false;
+    }
+
+    if (recipe.maxRecommendedAge !== null && isNaN(recipe.maxRecommendedAge)) {
       setMaxAgeError("La edad máxima recomendada debe ser un número válido.");
       isValid = false;
     }
@@ -208,7 +209,7 @@ export default function AddBaby() {
               },
             ]}
             placeholder="Edad mínima recomendada"
-            value={recipe.minRecommendedAge.toString()}
+            value={recipe.minRecommendedAge?.toString()}
             keyboardType="numeric"
             onChangeText={(text) => {
               const newValue = parseFloat(text) || 0;
