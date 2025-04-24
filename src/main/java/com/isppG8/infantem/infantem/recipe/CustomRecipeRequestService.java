@@ -50,6 +50,14 @@ public class CustomRecipeRequestService {
     }
 
     @Transactional(readOnly = true)
+    public Integer getNumRequestsByUserIdActualMonthPremium(Integer userId) {
+        LocalDateTime startOfMonth = LocalDateTime.now().withDayOfMonth(1).withHour(0).withMinute(0).withSecond(0);
+        LocalDateTime endOfMonth = LocalDateTime.now().withDayOfMonth(LocalDateTime.now().getMonth().length(false))
+                .withHour(23).withMinute(59).withSecond(59);
+        return requestRepository.countRequestsByUserIdAndDate(userId, startOfMonth, endOfMonth);
+    }
+
+    @Transactional(readOnly = true)
     public List<CustomRecipeRequest> getRequestsByUser() {
         User user = userService.findCurrentUser();
         if (user.getAuthorities().getAuthority().equals("premium")) {
@@ -64,7 +72,7 @@ public class CustomRecipeRequestService {
         User user = userService.findCurrentUser();
         if (!user.getAuthorities().getAuthority().equals("premium")) {
             throw new ResourceNotOwnedException("You are not authorized to create a request");
-        } else if (getNumRequestsByUserIdActualMonth(user.getId()) >= 5) {
+        } else if (getNumRequestsByUserIdActualMonthPremium(user.getId()) >= 5) {
             throw new CustomRecipeRequestLimitException();
         } else {
             CustomRecipeRequest request = new CustomRecipeRequest();
