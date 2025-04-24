@@ -7,7 +7,7 @@ import {
   ScrollView,
   Image,
 } from "react-native";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useAuth } from "../../../context/AuthContext";
 import * as ImagePicker from "expo-image-picker";
 import UploadImageModal from "../../../components/UploadImageModal";
@@ -18,6 +18,7 @@ export default function AddBaby() {
   const gs = require("../../../static/styles/globalStyles");
   const router = useRouter();
   const { user, token, updateToken } = useAuth();
+  const { requestId, requestUserId } = useLocalSearchParams();
 
   const [recipe, setRecipe] = useState<Recipe>({
     name: "",
@@ -100,13 +101,14 @@ export default function AddBaby() {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            name: recipe.name,
-            description: recipe.description,
-            ingredients: recipe.ingredients,
-            minRecommendedAge: recipe.minRecommendedAge,
-            maxRecommendedAge: recipe.maxRecommendedAge,
-            elaboration: recipe.elaboration,
-          }),
+              name: recipe.name,
+              description: recipe.description,
+              ingredients: recipe.ingredients,
+              minRecommendedAge: recipe.minRecommendedAge,
+              maxRecommendedAge: recipe.maxRecommendedAge,
+              elaboration: recipe.elaboration,
+              ...(requestId && requestUserId ? { requestId, user: requestUserId } : {}),
+            }),
         });
 
         if (response.ok) {

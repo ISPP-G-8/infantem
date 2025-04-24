@@ -46,7 +46,7 @@ export default function RequestComponent({ req, nutritionist }: { req: Request, 
           {statusLabel}
         </Text>
       </View>
-      {nutritionist && (
+      {nutritionist && req.status === "OPEN" && (
         <Link style={[gs.mainButton, { backgroundColor: "#1565C0", marginVertical: 10 }]} href={`/recipes/add?requestId=${req.id}&requestUserId=${req.user.id}`}>
           <Text style={gs.mainButtonText}>Añade esta receta</Text>
         </Link>
