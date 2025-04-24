@@ -220,6 +220,46 @@ A partir del feedback proporcionado por los usuarios piloto, hemos identificado 
 - Algunos usuarios proponen tener opción de subir vídeos o imágenes más visuales en secciones clave como recetas.  
 - Se valora positivamente la claridad del calendario, pero se insiste en que se indiquen bien sus funcionalidades previstas (citas médicas, vacunas, etc.).
 
+# PPL 
+## Semana 1
+
+### Navegación y Usabilidad
+- Problemas con la visualización de filtros y navegación en PC y móvil.
+- El buscador de recetas se desborda o no muestra resultados claros.
+- Falta de feedback visual en botones clave (guardar, login, etc.).
+- Formularios con navegación confusa o sin opción de volver atrás.
+- El Navbar no es visible o aparece en posiciones inusuales.
+- Sugerencia: limitar los resultados de búsqueda para no saturar al usuario.
+
+### Contenido y Estructura
+- Falta claridad en los rangos de edad (meses o años).
+- Necesidad de filtros más variados y visuales (ingredientes, dificultad...).
+- Propuesta de crear una sección para "Mis recetas", editable.
+- Las funcionalidades premium no están bien explicadas visualmente.
+- El apartado de recetas necesita mejor diseño y etiquetas visuales.
+- Incluir imágenes paso a paso o más detalladas para facilitar la elaboración.
+
+### Funcionalidad
+- Formularios permiten guardar con campos vacíos o inválidos.
+- Sugerencia de añadir modales de confirmación en acciones clave.
+- Añadir validaciones más robustas (nombres inválidos, fechas erróneas...).
+- Necesidad de funcionalidades como historial, subperfiles, recordatorios.
+- La sincronización con Google Calendar fue mencionada como mejora deseada.
+
+### Idioma y Accesibilidad
+- Algunos textos contienen errores ortográficos.
+- Mejorar feedback en errores y validaciones.
+- Sugerencias para un lenguaje más amigable y visual en funciones complejas.
+- Mejora en contraste y visibilidad de botones y formularios.
+- El calendario es valorado, pero se necesita mejor explicación de sus usos.
+
+### Redes Sociales y Marketing
+- Los usuarios prefieren vídeos cortos (Reels, TikToks) y contenido práctico.
+- Interés por contenido como: recetas por edad, síntomas comunes, salud emocional, entrevistas con especialistas.
+- Se sugiere mostrar cómo usar funcionalidades de la app a través de tutoriales o demos visuales.
+- Algunos usuarios proponen descuentos o planes de pago únicos como incentivo para el Premium.
+
+
 ## Categorización y Priorización de Problemas Detectados
 
 Este apartado recoge y clasifica los errores funcionales, problemas de usabilidad, mejoras visuales y recomendaciones detectadas durante el uso y revisión de la aplicación Infantem. La categorización se ha realizado según tres niveles de prioridad (alta, media y baja), con el objetivo de facilitar su abordaje en próximos sprints de desarrollo. También se incluyen sugerencias de mejora para optimizar la experiencia del usuario y la funcionalidad de la app.
@@ -456,6 +496,70 @@ Cada metrica se puntuara del 1 al 5 dando lugar a un valor de priorizacion de fe
 - Aumentar la fuente de letra en apartados clave y mejorar la jerarquía visual.
 
 - Añadir ejemplos visuales o textos más amigables para explicar funciones como los alérgenos.
+
+## PPL
+## Semana 1 
+
+### 🟥 Prioridad Alta
+
+- **Problemas al aladir nuevas ingestas al calendario** *(VPF = 23)*  
+- **Problemas a la hora de registrar un bebe"** *(VPF = 23)*
+- **Formularios permiten guardar con campos vacíos o inválidos.** *(VPF = 24)*  
+- **El buscador de recetas se desborda o no muestra resultados claros.** *(VPF = 22)*  
+- **Problemas con la visualización de filtros, por ejemplo el filtro de edad** *(VPF = 21)*  
+- **Falta claridad en los rangos de edad (meses o años).** *(VPF = 20)*  
+- **Añadir validaciones más robustas (nombres inválidos, fechas erróneas...).** *(VPF = 21)*  
+- **Actualización de métricas no óptima y sin validación mínima**: El formulario exige rellenar todos los campos incluso cuando solo se quiere actualizar uno, lo cual reduce la eficiencia. Además, no hay validación para valores absurdos como peso/talla 0. *(VPF = 22)*
+
+---
+
+### 🟧 Prioridad Media
+
+- **Formularios con navegación confusa o sin opción de volver atrás.** *(VPF = 17)*  
+- **El Navbar no es visible o aparece en posiciones inusuales.** *(VPF = 15)*  
+- **Sugerencia: limitar los resultados de búsqueda para no saturar al usuario.** *(VPF = 13)*  
+- **Necesidad de filtros más variados y visuales.** *(VPF = 14)*  
+- **Las funcionalidades premium no están bien explicadas visualmente.** *(VPF = 15)*  
+- **El apartado de recetas necesita mejor diseño y etiquetas visuales.** *(VPF = 14)*  
+- **Sugerencia de añadir modales de confirmación en acciones clave.** *(VPF = 13)*  
+- **El calendario es valorado, pero se necesita mejor explicación de sus usos.** *(VPF = 12)*  
+- **Mejorar errores y validaciones.** *(VPF = 14)*  
+- **Falta de validación visual en recuperación de cuenta**: No se notifica si el correo no está registrado, y eso genera desconfianza y confusión en el usuario. *(VPF = 15)* 
+- **Sugerencia de usabilidad al registrarse**: El botón de "Registrarse" debería estar deshabilitado hasta que el formulario esté completo y válido *(VPF = 14)*
+- **Error visual en las métricas de bebés eliminados**: Las métricas siguen mostrando datos de bebés eliminados, lo cual genera incoherencias y confusión en el seguimiento.
+
+---
+
+### 🟩 Prioridad Baja
+
+- **Propuesta de crear una sección para "Mis recetas", editable.** *(VPF = 9)*  
+- **Incluir imágenes paso a paso o más detalladas en recetas.** *(VPF = 8)*  
+- **Algunos textos contienen errores ortográficos.** *(VPF = 7)*  
+- **Sugerencias para un lenguaje más amigable y visual.** *(VPF = 9)*  
+- **Mejora en contraste y visibilidad de botones y formularios.** *(VPF = 8)*  
+- **Los usuarios prefieren vídeos cortos y contenido práctico.** *(VPF = 9)*  
+- **Interés por contenido: recetas por edad, síntomas comunes, entrevistas, salud emocional.** *(VPF = 9)*    
+- **Usuarios proponen descuentos o planes únicos como incentivo premium.** *(VPF = 8)*  
+- **Problema de usabilidad al introducir la hora**: El método actual para introducir fechas y horas manualmente es poco intuitivo. Se sugiere añadir un selector visual (date/time picker). 
+- **Búsqueda sensible a caracteres especiales**: El sistema de búsqueda no contempla variaciones lingüísticas o errores comunes (acentos, caracteres especiales), lo que reduce la accesibilidad y usabilidad. 
+- **Mensaje de error poco visible en la búsqueda**: El mensaje de error que indica que no se han encontrado recetas es poco visible y mal posicionado, lo que puede confundir al usuario.
+
+---
+
+### 💡 Recomendaciones
+
+- **Limitar el número de resultados que se muestran en la búsqueda** para evitar saturación visual.  
+- **Incluir una sección para "Mis recetas"** donde el usuario pueda editar o eliminar sus propias entradas.  
+- **Añadir imágenes paso a paso** o más detalles visuales para mejorar la experiencia en la elaboración de recetas.  
+- **Mostrar visualmente los beneficios del plan premium**, diferenciándolos claramente de las funcionalidades gratuitas.  
+- **Añadir modales de confirmación** en acciones como guardar recetas o salir de formularios sin completar.  
+- **Sincronización con Google Calendar** para planificación de comidas y seguimiento de eventos.  
+- **Incluir contenido educativo y promocional** en redes sociales como Reels, TikToks, entrevistas o consejos prácticos.  
+- **Ofrecer descuentos o planes de pago únicos** como incentivo para adquirir el plan Premium.  
+- **Usar un lenguaje más visual y amigable** en funciones complejas (como filtros, alérgenos o métricas).  
+- **Ampliar la paleta de filtros** en el buscador con opciones por dificultad, tiempo de preparación o preferencia alimenticia.
+- **Recomendación claude.ai** para refactorizar el frontend y hacerlo más estetico.
+- **Se sugiere mostrar funcionalidades de la app con tutoriales visuales.**
 
 
 > *Este sistema de evaluación sirve como guía para valorar la implicación de los usuarios piloto y tomar decisiones sobre futuras iteraciones y pruebas de usuario.*  
