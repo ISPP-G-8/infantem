@@ -86,16 +86,75 @@ Definir una estrategia de marketing para el lanzamiento de **Infantem**, una nue
 
 ### A. Madres y Padres Jóvenes (20-35 años)
 
-- Alta actividad en redes sociales como Instagram, TikTok...
-- Buscan información práctica, rápida y visual.
-- Gran participación en comunidades digitales.
+Este primer segmento en el que nos queremos enfocar está formado por los padres que están afrontando la primera etapa de crianza de sus niños, normalmente el primero de ellos o niños menores de 3 años. Son curiosos, activos digitalmente y sensibles a todo lo relacionado con la buena salud, desarrollo y bienestar de sus bebés. Valoran la información práctica y profesional pero presentada de una forma accesible y visual que sea fácil de entender.
+
+- **Hábitos digitales**
+  - Alta actividad en redes sociales como TikTok, Instagram o YouTube.
+  - Consumen contenido corto y rápido como reels, historias o fotografías.
+  - Suelen seguir influencers, pediatras u otros padres que compartan experiencias y consejos reales.
+
+- **Necesidades clave**
+  - Guías claras y estructuradas sobre cómo introducir alimentos.
+  - Recetas fáciles y rápidas.
+  - Evitar errores comunes.
+  - Sentirse acompañados y validados por expertos.
+
+- **Protopersona:**
+  - **Nombre:** Laura  
+  - **Edad:** 28 años  
+  - **Ocupación:** Diseñadora gráfica freelance  
+  - **Estado civil:** Casada, primer hijo de 1 año  
+  - **Perfil familiar:** Vive con su pareja y su primer hijo. Ambos comparten la crianza, pero Laura asume la mayor parte del cuidado diario. Su entorno es joven y digital, y suele apoyarse más en recursos online que en consejos tradicionales.
+  - **Intereses:** Desarrollo infantil, recetas caseras, tips de crianza  
+  - **Tecnología:** Usa Instagram y TikTok a diario, sigue a pediatras e influencers de maternidad  
+  - **Hábitos digitales:**
+    - Alta actividad en redes sociales como TikTok, Instagram o YouTube.
+    - Consume contenido corto y rápido como reels, historias o fotografías.
+    - Sigue influencers, pediatras u otros padres que comparten experiencias y consejos reales.
+  - **Situación:** Miedo a equivocarse al alimentar a su bebé, sobreinformación en internet  
+  - **Necesidades clave:**
+    - Guías claras y estructuradas sobre cómo introducir alimentos.
+    - Recetas fáciles y rápidas.
+    - Evitar errores comunes.
+    - Sentirse acompañada y validada por expertos.  
+  - **Objetivos:** Aprender paso a paso cómo alimentar a su hijo, sentirse segura con información de expertos  
 
 ### B. Padres Adultos (36-49 años)
 
-- Profesionales con menos tiempo disponible.
-- Consumen contenido estructurado y verificado.
-- Mayor presencia en Facebook, Instagram, Google y LinkedIn.
-- Interés por desarrollo infantil, salud y servicios premium.
+Este grupo está formado por personas con mayor estabilidad profesional y económica, muchas veces con más de un hijo o en proceso de ampliar su familia. Aunque pueden tener experiencia previa criando niños, buscan estar al día con prácticas modernas de crianza y valoran especialmente la accesibilidad, la eficiencia y la credibilidad de fuentes confiables.
+
+Además, en este segmento es común encontrar parejas que han accedido a la maternidad o paternidad a través de técnicas de reproducción asistida, lo que conlleva una mayor concienciación sobre la salud, la nutrición infantil y el seguimiento profesional desde las primeras etapas.
+
+- **Hábitos digitales**
+  - Consumen contenido más largo, estructurado y con base que lo respalde como pueden ser documentales o programas de nutrición.
+  - Son más activos en plataformas como Facebook, Google o foros de internet.
+  - Suelen consultar blogs, artículos largos o recursos descargables como guías en PDF.
+
+- **Necesidades clave**
+  - Información clara, profesional y confiable.
+  - Contenido descargable que sea fácil de consultar.
+  - Opciones de productos o servicios premium.
+  - Recursos útiles que les ayuden a ahorrar tiempo.
+
+- **Protopersona:**
+  - **Nombre:** Carlos  
+  - **Edad:** 41 años  
+  - **Ocupación:** Ingeniero con jornada completa  
+  - **Estado civil:** Casado, dos hijos (4 y 1 año)  
+  - **Intereses:** Tecnología útil, organización familiar, salud infantil
+  - **Perfil famliar:** Su hijo menor nació gracias a técnicas de reproducción asistida, lo que lo hace aún más consciente de seguir prácticas seguras y supervisadas.  
+  - **Tecnología:** Usa principalmente Facebook y Google, descarga guías en PDF  
+  - **Hábitos digitales:**
+    - Consume contenido más largo, estructurado y con base que lo respalde como documentales o programas de nutrición.
+    - Es más activo en plataformas como Facebook, Google o foros de internet.
+    - Consulta blogs, artículos largos o recursos descargables como guías en PDF.
+  - **Situación:** Falta de tiempo para investigar y comparar información  
+  - **Necesidades clave:**
+    - Información clara, profesional y confiable.
+    - Contenido descargable que sea fácil de consultar.
+    - Opciones de productos o servicios premium.
+    - Recursos útiles que le ayuden a ahorrar tiempo.
+  - **Objetivos:** Encontrar contenido confiable y práctico que pueda consultar rápido y aplicar con sus hijos.
 
 ---
 ## 3. Objetivos Estratégicos y KPIs
