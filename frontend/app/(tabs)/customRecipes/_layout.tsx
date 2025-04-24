@@ -4,7 +4,6 @@ import { Text } from 'react-native';
 
 export default function CustomRecipeLayout() {
   const { user } = useAuth();
-  console.log(user)
 
   if (!(user?.role === "nutritionist" || user?.role === "premium")) 
         router.replace('/recipes');
@@ -29,7 +28,6 @@ export default function CustomRecipeLayout() {
 				
 			  }}
 			>
-      <Stack.Screen name="requests" options={{ title: "Peticiones de recetas" }} />
       <Stack.Screen name="ask" options={{ title: "Solicita una receta" }} />
 		</Stack>
 	);

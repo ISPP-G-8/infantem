@@ -370,12 +370,12 @@ export default function Page() {
             {/* Sorry for this :D */}
             {user?.role === "nutritionist" 
               ?             
-              <Link style={gs.secondaryButton} href={"/customRecipes/requests"}>
+              <Link style={gs.secondaryButton} href={"/customRecipes"}>
                 <Text style={gs.secondaryButtonText}>Crear recetas personalizadas</Text>
               </Link>
               : user?.role === "premium"
                 ?               
-                <Link style={gs.secondaryButton} href={"/customRecipes/requests"}>
+                <Link style={gs.secondaryButton} href={"/customRecipes"}>
                   <Text style={gs.secondaryButtonText}>Solicita recetas personalizadas</Text>
                 </Link>
                 : null

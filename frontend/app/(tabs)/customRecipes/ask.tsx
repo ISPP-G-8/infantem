@@ -1,53 +1,78 @@
-import { useEffect, useState } from "react";
-import { Request } from "../../../types";
+import { useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
-import { ScrollView, Text, TouchableOpacity, useWindowDimensions, View } from "react-native";
-import Pagination from "../../../components/Pagination";
+import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { router } from "expo-router";
 
-
-export default function requests() {
+export default function CreateRequest() {
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const gs = require("../../../static/styles/globalStyles");
   const { token } = useAuth();
 
-  // const [requests, setRequests] = useState<Request[]>([]);
-  const [page, setPage] = useState<number>(1);
-  const [totalPages, setTotalPages] = useState<number | null>(null);
+  const [details, setDetails] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  useEffect(() => {
-    const fetchRequests = async (): Promise<boolean> => {
-      try {
-        // The backend is zero-indexed. Thats the reason behind the -1
-        const response = await fetch(`${apiUrl}/api/v1/recipes/custom-requests?page=${page-1}`, {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-          },
-        });
+  const handleSave = async () => {
+    if (!details) {
+      setErrorMessage("Es obligatorio rellenar los detalles.");
+      return;
+    }
 
-        if (!response.ok) {
-          throw new Error("Error fetching requests");
-        } 
+    if (errorMessage) 
+      return;
 
-        const data = await response.json();
-        // setRequests(data.content);
-        setTotalPages(data.totalPages)
-        return true;
-
-      } catch (error) {
-        console.error('Error fetching requests: ', error);
-        return false;
+    try {
+      const response = await fetch(`${apiUrl}/api/v1/recipes/custom-requests`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({'details': details})
+      });
+      
+      if (!response.ok) {
+        setErrorMessage('Error al guardar la ingesta');
+        throw new Error('Error al guardar la ingesta');
       }
-    };
 
-    fetchRequests();
-  }, [page]);
+      setDetails('');
+      router.replace("customRecipes");
 
+    } catch (error) {
+      console.error('Error saving intake:', error);
+    }
+  };
+
+  const handleCancel = () => {
+    setDetails('');
+    router.replace("customRecipes");
+  };
   return (
     <View style={gs.container}>
-      <Text style={{ color: "#1565C0", fontSize: 36, fontWeight: "bold", textAlign: "center", marginBottom: 10 }}>Tus solicitudes de recetas</Text>
-      <Text style={[gs.bodyText, { textAlign: "center",color:"#1565C0" }]}>Pide aquellas recetas personalizadas que quieras</Text>
+      <Text style={{ color: "#1565C0", fontSize: 36, fontWeight: "bold", textAlign: "center", marginBottom: 10 }}>Solicitud de recetas</Text>
+      <Text style={[gs.bodyText, { textAlign: "center",color:"#1565C0" }]}>Crea las recetas para las solicitudes de los usuarios</Text>
 
+
+          <View style={[gs.card, { alignItems: "center", justifyContent: "center", marginBottom: 19, borderRadius: 15, shadowColor: "#000", shadowOpacity: 0.1, shadowRadius: 10, elevation: 5 }]}>
+            
+            
+            <Text style={{ alignSelf: 'flex-start', marginLeft: '10%', color: '#1565C0', fontWeight: 'bold', marginBottom: 5 }}>Detalles de la petición</Text>
+            <TextInput
+              style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.8, textAlignVertical: "top", width:"80%", minHeight:100}]} 
+              placeholder="Detalles"
+              value={details}
+              onChangeText={(text) => (setDetails(text))}
+            />
+
+          {errorMessage&& <Text style={{ color: "red", alignSelf: 'flex-start', marginLeft: '10%' }}>{errorMessage}</Text>}
+
+            <TouchableOpacity style={[gs.mainButton, { marginTop: 20 }]} onPress={handleSave}>
+              <Text style={gs.mainButtonText}>Guardar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[gs.mainButton, { backgroundColor: "red", marginTop: 10 }]} onPress={handleCancel}>
+              <Text style={gs.mainButtonText}>Cancelar</Text>
+            </TouchableOpacity>
+          </View>
     </View>
   );
 }
