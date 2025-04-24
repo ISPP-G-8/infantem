@@ -272,7 +272,8 @@ public class RecipeController {
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size) {
 
-        List<CustomRecipeRequest> requests = customRecipeRequestService.getAllRequests();
+        List<CustomRecipeRequest> requests = customRecipeRequestService.getAllOpenRequests();
+
         Pageable pageable = PageRequest.of(page, size);
 
         int start = (int) pageable.getOffset();

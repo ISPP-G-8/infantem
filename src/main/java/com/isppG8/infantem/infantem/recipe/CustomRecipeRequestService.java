@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,10 +28,10 @@ public class CustomRecipeRequestService {
     }
 
     @Transactional(readOnly = true)
-    public List<CustomRecipeRequest> getAllRequests() {
+    public List<CustomRecipeRequest> getAllOpenRequests() {
         User user = userService.findCurrentUser();
         if (user.getAuthorities().getAuthority().equals("nutritionist")) {
-            return requestRepository.findAll();
+            return requestRepository.findAllOpen();
         } else {
             throw new ResourceNotFoundException("You are not authorized to access this resource");
         }
