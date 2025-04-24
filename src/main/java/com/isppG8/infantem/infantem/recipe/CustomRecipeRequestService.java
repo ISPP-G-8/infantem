@@ -108,12 +108,8 @@ public class CustomRecipeRequestService {
                 .orElseThrow(() -> new ResourceNotFoundException("Request not found"));
         User user = userService.findCurrentUser();
         if (request.getStatus().equals(RequestStatus.OPEN) || request.getStatus().equals(RequestStatus.IN_PROGRESS)) {
-            if (request.getUser().getId().equals(user.getId())) {
-                request.setStatus(RequestStatus.CLOSED);
-                return requestRepository.save(request);
-            } else {
-                throw new ResourceNotOwnedException("You are not authorized to close this request");
-            }
+            request.setStatus(RequestStatus.CLOSED);
+            return requestRepository.save(request);
         } else {
             throw new IllegalArgumentException("Request is already closed");
         }
