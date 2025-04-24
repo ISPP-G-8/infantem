@@ -27,10 +27,10 @@ public class CustomRecipeRequestService {
     }
 
     @Transactional(readOnly = true)
-    public List<CustomRecipeRequest> getAllRequests() {
+    public List<CustomRecipeRequest> getAllOpenRequests() {
         User user = userService.findCurrentUser();
         if (user.getAuthorities().getAuthority().equals("nutritionist")) {
-            return requestRepository.findAll();
+            return requestRepository.findAllOpen();
         } else {
             throw new ResourceNotFoundException("You are not authorized to access this resource");
         }

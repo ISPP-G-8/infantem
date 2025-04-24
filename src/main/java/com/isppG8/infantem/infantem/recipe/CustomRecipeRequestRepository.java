@@ -13,7 +13,10 @@ public interface CustomRecipeRequestRepository extends JpaRepository<CustomRecip
     @Query("SELECT count(r) FROM CustomRecipeRequest r WHERE r.user.id = ?1 AND r.createdAt BETWEEN ?2 AND ?3")
     Integer countRequestsByUserIdAndDate(Integer userId, LocalDateTime start, LocalDateTime end);
 
-    @Query("SELECT r FROM CustomRecipeRequest r WHERE r.user.id = ?1")
+    @Query("SELECT r FROM CustomRecipeRequest r WHERE r.user.id = ?1 ORDER BY r.createdAt DESC")
     List<CustomRecipeRequest> findByUserId(Integer id);
+
+    @Query("SELECT r FROM CustomRecipeRequest r WHERE r.status = 'OPEN' ORDER BY r.createdAt DESC")
+    List<CustomRecipeRequest> findAllOpen();
 
 }
