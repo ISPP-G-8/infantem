@@ -240,7 +240,7 @@ El equipo de trabajo está formado por 17 miembros, distribuidos en subgrupos se
 
 - **Acciones de mitigación**:
   - **Técnica**: Verificar que el entorno de pago esté correctamente ajustado para pruebas (`sandbox`) durante fases de evaluación. 
-  - **De proceso**: Incluir en la checklist de revisión final la validación del entorno de pago activo y su documentación clara en el entregable. Coordinar QA y documentación para asegurar que esta información se comunica de forma explícita.
+  - **De proceso**: Incluir en la checklist de revisión final la validación del entorno de pago activo y su documentación clara en el entregable. Coordinar QA y documentación para asegurar que esta información se comunique de forma explícita.
 
 - **Estado del error**: Resuelto.
 
@@ -393,22 +393,18 @@ debido a que no se probó a introducir una fecha de nacimiento en el futuro en l
 - **Estado del error**: Resuelto.
 
 
+## 6. Conclusiones
 
+Okay, entiendo. Quieres una conclusión que, aunque se refiera a los problemas del Sprint 2, tenga un estilo y enfoque similar al ejemplo que proporcionaste sobre el Sprint 1, poniendo énfasis en cómo los fallos impactaron la evaluación y la necesidad de mejorar los procesos de control y verificación.
 
+Aquí tienes una propuesta adaptada:
 
+6. Conclusiones
 
+Durante el Sprint 2, se evidenciaron múltiples incumplimientos relacionados tanto con el proceso de entrega (condición T-9) como con la calidad del software (condición T-10), que comprometieron seriamente la evaluación del entregable. A pesar de que el equipo identificó y resolvió posteriormente varios errores funcionales y técnicos, la causa principal de las deficiencias señaladas en la revisión radicó en fallos en la preparación y verificación final del paquete entregado y del propio software.
 
+Errores críticos como un archivo revision.md incompleto (sin explicaciones detalladas ni datos de prueba esenciales como los de la pasarela de pago) y un vídeo de demostración inaccesible según las normas impidieron que el profesorado pudiera evaluar adecuadamente los casos de uso implementados. Sumado a esto, la presencia de errores funcionales, fallos de validación y problemas visuales en producción mermó la fiabilidad de la versión entregada. Como resultado, gran parte del esfuerzo funcional del equipo no pudo ser valorado correctamente.
 
+Este conjunto de incidentes pone de manifiesto la necesidad urgente de establecer mecanismos más rigurosos de revisión y control, no solo sobre el código, sino sobre todo el proceso de empaquetado y entrega, especialmente en las fases previas a la fecha límite. Asimismo, resalta la importancia crítica de validar exhaustivamente, bajo condiciones lo más cercanas posible a la evaluación, tanto las funcionalidades clave como la correcta presentación de toda la documentación y artefactos requeridos.
 
-
-
-
-  
-
-
-
-
-
-
-
-
+Para próximos sprints, el equipo ha tomado conciencia de estas deficiencias y se ha comprometido firmemente a aplicar las medidas correctivas detalladas en este informe, tanto a nivel técnico como organizativo (reforzando QA, checklists de entrega y verificación final), con el fin de garantizar entregas futuras más estables, completas, verificadas y estrictamente alineadas con los criterios de evaluación.

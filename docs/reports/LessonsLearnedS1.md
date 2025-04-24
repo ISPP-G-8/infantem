@@ -64,11 +64,11 @@ Este documento recoge un análisis detallado de las condiciones de fallo detecta
 
 ## 2. Análisis de condiciones de fallo
 
-Durante la revisión del segundo entregable se identificaron incumplimientos en la condicion T-10, de acuerdo con los criterios establecidos en el documento oficial “Deliverable Failure Conditions v2.1”.
+Durante la revisión del segundo entregable se identificaron incumplimientos en la condición T-10, de acuerdo con los criterios establecidos en el documento oficial “Deliverable Failure Conditions v2.1”.
 
 #### Condición T-10 – Fallos en el software entregado
 
-El sistema entregado incurrió en varios errores funcionales que vulneran distintas subcondiciones de la condición T-10, todas relacionadas con la calidad del software y su comportamiento en producción. Segun lo indicado por el profesorado, no fueron capaces de ejecutar ninguna de las acciones indicadas como casos de uso en el documento revision.md del Sprint 1.
+El sistema entregado incurrió en varios errores funcionales que vulneran distintas subcondiciones de la condición T-10, todas relacionadas con la calidad del software y su comportamiento en producción. Según lo indicado por el profesorado, no fueron capaces de ejecutar ninguna de las acciones indicadas como casos de uso en el documento revision.md del Sprint 1.
 
 En concreto, se detectaron fallos vinculados a:
 
@@ -81,26 +81,26 @@ Estos errores serán descritos con mayor nivel de detalle en la sección corresp
 
 ## 3. Lista de errores y su relación con las condiciones de fallo
 
-A continuación, se recoge un listado de los errores detectados en relación con la condicion de fallo T-10, organizados según el momento en que fueron identificados y por quién.
+A continuación, se recoge un listado de los errores detectados en relación con la condición de fallo T-10, organizados según el momento en que fueron identificados y por quién.
 
 ### Errores identificados por el equipo **antes** de la entrega:
 
 - Las recetas registradas no se muestran correctamente en el buscador.
 - La pestaña de recetas favoritas no muestra nada.
-- Varias URI de la aplicacion fueron hard codeadas en el frontend y algunas no se corrigieron antes de la entrega.
+- Varias URI de la aplicación fueron hard codeadas en el frontend y algunas no se corrigieron antes de la entrega.
 
 ### Errores identificados por el equipo **después** de la entrega:
 
-- La version del despliegue disponible para la correccion no era la adecuada.
+- La versión del despliegue disponible para la corrección no era la adecuada.
 
 ### Errores identificados por el **revisor del entregable (profesor)**:
 
-- Imposibilidad de registrar bebes
-- Validaciones de formularios no ofrecían informacion de los errores.
-- En el fromulario de alergenos no se comprende correctamente a que bebe va dirijido.
-- Imposibilidad de dar de alta recetas
+- Imposibilidad de registrar bebés.
+- Las validaciones de formularios no ofrecían información de los errores.
+- En el formulario de alergenos no se comprende correctamente a que bebe va dirigido.
+- Imposibilidad de dar de alta recetas.
 
-Mas adelante se explicara el porque de la aparicion de estos ultimos errores detectados por el revisor del entregable.
+Más adelante se explicara el porqué de la aparición de estos últimos errores detectados por el revisor del entregable.
 
 Cada uno de estos errores será analizado en profundidad en la sección 4.
 
@@ -193,7 +193,7 @@ El equipo "Infantem" está formado por 17 miembros, distribuidos en subgrupos se
 
 ## 5. Análisis individual de errores
 
-Para una mejor comprensión, los errores se agrupan en dos grandes categorías: aquellos derivados de problemas en el despliegue y otros de índole funcional. Esta clasificación responde al análisis del feedback recibido, que señala que durante la corrección el despliegue no contaba con la version que correspondia con el tag de la entrega, lo cual generó múltiples fallos funcionales.
+Para una mejor comprensión, los errores se agrupan en tres grandes categorías: aquellos derivados de problemas en el despliegue, planificación y otros de índole funcional. Esta clasificación responde al análisis del feedback recibido, que señala que durante la corrección el despliegue no contaba con la versión que correspondía con el tag de la entrega, lo cual generó múltiples fallos funcionales.
 
 Tras verificar el tag correspondiente al despliegue del Sprint 1 y probar su funcionamiento en condiciones controladas, se concluye que probablemente el fallo se debió a un error en el despliegue, ya que actualmente dicha versión opera correctamente.
 
@@ -283,6 +283,29 @@ Tras verificar el tag correspondiente al despliegue del Sprint 1 y probar su fun
 - **Acciones de mitigación**:
   - _Técnica_: Revisar e implementar correctamente el flujo de alta de recetas.
   - _Proceso_: Priorizar funcionalidades esenciales desde los primeros días del sprint.
+- **Estado**: Resuelto.
+
+### Error 5: Problemas de planificación y organización
+
+#### Error 5.1: Desglose de tareas ineficiente
+- **Origen técnico**: las tareas fueron divididas en desarrollo, testeo y comprobación de calidad, cada una de estos pasos asociados a una persona distinta. Esto generó que el equipo no tuviera una visión global de la tarea e interrupciones constantes en el proceso de desarrollo, ya que cada miembro del equipo no podía avanzar en la tarea hasta que el anterior no la había terminado. Como consecuencia, hubo momentos en los que gran parte del equipo estaba parado a la espera de que el anterior terminara su parte.
+- **Origen en el proceso**: Detectado antes de la entrega.
+- **Fuente**: Equipo de Vocales y Directores de Proyecto.
+- **Responsables**: Directores de Proyecto.
+- **Acciones de mitigación**:
+  - _Técnica_: no aplica.
+  - _Proceso_: formar parejas de trabajo para asegurar que el desarrollo de las tareas críticas no se vea afectado por la falta de disponibilidad de un miembro del equipo y asignar tareas de desarrollo y testeo a la misma pareja.
+- **Estado**: Resuelto.
+
+#### Error 5.2: Tareas no asignadas correctamente
+
+- **Origen técnico**: Las tareas del primer sprint fueron asignadas de forma unilateral por los directores del proyecto en un contexto en el que el equipo no estaba acostumbrado a trabajar de forma conjunta y sin conocer el nivel de habilidad técnica de cada miembro. Como consecuencia, se asignaron tareas más complejas a miembros del equipo que no tenían la experiencia suficiente para llevarlas a cabo, lo que generó retrasos en el desarrollo y problemas de calidad en el entregable obligando a dedicar recursos a refactorizar el código.
+- **Origen en el proceso**: Detectado antes de la entrega.
+- **Fuente**: Equipo de Vocales y Directores de Proyecto.
+- **Responsables**: Directores de Proyecto.
+- **Acciones de mitigación**:
+  - _Técnica_: no aplica.
+  - _Proceso_: las tareas las asignarán los vocales de cada grupo que están más familiarizados con la eficacia de cada miembro del equipo.
 - **Estado**: Resuelto.
 
 ## 6. Conclusiones
