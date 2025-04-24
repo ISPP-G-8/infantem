@@ -61,7 +61,7 @@ export default function requests() {
 
       <ScrollView style={{maxWidth:600}}>
         {requests.map((req, index) => (
-          <RequestComponent key={index} req={req} />
+          <RequestComponent key={index} req={req} nutritionist={user?.role==='nutritionist'}/>
         ))}
       </ScrollView>
 

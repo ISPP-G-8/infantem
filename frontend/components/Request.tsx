@@ -1,8 +1,9 @@
 import React from "react";
 import { Text, View, useWindowDimensions } from "react-native";
 import { Request } from "../types";
+import { Link } from "expo-router";
 
-export default function RequestComponent({ req }: { req: Request}) {
+export default function RequestComponent({ req, nutritionist }: { req: Request, nutritionist: boolean}) {
   const gs = require("../static/styles/globalStyles");
   const { width } = useWindowDimensions();
 
@@ -25,6 +26,12 @@ export default function RequestComponent({ req }: { req: Request}) {
         <Text style={{fontWeight: 'bold'}}>Fecha de petición: </Text>
         {parseDate(req.createdAt)} {/*Fuck ts sorry. I'm dumb*/}
       </Text>
+      
+      {nutritionist && (
+        <Link style={[gs.mainButton, { backgroundColor: "#1565C0", marginVertical: 20 }]} href={"/recipes/add"}>
+          <Text style={gs.mainButtonText}>Añade esta receta</Text>
+        </Link>
+      )}
     </View>
   );
 }
