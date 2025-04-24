@@ -308,7 +308,7 @@ debido a que no se probó a introducir una fecha de nacimiento en el futuro en l
   - **Técnica**: Añadir validaciones en el frontend que impidan introducir fechas de nacimiento posteriores al día actual. Implementar manejo de errores del backend para mostrar mensajes comprensibles y accesibles desde el formulario.
   - **De proceso**: Actualizar los criterios de aceptación de tareas para incluir la validación de fechas lógicas. Incluir casos límite en las pruebas de QA.
 
-- **Estado del error**: Resuelto
+- **Estado del error**: Resuelto.
 
 ### Error 7: Las recetas no mostraban imágenes en la vista correspondiente
 
