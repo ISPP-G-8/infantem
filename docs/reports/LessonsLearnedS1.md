@@ -2,12 +2,12 @@
 
 ![Portada](../images/Infantem.png)
 
-
 **Fecha:** 19/04/2025  
 **Grupo 8:** Infantem  
 **Sprint 3**
 
 ## Integrantes del Grupo
+
 <div style="display: flex; justify-content: space-between; gap: 2px;">
   <div>
     <ul style="padding-left: 0; list-style: none;">
@@ -40,12 +40,17 @@
 ---
 
 ## Colaboradores del documento
-- David Fuentelsaz Rodríguez
-- Enrique García Abadía
-- Paula Luna Navarro: Revisó el documento.
 
+- David Fuentelsaz Rodríguez: Elaboró el documento.
+- Enrique García Abadía: Elaboró el documento.
+- Paula Luna Navarro: Revisó el documento.
+- Daniel del Castillo Piñero: Revisó el documento.
+- Josué Rodríguez López: Revisó el documento.
+- Felipe Solís Agudo: Revisó el documento.
+- Luis Giraldo Santiago: Revisó el documento.
 
 ## Índice
+
 - [Introducción](#1-introducción)
 - [Análisis de condiciones de fallo](#2-análisis-de-condiciones-de-fallo)
 - [Listado de problemas](#3-lista-de-errores-y-su-relación-con-las-condiciones-de-fallo)
@@ -54,13 +59,12 @@
 - [Conclusión](#6-conclusiones)
 
 ## 1. Introducción
-Este documento recoge un análisis detallado de las condiciones de fallo detectadas en el entregable del Sprint 1, así como las acciones planteadas para resolverlas y prevenir que se repitan en futuros sprints.
 
+Este documento recoge un análisis detallado de las condiciones de fallo detectadas en el entregable del Sprint 1, así como las acciones que se planteadas para resolverlas.
 
 ## 2. Análisis de condiciones de fallo
 
 Durante la revisión del segundo entregable se identificaron incumplimientos en la condicion T-10, de acuerdo con los criterios establecidos en el documento oficial “Deliverable Failure Conditions v2.1”.
-
 
 #### Condición T-10 – Fallos en el software entregado
 
@@ -84,7 +88,6 @@ A continuación, se recoge un listado de los errores detectados en relación con
 - Las recetas registradas no se muestran correctamente en el buscador.
 - La pestaña de recetas favoritas no muestra nada.
 - Varias URI de la aplicacion fueron hard codeadas en el frontend y algunas no se corrigieron antes de la entrega.
-
 
 ### Errores identificados por el equipo **después** de la entrega:
 
@@ -114,85 +117,78 @@ Durante el Sprint 1 se siguió una metodología de trabajo basada en **Scrum**, 
 
 El equipo "Infantem" está formado por 17 miembros, distribuidos en subgrupos según su especialización. La estructura organizativa incluye:
 
-- **Directores de Proyecto**:  
-  - **Luis Giraldo Santiago**  
+- **Directores de Proyecto**:
+
+  - **Luis Giraldo Santiago**
   - **Daniel del Castillo Piñero**  
-  Responsables de la planificación general, definición de tareas y coordinación entre grupos.
+    Responsables de la planificación general, definición de tareas y coordinación entre grupos.
 
-- **Jefes de Grupo**: Encargados de distribuir tareas, asistir a reuniones de coordinación y supervisar el progreso dentro de su equipo:
-  - **Frontend**: Felipe Solís Agudo  
-  - **Backend**: Josué Rodríguez López  
-  - **Full-Stack**: Daniel del Castillo Piñero  
-  - **QA e Ingeniería de pruebas**: Enrique García Abadía  
+- **Vocales de Grupos**: Encargados de distribuir la información en los grupos de trabajo y representantes de los mismos en reuniones específicas:
+
+  - **Frontend**: Felipe Solís Agudo, Álvaro Jiménez Osuna
+  - **Backend**: Josué Rodríguez López, David Fuentelsaz Rodríguez
+  - **Full-Stack**: Daniel del Castillo Piñero, Luis Giraldo Santiago
+  - **QA e Ingeniería de pruebas**: Enrique García Abadía
   - **Documentación**: Paula Luna Navarro
-
-- **Vocales**: Representantes del grupo en reuniones específicas, encargados de trasladar la información al resto del equipo:
-  - Álvaro Jiménez Osuna (Frontend)  
-  - Felipe Solís Agudo (Frontend)  
-  - Josué Rodríguez López (Backend)  
-  - David Fuentelsaz Rodríguez (Backend)  
-  - Paula Luna Navarro (Documentación)  
-  - Enrique García Abadía (QA)  
-  - Javier Santos Martín (QA)  
-  - Luis Giraldo Santiago (Full-Stack)
 
 ---
 
 ### Grupos funcionales
 
 #### Frontend
-- **Jefe de grupo**: Felipe Solís Agudo  
-- **Vocales**: Álvaro Jiménez Osuna, Felipe Solís Agudo  
-- **Miembros**:  
-  - Álvaro Jiménez Osuna  
-  - Enrique García Abadía  
-  - Ángela López Oliva  
-  - Felipe Solís Agudo  
-  - David Vargas Muñiz  
-  - Antonio Jiménez Ortega  
+
+- **Vocales**: Álvaro Jiménez Osuna, Felipe Solís Agudo
+- **Miembros**:
+  - Álvaro Jiménez Osuna
+  - Enrique García Abadía
+  - Ángela López Oliva
+  - Felipe Solís Agudo
+  - David Vargas Muñiz
+  - Antonio Jiménez Ortega
   - Javier Santos Martín
 
 #### Backend
-- **Jefe de grupo**: Josué Rodríguez López  
-- **Vocales**: Josué Rodríguez López, David Fuentelsaz Rodríguez  
-- **Miembros**:  
-  - David Fuentelsaz Rodríguez  
-  - Javier Ulecia García  
-  - José García de Tejada Delgado  
-  - José María Morgado Prudencio  
-  - Josué Rodríguez López  
-  - Miguel Galán Lerate  
-  - Lucía Noya Cano  
+
+- **Vocales**: Josué Rodríguez López, David Fuentelsaz Rodríguez
+- **Miembros**:
+  - David Fuentelsaz Rodríguez
+  - Javier Ulecia García
+  - José García de Tejada Delgado
+  - José María Morgado Prudencio
+  - Josué Rodríguez López
+  - Miguel Galán Lerate
+  - Lucía Noya Cano
   - Paula Luna Navarro
 
 #### Full-Stack
-- **Jefe de grupo y vocal**: Daniel del Castillo Piñero  
-- **Miembros**:  
-  - Daniel del Castillo Piñero  
+
+- **Miembros y Vocales**:
+  - Daniel del Castillo Piñero
   - Luis Giraldo Santiago
 
 #### QA e Ingeniería de Pruebas
-- **Jefe de grupo y vocal**: Enrique García Abadía  
-- **Vocal adicional**: Javier Santos Martín  
-- **Miembros**:  
-  - Enrique García Abadía  
-  - Antonio Jiménez Ortega  
-  - Felipe Solís Agudo  
-  - Álvaro Jiménez Osuna  
-  - David Vargas Muñiz  
-  - Javier Santos Martín  
-  - David Fuentelsaz Rodríguez  
-  - José García de Tejada Delgado  
-  - Josué Rodríguez López  
+
+- **Vocales**: Enrique García Abadía, Javier Santos Martín
+- **Miembros**:
+  - Enrique García Abadía
+  - Antonio Jiménez Ortega
+  - Felipe Solís Agudo
+  - Álvaro Jiménez Osuna
+  - David Vargas Muñiz
+  - Javier Santos Martín
+  - David Fuentelsaz Rodríguez
+  - José García de Tejada Delgado
+  - Josué Rodríguez López
   - Miguel Galán Lerate
 
 #### Documentación
-- **Jefa de grupo y vocal**: Paula Luna Navarro  
-- **Miembros**:  
-  - Paula Luna Navarro  
-  - José María Morgado Prudencio  
-  - Lucía Noya Cano  
-  - Ángela López Oliva  
+
+- **Vocal**: Paula Luna Navarro
+- **Miembros**:
+  - Paula Luna Navarro
+  - José María Morgado Prudencio
+  - Lucía Noya Cano
+  - Ángela López Oliva
   - Javier Ulecia García
 
 ## 5. Análisis individual de errores
@@ -208,19 +204,19 @@ Tras verificar el tag correspondiente al despliegue del Sprint 1 y probar su fun
 - **Fuente**: Felipe Solís Agudo.
 - **Responsables**: Equipo de Frontend.
 - **Acciones de mitigación**:
-  - *Técnica*: Establecer correctamente la comunicación con el backend para recuperar recetas del usuario.
-  - *Proceso*: Priorizar mejor las tareas para evitar exclusiones de funcionalidad crítica.
+  - _Técnica_: Establecer correctamente la comunicación con el backend para recuperar recetas del usuario.
+  - _Proceso_: Priorizar mejor las tareas para evitar exclusiones de funcionalidad crítica.
 - **Estado**: Resuelto.
 
 ### Error 2: Pestaña de recetas favoritas sin funcionalidad
 
-- **Origen técnico**: La vista queda en carga infinita al acceder.
+- **Origen técnico**: La vista queda cargando infinitamente al acceder.
 - **Origen en el proceso**: Detectado antes de la entrega.
 - **Fuente**: Equipo de Frontend.
 - **Responsables**: Equipo de Frontend.
 - **Acciones de mitigación**:
-  - *Técnica*: Implementar lógica y visualización de recetas favoritas.
-  - *Proceso*: Garantizar la asignación de todas las tareas planificadas al inicio del sprint.
+  - _Técnica_: Implementar lógica y visualización de recetas favoritas.
+  - _Proceso_: Garantizar la asignación de todas las tareas planificadas al inicio del sprint.
 - **Estado**: Resuelto.
 
 ### Error 3: URIs codificadas de forma fija en el frontend
@@ -230,8 +226,8 @@ Tras verificar el tag correspondiente al despliegue del Sprint 1 y probar su fun
 - **Fuente**: Equipo de Frontend.
 - **Responsables**: Equipo de Frontend.
 - **Acciones de mitigación**:
-  - *Técnica*: Eliminar referencias hardcoded y utilizar configuraciones dinámicas.
-  - *Proceso*: Incrementar la revisión de código y control de calidad previo a entregas.
+  - _Técnica_: Eliminar referencias hardcoded y utilizar configuraciones dinámicas.
+  - _Proceso_: Incrementar la revisión de código y control de calidad previo a entregas.
 - **Estado**: Resuelto.
 
 ### Error 4: Problemas en el despliegue
@@ -241,8 +237,8 @@ Tras verificar el tag correspondiente al despliegue del Sprint 1 y probar su fun
 - **Fuente**: Miguel Galán Lerate.
 - **Responsables**: Miguel Galán Lerate y equipo de desarrollo.
 - **Acciones de mitigación**:
-  - *Técnica*: Reemplazar la versión desplegada por la correspondiente al tag correcto.
-  - *Proceso*: Establecer una revisión final del despliegue antes de cada entrega.
+  - _Técnica_: Reemplazar la versión desplegada por la correspondiente al tag correcto.
+  - _Proceso_: Establecer una revisión final del despliegue antes de cada entrega.
 - **Estado**: Resuelto.
 
 #### Error 4.1: Imposibilidad de registrar bebés
@@ -252,8 +248,8 @@ Tras verificar el tag correspondiente al despliegue del Sprint 1 y probar su fun
 - **Fuente**: Revisión docente.
 - **Responsables**: Equipo de Backend.
 - **Acciones de mitigación**:
-  - *Técnica*: Corregir la lógica de backend y asegurar la persistencia de datos.
-  - *Proceso*: Verificar exhaustivamente los formularios críticos antes de la entrega.
+  - _Técnica_: Corregir la lógica de backend y asegurar la persistencia de datos.
+  - _Proceso_: Verificar exhaustivamente los formularios críticos antes de la entrega.
 - **Estado**: Resuelto.
 
 #### Error 4.2: Falta de validación con mensajes claros
@@ -263,8 +259,8 @@ Tras verificar el tag correspondiente al despliegue del Sprint 1 y probar su fun
 - **Fuente**: Revisión docente.
 - **Responsables**: Equipo de Frontend.
 - **Acciones de mitigación**:
-  - *Técnica*: Incluir validaciones visuales y mensajes informativos.
-  - *Proceso*: Integrar pruebas de experiencia de usuario antes de cada entrega.
+  - _Técnica_: Incluir validaciones visuales y mensajes informativos.
+  - _Proceso_: Integrar pruebas de experiencia de usuario antes de cada entrega.
 - **Estado**: Resuelto.
 
 #### Error 4.3: Confusión en el formulario de alérgenos
@@ -274,8 +270,8 @@ Tras verificar el tag correspondiente al despliegue del Sprint 1 y probar su fun
 - **Fuente**: Revisión docente.
 - **Responsables**: Equipos de Backend y Frontend.
 - **Acciones de mitigación**:
-  - *Técnica*: Añadir identificación explícita del bebé asociado.
-  - *Proceso*: Ampliar las pruebas funcionales desde una perspectiva del usuario.
+  - _Técnica_: Añadir identificación explícita del bebé asociado.
+  - _Proceso_: Ampliar las pruebas funcionales desde una perspectiva del usuario.
 - **Estado**: Resuelto.
 
 #### Error 4.4: Imposibilidad de dar de alta recetas
@@ -285,8 +281,8 @@ Tras verificar el tag correspondiente al despliegue del Sprint 1 y probar su fun
 - **Fuente**: Revisión docente.
 - **Responsables**: Equipo de Backend.
 - **Acciones de mitigación**:
-  - *Técnica*: Revisar e implementar correctamente el flujo de alta de recetas.
-  - *Proceso*: Priorizar funcionalidades esenciales desde los primeros días del sprint.
+  - _Técnica_: Revisar e implementar correctamente el flujo de alta de recetas.
+  - _Proceso_: Priorizar funcionalidades esenciales desde los primeros días del sprint.
 - **Estado**: Resuelto.
 
 ## 6. Conclusiones
@@ -298,7 +294,3 @@ El sistema evaluado por el profesorado no coincidía con la versión correcta in
 Este incidente pone de manifiesto la necesidad urgente de establecer mecanismos más rigurosos de revisión y control en el proceso de despliegue, especialmente en los momentos previos a una entrega. Asimismo, resalta la importancia de validar en condiciones reales todas las funcionalidades clave, asegurando que el entorno productivo sea representativo del estado real del desarrollo.
 
 Para próximos sprints, el equipo ha tomado conciencia de estas deficiencias y se ha comprometido a aplicar medidas correctivas tanto a nivel técnico como organizativo, con el fin de garantizar entregas más estables, verificadas y alineadas con los criterios de evaluación.
-
-
-
-
