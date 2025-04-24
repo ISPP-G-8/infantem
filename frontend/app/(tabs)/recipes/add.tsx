@@ -92,9 +92,13 @@ export default function AddBaby() {
   const handleSave = async () => {
     if (!validateForm()) return;
 
+    const url = requestUserId && requestId 
+      ?`${apiUrl}/api/v1/recipes/custom`
+      :`${apiUrl}/api/v1/recipes`
+
     if (token) {
       try {
-        const response = await fetch(`${apiUrl}/api/v1/recipes`, {
+        const response = await fetch(url, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -107,7 +111,7 @@ export default function AddBaby() {
               minRecommendedAge: recipe.minRecommendedAge,
               maxRecommendedAge: recipe.maxRecommendedAge,
               elaboration: recipe.elaboration,
-              ...(requestId && requestUserId ? { requestId, user: requestUserId } : {}),
+              ...(requestId && requestUserId ? { requestId: requestId, user: requestUserId } : {}),
             }),
         });
 
