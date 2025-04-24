@@ -30,8 +30,10 @@ export default function CreateRequest() {
         body: JSON.stringify({'details': details})
       });
       
-      if (!response.ok)
+      if (!response.ok) {
+        setErrorMessage('Error al guardar la ingesta');
         throw new Error('Error al guardar la ingesta');
+      }
 
       setDetails('');
       router.replace("customRecipes/requests");

@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.isppG8.infantem.infantem.auth.payload.response.MessageResponse;
 import com.isppG8.infantem.infantem.recipe.dto.CustomRecipeDTO;
+import com.isppG8.infantem.infantem.recipe.dto.CustomRecipeRequestCreateDTO;
 import com.isppG8.infantem.infantem.recipe.dto.CustomRecipeRequestDTO;
 import com.isppG8.infantem.infantem.recipe.dto.RecipeDTO;
 import com.isppG8.infantem.infantem.user.User;
@@ -307,7 +308,7 @@ public class RecipeController {
                             responseCode = "403",
                             description = "No tienes permiso para crear una solicitud de receta personalizada") @PostMapping("/custom-requests")
     public ResponseEntity<CustomRecipeRequest> createCustomRecipeRequest(
-            @Valid @RequestBody CustomRecipeRequest request) {
+            @Valid @RequestBody CustomRecipeRequestCreateDTO request) {
         CustomRecipeRequest createdRequest = customRecipeRequestService.createRequest(request);
         return ResponseEntity.status(201).body(createdRequest);
     }

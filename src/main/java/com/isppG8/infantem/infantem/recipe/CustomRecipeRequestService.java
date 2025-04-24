@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.isppG8.infantem.infantem.exceptions.CustomRecipeRequestLimitException;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotOwnedException;
+import com.isppG8.infantem.infantem.recipe.dto.CustomRecipeRequestCreateDTO;
 import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserService;
 
@@ -59,13 +60,15 @@ public class CustomRecipeRequestService {
     }
 
     @Transactional
-    public CustomRecipeRequest createRequest(CustomRecipeRequest request) {
+    public CustomRecipeRequest createRequest(CustomRecipeRequestCreateDTO req) {
         User user = userService.findCurrentUser();
         if (!user.getAuthorities().getAuthority().equals("premium")) {
             throw new ResourceNotOwnedException("You are not authorized to create a request");
         } else if (getNumRequestsByUserIdActualMonth(user.getId()) >= 5) {
             throw new CustomRecipeRequestLimitException();
         } else {
+            CustomRecipeRequest request = new CustomRecipeRequest();
+            request.setDetails(req.getDetails());
             request.setUser(user);
             request.setStatus(RequestStatus.OPEN);
             request.setCreatedAt(LocalDateTime.now());
