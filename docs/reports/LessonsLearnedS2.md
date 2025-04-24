@@ -226,8 +226,7 @@ El equipo de trabajo está formado por 17 miembros, distribuidos en subgrupos se
   
   - **De proceso**: Añadir casos de uso relacionados con permisos y control de visibilidad en el checklist de QA. Verificar funcionalidad completa (visual y lógica) para acciones restringidas según usuario.
 
-- **Estado del error**: En progreso  
-  - **Justificación**: La funcionalidad está implementada, pero requiere ajustes en la lógica de visibilidad para que esté correctamente operativa.
+- **Estado del error**: Resuelto.
 
 ### Error 2: El sistema de pago estaba configurado en modo real durante la entrega, sin que se documentara esta configuración
 
@@ -243,7 +242,7 @@ El equipo de trabajo está formado por 17 miembros, distribuidos en subgrupos se
   - **Técnica**: Verificar que el entorno de pago esté correctamente ajustado para pruebas (`sandbox`) durante fases de evaluación. 
   - **De proceso**: Incluir en la checklist de revisión final la validación del entorno de pago activo y su documentación clara en el entregable. Coordinar QA y documentación para asegurar que esta información se comunica de forma explícita.
 
-- **Estado del error**: Resuelto
+- **Estado del error**: Resuelto.
 
 ### Error 3: La interfaz de la pasarela de pago no se visualiza correctamente
 
@@ -259,7 +258,7 @@ El equipo de trabajo está formado por 17 miembros, distribuidos en subgrupos se
   - **Técnica**: Ajustar las propiedades del componente utilizado para el formulario de pago, asegurando que cada campo ocupe el espacio necesario sin interferencias. Comprobar el comportamiento en distintos tamaños de pantalla y situaciones de entrada.
   - **De proceso**: Incluir revisiones visuales detalladas de componentes críticos como el pago en el checklist de QA. Validar tanto la funcionalidad como la presentación en distintos navegadores o resoluciones.
 
-- **Estado del error**: Resuelto 
+- **Estado del error**: Resuelto. 
 
 ### Error 4: Edición de bebé: la fecha de nacimiento se muestra en formato `2023,3,1` en modo edición y `202331` en el listado
 
@@ -275,7 +274,7 @@ El equipo de trabajo está formado por 17 miembros, distribuidos en subgrupos se
   - **Técnica**: Asegurar que todos los valores de tipo fecha se convierten al formato ISO `yyyy-mm-dd` antes de mostrarlos en pantalla. 
   - **De proceso**: Añadir revisión visual obligatoria de formularios y listados en el checklist de QA.
 
-- **Estado del error**: Resuelto   
+- **Estado del error**: Resuelto.   
 
 ### Error 5: El vídeo de demostración no era accesible desde la rama `main` ni estaba vinculado a un `tag`
 
@@ -291,7 +290,7 @@ El equipo de trabajo está formado por 17 miembros, distribuidos en subgrupos se
   - **Técnica**: Verificar manualmente que los archivos obligatorios estén presentes y accesibles en la rama `main` y en el `tag` de entrega. Comprobar la funcionalidad del enlace o archivo multimedia.
   - **De proceso**: Incluir en el checklist de entrega la validación explícita de todos los archivos requeridos por parte de QA y del responsable asignado. Establecer una revisión final del repositorio justo después de crear el `tag`.
 
-- **Estado del error**: Resuelto  
+- **Estado del error**: Resuelto.  
 
 
 ### Error 6: Error 400 al introducir una fecha de nacimiento futura en el formulario del bebé, sin validación previa ni mensaje visible
@@ -309,8 +308,7 @@ debido a que no se probó a introducir una fecha de nacimiento en el futuro en l
   - **Técnica**: Añadir validaciones en el frontend que impidan introducir fechas de nacimiento posteriores al día actual. Implementar manejo de errores del backend para mostrar mensajes comprensibles y accesibles desde el formulario.
   - **De proceso**: Actualizar los criterios de aceptación de tareas para incluir la validación de fechas lógicas. Incluir casos límite en las pruebas de QA.
 
-- **Estado del error**: En progreso  
-  - **Justificación**: Se ha detectado el problema y se están incorporando validaciones en el frontend, pero aún no se ha completado la gestión visual de los errores del backend en todos los formularios afectados.
+- **Estado del error**: Resuelto.
 
 ### Error 7: Las recetas no mostraban imágenes en la vista correspondiente
 
@@ -359,8 +357,7 @@ debido a que no se probó a introducir una fecha de nacimiento en el futuro en l
   - **Técnica**: Añadir validaciones en el frontend que impidan introducir edades fuera de un rango lógico (por ejemplo, entre 0 y 36 meses). Implementar el manejo de errores del backend para mostrar mensajes comprensibles y accesibles desde el formulario.
   - **De proceso**: Actualizar los criterios de aceptación de tareas para incluir validaciones de rangos lógicos en formularios. Incluir casos límite en las pruebas de QA.
 
-- **Estado del error**: En progreso  
-  - **Justificación**: Se ha detectado el problema y se están incorporando validaciones en el frontend, pero aún no se ha completado la gestión visual de los errores del backend en todos los formularios afectados.
+- **Estado del error**: Resuelto.
 
 
 ### Error 10: El formulario de edición del perfil permite correos con formato incorrecto, generando errores en consola y provocando un error 500 en el backend
@@ -377,8 +374,7 @@ debido a que no se probó a introducir una fecha de nacimiento en el futuro en l
   - **Técnica**: Añadir validaciones en el frontend mediante expresiones regulares o validadores nativos para asegurar el formato correcto del correo electrónico. En backend, capturar errores de persistencia y devolver un mensaje controlado al cliente sin romper la ejecución.
   - **De proceso**: Incluir todos los formularios de usuario en los criterios de revisión de QA. Establecer un estándar mínimo de validaciones obligatorias para campos sensibles como el email.
 
-- **Estado del error**: En progreso  
-  - **Justificación**: Se ha detectado el fallo y se están aplicando validaciones en el formulario de edición, además de implementar un mejor manejo de errores en backend.
+- **Estado del error**: Resuelto.
 
 ### Error 11: El formulario de alérgenos no se sabe a qué bebé se refiere. 
 
@@ -394,7 +390,7 @@ debido a que no se probó a introducir una fecha de nacimiento en el futuro en l
   - **Técnica**: Añadir un selector obligatorio que permita al usuario elegir al bebé antes de acceder al formulario de alérgenos.
   - **De proceso**: Revisar el flujo completo de las funcionalidades asociadas a cada entidad (en este caso, bebés) para verificar que se implementan todos los pasos necesarios. Incluir validación de coherencia funcional y contexto de uso en QA.
 
-- **Estado del error**: Resuelto
+- **Estado del error**: Resuelto.
 
 
 
