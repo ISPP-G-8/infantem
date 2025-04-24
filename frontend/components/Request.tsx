@@ -12,6 +12,21 @@ export default function RequestComponent({ req, nutritionist }: { req: Request, 
     return `${year}-${pad(month)}-${pad(day)} ${pad(hour)}:${pad(minute)}`;
   }
 
+  let statusLabel = req.status;
+  let statusColor = "#9E9E9E"; 
+
+  if (req.status === "OPEN") {
+    statusLabel = "ABIERTA";
+    statusColor = "#2196F3"; // Azul
+  } else if (req.status === "CLOSED") {
+    statusLabel = "CERRADA";
+    statusColor = "#F44336"; // Rojo
+  } else if (req.status === "IN_PROGRESS") {
+    statusLabel = "EN PROGRESO";
+    statusColor = "#4CAF50"; // Verde
+  }
+
+
   return (
     <View style={[gs.card, width < 500 ? { maxWidth: 400 } : null]}>
       <Text style={[gs.cardContent, {marginBottom: 10}]} numberOfLines={2}>
@@ -26,9 +41,13 @@ export default function RequestComponent({ req, nutritionist }: { req: Request, 
         <Text style={{fontWeight: 'bold'}}>Fecha de petición: </Text>
         {parseDate(req.createdAt)} {/*Fuck ts sorry. I'm dumb*/}
       </Text>
-      
+      <View style={{backgroundColor: statusColor, marginTop:8, paddingHorizontal: 8,paddingVertical: 4, borderRadius: 4,alignSelf: "flex-start",marginBottom: 10}}>
+        <Text style={[{ color: "white"}]} numberOfLines={1}>
+          {statusLabel}
+        </Text>
+      </View>
       {nutritionist && (
-        <Link style={[gs.mainButton, { backgroundColor: "#1565C0", marginVertical: 20 }]} href={"/recipes/add"}>
+        <Link style={[gs.mainButton, { backgroundColor: "#1565C0", marginVertical: 10 }]} href={`/recipes/add?requestId=${req.id}&requestUserId=${req.user.id}`}>
           <Text style={gs.mainButtonText}>Añade esta receta</Text>
         </Link>
       )}

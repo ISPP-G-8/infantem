@@ -85,6 +85,7 @@ public class RecipeService {
             Recipe recipe = new Recipe(dto);
             User user = this.userService.getUserById((long) dto.getUser());
             recipe.setUser(user);
+            System.out.println("reach here");
             this.customRecipeRequestService.closeRequest(dto.getRequestId());
             return this.recipeRepository.save(recipe);
         } else {

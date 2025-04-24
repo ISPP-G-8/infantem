@@ -102,25 +102,18 @@ export default function AddBaby() {
           body: JSON.stringify({
             name: recipe.name,
             description: recipe.description,
-            photo_route: "",
             ingredients: recipe.ingredients,
             minRecommendedAge: recipe.minRecommendedAge,
             maxRecommendedAge: recipe.maxRecommendedAge,
             elaboration: recipe.elaboration,
-            intakes: [],
-            allergens: [],
-            alimentoNutriente: [],
           }),
         });
 
         if (response.ok) {
           const data = await response.json();
-          console.log("Recipe created successfully:", data);
           if (image) {
             await uploadRecipePhoto(data.id);
-          } else {
-            console.log("FALLOOOOOOOO");
-          }
+          } 
 
           router.push("/recipes");
         } else {
