@@ -531,6 +531,7 @@ La inteligencia artificial (IA) se incorporará como recurso transversal para po
     - **Ejemplo de prompt usado**: 
       - *“Dime qué tipo de segmentación podemos aplicar a padres mayores de 40 con hijos.”*  
       - *“¿Cómo adaptar una campaña publicitaria en TikTok para un público de 40 a 50 años?”*
+      - *“Dame una protopersona para el siguiente grupo de segmentacion de mercado”*
 
 - **Optimización de campañas publicitarias**  
   Uso de algoritmos para realizar A/B testing, ajustar dinámicamente la inversión en Meta Ads o Google Ads, y seleccionar las mejores creatividades en función del rendimiento.
