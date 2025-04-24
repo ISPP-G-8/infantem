@@ -320,7 +320,7 @@ public class RecipeController {
                             description = "No tienes permiso para eliminar esta solicitud") @ApiResponse(
                                     responseCode = "404",
                                     description = "Solicitud no encontrada") @DeleteMapping("/custom-requests/{id}")
-    public void deleteCustomRecipeRequest(Long id) {
+    public void deleteCustomRecipeRequest(@PathVariable Long id) {
         customRecipeRequestService.deleteRequest(id);
     }
 
