@@ -57,6 +57,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             password: userData.password,
             email: userData.email,
             profilePhotoRoute: userData.profilePhotoRoute,
+            role: userData.role,
           });
           setIsAuthenticated(true);
           console.log("reaching here");
