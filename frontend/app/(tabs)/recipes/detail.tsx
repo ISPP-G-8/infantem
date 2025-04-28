@@ -176,6 +176,27 @@ export default function RecipeDetails() {
       });
   };
 
+  const handleDeleteRecipe = async () => {
+    if (!recipe || !token) return;
+
+    try {
+      const response = await fetch(`${apiUrl}/api/v1/recipes/${recipe.id}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        console.log(response)
+        throw new Error("Error deleting baby");
+      }
+      router.push('/recipes');
+    } catch (error) {
+      console.error('Error while deleting recipe' + error);
+    }
+  }
+
   const uploadImage = async (action: string) => {
     if (action === "load") {
       try {
@@ -547,11 +568,11 @@ export default function RecipeDetails() {
             </View>
           }
 
-          <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+          <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: 10, marginTop: 10}}>
             {/* Botones de acción */}
             {(isOwned && !isEditing) && (
               <TouchableOpacity
-                style={[gs.mainButton, { marginTop: 30 }]}
+                style={[gs.mainButton]}
                 onPress={() => setIsEditing(true)}
               >
                 <Text style={gs.mainButtonText}>Editar Receta</Text>
@@ -565,7 +586,9 @@ export default function RecipeDetails() {
                 <Text style={gs.mainButtonText}>Guardar Cambios</Text>
               </TouchableOpacity>
             )}
-
+            <TouchableOpacity style={[gs.mainButton, { backgroundColor: "red", height: 'auto' }]} onPress={() => handleDeleteRecipe()}>
+              <Text style={gs.mainButtonText}>Eliminar</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
