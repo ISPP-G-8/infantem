@@ -42,7 +42,12 @@ module.exports = StyleSheet.create({
     color: "#007AFF",
     textDecorationLine: "underline",
   },
-
+  changeImageText: {
+    fontSize: 16,
+    color: "#1565c0",
+    textDecorationLine: "underline",
+    marginTop: 10,
+  },
   mainButton: {
     backgroundColor: "#1565C0", 
     paddingVertical: 12,
