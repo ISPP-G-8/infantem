@@ -245,50 +245,46 @@ public class SubscriptionInfantemController {
     }
 
     @PostMapping("/create-subscription-from-payment-intent")
-public ResponseEntity<?> createSubscriptionAfterPaymentIntent(@RequestParam Long userId, @RequestParam String priceId, @RequestParam String paymentIntentId) {
-    try {
-        PaymentIntent intent = PaymentIntent.retrieve(paymentIntentId);
-        String paymentMethodId = intent.getPaymentMethod();
-        String customerId = intent.getCustomer();
+    public ResponseEntity<?> createSubscriptionAfterPaymentIntent(@RequestParam Long userId,
+            @RequestParam String priceId, @RequestParam String paymentIntentId) {
+        try {
+            PaymentIntent intent = PaymentIntent.retrieve(paymentIntentId);
+            String paymentMethodId = intent.getPaymentMethod();
+            String customerId = intent.getCustomer();
 
-        if (paymentMethodId == null || customerId == null) {
-            return ResponseEntity.badRequest().body("Faltan datos del PaymentIntent.");
+            if (paymentMethodId == null || customerId == null) {
+                return ResponseEntity.badRequest().body("Faltan datos del PaymentIntent.");
+            }
+
+            // ⏩ Timestamp en el futuro para evitar error de billing_cycle_anchor
+            long futureTimestamp = Instant.now().plusSeconds(300).getEpochSecond(); // ahora + 5 minutos
+
+            SubscriptionCreateParams params = SubscriptionCreateParams.builder().setCustomer(customerId)
+                    .addItem(SubscriptionCreateParams.Item.builder().setPrice(priceId).build())
+                    .setDefaultPaymentMethod(paymentMethodId)
+                    .setPaymentBehavior(SubscriptionCreateParams.PaymentBehavior.DEFAULT_INCOMPLETE)
+                    .setBillingCycleAnchor(futureTimestamp).build();
+
+            Subscription stripeSubscription = Subscription.create(params);
+
+            // Guardar en tu base de datos
+            User user = userRepository.findById(userId)
+                    .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+            SubscriptionInfantem newSubscription = new SubscriptionInfantem();
+            newSubscription.setUser(user);
+            newSubscription.setStartDate(LocalDate.now());
+            newSubscription.setActive(true);
+            newSubscription.setStripePaymentMethodId(paymentMethodId);
+            newSubscription.setStripeSubscriptionId(stripeSubscription.getId());
+            newSubscription.setStripeCustomerId(customerId);
+
+            subscriptionInfantemRepository.save(newSubscription);
+
+            return ResponseEntity.ok(newSubscription);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error al crear la suscripción: " + e.getMessage());
         }
-
-        // ⏩ Timestamp en el futuro para evitar error de billing_cycle_anchor
-        long futureTimestamp = Instant.now().plusSeconds(300).getEpochSecond(); // ahora + 5 minutos
-
-        SubscriptionCreateParams params = SubscriptionCreateParams.builder()
-                .setCustomer(customerId)
-                .addItem(SubscriptionCreateParams.Item.builder()
-                        .setPrice(priceId)
-                        .build())
-                .setDefaultPaymentMethod(paymentMethodId)
-                .setPaymentBehavior(SubscriptionCreateParams.PaymentBehavior.DEFAULT_INCOMPLETE)
-                .setBillingCycleAnchor(futureTimestamp)
-                .build();
-
-        Subscription stripeSubscription = Subscription.create(params);
-
-        // Guardar en tu base de datos
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-
-        SubscriptionInfantem newSubscription = new SubscriptionInfantem();
-        newSubscription.setUser(user);
-        newSubscription.setStartDate(LocalDate.now());
-        newSubscription.setActive(true);
-        newSubscription.setStripePaymentMethodId(paymentMethodId);
-        newSubscription.setStripeSubscriptionId(stripeSubscription.getId());
-        newSubscription.setStripeCustomerId(customerId);
-
-        subscriptionInfantemRepository.save(newSubscription);
-
-        return ResponseEntity.ok(newSubscription);
-    } catch (Exception e) {
-        return ResponseEntity.badRequest().body("Error al crear la suscripción: " + e.getMessage());
     }
-}
-
 
 }
