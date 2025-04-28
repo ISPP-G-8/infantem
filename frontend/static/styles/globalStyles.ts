@@ -483,4 +483,37 @@ module.exports = StyleSheet.create({
   },
 
 
+  // Estilos de subscrición
+  inputWrapperStyle: {
+    padding: 12,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: "8px",
+    backgroundColor: "#fafafa",
+    marginTop: 4,
+  },
+  
+  textInputStyle: {
+    width: "100%",
+    padding: 12,
+    borderRadius: "8px",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    backgroundColor: "#fafafa",
+    fontSize: 16,
+    marginTop: 4,
+  },
+  
+  payButtonStyle: {
+    padding: 14,
+    backgroundColor: "#556cd6",
+    color: "white",
+    borderWidth: 0,
+    borderRadius: "8px",
+    fontSize: 16,
+    fontWeight: "bold",
+    cursor: "pointer",
+  }
+
+
 });
