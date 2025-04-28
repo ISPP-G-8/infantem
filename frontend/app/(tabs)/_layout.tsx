@@ -100,7 +100,7 @@ export default function TabLayout() {
     }}
     />
     <Tabs.Screen
-    name="customRecipes"
+    name="requests"
     options={{
       headerShown: false,
       href: null, 
