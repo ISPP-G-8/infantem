@@ -91,9 +91,6 @@ export default function Page() {
       });
   
       setRecommendedRecipes(recipesWithBase64Photos);
-  
-      console.log("Recetas recomendadas:", recipesWithBase64Photos);
-  
       setRecommendedTotalPages(recipesData.totalPages);
       return true;
   
