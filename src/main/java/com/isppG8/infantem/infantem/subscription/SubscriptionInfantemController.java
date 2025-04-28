@@ -1,15 +1,28 @@
 package com.isppG8.infantem.infantem.subscription;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isppG8.infantem.infantem.subscription.dto.CreatePaymentRequest;
+import com.isppG8.infantem.infantem.subscription.dto.CreatePaymentResponse;
 import com.isppG8.infantem.infantem.user.User;
+import com.isppG8.infantem.infantem.user.UserRepository;
+import com.stripe.Stripe;
+import com.stripe.exception.StripeException;
+import com.stripe.model.Customer;
+import com.stripe.model.PaymentIntent;
+import com.stripe.model.Subscription;
+import com.stripe.param.CustomerCreateParams;
+import com.stripe.param.PaymentIntentCreateParams;
+import com.stripe.param.SubscriptionCreateParams;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -17,6 +30,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,42 +48,8 @@ public class SubscriptionInfantemController {
     @Autowired
     private SubscriptionInfantemRepository subscriptionInfantemRepository;
 
-    @Operation(summary = "Crear una nueva suscripción",
-            description = "Crea una nueva suscripción asociada a un usuario.") @ApiResponse(responseCode = "200",
-                    description = "Suscripción creada exitosamente",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = SubscriptionInfantem.class))) @ApiResponse(
-                                    responseCode = "400",
-                                    description = "Error al crear la suscripción") @PostMapping("/create")
-    public ResponseEntity<?> createSubscription(@RequestParam String userId, // Ahora se recibe el ID del usuario
-            @RequestParam String customerId, @RequestParam String priceId, @RequestParam String paymentMethodId) {
-        try {
-            Long id = Long.parseLong(userId); // Convertir el ID a Long
-            SubscriptionInfantem subscription = subscriptionService.createSubscription(id, customerId, priceId,
-                    paymentMethodId);
-            return ResponseEntity.ok(subscription); // Devuelve la SubscriptionInfantem
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error al crear la suscripción: " + e.getMessage());
-        }
-    }
-
-    @Operation(summary = "Crear una nueva suscripción (versión nueva)",
-            description = "Crea una nueva suscripción asociada a un usuario, versión nueva.") @ApiResponse(
-                    responseCode = "200", description = "Suscripción creada exitosamente",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = SubscriptionInfantem.class))) @ApiResponse(
-                                    responseCode = "400",
-                                    description = "Error al crear la suscripción") @PostMapping("/create/new")
-    public ResponseEntity<?> createSubscriptionNew(@RequestParam String userId, @RequestParam String priceId,
-            @RequestParam String paymentMethodId) {
-        try {
-            Long id = Long.parseLong(userId); // Convertir el ID a Long
-            SubscriptionInfantem subscription = subscriptionService.createSubscriptionNew(id, priceId, paymentMethodId);
-            return ResponseEntity.ok(subscription); // Devuelve la SubscriptionInfantem
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error al crear la suscripción: " + e.getMessage());
-        }
-    }
+    @Autowired
+    private UserRepository userRepository;
 
     @Operation(summary = "Obtener cliente por email",
             description = "Recupera los detalles de un cliente a partir de su email y últimos 4 dígitos del método de pago.") @ApiResponse(
@@ -165,4 +146,149 @@ public class SubscriptionInfantemController {
             return ResponseEntity.ok().build(); // O podrías devolver un objeto vacío o un mensaje
         }
     }
+
+    @Operation(summary = "Crear una nueva suscripción (versión nueva)",
+            description = "Crea una nueva suscripción asociada a un usuario, versión nueva.") @ApiResponse(
+                    responseCode = "200", description = "Suscripción creada exitosamente",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = SubscriptionInfantem.class))) @ApiResponse(
+                                    responseCode = "400",
+                                    description = "Error al crear la suscripción") @PostMapping("/create-payment-intent")
+    public CreatePaymentResponse createPaymentIntent(@RequestBody CreatePaymentRequest request) throws StripeException {
+        if (request.getAmount() == null || request.getCurrency() == null || request.getCustomerId() == null) {
+            throw new IllegalArgumentException("Amount, currency, and customerId are required.");
+        }
+
+        PaymentIntentCreateParams params = PaymentIntentCreateParams.builder().setAmount(request.getAmount())
+                .setCurrency(request.getCurrency()).setCustomer(request.getCustomerId())
+                .setAutomaticPaymentMethods(
+                        PaymentIntentCreateParams.AutomaticPaymentMethods.builder().setEnabled(true).build())
+                .setSetupFutureUsage(PaymentIntentCreateParams.SetupFutureUsage.OFF_SESSION) // 🔥 CLAVE para Apple Pay,
+                                                                                             // Google Pay,
+                                                                                             // suscripciones
+                .build();
+
+        PaymentIntent paymentIntent = PaymentIntent.create(params);
+
+        return new CreatePaymentResponse(paymentIntent.getClientSecret());
+    }
+
+    @Operation(summary = "Crear una nueva suscripción",
+            description = "Crea una nueva suscripción asociada a un usuario.") @ApiResponse(responseCode = "200",
+                    description = "Suscripción creada exitosamente",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = SubscriptionInfantem.class))) @ApiResponse(
+                                    responseCode = "400",
+                                    description = "Error al crear la suscripción") @PostMapping("/create-from-intent")
+    public ResponseEntity<?> createSubscriptionFromIntent(@RequestParam String userId, @RequestParam String priceId,
+            @RequestParam String paymentIntentId) {
+        try {
+            PaymentIntent intent = PaymentIntent.retrieve(paymentIntentId);
+            String paymentMethodId = intent.getPaymentMethod();
+            String customerId = intent.getCustomer();
+
+            System.out.println("PaymentIntent ID: " + intent.getId());
+            System.out.println("Customer ID from intent: " + customerId);
+            System.out.println("PaymentMethod ID from intent: " + paymentMethodId);
+
+            if (paymentMethodId == null || customerId == null) {
+                return ResponseEntity.badRequest().body("Faltan datos del PaymentIntent.");
+            }
+
+            if (paymentMethodId == null || customerId == null) {
+                return ResponseEntity.badRequest().body("Faltan datos del PaymentIntent.");
+            }
+
+            SubscriptionInfantem subscription = subscriptionService.createSubscriptionNew(Long.parseLong(userId),
+                    priceId, paymentMethodId, customerId // ✅ NUEVO parámetro
+            );
+
+            return ResponseEntity.ok(subscription);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error al crear la suscripción: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/customer-id")
+    public ResponseEntity<?> createStripeCustomer(@RequestParam Long userId) throws Exception {
+        Optional<User> userOpt = userRepository.findById(userId);
+        if (userOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario no encontrado");
+        }
+
+        User user = userOpt.get();
+        String customerId = subscriptionService.createCustomer(user.getEmail(), user.getName(),
+                "Cliente creado para PaymentIntent");
+
+        return ResponseEntity.ok(customerId);
+    }
+
+    @PostMapping("/create-subscription")
+    public ResponseEntity<?> createSubscription(@RequestParam Long userId, @RequestParam String priceId,
+            @RequestParam String paymentIntentId) {
+        try {
+            PaymentIntent intent = PaymentIntent.retrieve(paymentIntentId);
+            String paymentMethodId = intent.getPaymentMethod();
+            String customerId = intent.getCustomer();
+
+            if (paymentMethodId == null || customerId == null) {
+                return ResponseEntity.badRequest().body("Faltan datos del PaymentIntent.");
+            }
+
+            SubscriptionInfantem subscription = subscriptionService.createSubscriptionNew(userId, priceId,
+                    paymentMethodId, customerId);
+
+            return ResponseEntity.ok(subscription);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error al crear la suscripción: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/create-subscription-from-payment-intent")
+public ResponseEntity<?> createSubscriptionAfterPaymentIntent(@RequestParam Long userId, @RequestParam String priceId, @RequestParam String paymentIntentId) {
+    try {
+        PaymentIntent intent = PaymentIntent.retrieve(paymentIntentId);
+        String paymentMethodId = intent.getPaymentMethod();
+        String customerId = intent.getCustomer();
+
+        if (paymentMethodId == null || customerId == null) {
+            return ResponseEntity.badRequest().body("Faltan datos del PaymentIntent.");
+        }
+
+        // ⏩ Timestamp en el futuro para evitar error de billing_cycle_anchor
+        long futureTimestamp = Instant.now().plusSeconds(300).getEpochSecond(); // ahora + 5 minutos
+
+        SubscriptionCreateParams params = SubscriptionCreateParams.builder()
+                .setCustomer(customerId)
+                .addItem(SubscriptionCreateParams.Item.builder()
+                        .setPrice(priceId)
+                        .build())
+                .setDefaultPaymentMethod(paymentMethodId)
+                .setPaymentBehavior(SubscriptionCreateParams.PaymentBehavior.DEFAULT_INCOMPLETE)
+                .setBillingCycleAnchor(futureTimestamp)
+                .build();
+
+        Subscription stripeSubscription = Subscription.create(params);
+
+        // Guardar en tu base de datos
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        SubscriptionInfantem newSubscription = new SubscriptionInfantem();
+        newSubscription.setUser(user);
+        newSubscription.setStartDate(LocalDate.now());
+        newSubscription.setActive(true);
+        newSubscription.setStripePaymentMethodId(paymentMethodId);
+        newSubscription.setStripeSubscriptionId(stripeSubscription.getId());
+        newSubscription.setStripeCustomerId(customerId);
+
+        subscriptionInfantemRepository.save(newSubscription);
+
+        return ResponseEntity.ok(newSubscription);
+    } catch (Exception e) {
+        return ResponseEntity.badRequest().body("Error al crear la suscripción: " + e.getMessage());
+    }
+}
+
+
 }
