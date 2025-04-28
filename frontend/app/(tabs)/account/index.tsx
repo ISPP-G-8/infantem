@@ -101,6 +101,7 @@ export default function Account() {
               ? userData.profilePhoto
               : `data:image/jpeg;base64,${userData.profilePhoto}`
           );
+
         }
         // Si viene como array de bytes, convertirlo a base64
         else if (Array.isArray(userData.profilePhoto)) {
@@ -111,6 +112,9 @@ export default function Account() {
           }
           const base64 = btoa(binary);
           setImageBase64(`data:image/jpeg;base64,${base64}`);
+        }
+        else if (userData.profilePhoto == null) {
+          setImageBase64(null);
         }
       }
     } catch (error) {
@@ -129,6 +133,7 @@ export default function Account() {
     }
 
     if (!token) return;
+
 
     try {
       // Primero enviemos solo los datos del usuario en JSON
@@ -232,9 +237,9 @@ export default function Account() {
         }
       );
 
+
       if (!response.ok) {
         const errorText = await response.text();
-        console.error("Error al subir la foto:", errorText);
         throw new Error(errorText);
       }
 
@@ -247,23 +252,13 @@ export default function Account() {
       }
 
       return photoData;
+
     } catch (error) {
-      console.error("Error al subir la foto de perfil:", error);
-      // No lanzamos error para que no afecte al flujo principal
+      console.error("Error al subir/eliminar la foto de perfil:", error);
     }
   };
+  
 
-  // IMAGE UPLOAD
-
-  const validImage = (uri) => {
-    // if (!uri) return false;
-
-    // const lowerUri = uri.toLowerCase();
-    // return lowerUri.endsWith('.jpg') ||
-    //   lowerUri.endsWith('.jpeg') ||
-    //   lowerUri.endsWith('.png');
-    return true;
-  };
 
   function base64toBlob(base64Data, contentType = "image/png") {
     const byteCharacters = atob(base64Data);
@@ -281,6 +276,7 @@ export default function Account() {
 
     return new Blob(byteArrays, { type: contentType });
   }
+
 
   const uploadImage = async () => {
     try {
@@ -319,9 +315,11 @@ export default function Account() {
         } else {
           console.log("Imagen URI válida:", imageUri);
           saveImage(imageUri);
+
         }
-      } else if (result === undefined) {
-        console.log("result undefined");
+      } catch (err) {
+        alert('Error al abrir la galería: ' + err.message);
+        setAvatarModalVisible(false);
       }
     } catch (err) {
       alert("Error al abrir la galería: " + err.message);
@@ -339,14 +337,21 @@ export default function Account() {
     }
   };
 
+
   const saveImage = async (image) => {
     try {
-      setImage(image);
-      const base64Image = await blobToBase64(image);
-      setImageBase64(base64Image);
-      console.log("Imagen base64:", base64Image);
-      // sendToBackend(image);
-      setAvatarModalVisible(false);
+      if (image) {
+        setImage(image);
+        const base64Image = await blobToBase64(image);
+        setImageBase64(base64Image);
+        console.log("Imagen base64:", base64Image);
+        setAvatarModalVisible(false);
+      } else {
+        setImage(null);
+        setImageBase64(null);
+        console.log("Imagen eliminada");
+        setAvatarModalVisible(false);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -447,11 +452,17 @@ export default function Account() {
           />
         </TouchableOpacity>
 
+        {isEditing &&
+          <TouchableOpacity onPress={() => isEditing && setAvatarModalVisible(true)} disabled={!isEditing}>
+            <Text style={gs.changeImageText}>Cambiar foto de perfil</Text>
+          </TouchableOpacity>
+        }
+
         <UploadImageModal
           visible={avatarModalVisible}
           onClose={() => setAvatarModalVisible(false)}
-          onGalleryPress={() => uploadImage()}
-          onDeletePress={deleteImage}
+          onGalleryPress={() => uploadImage('update')}
+          onDeletePress={() => uploadImage('delete')}
         />
 
         {user && (
