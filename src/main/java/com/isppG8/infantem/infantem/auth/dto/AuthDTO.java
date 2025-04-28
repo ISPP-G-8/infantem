@@ -21,6 +21,8 @@ public class AuthDTO {
 
     private byte[] profilePhoto;
 
+    private String role;
+
     public AuthDTO() {
 
     }
@@ -32,6 +34,7 @@ public class AuthDTO {
         this.username = user.getUsername();
         this.email = user.getEmail();
         this.profilePhoto = user.getProfilePhoto();
+        this.role = user.getAuthorities().getAuthority();
     }
 
 }
