@@ -92,7 +92,7 @@ export default function AddBaby() {
   const handleSave = async () => {
     if (!validateForm()) return;
 
-    const url = requestUserId && requestId 
+    const url = requestUserId && requestId && user?.role === 'nutritionist'
       ?`${apiUrl}/api/v1/recipes/custom`
       :`${apiUrl}/api/v1/recipes`
 
