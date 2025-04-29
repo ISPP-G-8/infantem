@@ -43,7 +43,7 @@ public class SubscriptionInfantemServiceTest {
     private StripeConfig stripeConfig;
 
     @InjectMocks
-    private SubscriptionInfantemService subscriptionService;   
+    private SubscriptionInfantemService subscriptionService;
 
     @BeforeEach
     public void setUp() {
@@ -118,11 +118,9 @@ public class SubscriptionInfantemServiceTest {
         mockUser.setEmail("test@example.com");
         mockUser.setName("Test User");
 
-        try (
-            MockedStatic<Customer> customerMockedStatic = mockStatic(Customer.class);
-            MockedStatic<PaymentMethod> paymentMethodMockedStatic = mockStatic(PaymentMethod.class);
-            MockedStatic<Subscription> subscriptionMockedStatic = mockStatic(Subscription.class)
-        ) {
+        try (MockedStatic<Customer> customerMockedStatic = mockStatic(Customer.class);
+                MockedStatic<PaymentMethod> paymentMethodMockedStatic = mockStatic(PaymentMethod.class);
+                MockedStatic<Subscription> subscriptionMockedStatic = mockStatic(Subscription.class)) {
             // 🔹 Customer mock
             Customer mockCustomer = new Customer();
             mockCustomer.setId("cus_123");
@@ -137,7 +135,7 @@ public class SubscriptionInfantemServiceTest {
             Subscription mockStripeSubscription = new Subscription();
             mockStripeSubscription.setId("sub_123");
             subscriptionMockedStatic.when(() -> Subscription.create(any(SubscriptionCreateParams.class)))
-                .thenReturn(mockStripeSubscription);
+                    .thenReturn(mockStripeSubscription);
 
             when(userService.getUserById(1L)).thenReturn(mockUser);
 
@@ -147,7 +145,8 @@ public class SubscriptionInfantemServiceTest {
             when(subscriptionInfantemRepository.save(any(SubscriptionInfantem.class))).thenReturn(savedSubscription);
 
             // Act
-            SubscriptionInfantem result = subscriptionService.createSubscriptionNew(1L, "price_123", "pm_123", "cus_123");
+            SubscriptionInfantem result = subscriptionService.createSubscriptionNew(1L, "price_123", "pm_123",
+                    "cus_123");
 
             // Assert
             assertNotNull(result);
@@ -155,7 +154,6 @@ public class SubscriptionInfantemServiceTest {
             verify(userService).getUserById(1L);
         }
     }
-
 
     @Test
     public void testActivateSubscription_WhenUserHasSubscription() {
@@ -275,8 +273,6 @@ public class SubscriptionInfantemServiceTest {
         }
     }
 
-
-
     @Test
     public void testDeleteExpiredSubscriptions_Success() {
         SubscriptionInfantem expired1 = new SubscriptionInfantem();
@@ -296,6 +292,4 @@ public class SubscriptionInfantemServiceTest {
         verify(subscriptionInfantemRepository, times(1)).deleteAll(expiredList);
     }
 
-
 }
-
