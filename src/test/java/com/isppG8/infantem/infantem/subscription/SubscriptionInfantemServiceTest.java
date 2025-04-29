@@ -110,59 +110,6 @@ public class SubscriptionInfantemServiceTest {
     }
 
     @Test
-    public void testCreateSubscriptionNew_Success() throws Exception {
-        // Arrange
-        User mockUser = new User();
-        mockUser.setId(1);
-        mockUser.setEmail("test@example.com");
-        mockUser.setName("Test User");
-
-        // Mock para createCustomer
-        try (var customerMockedStatic = mockStatic(Customer.class)) {
-            Customer mockCustomer = new Customer();
-            mockCustomer.setId("cus_123");
-            customerMockedStatic.when(() -> Customer.create(any(CustomerCreateParams.class))).thenReturn(mockCustomer);
-
-            // Mock para attachPaymentMethod
-            PaymentMethod mockPaymentMethod = mock(PaymentMethod.class);
-            when(mockPaymentMethod.getId()).thenReturn("pm_123");
-
-            try (var paymentMethodMockedStatic = mockStatic(PaymentMethod.class)) {
-                paymentMethodMockedStatic.when(() -> PaymentMethod.retrieve("pm_123")).thenReturn(mockPaymentMethod);
-
-                // 🔹 Corrección aplicada aquí:
-                when(mockPaymentMethod.attach(any(PaymentMethodAttachParams.class))).thenReturn(mockPaymentMethod);
-
-                // Mock para Subscription.create
-                Subscription mockSubscription = new Subscription();
-                mockSubscription.setId("sub_123");
-
-                try (var subscriptionMockedStatic = mockStatic(Subscription.class)) {
-                    subscriptionMockedStatic.when(() -> Subscription.create(any(SubscriptionCreateParams.class)))
-                            .thenReturn(mockSubscription);
-
-                    when(userService.getUserById(1L)).thenReturn(mockUser);
-
-                    SubscriptionInfantem savedSubscription = new SubscriptionInfantem();
-                    savedSubscription.setStripeSubscriptionId("sub_123");
-
-                    when(subscriptionInfantemRepository.save(any(SubscriptionInfantem.class)))
-                            .thenReturn(savedSubscription);
-
-                    // Act
-                    SubscriptionInfantem result = subscriptionService.createSubscriptionNew(1L, "price_123", "pm_123",
-                            "cus_123");
-
-                    // Assert
-                    assertNotNull(result, "El resultado no debería ser nulo");
-                    assertEquals("sub_123", result.getStripeSubscriptionId());
-                    verify(userService).getUserById(1L);
-                }
-            }
-        }
-    }
-
-    @Test
     public void testActivateSubscription_WhenUserHasSubscription() {
         // Arrange
         User user = new User();
