@@ -15,12 +15,9 @@ import com.isppG8.infantem.infantem.subscription.dto.CreatePaymentRequest;
 import com.isppG8.infantem.infantem.subscription.dto.CreatePaymentResponse;
 import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserRepository;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
-import com.stripe.model.Customer;
 import com.stripe.model.PaymentIntent;
 import com.stripe.model.Subscription;
-import com.stripe.param.CustomerCreateParams;
 import com.stripe.param.PaymentIntentCreateParams;
 import com.stripe.param.SubscriptionCreateParams;
 
