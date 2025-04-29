@@ -151,7 +151,7 @@ export default function PremiumPlan() {
     };
 
     const handleSubscribe = () => { 
-        router.push('/account/subscriptionweb') 
+        router.push('/account/checkoutpage') 
     };
 
     return (

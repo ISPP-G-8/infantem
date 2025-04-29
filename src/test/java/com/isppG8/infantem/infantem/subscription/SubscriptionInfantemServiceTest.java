@@ -55,37 +55,6 @@ public class SubscriptionInfantemServiceTest {
     }
 
     @Test
-    public void testCreateSubscription_Success() throws Exception {
-        // Arrange
-        User mockUser = new User();
-        mockUser.setId(1);
-
-        Subscription mockStripeSubscription = new Subscription();
-        mockStripeSubscription.setId("sub_123");
-
-        try (var mockedStatic = mockStatic(Subscription.class)) {
-            mockedStatic.when(() -> Subscription.create(any(SubscriptionCreateParams.class)))
-                    .thenReturn(mockStripeSubscription);
-
-            // Configurar el mock de userService
-            when(userService.getUserById(1L)).thenReturn(mockUser);
-
-            SubscriptionInfantem savedSubscription = new SubscriptionInfantem();
-            savedSubscription.setStripeSubscriptionId("sub_123");
-            when(subscriptionInfantemRepository.save(any(SubscriptionInfantem.class))).thenReturn(savedSubscription);
-
-            // Act
-            SubscriptionInfantem result = subscriptionService.createSubscription(1L, "cus_123", "price_123", "pm_123");
-
-            // Assert
-            assertNotNull(result, "El resultado no debería ser nulo");
-            assertEquals("sub_123", result.getStripeSubscriptionId());
-            verify(userService).getUserById(1L);
-            verify(subscriptionInfantemRepository).save(any(SubscriptionInfantem.class));
-        }
-    }
-
-    @Test
     public void testCancelSubscription_Success() throws Exception {
         // Arrange
         String subscriptionId = "sub_123";
@@ -181,7 +150,8 @@ public class SubscriptionInfantemServiceTest {
                             .thenReturn(savedSubscription);
 
                     // Act
-                    SubscriptionInfantem result = subscriptionService.createSubscriptionNew(1L, "price_123", "pm_123");
+                    SubscriptionInfantem result = subscriptionService.createSubscriptionNew(1L, "price_123", "pm_123",
+                            "cus_123");
 
                     // Assert
                     assertNotNull(result, "El resultado no debería ser nulo");

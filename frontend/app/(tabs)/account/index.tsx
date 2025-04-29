@@ -37,7 +37,58 @@ export default function Account() {
   const [image, setImage] = useState<any>(null);
   const [imageBase64, setImageBase64] = useState<any>(null);
 
+  const [nameError, setNameError] = useState<string | null>(null);
+  const [surnameError, setSurnameError] = useState<string | null>(null);
+  const [usernameError, setUsernameError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
+
   const FormData = global.FormData;
+  const validateForm = () => {
+    let isValid = true;
+
+    setNameError(null);
+    setSurnameError(null);
+    setUsernameError(null);
+    setEmailError(null);
+
+    // Validación para el campo "name"
+    if (!user.name.trim()) {
+      setNameError("El nombre no puede estar vacío.");
+      isValid = false;
+    } else if (user.name.length < 3 || user.name.length > 50) {
+      setNameError("El nombre debe tener entre 3 y 50 caracteres.");
+      isValid = false;
+    }
+
+    // Validación para el campo "surname"
+    if (!user.surname.trim()) {
+      setSurnameError("El apellido no puede estar vacío.");
+      isValid = false;
+    } else if (user.surname.length < 3 || user.surname.length > 50) {
+      setSurnameError("El apellido debe tener entre 3 y 50 caracteres.");
+      isValid = false;
+    }
+
+    // Validación para el campo "username"
+    if (!user.username.trim()) {
+      setUsernameError("El nombre de usuario no puede estar vacío.");
+      isValid = false;
+    } else if (user.username.length < 3 || user.username.length > 50) {
+      setUsernameError("El nombre de usuario debe tener entre 3 y 50 caracteres.");
+      isValid = false;
+    }
+
+    // Validación para el campo "email"
+    if (!user.email.trim()) {
+      setEmailError("El correo electrónico no puede estar vacío.");
+      isValid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.email)) {
+      setEmailError("El correo electrónico no tiene un formato válido.");
+      isValid = false;
+    }
+
+    return isValid;
+  };
 
   useEffect(() => {
     if (!user || !token) return;
@@ -135,8 +186,12 @@ export default function Account() {
     if (!token) return;
 
 
+    if (!validateForm()) return;
+    if (!token)
+      return;
+
+
     try {
-      // Primero enviemos solo los datos del usuario en JSON
       console.log(`Enviando petición a ${apiUrl}/api/v1/users/${user.id}`);
       const response = await fetch(`${apiUrl}/api/v1/users/${user.id}`, {
         method: "PUT",
