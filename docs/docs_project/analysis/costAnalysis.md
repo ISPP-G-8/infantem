@@ -73,13 +73,11 @@
    4.3 [1 Año: Rentabilidad Clara](#43-1-año-post-lanzamiento-rentabilidad-clara)  
    4.4 [2 Años: Escalado Sostenido](#44-2-años-post-lanzamiento-escalado-sostenido)  
    4.5 [Conclusión del Análisis](#45-conclusión-del-análisis)
-5. [Tabla de Beneficios Totales](#5-tabla-de-beneficios-totales)
-6. [Resumen Costes, Ingresos y Beneficios](#6-resumen-costes-ingresos-y-beneficios)
-7. [Conclusión](#7-conclusión)
-8. [Análisis de Rentabilidad](#8-análisis-de-rentabilidad)
-9. [Análisis de Resultados](#9-análisis-de-resultados)
-10. [Conclusión Final](#10-conclusión-final)
-
+5. [Resumen de Costes, Ingresos y Beneficios](#5-resumen-de-costes-ingresos-y-beneficios)
+6. [Conclusión](#6-conclusión)
+7. [Análisis de Rentabilidad](#7-análisis-de-rentabilidad)
+8. [Análisis de Resultados](#8-análisis-de-resultados)
+9. [Conclusión Final](#9-conclusión-final)
 
 
 ## 1. Introducción
@@ -484,6 +482,10 @@ A los dos años, se estima un crecimiento constante:
 > Nota: Los ingresos post-lanzamiento provienen de tres canales: suscripciones Premium, publicidad segmentada y comisiones del Marketplace. Los costes incluyen infraestructura, soporte técnico, mantenimiento, diseño, expertos y marketing.
 ---
 
+## 6. Resumen Costes, Ingresos y Beneficios
+
+La siguientes tabla presentan una proyección trimestral detallada de los costes, ingresos y beneficios netos del proyecto Infantem desde su inicio (T1 2025) hasta completar dos años de actividad (T4 2026). Para facilitar el análisis estratégico y financiero, se han considerado tres escenarios: realista, optimista y pesimista, cada uno con sus respectivas estimaciones de crecimiento, adopción de usuarios y rendimiento económico. Esta visión global permite anticipar el punto de equilibrio y planificar decisiones clave en función del retorno de inversión en cada escenario.
+
 ### Caso Realista
 
 | Trimestre          | CAPEX (€) | OPEX (€) | Coste Total (€) | Ingresos (€) | Beneficio (€) |
@@ -528,6 +530,8 @@ A los dos años, se estima un crecimiento constante:
 | T4 2026 (Nov-Ene)  | 0,00      | 28.025,44| 28.025,44       | 110.000,00   | 81.974,56     |
 
 ---
+
+--- 
 
 ## 7. Conclusión
 
