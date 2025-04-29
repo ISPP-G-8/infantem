@@ -185,11 +185,7 @@ export default function Account() {
 
     if (!token) return;
 
-
     if (!validateForm()) return;
-    if (!token)
-      return;
-
 
     try {
       console.log(`Enviando petición a ${apiUrl}/api/v1/users/${user.id}`);
@@ -372,10 +368,7 @@ export default function Account() {
           saveImage(imageUri);
 
         }
-      } catch (err) {
-        alert('Error al abrir la galería: ' + err.message);
-        setAvatarModalVisible(false);
-      }
+      } 
     } catch (err) {
       alert("Error al abrir la galería: " + err.message);
       setAvatarModalVisible(false);
