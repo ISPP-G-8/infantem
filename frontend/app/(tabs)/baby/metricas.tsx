@@ -826,6 +826,16 @@ export default function Metricas() {
                     )]}</Text>
                 </View>
             }
+
+            <View style={[gs.cardMetric, { width: screenWidth * 0.95 }]}>
+                <Text style={gs.title}>Los datos de los percentiles salen de la OMS</Text>
+                <Text style={gs.description}>Hemos obtenido las tablas, las cuales son comunes a cualquier niño o niña del mundo de 
+                    entre 0 a 5 años, y las hemos traducido para un mejor entendimiento. Si desean saber más información o informarse 
+                    pueden visitar la página oficial de la OMS, se les advierte que está en su mayoria en inglés.</Text>
+                <a href="https://www.who.int/publications/i/item/924154693X" target="_blank" rel="noopener noreferrer">
+                    Patrones de crecimiento infantil de la OMS
+                </a>
+            </View>
         </ScrollView>
     );
 }

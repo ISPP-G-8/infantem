@@ -458,8 +458,8 @@ export function getWGP(metrics: {weight?: number}) {
         metrica:[
             56 * ((metrics?.weight ?? 1) < 1 ? 0 : 
             (metrics?.weight ?? 1) > 10.3 ? 10.3 - 1.75 : ((metrics?.weight ?? 1) - 1.75)),
-            32.6* ((metrics?.weight ?? 1) < 1 ? 0 : 
-            (metrics?.weight ?? 1) > 15.7 ? 15.7 - 1 : ((metrics?.weight ?? 1) - 1)),
+            33.3* (( metrics?.weight ?? 1) < 1.2 ? 0.2 : 
+            (metrics?.weight ?? 1) > 15.7 ? 15.7 - 1 : ((metrics?.weight ?? 1) - 1.2)),
             28.83 * ((metrics?.weight ?? 8) < 8 ? 0 : 
             (metrics?.weight ?? 1) > 25.6 ? 25.6 - 8.5 : ((metrics?.weight ?? 8) - 8.5))
         ]
