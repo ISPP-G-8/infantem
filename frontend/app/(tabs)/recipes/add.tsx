@@ -51,7 +51,7 @@ export default function AddBaby() {
 
   const validateForm = () => {
     let isValid = true;
-
+  
     setNameError(null);
     setIngredientsError(null);
     setMinAgeError(null);
@@ -85,7 +85,7 @@ export default function AddBaby() {
       setMinAgeError("La edad mínima no puede ser mayor que la edad máxima.");
       isValid = false;
     }
-
+  
     return isValid;
   };
 
@@ -114,7 +114,7 @@ export default function AddBaby() {
               ...(requestId && requestUserId ? { requestId: requestId, user: requestUserId } : {}),
             }),
         });
-
+    
         if (response.ok) {
           const data = await response.json();
           if (image) {
@@ -389,7 +389,7 @@ export default function AddBaby() {
             value={recipe.description}
             onChangeText={(text) => setRecipe({ ...recipe, description: text })}
           />
-
+  
           <TextInput
             style={[
               gs.input,

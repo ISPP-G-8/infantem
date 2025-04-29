@@ -6,5 +6,5 @@ export type User = {
   password: string;
   email: string;
   profilePhotoRoute?: string;
-  role: string;
+  role?: string;
 };

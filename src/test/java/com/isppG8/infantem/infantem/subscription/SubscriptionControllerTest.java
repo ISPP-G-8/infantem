@@ -71,28 +71,12 @@ public class SubscriptionControllerTest {
     private SubscriptionInfantemRepository subscriptionInfantemRepository;
 
     @Test
-    public void testCreateSubscription() throws Exception {
-        SubscriptionInfantem fakeSubscription = new SubscriptionInfantem();
-        fakeSubscription.setStripeSubscriptionId("sub_test_123");
-        fakeSubscription.setActive(true);
-
-        // Corrección: Usar el mock del servicio correctamente
-        when(subscriptionService.createSubscription(anyLong(), anyString(), anyString(), anyString()))
-                .thenReturn(fakeSubscription);
-
-        mockMvc.perform(post("/api/v1/subscriptions/create").with(csrf()).param("userId", "1")
-                .param("customerId", "cus_test_123").param("priceId", "price_abc").param("paymentMethodId", "pm_xyz")
-                .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-                .andExpect(jsonPath("$.stripeSubscriptionId").value("sub_test_123"));
-    }
-
-    @Test
     public void testCreateSubscriptionNew() throws Exception {
         SubscriptionInfantem fakeSubscription = new SubscriptionInfantem();
         fakeSubscription.setStripeSubscriptionId("sub_test_new");
         fakeSubscription.setActive(true);
 
-        when(subscriptionService.createSubscriptionNew(anyLong(), anyString(), anyString()))
+        when(subscriptionService.createSubscriptionNew(anyLong(), anyString(), anyString(), anyString()))
                 .thenReturn(fakeSubscription);
 
         mockMvc.perform(
