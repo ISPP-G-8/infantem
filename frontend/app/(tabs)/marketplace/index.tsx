@@ -4,7 +4,7 @@ import { MarketItem } from '../../../types';
 import MarketItemComponent from '../../../components/MarketItem';
 import { useAuth } from '../../../context/AuthContext';
 import Pagination from '../../../components/Pagination';
-import { useWindowDimensions } from "react-native"; 
+import { useWindowDimensions } from "react-native";
 
 export default function Marketplace() {
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
@@ -19,7 +19,7 @@ export default function Marketplace() {
     const fetchMarketItems = async (): Promise<boolean> => {
       try {
         // The backend is zero-indexed. Thats the reason behind the -1
-        const response = await fetch(`${apiUrl}/api/v1/products?page=${page-1}`, {
+        const response = await fetch(`${apiUrl}/api/v1/products?page=${page - 1}`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -28,11 +28,11 @@ export default function Marketplace() {
 
         if (!response.ok) {
           throw new Error("Error fetching subscription");
-        } 
+        }
 
         const data = await response.json();
         setMarketItems(data.content);
-        setTotalPages(data.totalPages)
+        setTotalPages(data.totalPages);
         return true;
 
       } catch (error) {
@@ -47,10 +47,10 @@ export default function Marketplace() {
   return (
     <ScrollView contentContainerStyle={{ padding: 0, paddingBottom: 0 }}>
 
-    <View style={[gs.container, { paddingTop: 60, paddingHorizontal: 20, backgroundColor: "#E3F2FD" }]}>
+      <View style={[gs.container, { paddingTop: 60, paddingHorizontal: 20, backgroundColor: "#E3F2FD" }]}>
 
-{/* Título */}
-<Text style={{
+        {/* Título */}
+        <Text style={{
           color: "#1565C0",
           fontSize: 36,
           fontWeight: "bold",
@@ -59,7 +59,7 @@ export default function Marketplace() {
         }}>
           Tienda
         </Text>
-  
+
         {/* Subtítulo */}
         <Text style={{
           fontSize: 16,
@@ -69,56 +69,51 @@ export default function Marketplace() {
         }}>
           Compra todo lo que necesites para tu bebé
         </Text>
-      <View
-        style={{
-          backgroundColor: "white",
-          padding: 24,
-          borderRadius: 16,
-          maxWidth: 1200,
-          width: "100%",
-          alignSelf: "center",
-          shadowColor: "#000",
-          shadowOpacity: 0.1,
-          shadowRadius: 10,
-          elevation: 5,
-        }}
-      >
-        
-  
-        {/* Lista de productos en grid responsivo */}
         <View
           style={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-            justifyContent: width < 768 ? "center" : "flex-start",
-            gap: 12,
+            backgroundColor: "white",
+            padding: 24,
+            borderRadius: 16,
+            maxWidth: 1200,
+            width: "100%",
+            alignSelf: "center",
+            shadowColor: "#000",
+            shadowOpacity: 0.1,
+            shadowRadius: 10,
+            elevation: 5,
           }}
         >
-          {marketItems.map((item, index) => (
-            <View
-              key={index}
-              style={{
-                width: width < 768 ? "100%" : "23%", // 4 por fila con espacio entre
-                marginBottom: 16,
-              }}
-            >
-              <MarketItemComponent item={item} />
-            </View>
-          ))}
-        </View>
-  
-        {/* Paginación */}
-        {totalPages && (
-          <View style={{ marginTop: 30 }}>
-            <Pagination
-              totalPages={totalPages}
-              page={page}
-              setPage={setPage}
-            />
+
+
+          {/* Lista de productos en grid responsivo */}
+          <View
+            style={{
+              flexDirection: "column",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: 12,
+            }}
+          >
+            {marketItems.map((item, index) => (
+              
+                <MarketItemComponent item={item} />
+              
+            ))}
           </View>
-        )}
+
+          {/* Paginación */}
+          {totalPages && (
+            <View style={{ marginTop: 30 }}>
+              <Pagination
+                totalPages={totalPages}
+                page={page}
+                setPage={setPage}
+              />
+            </View>
+          )}
+        </View>
       </View>
-    </View>
     </ScrollView>
 
   );
