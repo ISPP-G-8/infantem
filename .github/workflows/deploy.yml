@@ -2,8 +2,8 @@ name: Deploy to App Engine
 
 on:
   push:
-    branches:
-      - "**"
+    tags:
+      - "Deploy*"
 
 jobs:
   deploy:
