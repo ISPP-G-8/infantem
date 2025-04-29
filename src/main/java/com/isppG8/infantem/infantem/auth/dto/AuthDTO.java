@@ -19,7 +19,7 @@ public class AuthDTO {
 
     private String email;
 
-    private String role;
+    private byte[] profilePhoto;
 
     private String role;
 
