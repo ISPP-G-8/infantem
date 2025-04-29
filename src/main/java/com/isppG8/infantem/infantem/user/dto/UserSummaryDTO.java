@@ -2,7 +2,6 @@ package com.isppG8.infantem.infantem.user.dto;
 
 import java.util.List;
 
-import com.isppG8.infantem.infantem.baby.Baby;
 import com.isppG8.infantem.infantem.baby.dto.BabyDTO;
 import com.isppG8.infantem.infantem.user.User;
 
