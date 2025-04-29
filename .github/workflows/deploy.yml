@@ -42,8 +42,8 @@ jobs:
         id: auth
         uses: google-github-actions/auth@6fc4af4b145ae7821d527454aa9bd537d1f2dc5f
         with:
-          workload_identity_provider: 'projects/604022547996/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
-          service_account: 'infantem-ppl@appspot.gserviceaccount.com'
+          workload_identity_provider: projects/604022547996/locations/global/workloadIdentityPools/github-actions-pool
+          service_account: 'github-actions-sa@infantem-ppl.iam.gserviceaccount.com'
 
       - name: Deploy to App Engine
         id: deploy
