@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.isppG8.infantem.infantem.baby.Baby;
+import com.isppG8.infantem.infantem.recipe.CustomRecipeRequest;
 import com.isppG8.infantem.infantem.recipe.Recipe;
 
 import jakarta.persistence.CascadeType;
@@ -78,4 +79,8 @@ public class User {
     @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
 
     List<Baby> babies = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<CustomRecipeRequest> customRecipeRequests = new ArrayList<>();
 }

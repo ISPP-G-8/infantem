@@ -60,7 +60,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             role: userData.role,
           });
           setIsAuthenticated(true);
-          console.log("reaching here");
         } else {
           await signOut();
         }
