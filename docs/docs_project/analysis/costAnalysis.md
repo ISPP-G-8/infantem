@@ -484,52 +484,50 @@ A los dos años, se estima un crecimiento constante:
 > Nota: Los ingresos post-lanzamiento provienen de tres canales: suscripciones Premium, publicidad segmentada y comisiones del Marketplace. Los costes incluyen infraestructura, soporte técnico, mantenimiento, diseño, expertos y marketing.
 ---
 
-## 6. Resumen Costes, Ingresos y Beneficios
+### Caso Realista
 
-La siguientes tabla presentan una proyección trimestral detallada de los costes, ingresos y beneficios netos del proyecto Infantem desde su inicio (T1 2025) hasta completar dos años de actividad (T4 2026). Para facilitar el análisis estratégico y financiero, se han considerado tres escenarios: realista, optimista y pesimista, cada uno con sus respectivas estimaciones de crecimiento, adopción de usuarios y rendimiento económico. Esta visión global permite anticipar el punto de equilibrio y planificar decisiones clave en función del retorno de inversión en cada escenario.
+| Trimestre          | CAPEX (€) | OPEX (€) | Coste Total (€) | Ingresos (€) | Beneficio (€) |
+|--------------------|-----------|----------|-----------------|--------------|---------------|
+| T1 2025 (Feb-Abr)  | 43.598,00 | 2.212,65 | 45.810,65       | 0,00         | -45.810,65    |
+| T2 2025 (May-Jul)  | 0,00      | 12.935,82| 12.935,82       | 20.000,00    | 7.064,18      |
+| T3 2025 (Ago-Oct)  | 0,00      | 9.701,86 | 9.701,86        | 85.053,18    | 75.351,32     |
+| T4 2025 (Nov-Ene)  | 0,00      | 9.701,86 | 9.701,86        | 255.800,58   | 246.098,72    |
+| T1 2026 (Feb-Abr)  | 0,00      | 29.025,44| 29.025,44       | 340.853,76   | 311.828,32    |
+| T2 2026 (May-Jul)  | 0,00      | 29.025,44| 29.025,44       | 352.453,76   | 323.428,32    |
+| T3 2026 (Ago-Oct)  | 0,00      | 29.025,44| 29.025,44       | 352.453,76   | 323.428,32    |
+| T4 2026 (Nov-Ene)  | 0,00      | 29.025,44| 29.025,44       | 352.453,76   | 323.428,32    |
 
-### Caso Realista 
-
-| Trimestre          | Costes (€) | Ingresos (€) | Beneficio (€) |
-|--------------------|------------|--------------|----------------|
-| T1 2025 (Feb-Abr)  | 45.810,65  | 0,00         | -45.810,65     |
-| T2 2025 (May-Jul)  | 12.935,82  | 0,00         | -12.935,82     |
-| T3 2025 (Ago-Oct)  | 9.701,86   | 85.053,18    | 75.351,32      |
-| T4 2025 (Nov-Ene)  | 9.701,86   | 255.800,58   | 246.098,72     |
-| T1 2026 (Feb-Abr)  | 29.025,44  | 340.853,76   | 311.828,32     |
-| T2 2026 (May-Jul)  | 29.025,44  | 352.453,76   | 323.428,32     |
-| T3 2026 (Ago-Oct)  | 29.025,44  | 352.453,76   | 323.428,32     |
-| T4 2026 (Nov-Ene)  | 29.025,44  | 352.453,76   | 323.428,32     |
-
+---
 
 ### Caso Optimista
 
-| Trimestre          | Costes (€) | Ingresos (€) | Beneficio (€) |
-|--------------------|------------|--------------|----------------|
-| T1 2025 (Feb-Abr)  | 45.810,65  | 0,00         | -45.810,65     |
-| T2 2025 (May-Jul)  | 13.435,82  | 0,00         | -13.435,82     |
-| T3 2025 (Ago-Oct)  | 10.201,86  | 120.000,00   | 109.798,14     |
-| T4 2025 (Nov-Ene)  | 10.201,86  | 300.000,00   | 289.798,14     |
-| T1 2026 (Feb-Abr)  | 30.025,44  | 600.000,00   | 569.974,56     |
-| T2 2026 (May-Jul)  | 30.025,44  | 620.000,00   | 589.974,56     |
-| T3 2026 (Ago-Oct)  | 30.025,44  | 620.000,00   | 589.974,56     |
-| T4 2026 (Nov-Ene)  | 30.025,44  | 620.000,00   | 589.974,56     |
+| Trimestre          | CAPEX (€) | OPEX (€) | Coste Total (€) | Ingresos (€) | Beneficio (€) |
+|--------------------|-----------|----------|-----------------|--------------|---------------|
+| T1 2025 (Feb-Abr)  | 43.598,00 | 2.212,65 | 45.810,65       | 0,00         | -45.810,65    |
+| T2 2025 (May-Jul)  | 0,00      | 13.435,82| 13.435,82       | 30.000,00    | 16.564,18     |
+| T3 2025 (Ago-Oct)  | 0,00      | 10.201,86| 10.201,86       | 120.000,00   | 109.798,14    |
+| T4 2025 (Nov-Ene)  | 0,00      | 10.201,86| 10.201,86       | 300.000,00   | 289.798,14    |
+| T1 2026 (Feb-Abr)  | 0,00      | 30.025,44| 30.025,44       | 600.000,00   | 569.974,56    |
+| T2 2026 (May-Jul)  | 0,00      | 30.025,44| 30.025,44       | 620.000,00   | 589.974,56    |
+| T3 2026 (Ago-Oct)  | 0,00      | 30.025,44| 30.025,44       | 620.000,00   | 589.974,56    |
+| T4 2026 (Nov-Ene)  | 0,00      | 30.025,44| 30.025,44       | 620.000,00   | 589.974,56    |
 
+---
 
 ### Caso Pesimista
 
-| Trimestre          | Costes (€) | Ingresos (€) | Beneficio (€) |
-|--------------------|------------|--------------|----------------|
-| T1 2025 (Feb-Abr)  | 45.810,65  | 0,00         | -45.810,65     |
-| T2 2025 (May-Jul)  | 11.935,82  | 0,00         | -11.935,82     |
-| T3 2025 (Ago-Oct)  | 9.201,86   | 35.000,00    | 25.798,14      |
-| T4 2025 (Nov-Ene)  | 9.201,86   | 70.000,00    | 60.798,14      |
-| T1 2026 (Feb-Abr)  | 28.025,44  | 100.000,00   | 71.974,56      |
-| T2 2026 (May-Jul)  | 28.025,44  | 110.000,00   | 81.974,56      |
-| T3 2026 (Ago-Oct)  | 28.025,44  | 110.000,00   | 81.974,56      |
-| T4 2026 (Nov-Ene)  | 28.025,44  | 110.000,00   | 81.974,56      |
+| Trimestre          | CAPEX (€) | OPEX (€) | Coste Total (€) | Ingresos (€) | Beneficio (€) |
+|--------------------|-----------|----------|-----------------|--------------|---------------|
+| T1 2025 (Feb-Abr)  | 43.598,00 | 2.212,65 | 45.810,65       | 0,00         | -45.810,65    |
+| T2 2025 (May-Jul)  | 0,00      | 11.935,82| 11.935,82       | 10.000,00    | -1.935,82     |
+| T3 2025 (Ago-Oct)  | 0,00      | 9.201,86 | 9.201,86        | 35.000,00    | 25.798,14     |
+| T4 2025 (Nov-Ene)  | 0,00      | 9.201,86 | 9.201,86        | 70.000,00    | 60.798,14     |
+| T1 2026 (Feb-Abr)  | 0,00      | 28.025,44| 28.025,44       | 100.000,00   | 71.974,56     |
+| T2 2026 (May-Jul)  | 0,00      | 28.025,44| 28.025,44       | 110.000,00   | 81.974,56     |
+| T3 2026 (Ago-Oct)  | 0,00      | 28.025,44| 28.025,44       | 110.000,00   | 81.974,56     |
+| T4 2026 (Nov-Ene)  | 0,00      | 28.025,44| 28.025,44       | 110.000,00   | 81.974,56     |
 
---- 
+---
 
 ## 7. Conclusión
 
