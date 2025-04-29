@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.isppG8.infantem.infantem.baby.BabyRepository;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
+import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserService;
 import com.isppG8.infantem.infantem.vaccine.dto.VaccineSummary;
 
@@ -17,14 +18,18 @@ public class VaccineService {
 
     private final VaccineRepository vaccineRepository;
 
+    private final UserService userService;
+
     @Autowired
     public VaccineService(VaccineRepository vaccineRepository, BabyRepository babyRepository, UserService userService) {
         this.vaccineRepository = vaccineRepository;
+        this.userService = userService;
     }
 
     @Transactional(readOnly = true)
     public List<Vaccine> getAll() {
-        return this.vaccineRepository.findAll();
+        User user = this.userService.findCurrentUser();
+        return vaccineRepository.findAllByUser(user);
     }
 
     @Transactional(readOnly = true)
