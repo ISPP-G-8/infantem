@@ -1,4 +1,4 @@
-# Análisis de Costes Spprint 3
+# Análisis de Costes Sprint 3
 
 ![Portada](../../images/Infantem.png)
 
@@ -73,11 +73,13 @@
    4.3 [1 Año: Rentabilidad Clara](#43-1-año-post-lanzamiento-rentabilidad-clara)  
    4.4 [2 Años: Escalado Sostenido](#44-2-años-post-lanzamiento-escalado-sostenido)  
    4.5 [Conclusión del Análisis](#45-conclusión-del-análisis)
-5. [Resumen de Costes, Ingresos y Beneficios](#5-resumen-de-costes-ingresos-y-beneficios)
-6. [Conclusión](#6-conclusión)
-7. [Análisis de Rentabilidad](#7-análisis-de-rentabilidad)
-8. [Análisis de Resultados](#8-análisis-de-resultados)
-9. [Conclusión Final](#9-conclusión-final)
+5. [Tabla de Beneficios Totales](#5-tabla-de-beneficios-totales)
+6. [Resumen Costes, Ingresos y Beneficios](#6-resumen-costes-ingresos-y-beneficios)
+7. [Conclusión](#7-conclusión)
+8. [Análisis de Rentabilidad](#8-análisis-de-rentabilidad)
+9. [Análisis de Resultados](#9-análisis-de-resultados)
+10. [Conclusión Final](#10-conclusión-final)
+
 
 
 ## 1. Introducción
@@ -480,8 +482,56 @@ A los dos años, se estima un crecimiento constante:
 | 2 Años Post       | 0         | 283.595,88| 283.595,88        | 200.000                 | 705.736,32             | 1.200.000               | -150.215,11              | 422.140,44              | 1.429.892,35             |
 
 > Nota: Los ingresos post-lanzamiento provienen de tres canales: suscripciones Premium, publicidad segmentada y comisiones del Marketplace. Los costes incluyen infraestructura, soporte técnico, mantenimiento, diseño, expertos y marketing.
+---
 
-## 6. Conclusión
+## 6. Resumen Costes, Ingresos y Beneficios
+
+La siguientes tabla presentan una proyección trimestral detallada de los costes, ingresos y beneficios netos del proyecto Infantem desde su inicio (T1 2025) hasta completar dos años de actividad (T4 2026). Para facilitar el análisis estratégico y financiero, se han considerado tres escenarios: realista, optimista y pesimista, cada uno con sus respectivas estimaciones de crecimiento, adopción de usuarios y rendimiento económico. Esta visión global permite anticipar el punto de equilibrio y planificar decisiones clave en función del retorno de inversión en cada escenario.
+
+### Caso Realista 
+
+| Trimestre          | Costes (€) | Ingresos (€) | Beneficio (€) |
+|--------------------|------------|--------------|----------------|
+| T1 2025 (Feb-Abr)  | 45.810,65  | 0,00         | -45.810,65     |
+| T2 2025 (May-Jul)  | 12.935,82  | 0,00         | -12.935,82     |
+| T3 2025 (Ago-Oct)  | 9.701,86   | 85.053,18    | 75.351,32      |
+| T4 2025 (Nov-Ene)  | 9.701,86   | 255.800,58   | 246.098,72     |
+| T1 2026 (Feb-Abr)  | 29.025,44  | 340.853,76   | 311.828,32     |
+| T2 2026 (May-Jul)  | 29.025,44  | 352.453,76   | 323.428,32     |
+| T3 2026 (Ago-Oct)  | 29.025,44  | 352.453,76   | 323.428,32     |
+| T4 2026 (Nov-Ene)  | 29.025,44  | 352.453,76   | 323.428,32     |
+
+
+### Caso Optimista
+
+| Trimestre          | Costes (€) | Ingresos (€) | Beneficio (€) |
+|--------------------|------------|--------------|----------------|
+| T1 2025 (Feb-Abr)  | 45.810,65  | 0,00         | -45.810,65     |
+| T2 2025 (May-Jul)  | 13.435,82  | 0,00         | -13.435,82     |
+| T3 2025 (Ago-Oct)  | 10.201,86  | 120.000,00   | 109.798,14     |
+| T4 2025 (Nov-Ene)  | 10.201,86  | 300.000,00   | 289.798,14     |
+| T1 2026 (Feb-Abr)  | 30.025,44  | 600.000,00   | 569.974,56     |
+| T2 2026 (May-Jul)  | 30.025,44  | 620.000,00   | 589.974,56     |
+| T3 2026 (Ago-Oct)  | 30.025,44  | 620.000,00   | 589.974,56     |
+| T4 2026 (Nov-Ene)  | 30.025,44  | 620.000,00   | 589.974,56     |
+
+
+### Caso Pesimista
+
+| Trimestre          | Costes (€) | Ingresos (€) | Beneficio (€) |
+|--------------------|------------|--------------|----------------|
+| T1 2025 (Feb-Abr)  | 45.810,65  | 0,00         | -45.810,65     |
+| T2 2025 (May-Jul)  | 11.935,82  | 0,00         | -11.935,82     |
+| T3 2025 (Ago-Oct)  | 9.201,86   | 35.000,00    | 25.798,14      |
+| T4 2025 (Nov-Ene)  | 9.201,86   | 70.000,00    | 60.798,14      |
+| T1 2026 (Feb-Abr)  | 28.025,44  | 100.000,00   | 71.974,56      |
+| T2 2026 (May-Jul)  | 28.025,44  | 110.000,00   | 81.974,56      |
+| T3 2026 (Ago-Oct)  | 28.025,44  | 110.000,00   | 81.974,56      |
+| T4 2026 (Nov-Ene)  | 28.025,44  | 110.000,00   | 81.974,56      |
+
+--- 
+
+## 7. Conclusión
 
 El proyecto **Infantem** ha demostrado ser económicamente **viable y escalable** desde el inicio. A pesar de una inversión significativa durante las primeras 15 semanas (CAPEX + OPEX de 88.730,38 €), los ingresos generados tras el lanzamiento superan con creces los costes operativos, alcanzando beneficios positivos ya en la primera semana.
 
@@ -489,7 +539,7 @@ El enfoque de monetización múltiple —suscripciones, publicidad y marketplace
 
 ---
 
-## 7. Análisis de Rentabilidad
+## 8. Análisis de Rentabilidad
 
 - **Punto de equilibrio**: Se alcanza en el mes 6 (escenario realista), con un beneficio neto de **+46.245,72 €**, superando así los costes acumulados del desarrollo inicial.
 - **ROI al año**: A los 12 meses, el beneficio neto es de **+224.148 €**, multiplicando por 2,5 la inversión inicial.
@@ -499,7 +549,7 @@ Esto significa que el retorno de inversión es **acelerado** y mejora exponencia
 
 ---
 
-## 8. Análisis de Resultados
+## 9. Análisis de Resultados
 
 - **Fase Pre-Lanzamiento**: Requiere una inversión considerable para diseñar, construir y posicionar la app. Aunque no genera ingresos en esta fase, se asientan las bases de la rentabilidad futura.
 - **Semana 1 Post-Lanzamiento**: Ya se alcanza un beneficio neto positivo (**+966,46 €**), lo que valida el producto y su acogida en el mercado.
@@ -509,6 +559,6 @@ Esto significa que el retorno de inversión es **acelerado** y mejora exponencia
 
 ---
 
-### 9. Conclusión final
+### 10. Conclusión final
 
 **Infantem es un proyecto con rentabilidad comprobada, potencial de crecimiento y retorno acelerado de inversión.** El diseño estratégico del modelo de negocio, centrado en valor añadido para las familias, permite generar beneficios sostenibles y escalar sin comprometer la experiencia del usuario.
