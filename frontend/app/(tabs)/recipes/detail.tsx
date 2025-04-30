@@ -586,9 +586,11 @@ export default function RecipeDetails() {
                 <Text style={gs.mainButtonText}>Guardar Cambios</Text>
               </TouchableOpacity>
             )}
-            <TouchableOpacity style={[gs.mainButton, { backgroundColor: "red", height: 'auto' }]} onPress={() => handleDeleteRecipe()}>
-              <Text style={gs.mainButtonText}>Eliminar</Text>
-            </TouchableOpacity>
+            {recipe.userId !== null &&
+              <TouchableOpacity style={[gs.mainButton, { backgroundColor: "red", height: 'auto' }]} onPress={() => handleDeleteRecipe()}>
+                <Text style={gs.mainButtonText}>Eliminar</Text>
+              </TouchableOpacity>
+            }
           </View>
         </View>
       </ScrollView>
