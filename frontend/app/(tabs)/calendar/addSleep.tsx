@@ -54,7 +54,7 @@ export default function AddSleep() {
   const validateDate = (dateString: string) => {
     const dateRegex = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/;
     if (!dateRegex.test(dateString)) {
-      return "La fecha debe tener el formato yyyy-MM-dd HH:mm";
+      return "La fecha debe tener el formato AAAA-MM-dd HH:mm";
     }
 
     const parsedDate = new Date(dateString);
@@ -69,17 +69,34 @@ export default function AddSleep() {
     const startDateError = validateDate(sleepData.dateStart);
     const endDateError = validateDate(sleepData.dateEnd);
 
-    if (startDateError || endDateError) {
-      setErrorMessage(startDateError || endDateError);
+    if (!sleepData.baby) {
+      setErrorMessage("Tienes que asociar un bebé al registro de sueño");
       return;
+    } else if (!sleepData.dateStart) {
+      setErrorMessage("Tienes que asociar una hora de inicio al registro de sueño");
+      return;
+    } else if (startDateError) {
+      setErrorMessage(startDateError);
+      return;
+    } else if (!sleepData.dateEnd) {
+      setErrorMessage("Tienes que asociar una hora de fin al registro de sueño");
+      return;
+    } else if (endDateError) {
+      setErrorMessage(endDateError);
+      return;
+    } else if (new Date(sleepData.dateStart) >= new Date(sleepData.dateEnd)) {
+      setErrorMessage("La hora de inicio debe ser anterior a la hora de fin");
+      return;
+    } else if (sleepData.numWakeups < 0) {
+      setErrorMessage("El número de despertares no puede ser negativo");
+      return;
+    } else if (!sleepData.dreamType) {
+      setErrorMessage("Tienes que asociar un tipo de sueño al registro");
+      return;
+    } else {
+      setErrorMessage(null);
     }
 
-    if (!sleepData.baby || !sleepData.dreamType) {
-      setErrorMessage('Por favor, completa todos los campos obligatorios.');
-      return;
-    }
-
-    setErrorMessage(null);
     setLoading(true);
 
     try {

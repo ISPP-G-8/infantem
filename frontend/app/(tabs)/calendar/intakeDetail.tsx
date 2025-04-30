@@ -135,6 +135,12 @@ export default function intakeDetail() {
     } else if(!intake.quantity) {
       setErrorMessage("Tienes que asociar una cantidad a la ingesta"); 
       return
+    } else if(intake.quantity < 0) {
+      setErrorMessage("No puedes asociar una cantidad negativa a la ingesta"); 
+      return
+    } else if(!intake.date) {
+      setErrorMessage("Tienes que asociar una fecha a la ingesta"); 
+      return
     } else if(!intake.observations) {
       setErrorMessage("Tienes que asociar una observacion a la ingesta"); 
       return

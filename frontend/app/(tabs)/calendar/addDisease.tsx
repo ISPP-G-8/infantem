@@ -53,12 +53,51 @@ export default function AddDisease() {
   }, [token]);
 
   const handleSaveDisease = async () => {
-    if (!selectedBaby || !diseaseName || !startDate || !endDate || !symptoms) {
-      setErrorMessage("Por favor, completa todos los campos obligatorios.");
+    const validateDate = (dateString: string) => {
+      const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+      if (!dateRegex.test(dateString)) {
+        return "La fecha debe tener el formato AAAA-MM-dd";
+      }
+
+      const parsedDate = new Date(dateString);
+      if (isNaN(parsedDate.getTime())) {
+        return "La fecha ingresada no es válida";
+      }
+
+      return null;
+    };
+
+    const startDateError = validateDate(startDate);
+    const endDateError = validateDate(endDate);
+
+    if (!selectedBaby) {
+      setErrorMessage("Tienes que asociar un bebé a la enfermedad");
       return;
+    } else if (!diseaseName) {
+      setErrorMessage("Tienes que asociar un nombre a la enfermedad");
+      return;
+    } else if (!startDate) {
+      setErrorMessage("Tienes que asociar una fecha de inicio a la enfermedad");
+      return;
+    } else if (startDateError) {
+      setErrorMessage(startDateError);
+      return;
+    } else if (!endDate) {
+      setErrorMessage("Tienes que asociar una fecha de fin a la enfermedad");
+      return;
+    } else if (endDateError) {
+      setErrorMessage(endDateError);
+      return;
+    } else if (new Date(startDate) > new Date(endDate)) {
+      setErrorMessage("La fecha de inicio no puede ser posterior a la fecha de fin");
+      return;
+    } else if (!symptoms) {
+      setErrorMessage("Tienes que asociar síntomas a la enfermedad");
+      return;
+    } else {
+      setErrorMessage('');
     }
 
-    setErrorMessage('');
     setLoading(true);
 
     const diseaseToSave = {

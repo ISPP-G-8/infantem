@@ -52,7 +52,7 @@ export default function AddVaccine() {
   const validateDate = (dateString: string) => {
     const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
     if (!dateRegex.test(dateString)) {
-      return "La fecha debe tener el formato yyyy-MM-dd";
+      return "La fecha debe tener el formato AAAA-MM-dd";
     }
 
     const parsedDate = new Date(dateString);
@@ -68,17 +68,20 @@ export default function AddVaccine() {
   };
 
   const addVaccineData = async () => {
-    const dateError = validateDate(vaccineDate);
-    if (dateError) {
-      setFormErrors({ vaccineDate: dateError });
+    if (!selectedBaby) {
+      setFormErrors({ vaccineDate: "Tienes que asociar un bebé a la vacuna" });
+      return;
+    } else if (!vaccineName) {
+      setFormErrors({ vaccineDate: "Tienes que asociar un nombre a la vacuna" });
+      return;
+    } else if (!vaccineDate) {
+      setFormErrors({ vaccineDate: "Tienes que asociar una fecha a la vacuna" });
+      return;
+    } else if (validateDate(vaccineDate)) {
+      setFormErrors({ vaccineDate: validateDate(vaccineDate) });
       return;
     } else {
       setFormErrors({});
-    }
-
-    if (!selectedBaby || !vaccineName || !vaccineDate) {
-      Alert.alert('Error', 'Por favor completa todos los campos obligatorios.');
-      return;
     }
 
     setLoading(true);
