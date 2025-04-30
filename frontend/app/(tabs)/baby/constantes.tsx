@@ -165,7 +165,7 @@ export function getHCGP(metrics: {headCircumference?: number}) {
             24*(((metrics?.headCircumference ?? 31.5) < 31.5 ? 0 :
             (metrics?.headCircumference ?? 31.5) > 51 ? 51 - 30.5 : (metrics?.headCircumference ?? 31.5) - 30.5)),
             21.8*((metrics?.headCircumference ?? 32) < 32 ? 0 :
-            (metrics?.headCircumference ?? 32) > 53.5 ? 53.5 - 32 : (metrics?.headCircumference ?? 32)- 32),
+            (metrics?.headCircumference ?? 32) > 53.5 ? 53.5 - 32 : (metrics?.headCircumference ?? 32)- 31),
         ]
     }
 };
@@ -312,8 +312,8 @@ export function getHGP(metrics: {height?: number}) {
             (metrics?.height ?? 45) > 73 ? 73 - 45 :((metrics?.height ?? 45) - 45)),
             9.6* ((metrics?.height ?? 45) < 45 ? 0 : 
             (metrics?.height ?? 45) > 95 ? 95 - 45 : ((metrics?.height ?? 45)  - 45)),
-            12 * ((metrics?.height ?? 80) < 80 ? 0 : 
-            (metrics?.height ?? 80) > 120 ? 120 - 80 : ((metrics?.height ?? 80) - 80))
+            11.1 * ((metrics?.height ?? 80) < 80 ? 0 : 
+            (metrics?.height ?? 80) > 120 ? 120 - 80 : ((metrics?.height ?? 80) - 77))
         ]
     };
 }
@@ -460,8 +460,8 @@ export function getWGP(metrics: {weight?: number}) {
             (metrics?.weight ?? 1) > 10.3 ? 10.3 - 1.75 : ((metrics?.weight ?? 1) - 1.75)),
             33.3* (( metrics?.weight ?? 1) < 1.2 ? 0.2 : 
             (metrics?.weight ?? 1) > 15.7 ? 15.7 - 1 : ((metrics?.weight ?? 1) - 1.2)),
-            28.83 * ((metrics?.weight ?? 8) < 8 ? 0 : 
-            (metrics?.weight ?? 1) > 25.6 ? 25.6 - 8.5 : ((metrics?.weight ?? 8) - 8.5))
+            28.83 * ((metrics?.weight ?? 8) < 1 ? 0 : 
+            (metrics?.weight ?? 1) > 25.6 ? 25.6 - 8.6 : ((metrics?.weight ?? 8) - 8.6))
         ]
     };
 }
@@ -528,7 +528,7 @@ export function getWFHGP(metrics: {weight?: number, height?: number}) {
         weight:[
             21.8* ((metrics?.weight ?? 1) < 1 ? 0 : 
             (metrics?.weight ?? 1) > 23 ? 23 - 1: ((metrics?.weight ?? 1) - 1)),
-            20.8* ((metrics?.weight ?? 5) < 5 ? 0 : 
+            20* ((metrics?.weight ?? 5) < 5 ? 0 : 
             (metrics?.weight ?? 5) > 28 ? 28 : ((metrics?.weight ?? 5) - 5)),
         ]
     };
