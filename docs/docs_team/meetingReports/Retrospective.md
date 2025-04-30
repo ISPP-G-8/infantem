@@ -1,8 +1,9 @@
 # Retrospective
-![Portada](../../imagenes/Infantem.png)
+
+![Portada](../../images/Infantem.png)
 
 
-**Fecha:** 11/03/2025  
+**Fecha:** 31/03/2025  
 **Grupo 8:** Infantem  
 **Sprint 1**
 
@@ -38,9 +39,14 @@
 
 ---
 
+## Colaboradores del documento
+
+- Luis Giraldo  
+  - Creó el documento.
+  - Actualizó el documento al sprint 3.
+
 
 ## Índice
-- [Colaboradores del documento](#colaboradores-del-documento)
 - [Riegos identificacdos](#riegos-identificacdos)
 - [Desarrollo con pinzas](#desarrollo-con-pinzas)
 - [Desarrollo conforme](#desarrollo-conforme)
@@ -48,9 +54,7 @@
 - [Aprendizaje de este sprint](#aprendizaje-de-este-sprint)
 - [Acciones a tomar para los siguentes sprint](#acciones-a-tomar-para-los-siguentes-sprint)
 
-## Colaboradores del documento
-- Luis Giraldo
-  - Creó el documento.
+
 
 
 ## Riegos identificacdos

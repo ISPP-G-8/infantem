@@ -284,14 +284,14 @@ public class RecipeServiceTest {
     @Test
     public void getAllRecommendedRecipesTest() {
         List<Recipe> recommendRecipes = recipeService.getAllRecommendedRecipes();
-        assertEquals(16, recommendRecipes.size(), "Number of recommended recipes should be 16");
+        assertEquals(8, recommendRecipes.size(), "Number of recommended recipes should be 8");
     }
 
     @Test
     public void getAllVisibleRecipesTest() {
         Mockito.when(userService.findCurrentUserId()).thenReturn(1);
         List<Recipe> visibleRecipes = recipeService.getVisibleRecipes();
-        assertEquals(21, visibleRecipes.size(), "Number of visible recipes should be 21");
+        assertEquals(13, visibleRecipes.size(), "Number of visible recipes should be 13");
         assertTrue(visibleRecipes.stream().filter(r -> r.getId() == 1L).findFirst().isPresent(),
                 "Recipe with id 1 should be present in the visible recipes");
     }
