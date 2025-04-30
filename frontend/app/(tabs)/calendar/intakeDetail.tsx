@@ -234,10 +234,9 @@ export default function intakeDetail() {
 </Text>
 
 {babies && (
-  <View style={{ borderWidth: 1, borderColor: "#1565C0", borderRadius: 8, width: "80%", marginBottom: 16 }}>
-    <Picker
+      <Picker
       selectedValue={intake.baby?.id ?? null}
-      style={{ opacity: 0.8 }}
+      style={[gs.input, { width: "80%" }]}
       onValueChange={(babyId) => {
         setIntake((prevIntake) => ({
           ...prevIntake,
@@ -254,7 +253,7 @@ export default function intakeDetail() {
         />
       ))}
     </Picker>
-  </View>
+  
 )}
   
 

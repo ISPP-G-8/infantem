@@ -75,12 +75,14 @@ export default function Diseases() {
             >
               <View style={{ flex: 1 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5 }}>
-                  <Text style={{ fontWeight: 'bold', color: '#333' }}>{disease.date}</Text>
+                  <Text style={{ fontWeight: 'bold', color: '#333' }}>Periodo: {disease.startDate}/{disease.endDate}</Text>
                   { disease.baby?.name &&
                     <Text style={{ fontWeight: 'bold', color: '#1565C0' }}> Bebé: {disease.baby.name}</Text>
                   }
                 </View>
-                <Text style={gs.cardContent} numberOfLines={2}>{disease.name}</Text>
+                <Text style={gs.cardContent} numberOfLines={2}>Enfermedad: {disease.name}</Text>
+                <Text style={gs.cardContent} numberOfLines={2}>Síntomas: {disease.symptoms}</Text>
+                <Text style={gs.cardContent} numberOfLines={2}>Observaciones: {disease.extraObservations}</Text>
                 
                 <View style={{ alignItems: 'flex-end', marginTop: 10 }}>
                   <View style={{ flexDirection: 'row', gap: 6 }}>
@@ -90,7 +92,6 @@ export default function Diseases() {
                     >
                       <Text style={{ color: 'white', fontWeight: 'bold' }}>Eliminar</Text>
                     </TouchableOpacity>
-                    
                   </View>
                 </View>
               </View>

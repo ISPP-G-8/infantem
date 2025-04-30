@@ -2,11 +2,15 @@ package com.isppG8.infantem.infantem.disease.dto;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.isppG8.infantem.infantem.baby.dto.BabyDTO;
 import com.isppG8.infantem.infantem.disease.Disease;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,8 +23,14 @@ public class DiseaseDTO {
 
     private String name;
 
+    @NotNull
+    @PastOrPresent
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 
+    @NotNull
+    @PastOrPresent
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 
     private String symptoms;
