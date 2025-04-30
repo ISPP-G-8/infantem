@@ -107,10 +107,12 @@ export default function RecipeDetails() {
         } else {
           setImageBase64(null); // No hay imagen -> limpiamos
         }
+        console.log(recipeData);
 
         const recipeObject: Recipe = {
           id: recipeData.id,
           userId: recipeData.user,
+          isCustom: recipeData.custom,
           name: recipeData.name,
           description: recipeData.description,
           minRecommendedAge: recipeData.minRecommendedAge,
@@ -578,7 +580,7 @@ export default function RecipeDetails() {
                 <Text style={gs.mainButtonText}>Editar Receta</Text>
               </TouchableOpacity>
             )}
-            {isEditing && (
+            {(isOwned && isEditing) && (
               <TouchableOpacity
                 style={[gs.mainButton]}
                 onPress={handleSaveChanges}
@@ -586,7 +588,7 @@ export default function RecipeDetails() {
                 <Text style={gs.mainButtonText}>Guardar Cambios</Text>
               </TouchableOpacity>
             )}
-            {recipe.userId !== null &&
+            {(recipe.userId !== null || !recipe.isCustom) &&
               <TouchableOpacity style={[gs.mainButton, { backgroundColor: "red", height: 'auto' }]} onPress={() => handleDeleteRecipe()}>
                 <Text style={gs.mainButtonText}>Eliminar</Text>
               </TouchableOpacity>
