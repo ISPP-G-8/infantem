@@ -1,13 +1,13 @@
 # Individual Performance Evaluation Form
 
-![Portada](../imagenes/Infantem.png)
+![Portada](../images/Infantem.png)
 
-
-**Fecha:** 18/02/2025  
+**Fecha:** 27/02/2025  
 **Grupo 8:** Infantem  
-**Sprint 1**
+**Sprint 3**
 
 ## Integrantes del Grupo
+
 <div style="display: flex; justify-content: space-between; gap: 2px;">
   <div>
     <ul style="padding-left: 0; list-style: none;">
@@ -23,7 +23,7 @@
     </ul>
   </div>
 
-  <div>
+<div>
     <ul style="padding-left: 0; list-style: none;">
     <li>Javier Ulecia García</li>
       <li>José García de Tejada Delgado</li>
@@ -37,60 +37,63 @@
   </div>
 </div>
 
-**Revisión: Felipe Solís Agudo**
+## Document contributors
+
+- Luis Giraldo
+  - Creó el documento en md.
+  - Rellena la sección de Agreed Individual Performance Evaluation.
+  - Actualiza al formato del sprint 3
+- Felipe Solís Agudo
+  - Revisión del documento.
+- Todos los miembro de grupo
+  - Rellenan su parte de Devising a Project
+  - Rellenan su parte del Sprint 1
+  - Rellenan su parte del Sprint 2
 
 ---
 
 ## Índice
-- [Document contributors](#document-contributors)
+
 - [Agreed Individual Performance Evaluation](#agreed-individual-performance-evaluation)
 - [Individual Contribution Summary](#individual-contribution-summary)
   - [Devising a Project](#devising-a-project-dp)
-  - [Sprint 1](#sprint-1)
-  - [Sprint 2](#sprint-2)
-  - [Sprint 3](#sprint-3)
-  - [Preparing Project Launch](#devising-a-project-dp)
-  - [World Project Launch](#devising-a-project-dp)
-
-## Document contributors
-- Luis Giraldo
-  - Creó el documento en md.
-
+  - [Sprint 1](#sprint-1-s1)
+  - [Sprint 2](#sprint-2-s2)
+  - [Sprint 3](#sprint-3-s3)
+  - [Preparing Project Launch](#preparing-project-launch-ppl)
+  - [World Project Launch](#world-project-launch-wpl)
 
 ## Agreed Individual Performance Evaluation
 
 Date: 11/03/2025
 
-|  Agreed Individual Performance Evaluation     |
-|-------------------------------|
+| Agreed Individual Performance Evaluation |
+| ---------------------------------------- |
 
-|  Student | #DP1 | #S1 | #S2 |#S3 |#PPL | #WPL | Total |Weigh |
-|--------------------------------|--|--|--|--|--|--|---|--|
-| del Catillo Piñero, Daniel     |10|  |  |  |  |  |0,5|5%|
-| Fuentelsaz Rodríguez, David    |10|  |  |  |  |  |0,5|5%|
-| Galán Lerate, Miguel           |10|  |  |  |  |  |0,5|5%|
-| García Abadía, Enrique         |10|  |  |  |  |  |0,5|5%|
-| García de Tejada Delgado, José |10|  |  |  |  |  |0,5|5%|
-| Giraldo Santiago, Luis         |10|  |  |  |  |  |0,5|5%|
-| Jiménez Ortega, Antonio        |10|  |  |  |  |  |0,5|5%|
-| Jiménez Osuna, Álvaro          |10|  |  |  |  |  |0,5|5%|
-| López Oliva, Ángela            |10|  |  |  |  |  |0,5|5%|
-| Luna Navarro, Paula            |10|  |  |  |  |  |0,5|5%|
-| Morgado Prudencio, Jose Maria  | 7|  |  |  |  |  |0,5|5%|
-| Noya Cano, Lucía               |10|  |  |  |  |  |0,5|5%|
-| Rodríguez López, Josué         |10|  |  |  |  |  |0,5|5%|
-| Santos Martín, Javier          |10|  |  |  |  |  |0,5|5%|
-| Solís Agudo, Felipe            |10|  |  |  |  |  |0,5|5%|
-| Ulecia García, Javier          |10|  |  |  |  |  |0,5|5%|
-| Vargas Muñiz, David            |10|  |  |  |  |  |0,5|5%|
+| Student                        | #DP1 | #S1 | #S2 | #S3 | #PPL | #WPL | Total | Weigh |
+| ------------------------------ | ---- | --- | --- | --- | ---- | ---- | ----- | ----- |
+| del Catillo Piñero, Daniel     | 10   | 10  | 10  |     |      |      | 3,5   | 35%   |
+| Fuentelsaz Rodríguez, David    | 10   | 10  | 10  |     |      |      | 3,5   | 35%   |
+| Galán Lerate, Miguel           | 10   | 10  | 9,13|     |      |      | 3,33  | 35%   |
+| García Abadía, Enrique         | 10   | 10  | 8,25|     |      |      | 3,15  | 35%   |
+| García de Tejada Delgado, José | 10   | 10  | 9,5 |     |      |      | 3,4   | 35%   |
+| Giraldo Santiago, Luis         | 10   | 10  | 10  |     |      |      | 3,5   | 35%   |
+| Jiménez Ortega, Antonio        | 10   | 9   | 9,2 |     |      |      | 3,24  | 35%   |
+| Jiménez Osuna, Álvaro          | 10   | 10  | 10  |     |      |      | 3,5   | 35%   |
+| López Oliva, Ángela            | 10   | 9   | 9,5 |     |      |      | 3,3   | 35%   |
+| Luna Navarro, Paula            | 10   | 9   | 10  |     |      |      | 3,4   | 35%   |
+| Morgado Prudencio, Jose Maria  | 7    | 10  | 8,83|     |      |      | 3,12  | 35%   |
+| Noya Cano, Lucía               | 10   | 9   | 9   |     |      |      | 3,2   | 35%   |
+| Rodríguez López, Josué         | 10   | 10  | 10  |     |      |      | 3,5   | 35%   |
+| Santos Martín, Javier          | 10   | 10  | 10  |     |      |      | 3,5   | 35%   |
+| Solís Agudo, Felipe            | 10   | 10  | 10  |     |      |      | 3,5   | 35%   |
+| Ulecia García, Javier          | 10   | 4   | 7,67|     |      |      | 2,43  | 35%   |
+| Vargas Muñiz, David            | 10   | 9   | 9,5 |     |      |      | 3,3   | 35%   |
 
-| Total |160  |  s|  s|  s|  s|  s| 
-|--|--|--|--|--|--|--|
-
+| Total | 167 | 159 | 160,58 | s   | s   | s   |
+| ----- | --- | --- | --- | --- | --- | --- |
 
 ## Individual Contribution Summary
-
-<a id="devising-a-project-dp"></a>
 
 ### Devising a Project (#DP)
 
@@ -107,7 +110,6 @@ Date: 11/03/2025
 - Creación del documento de MVP con refinado de ideas.
 - Creación de un servidor de discord, roles y canales de texto y voz.
 
-
 #### Fuentelsaz Rodríguez, David-2
 
 - Asistencia a las sesiones de presentación.
@@ -118,7 +120,6 @@ Date: 11/03/2025
 - Creación del currículum interno.
 - Análisis de costes.
 - Análisis de competidores.
-
 
 #### Galán Lerate, Miguel-3
 
@@ -132,7 +133,6 @@ Date: 11/03/2025
 - Elaboración de DAFO de ideas anteriores
 - Elaboración de commitment agreement ampliado
 
-
 #### García Abadía, Enrique-4
 
 - Asistencia a las sesiones de presentación.
@@ -142,7 +142,6 @@ Date: 11/03/2025
 - Creación del documento IndividualPerformanceEvaluationForm
 - Exposición de la presentación del día 07/02.
 - Desarrollo del Business Model Canvas para Infantem.
-
 
 #### García de Tejada Delgado, José-5
 
@@ -171,7 +170,6 @@ Date: 11/03/2025
 - Creación de la plantilla para los documentos.
 - Hoja de cálculo para la disponibilidad por personas.
 
-
 #### Jiménez Ortega, Antonio-7
 
 - Asistencia a las sesiones de presentación.
@@ -185,7 +183,6 @@ Date: 11/03/2025
 - Inicio del Análisis de Costes
 - Elaboración del Plan de Gestión de la Calidad
 
-
 #### Jiménez Osuna, Álvaro-8
 
 - Asistencia a las sesiones de presentación.
@@ -196,7 +193,6 @@ Date: 11/03/2025
 - Branding de la aplicación.
 - Mockups.
 - Presentación.
-
 
 #### López Oliva, Ángela-9
 
@@ -209,7 +205,6 @@ Date: 11/03/2025
 - Branding de la aplicación.
 - Desarrollo de funcionalidades.
 - Presentación.
-
 
 #### Luna Navarro, Paula-10
 
@@ -224,7 +219,6 @@ Date: 11/03/2025
 - Elaboración presentación 3 semana
 - Lectura de los actas a las reuniones no asistidas
 
-
 #### Morgado Prudencio, Jose Maria-11
 
 - Asistencia a las sesiones de presentación.
@@ -235,7 +229,6 @@ Date: 11/03/2025
 - Elaboración de curriculum interno
 - Visualización de píldoras teóricas
 - Lectura de los feedbacks
-
 
 #### Noya Cano, Lucía-12
 
@@ -248,7 +241,6 @@ Date: 11/03/2025
 - Tomar nota de los feedbacks aportados en clase
 - Ayuda con la presentación
 - Lectura de los actas a las reuniones no asistidas
-
 
 #### Rodríguez López, Josué-13
 
@@ -265,7 +257,6 @@ Date: 11/03/2025
 - Análisis de riesgos.
 - Análisis de costes.
 
-
 #### Santos Martín, Javier-14
 
 - Asistencia a las sesiones de presentación.
@@ -276,7 +267,6 @@ Date: 11/03/2025
 - Documentación de instalación de la aplicación
 - Desarrollo de la landing page
 - Elaboración de las políticas del equipo
-
 
 #### Solís Agudo, Felipe-15
 
@@ -289,7 +279,6 @@ Date: 11/03/2025
 - Definición de casos de uso y roles de usuario para idea no final.
 - Desarrollo del Business Model Canvas para Infantem.
 
-
 #### Ulecia García, Javier-16
 
 - Asistencia a las sesiones de presentación.
@@ -297,8 +286,8 @@ Date: 11/03/2025
 - Busqueda de competidores
 - Documento de usuarios piloto
 
-
 #### Vargas Muñiz, Davi- Asistencia a las sesiones de presentación.
+
 - Asistencia a reuniones internas del grupo.
 - Elaboración de nueva propuesta de idea.
 - Visualización de vídeos EV.
@@ -317,27 +306,34 @@ Date: 11/03/2025
 - Presentación evaluable 21/02/2025.
 
 
-<a id="sprint-1"></a>
-
 ### Sprint 1 (#S1)
 
 #### del Catillo Piñero, Daniel-1
+
+- Asistencia a las sesiones de presentación.
+- Preparación de reuniones.
+- Asistencia a reuniones internas del grupo.
+- Informe de productividad.
+- Contactar con usuarios pilotos.
+- Arreglo de la base de datos.
+- Revisión de pull request.
+- Revisión de la presentación.
+- funcionamiento del perfil de ususario.
 
 #### Fuentelsaz Rodríguez, David-2
 
 - Asistencia a las sesiones de presentación.
 - Asistencia a reuniones internas del grupo.
-- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
-- Visualización de vídeos EV.
 - Revisión y reajuste de los requisitos de información.
 - Desarrollo y revisión del modelo UML de la aplicación.
-- Revisión del desarrollo backend. 
+- Revisión del desarrollo backend.
 - Gestión como vocal secundario del subgrupo de desarrollo "Backend".
 - Recopilación de feedback de todos los grupos durante las sesiones de presentación.
 - Desarrollo del documento de Commitment Agreement en MarkDown.
-- Corrección y desarrollo de la lógica de la entidad Baby. 
+- Corrección y desarrollo de la lógica de la entidad Baby.
 
 #### Galán Lerate, Miguel-3
+
 - Asistencia a clase.
 - Asistencia a reuniones internas del grupo.
 - Testing de recomendaciones de recetas.
@@ -349,9 +345,15 @@ Date: 11/03/2025
 - Correción final de Urls en frontend.
 - Despliegue en App Engine.
 
-
-
 #### García Abadía, Enrique-4
+
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Asistencia a reuniones de vocales del grupo.
+- Reviones de frontend pre-presentaciones y unificacion de estilos.
+- Frontend de funcionalidad de registro de alimentos (eliminada posteriormente).
+- Creacion y configuracion de frontend de la funcionalidad baby.
+- Redaccion de documento revision.md juanto a Jose García de Tejada Delgado
 
 #### García de Tejada Delgado, José-5
 
@@ -362,11 +364,28 @@ Date: 11/03/2025
 - Refactoring general API backend
 - Arreglos finales autentificación backend
 - Implementación parcial algoritmo detección de alérgenos backend
-- Documento revisión.md 
+- Documento revisión.md
 
 #### Giraldo Santiago, Luis-6
 
+- Asistencia a las sesiones de presentación.
+- Preparación de reuniones.
+- Asistencia a reuniones internas del grupo.
+- Pasar documentos de docs a md.
+- Descripción de tareas.
+- Asignación de tareas.
+- Desarrollo de la clase dream, con su CRUD.
+- Gestión del feedback en la base de datos compartidas.
+- Creación de la restospectiva.
+- Creación de KBreport.md.
+- Revisón de pull requets.
+- Revisión y corrección de código.
+- Creación del MS project.
+- Ayuda hacer la presentación del 07/03.
+- Creación de la estructura de documentos en el repositorio.
+
 #### Jiménez Ortega, Antonio-7
+
 - Asistencia a las sesiones de presentación.
 - Asistencia a reuniones internas del grupo.
 - Recopilación de feedback propio durante las sesiones de presentación.
@@ -379,19 +398,32 @@ Date: 11/03/2025
 - Organización en las tareas de frontend
 - Grabación del vídeo de demostración de la app del S1
 
-
 #### Jiménez Osuna, Álvaro-8
 
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Gestión como vocal secundario del subgrupo de desarrollo "Frontend".
+- Elaboración de la presentación del Sprint.
+- Actualización del documento de MSProject.
+- Organización y subdivisión de las tareas Frontend.
+- Revisión y unificación estilos Presentacion
+- Elaboración de la pantalla Profile y Desarrollo de los Avatares.
+- Customizar los iconos de la aplicación.
+- Revisión del Diagrama de Clases.
+- Set Up del proyecto para MAC.
+
 #### López Oliva, Ángela-9
+
 - Asistencia a las sesiones de presentación.
 - Asistencia a reuniones internas del grupo.
 - Recopilación de feedback propio durante las sesiones de presentación.
 - Elaboración de la presentación del Sprint.
 - Desarrollo de la parte visual del Log-in.
 - Desarrollo de la parte visual de la Home Page.
-- Conversión de documentos de C.A. de los usuarios piloto 
+- Conversión de documentos de C.A. de los usuarios piloto
 
 #### Luna Navarro, Paula-10
+
 - Asistencia a las sesiones de presentación.
 - Asistencia a reuniones internas del grupo.
 - Lectura de actas de las reuniones no asistidas
@@ -410,6 +442,7 @@ Date: 11/03/2025
 - Mejora en la gestión de errores al eliminar alérgenos (tarea de Validacion backend)
 
 #### Morgado Prudencio, Jose Maria-11
+
 - Asistencia a las sesiones de presentación.
 - Asistencia a reuniones internas del grupo.
 - Lectura de actas de las reuniones no asistidas
@@ -419,7 +452,9 @@ Date: 11/03/2025
 - Implementacion de entidades
 - Analisis de Riesgos
 - performanceEvaluation de Usuarios Piloto
+
 #### Noya Cano, Lucía-12
+
 - Asistencia a las sesiones de presentación.
 - Asistencias a reuniones internas del grupo.
 - Lectura de actas a las reuniones no asistidas.
@@ -435,6 +470,7 @@ Date: 11/03/2025
 - Creación de tests para el módulo auth.
 
 #### Rodríguez López, Josué-13
+
 - Asistencia a las sesiones de presentación.
 - Asistencia a reuniones internas del grupo.
 - Desarrollo y correción de requisitos de información.
@@ -450,6 +486,7 @@ Date: 11/03/2025
 - Desarrollo del timeEffortReport.
 
 #### Santos Martín, Javier-14
+
 - Asistencia a las sesiones de presentación.
 - Asistencia a reuniones internas del grupo.
 - Desarrollo del stack de la aplicación en cliente
@@ -461,6 +498,7 @@ Date: 11/03/2025
 - Documentación del proceso CI/CD del proyecto
 
 #### Solís Agudo, Felipe-15
+
 - Asistencia a las sesiones de presentación.
 - Asistencia a reuniones internas del grupo.
 - Desarrollo de actas de las reuniones internas del grupo.
@@ -476,6 +514,7 @@ Date: 11/03/2025
 - Revisión de los documentos obligatorios del Sprint 1.
 
 #### Ulecia García, Javier-16
+
 - Asistencia a las seseiones de presentación.
 - Asistencia a reuniones internas del grupo.
 - Cambiar el MVP.
@@ -487,6 +526,7 @@ Date: 11/03/2025
 - Visualización de videos EV.
 
 #### Vargas Muñiz, David-17
+
 - Asistencia a las sesiones de presentación.
 - Asistencia a reuniones internas del grupo.
 - Recopilación de feedback de todos los grupos durante las sesiones de presentación.
@@ -495,45 +535,234 @@ Date: 11/03/2025
 - Presentación 07/03/2025.
 - Presentación evaluable 14/03/2025.
 
-<a id="sprint-2"></a>
 
 ### Sprint 2 (#S2)
 
 #### del Catillo Piñero, Daniel-1
 
+- Asistencia a clase.
+- Asistencia a reuniones de vocales.
+- Gestión del equipo de trabajo como jefe de proyecto.
+- Resolución de conflictos de merges.
+- Revisión de documentos.
+- Correcciones en el código.
+- Refactorización de código.
+- Implementar publicidad en la aplicación.
+- Implementar recetas en la aplicación.
+- Implementar mejoras visuales en la aplicación.
+- Ayuda con la preparación de la presentación.
+- Revisión de pull requests.
+- Ayuda con la generación de las storyboards.
+- Corrección del estado de GitHub Project.
+- Agregación de datos realistas a la base de datos.
+- Modificación del perfil de usuario.
+
 #### Fuentelsaz Rodríguez, David-2
 
+- Asistencia a clase.
+- Asistencia a reuniones de vocales.
+- Correcciones en el código.
+- Refactorización de código.
+- Revisión de pull requests.
+- Agregación de datos realistas a la base de datos.
+- Implementación y corrección de validaciones en backend.
+- Implementación de ingestas en backend junto con sus tests.
+
 #### Galán Lerate, Miguel-3
+- Asistencia a clases
+- Refactorización del backend
+- Modificar workflows CI/CD
+- Arreglo de Deploy del sprint 1
+- Creación de base de datos de testing
+- Desarrollo del backend de filtros para recetas
+- Tests del servicio de filtros de recetas
+- Tests del controlador de filtros de recetas
+- Tests del controlador de calendario
+- Arreglo de workflows de tests
+- Despliegue en app engine
 
 #### García Abadía, Enrique-4
 
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Asistencia a reuniones de vocales del grupo.
+- Correción documento analisisDeCostes.md.
+- Investigacion sobre implementación de funcionalidad del Calendario en frontend.
+- Implementacion calendario en frontend.
+- Generacion de actas de las reuniones de vocales automaticamente mediante IA.
+
 #### García de Tejada Delgado, José-5
+
+- Funcionalidad de validacion de emails mediante código(backend)
+- Hotfixes varios de última hora
+- Avances en la funcionalidad de detección de alergias
+- Introducción de DTOs para múltiples clases
+- Asistencia a reuniones internas de backend
+- Asistencia a clases de Sprint 
 
 #### Giraldo Santiago, Luis-6
 
+- Visualización del contenido de Enseñanza Virtual.
+- Asistencia a clase.
+- Asistencia a reuniones de vocales.
+- Resolución de conflictos de código.
+- Actualización y creación de plantillas.
+- Implementar pago en la aplicación.
+- Estudio de la tecnología de Stripe.
+- Aportación a la base de conocimiento en común.
+- Cambios en el Commitment Agreement.
+- Revisión de Pull Request.
+
 #### Jiménez Ortega, Antonio-7
+- Revisión de Pull Requests
+- Creación de la base para el desarrollo de test de interfaz con Selenium
+- Validación exhaustiva de datos de entrada en el formulario de registro de nuevo usuario
+- Correción de estilos en la pantalla del plan premium y del perfil del usuario
+- Redacción del documento de Impacto legal de la app
+- Vista de Términos y condiciones legales de la app tanto en el formulario de registro como en el perfil del usuario
+- Revisión de posibles hardcodeos de código
+- Usuario piloto de grupo externo
+- Grabación de los vídeos de demostración de los avances de la app
 
 #### Jiménez Osuna, Álvaro-8
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Ejercer de vocal del subgrupo "Frontend", asistiendo a reuniones de vocales, asignando tareas y organizando el grupo.
+- Elaborar la presentación.
+- Diseño completo de la aplicación web y movil.
+- Diseño de los Storyboards.
+- Elaborar métricas de esfuerzo.
+- Diseñar las gráficas representadas en la presentaición.
+- Test de Frontend de Recetas
 
 #### López Oliva, Ángela-9
+- Asistencia a clase.
+- Visualización del contenido de Enseñanza Virtual.
+- Lectura de actas de las reuniones no asistidas
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Modificación del estilo visual de la aplicación completa
+- Elaboración de la presentación del Sprint.
 
 #### Luna Navarro, Paula-10
 
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Lectura de actas de las reuniones no asistidas
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Visualización de vídeos EV.
+- Ejercer de vocal del subgrupo "Documentación", asistiendo a reuniones de vocales, asignando tareas y organizando el grupo.
+- Gestión de usuarios piloto, comunicación con ellos, explicación del funcionamiento de la recogida de feedback cada sprint, reuniones con ellos etc.
+- Realización de la encuesta para recoger el feedback
+- Realización del documento de Performance Evaluation de los usuarios piloto una vez recogido su feedback "pilotUsersPerformanceEvaluation".
+- IAUsage.md report
+- Organización de la carpeta docs para el entregable y crear todos los documentos actualizandolos para este sprint
+- Revisión de documentación
+- Ayuda preparando contenido para la documentación
+- Análisis con SonarCloud para estudiar la calidad del código y la cobertura de tests
+
 #### Morgado Prudencio, Jose Maria-11
+- Asistencia a las sesiones de presentación.
+- Visualización de vídeos EV.
+- Documentación pasada de formato Word a formato Markdown.
+- Desarrollo de filtros de la entidad Recipe
+- Actualizacion del Analisis de Riesgos
+- Actualizacion del Analisis de Costes
+- Documentacion de la api con swagger
+- Implementacion de governify
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Actuacion como usuario piloto del grupo 5
 
 #### Noya Cano, Lucía-12
 
+- Asistencia a las sesiones de presentación.
+- Asistencias a reuniones internas del grupo.
+- Lectura de actas a las reuniones no asistidas.
+- Visualización de vídeos EV.
+- Desarrollo de la funcionalidad de Métricas en Backend.
+- Creación en Backend de las entidad "Metric".
+- Creación de los respectivos CRUD a la entidad creada.
+- Gestión como vocal secundaria del subgrupo "Documentación" (Asistencia a reuniones, asignación de tareas de documentación...)
+- Realización del formulario de feedback para los usuarios pilotos.
+- Realización del documento de Performance Evaluation de los usuarios piloto una vez recogido su feedback "pilotUsersPerformanceEvaluation".
+- Documentación pasada de formato Word a formato Markdown.
+- Revisión, corrección y actualización del informe de usabilidad de la IA.
+- Investigación acerca de la publicidad en backend. No completado por no haberse decidido la implementación de la publicidad en la app aún.
+- Creación de tests para el módulo Metric.
+- Revisión de la entidad "Calendar" e "Intake".
+- Revisión y corrección de documentos.
+
 #### Rodríguez López, Josué-13
+
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Desarrollo y correción de requisitos de información.
+- Desarrollo del diagrama de clases del sistema.
+- Control de entradas de tiempo del equipo en Clockify.
+- Gestión y planificación del equipo de Backend como vocal.
+- Solución de problemas en la lógica de baby.
+- Usuario piloto del grupo 4.
+- Implementar la lógica del Calendar en el backend.
+- Realizar tests para CalendarService.
+- Corregir tests para los módulos de User, Baby y Vaccine.
+- Revisión de Pull Request.
+- Test en el backend de las recomendaciones de las recetas.
+- Corregir errores en la lógica de sign up.
+- Creación de la entidad Métric y el CRUD necesario para la funcionalidad de Calendar.
+- Redacción del timeEffortReport.
 
 #### Santos Martín, Javier-14
 
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Desarrollo de actas de las reuniones internas del grupo.
+- Gestión como vocal secundario del subgrupo de desarrollo "QA"
+- Participación en el desarrollo del sistema de autenticación de email
+- Realizacion del desarrollo del sistema de anuncios en cliente
+- Participación en el desarrollo del sistema de anuncios en servidor
+- Arreglo de errores generales en distinas partes en cliente
+- Revisión de Pull Requests
+
 #### Solís Agudo, Felipe-15
+
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas del grupo.
+- Desarrollo de actas de las reuniones internas del grupo.
+- Gestión como vocal principal del subgrupo de desarrollo "Frontend" (asignación de tareas, revisión del avance de dichas tareas,...).
+- Participación en el desarrollo del sistema de pago de la aplicación (parte de frontend).
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Visualización de vídeos EV.
+- Participación activa como usuario piloto para otro grupo de la asignatura.
+- Revisión de los documentos obligatorios del Sprint 2 y actualización de dicho documentos.
+- Realización de test de interfaz empleando Selenium de distintas funcionalidades del proyecto (Login, Register). No subidos aún debido a modificaciones de la UI por feedback de los usuarios piloto.
+- Investigación para obtener el mejor sistema posible para implementar publicidad en nuestra aplicación.
+- Revisión y aceptación de distintas pull request.
 
 #### Ulecia García, Javier-16
 
-#### Vargas Muñiz, David-17
+- Asistencia a las sesiones de presentación.
+- Asistencia a reuniones internas de grupo.
+- Investigación de un panel de administrador para Spring.
+- Actualización de los competidores.
+- Actualizar el analisis de costes con los inversores y gastos en storyboards.
+- Participación activa como usuario piloto para otro grupo de la asignatura.
+- Visualización de los vídeos de EV.
+- Recopilación de feedback de todos los grupos durante las sesiones de presentación.
+- Test de Baby.
+- Test de User.
+- Test de Vaccine.
 
-<a id="sprint-3"></a>
+#### Vargas Muñiz, David-17
+- Arreglar calidad del código: En la vista "bebe" hay algunos errores de linters y por eso no funciona el workflow.
+- Juntar funcionalidades Add baby y Edit baby en la misma vista.
+- Presentación 21-03-2025.
+- Realización de test de interfaz empleando Selenium de la parte de Recipes.
+- Visualización de vídeos EV.
+- Asistencia a clase.
+- Asistencia a reuniones.
+- Revisión de pr.
+- Corrección de tests.
+- Presentación 28-03-2025.
+
 
 ### Sprint 3 (#S3)
 
@@ -571,7 +800,6 @@ Date: 11/03/2025
 
 #### Vargas Muñiz, David-17
 
-<a id="preparing-project-launch"></a>
 
 ### Preparing Project Launch (#PPL)
 
@@ -609,7 +837,6 @@ Date: 11/03/2025
 
 #### Vargas Muñiz, David-17
 
-<a id="world-project-launch "></a>
 
 ### World Project Launch (#WPL)
 

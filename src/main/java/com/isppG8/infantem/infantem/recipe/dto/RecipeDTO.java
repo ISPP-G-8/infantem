@@ -32,6 +32,8 @@ public class RecipeDTO {
 
     private Integer user;
 
+    private boolean isCustom;
+
     private List<AllergenDTO> allergens = new ArrayList<>();
 
     private List<IntakeDTO> intakes = new ArrayList<>();
@@ -48,6 +50,7 @@ public class RecipeDTO {
         this.maxRecommendedAge = recipe.getMaxRecommendedAge();
         this.recipePhoto = recipe.getRecipePhoto();
         this.elaboration = recipe.getElaboration();
+        this.isCustom = recipe.isCustom();
         if (recipe.getUser() == null) {
             this.user = null;
         } else {

@@ -14,6 +14,7 @@ import com.isppG8.infantem.infantem.intake.Intake;
 import com.isppG8.infantem.infantem.user.User;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.isppG8.infantem.infantem.recipe.dto.CustomRecipeDTO;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -60,6 +61,10 @@ public class Recipe {
     @Column(nullable = true)
     private String elaboration;
 
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT false")
+    // Change to BIT DEFAULT 0 for SQL Server
+    private boolean isCustom = false;
+
     // Recipes made by nutritionists are not associated with any user
     @ManyToOne(optional = true)
     @JsonBackReference
@@ -70,4 +75,20 @@ public class Recipe {
 
     @ManyToMany(mappedBy = "recipes", cascade = CascadeType.ALL)
     private List<Intake> intakes = new ArrayList<>();
+
+    public Recipe() {
+    }
+
+    public Recipe(CustomRecipeDTO custom) {
+        this.name = custom.getName();
+        this.description = custom.getDescription();
+        this.recipePhoto = custom.getRecipePhoto();
+        this.ingredients = custom.getIngredients();
+        this.minRecommendedAge = custom.getMinRecommendedAge();
+        this.maxRecommendedAge = custom.getMaxRecommendedAge();
+        this.elaboration = custom.getElaboration();
+        this.isCustom = true;
+        this.allergens = custom.getAllergens();
+    }
+
 }
