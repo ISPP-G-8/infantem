@@ -62,6 +62,7 @@ public class Recipe {
     private String elaboration;
 
     @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT false")
+    // Change to BIT DEFAULT 0 for SQL Server
     private boolean isCustom = false;
 
     // Recipes made by nutritionists are not associated with any user
