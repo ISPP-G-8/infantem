@@ -479,7 +479,7 @@ La identidad visual de **Infantem** busca transmitir cercanía, confianza y mode
 
 - **Nombre de la App:** *Infantem*
 - **Slogan:**  
-  > “Falta completar con el slogan”
+  > “Recetas para bebés, tranquilidad para papás”
 
 
 ### B. Logo

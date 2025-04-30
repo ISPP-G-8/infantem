@@ -52,6 +52,7 @@
 - [Tipo de contenido](#tipo-de-contenido)
 - [Herramientas y Estética](#herramientas-y-estética)
 - [Plan de publicaciones](#plan-de-publicaciones)
+- [Dinámica de comunidad: Sorteo de Lanzamiento](#dinámicas-de-comunidad-sorteo-de-lanzamiento)
 - [Frecuencia sugerida (a implementar progresivamente)](#frecuencia-sugerida-a-implementar-progresivamente)
 - [Temas ya tratados en posts](#temas-ya-tratados-en-posts)
 - [Calendario de Contenidos (ejemplo mensual)](#calendario-de-contenidos-ejemplo-mensual)
@@ -82,6 +83,8 @@ El objetivo del community management para Infantem es crear, consolidar y manten
 - **Visual**: Capturas de pantalla, carátulas ilustradas con Spoony, carteles personalizados con Canva, infografías.
 - **Transparencia y comunidad**: Mostrar avances de desarrollo, agradecimientos a colaboradores, detrás de cámaras.
 
+---
+
 ### Herramientas y Estética
 
 - Todos los carteles fueron creados con **Canva**, manteniendo una línea visual unificada.
@@ -89,6 +92,8 @@ El objetivo del community management para Infantem es crear, consolidar y manten
 - La fuente utilizada en todos los diseños es **Loubag**, para mantener la coherencia visual.
 - Los carteles se han personalizado para mostrar distintas funcionalidades de la app, incluyendo tanto publicaciones graciosas de Spoony como explicaciones funcionales.
 - Uso coherente de iconografía y animaciones que refuercen la identidad amigable y cercana de la app.
+
+---
 
 ### Plan de publicaciones
 
@@ -99,6 +104,49 @@ Cada publicación se planifica con una intención específica y se ajusta al est
 - **LinkedIn**: Enfoque profesional, para destacar el valor innovador de la app y logros del equipo.
 - **TikTok**: Spoony como protagonista en videos cortos con tono relajado y humorístico, se plantea uso futuro.
 
+---
+
+### Dinámicas de Comunidad: Sorteo de Lanzamiento
+
+Para impulsar el crecimiento inicial de la comunidad, se llevará a cabo un sorteo en Instagram. Esta dinámica busca:
+
+- Incentivar el seguimiento y la interacción (likes, comentarios, compartidos).
+- Promover el prerregistro en la app.
+- Aumentar la visibilidad de la marca y Spoony en la fase previa al lanzamiento.
+
+**Detalles del sorteo:**
+
+- **Premio:** 3 suscripciones premium gratuitas por 6 meses.
+- **Duración:** del 3 al 15 de mayo.
+- **Requisitos para participar:**
+  - Seguir la cuenta oficial de Infantem en Instagram.
+  - Comentar el post del sorteo mencionando a 2 personas.
+  - Completar el prerregistro a la app a través del enlace en la bio.
+
+**Canales utilizados:**
+
+- **Principal:** Instagram (post principal, stories destacadas y reel promocional).
+- **Secundarios:** Facebook (post informativo).
+
+**Plan de comunicación asociado:**
+
+- **Semana previa (29 abril – 2 mayo):** teaser gráfico + stories de anticipación.
+- **Lanzamiento (3 mayo):** publicación oficial del sorteo + reel con Spoony.
+- **Semana del 6 mayo:** recordatorio en stories y post de incentivo.
+- **Últimos días (13–15 mayo):** cuenta atrás + repost de participación de usuarios.
+- **Post-sorteo (16 mayo):** anuncio de ganadores y agradecimiento.
+
+**KPIs esperados:**
+
+- Aumento del 25–30% en seguidores.
+- Al menos 50 comentarios y 20 compartidos.
+- +50 prerregistros adicionales a partir de tráfico en redes.
+- Mayor visibilidad del personaje Spoony y funcionalidades de la app.
+
+---
+
+
+
 ### Frecuencia sugerida (a implementar progresivamente)
 
 - 3 posts por semana (lunes, miércoles, viernes).
@@ -107,6 +155,7 @@ Cada publicación se planifica con una intención específica y se ajusta al est
 - 1 publicación en LinkedIn cada 10-15 días.
 
 > **Nota**: Hasta el momento solo se han publicado imágenes. Los reels y videos aún no se han subido a las redes sociales, pero se incluyen en la propuesta de planificación como próximos pasos.
+---
 
 ### Temas ya tratados en posts
 
@@ -115,6 +164,10 @@ Cada publicación se planifica con una intención específica y se ajusta al est
 - Funcionalidades destacadas: recetas, alérgenos, calendario.
 - Bienvenida a los usuarios y relanzamiento del perfil.
 - Consejos de expertos en nutrición.
+- Publicación de recetas personalizadas.
+- Mitos Vs. Realidades
+
+---
 
 ### Calendario de Contenidos (ejemplo mensual)
 
@@ -124,7 +177,7 @@ Cada publicación se planifica con una intención específica y se ajusta al est
 | 2      | Comparativa apps | Spoony divertido  | FAQ sobre alérgenos |
 | 3      | Historia usuario | Encuesta mitos | Reel funcionalidad |
 | 4      | Tips nutrición   | Mito vs realidad  | Post emocional      |
-
+---
 ## Seguimiento y Métricas
 
 - Crecimiento de seguidores por red social.
