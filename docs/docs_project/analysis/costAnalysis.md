@@ -48,6 +48,8 @@
 - Álvaro Jimenez Osuna  
   - Revisó el documento
   - Actualizó el documento al sprint 3
+-Jose Maria Morgado Prudencio
+  - Actualizó el documento para el PPL
 
 ## Índice
 
@@ -82,9 +84,11 @@
 
 ## 1. Introducción
 
-Este documento actualiza y analiza los costes e ingresos asociados al desarrollo, lanzamiento y mantenimiento de la aplicación Infantem. Se diferencian claramente los costes de inversión (CAPEX) y los costes operativos (OPEX), así como los ingresos proyectados en escenarios pesimista, realista y optimista.
+Este documento actualiza y analiza los costes e ingresos asociados al desarrollo, lanzamiento y mantenimiento de la aplicación Infantem, una plataforma diseñada para acompañar a los padres durante la introducción alimentaria de sus bebés. Se diferencian claramente los costes de inversión (CAPEX), que incluyen el diseño inicial, desarrollo de software, adquisición de infraestructura y acciones de marketing previas al lanzamiento, y los costes operativos (OPEX), como el mantenimiento del servidor, atención al cliente, actualizaciones periódicas y campañas de adquisición continua de usuarios.
 
-Con una media de 26.837 nacimientos al mes en España, la aplicación cuenta con un mercado potencial significativo. Se estima que un porcentaje de estos nuevos padres optará por utilizar Infantem, ya sea en su versión gratuita o mediante la suscripción premium, con un coste de 4,99 € al mes. Este documento analiza la viabilidad económica del proyecto y su potencial retorno de inversión.
+Además, se incluyen proyecciones de ingresos basadas en tres escenarios posibles —pesimista, realista y optimista—, considerando tanto el uso gratuito de la app como las suscripciones a su versión premium, con un precio mensual de 4,99 €. Con una media de 26.837 nacimientos al mes en España, el mercado potencial es amplio, y se espera captar progresivamente un porcentaje representativo de nuevos padres, especialmente aquellos interesados en soluciones digitales para el cuidado infantil.
+
+El presente análisis económico evalúa la viabilidad financiera del proyecto, identifica los puntos de equilibrio y estima el retorno de inversión (ROI) esperado en función del crecimiento de usuarios, ayudando así a guiar futuras decisiones estratégicas de financiación, escalado y sostenibilidad del producto.
 
 ## 2. Estimación de Costes PRE-LAUNCH
 
@@ -295,107 +299,99 @@ Costes de diseño e identidad visual	| 600,00 €
 
 ## 3. Estimación de Costes POST-LAUNCH
 
-Tras la publicación de Infantem, el proyecto continúa generando costes operativos derivados del uso de infraestructura en producción, la atención a usuarios y el mantenimiento de servicios. Estos costes han sido estimados para distintos horizontes temporales: **1 semana**, **6 meses**, **1 año** y **2 años**, suponiendo un crecimiento continuo de usuarios y carga de trabajo sobre la plataforma.
+Tras la publicación de _Infantem_, el proyecto continúa incurriendo en costes operativos derivados del funcionamiento constante de la plataforma en un entorno de producción. Estos costes incluyen el uso de infraestructura en la nube, la atención a los usuarios y el mantenimiento de los distintos servicios que permiten que la aplicación funcione de manera eficiente y segura, facilitando así la planificación económica y la evaluación de la sostenibilidad a medio plazo.
 
-Se han considerado tres grandes categorías:
+Además, con el objetivo de ofrecer un seguimiento más detallado de la evolución de los gastos, se ha realizado un estudio desglosado de forma trimestral hasta el segundo año de vida del producto, cubriendo un total de **8 trimestres**. Este enfoque permite observar cómo se incrementan progresivamente los costes conforme aumenta la base de usuarios y la carga de trabajo sobre la plataforma.
 
-- Costes de infraestructura (Google Cloud Platform),
-- Soporte técnico y atención al cliente,
-- Herramientas y mantenimiento del sistema.
+Para organizar este análisis, se han considerado tres grandes categorías de costes operativos:
+
+- **Costes de infraestructura**: Uso de servicios en la nube (Google Cloud Platform) como instancias de cómputo, bases de datos, almacenamiento y tráfico de red. Estos gastos escalan en función del número de usuarios activos y el volumen de datos procesados.
+
+- **Soporte técnico y atención al cliente**: Recursos humanos y herramientas para gestionar incidencias, responder consultas y garantizar una experiencia satisfactoria.
+
+- **Herramientas y mantenimiento del sistema**: Monitorización, automatización de despliegues, control de versiones y mantenimiento correctivo y evolutivo del software.
+
+Este análisis trimestral ofrece una visión clara de la evolución de los gastos operativos y permite tomar decisiones estratégicas en función de la rentabilidad y el crecimiento del proyecto.
 
 ---
 
 ### 3.1 Costes de Infraestructura en Producción
 
-La infraestructura incluye servidores, bases de datos, backups, ancho de banda, almacenamiento y monitorización, todos proporcionados mediante Google Cloud Platform.
+La infraestructura post-lanzamiento comprende los servicios esenciales necesarios para mantener la operatividad del sistema, incluyendo servidores, bases de datos, backups, ancho de banda, almacenamiento y monitorización. Todos estos servicios serán proporcionados a través de Google Cloud Platform, garantizando escalabilidad, fiabilidad y un rendimiento óptimo.
 
-#### A la semana del lanzamiento
-- 2 instancias `e2-standard-2` funcionando 24/7 → **22,72 €**
-- 1.342 usuarios generan 50 MB/día → ~458 GB mensuales → **54,84 €**
-- Almacenamiento de backups (50 GB) → **0,25 €**
-- Logs adicionales en Stackdriver (~5 GB) → **2,50 €**
-- Memoria adicional (4 GB × 168h) → **6,05 €**
-- **Total infraestructura (1 semana)**: **86,36 €**
+Para estudiar los costes que tendremos que asumir en los 2 años siguientes a nuestro lanzamiento, se han estimado de forma trimestral hasta llegar al 8º trimestre, estimando un crecimiento de usuarios de forma que al final del 2º año, tengamos unos 11.300 usuarios al mes.
 
-#### A los 6 meses
-- Escalado a 4 instancias → **272,64 €**
-- Tráfico de 2.692 usuarios (~2,2 TB mensuales) → **1.595,82 €**
-- Backups mensuales (100 GB) → **12 €**
-- Logs (5 GB/mes) → **15 €**
-- **Total infraestructura (6 meses)**: **1.895,46 €**
 
-#### Al año
-- Escalado a 8 instancias → **1.090,56 €**
-- Tráfico de 5.392 usuarios (~4,6 TB/mes) → **4.738,20 €**
-- Backups mensuales (200 GB) → **36 €**
-- Logs (10 GB/mes) → **45 €**
-- **Total infraestructura (1 año)**: **5.909,76 €**
+| Trimestre      | Número de Instancias (Coste) | Número de Usuarios | Tráfico de Red         | Logs Adicionales       | Backups              | Total Trimestre     | Total Acumulado     |
+|----------------|------------------------------|--------------------|------------------------|------------------------|----------------------|----------------------|----------------------|
+| Trimestre 1    | 2 → 89,94 €                  | 1.500              | 1 TB (108,35 €)        | 6,75 GB → 3,38 €       | 50 GB → 0,75 €       | 202,42 €             | 202,42 €             |
+| Trimestre 2    | 4 → 179,88 €                 | 2.281              | 1 TB (108,46 €)        | 10,96 GB → 5,48 €      | 60 GB → 0,90 €       | 294,72 €             | 497,14 €             |
+| Trimestre 3    | 6 → 269,82 €                 | 3.470              | 1 TB (108,46 €)        | 16,23 GB → 8,11 €      | 75 GB → 1,13 €       | 387,52 €             | 884,66 €             |
+| Trimestre 4    | 8 → 359,76 €                 | 5.277              | 1 TB (108,46 €)        | 24,59 GB → 12,29 €     | 100 GB → 1,50 €      | 481,01 €             | 1.365,67 €           |
+| Trimestre 5    | 10 → 449,70 €                | 8.025              | 2 TB (207,78 €)        | 37,28 GB → 18,64 €     | 150 GB → 2,25 €      | 678,37 €             | 2.044,04 €           |
+| Trimestre 6    | 12 → 539,64 €                | 12.206             | 2 TB (207,78 €)        | 56,56 GB → 28,28 €     | 200 GB → 3,00 €      | 778,70 €             | 2.822,74 €           |
+| Trimestre 7    | 14 → 629,58 €                | 18.563             | 3 TB (308,20 €)        | 86,53 GB → 43,27 €     | 300 GB → 4,50 €      | 985,55 €             | 3.808,29 €           |
+| Trimestre 8    | 16 → 719,52 €                | 28.232             | 5 TB (506,04 €)        | 131,08 GB → 65,54 €    | 500 GB → 7,50 €      | 1.298,60 €           | 5.106,89 €           |
 
-#### A los 2 años
-- Tráfico de 11.278 usuarios (~10 TB/mes) → **24.383,76 €**
-- Escalado continuo de instancias (conservador): **2.181,12 €**
-- Backups mensuales (400 GB) → **132 €**
-- Logs (15 GB/mes) → **135 €**
-- **Total infraestructura (2 años)**: **26.831,88 €**
+Se van a usar instancias `e2-standard-2` que estaran funcionando 24/7.
+
+Para calcular el trafico de red que soportara nuestra aplicacion, se han estimado unos 50 MB/mes por usuario, con un crecimiento del 15% al mes en cuanto a los usuarios.
+
 
 ---
 
 ### 3.2 Costes de Atención al Cliente y Soporte Técnico
 
-A medida que aumenta la base de usuarios, es necesario incorporar personal dedicado a resolver incidencias, responder dudas y mejorar la experiencia del usuario.
+A medida que la base de usuarios crece, también lo hacen las demandas de soporte y atención al cliente. Es necesario incorporar personal especializado para resolver incidencias, responder dudas y asegurar una buena experiencia para los usuarios. El aumento de empleados se realizará progresivamente, ajustándose al incremento de usuarios y tráfico. Así, se garantiza que el servicio se mantenga eficiente y de calidad a medida que la plataforma escala, sin que el volumen de solicitudes afecte la satisfacción del usuario.
 
 - Se estima un coste por empleado de soporte de **3.031 €/mes**, en jornada completa (40h/semana).
 
-#### A la semana del lanzamiento
-- 2 empleados dedicados → **700 €** (coste prorrateado semanal)
-
-#### A los 6 meses
-- 2 empleados trabajando a tiempo completo → **36.372 €**
-
-#### Al año
-- Ampliación a 4 empleados → **109.116 €**
-
-#### A los 2 años
-- Ampliación a 8 empleados → **254.604 €**
+| Trimestre     | Número de Empleados | Total Trimestre   | Total Acumulado |
+|----------------|---------------------|-------------------|-----------------|
+| Trimestre 1    | 2                   | 18.186 €          | 18.186 €        |
+| Trimestre 2    | 2                   | 18.186 €          | 36.372 €        |
+| Trimestre 3    | 3                   | 27.279 €          | 63.651 €        |
+| Trimestre 4    | 4                   | 36.372 €          | 100.023 €       |
+| Trimestre 5    | 5                   | 45.465 €          | 145.488 €       |
+| Trimestre 6    | 6                   | 54.558 €          | 200.046 €       |
+| Trimestre 7    | 7                   | 63.651 €          | 263.697 €       |
+| Trimestre 8    | 8                   | 72.744 €          | 336.441 €       |
 
 ---
 
 ### 3.3 Costes de Herramientas y Servicios de Mantenimiento
 
-Estas herramientas permiten mantener el sistema en condiciones óptimas de rendimiento, registrar eventos y automatizar procesos (incluidos chatbots).
+Estas herramientas son esenciales para mantener el sistema funcionando de manera eficiente, permitiendo supervisar su rendimiento, registrar eventos importantes y automatizar procesos. Esto incluye desde la monitorización en tiempo real hasta la automatización de tareas repetitivas, como la gestión de flujos de trabajo o la interacción mediante chatbots, lo que mejora tanto la productividad como la experiencia del usuario. A diferencia de otros costes operativos que pueden escalar con el número de usuarios o la carga del sistema, estos gastos se mantendrán en principio constantes en el tiempo, salvo que se superen los límites incluidos en los planes contratados. Por tanto, la categoría de herramientas y mantenimiento del sistema se considera un coste fijo predecible dentro del desglose de costes del proyecto. A continuación, se detallan los costes asociados a estas herramientas a lo largo del tiempo.
 
-#### A la semana del lanzamiento
-- Monitorización (Google Cloud Monitoring): **10 €**
-- Automatización básica: **0 €** (plan gratuito)
+Para la monitorización del sistema se utilizará el plan de pago de **Google Cloud Monitoring**, con un coste mensual de **40 €**. Este servicio permite supervisar el estado de los recursos en la nube, detectar fallos en tiempo real y recibir alertas personalizadas, lo cual es fundamental para garantizar la disponibilidad y fiabilidad de la plataforma.
 
-#### A los 6 meses
-- Monitorización continua (40 €/mes) → **240 €**
-- Automatización (plan estándar, 50 €/mes) → **300 €**
-- **Total herramientas (6 meses)**: **540 €**
+Para la automatización básica se utilizará el **plan estándar** (50 €/mes) durante los primeros **4 trimestres**, lo cual cubrirá las necesidades iniciales del proyecto. A partir del **segundo año**, se cambiará al **plan premium** (300 €/mes), que ofrece mayores capacidades y funcionalidades, adaptándose al crecimiento de usuarios y la complejidad de los procesos automatizados.
 
-#### Al año
-- Monitorización: **480 €**
-- Automatización (plan avanzado, 100 €/mes) → **1.200 €**
-- **Total herramientas (1 año)**: **1.680 €**
-
-#### A los 2 años
-- Monitorización: **960 €**
-- Automatización: **1.200 €**
-- **Total herramientas (2 años)**: **2.160 €**
+| Trimestre     | Monitorización | Automatización | Total Trimestre | Total Acumulado |
+|---------------|----------------|----------------|------------------|------------------|
+| Trimestre 1   | 120 €          | 150 €          | 270 €           | 270 €           |
+| Trimestre 2   | 120 €          | 150 €          | 270 €           | 540 €           |
+| Trimestre 3   | 120 €          | 150 €          | 270 €           | 810 €           |
+| Trimestre 4   | 120 €          | 150 €          | 270 €           | 1.080 €         |
+| Trimestre 5   | 120 €          | 300 €          | 420 €           | 1.500 €         |
+| Trimestre 6   | 120 €          | 300 €          | 420 €           | 1.920 €         |
+| Trimestre 7   | 120 €          | 300 €          | 420 €           | 2.340 €         |
+| Trimestre 8   | 120 €          | 300 €          | 420 €           | 2.760 €         |
 
 ---
 
 ### 3.4 Resumen de Costes Post-Lanzamiento
 
-| Periodo    | Infraestructura | Soporte técnico | Herramientas y mantenimiento | **Total (€)** |
-|------------|-----------------|-----------------|------------------------------|---------------|
-| 1 semana   | 86,36 €         | 700 €           | 10 €                         | **796,36 €**  |
-| 6 meses    | 1.895,46 €      | 36.372 €        | 540 €                        | **38.807,46 €** |
-| 1 año      | 5.909,76 €      | 109.116 €       | 1.680 €                      | **116.705,76 €** |
-| 2 años     | 26.831,88 €     | 254.604 €       | 2.160 €                      | **283.595,88 €** |
-
-> Todos los valores incluyen IVA estimado y reflejan un crecimiento realista de usuarios (15% mensual), así como necesidades técnicas y humanas correspondientes.
-
+| Periodo       | Infraestructura  | Soporte técnico   | Herramientas y mantenimiento | **Total Trimestre** | **Total Acumulado** |
+|---------------|------------------|-------------------|------------------------------|---------------------|---------------------|
+| Trimestre 1   | 202,42 €         | 18.186 €          | 270 €                        | 18.658,42 €         | 18.658,42 €         |
+| Trimestre 2   | 297,14 €         | 18.186 €          | 270 €                        | 18.753,14 €         | 37.411,56 €         |
+| Trimestre 3   | 884,66 €         | 27.279 €          | 270 €                        | 28.433,66 €         | 65.845,22 €         |
+| Trimestre 4   | 1.365,67 €       | 36.372 €          | 270 €                        | 38.007,67 €         | 103.852,89 €        |
+| Trimestre 5   | 2.044,04 €       | 45.465 €          | 420 €                        | 47.929,04 €         | 151.781,93 €        |
+| Trimestre 6   | 2.822,74 €       | 54.558 €          | 420 €                        | 58.800,74 €         | 210.582,67 €        |
+| Trimestre 7   | 3.808,29 €       | 63.651 €          | 420 €                        | 67.879,29 €         | 278.461,96 €        |
+| Trimestre 8   | 5.106,89 €       | 72.744 €          | 420 €                        | 78.270,89 €         | 356.732,85 €        |
 
 ## 4. Análisis de Ingresos Post-Lanzamiento
 
