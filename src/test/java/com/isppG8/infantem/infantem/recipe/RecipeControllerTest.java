@@ -1,14 +1,16 @@
 package com.isppG8.infantem.infantem.recipe;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.util.List;
-
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,8 +25,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.isppG8.infantem.infantem.auth.Authorities;
 import com.isppG8.infantem.infantem.baby.Baby;
 import com.isppG8.infantem.infantem.baby.BabyService;
+import com.isppG8.infantem.infantem.recipe.dto.CustomRecipeRequestCreateDTO;
 import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserService;
 
@@ -43,19 +47,24 @@ public class RecipeControllerTest {
     @MockitoBean
     private BabyService babyService;
 
+    @MockitoBean
+    private CustomRecipeRequestService customRecipeRequestService;
+
     @Autowired
     private RecipeController recipeController;
+
+    User user = new User();
 
     @BeforeEach
     void setUp() {
         Baby baby = new Baby();
         baby.setId(1);
         baby.setBirthDate(java.time.LocalDate.of(2018, 1, 1));
-
-        User user = new User();
         user.setId(1);
         user.setBabies(List.of(baby));
-
+        Authorities mockAuthorities = Mockito.mock(Authorities.class);
+        user.setAuthorities(mockAuthorities);
+        Mockito.when(user.getAuthorities().getAuthority()).thenReturn("nutritionist");
         Mockito.when(babyService.findById(1)).thenReturn(baby);
         Mockito.when(userService.findCurrentUser()).thenReturn(user);
         mockMvc = MockMvcBuilders.standaloneSetup(recipeController).build();
@@ -301,6 +310,85 @@ public class RecipeControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(jsonPath("$.content.length()").value(1))
                 .andExpect(jsonPath("$.content[0].name").value("Puré de Calabaza y Lentejas"));
+    }
+
+    @Test
+    void testGetAllCustomRecipeRequests() throws Exception {
+        // Arrange
+        CustomRecipeRequest request1 = new CustomRecipeRequest();
+        request1.setId(1L);
+        request1.setDetails("Solicitud 1");
+        CustomRecipeRequest request2 = new CustomRecipeRequest();
+        request2.setId(2L);
+        request2.setDetails("Solicitud 2");
+        List<CustomRecipeRequest> requests = Arrays.asList(request1, request2);
+        when(customRecipeRequestService.getAllOpenRequests()).thenReturn(requests);
+
+        // Act & Assert
+        mockMvc.perform(get("/api/v1/recipes/custom-requests").param("page", "0").param("size", "10")
+                .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+                .andExpect(jsonPath("$.content.length()").value(2));
+    }
+
+    @Test
+    void testGetRequestsByUser() throws Exception {
+
+        Mockito.when(user.getAuthorities().getAuthority()).thenReturn("premium");
+        // Act & Assert
+        mockMvc.perform(get("/api/v1/recipes/custom-requests/user").param("page", "0").param("size", "10")
+                .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+                .andExpect(jsonPath("$.content.length()").value(0));
+    }
+
+    @Test
+    void testCreateCustomRecipeRequest() throws Exception {
+        // Arrange
+        String requestJson = """
+                    {
+                        "name": "Solicitud de receta personalizada",
+                        "description": "Descripción de la solicitud",
+                        "ingredients": "Manzana, Pera",
+                        "minRecommendedAge": 6,
+                        "maxRecommendedAge": 12,
+                        "elaboration": "Cocer las frutas y triturar",
+                        "user": 1,
+                        "requestId": 123
+                    }
+                """;
+
+        CustomRecipeRequest createdRequest = new CustomRecipeRequest();
+        when(customRecipeRequestService.createRequest(Mockito.any(CustomRecipeRequestCreateDTO.class)))
+                .thenReturn(createdRequest);
+
+        // Act & Assert
+        mockMvc.perform(
+                post("/api/v1/recipes/custom-requests").contentType(MediaType.APPLICATION_JSON).content(requestJson))
+                .andExpect(status().isCreated());
+    }
+
+    @Test
+    void testDeleteCustomRecipeRequest() throws Exception {
+        // Arrange
+        Long requestId = 1L;
+        doNothing().when(customRecipeRequestService).deleteRequest(requestId);
+
+        // Act & Assert
+        mockMvc.perform(
+                delete("/api/v1/recipes/custom-requests/{id}", requestId).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void testCloseRequest() throws Exception {
+        // Arrange
+        Long requestId = 1L;
+        CustomRecipeRequest closedRequest = new CustomRecipeRequest();
+        when(customRecipeRequestService.closeRequest(requestId)).thenReturn(closedRequest);
+
+        // Act & Assert
+        mockMvc.perform(
+                post("/api/v1/recipes/custom-requests/{id}/close", requestId).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 
 }
