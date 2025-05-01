@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isppG8.infantem.infantem.disease.dto.DiseaseDTO;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -36,8 +38,9 @@ public class DiseaseController {
             description = "Devuelve la lista de todas las enfermedades registradas.") @ApiResponse(responseCode = "200",
                     description = "Lista de enfermedades obtenida exitosamente",
                     content = @Content(schema = @Schema(implementation = Disease.class))) @GetMapping
-    public List<Disease> getAll() {
-        return diseaseService.getAll();
+    public ResponseEntity<List<DiseaseDTO>> getAll() {
+        List<Disease> diseases = diseaseService.getAll();
+        return ResponseEntity.ok(diseases.stream().map(DiseaseDTO::new).toList());
     }
 
     @Operation(summary = "Obtener enfermedad por ID",

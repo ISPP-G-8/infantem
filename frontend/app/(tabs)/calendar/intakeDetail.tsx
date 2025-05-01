@@ -129,22 +129,52 @@ export default function intakeDetail() {
   };
 
   const handleSaveIntake = async () => {
+    const validateDate = (dateString: string) => {
+      const dateRegex = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/;
+      if (!dateRegex.test(dateString)) {
+        return "La fecha debe tener el formato AAAA-MM-DD HH:mm";
+      }
+  
+
+      const parsedDate = new Date(dateString.replace(' ', 'T'));
+      if (isNaN(parsedDate.getTime())) {
+        return "La fecha ingresada no es válida";
+      }
+  
+      return null;
+    };
+  
+    const now = new Date();
+    const dateError = validateDate(intake.date);
+  
     if (!intake.baby) {
       setErrorMessage("Tienes que asociar un bebé a la ingesta"); 
-      return
-    } else if(!intake.quantity) {
+      return;
+    } else if (!intake.quantity) {
       setErrorMessage("Tienes que asociar una cantidad a la ingesta"); 
-      return
-    } else if(!intake.observations) {
-      setErrorMessage("Tienes que asociar una observacion a la ingesta"); 
-      return
-    } else if(intake.recipes.length < 1) {
+      return;
+    } else if (intake.quantity < 0) {
+      setErrorMessage("No puedes asociar una cantidad negativa a la ingesta"); 
+      return;
+    } else if (!intake.date) {
+      setErrorMessage("Tienes que asociar una fecha a la ingesta"); 
+      return;
+    } else if (dateError) {
+      setErrorMessage(dateError); 
+      return;
+    } else if (new Date(intake.date.replace(' ', 'T')) > now) {
+      setErrorMessage("La fecha de la ingesta no puede estar en el futuro"); 
+      return;
+    } else if (!intake.observations) {
+      setErrorMessage("Tienes que asociar una observación a la ingesta"); 
+      return;
+    } else if (intake.recipes.length < 1) {
       setErrorMessage("Tienes que asociar al menos una receta a la ingesta"); 
-      return
+      return;
     } else {
       setErrorMessage("");
     }
-
+  
     if (errorMessage) 
       return;
 
@@ -234,10 +264,9 @@ export default function intakeDetail() {
 </Text>
 
 {babies && (
-  <View style={{ borderWidth: 1, borderColor: "#1565C0", borderRadius: 8, width: "80%", marginBottom: 16 }}>
-    <Picker
+      <Picker
       selectedValue={intake.baby?.id ?? null}
-      style={{ opacity: 0.8 }}
+      style={[gs.input, { width: "80%" }]}
       onValueChange={(babyId) => {
         setIntake((prevIntake) => ({
           ...prevIntake,
@@ -254,7 +283,7 @@ export default function intakeDetail() {
         />
       ))}
     </Picker>
-  </View>
+  
 )}
   
 

@@ -515,6 +515,7 @@ export default function Account() {
 
         {user && (
           <>
+            {/* Nombre */}
             <Text
               style={[
                 gs.inputLabel,
@@ -544,7 +545,9 @@ export default function Account() {
               editable={isEditing}
               onChangeText={(text) => setUser({ ...user, name: text })}
             />
+            {nameError && <Text style={{ color: "red", marginTop: 5 }}>{nameError}</Text>}
 
+            {/* Apellido */}
             <Text
               style={[
                 gs.inputLabel,
@@ -574,7 +577,9 @@ export default function Account() {
               editable={isEditing}
               onChangeText={(text) => setUser({ ...user, surname: text })}
             />
+            {surnameError && <Text style={{ color: "red", marginTop: 5 }}>{surnameError}</Text>}
 
+            {/* Nombre de Usuario */}
             <Text
               style={[
                 gs.inputLabel,
@@ -604,7 +609,9 @@ export default function Account() {
               editable={isEditing}
               onChangeText={(text) => setUser({ ...user, username: text })}
             />
+            {usernameError && <Text style={{ color: "red", marginTop: 5 }}>{usernameError}</Text>}
 
+            {/* Correo Electrónico */}
             <Text
               style={[
                 gs.inputLabel,
@@ -634,6 +641,7 @@ export default function Account() {
               editable={isEditing}
               onChangeText={(text) => setUser({ ...user, email: text })}
             />
+            {emailError && <Text style={{ color: "red", marginTop: 5 }}>{emailError}</Text>}
           </>
         )}
         {user && user.role !== "admin" && (

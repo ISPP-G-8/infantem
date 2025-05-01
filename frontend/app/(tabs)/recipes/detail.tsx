@@ -23,7 +23,6 @@ export default function RecipeDetails() {
   const [isEditing, setIsEditing] = useState(false);
 
   const [isLoading, setIsLoading] = useState(true);
-  const [image, setImage] = useState<any>(null);
   const [imageBase64, setImageBase64] = useState<any>(null);
   const [imageModalVisible, setImageModalVisible] = useState(false);
 
@@ -119,6 +118,7 @@ export default function RecipeDetails() {
           maxRecommendedAge: recipeData.maxRecommendedAge,
           ingredients: recipeData.ingredients,
           elaboration: recipeData.elaboration,
+          recipePhoto: recipeData.recipePhoto, // <-- AQUÍ
         };
         setRecipe(recipeObject);
         handleOwnership(recipeObject);
@@ -144,38 +144,35 @@ export default function RecipeDetails() {
     if (!recipe || !token) return;
     if (!validateForm()) return;
 
-    const recipeData = {
-      name: recipe.name,
-      description: recipe.description,
-      minRecommendedAge: recipe.minRecommendedAge,
-      maxRecommendedAge: recipe.maxRecommendedAge,
-      ingredients: recipe.ingredients,
-      elaboration: recipe.elaboration
-    };
-
-    await fetch(`${apiUrl}/api/v1/recipes/${recipe.id}`, {
+    console.log("Estado recipe antes de handleSaveChanges:", recipe);
+  
+    await fetch(`${apiUrl}/api/v1/recipes/${recipeId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
       },
-      body: JSON.stringify(recipeData)
+      body: JSON.stringify(recipe)
     })
-      .then(response => {
-        if (!response.ok) {
-          return response.json().then(err => { throw new Error(JSON.stringify(err)); });
-        }
-        return response.json();
-      })
-      .then(data => {
-        setIsEditing(false);
-        setRecipe(data);
-        Alert.alert("Receta actualizada", "Los cambios han sido guardados correctamente");
-        router.push(`/recipes/detail?recipeId=${recipe.id}`);
-      })
-      .catch(error => {
-        Alert.alert("Error", `No se pudo guardar los cambios: ${error.message}`);
-      });
+    .then(response => {
+      if (!response.ok) {
+        return response.json().then(err => { throw new Error(JSON.stringify(err)); });
+      }
+      return response.json();
+    })
+    .then(data => {
+      setIsEditing(false);
+      setRecipe(data);
+      // Si el backend devuelve la imagen actualizada, podrías querer actualizar imageBase64 aquí también
+      if (data.recipePhoto) {
+        processRecipePhoto(data.recipePhoto);
+      }
+      Alert.alert("Receta actualizada", "Los cambios han sido guardados correctamente");
+      router.push(`/recipes/detail?recipeId=${recipe.id}`);
+    })
+    .catch(error => {
+      Alert.alert("Error", `No se pudo guardar los cambios: ${error.message}`);
+    });
   };
 
   const handleDeleteRecipe = async () => {
@@ -201,106 +198,102 @@ export default function RecipeDetails() {
 
   const uploadImage = async (action: string) => {
     if (action === "load") {
-      try {
-        let result;
-        const permissionResult =
-          await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (!permissionResult.granted) {
-          alert("Permiso denegado para acceder a la galería.");
-          return;
+        try {
+            // Pedir permisos (sin cambios)
+            const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+            if (!permissionResult.granted) {
+                alert("Permiso denegado para acceder a la galería.");
+                return;
+            }
+
+            // Lanzar librería (sin cambios en opciones base)
+            const result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                allowsEditing: true,
+                aspect: [1, 1],
+                quality: 1, // Calidad 1 puede generar base64 muy grandes, considera 0.7 o similar
+                base64: true, // Necesario para obtener base64
+            });
+
+            if (!result.canceled && result.assets && result.assets.length > 0) {
+                const asset = result.assets[0];
+
+                // ImagePicker con base64: true a menudo ya devuelve un data URI en asset.uri
+                // Si no, lo construimos nosotros usando el base64 que pedimos.
+                let displayUri: string | null = null;
+
+                if (asset.uri) {
+                     // Si ya es un data URI, úsalo directamente
+                     if (asset.uri.startsWith('data:')) {
+                         displayUri = asset.uri;
+                     }
+                     // Si no es data URI pero TENEMOS base64, constrúyelo
+                     else if (asset.base64) {
+                         const mimeType = asset.mimeType || 'image/jpeg'; // Intenta obtener MimeType o usa default
+                         displayUri = `data:<span class="math-inline">\{mimeType\};base64,</span>{asset.base64}`;
+                     }
+                }
+                // Fallback: Si no hay URI pero sí base64, constrúyelo
+                else if (asset.base64) {
+                     const mimeType = asset.mimeType || 'image/jpeg';
+                     displayUri = `data:<span class="math-inline">\{mimeType\};base64,</span>{asset.base64}`;
+                }
+
+
+                if (displayUri) {
+                    // Llama a saveImage SOLO con el URI (que contiene el base64)
+                    saveImage(displayUri);
+                } else {
+                    console.error("Image picker no devolvió datos utilizables (URI o Base64).");
+                    alert("No se pudo obtener la imagen seleccionada.");
+                    setImageModalVisible(false);
+                }
+
+            } else {
+                // Usuario canceló o no hubo assets
+                console.log("Selección de imagen cancelada o sin assets.");
+                // No cierres el modal aquí si el usuario solo canceló,
+                // déjalo abierto por si quiere intentar de nuevo o eliminar.
+                // setImageModalVisible(false); <-- quitar si quieres que modal siga abierto
+            }
+        } catch (err) {
+            // Manejo de errores (sin cambios)
+             if (err instanceof Error) {
+                 alert("Error al abrir la galería: " + err.message);
+             } else {
+                 alert("Error desconocido al abrir la galería.");
+             }
+             setImageModalVisible(false); // Cierra el modal en caso de error
         }
-
-        result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.Images,
-          allowsEditing: true,
-          aspect: [1, 1],
-          quality: 1,
-          base64: false, // da igual, web da base64 como uri
-        });
-
-        if (!result.canceled) {
-          let imageUri = result.assets[0].uri;
-
-          // NUEVO: Validar que sea PNG
-          if (!imageUri.startsWith("data:image/png")) {
-            alert("Por favor, selecciona una imagen en formato PNG.");
-            return;
-          }
-
-          if (imageUri.startsWith("data:image")) {
-            const base64Data = imageUri.split(",")[1];
-
-            const blob = base64toBlob(base64Data);
-            console.log("Blob creado:", blob);
-
-            saveImage(blob);
-          } else {
-            console.log("Imagen URI válida:", imageUri);
-            saveImage(imageUri);
-          }
-        } else if (result == undefined) {
-          console.log("result undefined");
-        }
-      } catch (err) {
-        if (err instanceof Error) {
-          alert("Error al abrir la galería: " + err.message);
-        } else {
-          alert("Error al abrir la galería.");
-        }
-        setImageModalVisible(false);
-      }
     } else if (action === "delete") {
-      try {
-        saveImage(null);
-      } catch (err) {
-        if (err instanceof Error) {
-          alert("Error al eliminar la imagen: " + err.message);
-        } else {
-          alert("Error al eliminar la imagen.");
+        try {
+            // Llama a saveImage con null para borrar
+            saveImage(null);
+        } catch (err) {
+             // Manejo de errores (sin cambios)
+            if (err instanceof Error) {
+                alert("Error al eliminar la imagen: " + err.message);
+            } else {
+                alert("Error desconocido al eliminar la imagen.");
+            }
+            setImageModalVisible(false); // Cierra el modal en caso de error
         }
-        setImageModalVisible(false);
-      }
     }
-  };
+};
 
-  function base64toBlob(base64Data: string, contentType = "image/png") {
-    const byteCharacters = atob(base64Data);
-    const byteArrays = [];
 
-    for (let offset = 0; offset < byteCharacters.length; offset += 512) {
-      const slice = byteCharacters.slice(offset, offset + 512);
-      const byteNumbers = new Array(slice.length);
-      for (let i = 0; i < slice.length; i++) {
-        byteNumbers[i] = slice.charCodeAt(i);
-      }
-      const byteArray = new Uint8Array(byteNumbers);
-      byteArrays.push(byteArray);
-    }
-
-    return new Blob(byteArrays, { type: contentType });
-  }
-
-  const saveImage = async (image: any) => {
-    if (image != null) {
-      setImage(image);
-      const base64Image = await blobToBase64(image);
-      setImageBase64(base64Image);
-      console.log("Imagen base64:", base64Image);
-      setImageModalVisible(false);
-    } else {
-      setImage(null);
-      setImageBase64(null);
-      setImageModalVisible(false);
-    }
-  };
-
-  const blobToBase64 = (blob: Blob) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = () => resolve(reader.result);
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
+  // Simplificado: solo necesita el URI para mostrar (que contiene el base64)
+  const saveImage = (displayUri: string | null) => {
+    setImageBase64(displayUri); // Actualiza el estado para la vista
+    setRecipe(prevRecipe => {
+      if (!prevRecipe) return null; // Handle the case where prevRecipe is null
+      return {
+        ...prevRecipe,
+        recipePhoto: displayUri ? displayUri.split(",")[1] : null, // Guarda el base64 sin el encabezado en el objeto recipe
+      };
     });
+    console.log("Estado recipe después de saveImage:", recipe);
+    setImageModalVisible(false); // Cierra el modal
   };
 
   if (!recipe) {
@@ -310,6 +303,26 @@ export default function RecipeDetails() {
       </View>
     );
   }
+
+  const processRecipePhoto = (photo: any) => {
+    if (typeof photo === 'string') {
+      const base64Image = photo.startsWith('data:image')
+        ? photo
+        : `data:image/jpeg;base64,${photo}`;
+      setImageBase64(base64Image);
+    } else if (Array.isArray(photo)) {
+      const bytes = new Uint8Array(photo);
+      let binary = '';
+      for (let i = 0; i < bytes.byteLength; i++) {
+        binary += String.fromCharCode(bytes[i]);
+      }
+      const base64 = btoa(binary);
+      setImageBase64(`data:image/jpeg;base64,${base64}`);
+    } else {
+      setImageBase64(null);
+    }
+  };
+  
 
   return (
     <View style={{ flex: 1, backgroundColor: "#E3F2FD" }}>
