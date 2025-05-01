@@ -212,12 +212,20 @@ public class DreamServiceTest {
 
     @Test
     public void testGetAllDreams() {
+        User currentUser = new User();
+        currentUser.setId(1);
+
+        Baby baby = new Baby();
+        baby.setId(1);
+        baby.setUsers(List.of(currentUser));
+
         Dream dream1 = new Dream();
         dream1.setId(1L);
         dream1.setDateStart(LocalDateTime.of(2023, 1, 1, 22, 0));
         dream1.setDateEnd(LocalDateTime.of(2023, 1, 2, 6, 0));
         dream1.setNumWakeups(1);
         dream1.setDreamType(DreamType.DEEP);
+        dream1.setBaby(baby); // Configurar la propiedad baby
 
         Dream dream2 = new Dream();
         dream2.setId(2L);
@@ -225,8 +233,11 @@ public class DreamServiceTest {
         dream2.setDateEnd(LocalDateTime.of(2023, 2, 2, 6, 0));
         dream2.setNumWakeups(2);
         dream2.setDreamType(DreamType.LIGHT);
+        dream2.setBaby(baby); // Configurar la propiedad baby
 
-        when(dreamRepository.findAll()).thenReturn(List.of(dream1, dream2));
+        when(userService.findCurrentUser()).thenReturn(currentUser);
+        when(babyRepository.findById(1)).thenReturn(Optional.of(baby));
+        when(dreamRepository.findAllByUser(currentUser)).thenReturn(List.of(dream1, dream2));
 
         List<Dream> dreams = dreamService.getAllDreams();
 

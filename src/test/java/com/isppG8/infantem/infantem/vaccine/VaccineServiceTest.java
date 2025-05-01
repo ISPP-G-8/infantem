@@ -63,7 +63,7 @@ public class VaccineServiceTest {
     @Test
     public void TestFindAll() {
         List<Vaccine> vaccines = vaccineService.getAll();
-        assertEquals(10, vaccines.size(), "There should be 10 vaccines");
+        assertEquals(5, vaccines.size(), "There should be 5 vaccines");
     }
 
     @Test

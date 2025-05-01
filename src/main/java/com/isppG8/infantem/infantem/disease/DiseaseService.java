@@ -34,7 +34,8 @@ public class DiseaseService {
 
     @Transactional(readOnly = true)
     public List<Disease> getAll() {
-        return diseaseRepository.findAll();
+        User user = this.userService.findCurrentUser();
+        return diseaseRepository.findAllByUser(user);
     }
 
     @Transactional(readOnly = true)

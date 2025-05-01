@@ -35,7 +35,8 @@ public class DreamService {
 
     @Transactional(readOnly = true)
     public List<Dream> getAllDreams() {
-        return dreamRepository.findAll();
+        User user = this.userService.findCurrentUser();
+        return dreamRepository.findAllByUser(user);
     }
 
     @Transactional(readOnly = true)
