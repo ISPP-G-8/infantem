@@ -21,12 +21,15 @@ const TermsConditionsModal = ({
   TÉRMINOS Y CONDICIONES LEGALES
 
   1. ACEPTACIÓN DE LOS TÉRMINOS
-  Al acceder o utilizar la aplicación Infantem ("la App"), el usuario acepta cumplir con estos Términos y Condiciones y con nuestra Política de Privacidad. Si no está de acuerdo con alguna de las disposiciones de estos términos, debe abstenerse de usar la App.
+
+  Al registrarse o utilizar la aplicación Infantem ("la App"), el usuario acepta de forma expresa estos Términos y Condiciones y nuestra Política de Privacidad. Si no está de acuerdo con alguna de las disposiciones de estos términos, debe abstenerse de usar la App.
 
   2. OBJETO
-  Infantem es una aplicación móvil diseñada para asistir a padres y madres en el seguimiento de la alimentación, el crecimiento y los hitos de desarrollo de sus hijos. La App incluye, entre otras funcionalidades, recomendaciones de recetas personalizadas, detección de alergias e intolerancias alimentarias, un marketplace de productos recomendados, y un sistema de seguimiento de hitos del desarrollo.
 
+  Infantem es una aplicación móvil diseñada para asistir a padres y madres en el seguimiento de la alimentación, el crecimiento y los hitos de desarrollo de sus hijos. La App incluye, entre otras funcionalidades, recomendaciones de recetas personalizadas, detección de alergias e intolerancias alimentarias, un marketplace de productos recomendados, y un sistema de seguimiento de hitos del desarrollo.
+  
   3. FUNCIONALIDADES DE LA APLICACIÓN
+
   3.1 Recomendaciones Personalizadas de Recetas
   La App recomienda recetas y menús basados en la edad del bebé y los alimentos que puede ir introduciendo a su dieta. Las recomendaciones se ajustan según las preferencias del usuario, incluyendo alergias o intolerancias alimentarias.
 
@@ -56,6 +59,7 @@ const TermsConditionsModal = ({
   - Plan Premium: Amplía estas funciones con recetas personalizadas, seguimiento detallado de la salud y desarrollo del bebé, y recordatorios inteligentes. Tiene un coste de 4,99€ al mes.
 
   4. USO DE LA APLICACIÓN
+
   4.1 Requisitos de Edad
   El usuario debe ser mayor de 18 años para utilizar la App. En el caso de usuarios menores de 18 años, la App solo debe ser utilizada con la supervisión de un adulto responsable.
 
@@ -64,8 +68,9 @@ const TermsConditionsModal = ({
 
   4.3 Responsabilidad del Usuario
   El usuario es responsable de mantener la confidencialidad de sus credenciales de acceso a la App y de toda la actividad realizada bajo su cuenta. El usuario se compromete a no utilizar la App con fines ilegales o no autorizados.
-
+  
   5. PROTECCIÓN DE DATOS
+
   5.1 Tratamiento de Datos Personales
   En cumplimiento con el Reglamento General de Protección de Datos (RGPD) y la Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD), Infantem se compromete a proteger la privacidad de los datos personales de los usuarios.
 
@@ -76,21 +81,24 @@ const TermsConditionsModal = ({
 
   5.3 Compartición de Datos
   La información personal proporcionada por los usuarios solo será compartida con empresas afiliadas en el contexto del Marketplace, y con profesionales médicos en el caso de que se realice una consulta a través de la App, conforme a las leyes de protección de datos vigentes.
-
+  
   6. EXONERACIÓN DE RESPONSABILIDAD
+
   6.1 Exactitud de la Información
   La información y recomendaciones proporcionadas por la App son generadas de acuerdo con datos estadísticos y algoritmos basados en la edad y los datos de salud introducidos por el usuario. Sin embargo, Infantem no garantiza que dicha información sea exacta, completa o esté libre de errores. Las recomendaciones de recetas, el seguimiento de alergias y el crecimiento del bebé no sustituyen el consejo médico profesional.
 
   6.2 Limitación de Responsabilidad
-  Infantem no será responsable por daños directos, indirectos, incidentales o consecuentes derivados del uso de la aplicación, incluyendo, pero no limitado a, pérdidas de datos, daños a dispositivos móviles, o la incapacidad para acceder a la App.
+  Infantem será responsable en los casos en que así lo exija la ley aplicable. No obstante, no se responsabiliza de los daños indirectos o consecuentes derivados del uso indebido de la App, siempre que dicha limitación sea permitida por la normativa vigente.
 
   6.3 Salud del Bebé
   Infantem no se hace responsable de las consecuencias derivadas del uso de las recomendaciones de la App, especialmente en lo que respecta a la salud del bebé. Cualquier cambio en la dieta o el seguimiento de salud debe ser supervisado por un profesional médico.
-
+  
   7. PROPIEDAD INTELECTUAL
-  Todos los derechos de propiedad intelectual relacionados con la aplicación Infantem, incluyendo el código, diseño, logotipos, textos, imágenes y otros elementos, pertenecen al G8 de ISPP 2025. Está prohibida la reproducción, distribución, comunicación pública o transformación de cualquier elemento de la aplicación sin la autorización expresa de los titulares de los derechos.
 
+  Todos los derechos de propiedad intelectual relacionados con la aplicación Infantem, incluyendo el código, diseño, logotipos, textos, imágenes y otros elementos, pertenecen al G8 de ISPP 2025. Está prohibida la reproducción, distribución, comunicación pública o transformación de cualquier elemento de la aplicación sin la autorización expresa de los titulares de los derechos.
+  
   8. SUSCRIPCIÓN Y CANCELACIÓN
+
   8.1 Suscripción Premium
   Las suscripciones al plan Premium se realizan mensualmente y se renuevan de forma automática hasta que el usuario decida cancelarlas.
 
@@ -98,8 +106,8 @@ const TermsConditionsModal = ({
   La cancelación de la suscripción Premium se podrá realizar en cualquier momento a través de la opción disponible en el perfil del usuario. Cuando se cancela la suscripción, esta dejará de tener efecto cuando termine el periodo mensual ya pagado.
 
   8.3 Política de Reembolsos
-  No existe política de reembolsos de ningún tipo para las suscripciones Premium.
-
+  No existe política de reembolsos de ningún tipo para las suscripciones Premium, salvo lo dispuesto por la legislación aplicable.
+  
   9. ACUERDO DEL NIVEL DE SERVICIO
 
   Este Acuerdo de Nivel de Servicio (SLA) establece los compromisos de disponibilidad, soporte y calidad del servicio proporcionado por Infantem, la aplicación inteligente para la alimentación de bebés. Este acuerdo es aplicable a todos los usuarios registrados que utilizan la aplicación.
@@ -180,27 +188,31 @@ const TermsConditionsModal = ({
 
   9.8 Modificaciones y Vigencia
 
-  - Este SLA puede ser modificado con previo aviso por correo a los usuarios.
-  - Infantem se reserva el derecho de actualizar los términos del SLA para reflejar mejoras en el servicio.
-  - Su vigencia comienza en la fecha de aceptación por parte del usuario.
+  Este SLA puede ser modificado únicamente para reflejar mejoras justificadas en el servicio o por cambios legales. Infantem notificará a los usuarios con al menos 15 días de antelación por correo electrónico o mediante notificación en la App.
 
-  [Fecha de última actualización del ANS: 02/04/2025]
-
+  Fecha de última actualización del ANS: 02/04/2025
+  
   10. TERMINACIÓN DEL SERVICIO
-  Infantem podría cancelar el plan de un usuario o todo su acceso al sistema si se detecta cualquier uso indebido en la App, incluyendo pero no limitándose a: intentos de vulneración de la seguridad, suplantación de identidad, uso con fines comerciales no autorizados, o cualquier actividad que contravenga estos Términos y Condiciones.
 
+  Infantem podría cancelar el plan de un usuario o todo su acceso al sistema si se detecta cualquier uso indebido en la App, incluyendo pero no limitándose a: intentos de vulneración de la seguridad, suplantación de identidad, uso con fines comerciales no autorizados, o cualquier actividad que contravenga estos Términos y Condiciones.
+  
   11. INFORMACIÓN DEL PROVEEDOR
+
   - Dirección: Escuela Técnica Superior de Ingeniería Informática, Avenida Reina Mercedes, Universidad de Sevilla.
+
   - Contacto: ispp.g8@gmail.com
 
   12. MODIFICACIONES
-  Infantem se reserva el derecho de modificar estos Términos y Condiciones en cualquier momento, sin necesidad de aviso previo. Cualquier cambio será publicado en esta página y entrará en vigor inmediatamente después de su publicación. El uso continuado de la App después de dicha publicación constituye la aceptación de los nuevos términos.
 
+  Infantem se reserva el derecho de modificar estos Términos y Condiciones cuando sea necesario por motivos legales o para mejorar el servicio. Cualquier cambio será notificado con al menos 15 días de antelación mediante correo electrónico o a través de la App. El uso continuado de la App tras dicho plazo se entenderá como aceptación de los nuevos términos.
+  
   13. LEY APLICABLE Y JURISDICCIÓN
-  Estos Términos y Condiciones se regirán e interpretarán de acuerdo con la legislación española. Cualquier disputa derivada del uso de la App será resuelta ante los tribunales competentes de Sevilla, España.
 
+  Estos Términos y Condiciones se regirán e interpretarán de acuerdo con la legislación española. Cualquier disputa derivada del uso de la App será resuelta ante los tribunales del domicilio del usuario, salvo que la normativa establezca otro fuero imperativo.
+  
   14. CONTACTO
-  Si tiene alguna pregunta sobre estos Términos y Condiciones, puede ponerse en contacto con nosotros a través de la dirección de correo electrónico: soporte@infantem.com.
+
+  Si tiene alguna pregunta sobre estos Términos y Condiciones, puede ponerse en contacto con nosotros a través de la dirección de correo electrónico: soporte@infantem.com
   `;
 
   return (

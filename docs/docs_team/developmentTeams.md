@@ -1,11 +1,11 @@
 # EQUIPO DE DESARROLLO
 
-![Portada](../../frontend/assets/Documentos/Infantem.png)
+![Portada](../images/Infantem.png)
 
 
-**Fecha:** 18/02/2025  
+**Fecha:** 31/03/2025  
 **Grupo 8:** Infantem  
-**Sprint 1**
+**Sprint 3**
 
 ## Integrantes del Grupo
 <div style="display: flex; justify-content: space-between; gap: 2px;">
@@ -38,20 +38,17 @@
 </div>
 
 ---
-
-
-
-
+## Colaboradores del documento
+- Luis Giraldo
+  - Creó el documento en md.
+  - Actualizó el documento al sprint 3.
 
 ## Índice
-- [Colaboradores del documento](#colaboradores-del-documento)
 - [Conocimiento y Especialización de los Miembros del Equipo](#conocimiento-y-especialización-de-los-miembros-del-equipo)
 - [Descripción del Equipo](#descripción-del-equipo)
 - [Asignación de Responsabilidades](#asignación-de-responsabilidades)
 
-## Colaboradores del documento
-- Luis Giraldo
-  - Creó el documento en md.
+
 
 
 ## Conocimiento y Especialización de los Miembros del Equipo

@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,15 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.isppG8.infantem.infantem.auth.Authorities;
+import com.isppG8.infantem.infantem.auth.AuthoritiesService;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotOwnedException;
-import com.isppG8.infantem.infantem.user.User;
-import com.isppG8.infantem.infantem.user.UserService;
+import com.isppG8.infantem.infantem.recipe.dto.CustomRecipeDTO;
 import com.isppG8.infantem.infantem.recipe.dto.RecipeDTO;
+import com.isppG8.infantem.infantem.user.User;
+import com.isppG8.infantem.infantem.user.UserRepository;
+import com.isppG8.infantem.infantem.user.UserService;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -32,7 +37,31 @@ public class RecipeServiceTest {
     @Autowired
     private RecipeService recipeService;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private CustomRecipeRequestService customRecipeRequestService;
+
+    @Autowired
+    private AuthoritiesService authoritiesService;
+
     final int HUGE_BABY_AGE = 999;
+
+    User mockUser = new User();
+
+    @BeforeEach
+    public void setUp() {
+        mockUser.setName("John");
+        mockUser.setSurname("Doe");
+        mockUser.setEmail("john.doe@example.com");
+        mockUser.setUsername("johndoe");
+        mockUser.setPassword("password123");
+        Authorities mockAuthorities = Mockito.mock(Authorities.class);
+        mockUser.setAuthorities(mockAuthorities);
+        Mockito.when(mockUser.getAuthorities().getAuthority()).thenReturn("nutritionist");
+        Mockito.when(userService.findCurrentUser()).thenReturn(mockUser);
+    }
 
     @Test
     public void recipeFilterByMinAgeTest() {
@@ -284,14 +313,14 @@ public class RecipeServiceTest {
     @Test
     public void getAllRecommendedRecipesTest() {
         List<Recipe> recommendRecipes = recipeService.getAllRecommendedRecipes();
-        assertEquals(16, recommendRecipes.size(), "Number of recommended recipes should be 16");
+        assertEquals(8, recommendRecipes.size(), "Number of recommended recipes should be 8");
     }
 
     @Test
     public void getAllVisibleRecipesTest() {
         Mockito.when(userService.findCurrentUserId()).thenReturn(1);
         List<Recipe> visibleRecipes = recipeService.getVisibleRecipes();
-        assertEquals(21, visibleRecipes.size(), "Number of visible recipes should be 21");
+        assertEquals(13, visibleRecipes.size(), "Number of visible recipes should be 13");
         assertTrue(visibleRecipes.stream().filter(r -> r.getId() == 1L).findFirst().isPresent(),
                 "Recipe with id 1 should be present in the visible recipes");
     }
@@ -436,6 +465,46 @@ public class RecipeServiceTest {
 
         assertThrows(ResourceNotOwnedException.class, () -> recipeService.deleteRecipe(6L, 2),
                 "User 2 should not be able to delete recipe 6");
+    }
+
+    @Test
+    public void createCustomRecipeTest() {
+        Authorities existingAuthority = authoritiesService.findByAuthority("nutritionist");
+        mockUser.setAuthorities(existingAuthority);
+
+        User persistedUser = userRepository.save(mockUser);
+
+        Mockito.when(userService.findCurrentUser()).thenReturn(persistedUser);
+
+        CustomRecipeRequest request = this.customRecipeRequestService.getAllOpenRequests().get(0);
+
+        CustomRecipeDTO recipe = new CustomRecipeDTO();
+        recipe.setName("Test Recipe");
+        recipe.setDescription("Test Description");
+        recipe.setIngredients("Test Ingredients");
+        recipe.setMinRecommendedAge(1);
+        recipe.setMaxRecommendedAge(2);
+        recipe.setElaboration("Test Elaboration");
+        recipe.setUser(persistedUser.getId());
+        recipe.setRequestId(request.getId());
+
+        Recipe createdRecipe = recipeService.createCustomRecipe(recipe);
+        assertEquals(recipe.getName(), createdRecipe.getName(), "The recipe name should be 'Test Recipe'");
+    }
+
+    @Test
+    public void createCustomRecipeNotNutritionistTest() {
+        Mockito.when(userService.findCurrentUser().getAuthorities().getAuthority()).thenReturn("user");
+        CustomRecipeDTO recipe = new CustomRecipeDTO();
+        recipe.setName("Test Recipe");
+        recipe.setDescription("Test Description");
+        recipe.setIngredients("Test Ingredients");
+        recipe.setMinRecommendedAge(1);
+        recipe.setMaxRecommendedAge(2);
+        recipe.setElaboration("Test Elaboration");
+        recipe.setUser(1);
+        assertThrows(ResourceNotOwnedException.class, () -> recipeService.createCustomRecipe(recipe),
+                "User should not be able to create a custom recipe");
     }
 
 }

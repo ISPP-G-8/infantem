@@ -62,6 +62,20 @@ public class ExceptonHandleController {
         return new ResponseEntity<>(message, HttpStatus.FORBIDDEN);
     }
 
+    @Operation(summary = "Manejo de excepción límite de solicitudes de receta personalizada",
+            description = "Maneja la excepción cuando se alcanza el límite de solicitudes de receta personalizada.") @ApiResponse(
+                    responseCode = "403", description = "Límite de solicitudes alcanzado",
+                    content = @Content(schema = @Schema(
+                            implementation = ErrorMessage.class))) @ExceptionHandler(CustomRecipeRequestLimitException.class) @ResponseStatus(
+                                    value = HttpStatus.FORBIDDEN)
+    public ResponseEntity<ErrorMessage> handleCustomRecipeRequestLimitException(CustomRecipeRequestLimitException ex,
+            WebRequest request) {
+        ErrorMessage message = new ErrorMessage(HttpStatus.FORBIDDEN.value(), new Date(), ex.getMessage(),
+                request.getDescription(false));
+
+        return new ResponseEntity<>(message, HttpStatus.FORBIDDEN);
+    }
+
     @Operation(summary = "Manejo de excepción de validación",
             description = "Maneja las excepciones de validación de datos.") @ApiResponse(responseCode = "400",
                     description = "Error de validación de datos",
