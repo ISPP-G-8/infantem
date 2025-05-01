@@ -55,7 +55,7 @@ public class SubscriptionInfantemController {
 
     @Autowired
     private UserService userService;
-    
+
     @Autowired
     private JwtUtils jwtUtils;
 
