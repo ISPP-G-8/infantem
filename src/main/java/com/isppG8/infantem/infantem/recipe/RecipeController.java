@@ -210,13 +210,13 @@ public class RecipeController {
             description = "Actualiza los detalles de una receta existente.") @ApiResponse(responseCode = "200",
                     description = "Receta actualizada con éxito", content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Recipe.class))) @PutMapping("/{id}")
-    public ResponseEntity<Recipe> updateRecipe(@PathVariable Long id, @Valid @RequestBody RecipeDTO recipeDetails) {
-        User user = userService.findCurrentUser();
-        Recipe recipe = recipeService.getRecipeById(id);
-        recipeDetails.setRecipePhoto(recipe.getRecipePhoto());
-        Recipe updatedRecipe = recipeService.updateRecipe(id, recipeDetails, user.getId());
-        return ResponseEntity.ok(updatedRecipe);
-    }
+                            public ResponseEntity<Recipe> updateRecipe(@PathVariable Long id, @Valid @RequestBody RecipeDTO recipeDetails) {
+                                User user = userService.findCurrentUser();
+                                Recipe recipe = recipeService.getRecipeById(id);
+                                // recipeDetails.setRecipePhoto(recipe.getRecipePhoto()); // <-- ELIMINA ESTA LÍNEA
+                                Recipe updatedRecipe = recipeService.updateRecipe(id, recipeDetails, user.getId());
+                                return ResponseEntity.ok(updatedRecipe);
+                            }
 
     @Operation(summary = "Actualizar la foto de perfil de un usuario",
             description = "Actualiza la foto de perfil de un usuario por su ID.") @ApiResponse(responseCode = "200",

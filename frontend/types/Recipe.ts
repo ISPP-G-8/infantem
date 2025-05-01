@@ -1,4 +1,5 @@
 export type Recipe = {
+  recipePhoto: any;
   id?: number;
   userId?: number;
   isCustom: boolean;
