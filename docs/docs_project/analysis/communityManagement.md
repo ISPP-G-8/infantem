@@ -40,7 +40,7 @@
 ## Document contributors
 
 - Lucía Noya Cano
-  - Creó el documento en md.
+  - Creó el documento.
   - Rellena el documento.
 
 ---
@@ -128,14 +128,20 @@ Para impulsar el crecimiento inicial de la comunidad, se llevará a cabo un sort
 - **Principal:** Instagram (post principal, stories destacadas y reel promocional).
 - **Secundarios:** Facebook (post informativo).
 
-**Plan de comunicación asociado:**
+**Plan de comunicación asociado (Actualizado):**
 
-- **Semana previa (29 abril – 2 mayo):** teaser gráfico + stories de anticipación.
+- **Semana previa (29 abril – 2 mayo):** teaser gráfico + stories de anticipación del sorteo.
 - **Lanzamiento (3 mayo):** publicación oficial del sorteo + reel con Spoony.
-- **Semana del 6 mayo:** recordatorio en stories y post de incentivo.
-- **Últimos días (13–15 mayo):** cuenta atrás + repost de participación de usuarios.
-- **Post-sorteo (16 mayo):** anuncio de ganadores y agradecimiento.
+- **Semana del 6 mayo:**
+  - **6 mayo:** post de Spoony look Feria para ambientar la semana.
+  - **7 mayo:** apertura de la participación en el sorteo (post + story).
+  - **8 mayo:** reel con tips para mamis y papis en la Feria con peques.
+  - **9 mayo:** anuncio oficial de los ganadores del sorteo.
+  - **10 mayo:** reel funcionalidad app para reforzar la utilidad post-sorteo.
+- **Últimos días de impulso (13–15 mayo):** highlights de la app y repost de participación de usuarios.
+- **Post-sorteo (16 mayo):** post de cierre con agradecimiento, comunidad y CTA suave a seguir explorando la app Infantem.
 
+---
 **KPIs esperados:**
 
 - Aumento del 25–30% en seguidores.
@@ -166,17 +172,20 @@ Para impulsar el crecimiento inicial de la comunidad, se llevará a cabo un sort
 - Consejos de expertos en nutrición.
 - Publicación de recetas personalizadas.
 - Mitos Vs. Realidades
+- Anuncio de un futuro sorteo
 
 ---
 
-### Calendario de Contenidos (ejemplo mensual)
+# Calendario de Contenidos – (Semana del 5 al 9 de mayo)
 
-| Semana | Lunes            | Miércoles         | Viernes             |
-|--------|------------------|-------------------|---------------------|
-| 1      | Comparativa apps   | Función: Recetas  | Función: Calendario      |
-| 2      | Comparativa apps | Spoony divertido  | FAQ sobre alérgenos |
-| 3      | Historia usuario | Encuesta mitos | Reel funcionalidad |
-| 4      | Tips nutrición   | Mito vs realidad  | Post emocional      |
+| Día / Fecha | Customer Persona         | Buying Journey Stage   | Marketing Goal / Funnel Stage               | Content Title                                                   | Topics, Hashtags                                         | Format / Type              | Officer In Charge | Channels                     | KPIs esperados              |
+|-------------|--------------------------|-------------------------|---------------------------------------------|------------------------------------------------------------------|----------------------------------------------------------|-----------------------------|-------------------|-------------------------------|-----------------------------|
+| Lunes (5 may) | Mamis y papis primerizos | Awareness               | Aumentar visibilidad de marca               | Spoony se va de Feria  (look +  temática)                 | #SpoonyEnFeria #FeriaInfantem #CrianzaConAlegría         | Carrusel IG + Story         | Lucía Noya         | IG + FB                      | Alcance + engagement alto   |
+| Martes (6 may) | Padres curiosos          | Consideration           | Interacción y comunidad                     | ¡Abierto el sorteo! Participa y gana un pack sorpresa          | #SorteoInfantem #SpoonyLovers                            | Post + Story llamada a acción | Lucía Noya         | IG + FB + TikTok             | Participaciones + clics app |
+| Miércoles (7 may) | Padres fieles a la app   | Loyalty                 | Reforzar valor y fidelización               | Tips Feria con peques: cómo disfrutarla sin dramas               | #TipsDeSpoony #FamiliaEnFeria                            | Reel educativo               | Lucía Noya         | IG + TikTok + FB             | Visualizaciones + Shares    |
+| Jueves (8 may) | Nuevas mamis/papis       | Conversion              | Engagement y recompensas                    |  ¡Ganadores del sorteo! Mira si has sido uno de ellos        | #GanadoresInfantem #SpoonySorteo                         | Post + video agradecimiento  | Lucía Noya         | IG + FB + TikTok             | Comentarios + Alcance       |
+| Viernes (9 may)| Padres digitales activos | Awareness + Consideration | Refuerzo de marca y exploración de funciones | 3 funciones de Infantem que quizás no conocías                 | #AppInfantem #SpoonyTeAyuda                             | Reel funcionalidad           | Lucía Noya         | TikTok + IG                  | Guardados + Comentarios     |
+
 ---
 ## Seguimiento y Métricas
 
@@ -188,4 +197,4 @@ Para impulsar el crecimiento inicial de la comunidad, se llevará a cabo un sort
 - Feedback cualitativo de la comunidad.
 
 ---
-> **Nota**: Actualmente contamos con 48 seguidores y 1310 visitas al perfil.
+> **Nota**: Actualmente contamos con 52 seguidores y 1849 visitas al perfil.
