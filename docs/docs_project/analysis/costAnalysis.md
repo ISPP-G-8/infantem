@@ -1,4 +1,4 @@
-# Análisis de Costes Spprint 3
+# Análisis de Costes Sprint 3
 
 ![Portada](../../images/Infantem.png)
 
@@ -40,6 +40,11 @@
 --- 
 
 ## Colaboradores del documento
+- David Fuentelsaz Rodríguez
+  - Primera versión del documento
+- Josué Rodríguez López
+  - Primera versión del documento
+  - Revisión de costes del PPL
 - Luis Giraldo
   - Actualizó el documento al sprint 3
 - Paula Luna Navarro
@@ -48,6 +53,8 @@
 - Álvaro Jimenez Osuna  
   - Revisó el documento
   - Actualizó el documento al sprint 3
+-Jose Maria Morgado Prudencio
+  - Actualizó el documento para el PPL
 
 ## Índice
 
@@ -60,13 +67,15 @@
    2.5 [Desglose de Costes de Distribución y Publicación](#25-desglose-de-costes-de-distribución-y-publicación)  
    2.6 [Costes de Expertos (Nutricionistas)](#26-costes-de-expertos-nutricionistas)  
    2.7 [Costes de Marketing y Tracción](#27-costes-de-marketing-y-tracción)  
-   2.7.1 [Costes de Diseño e Identidad Visual](#271-costes-de-diseño-e-identidad-visual)  
-   2.8 [Costes Totales](#28-costes-totales)
+   2.8 [Costes de Diseño e Identidad Visual](#28-costes-de-diseño-e-identidad-visual)  
+   2.9 [Costes Totales](#29-costes-totales)
 3. [Estimación de Costes POST-LAUNCH](#3-estimación-de-costes-post-launch)  
    3.1 [Costes de Infraestructura en Producción](#31-costes-de-infraestructura-en-producción)  
    3.2 [Costes de Atención al Cliente y Soporte Técnico](#32-costes-de-atención-al-cliente-y-soporte-técnico)  
    3.3 [Costes de Herramientas y Servicios de Mantenimiento](#33-costes-de-herramientas-y-servicios-de-mantenimiento)  
-   3.4 [Resumen de Costes Post-Lanzamiento](#34-resumen-de-costes-post-lanzamiento)
+   3.4 [Costes de Publicidad y Marketing](#34-costes-de-publicidad-y-marketing)   
+   3.5 [Costes de Nutricionistas](#35-costes-de-nutricionistas)       
+   3.5 [Resumen de Costes Post-Lanzamiento](#36-resumen-de-costes-post-lanzamiento)
 4. [Análisis de Ingresos Post-Lanzamiento](#4-análisis-de-ingresos-post-lanzamiento)  
    4.1 [Semana 1: Inicio Prometedor](#41-semana-1-inicio-prometedor)  
    4.2 [6 Meses: Consolidación](#42-6-meses-post-lanzamiento-consolidación)  
@@ -82,23 +91,24 @@
 
 ## 1. Introducción
 
-Este documento actualiza y analiza los costes e ingresos asociados al desarrollo, lanzamiento y mantenimiento de la aplicación Infantem. Se diferencian claramente los costes de inversión (CAPEX) y los costes operativos (OPEX), así como los ingresos proyectados en escenarios pesimista, realista y optimista.
+Este documento actualiza y analiza los costes e ingresos asociados al desarrollo, lanzamiento y mantenimiento de la aplicación Infantem, una plataforma diseñada para acompañar a los padres durante la introducción alimentaria de sus bebés. Se diferencian claramente los costes de inversión (CAPEX), que incluyen el diseño inicial, desarrollo de software, adquisición de infraestructura y acciones de marketing previas al lanzamiento, y los costes operativos (OPEX), como el mantenimiento del servidor, atención al cliente, actualizaciones periódicas y campañas de adquisición continua de usuarios.
 
-Con una media de 26.837 nacimientos al mes en España, la aplicación cuenta con un mercado potencial significativo. Se estima que un porcentaje de estos nuevos padres optará por utilizar Infantem, ya sea en su versión gratuita o mediante la suscripción premium, con un coste de 4,99 € al mes. Este documento analiza la viabilidad económica del proyecto y su potencial retorno de inversión.
+Además, se incluyen proyecciones de ingresos basadas en tres escenarios posibles —pesimista, realista y optimista—, considerando tanto el uso gratuito de la app como las suscripciones a su versión premium, con un precio mensual de 4,99 €. Con una media de 26.837 nacimientos al mes en España, el mercado potencial es amplio, y se espera captar progresivamente un porcentaje representativo de nuevos padres, especialmente aquellos interesados en soluciones digitales para el cuidado infantil.
+
+El presente análisis económico evalúa la viabilidad financiera del proyecto, identifica los puntos de equilibrio y estima el retorno de inversión (ROI) esperado en función del crecimiento de usuarios, ayudando así a guiar futuras decisiones estratégicas de financiación, escalado y sostenibilidad del producto.
 
 ## 2. Estimación de Costes PRE-LAUNCH
 
-## Costes por Periodo
+### Costes por Periodo
 
-| Periodo            | CAPEX (€) | OPEX (€)   | TOTAL (€)     |
-|--------------------|-----------|------------|----------------|
-| Semana 1           | 4.396     | 12,51      | 4.408,51       | 
-| Semana 5           | 15.415    | 62,55      | 15.477,55      |
-| Semana 10          | 30.830    | 1.950,10   | 32.780,10      |
-| Semana 15          | 43.598    | 2.212,65   | 45.810,65      |
-| Primeros 6 meses   | 0         | 13.410,46  | 13.410,46      |
-| Primer Año         | 0         | 54.051,32  | 54.051,32      |
-| Segundo Año        | 0         | 125.148,64 | 125.148,64     |
+La siguiente tabla muestra el coste total estimado para cada periodo del desarrollo del proyecto. Estos valores se tomarán como costes para el primer trimestre.
+
+| Periodo            | CAPEX (€) | OPEX (€)   | CAPEX + OPEX (€)| TOTAL CON 10% DE CONTINGENCIA (€)| Costes acumulados |
+|--------------------|-----------|------------|-----------------|----------------------------------|-------------------|
+| Semana 1           | 2.980,78  | 278,16     | 3258,94         | 3584,83                          | 3584,83           |
+| Semana 5           | 12523,15  | 1112,59    | 13635,74        | 14999,31                         | 18.584,14         |
+| Semana 10          | 14903,95  | 1112,99    | 16800,94        | 18481,03                         | 37.065,17         |
+| Semana 15          | 14903,95  | 4040,94    | 18944,89        | 20839,38                         | 57904,55          |
 
 
 > *CAPEX:* Inversiones iniciales (desarrollo, hardware).  
@@ -200,7 +210,7 @@ Para el desarrollo del proyecto, se ha seleccionado el Lenovo IdeaPad Slim 3 15I
 
 Actualmente, este portátil está disponible en MediaMarkt por un precio de 629 € por unidad. Para realizar los cálculos hemos supuesto una vida útil de 3 años. Para la amortización mensual de cada equipo se ha dividido el coste por equipo entre la vida útil (en meses). La amortización total se ha obtenido multiplicando la amortización mensual por equipo por el número de meses (3,75) y el número de equipos.
 
-|                    Elemento | Vida útil  estimada | Número de equipos | Coste por equipo | Amortizaci ón  mensual  por equipo | Amortizaci ón total  (15  semanas) | Coste total |
+|                    Elemento | Vida útil  estimada | Número de equipos | Coste por equipo | Amortización  mensual  por equipo | Amortizaci ón total  (15  semanas) | Coste total |
 | --------------------------: | :------------------: | :----------------: | :--------------: | :---------------------------------: | :---------------------------------: | :---------: |
 | Lenovo  IdeaPad  Slim 3 Gen |       3 años       |         17         |      629 €      |              17,47 €              |             1.113,85 €             |  10.693 €  |
 
@@ -223,7 +233,7 @@ Se ha elegido Google Play Store y Apple App Store para distribuir la aplicación
 
 ### 2.6. Costes de Expertos (nutricionistas)
 
-Se ha de tener en cuenta el coste de contrartacion de expertos en el ambito de la nutricion para la elabroracion de las recetas presonalizadas y recomendaciones nutricionales. De media en España un nutricionista por consulta cobra un total de 60 €, con una duracion por consulta de 60 min aproximadamente. Con estos datos podemos suponer que realizaremos un total de 3 consultas semanales durante las primeras 15 semanas para obtener la informacion necesaria para las recomendaciones y las recetas personalizadas.
+Se ha de tener en cuenta el coste de contrartacion de expertos en el ambito de la nutrición para la elabroración de las recetas presonalizadas y recomendaciones nutricionales. De media en España un nutricionista por consulta cobra un total de 60 €, con una duracion por consulta de 60 min aproximadamente. Con estos datos podemos suponer que realizaremos un total de 3 consultas semanales durante las primeras 15 semanas para obtener la informacion necesaria para las recomendaciones y las recetas personalizadas.
 
 |             | Coste por consulta | Semana 1 | Semana 5 | Semana 10 | Semana 15 |
 | ----------- | ------------------ | -------- | -------- | --------- | --------- |
@@ -241,15 +251,13 @@ Para asegurar visibilidad, descargas y crecimiento sostenido desde el lanzamient
 | Diseño y contenidos           | 25 €                      |
 | Colaboraciones con influencers| 500 €                     |
 | Publicidad física (folletos)  | 150 €                     |
-| Sorteo de lanzamiento            |  200 €                      |
+| Sorteo de lanzamiento         | 200 €                     |
 | Ferias / eventos              | 400 €                     |
 | **Total mensual estimado**    | **2.025 €**               |
 
-Se proyecta mantener este gasto durante **al menos 12 meses**, lo que se traduce en **22.100 € anuales**, incluidos como OPEX en el presupuesto total.
+Puesto que la capaña de marketing se inicia 6 semanas antes de que acabe el periodo de desarrollo, esta tiene un coste de **3037,50 €** durante dicha fase.
 
-Esto es una versión para la tracción inicial, que podrá ser modificada en proximas versiones
-
-### 2.7.1. Costes de Diseño e Identidad Visual
+### 2.8. Costes de Diseño e Identidad Visual
 
 Para transmitir una imagen coherente, moderna y profesional, se ha realizado una inversión inicial en diseño gráfico que incluye:
 
@@ -271,7 +279,7 @@ Para transmitir una imagen coherente, moderna y profesional, se ha realizado una
 Este coste se incluye como **CAPEX** al tratarse de una inversión única que perdura a lo largo del proyecto.
 
 
-### 2.8. Costes totales
+### 2.9. Costes totales
 
 En la siguiente tabla se recogen los costes totales del proyecto, incluyendo en el precio total un 10% de reservas de contingencia
 
@@ -280,13 +288,13 @@ En la siguiente tabla se recogen los costes totales del proyecto, incluyendo en 
 | Costes de personal                        | 43.598 €       |
 | Costes de Infraestructura                 | 187,65 €       |
 | Costes de Herramientas de Desarrollo      | 1.284,56 €     |
-| Costes de Hardware y Amortización         | 10.693 €       |
+| Costes de Hardware y Amortización         | 1.113,85 €     |
 | Costes de Publicación y Distribución      | 118,95 €       |
 | Costes de Expertos (nutricionistas)       | 2.700 €        |
-|Costes de Marketing y Tracción inicial       | 22.100 €   |
+|Costes de Marketing y Tracción inicial       | 3037,50 €    |
 Costes de diseño e identidad visual	| 600,00 €
-| **Total**                                  | **81.282,16** **€**|
-| **Coste del proyecto (+10% contingencias)**| **88.730,38 €**|
+| **Total**                                  | **52640,51** **€**|
+| **Coste del proyecto (+10% contingencias)**| **57904,55 €**|
 
 
 
@@ -295,195 +303,381 @@ Costes de diseño e identidad visual	| 600,00 €
 
 ## 3. Estimación de Costes POST-LAUNCH
 
-Tras la publicación de Infantem, el proyecto continúa generando costes operativos derivados del uso de infraestructura en producción, la atención a usuarios y el mantenimiento de servicios. Estos costes han sido estimados para distintos horizontes temporales: **1 semana**, **6 meses**, **1 año** y **2 años**, suponiendo un crecimiento continuo de usuarios y carga de trabajo sobre la plataforma.
+Tras la publicación de _Infantem_, el proyecto continúa incurriendo en costes operativos derivados del funcionamiento constante de la plataforma en un entorno de producción. Estos costes incluyen el uso de infraestructura en la nube, la atención a los usuarios y el mantenimiento de los distintos servicios que permiten que la aplicación funcione de manera eficiente y segura, facilitando así la planificación económica y la evaluación de la sostenibilidad a medio plazo.
 
-Se han considerado tres grandes categorías:
+Además, con el objetivo de ofrecer un seguimiento más detallado de la evolución de los gastos, se ha realizado un estudio desglosado de forma trimestral hasta el segundo año de vida del producto, cubriendo un total de **8 trimestres**. Este enfoque permite observar cómo se incrementan progresivamente los costes conforme aumenta la base de usuarios y la carga de trabajo sobre la plataforma.
 
-- Costes de infraestructura (Google Cloud Platform),
-- Soporte técnico y atención al cliente,
-- Herramientas y mantenimiento del sistema.
+Para organizar este análisis, se han considerado tres grandes categorías de costes operativos:
+
+- **Costes de infraestructura**: Uso de servicios en la nube (Google Cloud Platform) como instancias de cómputo, bases de datos, almacenamiento y tráfico de red. Estos gastos escalan en función del número de usuarios activos y el volumen de datos procesados.
+
+- **Soporte técnico y atención al cliente**: Recursos humanos y herramientas para gestionar incidencias, responder consultas y garantizar una experiencia satisfactoria.
+
+- **Herramientas y mantenimiento del sistema**: Monitorización, automatización de despliegues, control de versiones y mantenimiento correctivo y evolutivo del software.
+
+Este análisis trimestral ofrece una visión clara de la evolución de los gastos operativos y permite tomar decisiones estratégicas en función de la rentabilidad y el crecimiento del proyecto.
 
 ---
 
 ### 3.1 Costes de Infraestructura en Producción
 
-La infraestructura incluye servidores, bases de datos, backups, ancho de banda, almacenamiento y monitorización, todos proporcionados mediante Google Cloud Platform.
+La infraestructura post-lanzamiento comprende los servicios esenciales necesarios para mantener la operatividad del sistema, incluyendo servidores, bases de datos, backups, ancho de banda, almacenamiento y monitorización. Todos estos servicios serán proporcionados a través de Google Cloud Platform, garantizando escalabilidad, fiabilidad y un rendimiento óptimo.
 
-#### A la semana del lanzamiento
-- 2 instancias `e2-standard-2` funcionando 24/7 → **22,72 €**
-- 1.342 usuarios generan 50 MB/día → ~458 GB mensuales → **54,84 €**
-- Almacenamiento de backups (50 GB) → **0,25 €**
-- Logs adicionales en Stackdriver (~5 GB) → **2,50 €**
-- Memoria adicional (4 GB × 168h) → **6,05 €**
-- **Total infraestructura (1 semana)**: **86,36 €**
+Para estudiar los costes que tendremos que asumir en los 2 años siguientes a nuestro lanzamiento, se han estimado de forma trimestral hasta llegar al 8º trimestre, estimando un crecimiento de usuarios de forma que al final del 2º año, tengamos unos 11.300 usuarios al mes.
 
-#### A los 6 meses
-- Escalado a 4 instancias → **272,64 €**
-- Tráfico de 2.692 usuarios (~2,2 TB mensuales) → **1.595,82 €**
-- Backups mensuales (100 GB) → **12 €**
-- Logs (5 GB/mes) → **15 €**
-- **Total infraestructura (6 meses)**: **1.895,46 €**
 
-#### Al año
-- Escalado a 8 instancias → **1.090,56 €**
-- Tráfico de 5.392 usuarios (~4,6 TB/mes) → **4.738,20 €**
-- Backups mensuales (200 GB) → **36 €**
-- Logs (10 GB/mes) → **45 €**
-- **Total infraestructura (1 año)**: **5.909,76 €**
+| Trimestre      | Número de Instancias (Coste) | Número de Usuarios | Tráfico de Red         | Logs Adicionales       | Backups              | Total Trimestre     | Total Acumulado     |
+|----------------|------------------------------|--------------------|------------------------|------------------------|----------------------|----------------------|----------------------|
+| Trimestre 2    | 2 → 89,94 €                  | 1.500              | 1 TB (108,35 €)        | 6,75 GB → 3,38 €       | 50 GB → 0,75 €       | 202,42 €             | 202,42 €             |
+| Trimestre 3    | 4 → 179,88 €                 | 2.281              | 1 TB (108,46 €)        | 10,96 GB → 5,48 €      | 60 GB → 0,90 €       | 294,72 €             | 497,14 €            |
+| Trimestre 4    | 6 → 269,82 €                 | 3.470              | 1 TB (108,46 €)        | 16,23 GB → 8,11 €      | 75 GB → 1,13 €       | 387,52 €             | 884,66 €             |
+| Trimestre 5    | 8 → 359,76 €                 | 5.277              | 1 TB (108,46 €)        | 24,59 GB → 12,29 €     | 100 GB → 1,50 €      | 481,01 €             | 1.365,67 €           |
+| Trimestre 6    | 10 → 449,70 €                | 8.025              | 2 TB (207,78 €)        | 37,28 GB → 18,64 €     | 150 GB → 2,25 €      | 678,37 €             | 2.044,04 €           |
+| Trimestre 7    | 12 → 539,64 €                | 12.206             | 2 TB (207,78 €)        | 56,56 GB → 28,28 €     | 200 GB → 3,00 €      | 778,70 €             | 2.822,74 €           |
+| Trimestre 8    | 14 → 629,58 €                | 18.563             | 3 TB (308,20 €)        | 86,53 GB → 43,27 €     | 300 GB → 4,50 €      | 985,55 €             | 3.808,29 €           |
 
-#### A los 2 años
-- Tráfico de 11.278 usuarios (~10 TB/mes) → **24.383,76 €**
-- Escalado continuo de instancias (conservador): **2.181,12 €**
-- Backups mensuales (400 GB) → **132 €**
-- Logs (15 GB/mes) → **135 €**
-- **Total infraestructura (2 años)**: **26.831,88 €**
+
+Se van a usar instancias `e2-standard-2` que estaran funcionando 24/7.
+
+Para calcular el trafico de red que soportara nuestra aplicacion, se han estimado unos 50 MB/mes por usuario, con un crecimiento del 15% al mes en cuanto a los usuarios.
+
 
 ---
 
 ### 3.2 Costes de Atención al Cliente y Soporte Técnico
 
-A medida que aumenta la base de usuarios, es necesario incorporar personal dedicado a resolver incidencias, responder dudas y mejorar la experiencia del usuario.
+A medida que la base de usuarios crece, también lo hacen las demandas de soporte y atención al cliente. Es necesario incorporar personal especializado para resolver incidencias, responder dudas y asegurar una buena experiencia para los usuarios. El aumento de empleados se realizará progresivamente, ajustándose al incremento de usuarios y tráfico. Así, se garantiza que el servicio se mantenga eficiente y de calidad a medida que la plataforma escala, sin que el volumen de solicitudes afecte la satisfacción del usuario.
 
-- Se estima un coste por empleado de soporte de **3.031 €/mes**, en jornada completa (40h/semana).
+- Se estima un coste por empleado de soporte de **1.515,50 €/mes**, en jornada parcial (40h/semana) según los datos obtenidos de https://www.getmanfred.com.
 
-#### A la semana del lanzamiento
-- 2 empleados dedicados → **700 €** (coste prorrateado semanal)
+|Criterios de  búsqueda en  manfred | Estimación  salario bruto anual | Estimación  salario bruto por mes | Coste total por mes (contribuciones sociales del 33,4%) |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------: | :---------------------------------: | ------------------------------- |
+|**Rol**: Customer Service & Support  **Experiencia**:  menos de dos años  **Idiomas**: Inglés nivel intermedio   | 15.600 €   | 1.300 € | 1.734,2 € |
+|
 
-#### A los 6 meses
-- 2 empleados trabajando a tiempo completo → **36.372 €**
+Coste total por trimestre:
 
-#### Al año
-- Ampliación a 4 empleados → **109.116 €**
-
-#### A los 2 años
-- Ampliación a 8 empleados → **254.604 €**
+| Trimestre     | Número de Empleados | Total Trimestre   | Total Acumulado |
+|----------------|---------------------|------------------|-----------------|
+| Trimestre 2    | 2                   | 10.405,20 €      | 10.405,20 €     |
+| Trimestre 3    | 2                   | 10.405,20 €      | 20.810,40 €     |
+| Trimestre 4    | 3                   | 15.607,80 €      | 36.418,20 €     |
+| Trimestre 5    | 3                   | 15.607,80 €      | 52.026,00 €     |
+| Trimestre 6    | 4                   | 20.810,40 €      | 72.836,40 €     |
+| Trimestre 7    | 4                   | 20.810,40 €      | 93.646.80 €     |
+| Trimestre 8    | 5                   | 26.013,00 €      | 119.659,80 €    |
 
 ---
 
 ### 3.3 Costes de Herramientas y Servicios de Mantenimiento
 
-Estas herramientas permiten mantener el sistema en condiciones óptimas de rendimiento, registrar eventos y automatizar procesos (incluidos chatbots).
+Estas herramientas son esenciales para mantener el sistema funcionando de manera eficiente, permitiendo supervisar su rendimiento, registrar eventos importantes y automatizar procesos. Esto incluye desde la monitorización en tiempo real hasta la automatización de tareas repetitivas, como la gestión de flujos de trabajo o la interacción mediante chatbots, lo que mejora tanto la productividad como la experiencia del usuario. A diferencia de otros costes operativos que pueden escalar con el número de usuarios o la carga del sistema, estos gastos se mantendrán en principio constantes en el tiempo, salvo que se superen los límites incluidos en los planes contratados. Por tanto, la categoría de herramientas y mantenimiento del sistema se considera un coste fijo predecible dentro del desglose de costes del proyecto. A continuación, se detallan los costes asociados a estas herramientas a lo largo del tiempo.
 
-#### A la semana del lanzamiento
-- Monitorización (Google Cloud Monitoring): **10 €**
-- Automatización básica: **0 €** (plan gratuito)
+Para la monitorización del sistema se utilizará el plan de pago de **Google Cloud Monitoring**, con un coste mensual de **40 €**. Este servicio permite supervisar el estado de los recursos en la nube, detectar fallos en tiempo real y recibir alertas personalizadas, lo cual es fundamental para garantizar la disponibilidad y fiabilidad de la plataforma.
 
-#### A los 6 meses
-- Monitorización continua (40 €/mes) → **240 €**
-- Automatización (plan estándar, 50 €/mes) → **300 €**
-- **Total herramientas (6 meses)**: **540 €**
+Para la automatización básica se utilizará el **plan estándar** (50 €/mes) durante los primeros **4 trimestres**, lo cual cubrirá las necesidades iniciales del proyecto. A partir del **segundo año**, se cambiará al **plan premium** (300 €/mes), que ofrece mayores capacidades y funcionalidades, adaptándose al crecimiento de usuarios y la complejidad de los procesos automatizados.
 
-#### Al año
-- Monitorización: **480 €**
-- Automatización (plan avanzado, 100 €/mes) → **1.200 €**
-- **Total herramientas (1 año)**: **1.680 €**
-
-#### A los 2 años
-- Monitorización: **960 €**
-- Automatización: **1.200 €**
-- **Total herramientas (2 años)**: **2.160 €**
+| Trimestre     | Monitorización | Automatización | Total Trimestre | Total Acumulado |
+|---------------|----------------|----------------|------------------|------------------|
+| Trimestre 2   | 120 €          | 150 €          | 270 €           | 270 €           |
+| Trimestre 3   | 120 €          | 150 €          | 270 €           | 540 €           |
+| Trimestre 4   | 120 €          | 150 €          | 270 €           | 810 €           |
+| Trimestre 5   | 120 €          | 150 €          | 270 €           | 1.080 €         |
+| Trimestre 6   | 120 €          | 300 €          | 420 €           | 1.500 €         |
+| Trimestre 7   | 120 €          | 300 €          | 420 €           | 1.920 €         |
+| Trimestre 8   | 120 €          | 300 €          | 420 €           | 2.340 €         |
 
 ---
 
-### 3.4 Resumen de Costes Post-Lanzamiento
+### 3.4 Costes de Publicidad y Marketing
+Los costes de publicidad y marketing que se recogen en este apartado son la continuación de los gastos iniciales realizados durante la fase de desarrollo. Como se mencionó en el apartado 2.7, se estima un gasto mensual de **2.025 €**. Además, se pretende tener a un empleado de marketing a tiempo parcial (20h/semana) para gestionar la estrategia de marketing y publicidad.
 
-| Periodo    | Infraestructura | Soporte técnico | Herramientas y mantenimiento | **Total (€)** |
-|------------|-----------------|-----------------|------------------------------|---------------|
-| 1 semana   | 86,36 €         | 700 €           | 10 €                         | **796,36 €**  |
-| 6 meses    | 1.895,46 €      | 36.372 €        | 540 €                        | **38.807,46 €** |
-| 1 año      | 5.909,76 €      | 109.116 €       | 1.680 €                      | **116.705,76 €** |
-| 2 años     | 26.831,88 €     | 254.604 €       | 2.160 €                      | **283.595,88 €** |
+|Criterios de  búsqueda en  manfred | Estimación  salario bruto anual | Estimación  salario bruto por mes | Coste total por mes (contribuciones sociales del 33,4%) |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------: | :---------------------------------: | ------------------------------- |
+|**Rol**: Content Marketing & Design  **Experiencia**:  menos de dos años| 8.300 € (16.600 € Jornada completa)   | 691,67 € | 922,68 € |
+|
 
-> Todos los valores incluyen IVA estimado y reflejan un crecimiento realista de usuarios (15% mensual), así como necesidades técnicas y humanas correspondientes.
+| Trimestre     | Costes de marketing | Costes nómina | Costes Totales| Coste Acumulado|
+|---------------|---------------------|---------------|---------------|----------------|
+| Trimestre 1   | 6.075 €             | 922,68 €      | 6.997,68 €    | 6.997,68 €     |
+| Trimestre 2   | 6.075 €             | 922,68 €      | 6.997,68 €    | 13.995,36 €    |
+| Trimestre 3   | 6.075 €             | 922,68 €      | 6.997,68 €    | 20.993,04 €    |
+| Trimestre 4   | 6.075 €             | 922,68 €      | 6.997,68 €    | 27.990,72 €    |
+| Trimestre 5   | 6.075 €             | 922,68 €      | 6.997,68 €    | 34.988,40 €    | 
+| Trimestre 6   | 6.075 €             | 922,68 €      | 6.997,68 €    | 41.986,08 €    |
+| Trimestre 7   | 6.075 €             | 922,68 €      | 6.997,68 €    | 48.983,76 €    |
 
+
+### 3.5 Costes de Nutricionistas
+Los costes de nutricionistas se han calculado en función de la necesidad de realizar consultas periódicas para la elaboración de recetas personalizadas. 
+
+| Estimación  salario bruto anual | Estimación  salario bruto por mes | Coste total por mes (contribuciones sociales del 33,4%) |
+| :------------------------------: | :---------------------------------: | ------------------------------- |
+| 24.000 € | 2.000,00 € | 2.668,00 € |
+|
+
+Coste total por trimestre:
+
+| Trimestre     | Número de Empleados | Total Trimestre   | Total Acumulado |
+|---------------|---------------------|-------------------|-----------------|
+| Trimestre 2   | 1                   | 8.004,00 €        | 8.004,00 €      |
+| Trimestre 3   | 2                   | 16.008,00 €       | 24.012,00 €     |
+| Trimestre 4   | 2                   | 16.008,00 €       | 40.0200,00 €    |
+| Trimestre 5   | 3                   | 24.012,00 €       | 64.032,00 €     |
+| Trimestre 6   | 3                   | 24.012,00 €       | 88.044,00 €     |
+| Trimestre 7   | 4                   | 32.016,00 €       | 120.060,00 €    |
+| Trimestre 8   | 4                   | 32.016,00 €       | 152.076,00 €    |
+
+### 3.6 Resumen de Costes Post-Lanzamiento
+
+| Trimestre     | Infraestructura  | Soporte técnico   | Herramientas y mantenimiento | Costes de Marketing | Costes de Nutricionistas| **Total Trimestre** | **Total Acumulado** |
+|---------------|------------------|-------------------|------------------------------|---------------------|-------------------------|---------------------|---------------------|
+| Trimestre 1 (costes de desarrollo)   |                  |                   |                              | |                      | 57904,55 €          | 57.904,55 €         |
+| Trimestre 2   | 202,42 €         | 10.405,20 €       | 270 €                        | 6.997,68 €          | 8.004,00 €              | 25.879,30 €         | 83.783,85 €         |
+| Trimestre 3   | 294,72 €         | 10.405,20 €       | 270 €                        | 6.997,68 €          | 16.008,00 €             | 33.975,60 €         | 117.759,45 €        |
+| Trimestre 4   | 387,52 €         | 15.607,80 €       | 270 €                        | 6.997,68 €          | 16.008,00 €             | 39.271,00 €         | 157.030,45 €        |
+| Trimestre 5   | 481,01 €         | 15.607,80 €       | 270 €                        | 6.997,68 €          | 24.012,00 €             | 47.368,49 €         | 204.398,94 €        |
+| Trimestre 6   | 678,37 €         | 20.810,40 €       | 420 €                        | 6.997,68 €          | 24.012,00 €             | 52.918,45 €         | 250.317,39 €        |
+| Trimestre 7   | 778,70 €         | 20.810,40 €       | 420 €                        | 6.997,68 €          | 32.016,00 €             | 61.022,78 €         | 318.340,00 €        |
+| Trimestre 8   | 985,55 €         | 26.013,00 €       | 420 €                        | 6.997,68 €          | 32.016,00 €             | 66.432,23 €         | 384.772,40 €        |
 
 ## 4. Análisis de Ingresos Post-Lanzamiento
 
-En este apartado se realiza un análisis progresivo del comportamiento de los ingresos de la aplicación **Infantem** desde su lanzamiento. Se examinan cuatro hitos temporales: **semana 1**, **6 meses**, **1 año** y **2 años** después del lanzamiento.
+En este apartado se lleva a cabo un análisis detallado y progresivo del comportamiento de los ingresos generados por la aplicación Infantem desde su lanzamiento al mercado. El objetivo es comprender la evolución económica del proyecto a lo largo del tiempo, identificando tendencias, puntos críticos y el impacto del crecimiento de la base de usuarios en las distintas fuentes de monetización. Se estudian los costes para cada trimestre.
 
-Las tres vías de monetización (suscripciones premium, publicidad y marketplace) presentan comportamientos distintos en función del crecimiento de la base de usuarios. Para este análisis, se parte de un escenario **realista** con un crecimiento mensual de usuarios del **15%**.
+La aplicación Infantem cuenta con tres canales principales de generación de ingresos: suscripciones premium, publicidad in-app y un marketplace asociado a productos para bebés y alimentación infantil. Cada una de estas vías presenta un comportamiento particular en función del volumen de usuarios activos, la tasa de conversión y el nivel de interacción con la plataforma.
 
----
+Para este análisis se plantea un escenario realista, basado en una hipótesis de crecimiento mensual sostenido del 10.5% en la base de usuarios, lo que permite proyectar ingresos de forma coherente con el comportamiento habitual de aplicaciones móviles en fase de escalado. Esta previsión sirve como marco para estimar el rendimiento económico de cada vía de monetización y evaluar la viabilidad financiera del proyecto a medio y largo plazo.
 
-### 4.1 Semana 1: Inicio prometedor
+Para estudiar los ingresos por usuarios premium deberemos multiplicar los usuarios trimestrales por el procentage de conversion. Para el primer año usaremos (P: 3%, R: 5%, O: 8%), mientras que en el segundo año usaremos (P: 8%, R: 12% , O: 15%)
 
-Durante la primera semana se ha registrado:
+Para estudiar el ingreso por publicidad se utilizará un sistema de **CPM (Coste Por Mil impresiones)**. Se usara un cpm de 5 para el caso pesimista, de 7 para el realista y de 9 para el optimista (€/Mil impresiones)
 
-- **Suscripciones premium**: 117,27 €
-- **Publicidad segmentada**: 55,28 €
-- **Marketplace**: 1.590,27 €
+Se  deben restar los **usuarios premium**, ya que no generan ingresos por publicidad. Además, se estima una media de **500 impresiones por usuario al mes** (IPM). Por tanto, la fórmula para calcular los ingresos mensuales por publicidad es la siguiente:
 
-**Total ingresos semana 1**: **1.762,82 €**
+```txt
+Ingresos por publicidad = 
+    (CPM * 3 * ImpresionesAlMes * (UsuariosTotales - UsuariosPremium)) / 1000
+```
 
-> Aunque las suscripciones y publicidad aún son limitadas, el marketplace proporciona una base sólida de ingresos. Se demuestra viabilidad comercial inmediata.
+Para el marketplace supondremos que el 3% de nuestros usuarios mensuales hacen una compra de un ticket medio de 25 € de la cual nos llevaremos una comision del 15%.
 
----
 
-### 4.2 6 Meses Post-Lanzamiento: Consolidación
+### 4.1 Trimestre 2
 
-A los seis meses, se observa una consolidación del producto y una mayor adopción por parte de usuarios:
+Para el 1º trimestre hay una estimación de 1350 usuarios al mes.
+Ingresos de marcketplace: 2.025,00 €
 
-- **Usuarios estimados**: 2.692
-- **Usuarios premium**: 188 → 5.622,72 €
-- **Publicidad**: 2.894,46 €
-- **Marketplace**: 76.536 €
+- **Caso Pesimista**
+  - Nº de usuarios premium: 40 usuarios premium.
+  - Ingresos de plan premium: 600 €
+  - Ingresos de publicidad: 1572 €
+  
+- **Caso Realista**
+  - Nº de usuarios premium: 67 usuarios premium.
+  - Ingresos de plan premium: 1002 €
+  - Ingresos de publicidad: 4618  €
+  
+- **Caso Optimista**
+  - Nº de usuarios premium: 108 usuarios premium.
+  - Ingresos de plan premium: 1617 €
+  - Ingresos de publicidad: 10432  €
 
-**Total ingresos 6 meses**: **85.053,18 €**
 
-> El crecimiento orgánico permite una mejora considerable en los ingresos, siendo el marketplace la vía dominante. Las suscripciones comienzan a adquirir peso relativo.
+### 4.2 Trimestre 3
 
----
+Para el 2º trimestre hay una estimación de 2.692 usuarios al mes.
+Ingresos de marcketplace: 4.038,00 €
 
-### 4.3 1 Año Post-Lanzamiento: Rentabilidad clara
+- **Caso Pesimista**
+  - Nº de usuarios premium: 80 usuarios premium.
+  - Ingresos de plan premium: 1209 €
+  - Ingresos de publicidad: 3.134  €
+  
+- **Caso Realista**
+  - Nº de usuarios premium: 134 usuarios premium.
+  - Ingresos de plan premium: 2013 €
+  - Ingresos de publicidad: 9.208  €
+  
+- **Caso Optimista**
+  - Nº de usuarios premium: 215 usuarios premium.
+  - Ingresos de plan premium: 3222 €
+  - Ingresos de publicidad: 20.806  €
 
-Tras un año completo, se consolida una base fiel de usuarios y el modelo freemium empieza a ser más rentable:
 
-- **Usuarios estimados**: 5.392
-- **Usuarios premium**: 377 → 22.562,76 €
-- **Publicidad**: 11.595 €
-- **Marketplace**: 306.696 €
+### 4.3 Trimestre 4
 
-**Total ingresos 1 año**: **340.853,76 €**
+Para el 3º trimestre hay una estimación de 4.030 usuarios al mes.
+Ingresos del marketplace: 6.045,00 €
 
-> El modelo alcanza una fase rentable sostenida. El volumen de compras en el marketplace muestra un altísimo potencial. La retención en suscripciones se vuelve crítica.
+- **Caso Pesimista**
+  - Nº de usuarios premium: 120 usuarios premium.
+  - Ingresos de plan premium: 1809 €
+  - Ingresos de publicidad: 4.692  €
 
----
+- **Caso Realista**
+  - Nº de usuarios premium: 201 usuarios premium.
+  - Ingresos de plan premium: 3015 €
+  - Ingresos de publicidad: 13.784  €
 
-### 4.4 2 Años Post-Lanzamiento: Escalado sostenido
+- **Caso Optimista**
+  - Nº de usuarios premium: 322 usuarios premium.
+  - Ingresos de plan premium: 4824 €
+  - Ingresos de publicidad: 31.146  €
 
-A los dos años, se estima un crecimiento constante:
 
-- **Usuarios estimados**: 11.278
-- **Usuarios premium**: ~790 → 47.317,20 €
-- **Publicidad**: 21.507,12 €
-- **Marketplace**: 636.912 €
+### 4.4 Trimestre 5
 
-**Total ingresos 2 años**: **705.736,32 €**
+Para el 4º trimestre hay una estimación de 5.392 usuarios al mes.
+Ingresos del marketplace: 8.088,00  €
 
-> En este punto, la aplicación alcanza un nivel de madurez. El marketplace representa el 90% de los ingresos, seguido por suscripciones. La rentabilidad permite reinversión y expansión a nuevos mercados o servicios.
+- **Caso Pesimista**
+  - Nº de usuarios premium: 161 usuarios premium.
+  - Ingresos de plan premium: 2421 €
+  - Ingresos de publicidad: 12.554  €
+
+- **Caso Realista**
+  - Nº de usuarios premium: 269 usuarios premium.
+  - Ingresos de plan premium: 4035 €
+  - Ingresos de publicidad: 30.738  €
+
+- **Caso Optimista**
+  - Nº de usuarios premium: 431 usuarios premium.
+  - Ingresos de plan premium: 6456 €
+  - Ingresos de publicidad: 71.438  €
+
+### 4.5 Trimestre 6
+
+Para el 5º trimestre hay una estimación de 6.925 usuarios al mes.
+Ingresos del marketplace: 10.387,50  €
+
+- **Caso Pesimista**
+  - Nº de usuarios premium: 554 usuarios premium.
+  - Ingresos de plan premium: 8292 €
+  - Ingresos de publicidad: 15.290 7645 €
+
+- **Caso Realista**
+  - Nº de usuarios premium: 831 usuarios premium.
+  - Ingresos de plan premium: 12440 €
+  - Ingresos de publicidad:  36.564  €
+
+- **Caso Optimista**
+  - Nº de usuarios premium: 554 usuarios premium.
+  - Ingresos de plan premium: 15550 €
+  - Ingresos de publicidad: 91.742  €
+
+### 4.6 Trimestre 7
+
+Para el 6º trimestre hay una estimación de 8.755 usuarios al mes.
+Ingresos del marketplace: 13.132,50 €
+
+- **Caso Pesimista**
+  - Nº de usuarios premium: 700 usuarios premium.
+  - Ingresos de plan premium: 10482 €
+  - Ingresos de publicidad: 28.998  €
+  
+- **Caso Realista**
+  - Nº de usuarios premium: 1050 usuarios premium.
+  - Ingresos de plan premium: 15727 €
+  - Ingresos de publicidad: 64.722  €
+
+- **Caso Optimista**
+  - Nº de usuarios premium: 1313 usuarios premium.
+  - Ingresos de plan premium: 19659 €
+  - Ingresos de publicidad: 133.956  €
+
+### 4.7 Trimestre 8
+
+Para el 7º trimestre hay una estimación de 10.970 usuarios al mes.
+Ingresos del marketplace: 16.455,00 €
+
+- **Caso Pesimista**
+  - Nº de usuarios premium: 877 usuarios premium.
+  - Ingresos de plan premium: 13137 €
+  - Ingresos de publicidad: 36.334  €
+
+- **Caso Realista**
+  - Nº de usuarios premium: 1316 usuarios premium.
+  - Ingresos de plan premium: 10706 €
+  - Ingresos de publicidad: 81.092  €
+
+- **Caso Optimista**
+  - Nº de usuarios premium: 1645 usuarios premium.
+  - Ingresos de plan premium: 24633 €
+  - Ingresos de publicidad: 167.850  €
+
+### 4.8 Trimestre 9
+
+Para el 8º trimestre hay una estimación de 11.278 usuarios al mes.
+Ingresos del marketplace: 16.917,00 €
+
+- **Caso Pesimista**
+  - Nº de usuarios premium: 902 usuarios premium.
+  - Ingresos de plan premium: 13506 €
+  - Ingresos de publicidad: 37.352  €
+
+- **Caso Realista**
+  - Nº de usuarios premium: 1353 usuarios premium.
+  - Ingresos de plan premium: 20259 €
+  - Ingresos de publicidad: 83.370  €
+  
+- **Caso Optimista**
+  - Nº de usuarios premium: 1691 usuarios premium.
+  - Ingresos de plan premium: 25324 €
+  - Ingresos de publicidad: 172.566  €
+
+
+| Trimestre | Caso       | Premium (€) | Publicidad (€) | Marketplace (€) | Total Trimestre (€) | Acumulado (€) |
+|-----------|------------|-------------|----------------|------------------|----------------------|----------------|
+| T2        | Pesimista  | 600         | 1.572          | 2.025            | 4.197                | 4.197          |
+|           | Realista   | 1.002       | 4.618          | 2.025            | 7.645                | 7.645          |
+|           | Optimista  | 1.617       | 10.432         | 2.025            | 14.074               | 14.074         |
+| T3        | Pesimista  | 1.209       | 3.134          | 4.038            | 8.381                | 12.578         |
+|           | Realista   | 2.013       | 9.208          | 4.038            | 15.259               | 22.904         |
+|           | Optimista  | 3.222       | 20.806         | 4.038            | 28.066               | 42.140         |
+| T4        | Pesimista  | 1.809       | 4.692          | 6.045            | 12.546               | 25.124         |
+|           | Realista   | 3.015       | 13.784         | 6.045            | 22.844               | 45.748         |
+|           | Optimista  | 4.824       | 31.146         | 6.045            | 42.015               | 84.155         |
+| T5        | Pesimista  | 2.421       | 12.554         | 8.088            | 23.063               | 48.187         |
+|           | Realista   | 4.035       | 30.738         | 8.088            | 42.861               | 88.609         |
+|           | Optimista  | 6.456       | 71.438         | 8.088            | 86.982               | 171.137        |
+| T6        | Pesimista  | 8.292       | 7.645          | 10.387,50        | 26.324,50            | 74.511,50      |
+|           | Realista   | 12.440      | 36.564         | 10.387,50        | 59.391,50            | 148.000,50     |
+|           | Optimista  | 15.550      | 91.742         | 10.387,50        | 117.679,50           | 288.816,50     |
+| T7        | Pesimista  | 10.482      | 28.998         | 13.132,50        | 52.612,50            | 127.124        |
+|           | Realista   | 15.727      | 64.722         | 13.132,50        | 93.581,50            | 241.582        |
+|           | Optimista  | 19.659      | 133.956        | 13.132,50        | 226.747,50           | 515.564        |
+| T8        | Pesimista  | 13.137      | 36.334         | 16.455           | 65.926               | 193.050        |
+|           | Realista   | 10.706      | 81.092         | 16.455           | 108.253              | 349.835        |
+|           | Optimista  | 24.633      | 167.850        | 16.455           | 208.938              | 724.502        |
+| T9        | Pesimista  | 13.506      | 37.352         | 16.917           | 67.775               | 260.825        |
+|           | Realista   | 20.259      | 83.370         | 16.917           | 120.546              | 470.381        |
+|           | Optimista  | 25.324      | 172.566        | 16.917           | 214.807              | 939.309        |
 
 ---
 
 
 ## 5. Tabla de Beneficios Totales.
+En esta tabla no se muestran los beneficios acumulados.
 
-| Periodo           | CAPEX (€) | OPEX (€)  | TOTAL Costes (€) | Ingresos Pesimista (€) | Ingresos Realista (€) | Ingresos Optimista (€) | Beneficio Pesimista (€) | Beneficio Realista (€) | Beneficio Optimista (€) |
-|-------------------|-----------|-----------|-------------------|-------------------------|------------------------|-------------------------|--------------------------|-------------------------|--------------------------|
-| Semana 1 (Pre)    | 4.396     | 12,51     | 4.408,51          | 0                       | 0                      | 0                       | -4.408,51                | -4.408,51               | -4.408,51                |
-| Semana 5 (Pre)    | 11.019    | 50,04     | 11.069,04         | 0                       | 0                      | 0                       | -15.477,55               | -15.477,55              | -15.477,55               |
-| Semana 10 (Pre)   | 15.415    | 1.887,55  | 17.302,55         | 0                       | 0                      | 0                       | -32.780,10               | -32.780,10              | -32.780,10               |
-| Semana 15 (Pre)   | 12.768    | 262,55    | 13.030,55         | 0                       | 0                      | 0                       | -45.810,65               | -45.810,65              | -45.810,65               |
-| **Total Pre**     | **43.598**| **2.212,65**| **45.810,65**     | **0**                   | **0**                  | **0**                   | **-45.810,65**           | **-45.810,65**          | **-45.810,65**           |
-| Semana 1 (Post)   | 0         | 796,36    | 796,36            | 500                     | 1.762,82               | 3.000                   | -46.106,01               | -44.843,19              | -43.606,01               |
-| 6 Meses Post      | 0         | 38.807,46 | 38.807,46         | 35.000                  | 85.053,18              | 120.000                 | -49.913,47               | -3.597,47               | 30.193,99                |
-| 1 Año Post        | 0         | 116.705,76| 116.705,76        | 100.000                 | 340.853,76             | 600.000                 | -66.619,23               | 221.555,29              | 513.488,23               |
-| 2 Años Post       | 0         | 283.595,88| 283.595,88        | 200.000                 | 705.736,32             | 1.200.000               | -150.215,11              | 422.140,44              | 1.429.892,35             |
+| Periodo           | CAPEX (€) | OPEX (€)  | TOTAL Costes (€) | Ingresos Pesimista (€) | Ingresos Realista (€) | Ingresos Optimista (€) | Beneficio Realista (€) |
+|-------------------|-----------|-----------|-------------------|-------------------------|------------------------|-------------------------|--------------------------|
+| Trimestre 1    | 49.843,01     | 7.199,15     |    57904,55       |     0                |  0                  |        0             | -57.904,55               |
+| Trimestre 2    |  0   | 25.879,30     | 25.879,30         | 4.197                       | 7.645                    | 14.074                       | -18.234,30               |
+| Trimestre 3   |  0   | 33.975,60  | 33.975,60         | 8.381                      | 15.259                      | 28.066                       | -18.716,30               |
+| Trimestre 4   | 0    | 39.271,00    | 39.271,00         | 12.546                       | 22.844                     | 	42.015                       | -16.427               |
+| Trimestre 5    | 0         | 47.368,49    | 47.368,49            | 23.063                     | 42.861              | 86.982                   | -4.507,49               | 
+| Trimestre 6       | 0         | 52.918,45 | 52.918,45         | 26.324,50                  | 59.391,50              | 117.679,50                 | 6473,05              |
+| Trimestre 7        | 0         | 61.022,78| 61.022,78        | 52.612,50                 | 93.581,50             | 		226.747,50                 | 32.558,72               |
+| Trimestre 8       | 0         | 66.432,23| 66.432,23        | 65.926               | 108.253             | 208.938              | -150.215,11              | 41820,77              |
 
 > Nota: Los ingresos post-lanzamiento provienen de tres canales: suscripciones Premium, publicidad segmentada y comisiones del Marketplace. Los costes incluyen infraestructura, soporte técnico, mantenimiento, diseño, expertos y marketing.
+---
+
 
 ## 6. Conclusión
 
-El proyecto **Infantem** ha demostrado ser económicamente **viable y escalable** desde el inicio. A pesar de una inversión significativa durante las primeras 15 semanas (CAPEX + OPEX de 88.730,38 €), los ingresos generados tras el lanzamiento superan con creces los costes operativos, alcanzando beneficios positivos ya en la primera semana.
+El proyecto **Infantem** ha demostrado ser económicamente **viable y escalable**, puesto que consigue un retorno de la invesión a partir del noveno trimestre. A pesar de una inversión significativa durante las primeras 15 semanas (CAPEX + OPEX de 88.730,38 €), sumado a grandes costes operativos en los primeros trimestres, el modelo de negocio se sostiene gracias a un crecimiento sostenido de la base de usuarios y una diversificación de ingresos.
 
 El enfoque de monetización múltiple —suscripciones, publicidad y marketplace— ofrece un modelo equilibrado y diversificado, donde el **marketplace se consolida como el motor principal de ingresos**. Este modelo permite una recuperación rápida de la inversión y abre la puerta a una **expansión sostenible** a medio y largo plazo.
 
@@ -491,11 +685,9 @@ El enfoque de monetización múltiple —suscripciones, publicidad y marketplace
 
 ## 7. Análisis de Rentabilidad
 
-- **Punto de equilibrio**: Se alcanza en el mes 6 (escenario realista), con un beneficio neto de **+46.245,72 €**, superando así los costes acumulados del desarrollo inicial.
-- **ROI al año**: A los 12 meses, el beneficio neto es de **+224.148 €**, multiplicando por 2,5 la inversión inicial.
-- **ROI a 2 años**: A los 24 meses, se alcanza un beneficio neto acumulado de **+422.140 €**, cuadruplicando la inversión inicial.
-
-Esto significa que el retorno de inversión es **acelerado** y mejora exponencialmente con el crecimiento de la base de usuarios. El **bajo coste marginal** de cada nuevo usuario (gracias al modelo digital) permite escalar sin necesidad de grandes inversiones adicionales.
+- **Punto de equilibrio**: Se alcanza en noveno trimestre (escenario realista).
+- **ROI al año**: A los 12 meses, el beneficio neto es de **-111.282,15 €**, por lo que la invesión no se sigue en pérdidas. Sin embargo, se ha recuperado la invesión inicial de desarrollo.
+- **ROI a 2 años**: A los 24 meses, se alcanza un beneficio neto acumulado de **-76757,87 €**. Por ello, el retorno de inversión se realiza durante el noveno trimestre, momento a partir del cual el proyecto genera beneficios netos positivos. 
 
 ---
 
@@ -504,11 +696,11 @@ Esto significa que el retorno de inversión es **acelerado** y mejora exponencia
 - **Fase Pre-Lanzamiento**: Requiere una inversión considerable para diseñar, construir y posicionar la app. Aunque no genera ingresos en esta fase, se asientan las bases de la rentabilidad futura.
 - **Semana 1 Post-Lanzamiento**: Ya se alcanza un beneficio neto positivo (**+966,46 €**), lo que valida el producto y su acogida en el mercado.
 - **6 Meses**: Se evidencia una consolidación del modelo con ingresos estables y aumento progresivo de usuarios Premium.
-- **1 Año**: El negocio se vuelve claramente rentable. Todas las fuentes de ingreso contribuyen de manera significativa.
-- **2 Años**: Se alcanza una **madurez de mercado**, con ingresos superiores a 700.000 € y rentabilidad sostenida, lo que abre la posibilidad de expandirse a nuevos servicios o mercados.
+- **1 Año**: El negocio sigue en pérdidas pero con un crecimiento sostenido, recuperando la inversión inicial de desarrollo.
+- **2 Años**: Se alcanza una **madurez de mercado**, con ingresos estables y un retorno de la inversión a partir del noveno trimestre. 
 
 ---
 
-### 9. Conclusión final
+### 10. Conclusión final
 
 **Infantem es un proyecto con rentabilidad comprobada, potencial de crecimiento y retorno acelerado de inversión.** El diseño estratégico del modelo de negocio, centrado en valor añadido para las familias, permite generar beneficios sostenibles y escalar sin comprometer la experiencia del usuario.
