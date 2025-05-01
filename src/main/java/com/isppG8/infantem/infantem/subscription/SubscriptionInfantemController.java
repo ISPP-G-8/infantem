@@ -271,7 +271,7 @@ public class SubscriptionInfantemController {
             // Guardar en tu base de datos
             User user = userRepository.findById(userId)
                     .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-            
+
             userService.upgradeToPremium(user);
 
             SubscriptionInfantem newSubscription = new SubscriptionInfantem();
