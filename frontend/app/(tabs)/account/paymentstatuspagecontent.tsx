@@ -3,6 +3,7 @@ import { useStripe } from '@stripe/react-stripe-js';
 import { getToken } from '../../../utils/jwtStorage';
 import { jwtDecode } from 'jwt-decode';
 import { useRouter } from 'expo-router'; // 👈 Añadido
+import { useAuth } from "../../../context/AuthContext";
 
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 const priceId = "price_1R4hyZRD1fD8EiuBaXzXdw9p";
@@ -14,6 +15,7 @@ const PaymentStatusPage: React.FC = () => {
   const [hasCreatedSubscription, setHasCreatedSubscription] = useState(false);
   const [jwt, setJwt] = useState<string>("");
   const [userId, setUserId] = useState<number | null>(null);
+  const { updateToken, checkAuth } = useAuth(); 
 
   useEffect(() => {
     const getUserToken = async () => {
@@ -51,6 +53,13 @@ try {
   });
 
   if (res.ok) {
+    const data = await res.json();
+    const newToken = data.token?.token;
+
+    if (newToken) {
+      await updateToken(newToken); // guarda el nuevo token y actualiza el contexto
+      await checkAuth(); // fuerza la recarga del usuario (rol actualizado)
+    }
     setMessage("¡Suscripción activada con éxito!");
     setHasCreatedSubscription(true);
     setTimeout(() => {
