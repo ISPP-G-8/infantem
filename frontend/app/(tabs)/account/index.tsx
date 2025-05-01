@@ -13,6 +13,8 @@ import {
 } from "react-native";
 import UploadImageModal from "../../../components/UploadImageModal";
 import { useAuth } from "../../../context/AuthContext";
+import { profile } from "console";
+import { set } from "date-fns";
 
 const avatarOptions = [
   require("../../../assets/avatar/avatar1.png"),
@@ -34,7 +36,7 @@ export default function Account() {
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const gs = require("../../../static/styles/globalStyles");
   const { user, token, setUser, updateToken, signOut } = useAuth();
-  const [image, setImage] = useState<any>(null);
+  const [image, setImage] = useState<any>(user?.profilePhotoRoute);
   const [imageBase64, setImageBase64] = useState<any>(null);
 
   const [nameError, setNameError] = useState<string | null>(null);
@@ -74,7 +76,9 @@ export default function Account() {
       setUsernameError("El nombre de usuario no puede estar vacío.");
       isValid = false;
     } else if (user.username.length < 3 || user.username.length > 50) {
-      setUsernameError("El nombre de usuario debe tener entre 3 y 50 caracteres.");
+      setUsernameError(
+        "El nombre de usuario debe tener entre 3 y 50 caracteres."
+      );
       isValid = false;
     }
 
@@ -152,7 +156,6 @@ export default function Account() {
               ? userData.profilePhoto
               : `data:image/jpeg;base64,${userData.profilePhoto}`
           );
-
         }
         // Si viene como array de bytes, convertirlo a base64
         else if (Array.isArray(userData.profilePhoto)) {
@@ -163,8 +166,7 @@ export default function Account() {
           }
           const base64 = btoa(binary);
           setImageBase64(`data:image/jpeg;base64,${base64}`);
-        }
-        else if (userData.profilePhoto == null) {
+        } else if (userData.profilePhoto == null) {
           setImageBase64(null);
         }
       }
@@ -201,6 +203,7 @@ export default function Account() {
           surname: user.surname,
           username: user.username,
           email: user.email,
+          profilePhotoRoute: user.profilePhotoRoute,
         }),
       });
 
@@ -229,6 +232,8 @@ export default function Account() {
       }
 
       setIsEditing(false);
+      console.log("Cambios guardados:", data);
+      console.log("datos del usuario:", user);
       Alert.alert(
         "Perfil actualizado",
         "Los cambios han sido guardados correctamente"
@@ -288,7 +293,6 @@ export default function Account() {
         }
       );
 
-
       if (!response.ok) {
         const errorText = await response.text();
         throw new Error(errorText);
@@ -303,13 +307,10 @@ export default function Account() {
       }
 
       return photoData;
-
     } catch (error) {
       console.error("Error al subir/eliminar la foto de perfil:", error);
     }
   };
-  
-
 
   function base64toBlob(base64Data, contentType = "image/png") {
     const byteCharacters = atob(base64Data);
@@ -327,7 +328,6 @@ export default function Account() {
 
     return new Blob(byteArrays, { type: contentType });
   }
-
 
   const uploadImage = async () => {
     try {
@@ -366,9 +366,8 @@ export default function Account() {
         } else {
           console.log("Imagen URI válida:", imageUri);
           saveImage(imageUri);
-
         }
-      } 
+      }
     } catch (err) {
       alert("Error al abrir la galería: " + err.message);
       setAvatarModalVisible(false);
@@ -385,7 +384,6 @@ export default function Account() {
     }
   };
 
-
   const saveImage = async (image) => {
     try {
       if (image) {
@@ -395,7 +393,7 @@ export default function Account() {
         console.log("Imagen base64:", base64Image);
         setAvatarModalVisible(false);
       } else {
-        setImage(null);
+        setUser((user) => ({ ...user, profilePhotoRoute: null }));
         setImageBase64(null);
         console.log("Imagen eliminada");
         setAvatarModalVisible(false);
@@ -500,17 +498,20 @@ export default function Account() {
           />
         </TouchableOpacity>
 
-        {isEditing &&
-          <TouchableOpacity onPress={() => isEditing && setAvatarModalVisible(true)} disabled={!isEditing}>
+        {isEditing && (
+          <TouchableOpacity
+            onPress={() => isEditing && setAvatarModalVisible(true)}
+            disabled={!isEditing}
+          >
             <Text style={gs.changeImageText}>Cambiar foto de perfil</Text>
           </TouchableOpacity>
-        }
+        )}
 
         <UploadImageModal
           visible={avatarModalVisible}
           onClose={() => setAvatarModalVisible(false)}
-          onGalleryPress={() => uploadImage('update')}
-          onDeletePress={() => uploadImage('delete')}
+          onGalleryPress={() => uploadImage()}
+          onDeletePress={() => deleteImage()}
         />
 
         {user && (
@@ -545,7 +546,9 @@ export default function Account() {
               editable={isEditing}
               onChangeText={(text) => setUser({ ...user, name: text })}
             />
-            {nameError && <Text style={{ color: "red", marginTop: 5 }}>{nameError}</Text>}
+            {nameError && (
+              <Text style={{ color: "red", marginTop: 5 }}>{nameError}</Text>
+            )}
 
             {/* Apellido */}
             <Text
@@ -577,7 +580,9 @@ export default function Account() {
               editable={isEditing}
               onChangeText={(text) => setUser({ ...user, surname: text })}
             />
-            {surnameError && <Text style={{ color: "red", marginTop: 5 }}>{surnameError}</Text>}
+            {surnameError && (
+              <Text style={{ color: "red", marginTop: 5 }}>{surnameError}</Text>
+            )}
 
             {/* Nombre de Usuario */}
             <Text
@@ -609,7 +614,11 @@ export default function Account() {
               editable={isEditing}
               onChangeText={(text) => setUser({ ...user, username: text })}
             />
-            {usernameError && <Text style={{ color: "red", marginTop: 5 }}>{usernameError}</Text>}
+            {usernameError && (
+              <Text style={{ color: "red", marginTop: 5 }}>
+                {usernameError}
+              </Text>
+            )}
 
             {/* Correo Electrónico */}
             <Text
@@ -641,7 +650,9 @@ export default function Account() {
               editable={isEditing}
               onChangeText={(text) => setUser({ ...user, email: text })}
             />
-            {emailError && <Text style={{ color: "red", marginTop: 5 }}>{emailError}</Text>}
+            {emailError && (
+              <Text style={{ color: "red", marginTop: 5 }}>{emailError}</Text>
+            )}
           </>
         )}
         {user && user.role !== "admin" && (
