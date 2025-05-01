@@ -115,6 +115,7 @@ public class SubscriptionInfantemService {
                 .setDefaultPaymentMethod(paymentMethodId).build();
 
         Subscription stripeSubscription = Subscription.create(params);
+        userService.upgradeToPremium(user);
 
         // Guardar en base de datos local
         SubscriptionInfantem newSubscription = new SubscriptionInfantem();
