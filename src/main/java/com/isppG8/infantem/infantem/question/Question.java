@@ -3,6 +3,9 @@ package com.isppG8.infantem.infantem.question;
 import com.isppG8.infantem.infantem.intake.Intake;
 import com.isppG8.infantem.infantem.baby.Baby;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -42,10 +45,12 @@ public class Question {
 
     @ManyToOne
     @JoinColumn(name = "intake_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Intake intake;
 
     @ManyToOne
     @JoinColumn(name = "baby_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Baby baby;
 
 }
