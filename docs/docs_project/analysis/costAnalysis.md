@@ -40,6 +40,11 @@
 --- 
 
 ## Colaboradores del documento
+- David Fuentelsaz Rodríguez
+  - Primera versión del documento
+- Josué Rodríguez López
+  - Primera versión del documento
+  - Revisión de costes del PPL
 - Luis Giraldo
   - Actualizó el documento al sprint 3
 - Paula Luna Navarro
@@ -62,13 +67,14 @@
    2.5 [Desglose de Costes de Distribución y Publicación](#25-desglose-de-costes-de-distribución-y-publicación)  
    2.6 [Costes de Expertos (Nutricionistas)](#26-costes-de-expertos-nutricionistas)  
    2.7 [Costes de Marketing y Tracción](#27-costes-de-marketing-y-tracción)  
-   2.7.1 [Costes de Diseño e Identidad Visual](#271-costes-de-diseño-e-identidad-visual)  
-   2.8 [Costes Totales](#28-costes-totales)
+   2.8 [Costes de Diseño e Identidad Visual](#28-costes-de-diseño-e-identidad-visual)  
+   2.9 [Costes Totales](#29-costes-totales)
 3. [Estimación de Costes POST-LAUNCH](#3-estimación-de-costes-post-launch)  
    3.1 [Costes de Infraestructura en Producción](#31-costes-de-infraestructura-en-producción)  
    3.2 [Costes de Atención al Cliente y Soporte Técnico](#32-costes-de-atención-al-cliente-y-soporte-técnico)  
    3.3 [Costes de Herramientas y Servicios de Mantenimiento](#33-costes-de-herramientas-y-servicios-de-mantenimiento)  
-   3.4 [Resumen de Costes Post-Lanzamiento](#34-resumen-de-costes-post-lanzamiento)
+   3.4 [Costes de Publicidad y Marketing](#34-costes-de-publicidad-y-marketing)       
+   3.5 [Resumen de Costes Post-Lanzamiento](#35-resumen-de-costes-post-lanzamiento)
 4. [Análisis de Ingresos Post-Lanzamiento](#4-análisis-de-ingresos-post-lanzamiento)  
    4.1 [Semana 1: Inicio Prometedor](#41-semana-1-inicio-prometedor)  
    4.2 [6 Meses: Consolidación](#42-6-meses-post-lanzamiento-consolidación)  
@@ -94,15 +100,14 @@ El presente análisis económico evalúa la viabilidad financiera del proyecto, 
 
 ## Costes por Periodo
 
-| Periodo            | CAPEX (€) | OPEX (€)   | TOTAL (€)     |
-|--------------------|-----------|------------|----------------|
-| Semana 1           | 4.396     | 12,51      | 4.408,51       | 
-| Semana 5           | 15.415    | 62,55      | 15.477,55      |
-| Semana 10          | 30.830    | 1.950,10   | 32.780,10      |
-| Semana 15          | 43.598    | 2.212,65   | 45.810,65      |
-| Primeros 6 meses   | 0         | 13.410,46  | 13.410,46      |
-| Primer Año         | 0         | 54.051,32  | 54.051,32      |
-| Segundo Año        | 0         | 125.148,64 | 125.148,64     |
+La siguiente tabla muestra el coste total estimado para cada periodo del desarrollo del proyecto. Estos valores se tomarán como costes para el primer trimestre.
+
+| Periodo            | CAPEX (€) | OPEX (€)   | CAPEX + OPEX (€)| TOTAL CON 10% DE CONTINGENCIA (€)| Costes acumulados |
+|--------------------|-----------|------------|-----------------|----------------------------------|-------------------|
+| Semana 1           | 2.980,78  | 278,16     | 3258,94         | 3584,83                          | 3584,83           |
+| Semana 5           | 12523,15  | 1112,59    | 13635,74        | 14999,31                         | 18.584,14         |
+| Semana 10          | 14903,95  | 1112,99    | 16800,94        | 18481,03                         | 37.065,17         |
+| Semana 15          | 14903,95  | 4040,94    | 18944,89        | 20839,38                         | 57904,55          |
 
 
 > *CAPEX:* Inversiones iniciales (desarrollo, hardware).  
@@ -204,7 +209,7 @@ Para el desarrollo del proyecto, se ha seleccionado el Lenovo IdeaPad Slim 3 15I
 
 Actualmente, este portátil está disponible en MediaMarkt por un precio de 629 € por unidad. Para realizar los cálculos hemos supuesto una vida útil de 3 años. Para la amortización mensual de cada equipo se ha dividido el coste por equipo entre la vida útil (en meses). La amortización total se ha obtenido multiplicando la amortización mensual por equipo por el número de meses (3,75) y el número de equipos.
 
-|                    Elemento | Vida útil  estimada | Número de equipos | Coste por equipo | Amortizaci ón  mensual  por equipo | Amortizaci ón total  (15  semanas) | Coste total |
+|                    Elemento | Vida útil  estimada | Número de equipos | Coste por equipo | Amortización  mensual  por equipo | Amortizaci ón total  (15  semanas) | Coste total |
 | --------------------------: | :------------------: | :----------------: | :--------------: | :---------------------------------: | :---------------------------------: | :---------: |
 | Lenovo  IdeaPad  Slim 3 Gen |       3 años       |         17         |      629 €      |              17,47 €              |             1.113,85 €             |  10.693 €  |
 
@@ -227,7 +232,7 @@ Se ha elegido Google Play Store y Apple App Store para distribuir la aplicación
 
 ### 2.6. Costes de Expertos (nutricionistas)
 
-Se ha de tener en cuenta el coste de contrartacion de expertos en el ambito de la nutricion para la elabroracion de las recetas presonalizadas y recomendaciones nutricionales. De media en España un nutricionista por consulta cobra un total de 60 €, con una duracion por consulta de 60 min aproximadamente. Con estos datos podemos suponer que realizaremos un total de 3 consultas semanales durante las primeras 15 semanas para obtener la informacion necesaria para las recomendaciones y las recetas personalizadas.
+Se ha de tener en cuenta el coste de contrartacion de expertos en el ambito de la nutrición para la elabroración de las recetas presonalizadas y recomendaciones nutricionales. De media en España un nutricionista por consulta cobra un total de 60 €, con una duracion por consulta de 60 min aproximadamente. Con estos datos podemos suponer que realizaremos un total de 3 consultas semanales durante las primeras 15 semanas para obtener la informacion necesaria para las recomendaciones y las recetas personalizadas.
 
 |             | Coste por consulta | Semana 1 | Semana 5 | Semana 10 | Semana 15 |
 | ----------- | ------------------ | -------- | -------- | --------- | --------- |
@@ -245,15 +250,13 @@ Para asegurar visibilidad, descargas y crecimiento sostenido desde el lanzamient
 | Diseño y contenidos           | 25 €                      |
 | Colaboraciones con influencers| 500 €                     |
 | Publicidad física (folletos)  | 150 €                     |
-| Sorteo de lanzamiento            |  200 €                      |
+| Sorteo de lanzamiento         | 200 €                     |
 | Ferias / eventos              | 400 €                     |
 | **Total mensual estimado**    | **2.025 €**               |
 
-Se proyecta mantener este gasto durante **al menos 12 meses**, lo que se traduce en **22.100 € anuales**, incluidos como OPEX en el presupuesto total.
+Puesto que la capaña de marketing se inicia 6 semanas antes de que acabe el periodo de desarrollo, esta tiene un coste de **3037,50 €** durante dicha fase.
 
-Esto es una versión para la tracción inicial, que podrá ser modificada en proximas versiones
-
-### 2.7.1. Costes de Diseño e Identidad Visual
+### 2.8. Costes de Diseño e Identidad Visual
 
 Para transmitir una imagen coherente, moderna y profesional, se ha realizado una inversión inicial en diseño gráfico que incluye:
 
@@ -275,7 +278,7 @@ Para transmitir una imagen coherente, moderna y profesional, se ha realizado una
 Este coste se incluye como **CAPEX** al tratarse de una inversión única que perdura a lo largo del proyecto.
 
 
-### 2.8. Costes totales
+### 2.9. Costes totales
 
 En la siguiente tabla se recogen los costes totales del proyecto, incluyendo en el precio total un 10% de reservas de contingencia
 
@@ -284,13 +287,13 @@ En la siguiente tabla se recogen los costes totales del proyecto, incluyendo en 
 | Costes de personal                        | 43.598 €       |
 | Costes de Infraestructura                 | 187,65 €       |
 | Costes de Herramientas de Desarrollo      | 1.284,56 €     |
-| Costes de Hardware y Amortización         | 10.693 €       |
+| Costes de Hardware y Amortización         | 1.113,85 €     |
 | Costes de Publicación y Distribución      | 118,95 €       |
 | Costes de Expertos (nutricionistas)       | 2.700 €        |
-|Costes de Marketing y Tracción inicial       | 22.100 €   |
+|Costes de Marketing y Tracción inicial       | 3037,50 €    |
 Costes de diseño e identidad visual	| 600,00 €
-| **Total**                                  | **81.282,16** **€**|
-| **Coste del proyecto (+10% contingencias)**| **88.730,38 €**|
+| **Total**                                  | **52640,51** **€**|
+| **Coste del proyecto (+10% contingencias)**| **57904,55 €**|
 
 
 
@@ -324,14 +327,14 @@ Para estudiar los costes que tendremos que asumir en los 2 años siguientes a nu
 
 | Trimestre      | Número de Instancias (Coste) | Número de Usuarios | Tráfico de Red         | Logs Adicionales       | Backups              | Total Trimestre     | Total Acumulado     |
 |----------------|------------------------------|--------------------|------------------------|------------------------|----------------------|----------------------|----------------------|
-| Trimestre 1    | 2 → 89,94 €                  | 1.500              | 1 TB (108,35 €)        | 6,75 GB → 3,38 €       | 50 GB → 0,75 €       | 202,42 €             | 202,42 €             |
-| Trimestre 2    | 4 → 179,88 €                 | 2.281              | 1 TB (108,46 €)        | 10,96 GB → 5,48 €      | 60 GB → 0,90 €       | 294,72 €             | 497,14 €             |
-| Trimestre 3    | 6 → 269,82 €                 | 3.470              | 1 TB (108,46 €)        | 16,23 GB → 8,11 €      | 75 GB → 1,13 €       | 387,52 €             | 884,66 €             |
-| Trimestre 4    | 8 → 359,76 €                 | 5.277              | 1 TB (108,46 €)        | 24,59 GB → 12,29 €     | 100 GB → 1,50 €      | 481,01 €             | 1.365,67 €           |
-| Trimestre 5    | 10 → 449,70 €                | 8.025              | 2 TB (207,78 €)        | 37,28 GB → 18,64 €     | 150 GB → 2,25 €      | 678,37 €             | 2.044,04 €           |
-| Trimestre 6    | 12 → 539,64 €                | 12.206             | 2 TB (207,78 €)        | 56,56 GB → 28,28 €     | 200 GB → 3,00 €      | 778,70 €             | 2.822,74 €           |
-| Trimestre 7    | 14 → 629,58 €                | 18.563             | 3 TB (308,20 €)        | 86,53 GB → 43,27 €     | 300 GB → 4,50 €      | 985,55 €             | 3.808,29 €           |
-| Trimestre 8    | 16 → 719,52 €                | 28.232             | 5 TB (506,04 €)        | 131,08 GB → 65,54 €    | 500 GB → 7,50 €      | 1.298,60 €           | 5.106,89 €           |
+| Trimestre 2    | 2 → 89,94 €                  | 1.500              | 1 TB (108,35 €)        | 6,75 GB → 3,38 €       | 50 GB → 0,75 €       | 202,42 €             | 202,42 €             |
+| Trimestre 3    | 4 → 179,88 €                 | 2.281              | 1 TB (108,46 €)        | 10,96 GB → 5,48 €      | 60 GB → 0,90 €       | 294,72 €             | 497,14 €            |
+| Trimestre 4    | 6 → 269,82 €                 | 3.470              | 1 TB (108,46 €)        | 16,23 GB → 8,11 €      | 75 GB → 1,13 €       | 387,52 €             | 884,66 €             |
+| Trimestre 5    | 8 → 359,76 €                 | 5.277              | 1 TB (108,46 €)        | 24,59 GB → 12,29 €     | 100 GB → 1,50 €      | 481,01 €             | 1.365,67 €           |
+| Trimestre 6    | 10 → 449,70 €                | 8.025              | 2 TB (207,78 €)        | 37,28 GB → 18,64 €     | 150 GB → 2,25 €      | 678,37 €             | 2.044,04 €           |
+| Trimestre 7    | 12 → 539,64 €                | 12.206             | 2 TB (207,78 €)        | 56,56 GB → 28,28 €     | 200 GB → 3,00 €      | 778,70 €             | 2.822,74 €           |
+| Trimestre 8    | 14 → 629,58 €                | 18.563             | 3 TB (308,20 €)        | 86,53 GB → 43,27 €     | 300 GB → 4,50 €      | 985,55 €             | 3.808,29 €           |
+
 
 Se van a usar instancias `e2-standard-2` que estaran funcionando 24/7.
 
@@ -344,18 +347,24 @@ Para calcular el trafico de red que soportara nuestra aplicacion, se han estimad
 
 A medida que la base de usuarios crece, también lo hacen las demandas de soporte y atención al cliente. Es necesario incorporar personal especializado para resolver incidencias, responder dudas y asegurar una buena experiencia para los usuarios. El aumento de empleados se realizará progresivamente, ajustándose al incremento de usuarios y tráfico. Así, se garantiza que el servicio se mantenga eficiente y de calidad a medida que la plataforma escala, sin que el volumen de solicitudes afecte la satisfacción del usuario.
 
-- Se estima un coste por empleado de soporte de **3.031 €/mes**, en jornada completa (40h/semana).
+- Se estima un coste por empleado de soporte de **1.515,50 €/mes**, en jornada parcial (40h/semana) según los datos obtenidos de https://www.getmanfred.com.
+
+|Criterios de  búsqueda en  manfred | Estimación  salario bruto anual | Estimación  salario bruto por mes | Coste total por mes (contribuciones sociales del 33,4%) |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------: | :---------------------------------: | ------------------------------- |
+|**Rol**: Customer Service & Support  **Experiencia**:  menos de dos años  **Idiomas**: Inglés nivel intermedio   | 15.600 €   | 1.300 € | 1.734,2 € |
+|
+
+Coste total por trimestre:
 
 | Trimestre     | Número de Empleados | Total Trimestre   | Total Acumulado |
-|----------------|---------------------|-------------------|-----------------|
-| Trimestre 1    | 2                   | 18.186 €          | 18.186 €        |
-| Trimestre 2    | 2                   | 18.186 €          | 36.372 €        |
-| Trimestre 3    | 3                   | 27.279 €          | 63.651 €        |
-| Trimestre 4    | 4                   | 36.372 €          | 100.023 €       |
-| Trimestre 5    | 5                   | 45.465 €          | 145.488 €       |
-| Trimestre 6    | 6                   | 54.558 €          | 200.046 €       |
-| Trimestre 7    | 7                   | 63.651 €          | 263.697 €       |
-| Trimestre 8    | 8                   | 72.744 €          | 336.441 €       |
+|----------------|---------------------|------------------|-----------------|
+| Trimestre 2    | 2                   | 10.405,20 €      | 10.405,20 €     |
+| Trimestre 3    | 2                   | 10.405,20 €      | 20.810,40 €     |
+| Trimestre 4    | 3                   | 15.607,80 €      | 36.418,20 €     |
+| Trimestre 5    | 3                   | 15.607,80 €      | 52.026,00 €     |
+| Trimestre 6    | 4                   | 20.810,40 €      | 72.836,40 €     |
+| Trimestre 7    | 4                   | 20.810,40 €      | 93.646.80 €     |
+| Trimestre 8    | 5                   | 26.013,00 €      | 119.659,80 €    |
 
 ---
 
@@ -369,29 +378,67 @@ Para la automatización básica se utilizará el **plan estándar** (50 €/me
 
 | Trimestre     | Monitorización | Automatización | Total Trimestre | Total Acumulado |
 |---------------|----------------|----------------|------------------|------------------|
-| Trimestre 1   | 120 €          | 150 €          | 270 €           | 270 €           |
-| Trimestre 2   | 120 €          | 150 €          | 270 €           | 540 €           |
-| Trimestre 3   | 120 €          | 150 €          | 270 €           | 810 €           |
-| Trimestre 4   | 120 €          | 150 €          | 270 €           | 1.080 €         |
-| Trimestre 5   | 120 €          | 300 €          | 420 €           | 1.500 €         |
-| Trimestre 6   | 120 €          | 300 €          | 420 €           | 1.920 €         |
-| Trimestre 7   | 120 €          | 300 €          | 420 €           | 2.340 €         |
-| Trimestre 8   | 120 €          | 300 €          | 420 €           | 2.760 €         |
+| Trimestre 2   | 120 €          | 150 €          | 270 €           | 270 €           |
+| Trimestre 3   | 120 €          | 150 €          | 270 €           | 540 €           |
+| Trimestre 4   | 120 €          | 150 €          | 270 €           | 810 €           |
+| Trimestre 5   | 120 €          | 150 €          | 270 €           | 1.080 €         |
+| Trimestre 6   | 120 €          | 300 €          | 420 €           | 1.500 €         |
+| Trimestre 7   | 120 €          | 300 €          | 420 €           | 1.920 €         |
+| Trimestre 8   | 120 €          | 300 €          | 420 €           | 2.340 €         |
 
 ---
 
-### 3.4 Resumen de Costes Post-Lanzamiento
+### 3.4 Costes de Publicidad y Marketing
+Los costes de publicidad y marketing que se recogen en este apartado son la continuación de los gastos iniciales realizados durante la fase de desarrollo. Como se mencionó en el apartado 2.7, se estima un gasto mensual de **2.025 €**. Además, se pretende tener a un empleado de marketing a tiempo parcial (20h/semana) para gestionar la estrategia de marketing y publicidad.
 
-| Periodo       | Infraestructura  | Soporte técnico   | Herramientas y mantenimiento | **Total Trimestre** | **Total Acumulado** |
-|---------------|------------------|-------------------|------------------------------|---------------------|---------------------|
-| Trimestre 1   | 202,42 €         | 18.186 €          | 270 €                        | 18.658,42 €         | 18.658,42 €         |
-| Trimestre 2   | 297,14 €         | 18.186 €          | 270 €                        | 18.753,14 €         | 37.411,56 €         |
-| Trimestre 3   | 884,66 €         | 27.279 €          | 270 €                        | 28.433,66 €         | 65.845,22 €         |
-| Trimestre 4   | 1.365,67 €       | 36.372 €          | 270 €                        | 38.007,67 €         | 103.852,89 €        |
-| Trimestre 5   | 2.044,04 €       | 45.465 €          | 420 €                        | 47.929,04 €         | 151.781,93 €        |
-| Trimestre 6   | 2.822,74 €       | 54.558 €          | 420 €                        | 58.800,74 €         | 210.582,67 €        |
-| Trimestre 7   | 3.808,29 €       | 63.651 €          | 420 €                        | 67.879,29 €         | 278.461,96 €        |
-| Trimestre 8   | 5.106,89 €       | 72.744 €          | 420 €                        | 78.270,89 €         | 356.732,85 €        |
+|Criterios de  búsqueda en  manfred | Estimación  salario bruto anual | Estimación  salario bruto por mes | Coste total por mes (contribuciones sociales del 33,4%) |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------: | :---------------------------------: | ------------------------------- |
+|**Rol**: Content Marketing & Design  **Experiencia**:  menos de dos años| 8.300 € (16.600 € Jornada completa)   | 691,67 € | 922,68 € |
+|
+
+| Trimestre     | Costes de marketing | Costes nómina | Costes Totales| Coste Acumulado|
+|---------------|---------------------|---------------|---------------|----------------|
+| Trimestre 1   | 6.075 €             | 922,68 €      | 6.997,68 €    | 6.997,68 €     |
+| Trimestre 2   | 6.075 €             | 922,68 €      | 6.997,68 €    | 13.995,36 €    |
+| Trimestre 3   | 6.075 €             | 922,68 €      | 6.997,68 €    | 20.993,04 €    |
+| Trimestre 4   | 6.075 €             | 922,68 €      | 6.997,68 €    | 27.990,72 €    |
+| Trimestre 5   | 6.075 €             | 922,68 €      | 6.997,68 €    | 34.988,40 €    | 
+| Trimestre 6   | 6.075 €             | 922,68 €      | 6.997,68 €    | 41.986,08 €    |
+| Trimestre 7   | 6.075 €             | 922,68 €      | 6.997,68 €    | 48.983,76 €    |
+
+
+### 3.5 Costes de Nutricionistas
+Los costes de nutricionistas se han calculado en función de la necesidad de realizar consultas periódicas para la elaboración de recetas personalizadas. 
+
+| Estimación  salario bruto anual | Estimación  salario bruto por mes | Coste total por mes (contribuciones sociales del 33,4%) |
+| :------------------------------: | :---------------------------------: | ------------------------------- |
+| 24.000 € | 2.000,00 € | 2.668,00 € |
+|
+
+Coste total por trimestre:
+
+| Trimestre     | Número de Empleados | Total Trimestre   | Total Acumulado |
+|---------------|---------------------|-------------------|-----------------|
+| Trimestre 2   | 1                   | 8.004,00 €        | 8.004,00 €      |
+| Trimestre 3   | 2                   | 16.008,00 €       | 24.012,00 €     |
+| Trimestre 4   | 2                   | 16.008,00 €       | 40.0200,00 €    |
+| Trimestre 5   | 3                   | 24.012,00 €       | 64.032,00 €     |
+| Trimestre 6   | 3                   | 24.012,00 €       | 88.044,00 €     |
+| Trimestre 7   | 4                   | 32.016,00 €       | 120.060,00 €    |
+| Trimestre 8   | 4                   | 32.016,00 €       | 152.076,00 €    |
+
+### 3.5 Resumen de Costes Post-Lanzamiento
+
+| Trimestre     | Infraestructura  | Soporte técnico   | Herramientas y mantenimiento | Costes de Marketing | Costes de Nutricionistas| **Total Trimestre** | **Total Acumulado** |
+|---------------|------------------|-------------------|------------------------------|---------------------|-------------------------|---------------------|---------------------|
+| Trimestre 1 (costes de desarrollo)   |                  |                   |                              | |                      | 57904,55 €          | 57.904,55 €         |
+| Trimestre 2   | 202,42 €         | 10.405,20 €       | 270 €                        | 6.997,68 €          | 8.004,00 €              | 25.879,30 €         | 83.783,85 €         |
+| Trimestre 3   | 294,72 €         | 10.405,20 €       | 270 €                        | 6.997,68 €          | 16.008,00 €             | 33.975,60 €         | 117.759,45 €        |
+| Trimestre 4   | 387,52 €         | 15.607,80 €       | 270 €                        | 6.997,68 €          | 16.008,00 €             | 39.271,00 €         | 157.030,45 €        |
+| Trimestre 5   | 481,01 €         | 15.607,80 €       | 270 €                        | 6.997,68 €          | 24.012,00 €             | 47.368,49 €         | 204.398,94 €        |
+| Trimestre 6   | 678,37 €         | 20.810,40 €       | 420 €                        | 6.997,68 €          | 24.012,00 €             | 52.918,45 €         | 250.317,39 €        |
+| Trimestre 7   | 778,70 €         | 20.810,40 €       | 420 €                        | 6.997,68 €          | 32.016,00 €             | 61.022,78 €         | 318.340,00 €        |
+| Trimestre 8   | 985,55 €         | 26.013,00 €       | 420 €                        | 6.997,68 €          | 32.016,00 €             | 66.432,23 €         | 384.772,40 €        |
 
 ## 4. Análisis de Ingresos Post-Lanzamiento
 
