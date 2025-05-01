@@ -61,14 +61,15 @@ Contribuyó en completar el contenido del documento
      - [Canales Prioritarios Según el Público Objetivo](#3-canales-prioritarios-según-el-público-objetivo)
      - [Mecanismos de Fidelización Desde el Primer Contacto](#4-mecanismos-de-fidelización-desde-el-primer-contacto)
     - [Posicionamiento SEO y Redes Sociales](#e-posicionamiento-seo-y-redes-sociales)
-5. [Planificación de Campañas y Calendario Editorial](#5-planificación-de-campañas-y-calendario-editorial)
-6. [Costes Estimados](#6-costes-estimados)
-7. [Definición de Responsabilidades del Equipo de Marketing](#7-definición-de-responsabilidades-del-equipo-de-marketing)
-8. [Herramientas a Utilizar](#8-herramientas-a-utilizar)
-9. [Evaluación y Retroalimentación](#9-evaluación-y-retroalimentación)
-10. [Imagen de Marca e Identidad Visual](#10-imagen-de-marca-e-identidad-visual)
-11. [Uso de IA para Marketing](#11-uso-de-ia-para-marketing)
-12. [Conclusión](#11-conclusión)
+5. [Plan de Community Management](#5-plan-de-community-management)
+6. [Planificación de Campañas y Calendario Editorial](#6-planificación-de-campañas-y-calendario-editorial)
+7. [Costes Estimados](#7-costes-estimados)
+8. [Definición de Responsabilidades del Equipo de Marketing](#8-definición-de-responsabilidades-del-equipo-de-marketing)
+9. [Herramientas a Utilizar](#9-herramientas-a-utilizar)
+10. [Evaluación y Retroalimentación](10-evaluación-y-retroalimentación)
+11. [Imagen de Marca e Identidad Visual](#11-imagen-de-marca-e-identidad-visual)
+12. [Uso de IA para Marketing](#12-uso-de-ia-para-marketing)
+13. [Conclusión](#13-conclusión)
 
 ---
 ## 1. Introducción y Objetivos
@@ -371,8 +372,187 @@ Con el objetivo de generar expectativa y atraer a los primeros usuarios, se plan
 
 
 ---
+## 5. Plan de Community Management
 
-## 5. Planificación de Campañas y Calendario Editorial
+El **Plan de Community Management** de *Infantem* tiene como objetivo consolidar una comunidad digital activa, informada y comprometida con la app, generando una relación emocional con la marca, especialmente a través de su mascota Spoony. Se encarga de ejecutar la estrategia social media, fomentar la interacción con usuarios e impulsar el prerregistro y la fidelización desde las redes.
+
+### 5.1 Objetivos del Community Management
+
+- Posicionar Infantem como referente en salud y nutrición infantil.
+- Comunicar las funcionalidades de la app de manera cercana y visual.
+- Estimular la participación con preguntas, dinámicas y sorteos.
+- Reforzar la identidad visual y el tono empático de la marca.
+- Incentivar el prerregistro, descargas y tráfico hacia la app.
+
+### 5.2 Estrategia de Contenidos
+
+Se han diseñado cinco categorías de contenido clave:
+
+- **Educativo**: consejos de nutrición, mitos vs realidades, datos curiosos.
+- **Promocional**: beneficios premium, testimonios de usuarios, funcionalidades.
+- **Interactivo**: encuestas, juegos, retos y preguntas abiertas.
+- **Visual y emocional**: Spoony como personaje guía, carátulas e infografías.
+- **Transparencia**: avances del equipo, desarrollo de funcionalidades, feedback.
+
+Todos los contenidos siguen una línea visual coherente, utilizando **Canva**, la fuente **Loubag** y la paleta con color base `#1a649e`.
+
+### 5.3 Publicaciones por canal
+
+| Canal        | Estrategia principal                                                                 |
+|--------------|----------------------------------------------------------------------------------------|
+| **Instagram** | Reels, carouseles y stories con Spoony y contenido funcional                         |
+| **Facebook**  | Información extensa para padres adultos, enlaces a recursos                          |
+| **TikTok**    | Spoony en tono humorístico, retos y contenido emocional                              |
+| **LinkedIn**  | Posicionamiento profesional del equipo y avances del proyecto                        |
+
+### 5.4 Dinámica destacada: Sorteo de Lanzamiento
+
+Para impulsar el crecimiento inicial de la comunidad, se lanza un sorteo entre el **3 y el 15 de mayo** con el siguiente formato:
+
+- **Premio:** 3 suscripciones premium gratuitas por 6 meses.
+- **Requisitos:**
+  - Seguir la cuenta oficial de Infantem en Instagram.
+  - Comentar el post del sorteo mencionando a 2 personas.
+  - Completar el prerregistro a la app desde el enlace en la bio.
+
+**Plan de comunicación del sorteo:**
+
+- *Semana previa (29 abril – 2 mayo):* teaser + stories.
+- *Lanzamiento (3 mayo):* post oficial + reel con Spoony.
+- *Semana 2:* recordatorio + incentivo.
+- *Últimos días:* cuenta atrás + repost de participantes.
+- *Post-sorteo (16 mayo):* anuncio de ganadores.
+
+**KPIs esperados:**
+
+- Aumento del 25–30% en seguidores.
+- Al menos 50 comentarios y 20 compartidos.
+- +50 prerregistros adicionales a partir del tráfico en redes.
+- Mayor visibilidad de Spoony y funcionalidades clave.
+
+### 5.5 Calendario y Frecuencia de Contenidos
+
+| Semana | Lunes             | Miércoles         | Viernes              |
+|--------|-------------------|-------------------|-----------------------|
+| 1      | Comparativa apps  | Función: Recetas  | Función: Calendario   |
+| 2      | Spoony divertido  | Tips nutrición    | FAQ sobre alérgenos   |
+| 3      | Historia usuario  | Encuesta mitos    | Reel funcionalidad    |
+| 4      | Mitos y realidades| Post emocional    | Resultados del sorteo |
+
+**Frecuencia sugerida:**
+
+- 3 publicaciones semanales (lunes, miércoles y viernes).
+- 3 historias por semana, al menos una por funcionalidad presentada.
+- 1 reel o TikTok semanal.
+- 1 publicación LinkedIn cada 10-15 días.
+
+> *Nota: Hasta ahora se han publicado imágenes estáticas. Reels y vídeos se incorporan como próximos pasos en la planificación.*
+
+### 5.6 Métricas y Herramientas de Seguimiento
+
+- **Crecimiento** de seguidores por red social.
+- **Interacciones**: likes, comentarios, compartidos, guardados.
+- **Alcance** e impresiones por publicación.
+- **Clics** en enlaces hacia la app.
+- **Mensajes directos** y menciones recibidas.
+- **Feedback cualitativo** en comentarios o encuestas.
+
+**Herramientas utilizadas:**
+
+- Metricool / Hootsuite (programación y analítica).
+- Google Analytics para clics y tráfico web.
+- Formularios de feedback en redes y app.
+
+### 5.7  Community Management y Dinámicas de Comunidad
+
+Dentro de la estrategia digital de *Infantem*, el **Community Management** adquiere un rol clave como herramienta de fidelización, crecimiento orgánico y construcción de una comunidad activa en torno a la app. Esta línea de acción se desarrolla en paralelo a las campañas de captación y posicionamiento, con una planificación editorial específica y dinámicas participativas que fortalecen el vínculo emocional con los usuarios.
+
+#### Objetivos del Community Management
+
+- Generar una comunidad digital fiel y participativa.
+- Posicionar a *Infantem* como referente en alimentación infantil y salud.
+- Humanizar la app mediante el personaje de Spoony como guía simpática.
+- Reforzar la notoriedad de marca con contenido útil, divertido y emocional.
+- Recoger feedback de usuarios y fomentar la co-creación con la comunidad.
+
+#### Tipos de Contenido
+
+- **Educativo:** Datos curiosos, mitos vs. realidades, tips nutricionales, explicaciones de funcionalidades.
+- **Promocional:** Beneficios del premium, comparativas con otras apps, testimonios reales.
+- **Participativo:** Encuestas, dinámicas semanales, preguntas frecuentes.
+- **Visual y emocional:** Ilustraciones de Spoony, infografías, reels, carouseles.
+- **Transparente:** Progreso del desarrollo, agradecimientos, detrás de cámaras.
+
+#### Canales y Estilo
+
+- **Instagram**: Tono cercano, educativo y visual. Uso de stories, reels y carruseles.
+- **Facebook**: Contenido informativo para padres más adultos.
+- **TikTok**: Vídeos cortos y humorísticos con Spoony como protagonista.
+- **LinkedIn**: Comunicación profesional, logros y avances del proyecto.
+
+#### Dinámica de Sorteo de Lanzamiento
+
+Como acción clave en la fase de pre-lanzamiento se organizará un sorteo en Instagram:
+
+- **Premio:** 3 suscripciones premium (6 meses).
+- **Fechas:** del 3 al 15 de mayo.
+- **Participación:**
+  - Seguir la cuenta oficial.
+  - Comentar mencionando a 2 personas.
+  - Realizar el prerregistro a través del enlace de la bio.
+- **Plan de comunicación:**
+  - *29 abril – 2 mayo:* teaser gráfico + stories de anticipo.
+  - *3 mayo:* publicación oficial + reel de Spoony.
+  - *6 mayo:* recordatorios.
+  - *13–15 mayo:* cuenta atrás + reposts de usuarios.
+  - *16 mayo:* anuncio de ganadores.
+- **KPIs esperados:**
+  - +25–30% seguidores nuevos.
+  - +50 comentarios y +20 compartidos.
+  - +50 prerregistros adicionales.
+
+#### Calendario Editorial (Ejemplo mensual)
+
+| Semana | Lunes              | Miércoles         | Viernes             |
+|--------|--------------------|-------------------|---------------------|
+| 1      | Comparativa apps   | Función: Recetas  | Función: Calendario |
+| 2      | Spoony divertido   | FAQ alérgenos     | Comparativa apps    |
+| 3      | Historia usuario   | Encuesta mitos    | Reel funcionalidad  |
+| 4      | Tips nutrición     | Mito vs realidad  | Post emocional      |
+
+#### Frecuencia de Publicaciones (sugerida)
+
+- 3 publicaciones por semana (lunes, miércoles, viernes).
+- 3 historias por semana (una por funcionalidad nueva).
+- 1 reel o TikTok semanal con Spoony o funcionalidades destacadas.
+- 1 publicación en LinkedIn cada 10–15 días.
+
+> *Nota:* Hasta la fecha se han publicado imágenes estáticas. La propuesta incluye reels y vídeos como siguientes pasos a implementar.
+
+#### Herramientas y Estética
+
+- Diseño gráfico con **Canva** (paleta azul `#1a649e`, fuente **Loubag**).
+- Uso de iconografía coherente y estética amigable con Spoony.
+- Publicaciones personalizadas según cada funcionalidad.
+- Herramientas de programación y análisis: **Metricool**, **Hootsuite**, etc.
+
+#### Seguimiento y KPIs
+
+- Evolución de seguidores por red social.
+- Interacciones: likes, comentarios, guardados y compartidos.
+- Alcance e impresiones por publicación.
+- Clics en enlaces a la app.
+- Participación en dinámicas (stories, encuestas, sorteos).
+- Frecuencia de menciones y mensajes directos.
+- Feedback cualitativo recogido.
+
+> Actualmente se contabilizan **48 seguidores** y **1310 visitas al perfil**.
+
+
+
+---
+
+## 6. Planificación de Campañas y Calendario Editorial
 
 - **Teasers previos al lanzamiento.**
 - **Campaña de lanzamiento:** Sorteos, testimonios en redes, influencers probando la app.
@@ -381,7 +561,7 @@ Con el objetivo de generar expectativa y atraer a los primeros usuarios, se plan
 
 ---
 
-## 6. Costes Estimados
+## 7. Costes Estimados
 
 | Canal/Acción                      | Herramienta/Detalle                     | Coste estimado mensual (€) |
 |----------------------------------|----------------------------------------|----------------------------|
@@ -399,7 +579,7 @@ Con el objetivo de generar expectativa y atraer a los primeros usuarios, se plan
 
 ---
 
-## 7. Definición de Responsabilidades del Equipo de Marketing
+## 8. Definición de Responsabilidades del Equipo de Marketing
 
 Para asegurar una ejecución eficiente y bien coordinada del plan de marketing, se definen los siguientes roles y responsabilidades dentro del equipo:
 
@@ -443,7 +623,7 @@ Para asegurar una ejecución eficiente y bien coordinada del plan de marketing, 
 ---
 
 
-## 8. Herramientas a Utilizar
+## 9. Herramientas a Utilizar
 
 - **Meta Business Suite:** Para gestión de campañas en Facebook e Instagram.
 - **Google Ads Manager:** Campañas PPC y Display.
@@ -454,7 +634,7 @@ Para asegurar una ejecución eficiente y bien coordinada del plan de marketing, 
 
 ---
 
-## 9. Evaluación y Retroalimentación
+## 10. Evaluación y Retroalimentación
 
 - **Revisión semanal** de métricas clave:
   - Costo por clic (CPC)
@@ -471,7 +651,7 @@ Para asegurar una ejecución eficiente y bien coordinada del plan de marketing, 
 
 ---
 
-## 10. Imagen de Marca e Identidad Visual
+## 11. Imagen de Marca e Identidad Visual
 
 La identidad visual de **Infantem** busca transmitir cercanía, confianza y modernidad, reflejando los valores de una app diseñada para acompañar a los padres en el crecimiento de sus hijos.
 
@@ -512,7 +692,7 @@ Todo el contenido gráfico de la marca (redes, app, web, materiales impresos) de
 - **Personalidad:** Cuidada, accesible, moderna, con autoridad sin ser impositiva.
 
 ---
-## 11. Uso de IA para Marketing
+## 12. Uso de IA para Marketing
 
 La inteligencia artificial (IA) se incorporará como recurso transversal para potenciar la eficiencia y la personalización de las campañas de marketing de *Infantem*. Su aplicación permitirá mejorar tanto la planificación como la ejecución de las acciones promocionales, optimizando recursos y resultados.
 
@@ -552,6 +732,6 @@ La inteligencia artificial (IA) se incorporará como recurso transversal para po
 El uso estratégico de la inteligencia artificial permite al equipo de marketing de *Infantem* tomar decisiones más informadas, optimizar recursos y ofrecer experiencias más personalizadas. Gracias a su integración, se mejora no solo la eficacia de las campañas publicitarias, sino también la conexión con el público objetivo, anticipando sus necesidades y generando mayor valor desde el primer contacto.
 
 ---
-## 12. Conclusión
+## 13. Conclusión
 
 La planificación de marketing para Infantem se centra en generar una comunidad comprometida antes del lanzamiento y sostener el crecimiento mediante campañas relevantes, colaboraciones efectivas y publicidad bien segmentada. La estrategia multicanal se adapta al perfil de los usuarios (padres jóvenes vs. adultos) y asegura una presencia coherente y atractiva de la marca desde el primer contacto.
