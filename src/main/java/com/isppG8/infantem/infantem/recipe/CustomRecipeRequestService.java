@@ -32,7 +32,7 @@ public class CustomRecipeRequestService {
         if (user.getAuthorities().getAuthority().equals("nutritionist")) {
             return requestRepository.findAllOpen();
         } else {
-            throw new ResourceNotFoundException("You are not authorized to access this resource");
+            throw new ResourceNotOwnedException("You are not authorized to access this resource");
         }
     }
 
@@ -45,7 +45,7 @@ public class CustomRecipeRequestService {
                     .withHour(23).withMinute(59).withSecond(59);
             return requestRepository.countRequestsByUserIdAndDate(userId, startOfMonth, endOfMonth);
         } else {
-            throw new ResourceNotFoundException("You are not authorized to access this resource");
+            throw new ResourceNotOwnedException("You are not authorized to access this resource");
         }
     }
 
