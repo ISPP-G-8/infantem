@@ -98,7 +98,7 @@ El presente análisis económico evalúa la viabilidad financiera del proyecto, 
 
 ## 2. Estimación de Costes PRE-LAUNCH
 
-## Costes por Periodo
+### Costes por Periodo
 
 La siguiente tabla muestra el coste total estimado para cada periodo del desarrollo del proyecto. Estos valores se tomarán como costes para el primer trimestre.
 
@@ -327,6 +327,16 @@ Para estudiar los costes que tendremos que asumir en los 2 años siguientes a nu
 
 | Trimestre      | Número de Instancias (Coste) | Número de Usuarios | Tráfico de Red         | Logs Adicionales       | Backups              | Total Trimestre     | Total Acumulado     |
 |----------------|------------------------------|--------------------|------------------------|------------------------|----------------------|----------------------|----------------------|
+<<<<<<< HEAD
+| Trimestre 1    | 2 → 89,94 €                  | 1.350              | 1 TB (108,35 €)        | 6,75 GB → 3,38 €       | 50 GB → 0,75 €       | 202,42 €             | 202,42 €             |
+| Trimestre 2    | 4 → 179,88 €                 | 2.692              | 1 TB (108,46 €)        | 10,96 GB → 5,48 €      | 60 GB → 0,90 €       | 294,72 €             | 497,14 €             |
+| Trimestre 3    | 6 → 269,82 €                 | 4.030              | 1 TB (108,46 €)        | 16,23 GB → 8,11 €      | 75 GB → 1,13 €       | 387,52 €             | 884,66 €             |
+| Trimestre 4    | 8 → 359,76 €                 | 5.392              | 1 TB (108,46 €)        | 24,59 GB → 12,29 €     | 100 GB → 1,50 €      | 481,01 €             | 1.365,67 €           |
+| Trimestre 5    | 10 → 449,70 €                | 6.925              | 2 TB (207,78 €)        | 37,28 GB → 18,64 €     | 150 GB → 2,25 €      | 678,37 €             | 2.044,04 €           |
+| Trimestre 6    | 12 → 539,64 €                | 8.755              | 2 TB (207,78 €)        | 56,56 GB → 28,28 €     | 200 GB → 3,00 €      | 778,70 €             | 2.822,74 €           |
+| Trimestre 7    | 14 → 629,58 €                | 10.970             | 3 TB (308,20 €)        | 86,53 GB → 43,27 €     | 300 GB → 4,50 €      | 985,55 €             | 3.808,29 €           |
+| Trimestre 8    | 16 → 719,52 €                | 11.278             | 5 TB (506,04 €)        | 131,08 GB → 65,54 €    | 500 GB → 7,50 €      | 1.298,60 €           | 5.106,89 €           |
+=======
 | Trimestre 2    | 2 → 89,94 €                  | 1.500              | 1 TB (108,35 €)        | 6,75 GB → 3,38 €       | 50 GB → 0,75 €       | 202,42 €             | 202,42 €             |
 | Trimestre 3    | 4 → 179,88 €                 | 2.281              | 1 TB (108,46 €)        | 10,96 GB → 5,48 €      | 60 GB → 0,90 €       | 294,72 €             | 497,14 €            |
 | Trimestre 4    | 6 → 269,82 €                 | 3.470              | 1 TB (108,46 €)        | 16,23 GB → 8,11 €      | 75 GB → 1,13 €       | 387,52 €             | 884,66 €             |
@@ -335,6 +345,7 @@ Para estudiar los costes que tendremos que asumir en los 2 años siguientes a nu
 | Trimestre 7    | 12 → 539,64 €                | 12.206             | 2 TB (207,78 €)        | 56,56 GB → 28,28 €     | 200 GB → 3,00 €      | 778,70 €             | 2.822,74 €           |
 | Trimestre 8    | 14 → 629,58 €                | 18.563             | 3 TB (308,20 €)        | 86,53 GB → 43,27 €     | 300 GB → 4,50 €      | 985,55 €             | 3.808,29 €           |
 
+>>>>>>> 9a215b6cef56f5eecd8ce7c549f90f0e67d480c5
 
 Se van a usar instancias `e2-standard-2` que estaran funcionando 24/7.
 
@@ -442,68 +453,216 @@ Coste total por trimestre:
 
 ## 4. Análisis de Ingresos Post-Lanzamiento
 
-En este apartado se realiza un análisis progresivo del comportamiento de los ingresos de la aplicación **Infantem** desde su lanzamiento. Se examinan cuatro hitos temporales: **semana 1**, **6 meses**, **1 año** y **2 años** después del lanzamiento.
+En este apartado se lleva a cabo un análisis detallado y progresivo del comportamiento de los ingresos generados por la aplicación Infantem desde su lanzamiento al mercado. El objetivo es comprender la evolución económica del proyecto a lo largo del tiempo, identificando tendencias, puntos críticos y el impacto del crecimiento de la base de usuarios en las distintas fuentes de monetización. Se estudian los costes para cada trimestre.
 
-Las tres vías de monetización (suscripciones premium, publicidad y marketplace) presentan comportamientos distintos en función del crecimiento de la base de usuarios. Para este análisis, se parte de un escenario **realista** con un crecimiento mensual de usuarios del **15%**.
+La aplicación Infantem cuenta con tres canales principales de generación de ingresos: suscripciones premium, publicidad in-app y un marketplace asociado a productos para bebés y alimentación infantil. Cada una de estas vías presenta un comportamiento particular en función del volumen de usuarios activos, la tasa de conversión y el nivel de interacción con la plataforma.
 
----
+Para este análisis se plantea un escenario realista, basado en una hipótesis de crecimiento mensual sostenido del 10.5% en la base de usuarios, lo que permite proyectar ingresos de forma coherente con el comportamiento habitual de aplicaciones móviles en fase de escalado. Esta previsión sirve como marco para estimar el rendimiento económico de cada vía de monetización y evaluar la viabilidad financiera del proyecto a medio y largo plazo.
 
-### 4.1 Semana 1: Inicio prometedor
+Para estudiar los ingresos por usuarios premium deberemos multiplicar los usuarios trimestrales por el procentage de conversion. Para el primer año usaremos (P: 3%, R: 5%, O: 8%), mientras que en el segundo año usaremos (P: 8%, R: 12% , O: 15%)
 
-Durante la primera semana se ha registrado:
+Para estudiar el ingreso por publicidad se utilizará un sistema de **CPM (Coste Por Mil impresiones)**. Se usara un cpm de 5 para el caso pesimista, de 7 para el realista y de 9 para el optimista (€/Mil impresiones)
 
-- **Suscripciones premium**: 117,27 €
-- **Publicidad segmentada**: 55,28 €
-- **Marketplace**: 1.590,27 €
+Se  deben restar los **usuarios premium**, ya que no generan ingresos por publicidad. Además, se estima una media de **500 impresiones por usuario al mes** (IPM). Por tanto, la fórmula para calcular los ingresos mensuales por publicidad es la siguiente:
 
-**Total ingresos semana 1**: **1.762,82 €**
+```txt
+Ingresos por publicidad = 
+    (CPM * 3 * ImpresionesAlMes * (UsuariosTotales - UsuariosPremium)) / 1000
+```
 
-> Aunque las suscripciones y publicidad aún son limitadas, el marketplace proporciona una base sólida de ingresos. Se demuestra viabilidad comercial inmediata.
+Para el marketplace supondremos que el 3% de nuestros usuarios mensuales hacen una compra de un ticket medio de 25 € de la cual nos llevaremos una comision del 15%.
 
----
 
-### 4.2 6 Meses Post-Lanzamiento: Consolidación
+### 4.1 Trimestre 1
 
-A los seis meses, se observa una consolidación del producto y una mayor adopción por parte de usuarios:
+Para el 1º trimestre hay una estimación de 1350 usuarios al mes.
+Ingresos de marcketplace: 2.025,00 €
 
-- **Usuarios estimados**: 2.692
-- **Usuarios premium**: 188 → 5.622,72 €
-- **Publicidad**: 2.894,46 €
-- **Marketplace**: 76.536 €
+- **Caso Pesimista**
+  - Nº de usuarios premium: 40 usuarios premium.
+  - Ingresos de plan premium: 600 €
+  - Ingresos de publicidad: 1572 €
+  
+- **Caso Realista**
+  - Nº de usuarios premium: 67 usuarios premium.
+  - Ingresos de plan premium: 1002 €
+  - Ingresos de publicidad: 4618  €
+  
+- **Caso Optimista**
+  - Nº de usuarios premium: 108 usuarios premium.
+  - Ingresos de plan premium: 1617 €
+  - Ingresos de publicidad: 10432  €
 
-**Total ingresos 6 meses**: **85.053,18 €**
 
-> El crecimiento orgánico permite una mejora considerable en los ingresos, siendo el marketplace la vía dominante. Las suscripciones comienzan a adquirir peso relativo.
+### 4.2 Trimestre 2
 
----
+Para el 2º trimestre hay una estimación de 2.692 usuarios al mes.
+Ingresos de marcketplace: 4.038,00 €
 
-### 4.3 1 Año Post-Lanzamiento: Rentabilidad clara
+- **Caso Pesimista**
+  - Nº de usuarios premium: 80 usuarios premium.
+  - Ingresos de plan premium: 1209 €
+  - Ingresos de publicidad: 3.134  €
+  
+- **Caso Realista**
+  - Nº de usuarios premium: 134 usuarios premium.
+  - Ingresos de plan premium: 2013 €
+  - Ingresos de publicidad: 9.208  €
+  
+- **Caso Optimista**
+  - Nº de usuarios premium: 215 usuarios premium.
+  - Ingresos de plan premium: 3222 €
+  - Ingresos de publicidad: 20.806  €
 
-Tras un año completo, se consolida una base fiel de usuarios y el modelo freemium empieza a ser más rentable:
 
-- **Usuarios estimados**: 5.392
-- **Usuarios premium**: 377 → 22.562,76 €
-- **Publicidad**: 11.595 €
-- **Marketplace**: 306.696 €
+### 4.3 Trimestre 3
 
-**Total ingresos 1 año**: **340.853,76 €**
+Para el 3º trimestre hay una estimación de 4.030 usuarios al mes.
+Ingresos del marketplace: 6.045,00 €
 
-> El modelo alcanza una fase rentable sostenida. El volumen de compras en el marketplace muestra un altísimo potencial. La retención en suscripciones se vuelve crítica.
+- **Caso Pesimista**
+  - Nº de usuarios premium: 120 usuarios premium.
+  - Ingresos de plan premium: 1809 €
+  - Ingresos de publicidad: 4.692  €
 
----
+- **Caso Realista**
+  - Nº de usuarios premium: 201 usuarios premium.
+  - Ingresos de plan premium: 3015 €
+  - Ingresos de publicidad: 13.784  €
 
-### 4.4 2 Años Post-Lanzamiento: Escalado sostenido
+- **Caso Optimista**
+  - Nº de usuarios premium: 322 usuarios premium.
+  - Ingresos de plan premium: 4824 €
+  - Ingresos de publicidad: 31.146  €
 
-A los dos años, se estima un crecimiento constante:
 
-- **Usuarios estimados**: 11.278
-- **Usuarios premium**: ~790 → 47.317,20 €
-- **Publicidad**: 21.507,12 €
-- **Marketplace**: 636.912 €
+### 4.4 Trimestre 4
 
-**Total ingresos 2 años**: **705.736,32 €**
+Para el 4º trimestre hay una estimación de 5.392 usuarios al mes.
+Ingresos del marketplace: 8.088,00  €
 
-> En este punto, la aplicación alcanza un nivel de madurez. El marketplace representa el 90% de los ingresos, seguido por suscripciones. La rentabilidad permite reinversión y expansión a nuevos mercados o servicios.
+- **Caso Pesimista**
+  - Nº de usuarios premium: 161 usuarios premium.
+  - Ingresos de plan premium: 2421 €
+  - Ingresos de publicidad: 12.554  €
+
+- **Caso Realista**
+  - Nº de usuarios premium: 269 usuarios premium.
+  - Ingresos de plan premium: 4035 €
+  - Ingresos de publicidad: 30.738  €
+
+- **Caso Optimista**
+  - Nº de usuarios premium: 431 usuarios premium.
+  - Ingresos de plan premium: 6456 €
+  - Ingresos de publicidad: 71.438  €
+
+### 4.5 Trimestre 5
+
+Para el 5º trimestre hay una estimación de 6.925 usuarios al mes.
+Ingresos del marketplace: 10.387,50  €
+
+- **Caso Pesimista**
+  - Nº de usuarios premium: 554 usuarios premium.
+  - Ingresos de plan premium: 8292 €
+  - Ingresos de publicidad: 15.290 7645 €
+
+- **Caso Realista**
+  - Nº de usuarios premium: 831 usuarios premium.
+  - Ingresos de plan premium: 12440 €
+  - Ingresos de publicidad:  36.564  €
+
+- **Caso Optimista**
+  - Nº de usuarios premium: 554 usuarios premium.
+  - Ingresos de plan premium: 15550 €
+  - Ingresos de publicidad: 91.742  €
+
+### 4.6 Trimestre 6
+
+Para el 6º trimestre hay una estimación de 8.755 usuarios al mes.
+Ingresos del marketplace: 13.132,50 €
+
+- **Caso Pesimista**
+  - Nº de usuarios premium: 700 usuarios premium.
+  - Ingresos de plan premium: 10482 €
+  - Ingresos de publicidad: 28.998  €
+  
+- **Caso Realista**
+  - Nº de usuarios premium: 1050 usuarios premium.
+  - Ingresos de plan premium: 15727 €
+  - Ingresos de publicidad: 64.722  €
+
+- **Caso Optimista**
+  - Nº de usuarios premium: 1313 usuarios premium.
+  - Ingresos de plan premium: 19659 €
+  - Ingresos de publicidad: 133.956  €
+
+### 4.7 Trimestre 7
+
+Para el 7º trimestre hay una estimación de 10.970 usuarios al mes.
+Ingresos del marketplace: 16.455,00 €
+
+- **Caso Pesimista**
+  - Nº de usuarios premium: 877 usuarios premium.
+  - Ingresos de plan premium: 13137 €
+  - Ingresos de publicidad: 36.334  €
+
+- **Caso Realista**
+  - Nº de usuarios premium: 1316 usuarios premium.
+  - Ingresos de plan premium: 10706 €
+  - Ingresos de publicidad: 81.092  €
+
+- **Caso Optimista**
+  - Nº de usuarios premium: 1645 usuarios premium.
+  - Ingresos de plan premium: 24633 €
+  - Ingresos de publicidad: 167.850  €
+
+### 4.8 Trimestre 8
+
+Para el 8º trimestre hay una estimación de 11.278 usuarios al mes.
+Ingresos del marketplace: 16.917,00 €
+
+- **Caso Pesimista**
+  - Nº de usuarios premium: 902 usuarios premium.
+  - Ingresos de plan premium: 13506 €
+  - Ingresos de publicidad: 37.352  €
+
+- **Caso Realista**
+  - Nº de usuarios premium: 1353 usuarios premium.
+  - Ingresos de plan premium: 20259 €
+  - Ingresos de publicidad: 83.370  €
+  
+- **Caso Optimista**
+  - Nº de usuarios premium: 1691 usuarios premium.
+  - Ingresos de plan premium: 25324 €
+  - Ingresos de publicidad: 172.566  €
+
+
+| Trimestre | Caso       | Premium (€) | Publicidad (€) | Marketplace (€) | Total Trimestre (€) | Acumulado (€) |
+|-----------|------------|-------------|----------------|------------------|----------------------|----------------|
+| T1        | Pesimista  | 600         | 1.572          | 2.025            | 4.197                | 4.197          |
+|           | Realista   | 1.002       | 4.618          | 2.025            | 7.645                | 7.645          |
+|           | Optimista  | 1.617       | 10.432         | 2.025            | 14.074               | 14.074         |
+| T2        | Pesimista  | 1.209       | 3.134          | 4.038            | 8.381                | 12.578         |
+|           | Realista   | 2.013       | 9.208          | 4.038            | 15.259               | 22.904         |
+|           | Optimista  | 3.222       | 20.806         | 4.038            | 28.066               | 42.140         |
+| T3        | Pesimista  | 1.809       | 4.692          | 6.045            | 12.546               | 25.124         |
+|           | Realista   | 3.015       | 13.784         | 6.045            | 22.844               | 45.748         |
+|           | Optimista  | 4.824       | 31.146         | 6.045            | 42.015               | 84.155         |
+| T4        | Pesimista  | 2.421       | 12.554         | 8.088            | 23.063               | 48.187         |
+|           | Realista   | 4.035       | 30.738         | 8.088            | 42.861               | 88.609         |
+|           | Optimista  | 6.456       | 71.438         | 8.088            | 86.982               | 171.137        |
+| T5        | Pesimista  | 8.292       | 7.645          | 10.387,50        | 26.324,50            | 74.511,50      |
+|           | Realista   | 12.440      | 36.564         | 10.387,50        | 59.391,50            | 148.000,50     |
+|           | Optimista  | 15.550      | 91.742         | 10.387,50        | 117.679,50           | 288.816,50     |
+| T6        | Pesimista  | 10.482      | 28.998         | 13.132,50        | 52.612,50            | 127.124        |
+|           | Realista   | 15.727      | 64.722         | 13.132,50        | 93.581,50            | 241.582        |
+|           | Optimista  | 19.659      | 133.956        | 13.132,50        | 226.747,50           | 515.564        |
+| T7        | Pesimista  | 13.137      | 36.334         | 16.455           | 65.926               | 193.050        |
+|           | Realista   | 10.706      | 81.092         | 16.455           | 108.253              | 349.835        |
+|           | Optimista  | 24.633      | 167.850        | 16.455           | 208.938              | 724.502        |
+| T8        | Pesimista  | 13.506      | 37.352         | 16.917           | 67.775               | 260.825        |
+|           | Realista   | 20.259      | 83.370         | 16.917           | 120.546              | 470.381        |
+|           | Optimista  | 25.324      | 172.566        | 16.917           | 214.807              | 939.309        |
 
 ---
 
