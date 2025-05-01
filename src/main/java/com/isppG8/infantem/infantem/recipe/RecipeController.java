@@ -213,7 +213,7 @@ public class RecipeController {
     public ResponseEntity<Recipe> updateRecipe(@PathVariable Long id, @Valid @RequestBody RecipeDTO recipeDetails) {
         User user = userService.findCurrentUser();
         Recipe recipe = recipeService.getRecipeById(id);
-        recipeDetails.setRecipePhoto(recipe.getRecipePhoto());
+        // recipeDetails.setRecipePhoto(recipe.getRecipePhoto()); // <-- ELIMINA ESTA LÍNEA
         Recipe updatedRecipe = recipeService.updateRecipe(id, recipeDetails, user.getId());
         return ResponseEntity.ok(updatedRecipe);
     }

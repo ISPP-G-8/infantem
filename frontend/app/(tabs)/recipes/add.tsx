@@ -27,6 +27,7 @@ export default function AddBaby() {
     minRecommendedAge: null,
     maxRecommendedAge: null,
     elaboration: "",
+    isCustom: false, // Added the missing property
   });
 
   // As this is an array of Intakes this couldn't be implemented this fast
