@@ -15,6 +15,7 @@ import com.isppG8.infantem.infantem.subscription.dto.CreatePaymentRequest;
 import com.isppG8.infantem.infantem.subscription.dto.CreatePaymentResponse;
 import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserRepository;
+import com.isppG8.infantem.infantem.user.UserService;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
 import com.stripe.model.Subscription;
@@ -47,6 +48,9 @@ public class SubscriptionInfantemController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserService userService;
 
     @Operation(summary = "Obtener cliente por email",
             description = "Recupera los detalles de un cliente a partir de su email y últimos 4 dígitos del método de pago.") @ApiResponse(
@@ -267,6 +271,8 @@ public class SubscriptionInfantemController {
             // Guardar en tu base de datos
             User user = userRepository.findById(userId)
                     .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+            userService.upgradeToPremium(user);
 
             SubscriptionInfantem newSubscription = new SubscriptionInfantem();
             newSubscription.setUser(user);
