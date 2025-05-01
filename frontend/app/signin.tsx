@@ -35,7 +35,7 @@ export default function Signin() {
       const data = await response.json();
       await storeToken(data.token);
       await checkAuth();
-      router.replace("/recipes")
+      username === "admin1" ? router.replace("/admin") : router.replace("/recipes")
 
     } catch (error) {
       console.error("An error occurred: ", error);
@@ -45,11 +45,11 @@ export default function Signin() {
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
       <View style={[gs.container, { justifyContent: "center", alignItems: "center", backgroundColor: "#E3F2FD", flex: 1, paddingVertical: 40 }]}>
-        
+
         <Image source={require("../static/images/profile.webp")} style={[{ width: 100, height: 100, borderRadius: 50, marginBottom: 20 }]} />
 
         <View style={[gs.card, { maxWidth: 400, width: "90%", padding: 25, borderRadius: 15, backgroundColor: "white", shadowColor: "#000", shadowOpacity: 0.1, shadowRadius: 10, elevation: 5, alignItems: "center" }]}>
-          
+
           <Text style={{ fontSize: 24, fontWeight: "bold", color: "#1565C0", textAlign: "center", marginBottom: 15 }}>
             Iniciar Sesión
           </Text>
@@ -59,7 +59,7 @@ export default function Signin() {
           </Text>
 
           <TextInput
-            style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", marginBottom: 10, opacity:0.6 }]}
+            style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", marginBottom: 10, opacity: 0.6 }]}
             placeholder="Nombre de usuario"
             value={username}
             onChangeText={setUsername}
@@ -67,7 +67,7 @@ export default function Signin() {
           />
 
           <TextInput
-            style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0" , opacity:0.6}]}
+            style={[gs.input, { padding: 12, borderRadius: 8, borderWidth: 1, borderColor: "#1565C0", opacity: 0.6 }]}
             placeholder="Contraseña"
             value={password}
             onChangeText={setPassword}
@@ -84,7 +84,7 @@ export default function Signin() {
             <Text style={{ color: "#007AFF", fontSize: 14 }}>¿No tienes cuenta? ¡Regístrate!</Text>
           </Link>
 
-          <TouchableOpacity 
+          <TouchableOpacity
             style={{ marginTop: 20, backgroundColor: "#1565C0", padding: 14, borderRadius: 8, alignItems: "center", shadowColor: "#000", shadowOpacity: 0.2, shadowRadius: 5, elevation: 3 }}
             onPress={handleSubmit}
           >

@@ -1,11 +1,11 @@
 # MVP
 
-![Portada](../../../frontend/assets/Documentos/Infantem.png)
+![Portada](../../images/Infantem.png)
 
 
-**Fecha:** 18/02/2025  
+**Fecha:** 31/03/2025  
 **Grupo 8:** Infantem  
-**Sprint 1**
+**Sprint 3**
 
 ## Integrantes del Grupo
 <div style="display: flex; justify-content: space-between; gap: 2px;">
@@ -39,20 +39,16 @@
 
 ---
 
-
+## Colaboradores del documento
+- Luis Giraldo
+  - Actualizó el documento para el sprint 3.
 
 
 
 ## Índice
-- [Colaboradores del documento](#colaboradores-del-documento)
 - [Casos de uso core de la aplicación](#casos-de-uso-core-de-la-aplicación)
 - [Funcionalidades que hemos descartado](#funcionalidades-que-hemos-descartado)
 - [Comparativa entre plan básico y premium](#comparativa-entre-plan-básico-y-premium)
-
-## Colaboradores del documento
-- Luis Giraldo
-  - Creó el documento en md.
-
 
 ## Casos de uso core de la aplicación
 

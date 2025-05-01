@@ -8,4 +8,3 @@ export type Baby = {
   headCircumference?: number;
   foodPreference?: string;
 }
-

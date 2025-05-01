@@ -12,17 +12,17 @@ const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
 export default function Page() {
   const gs = require("../../../static/styles/globalStyles");
-  const { token } = useAuth();
+  const { token, user } = useAuth();
   const router = useRouter();
   const screenWidth = Dimensions.get('window').width;
   const cardWidth = screenWidth < 500 ? 170 : 250;
 
   const [userRecipes, setUserRecipes] = useState<Recipe[]>([]);
   const [userPage, setUserPage] = useState<number>(1);
-  const [userTotalPages, setUserTotalPages] = useState<number | null>(null);
+  const [userTotalPages, setUserTotalPages] = useState<number>(0);
   const [recommendedRecipes, setRecommendedRecipes] = useState<Recipe[]>([]);
   const [recommendedPage, setRecommendedPage] = useState<number>(1);
-  const [recommendedTotalPages, setRecommendedTotalPages] = useState<number | null>(null);
+  const [recommendedTotalPages, setRecommendedTotalPages] = useState<number>(0);
 
   const [filters, setFilters] = useState<RecipeFilter>({});
   const [userRecipesSearchQuery, setUserRecipesSearchQuery] = useState<string | undefined>();
@@ -38,7 +38,6 @@ export default function Page() {
 
 
   const fetchRecommendedRecipes = async (filters: RecipeFilter): Promise<boolean> => {
-
     const queryParams = new URLSearchParams();
     
     Object.entries(filters).forEach(([key, value]) => {
@@ -56,8 +55,8 @@ export default function Page() {
     });
     
     const queryString = queryParams.toString();
-    const url = `${apiUrl}/api/v1/recipes/recommended?page=${recommendedPage-1}${queryString ? `&${queryString}` : ''}`;
-
+    const url = `${apiUrl}/api/v1/recipes/recommended?page=${recommendedPage - 1}${queryString ? `&${queryString}` : ''}`;
+  
     try {
       const response = await fetch(url, {
         method: 'GET',
@@ -65,25 +64,46 @@ export default function Page() {
           'Authorization': `Bearer ${token}`,
         },
       });
-
+  
       if (!response.ok)
         throw new Error("Error fetching recipes");
-
+  
       const recipesData = await response.json();
-      setRecommendedRecipes(recipesData.content);
+  
+      // Convertir las imágenes de cada receta a base64
+      const recipesWithBase64Photos = recipesData.content.map(recipe => {
+        if (recipe.recipePhoto) {
+          if (typeof recipe.recipePhoto === 'string') {
+            recipe.recipePhoto = recipe.recipePhoto.startsWith('data:image')
+              ? recipe.recipePhoto
+              : `data:image/jpeg;base64,${recipe.recipePhoto}`;
+          } else if (Array.isArray(recipe.recipePhoto)) {
+            const bytes = new Uint8Array(recipe.recipePhoto);
+            let binary = '';
+            for (let i = 0; i < bytes.byteLength; i++) {
+              binary += String.fromCharCode(bytes[i]);
+            }
+            const base64 = btoa(binary);
+            recipe.recipePhoto = `data:image/jpeg;base64,${base64}`;
+          }
+        }
+        return recipe;
+      });
+  
+      setRecommendedRecipes(recipesWithBase64Photos);
       setRecommendedTotalPages(recipesData.totalPages);
       return true;
-
+  
     } catch (error) {
-      console.error('Error fetching recipes: ', error);
+      console.error('Error fetching recommended recipes: ', error);
       return false;
     }
   };
+  
 
   const fetchUserRecipes = async (searchQuery?: string): Promise<boolean> => {
-
-    const url = `${apiUrl}/api/v1/recipes?page=${userPage-1}${searchQuery? `&name=${searchQuery}` : ''}`;
-
+    const url = `${apiUrl}/api/v1/recipes?page=${userPage - 1}${searchQuery ? `&name=${searchQuery}` : ''}`;
+  
     try {
       const response = await fetch(url, {
         method: 'GET',
@@ -91,20 +111,44 @@ export default function Page() {
           'Authorization': `Bearer ${token}`,
         },
       });
-
+  
       if (!response.ok)
         throw new Error("Error fetching recipes");
-
+  
       const recipesData = await response.json();
-      setUserRecipes(recipesData.content);
+  
+      // Convertir las imágenes de cada receta a base64
+      const recipesWithBase64Photos = recipesData.content.map(recipe => {
+        if (recipe.recipePhoto) {
+          if (typeof recipe.recipePhoto === 'string') {
+            recipe.recipePhoto = recipe.recipePhoto.startsWith('data:image')
+              ? recipe.recipePhoto
+              : `data:image/jpeg;base64,${recipe.recipePhoto}`;
+          } else if (Array.isArray(recipe.recipePhoto)) {
+            const bytes = new Uint8Array(recipe.recipePhoto);
+            let binary = '';
+            for (let i = 0; i < bytes.byteLength; i++) {
+              binary += String.fromCharCode(bytes[i]);
+            }
+            const base64 = btoa(binary);
+            recipe.recipePhoto = `data:image/jpeg;base64,${base64}`;
+          }
+        }
+        return recipe;
+      });
+  
+      // Guardamos en el estado las recetas ya procesadas
+      setUserRecipes(recipesWithBase64Photos);
+  
       setUserTotalPages(recipesData.totalPages);
-      return true
-
+      return true;
+  
     } catch (error) {
       console.error('Error fetching user recipes: ', error);
       return false;
     }
   };
+  
 
   return (
 
@@ -227,7 +271,9 @@ export default function Page() {
                         marginBottom: 30,
                       }}>
                       <Image
-                        source={require("frontend/assets/adaptive-icon.png")}
+                        source={recommendedRecipes[index].recipePhoto 
+                          ? { uri: recommendedRecipes[index].recipePhoto } 
+                          : require("../../../assets/avatar/avatar1.png")}
                         style={{ width: "100%", height: 150 }}
                         resizeMode="cover"
                       />
@@ -246,7 +292,7 @@ export default function Page() {
           </View>
         )}
 
-        {recommendedTotalPages && (
+        {recommendedTotalPages > 1 && (
           <Pagination 
           totalPages={recommendedTotalPages} 
           page={recommendedPage} 
@@ -314,10 +360,24 @@ export default function Page() {
             </TouchableOpacity>
           </View>
 
-          <View style={{ gap: 10, marginVertical: 20, alignSelf: "flex-start", alignItems: "center", width: "100%" }}>
+          <View style={{ gap: 10, marginVertical: 20, justifyContent:"center", alignItems: "center", flexDirection: "row",  width: "100%" }}>
             <Link style={[gs.mainButton, { backgroundColor: "#1565C0" }]} href={"/recipes/add"}>
-              <Text style={gs.mainButtonText}>Añade una receta</Text>
+              <Text style={gs.mainButtonText}>Crear receta</Text>
             </Link>
+            {/* Sorry for this :D */}
+            {user?.role === "nutritionist" 
+              ?             
+              <Link style={gs.secondaryButton} href={"/requests"}>
+                <Text style={gs.secondaryButtonText}>Crear recetas personalizadas</Text>
+              </Link>
+              : user?.role === "premium"
+                ?               
+                <Link style={gs.secondaryButton} href={"/requests"}>
+                  <Text style={gs.secondaryButtonText}>Solicita recetas personalizadas</Text>
+                </Link>
+                : null
+            }
+
           </View>
 
           {userRecipes.length === 0 ? (
@@ -342,7 +402,9 @@ export default function Page() {
                         marginBottom: 30,
                       }}>
                       <Image
-                        source={require("frontend/assets/adaptive-icon.png")}
+                        source={userRecipes[index].recipePhoto 
+                          ? { uri: userRecipes[index].recipePhoto } 
+                          : require("../../../assets/avatar/avatar1.png")}
                         style={{ width: "100%", height: 150 }}
                         resizeMode="cover"
                       />
@@ -357,7 +419,7 @@ export default function Page() {
                 ))}
             </View>
           )}
-          {userTotalPages && userTotalPages > 1 && (
+          {userTotalPages > 1 && (
             <Pagination 
             totalPages={userTotalPages} 
             page={userPage} 

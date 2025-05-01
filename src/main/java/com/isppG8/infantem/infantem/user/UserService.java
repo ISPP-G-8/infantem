@@ -81,6 +81,7 @@ public class UserService {
             user.setSurname(userDetails.getSurname());
             user.setUsername(userDetails.getUsername());
             user.setEmail(userDetails.getEmail());
+            user.setProfilePhoto(userDetails.getProfilePhoto());
             return userRepository.save(user);
         }).orElse(null);
     }

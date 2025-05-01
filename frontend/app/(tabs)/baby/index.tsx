@@ -47,6 +47,7 @@ export default function BabyInfo() {
   const [heightError, setHeightError] = useState<string | null>(null);
   const [headCircumferenceError, setHeadCircumferenceError] = useState<string | null>(null);
   const [foodPreferenceError, setFoodPreferenceError] = useState<string | null>(null);
+  const [babyAllergensDict, setBabyAllergensDict] = useState<{ [key: string]: string[] }>({});
 
   const isValidDate = (dateString: string) => {
     const dateRegex = /^\d{4}-\d{2}-\d{2}$/; // Format: YYYY-MM-DD
@@ -131,12 +132,29 @@ export default function BabyInfo() {
         if (!response.ok) throw new Error("Error fetching babies");
         const data: Baby[] = await response.json();
         setBabies(data);
+
+        for (let i = 0; i < data.length; i++) {
+          const url = `${apiUrl}/api/v1/allergens/baby/${data[i].id}`;
+          const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${jwt}`,
+            },
+          });
+          const babyAllergens = await response.json();
+          setBabyAllergensDict((prev) => ({
+            ...prev,
+            [data[i].name]: babyAllergens.map((allergen) => allergen.name).join(", "),
+          }));
+          console.log(babyAllergensDict);
+        }
       } catch (error) {
         console.error(error);
       }
     };
     fetchBabies();
   }, [jwt]);
+
 
   const handleSaveBaby = async () => {
     if (!jwt || !editedBaby) return;
@@ -263,6 +281,7 @@ export default function BabyInfo() {
     setFoodPreferenceError(null);
   };
 
+
   return (
     <ImageBackground
       style={{ flex: 1, width: "100%", height: "100%", backgroundColor: "#E3F2FD" }}
@@ -362,6 +381,7 @@ export default function BabyInfo() {
                 <Text style={gs.cardContent}>🍼 Preferencia: {baby.foodPreference}</Text>
                 <Text style={gs.cardContent}>⚖️ Peso: {baby.weight} kg </Text>
                 <Text style={gs.cardContent}>📏 Altura: {baby.height} cm</Text>
+                <Text style={gs.cardContent}>🪲 Alérgenos: {babyAllergensDict[baby.name]}</Text>
               </View>
 
               <View style={{ flexDirection: "column", alignItems: "center", gap: 10 }}>

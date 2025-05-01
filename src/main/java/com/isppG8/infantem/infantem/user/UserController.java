@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.isppG8.infantem.infantem.auth.jwt.JwtUtils;
 import com.isppG8.infantem.infantem.auth.payload.response.MessageResponse;
@@ -25,6 +27,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
+import java.io.IOException;
 import java.util.List;
 
 @Tag(name = "Users", description = "Gestión de usuarios")
@@ -84,7 +87,7 @@ public class UserController {
                             schema = @Schema(implementation = UserDTO.class))) @ApiResponse(responseCode = "400",
                                     description = "El usuario no es el tuyo") @PutMapping("/{id}")
     public ResponseEntity<Object> updateUser(@PathVariable Long id, @Valid @RequestBody UserDTO userDetails,
-            @RequestHeader(name = "Authorization") String token) {
+            @RequestHeader(name = "Authorization") String token) throws IOException {
 
         String jwtId = jwtUtils.getIdFromJwtToken(token.substring(6));
 
@@ -95,12 +98,67 @@ public class UserController {
         if (newUsernameUser != null && !newUsernameUser.getId().toString().equals(jwtId)) {
             return ResponseEntity.badRequest().body(new MessageResponse("New username is already taken"));
         }
+
+        // Mantén la foto de perfil existente
+        User existingUser = userService.getUserById(id);
+        if (existingUser != null) {
+            userDetails.setProfilePhoto(existingUser.getProfilePhoto());
+        }
+
         User updatedUser = userService.updateUser(id, userDetails);
         String jwt = jwtUtils.generateTokenFromUsername(updatedUser.getUsername(), updatedUser.getAuthorities(),
                 updatedUser.getId());
 
         return ResponseEntity.ok().body(new UserUpdatedDTO(updatedUser, jwt));
+    }
 
+    @Operation(summary = "Actualizar la foto de perfil de un usuario",
+            description = "Actualiza la foto de perfil de un usuario por su ID.") @ApiResponse(responseCode = "200",
+                    description = "Foto de perfil actualizada exitosamente") @ApiResponse(responseCode = "400",
+                            description = "El usuario no es el tuyo") @PutMapping(value = "/{id}/profile-photo",
+                                    consumes = { "multipart/form-data" })
+    public ResponseEntity<Object> updateProfilePhoto(@RequestPart(name = "profilePhoto") MultipartFile multipartFile,
+            @PathVariable Long id, @RequestHeader(name = "Authorization") String token) throws IOException {
+
+        String jwtId = jwtUtils.getIdFromJwtToken(token.substring(6));
+
+        if (!(jwtId.equals(id.toString()))) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Not your user"));
+        }
+
+        User user = userService.getUserById(id);
+        if (user == null) {
+            return ResponseEntity.badRequest().body(new MessageResponse("User not found"));
+        }
+
+        if (multipartFile != null && !multipartFile.isEmpty()) {
+            UserDTO userDTO = new UserDTO(user);
+            userDTO.setProfilePhoto(multipartFile.getBytes());
+            User updatedUser = userService.updateUser(id, userDTO);
+            String jwt = jwtUtils.generateTokenFromUsername(updatedUser.getUsername(), updatedUser.getAuthorities(),
+                    updatedUser.getId());
+
+            return ResponseEntity.ok().body(new UserUpdatedDTO(updatedUser, jwt));
+        } else {
+            return ResponseEntity.badRequest().body(new MessageResponse("Profile photo is empty"));
+        }
+    }
+
+    @DeleteMapping("/{id}/profile-photo")
+    public ResponseEntity<MessageResponse> deleteProfilePhoto(@PathVariable Long id,
+            @RequestHeader(name = "Authorization") String token) {
+        String jwtId = jwtUtils.getIdFromJwtToken(token.substring(6));
+        if (!(jwtId.equals(id.toString()))) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Not your user"));
+        }
+        User user = userService.getUserById(id);
+        if (user == null) {
+            return ResponseEntity.badRequest().body(new MessageResponse("User not found"));
+        }
+        UserDTO userDTO = new UserDTO(user);
+        userDTO.setProfilePhoto(null);
+        userService.updateUser(id, userDTO);
+        return ResponseEntity.ok().body(new MessageResponse("Photo delete successfully"));
     }
 
     @Operation(summary = "Eliminar un usuario por su ID", description = "Elimina un usuario por su ID.") @ApiResponse(

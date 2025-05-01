@@ -23,7 +23,11 @@ public interface IntakeRepository extends JpaRepository<Intake, Long> {
     @Query("SELECT i FROM Intake i WHERE i.baby.id IN (SELECT b.id FROM Baby b WHERE :user MEMBER OF b.users)")
     List<Intake> findAllByUser(@Param("user") User user);
 
+    @Query("SELECT i FROM Intake i")
+    List<Intake> getAll();
+
     @Query(value = "SELECT i FROM Intake i WHERE i.baby.id = :babyId ORDER BY i.date",
             queryRewriter = IntakeQueryRewriter.class)
     Intake getLastIntake(Integer babyId);
+
 }

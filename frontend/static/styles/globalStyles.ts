@@ -42,7 +42,12 @@ module.exports = StyleSheet.create({
     color: "#007AFF",
     textDecorationLine: "underline",
   },
-
+  changeImageText: {
+    fontSize: 16,
+    color: "#1565c0",
+    textDecorationLine: "underline",
+    marginTop: 10,
+  },
   mainButton: {
     backgroundColor: "#1565C0", 
     paddingVertical: 12,
@@ -127,6 +132,43 @@ module.exports = StyleSheet.create({
     fontSize: 14,
     lineHeight: 22
   },
+  imageButtonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 30,
+    alignItems: 'center',
+    width: '100%'
+  },
+  imageButton: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    borderRadius: 10,
+    padding: 10,
+    width: 'auto',
+    backgroundColor: '#0d47a1',
+  },
+  imageDeleteButton: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    borderRadius: 10,
+    padding: 10,
+    width: 'auto',
+    backgroundColor: '#ededed',
+  },
+  imageButtonTextStyle: {
+    color: 'white',
+    fontWeight: 'thin',
+    fontSize: 12,
+    textAlign: 'center'
+  },
+  imageDeleteButtonTextStyle: {
+    color: '#ff0512',
+    fontWeight: 'thin',
+    fontSize: 12,
+    textAlign: 'center'
+  },
   buttonContainer: {
     flexDirection: 'column',
     alignItems: 'center',
@@ -135,11 +177,10 @@ module.exports = StyleSheet.create({
   button: {
     borderRadius: 10,
     padding: 10,
-    elevation: 2,
-    width: '48%'
+    width: '48%',
   },
   buttonClose: {
-    backgroundColor: '#2196F3'
+    backgroundColor: '#0d47a1'
   },
   buttonTextStyle: {
     color: 'white',
@@ -445,6 +486,39 @@ module.exports = StyleSheet.create({
     marginTop: 10,
     lineHeight: 20,
   },
+
+
+  // Estilos de subscrición
+  inputWrapperStyle: {
+    padding: 12,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: "8px",
+    backgroundColor: "#fafafa",
+    marginTop: 4,
+  },
+  
+  textInputStyle: {
+    width: "100%",
+    padding: 12,
+    borderRadius: "8px",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    backgroundColor: "#fafafa",
+    fontSize: 16,
+    marginTop: 4,
+  },
+  
+  payButtonStyle: {
+    padding: 14,
+    backgroundColor: "#556cd6",
+    color: "white",
+    borderWidth: 0,
+    borderRadius: "8px",
+    fontSize: 16,
+    fontWeight: "bold",
+    cursor: "pointer",
+  }
 
 
 });

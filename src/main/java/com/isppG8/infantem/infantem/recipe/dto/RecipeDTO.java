@@ -1,7 +1,9 @@
 package com.isppG8.infantem.infantem.recipe.dto;
 
 import com.isppG8.infantem.infantem.recipe.Recipe;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.isppG8.infantem.infantem.allergen.dto.AllergenDTO;
+import com.isppG8.infantem.infantem.config.Base64ToByteArrayDeserializer;
 import com.isppG8.infantem.infantem.intake.dto.IntakeDTO;
 
 import java.util.List;
@@ -28,7 +30,12 @@ public class RecipeDTO {
 
     private String elaboration;
 
+    @JsonDeserialize(using = Base64ToByteArrayDeserializer.class)
+    private byte[] recipePhoto;
+
     private Integer user;
+
+    private boolean isCustom;
 
     private List<AllergenDTO> allergens = new ArrayList<>();
 
@@ -44,7 +51,9 @@ public class RecipeDTO {
         this.ingredients = recipe.getIngredients();
         this.minRecommendedAge = recipe.getMinRecommendedAge();
         this.maxRecommendedAge = recipe.getMaxRecommendedAge();
+        this.recipePhoto = recipe.getRecipePhoto();
         this.elaboration = recipe.getElaboration();
+        this.isCustom = recipe.isCustom();
         if (recipe.getUser() == null) {
             this.user = null;
         } else {

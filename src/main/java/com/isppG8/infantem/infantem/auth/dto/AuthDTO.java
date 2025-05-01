@@ -19,7 +19,9 @@ public class AuthDTO {
 
     private String email;
 
-    private String profilePhotoRoute;
+    private byte[] profilePhoto;
+
+    private String role;
 
     public AuthDTO() {
 
@@ -31,7 +33,8 @@ public class AuthDTO {
         this.surname = user.getSurname();
         this.username = user.getUsername();
         this.email = user.getEmail();
-        this.profilePhotoRoute = user.getProfilePhotoRoute();
+        this.profilePhoto = user.getProfilePhoto();
+        this.role = user.getAuthorities().getAuthority();
     }
 
 }

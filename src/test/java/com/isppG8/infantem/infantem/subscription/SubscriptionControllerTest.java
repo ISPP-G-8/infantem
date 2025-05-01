@@ -1,6 +1,7 @@
 package com.isppG8.infantem.infantem.subscription;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -17,6 +18,10 @@ import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserRepository;
 import com.isppG8.infantem.infantem.user.UserService;
+import com.stripe.model.PaymentIntent;
+import com.stripe.model.Subscription;
+import com.stripe.param.PaymentIntentCreateParams;
+import com.stripe.param.SubscriptionCreateParams;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -28,7 +33,8 @@ import java.util.Map;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -72,34 +78,28 @@ public class SubscriptionControllerTest {
     private SubscriptionInfantemRepository subscriptionInfantemRepository;
 
     @Test
-    public void testCreateSubscription() throws Exception {
-        SubscriptionInfantem fakeSubscription = new SubscriptionInfantem();
-        fakeSubscription.setStripeSubscriptionId("sub_test_123");
-        fakeSubscription.setActive(true);
-
-        // Corrección: Usar el mock del servicio correctamente
-        when(subscriptionService.createSubscription(anyLong(), anyString(), anyString(), anyString()))
-                .thenReturn(fakeSubscription);
-
-        mockMvc.perform(post("/api/v1/subscriptions/create").with(csrf()).param("userId", "1")
-                .param("customerId", "cus_test_123").param("priceId", "price_abc").param("paymentMethodId", "pm_xyz")
-                .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-                .andExpect(jsonPath("$.stripeSubscriptionId").value("sub_test_123"));
-    }
-
-    @Test
     public void testCreateSubscriptionNew() throws Exception {
-        SubscriptionInfantem fakeSubscription = new SubscriptionInfantem();
-        fakeSubscription.setStripeSubscriptionId("sub_test_new");
-        fakeSubscription.setActive(true);
+        // Mock del PaymentIntent
+        PaymentIntent mockIntent = mock(PaymentIntent.class);
+        when(mockIntent.getPaymentMethod()).thenReturn("pm_456");
+        when(mockIntent.getCustomer()).thenReturn("cus_123");
 
-        when(subscriptionService.createSubscriptionNew(anyLong(), anyString(), anyString()))
-                .thenReturn(fakeSubscription);
+        try (MockedStatic<PaymentIntent> mockedStatic = mockStatic(PaymentIntent.class)) {
+            mockedStatic.when(() -> PaymentIntent.retrieve("pi_123")).thenReturn(mockIntent);
 
-        mockMvc.perform(
-                post("/api/v1/subscriptions/create/new").with(csrf()).param("userId", "1").param("priceId", "price_abc")
-                        .param("paymentMethodId", "pm_456").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()).andExpect(jsonPath("$.stripeSubscriptionId").value("sub_test_new"));
+            SubscriptionInfantem fakeSubscription = new SubscriptionInfantem();
+            fakeSubscription.setStripeSubscriptionId("sub_test_new");
+            fakeSubscription.setActive(true);
+
+            when(subscriptionService.createSubscriptionNew(1L, "price_abc", "pm_456", "cus_123"))
+                    .thenReturn(fakeSubscription);
+
+            mockMvc.perform(post("/api/v1/subscriptions/create-subscription").with(csrf()).param("userId", "1")
+                    .param("priceId", "price_abc").param("paymentIntentId", "pi_123")
+                    .contentType(MediaType.APPLICATION_FORM_URLENCODED)).andExpect(status().isOk())
+                    .andExpect(jsonPath("$.stripeSubscriptionId").value("sub_test_new"))
+                    .andExpect(jsonPath("$.active").value(true));
+        }
     }
 
     @Test
@@ -237,4 +237,82 @@ public class SubscriptionControllerTest {
                                                                                                                          // objeto
                                                                                                                          // vacío
     }
+
+    @Test
+    public void testCreateStripeCustomer_Success() throws Exception {
+        User mockUser = new User();
+        mockUser.setId(1);
+        mockUser.setEmail("test@example.com");
+        mockUser.setName("Test User");
+
+        when(userRepository.findById(1L)).thenReturn(Optional.of(mockUser));
+        when(subscriptionService.createCustomer(eq("test@example.com"), eq("Test User"), anyString()))
+                .thenReturn("cus_123");
+
+        mockMvc.perform(get("/api/v1/subscriptions/customer-id").param("userId", "1")).andExpect(status().isOk())
+                .andExpect(content().string("cus_123"));
+    }
+
+    @Test
+    public void testCreateStripeCustomer_UserNotFound() throws Exception {
+        when(userRepository.findById(99L)).thenReturn(Optional.empty());
+
+        mockMvc.perform(get("/api/v1/subscriptions/customer-id").param("userId", "99")).andExpect(status().isNotFound())
+                .andExpect(content().string("Usuario no encontrado"));
+    }
+
+    @Test
+    public void testCreatePaymentIntent_Success() throws Exception {
+        // Mock del PaymentIntent
+        PaymentIntent mockPaymentIntent = mock(PaymentIntent.class);
+        when(mockPaymentIntent.getClientSecret()).thenReturn("secret_test_123");
+
+        try (MockedStatic<PaymentIntent> mockedStatic = mockStatic(PaymentIntent.class)) {
+            mockedStatic.when(() -> PaymentIntent.create(any(PaymentIntentCreateParams.class)))
+                    .thenReturn(mockPaymentIntent);
+
+            mockMvc.perform(post("/api/v1/subscriptions/create-payment-intent").with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON).content("""
+                                {
+                                    "amount": 1000,
+                                    "currency": "eur",
+                                    "customerId": "cus_123"
+                                }
+                            """)).andExpect(status().isOk())
+                    .andExpect(jsonPath("$.clientSecret").value("secret_test_123"));
+        }
+    }
+
+    @Test
+    public void testCreateSubscriptionAfterPaymentIntent_Success() throws Exception {
+        PaymentIntent mockIntent = mock(PaymentIntent.class);
+        when(mockIntent.getPaymentMethod()).thenReturn("pm_123");
+        when(mockIntent.getCustomer()).thenReturn("cus_123");
+
+        try (MockedStatic<PaymentIntent> mockedIntent = mockStatic(PaymentIntent.class);
+                MockedStatic<Subscription> mockedSubscription = mockStatic(Subscription.class)) {
+            mockedIntent.when(() -> PaymentIntent.retrieve("pi_abc")).thenReturn(mockIntent);
+
+            Subscription mockStripeSubscription = new Subscription();
+            mockStripeSubscription.setId("sub_test_created");
+            mockedSubscription.when(() -> Subscription.create(any(SubscriptionCreateParams.class)))
+                    .thenReturn(mockStripeSubscription);
+
+            User mockUser = new User();
+            mockUser.setId(1);
+            when(userRepository.findById(1L)).thenReturn(Optional.of(mockUser));
+
+            SubscriptionInfantem newSubscription = new SubscriptionInfantem();
+            newSubscription.setStripeSubscriptionId("sub_test_created");
+            newSubscription.setActive(true);
+
+            when(subscriptionInfantemRepository.save(any())).thenReturn(newSubscription);
+
+            mockMvc.perform(post("/api/v1/subscriptions/create-subscription-from-payment-intent").with(csrf())
+                    .param("userId", "1").param("priceId", "price_test").param("paymentIntentId", "pi_abc"))
+                    .andExpect(status().isOk()).andExpect(jsonPath("$.stripeSubscriptionId").value("sub_test_created"))
+                    .andExpect(jsonPath("$.active").value(true));
+        }
+    }
+
 }
