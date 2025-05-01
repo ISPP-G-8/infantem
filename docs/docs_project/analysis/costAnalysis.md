@@ -73,8 +73,9 @@
    3.1 [Costes de Infraestructura en Producción](#31-costes-de-infraestructura-en-producción)  
    3.2 [Costes de Atención al Cliente y Soporte Técnico](#32-costes-de-atención-al-cliente-y-soporte-técnico)  
    3.3 [Costes de Herramientas y Servicios de Mantenimiento](#33-costes-de-herramientas-y-servicios-de-mantenimiento)  
-   3.4 [Costes de Publicidad y Marketing](#34-costes-de-publicidad-y-marketing)       
-   3.5 [Resumen de Costes Post-Lanzamiento](#35-resumen-de-costes-post-lanzamiento)
+   3.4 [Costes de Publicidad y Marketing](#34-costes-de-publicidad-y-marketing)   
+   3.5 [Costes de Nutricionistas](#35-costes-de-nutricionistas)       
+   3.5 [Resumen de Costes Post-Lanzamiento](#36-resumen-de-costes-post-lanzamiento)
 4. [Análisis de Ingresos Post-Lanzamiento](#4-análisis-de-ingresos-post-lanzamiento)  
    4.1 [Semana 1: Inicio Prometedor](#41-semana-1-inicio-prometedor)  
    4.2 [6 Meses: Consolidación](#42-6-meses-post-lanzamiento-consolidación)  
@@ -327,16 +328,6 @@ Para estudiar los costes que tendremos que asumir en los 2 años siguientes a nu
 
 | Trimestre      | Número de Instancias (Coste) | Número de Usuarios | Tráfico de Red         | Logs Adicionales       | Backups              | Total Trimestre     | Total Acumulado     |
 |----------------|------------------------------|--------------------|------------------------|------------------------|----------------------|----------------------|----------------------|
-<<<<<<< HEAD
-| Trimestre 1    | 2 → 89,94 €                  | 1.350              | 1 TB (108,35 €)        | 6,75 GB → 3,38 €       | 50 GB → 0,75 €       | 202,42 €             | 202,42 €             |
-| Trimestre 2    | 4 → 179,88 €                 | 2.692              | 1 TB (108,46 €)        | 10,96 GB → 5,48 €      | 60 GB → 0,90 €       | 294,72 €             | 497,14 €             |
-| Trimestre 3    | 6 → 269,82 €                 | 4.030              | 1 TB (108,46 €)        | 16,23 GB → 8,11 €      | 75 GB → 1,13 €       | 387,52 €             | 884,66 €             |
-| Trimestre 4    | 8 → 359,76 €                 | 5.392              | 1 TB (108,46 €)        | 24,59 GB → 12,29 €     | 100 GB → 1,50 €      | 481,01 €             | 1.365,67 €           |
-| Trimestre 5    | 10 → 449,70 €                | 6.925              | 2 TB (207,78 €)        | 37,28 GB → 18,64 €     | 150 GB → 2,25 €      | 678,37 €             | 2.044,04 €           |
-| Trimestre 6    | 12 → 539,64 €                | 8.755              | 2 TB (207,78 €)        | 56,56 GB → 28,28 €     | 200 GB → 3,00 €      | 778,70 €             | 2.822,74 €           |
-| Trimestre 7    | 14 → 629,58 €                | 10.970             | 3 TB (308,20 €)        | 86,53 GB → 43,27 €     | 300 GB → 4,50 €      | 985,55 €             | 3.808,29 €           |
-| Trimestre 8    | 16 → 719,52 €                | 11.278             | 5 TB (506,04 €)        | 131,08 GB → 65,54 €    | 500 GB → 7,50 €      | 1.298,60 €           | 5.106,89 €           |
-=======
 | Trimestre 2    | 2 → 89,94 €                  | 1.500              | 1 TB (108,35 €)        | 6,75 GB → 3,38 €       | 50 GB → 0,75 €       | 202,42 €             | 202,42 €             |
 | Trimestre 3    | 4 → 179,88 €                 | 2.281              | 1 TB (108,46 €)        | 10,96 GB → 5,48 €      | 60 GB → 0,90 €       | 294,72 €             | 497,14 €            |
 | Trimestre 4    | 6 → 269,82 €                 | 3.470              | 1 TB (108,46 €)        | 16,23 GB → 8,11 €      | 75 GB → 1,13 €       | 387,52 €             | 884,66 €             |
@@ -345,7 +336,6 @@ Para estudiar los costes que tendremos que asumir en los 2 años siguientes a nu
 | Trimestre 7    | 12 → 539,64 €                | 12.206             | 2 TB (207,78 €)        | 56,56 GB → 28,28 €     | 200 GB → 3,00 €      | 778,70 €             | 2.822,74 €           |
 | Trimestre 8    | 14 → 629,58 €                | 18.563             | 3 TB (308,20 €)        | 86,53 GB → 43,27 €     | 300 GB → 4,50 €      | 985,55 €             | 3.808,29 €           |
 
->>>>>>> 9a215b6cef56f5eecd8ce7c549f90f0e67d480c5
 
 Se van a usar instancias `e2-standard-2` que estaran funcionando 24/7.
 
@@ -438,7 +428,7 @@ Coste total por trimestre:
 | Trimestre 7   | 4                   | 32.016,00 €       | 120.060,00 €    |
 | Trimestre 8   | 4                   | 32.016,00 €       | 152.076,00 €    |
 
-### 3.5 Resumen de Costes Post-Lanzamiento
+### 3.6 Resumen de Costes Post-Lanzamiento
 
 | Trimestre     | Infraestructura  | Soporte técnico   | Herramientas y mantenimiento | Costes de Marketing | Costes de Nutricionistas| **Total Trimestre** | **Total Acumulado** |
 |---------------|------------------|-------------------|------------------------------|---------------------|-------------------------|---------------------|---------------------|
@@ -473,7 +463,7 @@ Ingresos por publicidad =
 Para el marketplace supondremos que el 3% de nuestros usuarios mensuales hacen una compra de un ticket medio de 25 € de la cual nos llevaremos una comision del 15%.
 
 
-### 4.1 Trimestre 1
+### 4.1 Trimestre 2
 
 Para el 1º trimestre hay una estimación de 1350 usuarios al mes.
 Ingresos de marcketplace: 2.025,00 €
@@ -494,7 +484,7 @@ Ingresos de marcketplace: 2.025,00 €
   - Ingresos de publicidad: 10432  €
 
 
-### 4.2 Trimestre 2
+### 4.2 Trimestre 3
 
 Para el 2º trimestre hay una estimación de 2.692 usuarios al mes.
 Ingresos de marcketplace: 4.038,00 €
@@ -515,7 +505,7 @@ Ingresos de marcketplace: 4.038,00 €
   - Ingresos de publicidad: 20.806  €
 
 
-### 4.3 Trimestre 3
+### 4.3 Trimestre 4
 
 Para el 3º trimestre hay una estimación de 4.030 usuarios al mes.
 Ingresos del marketplace: 6.045,00 €
@@ -536,7 +526,7 @@ Ingresos del marketplace: 6.045,00 €
   - Ingresos de publicidad: 31.146  €
 
 
-### 4.4 Trimestre 4
+### 4.4 Trimestre 5
 
 Para el 4º trimestre hay una estimación de 5.392 usuarios al mes.
 Ingresos del marketplace: 8.088,00  €
@@ -556,7 +546,7 @@ Ingresos del marketplace: 8.088,00  €
   - Ingresos de plan premium: 6456 €
   - Ingresos de publicidad: 71.438  €
 
-### 4.5 Trimestre 5
+### 4.5 Trimestre 6
 
 Para el 5º trimestre hay una estimación de 6.925 usuarios al mes.
 Ingresos del marketplace: 10.387,50  €
@@ -576,7 +566,7 @@ Ingresos del marketplace: 10.387,50  €
   - Ingresos de plan premium: 15550 €
   - Ingresos de publicidad: 91.742  €
 
-### 4.6 Trimestre 6
+### 4.6 Trimestre 7
 
 Para el 6º trimestre hay una estimación de 8.755 usuarios al mes.
 Ingresos del marketplace: 13.132,50 €
@@ -596,7 +586,7 @@ Ingresos del marketplace: 13.132,50 €
   - Ingresos de plan premium: 19659 €
   - Ingresos de publicidad: 133.956  €
 
-### 4.7 Trimestre 7
+### 4.7 Trimestre 8
 
 Para el 7º trimestre hay una estimación de 10.970 usuarios al mes.
 Ingresos del marketplace: 16.455,00 €
@@ -616,7 +606,7 @@ Ingresos del marketplace: 16.455,00 €
   - Ingresos de plan premium: 24633 €
   - Ingresos de publicidad: 167.850  €
 
-### 4.8 Trimestre 8
+### 4.8 Trimestre 9
 
 Para el 8º trimestre hay una estimación de 11.278 usuarios al mes.
 Ingresos del marketplace: 16.917,00 €
@@ -639,28 +629,28 @@ Ingresos del marketplace: 16.917,00 €
 
 | Trimestre | Caso       | Premium (€) | Publicidad (€) | Marketplace (€) | Total Trimestre (€) | Acumulado (€) |
 |-----------|------------|-------------|----------------|------------------|----------------------|----------------|
-| T1        | Pesimista  | 600         | 1.572          | 2.025            | 4.197                | 4.197          |
+| T2        | Pesimista  | 600         | 1.572          | 2.025            | 4.197                | 4.197          |
 |           | Realista   | 1.002       | 4.618          | 2.025            | 7.645                | 7.645          |
 |           | Optimista  | 1.617       | 10.432         | 2.025            | 14.074               | 14.074         |
-| T2        | Pesimista  | 1.209       | 3.134          | 4.038            | 8.381                | 12.578         |
+| T3        | Pesimista  | 1.209       | 3.134          | 4.038            | 8.381                | 12.578         |
 |           | Realista   | 2.013       | 9.208          | 4.038            | 15.259               | 22.904         |
 |           | Optimista  | 3.222       | 20.806         | 4.038            | 28.066               | 42.140         |
-| T3        | Pesimista  | 1.809       | 4.692          | 6.045            | 12.546               | 25.124         |
+| T4        | Pesimista  | 1.809       | 4.692          | 6.045            | 12.546               | 25.124         |
 |           | Realista   | 3.015       | 13.784         | 6.045            | 22.844               | 45.748         |
 |           | Optimista  | 4.824       | 31.146         | 6.045            | 42.015               | 84.155         |
-| T4        | Pesimista  | 2.421       | 12.554         | 8.088            | 23.063               | 48.187         |
+| T5        | Pesimista  | 2.421       | 12.554         | 8.088            | 23.063               | 48.187         |
 |           | Realista   | 4.035       | 30.738         | 8.088            | 42.861               | 88.609         |
 |           | Optimista  | 6.456       | 71.438         | 8.088            | 86.982               | 171.137        |
-| T5        | Pesimista  | 8.292       | 7.645          | 10.387,50        | 26.324,50            | 74.511,50      |
+| T6        | Pesimista  | 8.292       | 7.645          | 10.387,50        | 26.324,50            | 74.511,50      |
 |           | Realista   | 12.440      | 36.564         | 10.387,50        | 59.391,50            | 148.000,50     |
 |           | Optimista  | 15.550      | 91.742         | 10.387,50        | 117.679,50           | 288.816,50     |
-| T6        | Pesimista  | 10.482      | 28.998         | 13.132,50        | 52.612,50            | 127.124        |
+| T7        | Pesimista  | 10.482      | 28.998         | 13.132,50        | 52.612,50            | 127.124        |
 |           | Realista   | 15.727      | 64.722         | 13.132,50        | 93.581,50            | 241.582        |
 |           | Optimista  | 19.659      | 133.956        | 13.132,50        | 226.747,50           | 515.564        |
-| T7        | Pesimista  | 13.137      | 36.334         | 16.455           | 65.926               | 193.050        |
+| T8        | Pesimista  | 13.137      | 36.334         | 16.455           | 65.926               | 193.050        |
 |           | Realista   | 10.706      | 81.092         | 16.455           | 108.253              | 349.835        |
 |           | Optimista  | 24.633      | 167.850        | 16.455           | 208.938              | 724.502        |
-| T8        | Pesimista  | 13.506      | 37.352         | 16.917           | 67.775               | 260.825        |
+| T9        | Pesimista  | 13.506      | 37.352         | 16.917           | 67.775               | 260.825        |
 |           | Realista   | 20.259      | 83.370         | 16.917           | 120.546              | 470.381        |
 |           | Optimista  | 25.324      | 172.566        | 16.917           | 214.807              | 939.309        |
 
@@ -668,98 +658,46 @@ Ingresos del marketplace: 16.917,00 €
 
 
 ## 5. Tabla de Beneficios Totales.
+En esta tabla no se muestran los beneficios acumulados.
 
-| Periodo           | CAPEX (€) | OPEX (€)  | TOTAL Costes (€) | Ingresos Pesimista (€) | Ingresos Realista (€) | Ingresos Optimista (€) | Beneficio Pesimista (€) | Beneficio Realista (€) | Beneficio Optimista (€) |
-|-------------------|-----------|-----------|-------------------|-------------------------|------------------------|-------------------------|--------------------------|-------------------------|--------------------------|
-| Semana 1 (Pre)    | 4.396     | 12,51     | 4.408,51          | 0                       | 0                      | 0                       | -4.408,51                | -4.408,51               | -4.408,51                |
-| Semana 5 (Pre)    | 11.019    | 50,04     | 11.069,04         | 0                       | 0                      | 0                       | -15.477,55               | -15.477,55              | -15.477,55               |
-| Semana 10 (Pre)   | 15.415    | 1.887,55  | 17.302,55         | 0                       | 0                      | 0                       | -32.780,10               | -32.780,10              | -32.780,10               |
-| Semana 15 (Pre)   | 12.768    | 262,55    | 13.030,55         | 0                       | 0                      | 0                       | -45.810,65               | -45.810,65              | -45.810,65               |
-| **Total Pre**     | **43.598**| **2.212,65**| **45.810,65**     | **0**                   | **0**                  | **0**                   | **-45.810,65**           | **-45.810,65**          | **-45.810,65**           |
-| Semana 1 (Post)   | 0         | 796,36    | 796,36            | 500                     | 1.762,82               | 3.000                   | -46.106,01               | -44.843,19              | -43.606,01               |
-| 6 Meses Post      | 0         | 38.807,46 | 38.807,46         | 35.000                  | 85.053,18              | 120.000                 | -49.913,47               | -3.597,47               | 30.193,99                |
-| 1 Año Post        | 0         | 116.705,76| 116.705,76        | 100.000                 | 340.853,76             | 600.000                 | -66.619,23               | 221.555,29              | 513.488,23               |
-| 2 Años Post       | 0         | 283.595,88| 283.595,88        | 200.000                 | 705.736,32             | 1.200.000               | -150.215,11              | 422.140,44              | 1.429.892,35             |
+| Periodo           | CAPEX (€) | OPEX (€)  | TOTAL Costes (€) | Ingresos Pesimista (€) | Ingresos Realista (€) | Ingresos Optimista (€) | Beneficio Realista (€) |
+|-------------------|-----------|-----------|-------------------|-------------------------|------------------------|-------------------------|--------------------------|
+| Trimestre 1    | 49.843,01     | 7.199,15     |    57904,55       |     0                |  0                  |        0             | -57.904,55               |
+| Trimestre 2    |  0   | 25.879,30     | 25.879,30         | 4.197                       | 7.645                    | 14.074                       | -18.234,30               |
+| Trimestre 3   |  0   | 33.975,60  | 33.975,60         | 8.381                      | 15.259                      | 28.066                       | -18.716,30               |
+| Trimestre 4   | 0    | 39.271,00    | 39.271,00         | 12.546                       | 22.844                     | 	42.015                       | -16.427               |
+| Trimestre 5    | 0         | 47.368,49    | 47.368,49            | 23.063                     | 42.861              | 86.982                   | -4.507,49               | 
+| Trimestre 6       | 0         | 52.918,45 | 52.918,45         | 26.324,50                  | 59.391,50              | 117.679,50                 | 6473,05              |
+| Trimestre 7        | 0         | 61.022,78| 61.022,78        | 52.612,50                 | 93.581,50             | 		226.747,50                 | 32.558,72               |
+| Trimestre 8       | 0         | 66.432,23| 66.432,23        | 65.926               | 108.253             | 208.938              | -150.215,11              | 41820,77              |
 
 > Nota: Los ingresos post-lanzamiento provienen de tres canales: suscripciones Premium, publicidad segmentada y comisiones del Marketplace. Los costes incluyen infraestructura, soporte técnico, mantenimiento, diseño, expertos y marketing.
 ---
 
-## 6. Resumen Costes, Ingresos y Beneficios
 
-La siguientes tabla presentan una proyección trimestral detallada de los costes, ingresos y beneficios netos del proyecto Infantem desde su inicio (T1 2025) hasta completar dos años de actividad (T4 2026). Para facilitar el análisis estratégico y financiero, se han considerado tres escenarios: realista, optimista y pesimista, cada uno con sus respectivas estimaciones de crecimiento, adopción de usuarios y rendimiento económico. Esta visión global permite anticipar el punto de equilibrio y planificar decisiones clave en función del retorno de inversión en cada escenario.
+## 6. Conclusión
 
-### Caso Realista
-
-| Trimestre          | CAPEX (€) | OPEX (€) | Coste Total (€) | Ingresos (€) | Beneficio (€) |
-|--------------------|-----------|----------|-----------------|--------------|---------------|
-| T1 2025 (Feb-Abr)  | 43.598,00 | 2.212,65 | 45.810,65       | 0,00         | -45.810,65    |
-| T2 2025 (May-Jul)  | 0,00      | 12.935,82| 12.935,82       | 20.000,00    | 7.064,18      |
-| T3 2025 (Ago-Oct)  | 0,00      | 9.701,86 | 9.701,86        | 85.053,18    | 75.351,32     |
-| T4 2025 (Nov-Ene)  | 0,00      | 9.701,86 | 9.701,86        | 255.800,58   | 246.098,72    |
-| T1 2026 (Feb-Abr)  | 0,00      | 29.025,44| 29.025,44       | 340.853,76   | 311.828,32    |
-| T2 2026 (May-Jul)  | 0,00      | 29.025,44| 29.025,44       | 352.453,76   | 323.428,32    |
-| T3 2026 (Ago-Oct)  | 0,00      | 29.025,44| 29.025,44       | 352.453,76   | 323.428,32    |
-| T4 2026 (Nov-Ene)  | 0,00      | 29.025,44| 29.025,44       | 352.453,76   | 323.428,32    |
-
----
-
-### Caso Optimista
-
-| Trimestre          | CAPEX (€) | OPEX (€) | Coste Total (€) | Ingresos (€) | Beneficio (€) |
-|--------------------|-----------|----------|-----------------|--------------|---------------|
-| T1 2025 (Feb-Abr)  | 43.598,00 | 2.212,65 | 45.810,65       | 0,00         | -45.810,65    |
-| T2 2025 (May-Jul)  | 0,00      | 13.435,82| 13.435,82       | 30.000,00    | 16.564,18     |
-| T3 2025 (Ago-Oct)  | 0,00      | 10.201,86| 10.201,86       | 120.000,00   | 109.798,14    |
-| T4 2025 (Nov-Ene)  | 0,00      | 10.201,86| 10.201,86       | 300.000,00   | 289.798,14    |
-| T1 2026 (Feb-Abr)  | 0,00      | 30.025,44| 30.025,44       | 600.000,00   | 569.974,56    |
-| T2 2026 (May-Jul)  | 0,00      | 30.025,44| 30.025,44       | 620.000,00   | 589.974,56    |
-| T3 2026 (Ago-Oct)  | 0,00      | 30.025,44| 30.025,44       | 620.000,00   | 589.974,56    |
-| T4 2026 (Nov-Ene)  | 0,00      | 30.025,44| 30.025,44       | 620.000,00   | 589.974,56    |
-
----
-
-### Caso Pesimista
-
-| Trimestre          | CAPEX (€) | OPEX (€) | Coste Total (€) | Ingresos (€) | Beneficio (€) |
-|--------------------|-----------|----------|-----------------|--------------|---------------|
-| T1 2025 (Feb-Abr)  | 43.598,00 | 2.212,65 | 45.810,65       | 0,00         | -45.810,65    |
-| T2 2025 (May-Jul)  | 0,00      | 11.935,82| 11.935,82       | 10.000,00    | -1.935,82     |
-| T3 2025 (Ago-Oct)  | 0,00      | 9.201,86 | 9.201,86        | 35.000,00    | 25.798,14     |
-| T4 2025 (Nov-Ene)  | 0,00      | 9.201,86 | 9.201,86        | 70.000,00    | 60.798,14     |
-| T1 2026 (Feb-Abr)  | 0,00      | 28.025,44| 28.025,44       | 100.000,00   | 71.974,56     |
-| T2 2026 (May-Jul)  | 0,00      | 28.025,44| 28.025,44       | 110.000,00   | 81.974,56     |
-| T3 2026 (Ago-Oct)  | 0,00      | 28.025,44| 28.025,44       | 110.000,00   | 81.974,56     |
-| T4 2026 (Nov-Ene)  | 0,00      | 28.025,44| 28.025,44       | 110.000,00   | 81.974,56     |
-
----
-
---- 
-
-## 7. Conclusión
-
-El proyecto **Infantem** ha demostrado ser económicamente **viable y escalable** desde el inicio. A pesar de una inversión significativa durante las primeras 15 semanas (CAPEX + OPEX de 88.730,38 €), los ingresos generados tras el lanzamiento superan con creces los costes operativos, alcanzando beneficios positivos ya en la primera semana.
+El proyecto **Infantem** ha demostrado ser económicamente **viable y escalable**, puesto que consigue un retorno de la invesión a partir del noveno trimestre. A pesar de una inversión significativa durante las primeras 15 semanas (CAPEX + OPEX de 88.730,38 €), sumado a grandes costes operativos en los primeros trimestres, el modelo de negocio se sostiene gracias a un crecimiento sostenido de la base de usuarios y una diversificación de ingresos.
 
 El enfoque de monetización múltiple —suscripciones, publicidad y marketplace— ofrece un modelo equilibrado y diversificado, donde el **marketplace se consolida como el motor principal de ingresos**. Este modelo permite una recuperación rápida de la inversión y abre la puerta a una **expansión sostenible** a medio y largo plazo.
 
 ---
 
-## 8. Análisis de Rentabilidad
+## 7. Análisis de Rentabilidad
 
-- **Punto de equilibrio**: Se alcanza en el mes 6 (escenario realista), con un beneficio neto de **+46.245,72 €**, superando así los costes acumulados del desarrollo inicial.
-- **ROI al año**: A los 12 meses, el beneficio neto es de **+224.148 €**, multiplicando por 2,5 la inversión inicial.
-- **ROI a 2 años**: A los 24 meses, se alcanza un beneficio neto acumulado de **+422.140 €**, cuadruplicando la inversión inicial.
-
-Esto significa que el retorno de inversión es **acelerado** y mejora exponencialmente con el crecimiento de la base de usuarios. El **bajo coste marginal** de cada nuevo usuario (gracias al modelo digital) permite escalar sin necesidad de grandes inversiones adicionales.
+- **Punto de equilibrio**: Se alcanza en noveno trimestre (escenario realista).
+- **ROI al año**: A los 12 meses, el beneficio neto es de **-111.282,15 €**, por lo que la invesión no se sigue en pérdidas. Sin embargo, se ha recuperado la invesión inicial de desarrollo.
+- **ROI a 2 años**: A los 24 meses, se alcanza un beneficio neto acumulado de **-76757,87 €**. Por ello, el retorno de inversión se realiza durante el noveno trimestre, momento a partir del cual el proyecto genera beneficios netos positivos. 
 
 ---
 
-## 9. Análisis de Resultados
+## 8. Análisis de Resultados
 
 - **Fase Pre-Lanzamiento**: Requiere una inversión considerable para diseñar, construir y posicionar la app. Aunque no genera ingresos en esta fase, se asientan las bases de la rentabilidad futura.
 - **Semana 1 Post-Lanzamiento**: Ya se alcanza un beneficio neto positivo (**+966,46 €**), lo que valida el producto y su acogida en el mercado.
 - **6 Meses**: Se evidencia una consolidación del modelo con ingresos estables y aumento progresivo de usuarios Premium.
-- **1 Año**: El negocio se vuelve claramente rentable. Todas las fuentes de ingreso contribuyen de manera significativa.
-- **2 Años**: Se alcanza una **madurez de mercado**, con ingresos superiores a 700.000 € y rentabilidad sostenida, lo que abre la posibilidad de expandirse a nuevos servicios o mercados.
+- **1 Año**: El negocio sigue en pérdidas pero con un crecimiento sostenido, recuperando la inversión inicial de desarrollo.
+- **2 Años**: Se alcanza una **madurez de mercado**, con ingresos estables y un retorno de la inversión a partir del noveno trimestre. 
 
 ---
 
