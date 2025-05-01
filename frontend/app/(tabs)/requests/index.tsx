@@ -54,7 +54,7 @@ export default function requests() {
       <Text style={[gs.bodyText, { textAlign: "center",color:"#1565C0" }]}>¡Recetas personalizadas para los usuarios premium!</Text>
 
       {user?.role === 'premium' && (
-        <Link style={[gs.mainButton, { backgroundColor: "#1565C0", marginVertical: 20 }]} href={"/customRecipes/ask"}>
+        <Link style={[gs.mainButton, { backgroundColor: "#1565C0", marginVertical: 20 }]} href={"/requests/ask"}>
           <Text style={gs.mainButtonText}>Crear solicitud</Text>
         </Link>
       )}

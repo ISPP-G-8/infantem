@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Picker } from "@react-native-picker/picker";
+import { getToken } from "../utils/jwtStorage";
 import {
   View,
   Text,
@@ -10,6 +12,7 @@ import {
 import { RecipeFilter } from "../types";
 
 const styles = require("../static/styles/recipeFilter");
+const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
 type RecipeFilterProps = {
   filters: RecipeFilter;
@@ -27,6 +30,18 @@ const RecipeFilterComponent = ({
 
   const [expanded, setExpanded] = useState(false);
   const animatedHeight = useState(new Animated.Value(0))[0];
+  const [availableAllergens, setAvailableAllergens] = useState<string[]>([]);
+const [selectedAllergen, setSelectedAllergen] = useState<string>("");
+const [jwt, setJwt] = useState<string | null>(null); // 👈 MOVIDO AQUÍ
+
+  useEffect(() => {
+    const getUserToken = async () => {
+      const token = await getToken();
+      setJwt(token);
+    };
+    getUserToken();
+  }, []);
+
 
   // Yeah, the animation code is a bit messy; but trust me, it looked way bad without it.
   const toggleExpand = () => {
@@ -97,6 +112,31 @@ const RecipeFilterComponent = ({
     setFilters({});
     onApplyFilters({});
   };
+
+  useEffect(() => {
+    const fetchAllergens = async () => {
+      try {
+        const response = await fetch(`${apiUrl}/api/v1/allergens`, {
+          method: 'GET',
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${jwt}`,
+          },
+        });
+        if (!response.ok) throw new Error("Error al obtener alérgenos");
+        const data = await response.json();
+        console.log("Alérgenos:", data);
+        const names = data.map((a: any) => a.name);
+        setAvailableAllergens(names);
+      } catch (error) {
+        console.error("Error obteniendo alérgenos:", error);
+      }
+    };
+  
+    fetchAllergens();
+  }, [apiUrl, jwt]);
+  
+  
 
   return (
     <View style={styles.outerContainer}>
@@ -190,32 +230,76 @@ const RecipeFilterComponent = ({
             <View style={styles.inputContainer}>
               <Text style={styles.label}>Alérgenos</Text>
               <View style={styles.addItemContainer}>
-                <TextInput
-                  style={styles.addItemInput}
-                  placeholder="Añade un alérgeno"
-                  value={allergen}
-                  onChangeText={setAllergen}
-                  placeholderTextColor="#A0A0A0"
-                />
-                <TouchableOpacity
-                  style={styles.addButton}
-                  onPress={addAllergen}
+              <View style={[styles.addItemInput, { padding: 0, justifyContent: "center" }]}>
+              {availableAllergens?.length > 0 &&
+              availableAllergens.filter(
+                (name) => !(filters.allergens || []).includes(name)
+              ).length > 0 ? (
+                <select
+                  style={{
+                    flex: 1,
+                    height: 40,
+                    borderWidth: 0,
+                    backgroundColor: "transparent",
+                    color: "#000",
+                  }}
+                  value={selectedAllergen}
+                  onChange={(e) => setSelectedAllergen(e.target.value)}
                 >
-                  <Text style={styles.addButtonText}>Añadir</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.tagsContainer}>
-                {(filters.allergens || []).map((item, index) => (
-                  <TouchableOpacity
-                    key={index}
-                    style={styles.tag}
-                    onPress={() => removeAllergen(index)}
-                  >
-                    <Text style={styles.tagText}>{item} ×</Text>
-                  </TouchableOpacity>
-                ))}
-              </View>
+                  <option value="">Selecciona un alérgeno...</option>
+                  {availableAllergens
+                    .filter((name) => !(filters.allergens || []).includes(name))
+                    .map((name, index) => (
+                      <option key={index} value={name}>
+                        {name}
+                      </option>
+                    ))}
+                </select>
+              ) : (
+                <Text style={{ color: "#808080", paddingLeft: 8 }}>
+                  Todos los alérgenos han sido añadidos
+                </Text>
+              )}
             </View>
+
+            <TouchableOpacity
+              style={styles.addButton}
+              onPress={() => {
+                if (
+                  selectedAllergen &&
+                  !filters.allergens?.includes(selectedAllergen)
+                ) {
+                  setFilters({
+                    ...filters,
+                    allergens: [...(filters.allergens || []), selectedAllergen],
+                  });
+                  setSelectedAllergen("");
+                }
+              }}
+            >
+              <Text style={styles.addButtonText}>Añadir</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.tagsContainer}>
+            {(filters.allergens || []).map((item, index) => (
+              <TouchableOpacity
+                key={index}
+                style={styles.tag}
+                onPress={() => {
+                  const updated = [...(filters.allergens || [])];
+                  updated.splice(index, 1);
+                  setFilters({ ...filters, allergens: updated });
+                }}
+              >
+                <Text style={styles.tagText}>{item} ×</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+
+
+
 
             <View style={styles.buttonContainer}>
               <TouchableOpacity

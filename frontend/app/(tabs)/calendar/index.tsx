@@ -18,6 +18,13 @@ const CalendarTab = () => {
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
+  const dreamTypeLabels: { [key: string]: string } = {
+    DEEP: "Sueño profundo",
+    LIGHT: "Sueño ligero",
+    REM: "REM",
+    AGITATED: "Agitado",
+  };
+
   // Manejar la selección de un día en el calendario
   const handleDayPress = (day: { dateString: string }) => {
     setSelectedDate(day.dateString);
@@ -278,10 +285,10 @@ const CalendarTab = () => {
               marginTop: 5,
             }}
             onPress={() => {
-              navigation.navigate("addSleep"); // Navegar a la pestaña Sleep con la fecha seleccionada
+              navigation.navigate("sleep"); // Navegar a la pestaña Sleep con la fecha seleccionada
             }}
           >
-            <Text style={{ color: "#fff", fontWeight: "bold" }}>Tus sueños</Text>
+            <Text style={{ color: "#fff", fontWeight: "bold" }}>Tus tramos de sueños</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
@@ -293,7 +300,7 @@ const CalendarTab = () => {
               marginTop: 5,
             }}
             onPress={() => {
-              navigation.navigate("addDisease"); // Reemplaza con la función correspondiente
+              navigation.navigate("disease"); // Reemplaza con la función correspondiente
             }}
           >
             <Text style={{ color: "#fff", fontWeight: "bold" }}>Tus enfermedades</Text>
@@ -308,7 +315,7 @@ const CalendarTab = () => {
                 marginTop: 5,
               }}
               onPress={() => {
-                navigation.navigate("addVaccine", { selectedDate });
+                navigation.navigate("vaccine"); // Reemplaza con la función correspondiente
               }}
             >
               <Text style={{ color: "#fff", fontWeight: "bold" }}>Tus vacunas</Text>
@@ -405,7 +412,7 @@ const CalendarTab = () => {
                   
                         return (
                           <Text key={index} style={[gs.bodyText, { marginLeft: 10 }]}>
-                            - Tipo: {dream.dreamType}, Despertadas: {dream.numWakeups}, Inicio:{" "}
+                            - Tipo: {dreamTypeLabels[dream.dreamType] || "Desconocido"}, Despertadas: {dream.numWakeups}, Inicio:{" "}
                             {startDate ? startDate.toLocaleString() : "No especificado"}, Fin:{" "}
                             {endDate ? endDate.toLocaleString() : "No especificado"}
                           </Text>
@@ -461,8 +468,8 @@ const CalendarTab = () => {
                       <Text style={[gs.bodyText, { fontWeight: "bold", marginBottom: 5 }]}>Métricas:</Text>
                       {events[selectedDate][babyId].metrics.map((metric: any, index: number) => (
                         <Text key={index} style={[gs.bodyText, { marginLeft: 10 }]}>
-                          - Peso: {metric.weight} kg, Altura: {metric.height} cm, Perímetro cefálico: {metric.headCircumference} cm
-                        </Text>
+                          - Peso: {metric.weight} kg, Altura: {metric.height} cm, Circunferencia cefálico: {metric.headCircumference} cm, Circunferencia del brazo: {metric.armCircumference} cm
+                          </Text>
                       ))}
                     </View>
                   )}

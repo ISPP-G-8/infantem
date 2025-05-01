@@ -9,6 +9,7 @@ what the following rules do, please see the checkstyle configuration
 page at http://checkstyle.sourceforge.net/config.html -->
 
 <module name="Checker">
+    <property name="fileExtensions" value="java"/>
     <!-- Headers -->
     <module name="Header">
         <property name="fileExtensions" value="java"/>

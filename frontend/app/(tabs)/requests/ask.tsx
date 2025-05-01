@@ -31,12 +31,12 @@ export default function CreateRequest() {
       });
       
       if (!response.ok) {
-        setErrorMessage('Error al guardar la ingesta');
-        throw new Error('Error al guardar la ingesta');
+        setErrorMessage('Error al guardar la solicitud');
+        throw new Error('Error al guardar la solicitud');
       }
 
       setDetails('');
-      router.replace("customRecipes");
+      router.replace("requests");
 
     } catch (error) {
       console.error('Error saving intake:', error);
@@ -45,7 +45,7 @@ export default function CreateRequest() {
 
   const handleCancel = () => {
     setDetails('');
-    router.replace("customRecipes");
+    router.replace("requests");
   };
   return (
     <View style={gs.container}>

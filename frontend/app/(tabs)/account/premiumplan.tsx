@@ -3,12 +3,14 @@ import { View, Text, TouchableOpacity,Dimensions, ActivityIndicator, Alert, Scro
 import { useRouter } from "expo-router";
 import { getToken } from "../../../utils/jwtStorage";
 import { jwtDecode } from "jwt-decode";
+import { useAuth } from "../../../context/AuthContext";
 
 export default function PremiumPlan() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [token, setToken] = useState<string | null>(null);
       const [isMobile, setIsMobile] = useState<boolean>(Dimensions.get("window").width < 768);
+      const { updateToken, checkAuth } = useAuth(); 
     
     interface Subscription {
         stripeSubscriptionId: any;
@@ -144,6 +146,12 @@ export default function PremiumPlan() {
             return response.json();
         }).then(data => {
             setSubscription(data);
+            const newToken = data.token?.token;
+
+            if (newToken) {
+              updateToken(newToken); // guarda el nuevo token y actualiza el contexto
+              checkAuth(); // fuerza la recarga del usuario (rol actualizado)
+            }
             router.push('/account')
         }).catch(error => {
             Alert.alert("Error", `No se pudo realizar la activación: ${error.message}`);

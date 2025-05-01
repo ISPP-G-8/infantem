@@ -73,45 +73,70 @@ export default function BabyInfo() {
   };
 
   const validateAllFields = (): boolean => {
-  let valid = true;
-
-  if (!editedBaby) return false;
-
-  if (!editedBaby.name.trim()) {
-    setNameError("El nombre es obligatorio.");
-    valid = false;
-  }
-
-  if (!isValidDate(editedBaby.birthDate)) {
-    setBirthDateError("Fecha inválida. Use AAAA-MM-DD y asegúrese de que la fecha existe.");
-    valid = false;
-  }
-
-  const weight = parseFloat(editedBaby.weight);
-  if (isNaN(weight) || weight <= 0) {
-    setWeightError("Ingrese un peso válido mayor que 0.");
-    valid = false;
-  }
-
-  const height = parseFloat(editedBaby.height);
-  if (isNaN(height) || height <= 0) {
-    setHeightError("Ingrese una altura válida mayor que 0.");
-    valid = false;
-  }
-
-  const cephalic = parseFloat(editedBaby.headCircumference);
-  if (isNaN(cephalic) || cephalic <= 0) {
-    setHeadCircumferenceError("Ingrese una medida de la circunferencia de la cabeza válida mayor que 0.");
-    valid = false;
-  }
-
-  if (!editedBaby.foodPreference.trim()) {
-    setFoodPreferenceError("La preferencia alimentaria es obligatoria.");
-    valid = false;
-  }
-
-  return valid;
-};
+    let valid = true;
+  
+    if (!editedBaby) return false;
+  
+    if (!editedBaby.name.trim()) {
+      setNameError("El nombre es obligatorio.");
+      valid = false;
+    } else {
+      setNameError(null);
+    }
+  
+    if (!isValidDate(editedBaby.birthDate)) {
+      setBirthDateError("Fecha inválida. Use AAAA-MM-DD y asegúrese de que la fecha existe.");
+      valid = false;
+    } else if (new Date(editedBaby.birthDate) > new Date()) {
+      setBirthDateError("La fecha no puede ser en el futuro.");
+      valid = false;
+    } else {
+      setBirthDateError(null);
+    }
+  
+    const weight = parseFloat(editedBaby.weight);
+    if (isNaN(weight) || weight <= 0) {
+      setWeightError("Ingrese un peso válido mayor que 0.");
+      valid = false;
+    } else if (weight > 30) {
+      setWeightError("El peso no puede ser mayor a 30 kg.");
+      valid = false;
+    } else {
+      setWeightError(null);
+    }
+  
+    const height = parseFloat(editedBaby.height);
+    if (isNaN(height) || height <= 0) {
+      setHeightError("Ingrese una altura válida mayor que 0.");
+      valid = false;
+    } else if (height > 130) {
+      setHeightError("La altura no puede ser mayor a 130 cm.");
+      valid = false;
+    } else {
+      setHeightError(null);
+    }
+  
+    const cephalic = parseFloat(editedBaby.headCircumference);
+    if (isNaN(cephalic) || cephalic <= 0) {
+      setHeadCircumferenceError("Ingrese una medida de la circunferencia de la cabeza válida mayor que 0.");
+      valid = false;
+    } else if (cephalic > 55) {
+      setHeadCircumferenceError("La circunferencia de la cabeza no puede ser mayor a 55 cm.");
+      valid = false;
+    } else {
+      setHeadCircumferenceError(null);
+    }
+  
+    if (!editedBaby.foodPreference.trim()) {
+      setFoodPreferenceError("La preferencia alimentaria es obligatoria.");
+      valid = false;
+    } else {
+      setFoodPreferenceError(null);
+    }
+  
+    return valid;
+  };
+  
 
   useEffect(() => {
     const getUserToken = async () => {

@@ -11,10 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isppG8.infantem.infantem.auth.Authorities;
+import com.isppG8.infantem.infantem.auth.jwt.JwtResponse;
+import com.isppG8.infantem.infantem.auth.jwt.JwtUtils;
 import com.isppG8.infantem.infantem.subscription.dto.CreatePaymentRequest;
 import com.isppG8.infantem.infantem.subscription.dto.CreatePaymentResponse;
 import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserRepository;
+import com.isppG8.infantem.infantem.user.UserService;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
 import com.stripe.model.Subscription;
@@ -47,6 +51,12 @@ public class SubscriptionInfantemController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private JwtUtils jwtUtils;
 
     @Operation(summary = "Obtener cliente por email",
             description = "Recupera los detalles de un cliente a partir de su email y últimos 4 dígitos del método de pago.") @ApiResponse(
@@ -93,13 +103,16 @@ public class SubscriptionInfantemController {
             SubscriptionInfantem subscription = optionalSub.get();
             User user = subscription.getUser();
 
+            JwtResponse jwtResponse;
+
             if (active) {
-                subscriptionService.activateSubscription(user, subscriptionId);
+                jwtResponse = subscriptionService.activateSubscription(user, subscriptionId);
             } else {
-                subscriptionService.desactivateSubscription(user, subscriptionId);
+                jwtResponse = subscriptionService.desactivateSubscription(user, subscriptionId);
             }
 
-            return ResponseEntity.ok("Estado de la suscripción actualizado.");
+            return ResponseEntity.ok(jwtResponse);
+
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error al actualizar el estado: " + e.getMessage());
         }
@@ -265,8 +278,11 @@ public class SubscriptionInfantemController {
             Subscription stripeSubscription = Subscription.create(params);
 
             // Guardar en tu base de datos
+            // Guardar en tu base de datos
             User user = userRepository.findById(userId)
                     .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+            userService.upgradeToPremium(user);
 
             SubscriptionInfantem newSubscription = new SubscriptionInfantem();
             newSubscription.setUser(user);
@@ -278,7 +294,20 @@ public class SubscriptionInfantemController {
 
             subscriptionInfantemRepository.save(newSubscription);
 
-            return ResponseEntity.ok(newSubscription);
+            // 🟡 Generar nuevo JWT tras cambio de rol (a premium)
+            Authorities auth = user.getAuthorities();
+            String newToken = jwtUtils.generateTokenFromUsername(user.getUsername(), auth, user.getId());
+            List<String> roles = List.of(auth.getAuthority());
+
+            JwtResponse jwtResponse = new JwtResponse(newToken, user.getId(), user.getUsername(), roles);
+
+            // Puedes devolver ambos: JWT + info de suscripción
+            Map<String, Object> response = new HashMap<>();
+            response.put("subscription", newSubscription);
+            response.put("token", jwtResponse);
+
+            return ResponseEntity.ok(response);
+
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error al crear la suscripción: " + e.getMessage());
         }

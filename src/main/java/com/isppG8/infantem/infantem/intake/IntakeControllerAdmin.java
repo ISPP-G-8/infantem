@@ -34,7 +34,7 @@ public class IntakeControllerAdmin {
     private AuthoritiesService authoritiesService;
 
     @Autowired
-    public IntakeControllerAdmin(IntakeService intakeService) {
+    public IntakeControllerAdmin(IntakeService intakeService, AuthoritiesService authoritiesService) {
         this.intakeService = intakeService;
         this.authoritiesService = authoritiesService;
     }
