@@ -49,7 +49,6 @@ public class SubscriptionInfantemService {
     @Autowired
     private JwtUtils jwtUtils;
 
-
     public void processPayment() {
         String apiKey = stripeConfig.getStripeApiKey();
         System.out.println("Usando clave de Stripe: " + apiKey);
@@ -87,7 +86,6 @@ public class SubscriptionInfantemService {
         return new JwtResponse(token, user.getId(), user.getUsername(), roles);
     }
 
-
     @Transactional
     public JwtResponse desactivateSubscription(User user, String subscriptionId) {
         Optional<SubscriptionInfantem> subOpt = subscriptionInfantemRepository.findByUser(user);
@@ -111,7 +109,6 @@ public class SubscriptionInfantemService {
 
         throw new EntityNotFoundException("No subscription found for user.");
     }
-
 
     // 1. Crear un cliente en Stripe
     public String createCustomer(String email, String name, String description) throws Exception {
