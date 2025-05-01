@@ -1,13 +1,10 @@
 package com.isppG8.infantem.infantem.disease.dto;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.isppG8.infantem.infantem.baby.dto.BabyDTO;
 import com.isppG8.infantem.infantem.disease.Disease;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
