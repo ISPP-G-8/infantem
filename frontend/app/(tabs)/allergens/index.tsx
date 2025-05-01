@@ -246,7 +246,8 @@ export default function Allergens() {
             </>
           )}
         </ScrollView>
-        <AdvertisementFetcher />
+
+        {user?.role !== "premium" && <AdvertisementFetcher />}
       </ImageBackground>
     </View>
   );
