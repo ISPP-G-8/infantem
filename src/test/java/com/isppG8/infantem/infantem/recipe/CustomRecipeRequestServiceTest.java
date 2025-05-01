@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -31,6 +32,8 @@ import jakarta.transaction.Transactional;
 @ActiveProfiles("test")
 @Transactional
 public class CustomRecipeRequestServiceTest {
+    private static final String TEST_DETAILS = "Test details";
+
     @MockitoBean
     private UserService userService;
 
@@ -78,8 +81,17 @@ public class CustomRecipeRequestServiceTest {
 
     @Test
     public void getNumRequestsByUserIdActualMonthTest() {
-        Integer userId = 1;
-        Integer result = requestService.getNumRequestsByUserIdActualMonth(userId);
+        Long userId = 1L;
+        User user = userRepository.getReferenceById(userId);
+
+        CustomRecipeRequest request = new CustomRecipeRequest();
+        request.setDetails(TEST_DETAILS);
+        request.setUser(user);
+        request.setStatus(RequestStatus.OPEN);
+        request.setCreatedAt(LocalDateTime.now());
+        requestRepository.save(request);
+
+        Integer result = requestService.getNumRequestsByUserIdActualMonth(userId.intValue());
 
         assertNotNull(result);
         assertEquals(1, result);
@@ -95,8 +107,17 @@ public class CustomRecipeRequestServiceTest {
 
     @Test
     public void getNumRequestsByUserIdActualMonthPremiumTest() {
-        Integer userId = 1;
-        Integer result = requestService.getNumRequestsByUserIdActualMonthPremium(userId);
+        Long userId = 1L;
+        User user = userRepository.getReferenceById(userId);
+
+        CustomRecipeRequest request = new CustomRecipeRequest();
+        request.setDetails("Premium test details");
+        request.setUser(user);
+        request.setStatus(RequestStatus.OPEN);
+        request.setCreatedAt(LocalDateTime.now());
+        requestRepository.save(request);
+
+        Integer result = requestService.getNumRequestsByUserIdActualMonthPremium(userId.intValue());
 
         assertNotNull(result);
         assertEquals(1, result);
@@ -112,7 +133,7 @@ public class CustomRecipeRequestServiceTest {
         Mockito.when(userService.findCurrentUser()).thenReturn(persistedUser);
 
         CustomRecipeRequestCreateDTO req = new CustomRecipeRequestCreateDTO();
-        req.setDetails("Test details");
+        req.setDetails(TEST_DETAILS);
 
         requestService.createRequest(req);
 
@@ -140,12 +161,12 @@ public class CustomRecipeRequestServiceTest {
         Mockito.when(userService.findCurrentUser()).thenReturn(persistedUser);
 
         CustomRecipeRequestCreateDTO req = new CustomRecipeRequestCreateDTO();
-        req.setDetails("Test details");
+        req.setDetails(TEST_DETAILS);
 
         CustomRecipeRequest result = requestService.createRequest(req);
 
         assertNotNull(result);
-        assertEquals("Test details", result.getDetails());
+        assertEquals(TEST_DETAILS, result.getDetails());
     }
 
     @Test
@@ -153,7 +174,7 @@ public class CustomRecipeRequestServiceTest {
         Mockito.when(mockUser.getAuthorities().getAuthority()).thenReturn("user");
 
         CustomRecipeRequestCreateDTO req = new CustomRecipeRequestCreateDTO();
-        req.setDetails("Test details");
+        req.setDetails(TEST_DETAILS);
 
         assertThrows(ResourceNotOwnedException.class, () -> requestService.createRequest(req));
     }
@@ -168,7 +189,7 @@ public class CustomRecipeRequestServiceTest {
         Mockito.when(userService.findCurrentUser()).thenReturn(persistedUser);
 
         CustomRecipeRequestCreateDTO req = new CustomRecipeRequestCreateDTO();
-        req.setDetails("Test details");
+        req.setDetails(TEST_DETAILS);
 
         for (int i = 0; i < 5; i++) {
             requestService.createRequest(req);
@@ -187,7 +208,7 @@ public class CustomRecipeRequestServiceTest {
         Mockito.when(userService.findCurrentUser()).thenReturn(persistedUser);
 
         CustomRecipeRequestCreateDTO req = new CustomRecipeRequestCreateDTO();
-        req.setDetails("Test details");
+        req.setDetails(TEST_DETAILS);
 
         CustomRecipeRequest created = requestService.createRequest(req);
 
@@ -218,7 +239,7 @@ public class CustomRecipeRequestServiceTest {
         Mockito.when(userService.findCurrentUser()).thenReturn(persistedUser);
 
         CustomRecipeRequestCreateDTO req = new CustomRecipeRequestCreateDTO();
-        req.setDetails("Test details");
+        req.setDetails(TEST_DETAILS);
 
         CustomRecipeRequest created = requestService.createRequest(req);
 
@@ -238,7 +259,7 @@ public class CustomRecipeRequestServiceTest {
         Mockito.when(userService.findCurrentUser()).thenReturn(persistedUser);
 
         CustomRecipeRequestCreateDTO req = new CustomRecipeRequestCreateDTO();
-        req.setDetails("Test details");
+        req.setDetails(TEST_DETAILS);
 
         CustomRecipeRequest created = requestService.createRequest(req);
 
@@ -263,7 +284,7 @@ public class CustomRecipeRequestServiceTest {
         Mockito.when(userService.findCurrentUser()).thenReturn(persistedUser);
 
         CustomRecipeRequestCreateDTO req = new CustomRecipeRequestCreateDTO();
-        req.setDetails("Test details");
+        req.setDetails(TEST_DETAILS);
 
         CustomRecipeRequest created = requestService.createRequest(req);
 

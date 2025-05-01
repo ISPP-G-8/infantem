@@ -72,9 +72,14 @@ export default function AddBaby() {
       isValid = false;
     }
 
-    if (recipe.maxRecommendedAge !== null && isNaN(recipe.maxRecommendedAge)) {
-      setMaxAgeError("La edad máxima recomendada debe ser un número válido.");
-      isValid = false;
+    if (recipe.maxRecommendedAge !== null) {
+      if (isNaN(recipe.maxRecommendedAge)) {
+        setMaxAgeError("La edad máxima recomendada debe ser un número válido.");
+        isValid = false;
+      } else if (recipe.maxRecommendedAge > 72) {
+        setMaxAgeError("La edad máxima recomendada no puede ser superior a 72 meses.");
+        isValid = false;
+      }
     }
 
     if (
