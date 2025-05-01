@@ -11,10 +11,15 @@ import com.stripe.param.CustomerListParams;
 import com.stripe.param.PaymentMethodAttachParams;
 import com.stripe.param.PaymentMethodListParams;
 import com.stripe.param.SubscriptionCreateParams;
+
+import jakarta.persistence.EntityNotFoundException;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.isppG8.infantem.infantem.auth.Authorities;
 import com.isppG8.infantem.infantem.auth.AuthoritiesService;
+import com.isppG8.infantem.infantem.auth.jwt.JwtResponse;
+import com.isppG8.infantem.infantem.auth.jwt.JwtUtils;
 import com.isppG8.infantem.infantem.config.StripeConfig;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 import com.isppG8.infantem.infantem.user.User;
@@ -23,12 +28,14 @@ import com.isppG8.infantem.infantem.user.dto.UserDTO;
 import com.stripe.model.checkout.Session;
 import com.stripe.exception.StripeException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -38,6 +45,10 @@ import java.util.stream.Collectors;
 public class SubscriptionInfantemService {
 
     private final StripeConfig stripeConfig;
+
+    @Autowired
+    private JwtUtils jwtUtils;
+
 
     public void processPayment() {
         String apiKey = stripeConfig.getStripeApiKey();
@@ -57,17 +68,28 @@ public class SubscriptionInfantemService {
     }
 
     @Transactional
-    public void activateSubscription(User user, String subscriptionId) {
+    public JwtResponse activateSubscription(User user, String subscriptionId) {
         SubscriptionInfantem subscription = subscriptionInfantemRepository.findByUser(user)
                 .orElseThrow(() -> new ResourceNotFoundException("Suscripción no encontrada"));
+
+        // Actualiza el rol a premium
         userService.upgradeToPremium(user);
+
+        // Marca la suscripción como activa
         subscription.setStripeSubscriptionId(subscriptionId);
         subscription.setActive(true);
         subscriptionInfantemRepository.save(subscription);
+
+        // Regenera el JWT con el nuevo rol del usuario
+        String token = jwtUtils.generateTokenFromUsername(user.getUsername(), user.getAuthorities(), user.getId());
+        List<String> roles = Collections.singletonList(user.getAuthorities().getAuthority());
+
+        return new JwtResponse(token, user.getId(), user.getUsername(), roles);
     }
 
+
     @Transactional
-    public void desactivateSubscription(User user, String subscriptionId) {
+    public JwtResponse desactivateSubscription(User user, String subscriptionId) {
         Optional<SubscriptionInfantem> subOpt = subscriptionInfantemRepository.findByUser(user);
 
         if (subOpt.isPresent()) {
@@ -80,8 +102,16 @@ public class SubscriptionInfantemService {
             subscription.setStripeSubscriptionId(subscriptionId);
             subscription.setActive(false);
             subscriptionInfantemRepository.save(subscription);
+
+            String token = jwtUtils.generateTokenFromUsername(user.getUsername(), authorities, user.getId());
+            List<String> roles = Collections.singletonList(authorities.getAuthority());
+
+            return new JwtResponse(token, user.getId(), user.getUsername(), roles);
         }
+
+        throw new EntityNotFoundException("No subscription found for user.");
     }
+
 
     // 1. Crear un cliente en Stripe
     public String createCustomer(String email, String name, String description) throws Exception {
