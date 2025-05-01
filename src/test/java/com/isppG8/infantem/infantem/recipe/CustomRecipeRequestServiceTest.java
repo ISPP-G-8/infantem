@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -78,8 +79,17 @@ public class CustomRecipeRequestServiceTest {
 
     @Test
     public void getNumRequestsByUserIdActualMonthTest() {
-        Integer userId = 1;
-        Integer result = requestService.getNumRequestsByUserIdActualMonth(userId);
+        Long userId = 1L;
+        User user = userRepository.getReferenceById(userId);
+
+        CustomRecipeRequest request = new CustomRecipeRequest();
+        request.setDetails("Test details");
+        request.setUser(user);
+        request.setStatus(RequestStatus.OPEN);
+        request.setCreatedAt(LocalDateTime.now());
+        requestRepository.save(request);
+
+        Integer result = requestService.getNumRequestsByUserIdActualMonth(user.getId());
 
         assertNotNull(result);
         assertEquals(1, result);
@@ -95,8 +105,17 @@ public class CustomRecipeRequestServiceTest {
 
     @Test
     public void getNumRequestsByUserIdActualMonthPremiumTest() {
-        Integer userId = 1;
-        Integer result = requestService.getNumRequestsByUserIdActualMonthPremium(userId);
+        Long userId = 1L;
+        User user = userRepository.getReferenceById(userId);
+
+        CustomRecipeRequest request = new CustomRecipeRequest();
+        request.setDetails("Premium test details");
+        request.setUser(user);
+        request.setStatus(RequestStatus.OPEN);
+        request.setCreatedAt(LocalDateTime.now());
+        requestRepository.save(request);
+
+        Integer result = requestService.getNumRequestsByUserIdActualMonthPremium(user.getId());
 
         assertNotNull(result);
         assertEquals(1, result);
