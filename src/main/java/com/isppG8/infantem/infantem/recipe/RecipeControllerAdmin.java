@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.isppG8.infantem.infantem.user.UserService;
 import com.isppG8.infantem.infantem.auth.AuthoritiesService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -37,8 +36,7 @@ public class RecipeControllerAdmin {
     private AuthoritiesService authoritiesService;
 
     @Autowired
-    public RecipeControllerAdmin(RecipeService recipeService, UserService userService,
-            AuthoritiesService authoritiesService) {
+    public RecipeControllerAdmin(RecipeService recipeService, AuthoritiesService authoritiesService) {
         this.recipeService = recipeService;
         this.authoritiesService = authoritiesService;
     }

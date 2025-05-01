@@ -1,6 +1,7 @@
 package com.isppG8.infantem.infantem.metric;
 
 import java.util.List;
+import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -83,7 +84,7 @@ public class MetricControllerAdmin {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Metric.class))) @ApiResponse(responseCode = "404",
                                     description = "Métrica no encontrada") @PutMapping("/{id}")
-    public ResponseEntity<Metric> updateMetric(@PathVariable Long id, @RequestBody Metric metric) {
+    public ResponseEntity<Metric> updateMetric(@PathVariable Long id, @RequestBody @Valid Metric metric) {
         if (authoritiesService.isAdmin()) {
             Metric updatedMetric = metricService.updateMetric(id, metric);
             return ResponseEntity.ok(updatedMetric);
