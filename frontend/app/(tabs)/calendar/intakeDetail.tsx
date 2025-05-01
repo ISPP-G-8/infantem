@@ -130,12 +130,13 @@ export default function intakeDetail() {
 
   const handleSaveIntake = async () => {
     const validateDate = (dateString: string) => {
-      const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+      const dateRegex = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/;
       if (!dateRegex.test(dateString)) {
-        return "La fecha debe tener el formato AAAA-MM-dd";
+        return "La fecha debe tener el formato AAAA-MM-DD HH:mm";
       }
   
-      const parsedDate = new Date(dateString);
+
+      const parsedDate = new Date(dateString.replace(' ', 'T'));
       if (isNaN(parsedDate.getTime())) {
         return "La fecha ingresada no es válida";
       }
@@ -161,7 +162,7 @@ export default function intakeDetail() {
     } else if (dateError) {
       setErrorMessage(dateError); 
       return;
-    } else if (new Date(intake.date) > now) {
+    } else if (new Date(intake.date.replace(' ', 'T')) > now) {
       setErrorMessage("La fecha de la ingesta no puede estar en el futuro"); 
       return;
     } else if (!intake.observations) {
