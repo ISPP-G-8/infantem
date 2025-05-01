@@ -41,10 +41,11 @@ export default function Vaccines() {
 
   const handleDelete = async (id: number) => {
     try {
-      const response = await fetch(`${apiUrl}/api/v1/vaccine/${id}`, {
+      const response = await fetch(`${apiUrl}/api/v1/vaccines/${id}`, {
         method: 'DELETE',
         headers: {
-          'Authorization': `Bearer ${token}`,
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`, 
         },
       });
 
@@ -70,7 +71,7 @@ export default function Vaccines() {
         {vaccines.map((vaccine, index) => {
           return (
             <TouchableOpacity
-              key={vaccine.id || index}
+              key={vaccine.id || index} // Usa index como fallback si id no existe
               style={gs.card}
             >
               <View style={{ flex: 1 }}>
@@ -80,21 +81,28 @@ export default function Vaccines() {
                     <Text style={{ fontWeight: 'bold', color: '#1565C0' }}> Bebé: {vaccine.baby.name}</Text>
                   }
                 </View>
-                
-                <Text style={gs.cardContent}>Vacuna: {vaccine.type}</Text>
 
-                
+                <Text style={gs.cardContent}>Vacuna: {vaccine.type}</Text>
 
                 <View style={{ alignItems: 'flex-end', marginTop: 10 }}>
                   <View style={{ flexDirection: 'row', gap: 6 }}>
                     <TouchableOpacity
                       style={{ backgroundColor: 'red', paddingVertical: 5, paddingHorizontal: 12, borderRadius: 5 }}
-                      onPress={() => handleDelete(vaccine.id)}
+                      // MODIFICACIÓN AQUÍ: Añadida la verificación
+                      onPress={() => {
+                        if (vaccine.id !== undefined && vaccine.id !== null) { // Verifica que id no sea undefined ni null
+                          handleDelete(vaccine.id);
+                        } else {
+                          console.warn("Intentaste eliminar una vacuna sin un ID definido:", vaccine);
+                          // Opcional: Mostrar un mensaje al usuario si lo deseas
+                          // Alert.alert("Error", "No se puede eliminar esta vacuna porque no tiene un ID válido.");
+                        }
+                      }}
                     >
                       <Text style={{ color: 'white', fontWeight: 'bold' }}>Eliminar</Text>
                     </TouchableOpacity>
-                    {/*<TouchableOpacity 
-                      key={index} 
+                    {/*<TouchableOpacity
+                      key={index}
                       onPress={() => router.push(`/calendar/vaccineDetail?vaccineId=${vaccine.id}`)}
                       style={{ backgroundColor: '#1565C0', paddingVertical: 5, paddingHorizontal: 12, borderRadius: 5 }}
                     >
