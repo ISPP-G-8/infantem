@@ -68,6 +68,7 @@ export default function AddSleep() {
   const addSleepData = async () => {
     const startDateError = validateDate(sleepData.dateStart);
     const endDateError = validateDate(sleepData.dateEnd);
+    const now = new Date();
 
     if (!sleepData.baby) {
       setErrorMessage("Tienes que asociar un bebé al registro de sueño");
@@ -86,6 +87,12 @@ export default function AddSleep() {
       return;
     } else if (new Date(sleepData.dateStart) >= new Date(sleepData.dateEnd)) {
       setErrorMessage("La hora de inicio debe ser anterior a la hora de fin");
+      return;
+    } else if (new Date(sleepData.dateStart) > now) {
+      setErrorMessage("La hora de inicio no puede estar en el futuro");
+      return;
+    } else if (new Date(sleepData.dateEnd) > now) {
+      setErrorMessage("La hora de fin no puede estar en el futuro");
       return;
     } else if (sleepData.numWakeups < 0) {
       setErrorMessage("El número de despertares no puede ser negativo");

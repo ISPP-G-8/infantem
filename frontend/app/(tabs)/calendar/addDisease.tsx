@@ -58,18 +58,19 @@ export default function AddDisease() {
       if (!dateRegex.test(dateString)) {
         return "La fecha debe tener el formato AAAA-MM-dd";
       }
-
+  
       const parsedDate = new Date(dateString);
       if (isNaN(parsedDate.getTime())) {
         return "La fecha ingresada no es válida";
       }
-
+  
       return null;
     };
-
+  
     const startDateError = validateDate(startDate);
     const endDateError = validateDate(endDate);
-
+    const now = new Date();
+  
     if (!selectedBaby) {
       setErrorMessage("Tienes que asociar un bebé a la enfermedad");
       return;
@@ -90,6 +91,12 @@ export default function AddDisease() {
       return;
     } else if (new Date(startDate) > new Date(endDate)) {
       setErrorMessage("La fecha de inicio no puede ser posterior a la fecha de fin");
+      return;
+    } else if (new Date(startDate) > now) {
+      setErrorMessage("La fecha de inicio no puede estar en el futuro");
+      return;
+    } else if (new Date(endDate) > now) {
+      setErrorMessage("La fecha de fin no puede estar en el futuro");
       return;
     } else if (!symptoms) {
       setErrorMessage("Tienes que asociar síntomas a la enfermedad");
