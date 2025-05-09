@@ -1,9 +1,9 @@
 import React from "react";
-import { Text, View, useWindowDimensions } from "react-native";
+import { Text, TouchableOpacity, View, useWindowDimensions } from "react-native";
 import { Request } from "../types";
 import { Link } from "expo-router";
 
-export default function RequestComponent({ req, nutritionist }: { req: Request, nutritionist: boolean}) {
+export default function RequestComponent({ req, nutritionist, handleDelete }: { req: Request, nutritionist: boolean, handleDelete: () => Promise<boolean>}) {
   const gs = require("../static/styles/globalStyles");
   const { width } = useWindowDimensions();
 
@@ -25,7 +25,6 @@ export default function RequestComponent({ req, nutritionist }: { req: Request, 
     statusLabel = "EN PROGRESO";
     statusColor = "#4CAF50"; // Verde
   }
-
 
   return (
     <View style={[gs.card, width < 500 ? { maxWidth: 400 } : null]}>
@@ -51,27 +50,32 @@ export default function RequestComponent({ req, nutritionist }: { req: Request, 
       </Text>
 
 
-      <Text style={[gs.cardContent, {marginTop: 10, textAlign: "center"}]} numberOfLines={2}>
-        <Text style={{fontWeight: 'bold'}}>Bebés</Text>
-      </Text>
-      <View style={gs.cardContent}> 
-        {req.user.babies.map((baby) => {
-          return (
-            <View>
-              <Text style={{fontWeight: 'bold'}}>{baby.name}</Text>
-              <Text style={[gs.cardContent, {marginLeft: 10, marginBottom: 10}]} numberOfLines={2}>
-                <Text style={{fontWeight: 'bold'}}>Alergias: </Text>
-                {baby.allergies}
-              </Text>
-              <Text style={[gs.cardContent, {marginLeft: 10, marginBottom: 10}]} numberOfLines={2}>
-                <Text style={{fontWeight: 'bold'}}>Alimento preferido: </Text>
-                {baby.foodPreference}
-              </Text>
+      {req.user.babies.length > 0 && (
+        <View>
+          <Text style={[gs.cardContent, {marginTop: 10, textAlign: "center"}]} numberOfLines={2}>
+            <Text style={{fontWeight: 'bold'}}>Bebés</Text>
+          </Text>
+          <View style={gs.cardContent}> 
+            {req.user.babies.map((baby) => {
+              return (
+                <View>
+                  <Text style={{fontWeight: 'bold'}}>{baby.name}</Text>
+                  <Text style={[gs.cardContent, {marginLeft: 10, marginBottom: 10}]} numberOfLines={2}>
+                    <Text style={{fontWeight: 'bold'}}>Alergias: </Text>
+                    {baby.allergies}
+                  </Text>
+                  <Text style={[gs.cardContent, {marginLeft: 10, marginBottom: 10}]} numberOfLines={2}>
+                    <Text style={{fontWeight: 'bold'}}>Alimento preferido: </Text>
+                    {baby.foodPreference}
+                  </Text>
 
-            </View>
-          )
-        })}
-      </View>
+                </View>
+              )
+            })}
+          </View>
+        </View>
+      )
+      }
 
       {nutritionist && req.status === "OPEN" && (
         <Link style={[gs.mainButton, { backgroundColor: "#1565C0", marginVertical: 10 }]} href={`/recipes/add?requestId=${req.id}&requestUserId=${req.user.id}`}>
@@ -79,6 +83,11 @@ export default function RequestComponent({ req, nutritionist }: { req: Request, 
         </Link>
       )}
 
+      {!nutritionist && req.status === "OPEN" && (
+        <TouchableOpacity style={[gs.mainButton, { backgroundColor: "red" }]} onPress={() => handleDelete()}>
+          <Text style={gs.mainButtonText}>Eliminar</Text>
+        </TouchableOpacity>
+      )}
 
     </View>
   );
