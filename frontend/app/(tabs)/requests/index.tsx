@@ -81,8 +81,8 @@ export default function requests() {
       )}
 
       <ScrollView style={{maxWidth:600}}>
-        {requests.map((req, index) => (
-          <RequestComponent key={index} req={req} nutritionist={user?.role==='nutritionist'} handleDelete={() => handleDelete(req.id)}/>
+        {requests.map((req) => (
+          <RequestComponent key={req.id} req={req} nutritionist={user?.role==='nutritionist'} handleDelete={() => handleDelete(req.id)}/>
         ))}
       </ScrollView>
 
