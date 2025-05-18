@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,7 @@ import com.isppG8.infantem.infantem.auth.AuthoritiesService;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotOwnedException;
 import com.isppG8.infantem.infantem.recipe.dto.CustomRecipeDTO;
+import com.isppG8.infantem.infantem.recipe.dto.RecipeCreateDTO;
 import com.isppG8.infantem.infantem.recipe.dto.RecipeDTO;
 import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserRepository;
@@ -366,26 +368,34 @@ public class RecipeServiceTest {
         User user = new User();
         user.setId(1);
         Mockito.when(userService.findCurrentUser()).thenReturn(user);
-        Recipe recipe = new Recipe();
-        recipe.setName("Test Recipe");
-        recipe.setDescription("Test Description");
-        recipe.setIngredients("Test Ingredients");
-        recipe.setMinRecommendedAge(1);
-        recipe.setMaxRecommendedAge(2);
-        recipe.setElaboration("Test Elaboration");
 
-        Recipe createdRecipe = recipeService.createRecipe(recipe);
-        assertEquals(recipe.getName(), createdRecipe.getName(), "The recipe name should be 'Test Recipe'");
-        assertEquals(recipe.getDescription(), createdRecipe.getDescription(),
+        // Creamos el DTO
+        RecipeCreateDTO dto = new RecipeCreateDTO();
+        dto.setName("Test Recipe");
+        dto.setDescription("Test Description");
+        dto.setIngredients("Test Ingredients");
+        dto.setMinRecommendedAge(1);
+        dto.setMaxRecommendedAge(2);
+        dto.setElaboration("Test Elaboration");
+        dto.setCustom(false);
+        dto.setAllergens(new ArrayList<>());
+
+        // Ejecutamos el método a testear
+        Recipe createdRecipe = recipeService.createRecipe(dto);
+
+        // Comprobaciones
+        assertEquals(dto.getName(), createdRecipe.getName(), "The recipe name should be 'Test Recipe'");
+        assertEquals(dto.getDescription(), createdRecipe.getDescription(),
                 "The recipe description should be 'Test Description'");
-        assertEquals(recipe.getIngredients(), createdRecipe.getIngredients(),
+        assertEquals(dto.getIngredients(), createdRecipe.getIngredients(),
                 "The recipe ingredients should be 'Test Ingredients'");
-        assertEquals(recipe.getMinRecommendedAge(), createdRecipe.getMinRecommendedAge(),
+        assertEquals(dto.getMinRecommendedAge(), createdRecipe.getMinRecommendedAge(),
                 "The recipe min recommended age should be 1");
-        assertEquals(recipe.getMaxRecommendedAge(), createdRecipe.getMaxRecommendedAge(),
+        assertEquals(dto.getMaxRecommendedAge(), createdRecipe.getMaxRecommendedAge(),
                 "The recipe max recommended age should be 2");
-        assertEquals(recipe.getElaboration(), createdRecipe.getElaboration(),
+        assertEquals(dto.getElaboration(), createdRecipe.getElaboration(),
                 "The recipe elaboration should be 'Test Elaboration'");
+        assertEquals(user, createdRecipe.getUser(), "The recipe user should match the current user");
     }
 
     @Test
