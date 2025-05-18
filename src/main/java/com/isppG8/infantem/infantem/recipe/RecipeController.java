@@ -27,6 +27,7 @@ import com.isppG8.infantem.infantem.auth.payload.response.MessageResponse;
 import com.isppG8.infantem.infantem.recipe.dto.CustomRecipeDTO;
 import com.isppG8.infantem.infantem.recipe.dto.CustomRecipeRequestCreateDTO;
 import com.isppG8.infantem.infantem.recipe.dto.CustomRecipeRequestDTO;
+import com.isppG8.infantem.infantem.recipe.dto.RecipeCreateDTO;
 import com.isppG8.infantem.infantem.recipe.dto.RecipeDTO;
 import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserService;
@@ -191,7 +192,7 @@ public class RecipeController {
             responseCode = "201", description = "Receta creada con éxito",
             content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = Recipe.class))) @PostMapping
-    public ResponseEntity<Recipe> createRecipe(@Valid @RequestBody Recipe recipe) {
+    public ResponseEntity<Recipe> createRecipe(@Valid @RequestBody RecipeCreateDTO recipe) {
         Recipe createdRecipe = recipeService.createRecipe(recipe);
         return ResponseEntity.status(201).body(createdRecipe);
     }

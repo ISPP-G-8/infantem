@@ -15,12 +15,15 @@ import com.isppG8.infantem.infantem.user.User;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.isppG8.infantem.infantem.recipe.dto.CustomRecipeDTO;
+import com.isppG8.infantem.infantem.recipe.dto.RecipeCreateDTO;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -70,13 +73,24 @@ public class Recipe {
     @JsonBackReference
     private User user;
 
-    @ManyToMany(mappedBy = "recipes", cascade = CascadeType.REMOVE)
+    @ManyToMany
+    @JoinTable(name = "recipe_allergen", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "allergen_id"))
     private List<Allergen> allergens = new ArrayList<>();
 
     @ManyToMany(mappedBy = "recipes", cascade = CascadeType.ALL)
     private List<Intake> intakes = new ArrayList<>();
 
     public Recipe() {
+    }
+
+    public Recipe(RecipeCreateDTO dto) {
+        this.name = dto.getName();
+        this.description = dto.getDescription();
+        this.ingredients = dto.getIngredients();
+        this.minRecommendedAge = dto.getMinRecommendedAge();
+        this.maxRecommendedAge = dto.getMaxRecommendedAge();
+        this.elaboration = dto.getElaboration();
+        this.isCustom = dto.isCustom();
     }
 
     public Recipe(CustomRecipeDTO custom) {
