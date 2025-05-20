@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.isppG8.infantem.infantem.allergen.Allergen;
 import com.isppG8.infantem.infantem.allergen.AllergenRepository;
-import com.isppG8.infantem.infantem.allergen.dto.AllergenDTO;
 import com.isppG8.infantem.infantem.baby.Baby;
 import com.isppG8.infantem.infantem.baby.BabyService;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
@@ -124,11 +122,10 @@ public class RecipeService {
         recipe.setMinRecommendedAge(recipeDetails.getMinRecommendedAge());
         recipe.setMaxRecommendedAge(recipeDetails.getMaxRecommendedAge());
         recipe.setElaboration(recipeDetails.getElaboration());
-        recipe.setAllergens(new ArrayList<>(
-                recipeDetails.getAllergens().stream()
-                        .map(allergen -> allergenRepository.findById(allergen.getId())
-                                .orElseThrow(() -> new ResourceNotFoundException("Allergen", "id", allergen.getId())))
-                        .toList()));
+        recipe.setAllergens(new ArrayList<>(recipeDetails.getAllergens().stream()
+                .map(allergen -> allergenRepository.findById(allergen.getId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Allergen", "id", allergen.getId())))
+                .toList()));
 
         return this.recipeRepository.save(recipe);
     }
