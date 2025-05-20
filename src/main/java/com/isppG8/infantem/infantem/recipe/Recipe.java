@@ -74,7 +74,8 @@ public class Recipe {
     private User user;
 
     @ManyToMany
-    @JoinTable(name = "recipe_allergen", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "allergen_id"))
+    @JoinTable(name = "recipe_allergen", joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "allergen_id"))
     private List<Allergen> allergens = new ArrayList<>();
 
     @ManyToMany(mappedBy = "recipes", cascade = CascadeType.ALL)
