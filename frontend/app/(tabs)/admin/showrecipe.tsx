@@ -45,6 +45,7 @@ export default function RecipeDetails() {
       maxRecommendedAge: recipeToModify.maxRecommendedAge,
       ingredients: recipeToModify.ingredients,
       elaboration: recipeToModify.elaboration,
+      allergens: recipeToModify.allergens,
     };
 
     fetch(`${apiUrl}/api/v1/admin/recipes/${recipeToModify.id}`, {
@@ -185,24 +186,19 @@ export default function RecipeDetails() {
                 ? ` a ${recipeToModify.maxRecommendedAge} meses`
                 : ""}
             </Text>
-
-            {/* Botones de acción */}
-            {/* {!isEditing && (
-              <TouchableOpacity
-                style={[gs.mainButton, { marginTop: 30 }]}
-                onPress={handleEditRecipe}
-              >
-                <Text style={gs.mainButtonText}>Editar Receta</Text>
-              </TouchableOpacity>
+            {/* Alérgenos */}
+            {recipeToModify.allergens && recipeToModify.allergens.length > 0 && (
+              <View style={{ marginTop: 20 }}>
+                <Text style={{ fontSize: 16, fontWeight: "bold", color: "#1565C0", marginBottom: 6 }}>
+                  Alérgenos:
+                </Text>
+                {recipeToModify.allergens.map((allergen: any) => (
+                  <Text key={allergen.id} style={{ color: "#1565C0" }}>
+                    • {allergen.name}
+                  </Text>
+                ))}
+              </View>
             )}
-            {isEditing && (
-              <TouchableOpacity
-                style={[gs.mainButton, { marginTop: 30 }]}
-                onPress={handleSaveChanges}
-              >
-                <Text style={gs.mainButtonText}>Guardar Cambios</Text>
-              </TouchableOpacity>
-            )} */}
           </View>
         </View>
       </ScrollView>
