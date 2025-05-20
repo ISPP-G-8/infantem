@@ -520,13 +520,15 @@ export default function AddBaby() {
             multiline
           />
 
+
+
           <View style={{ width: "100%", alignItems: "center", marginTop: 20 }}>
             <Text
               style={{
                 fontSize: 16,
                 fontWeight: "bold",
                 color: "#1565C0",
-                marginBottom: 10,
+                marginBottom: 16,
               }}
             >
               Selecciona los alérgenos
@@ -535,34 +537,49 @@ export default function AddBaby() {
             <View style={{ width: "90%" }}>
               {availableAllergens.length > 0 ? (
                 availableAllergens.map((allergen: any) => (
-                  <View
+                  <TouchableOpacity
                     key={allergen.id}
+                    onPress={() => {
+                      const isSelected = selectedAllergens.includes(allergen.id);
+                      if (isSelected) {
+                        setSelectedAllergens((prev) =>
+                          prev.filter((id) => id !== allergen.id)
+                        );
+                      } else {
+                        setSelectedAllergens((prev) => [...prev, allergen.id]);
+                      }
+                    }}
                     style={{
                       flexDirection: "row",
                       alignItems: "center",
-                      marginBottom: 8,
+                      marginBottom: 12,
                       backgroundColor: "#fff",
-                      padding: 10,
-                      borderRadius: 8,
-                      borderColor: "#ddd",
+                      padding: 14,
+                      borderRadius: 10,
+                      borderColor: "#ccc",
                       borderWidth: 1,
+                      shadowColor: "#000",
+                      shadowOpacity: 0.05,
+                      shadowRadius: 4,
+                      elevation: 1,
                     }}
                   >
                     <CheckBox
                       value={selectedAllergens.includes(allergen.id)}
-                      onValueChange={(newValue) => {
-                        if (newValue) {
-                          setSelectedAllergens((prev) => [...prev, allergen.id]);
-                        } else {
+                      onValueChange={() => {
+                        const isSelected = selectedAllergens.includes(allergen.id);
+                        if (isSelected) {
                           setSelectedAllergens((prev) =>
                             prev.filter((id) => id !== allergen.id)
                           );
+                        } else {
+                          setSelectedAllergens((prev) => [...prev, allergen.id]);
                         }
                       }}
-                      color="#1565C0"
+                      tintColors={{ true: "#1565C0", false: "#ccc" }}
                     />
-                    <Text style={{ marginLeft: 10 }}>{allergen.name}</Text>
-                  </View>
+                    <Text style={{ marginLeft: 12, fontSize: 16 }}>{allergen.name}</Text>
+                  </TouchableOpacity>
                 ))
               ) : (
                 <Text style={{ color: "gray" }}>Cargando alérgenos...</Text>
