@@ -124,11 +124,10 @@ public class RecipeService {
         recipe.setMinRecommendedAge(recipeDetails.getMinRecommendedAge());
         recipe.setMaxRecommendedAge(recipeDetails.getMaxRecommendedAge());
         recipe.setElaboration(recipeDetails.getElaboration());
-        recipe.setAllergens(new ArrayList<>(
-                recipeDetails.getAllergens().stream()
-                        .map(allergen -> allergenRepository.findById(allergen.getId())
-                                .orElseThrow(() -> new ResourceNotFoundException("Allergen", "id", allergen.getId())))
-                        .toList()));
+        recipe.setAllergens(new ArrayList<>(recipeDetails.getAllergens().stream()
+                .map(allergen -> allergenRepository.findById(allergen.getId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Allergen", "id", allergen.getId())))
+                .toList()));
 
         return this.recipeRepository.save(recipe);
     }

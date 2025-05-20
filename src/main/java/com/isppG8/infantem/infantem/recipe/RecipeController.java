@@ -60,9 +60,11 @@ public class RecipeController {
         this.customRecipeRequestService = customRecipeRequestService;
     }
 
-    @Operation(summary = "Obtener todas las recetas", description = "Recupera todas las recetas filtradas por parámetros opcionales como edad, ingredientes, y alérgenos.")
-    @ApiResponse(responseCode = "200", description = "Lista de recetas encontrada", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RecipeDTO.class)))
-    @GetMapping
+    @Operation(summary = "Obtener todas las recetas",
+            description = "Recupera todas las recetas filtradas por parámetros opcionales como edad, ingredientes, y alérgenos.") @ApiResponse(
+                    responseCode = "200", description = "Lista de recetas encontrada",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = RecipeDTO.class))) @GetMapping
     public ResponseEntity<Page<RecipeDTO>> getAllRecipes(
             @RequestParam(value = "maxAge", required = false) Integer maxAge,
             @RequestParam(value = "minAge", required = false) Integer minAge,
@@ -104,9 +106,11 @@ public class RecipeController {
         return ResponseEntity.ok(paginatedRecipes.map(RecipeDTO::new));
     }
 
-    @Operation(summary = "Obtener recetas recomendadas", description = "Recupera las recetas recomendadas basadas en diferentes filtros como edad, ingredientes y alérgenos.")
-    @ApiResponse(responseCode = "200", description = "Lista de recetas recomendadas encontrada", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RecipeDTO.class)))
-    @GetMapping("/recommended")
+    @Operation(summary = "Obtener recetas recomendadas",
+            description = "Recupera las recetas recomendadas basadas en diferentes filtros como edad, ingredientes y alérgenos.") @ApiResponse(
+                    responseCode = "200", description = "Lista de recetas recomendadas encontrada",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = RecipeDTO.class))) @GetMapping("/recommended")
     public ResponseEntity<Page<RecipeDTO>> getAllRecommendedRecipes(
             @RequestParam(value = "maxAge", required = false) Integer maxAge,
             @RequestParam(value = "minAge", required = false) Integer minAge,
@@ -166,42 +170,49 @@ public class RecipeController {
         return ResponseEntity.ok(paginatedRecipes.map(RecipeDTO::new));
     }
 
-    @Operation(summary = "Obtener recetas recomendadas por ID de bebé", description = "Recupera las recetas recomendadas para un bebé específico utilizando su ID.")
-    @ApiResponse(responseCode = "200", description = "Recetas recomendadas por bebé encontradas", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RecipeDTO.class)))
-    @GetMapping("/recommended/{babyId}")
+    @Operation(summary = "Obtener recetas recomendadas por ID de bebé",
+            description = "Recupera las recetas recomendadas para un bebé específico utilizando su ID.") @ApiResponse(
+                    responseCode = "200", description = "Recetas recomendadas por bebé encontradas",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = RecipeDTO.class))) @GetMapping("/recommended/{babyId}")
     public ResponseEntity<List<RecipeDTO>> getRecommendedRecipes(@PathVariable Integer babyId) {
         List<Recipe> recipes = recipeService.getRecommendedRecipes(babyId);
         return ResponseEntity.ok(recipes.stream().map(RecipeDTO::new).toList());
     }
 
-    @Operation(summary = "Obtener receta por ID", description = "Recupera los detalles de una receta utilizando su ID.")
-    @ApiResponse(responseCode = "200", description = "Receta encontrada", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Recipe.class)))
-    @GetMapping("/{id}")
+    @Operation(summary = "Obtener receta por ID",
+            description = "Recupera los detalles de una receta utilizando su ID.") @ApiResponse(responseCode = "200",
+                    description = "Receta encontrada", content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Recipe.class))) @GetMapping("/{id}")
     public ResponseEntity<RecipeDTO> getRecipeById(@PathVariable Long id) {
 
         Recipe recipe = recipeService.getRecipeById(id);
         return ResponseEntity.ok(new RecipeDTO(recipe));
     }
 
-    @Operation(summary = "Crear una receta", description = "Crea una nueva receta para un bebé.")
-    @ApiResponse(responseCode = "201", description = "Receta creada con éxito", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Recipe.class)))
-    @PostMapping
+    @Operation(summary = "Crear una receta", description = "Crea una nueva receta para un bebé.") @ApiResponse(
+            responseCode = "201", description = "Receta creada con éxito",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Recipe.class))) @PostMapping
     public ResponseEntity<Recipe> createRecipe(@Valid @RequestBody RecipeCreateDTO recipe) {
         Recipe createdRecipe = recipeService.createRecipe(recipe);
         return ResponseEntity.status(201).body(createdRecipe);
     }
 
-    @Operation(summary = "Crear una receta personalizada", description = "Crea una nueva receta personalizada para un bebé.")
-    @ApiResponse(responseCode = "201", description = "Receta personalizada creada con éxito", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Recipe.class)))
-    @PostMapping("/custom")
+    @Operation(summary = "Crear una receta personalizada",
+            description = "Crea una nueva receta personalizada para un bebé.") @ApiResponse(responseCode = "201",
+                    description = "Receta personalizada creada con éxito",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Recipe.class))) @PostMapping("/custom")
     public ResponseEntity<Recipe> createCustomRecipe(@Valid @RequestBody CustomRecipeDTO customRecipe) {
         Recipe recipe = this.recipeService.createCustomRecipe(customRecipe);
         return ResponseEntity.status(201).body(recipe);
     }
 
-    @Operation(summary = "Actualizar una receta", description = "Actualiza los detalles de una receta existente.")
-    @ApiResponse(responseCode = "200", description = "Receta actualizada con éxito", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Recipe.class)))
-    @PutMapping("/{id}")
+    @Operation(summary = "Actualizar una receta",
+            description = "Actualiza los detalles de una receta existente.") @ApiResponse(responseCode = "200",
+                    description = "Receta actualizada con éxito", content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Recipe.class))) @PutMapping("/{id}")
     public ResponseEntity<?> updateRecipe(@PathVariable Long id, @Valid @RequestBody RecipeDTO recipeDetails) {
         try {
             User user = userService.findCurrentUser();
@@ -216,10 +227,11 @@ public class RecipeController {
         }
     }
 
-    @Operation(summary = "Actualizar la foto de perfil de un usuario", description = "Actualiza la foto de perfil de un usuario por su ID.")
-    @ApiResponse(responseCode = "200", description = "Foto de perfil actualizada exitosamente")
-    @ApiResponse(responseCode = "400", description = "El usuario no es el tuyo")
-    @PutMapping(value = "/{id}/recipe-photo", consumes = { "multipart/form-data" })
+    @Operation(summary = "Actualizar la foto de perfil de un usuario",
+            description = "Actualiza la foto de perfil de un usuario por su ID.") @ApiResponse(responseCode = "200",
+                    description = "Foto de perfil actualizada exitosamente") @ApiResponse(responseCode = "400",
+                            description = "El usuario no es el tuyo") @PutMapping(value = "/{id}/recipe-photo",
+                                    consumes = { "multipart/form-data" })
     public ResponseEntity<Object> updateRecipePhoto(@RequestPart(name = "recipePhoto") MultipartFile multipartFile,
             @PathVariable Long id, @RequestHeader(name = "Authorization") String token) throws IOException {
 
@@ -247,9 +259,8 @@ public class RecipeController {
         return ResponseEntity.ok().body(new MessageResponse("Photo deleted successfully"));
     }
 
-    @Operation(summary = "Eliminar una receta", description = "Elimina una receta existente por su ID.")
-    @ApiResponse(responseCode = "200", description = "Receta eliminada con éxito")
-    @DeleteMapping("/{id}")
+    @Operation(summary = "Eliminar una receta", description = "Elimina una receta existente por su ID.") @ApiResponse(
+            responseCode = "200", description = "Receta eliminada con éxito") @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteRecipe(@PathVariable Long id) {
         User user = userService.findCurrentUser();
         recipeService.deleteRecipe(id, user.getId());
@@ -258,11 +269,14 @@ public class RecipeController {
 
     // Custom Recipe Request
 
-    @GetMapping("/custom-requests")
-    @Operation(summary = "Obtener todas las solicitudes de recetas personalizadas", description = "Recupera todas las solicitudes de recetas personalizadas.")
-    @ApiResponse(responseCode = "200", description = "Lista de solicitudes de recetas personalizadas encontrada", content = @Content(mediaType = "application/json", schema = @Schema(implementation = CustomRecipeRequest.class)))
-    @ApiResponse(responseCode = "403", description = "No tienes permiso para acceder a esta ruta")
-    @ApiResponse(responseCode = "404", description = "No se encontraron solicitudes")
+    @GetMapping("/custom-requests") @Operation(summary = "Obtener todas las solicitudes de recetas personalizadas",
+            description = "Recupera todas las solicitudes de recetas personalizadas.") @ApiResponse(
+                    responseCode = "200", description = "Lista de solicitudes de recetas personalizadas encontrada",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CustomRecipeRequest.class))) @ApiResponse(
+                                    responseCode = "403",
+                                    description = "No tienes permiso para acceder a esta ruta") @ApiResponse(
+                                            responseCode = "404", description = "No se encontraron solicitudes")
     public ResponseEntity<Page<CustomRecipeRequestDTO>> getAllCustomRecipeRequests(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size) {
@@ -279,9 +293,11 @@ public class RecipeController {
         return ResponseEntity.ok(paginatedRequests.map(CustomRecipeRequestDTO::new));
     }
 
-    @Operation(summary = "Obtener todas las solicitudes de recetas personalizadas de un usuario", description = "Recupera todas las solicitudes de recetas personalizadas de un usuario.")
-    @ApiResponse(responseCode = "200", description = "Lista de solicitudes de recetas personalizadas encontrada", content = @Content(mediaType = "application/json", schema = @Schema(implementation = CustomRecipeRequest.class)))
-    @GetMapping("/custom-requests/user")
+    @Operation(summary = "Obtener todas las solicitudes de recetas personalizadas de un usuario",
+            description = "Recupera todas las solicitudes de recetas personalizadas de un usuario.") @ApiResponse(
+                    responseCode = "200", description = "Lista de solicitudes de recetas personalizadas encontrada",
+                    content = @Content(mediaType = "application/json", schema = @Schema(
+                            implementation = CustomRecipeRequest.class))) @GetMapping("/custom-requests/user")
     public ResponseEntity<Page<CustomRecipeRequestDTO>> getRequestsByUser(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size) {
@@ -296,30 +312,35 @@ public class RecipeController {
         return ResponseEntity.ok(paginatedRequests.map(CustomRecipeRequestDTO::new));
     }
 
-    @Operation(summary = "Crear una solicitud de receta personalizada", description = "Crea una nueva solicitud de receta personalizada.")
-    @ApiResponse(responseCode = "201", description = "Solicitud de receta personalizada creada con éxito")
-    @ApiResponse(responseCode = "403", description = "No tienes permiso para crear una solicitud de receta personalizada")
-    @PostMapping("/custom-requests")
+    @Operation(summary = "Crear una solicitud de receta personalizada",
+            description = "Crea una nueva solicitud de receta personalizada.") @ApiResponse(responseCode = "201",
+                    description = "Solicitud de receta personalizada creada con éxito") @ApiResponse(
+                            responseCode = "403",
+                            description = "No tienes permiso para crear una solicitud de receta personalizada") @PostMapping("/custom-requests")
     public ResponseEntity<CustomRecipeRequest> createCustomRecipeRequest(
             @Valid @RequestBody CustomRecipeRequestCreateDTO request) {
         CustomRecipeRequest createdRequest = customRecipeRequestService.createRequest(request);
         return ResponseEntity.status(201).body(createdRequest);
     }
 
-    @Operation(summary = "Eliminar una solicitud de receta personalizada", description = "Elimina una solicitud de receta personalizada por su ID.")
-    @ApiResponse(responseCode = "200", description = "Solicitud de receta personalizada eliminada con éxito")
-    @ApiResponse(responseCode = "403", description = "No tienes permiso para eliminar esta solicitud")
-    @ApiResponse(responseCode = "404", description = "Solicitud no encontrada")
-    @DeleteMapping("/custom-requests/{id}")
+    @Operation(summary = "Eliminar una solicitud de receta personalizada",
+            description = "Elimina una solicitud de receta personalizada por su ID.") @ApiResponse(responseCode = "200",
+                    description = "Solicitud de receta personalizada eliminada con éxito") @ApiResponse(
+                            responseCode = "403",
+                            description = "No tienes permiso para eliminar esta solicitud") @ApiResponse(
+                                    responseCode = "404",
+                                    description = "Solicitud no encontrada") @DeleteMapping("/custom-requests/{id}")
     public void deleteCustomRecipeRequest(@PathVariable Long id) {
         customRecipeRequestService.deleteRequest(id);
     }
 
-    @Operation(summary = "Cerrar una solicitud de receta personalizada", description = "Cierra una solicitud de receta personalizada por su ID.")
-    @ApiResponse(responseCode = "200", description = "Solicitud de receta personalizada cerrada con éxito")
-    @ApiResponse(responseCode = "403", description = "No tienes permiso para cerrar esta solicitud")
-    @ApiResponse(responseCode = "404", description = "Solicitud no encontrada")
-    @PostMapping("/custom-requests/{id}/close")
+    @Operation(summary = "Cerrar una solicitud de receta personalizada",
+            description = "Cierra una solicitud de receta personalizada por su ID.") @ApiResponse(responseCode = "200",
+                    description = "Solicitud de receta personalizada cerrada con éxito") @ApiResponse(
+                            responseCode = "403",
+                            description = "No tienes permiso para cerrar esta solicitud") @ApiResponse(
+                                    responseCode = "404",
+                                    description = "Solicitud no encontrada") @PostMapping("/custom-requests/{id}/close")
     public ResponseEntity<CustomRecipeRequest> closeRequest(Long id) {
         CustomRecipeRequest request = customRecipeRequestService.closeRequest(id);
         return ResponseEntity.ok(request);
