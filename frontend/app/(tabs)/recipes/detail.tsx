@@ -5,6 +5,7 @@ import { useAuth } from "../../../context/AuthContext";
 import { Recipe } from "../../../types";
 import UploadImageModal from "../../../components/UploadImageModal";
 import * as ImagePicker from "expo-image-picker";
+import CheckBox from "react-native-check-box";
 // import validateForm from './add';
 
 export default function RecipeDetails() {
@@ -26,13 +27,30 @@ export default function RecipeDetails() {
   const [imageBase64, setImageBase64] = useState<any>(null);
   const [imageModalVisible, setImageModalVisible] = useState(false);
 
+  const [allAllergens, setAllAllergens] = useState<{ id: number, name: string }[]>([]);
+
   const gs = require('../../../static/styles/globalStyles');
 
   const { token, user } = useAuth();
 
   useEffect(() => {
     obtainRecipe();
+    fetchAllAllergens();
   }, []);
+
+  const fetchAllAllergens = async () => {
+    try {
+      const response = await fetch(`${apiUrl}/api/v1/allergens`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setAllAllergens(data);
+      }
+    } catch (error) {
+      console.error('Error fetching allergens:', error);
+    }
+  };
 
   const validateForm = () => {
     let isValid = true;
@@ -594,6 +612,69 @@ export default function RecipeDetails() {
                 onChangeText={(text) => setRecipe({ ...recipe, elaboration: text })}
                 multiline
               />
+              <Text style={[gs.inputLabel, { width: "90%", color: "#1565C0", fontWeight: "bold", marginTop: 16 }]}>
+      Selecciona los alérgenos
+    </Text>
+    <View style={{ width: "90%" }}>
+      {allAllergens.length > 0 ? (
+        allAllergens.map((allergen: any) => {
+          const isSelected = recipe.allergens.some((a: any) => a.id === allergen.id);
+          return (
+            <TouchableOpacity
+              key={allergen.id}
+              onPress={() => {
+                if (isSelected) {
+                  setRecipe({
+                    ...recipe,
+                    allergens: recipe.allergens.filter((a: any) => a.id !== allergen.id),
+                  });
+                } else {
+                  setRecipe({
+                    ...recipe,
+                    allergens: [...recipe.allergens, allergen],
+                  });
+                }
+              }}
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginBottom: 12,
+                backgroundColor: "#fff",
+                padding: 14,
+                borderRadius: 10,
+                borderColor: "#ccc",
+                borderWidth: 1,
+                shadowColor: "#000",
+                shadowOpacity: 0.05,
+                shadowRadius: 4,
+                elevation: 1,
+              }}
+            >
+              <CheckBox
+                isChecked={isSelected}
+                onClick={() => {
+                  if (isSelected) {
+                    setRecipe({
+                      ...recipe,
+                      allergens: recipe.allergens.filter((a: any) => a.id !== allergen.id),
+                    });
+                  } else {
+                    setRecipe({
+                      ...recipe,
+                      allergens: [...recipe.allergens, allergen],
+                    });
+                  }
+                }}
+                checkBoxColor={isSelected ? "#1565C0" : "#ccc"}
+              />
+              <Text style={{ marginLeft: 12, fontSize: 16 }}>{allergen.name}</Text>
+            </TouchableOpacity>
+          );
+        })
+      ) : (
+        <Text style={{ color: "gray" }}>Cargando alérgenos...</Text>
+      )}
+    </View>
             </View>
           }
 
