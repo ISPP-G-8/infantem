@@ -660,16 +660,16 @@ Ingresos del marketplace: 16.917,00 €
 ## 5. Tabla de Beneficios Totales.
 En esta tabla no se muestran los beneficios acumulados.
 
-| Periodo           | CAPEX (€) | OPEX (€)  | TOTAL Costes (€) | Ingresos Pesimista (€) | Ingresos Realista (€) | Ingresos Optimista (€) | Beneficio Realista (€) |
-|-------------------|-----------|-----------|-------------------|-------------------------|------------------------|-------------------------|--------------------------|
-| Trimestre 1    | 49.843,01     | 7.199,15     |    57904,55       |     0                |  0                  |        0             | -57.904,55               |
-| Trimestre 2    |  0   | 25.879,30     | 25.879,30         | 4.197                       | 7.645                    | 14.074                       | -18.234,30               |
-| Trimestre 3   |  0   | 33.975,60  | 33.975,60         | 8.381                      | 15.259                      | 28.066                       | -18.716,30               |
-| Trimestre 4   | 0    | 39.271,00    | 39.271,00         | 12.546                       | 22.844                     | 	42.015                       | -16.427               |
-| Trimestre 5    | 0         | 47.368,49    | 47.368,49            | 23.063                     | 42.861              | 86.982                   | -4.507,49               | 
-| Trimestre 6       | 0         | 52.918,45 | 52.918,45         | 26.324,50                  | 59.391,50              | 117.679,50                 | 6473,05              |
-| Trimestre 7        | 0         | 61.022,78| 61.022,78        | 52.612,50                 | 93.581,50             | 		226.747,50                 | 32.558,72               |
-| Trimestre 8       | 0         | 66.432,23| 66.432,23        | 65.926               | 108.253             | 208.938              | -150.215,11              | 41820,77              |
+| Periodo     | CAPEX (€) | OPEX (€)  | TOTAL Costes (€) | Ingresos Pesimista (€) | Ingresos Realista (€) | Ingresos Optimista (€) |Beneficio Pesimista (€) | Beneficio Realista (€) |
+|-------------------|-----------|-----------|-------------------|-------------------------|------------------------|---------------|--------------------------|----------------------|
+| Trimestre 1 | 49.843,01 | 7.199,15  |  57904,55  |     0     |  0         |   0        | -57.904,55    | -57.904,55  |
+| Trimestre 2 |  0        | 25.879,30 | 25.879,30  | 4.197     | 7.645      | 14.074     | -18.34.30     | -18.234,30  |
+| Trimestre 3 |  0        | 33.975,60 | 33.975,6   | 8.381     | 15.259     | 28.066     | -21.682,30    | -18.716,30  |
+| Trimestre 4 | 0         | 39.271,00 | 39.271,00  | 12.546    | 22.844     | 	42.015   | -25.594,60    | -16.427     |
+| Trimestre 5 | 0         | 47.368,49 | 47.368,49  | 23.063    | 42.861     | 86.982     |     | -4.507,49   | 
+| Trimestre 6 | 0         | 52.918,45 | 52.918,45  | 26.324,50 | 59.391,50  | 117.679,50 |     | 6473,05     |
+| Trimestre 7 | 0         | 61.022,78 | 61.022,78  | 52.612,50 | 93.581,50  | 226.747,50 |     | 32.558,72   |
+| Trimestre 8 | 0         | 66.432,23 | 66.432,23  | 65.926    | 108.253    | 208.938    |     | 41820,77    |
 
 > Nota: Los ingresos post-lanzamiento provienen de tres canales: suscripciones Premium, publicidad segmentada y comisiones del Marketplace. Los costes incluyen infraestructura, soporte técnico, mantenimiento, diseño, expertos y marketing.
 ---
