@@ -45,6 +45,17 @@ jobs:
           echo "STRIPE_WEBHOOK_SECRET=${{ secrets.STRIPE_WEBHOOK_SECRET }}" >> .env
           echo "EXPO_PUBLIC_STRIPE_API_KEY=${{ secrets.EXPO_PUBLIC_STRIPE_API_KEY }}" >> .env
 
+      - name: Wait for MySQL
+        run: |
+          for i in {1..30}; do
+            if mysql -h127.0.0.1 -uspring_user -pStrongPassword123! -e "USE infantem_db_test;" ; then
+              echo "MySQL is up!"
+              break
+            fi
+            echo "Waiting for MySQL..."
+            sleep 2
+          done
+
       - name: Run backend tests
         run: mvn clean test -Dspring.profiles.active=test
 
