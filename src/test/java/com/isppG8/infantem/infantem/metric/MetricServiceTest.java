@@ -27,9 +27,9 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
-@SpringBootTest
+@SpringBootTest(classes = { InfantemApplication.class, MetricServiceTest.class, MetricServiceTest.TestConfig.class })
 @ActiveProfiles("test")
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) // Use the configured test database
 @Transactional
 @Import(MetricServiceTest.TestConfig.class)
 public class MetricServiceTest {
