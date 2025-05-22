@@ -47,6 +47,7 @@ export default function BabyInfo() {
   const [heightError, setHeightError] = useState<string | null>(null);
   const [headCircumferenceError, setHeadCircumferenceError] = useState<string | null>(null);
   const [foodPreferenceError, setFoodPreferenceError] = useState<string | null>(null);
+  const [babyAllergensDict, setBabyAllergensDict] = useState<{ [key: string]: string[] }>({});
 
   const isValidDate = (dateString: string) => {
     const dateRegex = /^\d{4}-\d{2}-\d{2}$/; // Format: YYYY-MM-DD
@@ -72,45 +73,70 @@ export default function BabyInfo() {
   };
 
   const validateAllFields = (): boolean => {
-  let valid = true;
-
-  if (!editedBaby) return false;
-
-  if (!editedBaby.name.trim()) {
-    setNameError("El nombre es obligatorio.");
-    valid = false;
-  }
-
-  if (!isValidDate(editedBaby.birthDate)) {
-    setBirthDateError("Fecha inválida. Use AAAA-MM-DD y asegúrese de que la fecha existe.");
-    valid = false;
-  }
-
-  const weight = parseFloat(editedBaby.weight);
-  if (isNaN(weight) || weight <= 0) {
-    setWeightError("Ingrese un peso válido mayor que 0.");
-    valid = false;
-  }
-
-  const height = parseFloat(editedBaby.height);
-  if (isNaN(height) || height <= 0) {
-    setHeightError("Ingrese una altura válida mayor que 0.");
-    valid = false;
-  }
-
-  const cephalic = parseFloat(editedBaby.headCircumference);
-  if (isNaN(cephalic) || cephalic <= 0) {
-    setHeadCircumferenceError("Ingrese una medida de la circunferencia de la cabeza válida mayor que 0.");
-    valid = false;
-  }
-
-  if (!editedBaby.foodPreference.trim()) {
-    setFoodPreferenceError("La preferencia alimentaria es obligatoria.");
-    valid = false;
-  }
-
-  return valid;
-};
+    let valid = true;
+  
+    if (!editedBaby) return false;
+  
+    if (!editedBaby.name.trim()) {
+      setNameError("El nombre es obligatorio.");
+      valid = false;
+    } else {
+      setNameError(null);
+    }
+  
+    if (!isValidDate(editedBaby.birthDate)) {
+      setBirthDateError("Fecha inválida. Use AAAA-MM-DD y asegúrese de que la fecha existe.");
+      valid = false;
+    } else if (new Date(editedBaby.birthDate) > new Date()) {
+      setBirthDateError("La fecha no puede ser en el futuro.");
+      valid = false;
+    } else {
+      setBirthDateError(null);
+    }
+  
+    const weight = parseFloat(editedBaby.weight);
+    if (isNaN(weight) || weight <= 0) {
+      setWeightError("Ingrese un peso válido mayor que 0.");
+      valid = false;
+    } else if (weight > 30) {
+      setWeightError("El peso no puede ser mayor a 30 kg.");
+      valid = false;
+    } else {
+      setWeightError(null);
+    }
+  
+    const height = parseFloat(editedBaby.height);
+    if (isNaN(height) || height <= 0) {
+      setHeightError("Ingrese una altura válida mayor que 0.");
+      valid = false;
+    } else if (height > 130) {
+      setHeightError("La altura no puede ser mayor a 130 cm.");
+      valid = false;
+    } else {
+      setHeightError(null);
+    }
+  
+    const cephalic = parseFloat(editedBaby.headCircumference);
+    if (isNaN(cephalic) || cephalic <= 0) {
+      setHeadCircumferenceError("Ingrese una medida de la circunferencia de la cabeza válida mayor que 0.");
+      valid = false;
+    } else if (cephalic > 55) {
+      setHeadCircumferenceError("La circunferencia de la cabeza no puede ser mayor a 55 cm.");
+      valid = false;
+    } else {
+      setHeadCircumferenceError(null);
+    }
+  
+    if (!editedBaby.foodPreference.trim()) {
+      setFoodPreferenceError("La preferencia alimentaria es obligatoria.");
+      valid = false;
+    } else {
+      setFoodPreferenceError(null);
+    }
+  
+    return valid;
+  };
+  
 
   useEffect(() => {
     const getUserToken = async () => {
@@ -131,12 +157,29 @@ export default function BabyInfo() {
         if (!response.ok) throw new Error("Error fetching babies");
         const data: Baby[] = await response.json();
         setBabies(data);
+
+        for (let i = 0; i < data.length; i++) {
+          const url = `${apiUrl}/api/v1/allergens/baby/${data[i].id}`;
+          const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${jwt}`,
+            },
+          });
+          const babyAllergens = await response.json();
+          setBabyAllergensDict((prev) => ({
+            ...prev,
+            [data[i].name]: babyAllergens.map((allergen) => allergen.name).join(", "),
+          }));
+          console.log(babyAllergensDict);
+        }
       } catch (error) {
         console.error(error);
       }
     };
     fetchBabies();
   }, [jwt]);
+
 
   const handleSaveBaby = async () => {
     if (!jwt || !editedBaby) return;
@@ -263,6 +306,7 @@ export default function BabyInfo() {
     setFoodPreferenceError(null);
   };
 
+
   return (
     <ImageBackground
       style={{ flex: 1, width: "100%", height: "100%", backgroundColor: "#E3F2FD" }}
@@ -362,6 +406,7 @@ export default function BabyInfo() {
                 <Text style={gs.cardContent}>🍼 Preferencia: {baby.foodPreference}</Text>
                 <Text style={gs.cardContent}>⚖️ Peso: {baby.weight} kg </Text>
                 <Text style={gs.cardContent}>📏 Altura: {baby.height} cm</Text>
+                <Text style={gs.cardContent}>🪲 Alérgenos: {babyAllergensDict[baby.name]}</Text>
               </View>
 
               <View style={{ flexDirection: "column", alignItems: "center", gap: 10 }}>

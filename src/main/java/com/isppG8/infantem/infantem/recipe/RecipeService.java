@@ -1,18 +1,25 @@
 package com.isppG8.infantem.infantem.recipe;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.isppG8.infantem.infantem.allergen.Allergen;
+import com.isppG8.infantem.infantem.allergen.AllergenRepository;
 import com.isppG8.infantem.infantem.baby.Baby;
 import com.isppG8.infantem.infantem.baby.BabyService;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotOwnedException;
-import com.isppG8.infantem.infantem.user.UserService;
-import java.time.LocalDate;
-import java.time.Period;
+import com.isppG8.infantem.infantem.recipe.dto.CustomRecipeDTO;
+import com.isppG8.infantem.infantem.recipe.dto.RecipeCreateDTO;
 import com.isppG8.infantem.infantem.recipe.dto.RecipeDTO;
+import com.isppG8.infantem.infantem.user.User;
+import com.isppG8.infantem.infantem.user.UserService;
 
 @Service
 public class RecipeService {
@@ -20,12 +27,17 @@ public class RecipeService {
     private RecipeRepository recipeRepository;
     private UserService userService;
     private BabyService babyService;
+    private CustomRecipeRequestService customRecipeRequestService;
+    private AllergenRepository allergenRepository;
 
     @Autowired
-    public RecipeService(RecipeRepository recipeRepository, UserService userService, BabyService babyService) {
+    public RecipeService(RecipeRepository recipeRepository, UserService userService, BabyService babyService,
+            CustomRecipeRequestService customRecipeRequestService, AllergenRepository allergenRepository) {
         this.recipeRepository = recipeRepository;
         this.userService = userService;
         this.babyService = babyService;
+        this.customRecipeRequestService = customRecipeRequestService;
+        this.allergenRepository = allergenRepository;
     }
 
     public Integer getCurrentUserId() {
@@ -66,9 +78,31 @@ public class RecipeService {
     }
 
     @Transactional
-    public Recipe createRecipe(Recipe recipe) {
+    public Recipe createRecipe(RecipeCreateDTO dto) {
+        Recipe recipe = new Recipe(dto);
         recipe.setUser(userService.findCurrentUser());
-        return this.recipeRepository.save(recipe);
+
+        if (dto.getAllergens() != null && !dto.getAllergens().isEmpty()) {
+            List<Allergen> allergenEntities = allergenRepository.findAllById(dto.getAllergens());
+            recipe.setAllergens(allergenEntities);
+        }
+
+        return recipeRepository.save(recipe);
+    }
+
+    @Transactional
+    public Recipe createCustomRecipe(CustomRecipeDTO dto) {
+        User nutritionist = userService.findCurrentUser();
+        if (nutritionist.getAuthorities().getAuthority().equals("nutritionist")) {
+            Recipe recipe = new Recipe(dto);
+            User user = this.userService.getUserById((long) dto.getUser());
+            recipe.setUser(user);
+            System.out.println("reach here");
+            this.customRecipeRequestService.closeRequest(dto.getRequestId());
+            return this.recipeRepository.save(recipe);
+        } else {
+            throw new ResourceNotOwnedException("You are not authorized to create a custom recipe");
+        }
     }
 
     @Transactional
@@ -88,6 +122,10 @@ public class RecipeService {
         recipe.setMinRecommendedAge(recipeDetails.getMinRecommendedAge());
         recipe.setMaxRecommendedAge(recipeDetails.getMaxRecommendedAge());
         recipe.setElaboration(recipeDetails.getElaboration());
+        recipe.setAllergens(new ArrayList<>(recipeDetails.getAllergens().stream()
+                .map(allergen -> allergenRepository.findById(allergen.getId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Allergen", "id", allergen.getId())))
+                .toList()));
 
         return this.recipeRepository.save(recipe);
     }

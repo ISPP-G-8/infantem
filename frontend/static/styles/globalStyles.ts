@@ -42,7 +42,12 @@ module.exports = StyleSheet.create({
     color: "#007AFF",
     textDecorationLine: "underline",
   },
-
+  changeImageText: {
+    fontSize: 16,
+    color: "#1565c0",
+    textDecorationLine: "underline",
+    marginTop: 10,
+  },
   mainButton: {
     backgroundColor: "#1565C0", 
     paddingVertical: 12,
@@ -481,6 +486,39 @@ module.exports = StyleSheet.create({
     marginTop: 10,
     lineHeight: 20,
   },
+
+
+  // Estilos de subscrición
+  inputWrapperStyle: {
+    padding: 12,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: "8px",
+    backgroundColor: "#fafafa",
+    marginTop: 4,
+  },
+  
+  textInputStyle: {
+    width: "100%",
+    padding: 12,
+    borderRadius: "8px",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    backgroundColor: "#fafafa",
+    fontSize: 16,
+    marginTop: 4,
+  },
+  
+  payButtonStyle: {
+    padding: 14,
+    backgroundColor: "#556cd6",
+    color: "white",
+    borderWidth: 0,
+    borderRadius: "8px",
+    fontSize: 16,
+    fontWeight: "bold",
+    cursor: "pointer",
+  }
 
 
 });

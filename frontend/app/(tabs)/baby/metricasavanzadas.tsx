@@ -63,6 +63,10 @@ export default function MetricasAvanzadas() {
         months: number;
         days: number;
     };
+    const height = metrics?.height ?? 45;
+    const { M, L, S } = getLMSForHeight(height);
+    const weight = metrics?.weight ?? 3.5;
+    const zScore = calcularZ(weight, M, L, S);
 
     useEffect(() => {
         const fetchToken = async () => {
@@ -188,6 +192,19 @@ export default function MetricasAvanzadas() {
         }
         return (Math.pow(X / M, L) - 1) / (L * S);
     }
+    
+    // Función para obtener los parámetros LMS según la altura
+    function getLMSForHeight(height: number) {
+        // Asegurarnos que la altura esté dentro del rango
+        const minHeight = 45.0;
+        const maxHeight = 120.0; // Ajustar según tu JSON completo
+        const clampedHeight = Math.max(minHeight, Math.min(maxHeight, height));
+        
+        // Calcular el índice exacto (cada 0.5 cm)
+        const index = Math.round((clampedHeight - minHeight) * 2);
+        
+        return WFHBZD[index];
+    }
 
     function calcularEdad(año: number, mes: number, dia: number): Edad {
         const hoy = new Date();
@@ -215,61 +232,77 @@ export default function MetricasAvanzadas() {
       }
 
     return (
-        
-        <ScrollView contentContainerStyle={gs.containerMetric} showsVerticalScrollIndicator={false}>
 
-            <Text style={gs.headerText}>Gráficas de crecimiento</Text>
-            <view style={gs.separator}/>
-            {baby && metrics && (
-                <View style={[gs.cardMetric, { flex: 6 }]}>
-                    <Text style={[gs.cardTitle, { fontSize: 18 }]}>{baby.name}</Text>
-                    <Text style={gs.cardContent}>💪 Circunferencia del brazo: {metrics.armCircumference}</Text>
-                    <Text style={gs.cardContent}>👶 Circunferencia de la cabeza: {metrics.headCircumference}</Text>
-                    <Text style={gs.cardContent}>📏 Altura: {metrics.height} cm</Text>
-                    <Text style={gs.cardContent}>⚖️ Peso: {metrics.weight} kg </Text>
-                    <Text style={gs.cardContent}>📆 Fecha de las métricas: 
-                        {` ${metrics.date[2].toString().padStart(2, '0')}/${metrics.date[1].toString().padStart(2, '0')}/${metrics.date[0]}`}
-                    </Text>
-                    <view style={gs.separator}/>
-                    {metrics.date[0] !== nowYear || metrics.date[1] !== nowMonth || metrics.date[2] !== nowDay ? (
-                        <View>
-                            <Text style={gs.cardContent}>La medida del bebe no están actualizadas, 
-                            por lo tanto las graficas no estarán actualizadas. Por favor, actualícelas</Text>
-                            <view style={gs.separator}/>
-                            <TouchableOpacity style={[gs.mainButton, { backgroundColor: "green" }]} onPress={() => router.push(`/baby/addmetricas?babyId=${babyId}`)}>
-                                <Text style={gs.mainButtonText}>Actualizar métricas</Text>
-                            </TouchableOpacity>
-                        </View>
-                    ) : (
-                        <View>
-                            <view style={gs.separator}/>
-                            <view style={gs.separator}/>
-                            <Text style={gs.cardContent}>La medida del bebe están actualizadas, 
-                            pero las puede volver actualizar.</Text>
-                            <view style={gs.separator}/>
-                            <view style={gs.separator}/>
-                            <TouchableOpacity style={[gs.mainButton, { backgroundColor: "green" }]} onPress={() => router.push(`/baby/addmetricas?babyId=${babyId}`)}>
-                                <Text style={gs.mainButtonText}>Actualizar métricas</Text>
-                            </TouchableOpacity>
-                        </View>
-                    )}  
-                    <view style={gs.separator}/>
-                    {subscription && (
-                        <View>
-                            <view style={gs.separator}/>
-                            <view style={gs.separator}/>
-                            <Text style={gs.cardContent}>La medida del bebe están actualizadas, 
-                            pero las puede volver actualizar.</Text>
-                            <view style={gs.separator}/>
-                            <view style={gs.separator}/>
-                            <TouchableOpacity style={[gs.mainButton, { backgroundColor: "blue" }]} onPress={() => router.push(`/baby/metricas?babyId=${babyId}`)}>
-                                <Text style={gs.mainButtonText}>Métricas básicas</Text>
-                            </TouchableOpacity>
-                        </View>
-                        )
-                    }
-                </View>
+       <View style={{ flex: 1, backgroundColor: "#E3F2FD" }}>
+
+        <ScrollView contentContainerStyle={[gs.containerMetric,{backgroundColor:"transparent"}]} showsVerticalScrollIndicator={false}>
+
+        <Text style={[gs.headerText, { marginBottom: 20 }]}>📈 Gráficas de crecimiento</Text>
+
+        <View style={gs.separator} />
+
+        {baby && metrics && (
+        <View style={[gs.cardMetric, { flex: 6, padding: 20, backgroundColor: "#ffffff", borderRadius: 16 }]}>
+            <Text style={[gs.cardTitle, { fontSize: 20, marginBottom: 10, color: "#1565C0" }]}>
+            👶 {baby.name}
+            </Text>
+
+            <Text style={gs.cardContent}>💪 Circunferencia del brazo: {metrics.armCircumference} cm</Text>
+            <Text style={gs.cardContent}>🧠 Circunferencia de la cabeza: {metrics.headCircumference} cm</Text>
+            <Text style={gs.cardContent}>📏 Altura: {metrics.height} cm</Text>
+            <Text style={gs.cardContent}>⚖️ Peso: {metrics.weight} kg</Text>
+            <Text style={gs.cardContent}>
+            📅 Fecha de las métricas:{" "}
+            {`${metrics.date[2].toString().padStart(2, '0')}/${metrics.date[1].toString().padStart(2, '0')}/${metrics.date[0]}`}
+            </Text>
+
+            <View style={gs.separator} />
+
+            {metrics.date[0] !== nowYear || metrics.date[1] !== nowMonth || metrics.date[2] !== nowDay ? (
+            <View style={{ marginTop: 20 }}>
+                <Text style={[gs.cardContent, { color: "#E53935", marginBottom: 10 }]}>
+                ⚠️ Las métricas del bebé no están actualizadas, por lo tanto las gráficas no reflejan los últimos datos. Por favor, actualízalas.
+                </Text>
+
+                <TouchableOpacity
+                style={[gs.mainButton, { backgroundColor: "#0D47A1", marginTop: 10 }]}
+                onPress={() => router.push(`/baby/addmetricas?babyId=${babyId}`)}
+                >
+                <Text style={gs.mainButtonText}>Actualizar métricas</Text>
+                </TouchableOpacity>
+            </View>
+            ) : (
+            <View style={{ marginTop: 20 }}>
+                <Text style={[gs.cardContent, { color: "#388E3C", marginBottom: 10 }]}>
+                ✅ Las métricas están actualizadas, pero puedes volver a actualizarlas si lo deseas.
+                </Text>
+
+                <TouchableOpacity
+                style={[gs.mainButton, { backgroundColor: "#0D47A1", marginTop: 10 }]}
+                onPress={() => router.push(`/baby/addmetricas?babyId=${babyId}`)}
+                >
+                <Text style={gs.mainButtonText}>Actualizar métricas</Text>
+                </TouchableOpacity>
+            </View>
             )}
+
+            {subscription && (
+            <View style={{ marginTop: 30 }}>
+                <Text style={[gs.cardContent, { color: "#0D47A1", marginBottom: 10 }]}>
+                🔍 Puedes acceder a métricas avanzadas para un análisis más detallado del crecimiento.
+                </Text>
+
+                <TouchableOpacity
+                style={[gs.mainButton, { backgroundColor: "#1565C0" }]}
+                onPress={() => router.push(`/baby/metricas?babyId=${babyId}`)}
+                >
+                <Text style={gs.mainButtonText}>Métricas básicas</Text>
+                </TouchableOpacity>
+            </View>
+            )}
+        </View>
+        )}
+
             {baby?.genre == 'OTHER' && (
                 <View style={[gs.cardMetric, { flex: 3 }]}>
                         <Text style={gs.cardContent}>Como en el género del bebe se puso otro, a continuación se le van a motrar las graficas 
@@ -463,7 +496,7 @@ export default function MetricasAvanzadas() {
                         <Image 
                             source={HCBZ.image[
                                 (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3) ? 0 :
-                                (calcularEdad(year,month,day).years <= 2 ? 1 : 2)]}
+                                (calcularEdad(year,month,day).years < 2 ? 1 : 2)]}
                             style={[gs.imageMetric, { height: screenWidth * 0.48 }]} 
                             resizeMode="contain"
                             onLayout={(event) => {
@@ -478,15 +511,15 @@ export default function MetricasAvanzadas() {
                                 {
                                     right: imageSize.width * HCBZ.cuadrante[
                                         (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3) ? 0 :
-                                        (calcularEdad(year,month,day).years <= 2 ? 1 : 2)][
+                                        (calcularEdad(year,month,day).years < 2 ? 1 : 2)][
                                             (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3) ? calcularEdad(year,month,day).months * 4 + Math.floor(calcularEdad(year,month,day).days / 7)
                                             : calcularEdad(year,month,day).years
                                         ] - ((calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3) ? 8 * (calcularEdad(year,month,day).days - (Math.floor(calcularEdad(year,month,day).days / 7)*7)) : 
-                                        (12.6*calcularEdad(year,month,day).months) + 0.43*calcularEdad(year,month,day).days)
+                                        (12.6*calcularEdad(year,month,day).months) + 0.35*calcularEdad(year,month,day).days)
                                         ,  // Ajusta según la posición deseada
                                     top: imageSize.height * 0.843 - HCBZ.metrica[
                                         (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 3) ? 0 :
-                                        (calcularEdad(year,month,day).years <= 2 ? 1 : 2)],  // Ajusta según la posición deseada
+                                        (calcularEdad(year,month,day).years < 2 ? 1 : 2)],  // Ajusta según la posición deseada
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
                                     tintColor: (
@@ -552,7 +585,7 @@ export default function MetricasAvanzadas() {
                         <Image 
                             source={HCGZ.image[
                                 (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3) ? 0 :
-                                (calcularEdad(year,month,day).years <= 2 ? 1 : 2)]}
+                                (calcularEdad(year,month,day).years < 2 ? 1 : 2)]}
                             style={[gs.imageMetric, { height: screenWidth * 0.48 }]} 
                             resizeMode="contain"
                             onLayout={(event) => {
@@ -565,16 +598,16 @@ export default function MetricasAvanzadas() {
                             style={[
                                 gs.babyImage,
                                 {
-                                    right: imageSize.width * (HCGZ.cuadrante[
+                                    right: imageSize.width * HCGZ.cuadrante[
                                         (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3) ? 0 :
-                                        (calcularEdad(year,month,day).years <= 2 ? 1 : 2)][
-                                            calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? calcularEdad(year,month,day).months * 4 + Math.floor(calcularEdad(year,month,day).days / 7)
+                                        (calcularEdad(year,month,day).years < 2 ? 1 : 2)][
+                                            (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3) ? calcularEdad(year,month,day).months * 4 + Math.floor(calcularEdad(year,month,day).days / 7)
                                             : calcularEdad(year,month,day).years
-                                        ] - 0.0217*(calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? 0.26* (calcularEdad(year,month,day).days - (Math.floor(calcularEdad(year,month,day).days / 7)*7)) : 
-                                        calcularEdad(year,month,day).months + 0.01*(calcularEdad(year,month,day).days))),  // Ajusta según la posición deseada
+                                        ] - ((calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3) ? 8 * (calcularEdad(year,month,day).days - (Math.floor(calcularEdad(year,month,day).days / 7)*7)) : 
+                                        (12.6*calcularEdad(year,month,day).months) + 0.35*calcularEdad(year,month,day).days),
                                     top: imageSize.height * 0.843 - HCGZ.metrica[
                                         (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3) ? 0 :
-                                        (calcularEdad(year,month,day).years <= 2 ? 1 : 2)],  // Ajusta según la posición deseada
+                                        (calcularEdad(year,month,day).years < 2 ? 1 : 2)],  // Ajusta según la posición deseada
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
                                     tintColor: (
@@ -640,7 +673,7 @@ export default function MetricasAvanzadas() {
                     <Image 
                         source={HBZ.image[
                             (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
-                            (calcularEdad(year,month,day).years <= 2 ? 1 : 2)]}
+                            (calcularEdad(year,month,day).years < 2 ? 1 : 2)]}
                         style={[gs.imageMetric, { height: screenWidth * 0.48 }]} 
                         resizeMode="contain"
                         onLayout={(event) => {
@@ -655,15 +688,15 @@ export default function MetricasAvanzadas() {
                             {
                                 right: imageSize.width * (HBZ.cuadrante[
                                     (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
-                                    (calcularEdad(year,month,day).years <= 2 ? 1 : 2)
+                                    (calcularEdad(year,month,day).years < 2 ? 1 : 2)
                                 ][
                                     calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6 ? calcularEdad(year,month,day).months * 4 + Math.floor(calcularEdad(year,month,day).days / 7)
                                     : (calcularEdad(year,month,day).years - 2)])
                                     - (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6 ? 3.5 * (calcularEdad(year,month,day).days - (Math.floor(calcularEdad(year,month,day).days / 7)*7))  : 
-                                    (26*calcularEdad(year,month,day).months) + 0.43*calcularEdad(year,month,day).days), 
+                                    (20.85 *calcularEdad(year,month,day).months) + 0.43*calcularEdad(year,month,day).days), 
                                 top: imageSize.height * 0.84 - HBZ.metrica[
                                     (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
-                                    (calcularEdad(year,month,day).years <= 2  ? 1 : 2)
+                                    (calcularEdad(year,month,day).years < 2  ? 1 : 2)
                                 ],  // Ajusta según la posición deseada
                                 width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                 height: imageSize.width * 0.01, // Mantiene proporción
@@ -730,7 +763,7 @@ export default function MetricasAvanzadas() {
                         <Image 
                             source={HGZ.image[
                                 (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
-                                (calcularEdad(year,month,day).years <= 2 ? 1 : 2)]}
+                                (calcularEdad(year,month,day).years < 2 ? 1 : 2)]}
                             style={[gs.imageMetric, { height: screenWidth * 0.48 }]} 
                             resizeMode="contain"
                             onLayout={(event) => {
@@ -744,15 +777,16 @@ export default function MetricasAvanzadas() {
                                 gs.babyImage,
                                 {
                                     right: imageSize.width * (HGZ.cuadrante[
-                                        (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
-                                        (calcularEdad(year,month,day).years <= 2 ? 1 : 2)][
-                                            calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? calcularEdad(year,month,day).months * 4 + Math.floor(calcularEdad(year,month,day).days / 7)
-                                            : calcularEdad(year,month,day).years
-                                        ] - 0.0217*(calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? 0.12 * (calcularEdad(year,month,day).days - (Math.floor(calcularEdad(year,month,day).days / 7)*7))  : 
-                                        calcularEdad(year,month,day).months + 0.01*(calcularEdad(year,month,day).days))),
+                                        (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                        (calcularEdad(year,month,day).years < 2 ? 1 : 2)
+                                    ][
+                                        calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6 ? calcularEdad(year,month,day).months * 4 + Math.floor(calcularEdad(year,month,day).days / 7)
+                                        : (calcularEdad(year,month,day).years - 2)])
+                                        - (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6 ? 3.5 * (calcularEdad(year,month,day).days - (Math.floor(calcularEdad(year,month,day).days / 7)*7))  : 
+                                        (20.85 *calcularEdad(year,month,day).months) + 0.43*calcularEdad(year,month,day).days),
                                     top: imageSize.height * 0.84 - HGZ.metrica[
                                         (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
-                                        (calcularEdad(year,month,day).years <= 2 ? 1 : 2)
+                                        (calcularEdad(year,month,day).years < 2 ? 1 : 2)
                                     ],  // Ajusta según la posición deseada
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
@@ -819,7 +853,7 @@ export default function MetricasAvanzadas() {
                         <Image 
                             source={WBZ.image[
                                 (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
-                                (calcularEdad(year,month,day).years <= 2 ? 1 : 2)]}
+                                (calcularEdad(year,month,day).years < 2 ? 1 : 2)]}
                             style={[gs.imageMetric, { height: screenWidth * 0.48 }]} 
                             resizeMode="contain"
                             onLayout={(event) => {
@@ -834,15 +868,15 @@ export default function MetricasAvanzadas() {
                                 {
                                     right: imageSize.width * (WBZ.cuadrante[
                                         (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
-                                        (calcularEdad(year,month,day).years <= 2 ? 1 : 2)
+                                        (calcularEdad(year,month,day).years < 2 ? 1 : 2)
                                     ][
                                         calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6 ? calcularEdad(year,month,day).months * 4 + Math.floor(calcularEdad(year,month,day).days / 7)
                                         : (calcularEdad(year,month,day).years - 2)])
                                         - (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6 ? 3.5 * (calcularEdad(year,month,day).days - (Math.floor(calcularEdad(year,month,day).days / 7)*7))  : 
-                                        (12*calcularEdad(year,month,day).months) + 0.43*calcularEdad(year,month,day).days),
+                                        (20.85*calcularEdad(year,month,day).months)+ 0.43*calcularEdad(year,month,day).days),
                                     top: imageSize.height * 0.84 - WBZ.metrica[
                                         (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
-                                        (calcularEdad(year,month,day).years <= 2  ? 1 : 2)
+                                        (calcularEdad(year,month,day).years < 2  ? 1 : 2)
                                     ],
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
@@ -909,7 +943,7 @@ export default function MetricasAvanzadas() {
                         <Image 
                             source={WGZ.image[
                                 (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
-                                (calcularEdad(year,month,day).years <= 2 ? 1 : 2)]}
+                                (calcularEdad(year,month,day).years < 2 ? 1 : 2)]}
                             style={[gs.imageMetric, { height: screenWidth * 0.48 }]}
                             resizeMode="contain"
                             onLayout={(event) => {
@@ -923,15 +957,16 @@ export default function MetricasAvanzadas() {
                                 gs.babyImage,
                                 {
                                     right: imageSize.width * (WGZ.cuadrante[
-                                        (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
-                                        (calcularEdad(year,month,day).years <= 2 ? 1 : 2)][
-                                            calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? calcularEdad(year,month,day).months * 4 + Math.floor(calcularEdad(year,month,day).days / 7)
-                                            : calcularEdad(year,month,day).years
-                                        ] - 0.0217*(calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 3 ? 0.12 * (calcularEdad(year,month,day).days - (Math.floor(calcularEdad(year,month,day).days / 7)*7))  : 
-                                        calcularEdad(year,month,day).months + 0.01*(calcularEdad(year,month,day).days))),
+                                        (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
+                                        (calcularEdad(year,month,day).years < 2 ? 1 : 2)
+                                    ][
+                                        calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6 ? calcularEdad(year,month,day).months * 4 + Math.floor(calcularEdad(year,month,day).days / 7)
+                                        : (calcularEdad(year,month,day).years - 2)])
+                                        - (calcularEdad(year,month,day).years <= 0 && calcularEdad(year,month,day).months <= 6 ? 3.5 * (calcularEdad(year,month,day).days - (Math.floor(calcularEdad(year,month,day).days / 7)*7))  : 
+                                        (20.85*calcularEdad(year,month,day).months)+ 0.43*calcularEdad(year,month,day).days),
                                     top: imageSize.height * 0.84 - WGZ.metrica[
                                         (calcularEdad(year,month,day).years == 0 && calcularEdad(year,month,day).months <= 6) ? 0 :
-                                        (calcularEdad(year,month,day).years <= 2 ? 1 : 2)
+                                        (calcularEdad(year,month,day).years < 2 ? 1 : 2)
                                     ], 
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
@@ -997,7 +1032,7 @@ export default function MetricasAvanzadas() {
                     <View style={gs.imageContainer}>
                         <Image 
                             source={WFHBZ.image[
-                                (calcularEdad(year,month,day).years <= 2 ? 0 : 1)
+                                (calcularEdad(year,month,day).years < 2 ? 0 : 1)
                             ]}
                             style={[gs.imageMetric, { height: screenWidth * 0.48 }]} 
                             resizeMode="contain"
@@ -1012,113 +1047,30 @@ export default function MetricasAvanzadas() {
                                 gs.babyImage,
                                 {
                                     right: imageSize.width * 0.764 - WFHBZ.height[
-                                        (calcularEdad(year,month,day).years <= 2 ? 0 : 1)
+                                        (calcularEdad(year,month,day).years < 2 ? 0 : 1)
                                     ],  // Ajusta según la posición deseada
                                     top: imageSize.height * 0.84 -  WFHBZ.weight[
-                                        (calcularEdad(year,month,day).years <= 2 ? 0 : 1)
+                                        (calcularEdad(year,month,day).years < 2 ? 0 : 1)
                                     ],  // Ajusta según la posición deseada
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
-                                    tintColor: (
-                                        calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -3.0 ? "black":
-                                        (calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -2.0
-                                        && calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -3.0) ? "red": 
-                                        (calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -1.0
-                                        && calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -2.0) ? "#BE6B00" :
-                                        (calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 1.0
-                                        && calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -1.0) ? "green" : 
-                                        (calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 2.0
-                                        && calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= 1.0) ? "#BE6B00" : 
-                                        (calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 3.0
-                                        && calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= 2.0) ? "red" : "black"
-                                    ),
+                                    tintColor: zScore < -3.0 ? "black":
+                                        (zScore < -2.0 && zScore >= -3.0) ? "red":
+                                        (zScore < -1.0 && zScore >= -2.0) ? "#BE6B00":
+                                        (zScore < 1.0 && zScore >= -1.0) ? "green":
+                                        (zScore < 2.0 && zScore >= 1.0) ? "#BE6B00":
+                                        (zScore < 3.0 && zScore >= 2.0) ? "red": "black"
                                 },
                             ]}
                         />
                     </View>
-                    <Text style={gs.description}>La puntuación z de tu niño es: {calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S).toFixed(2)}, por lo cual llegamos a la siguente conclusión.</Text>
-                    <Text style={gs.description}>{WFHBZ.description[(
-                        calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -3.0 ? 0:
-                        (calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -2.0
-                        && calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -3.0) ? 1: 
-                        (calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -1.0
-                        && calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -2.0) ? 2:
-                        (calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 1.0
-                        && calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -1.0) ? 3 : 
-                        (calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 2.0
-                        && calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= 1.0) ? 4 : 
-                        (calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 3.0
-                        && calcularZ((metrics?.weight ?? 11.5), 
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHBZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= 2.0) ? 5 : 6
-                    )]}</Text>
+                    <Text style={gs.description}>La puntuación z de tu niño es: {zScore.toFixed(2)}, por lo cual llegamos a la siguente conclusión.</Text>
+                    <Text style={gs.description}>{WFHBZ.description[(zScore < -3.0 ? 0:
+                                        (zScore < -2.0 && zScore >= -3.0) ? 1:
+                                        (zScore < -1.0 && zScore >= -2.0) ? 2:
+                                        (zScore < 1.0 && zScore >= -1.0) ? 3:
+                                        (zScore < 2.0 && zScore >= 1.0) ? 4:
+                                        (zScore < 3.0 && zScore >= 2.0) ? 5: 6)]}</Text>
                 </View>
             }
             {(baby?.genre == 'FEMALE' || (baby?.genre == 'OTHER' && !genreGirl)) && WFHGZ != null &&
@@ -1127,7 +1079,7 @@ export default function MetricasAvanzadas() {
                     <View style={gs.imageContainer}>
                         <Image 
                             source={WFHGZ.image[
-                                (calcularEdad(year,month,day).years <= 2 ? 0 : 1)
+                                (calcularEdad(year,month,day).years < 2 ? 0 : 1)
                             ]}
                             style={[gs.imageMetric, { height: screenWidth * 0.48 }]} 
                             resizeMode="contain"
@@ -1142,115 +1094,42 @@ export default function MetricasAvanzadas() {
                                 gs.babyImage,
                                 {
                                     right: imageSize.width * 0.764 - WFHGZ.height[
-                                        (calcularEdad(year,month,day).years <= 2 ? 0 : 1)
+                                        (calcularEdad(year,month,day).years < 2 ? 0 : 1)
                                     ],  // Ajusta según la posición deseada
                                     top: imageSize.height * 0.84 -  WFHGZ.weight[
-                                        (calcularEdad(year,month,day).years <= 2 ? 0 : 1)
+                                        (calcularEdad(year,month,day).years < 2 ? 0 : 1)
                                     ],
                                     width: imageSize.width * 0.01, // Ajusta el tamaño en proporción a la gráfica
                                     height: imageSize.width * 0.01, // Mantiene proporción
-                                    tintColor: (
-                                        calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -3.0 ? "black":
-                                        (calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -2.0
-                                        && calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -3.0) ? "red": 
-                                        (calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -1.0
-                                        && calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -2.0) ? "#BE6B00" :
-                                        (calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 1.0
-                                        && calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -1.0) ? "green" : 
-                                        (calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 2.0
-                                        && calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= 1.0) ? "#BE6B00" : 
-                                        (calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 3.0
-                                        && calcularZ((metrics?.weight ?? 11.5), 
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= 2.0) ? "red" : "black"
-                                    ),
+                                    tintColor: zScore < -3.0 ? "black":
+                                    (zScore < -2.0 && zScore >= -3.0) ? "red":
+                                    (zScore < -1.0 && zScore >= -2.0) ? "#BE6B00":
+                                    (zScore < 1.0 && zScore >= -1.0) ? "green":
+                                    (zScore < 2.0 && zScore >= 1.0) ? "#BE6B00":
+                                    (zScore < 3.0 && zScore >= 2.0) ? "red": "black"
                                 },
                             ]}
                         />
                     </View>
-                    <Text style={gs.description}>La puntuación z de tu niño es: {calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S).toFixed(2)}, por lo cual llegamos a la siguente conclusión.</Text>
-                    <Text style={gs.description}>{WFHGZ.description[(
-                        calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -3.0 ? 0:
-                        (calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -2.0
-                        && calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -3.0) ? 1: 
-                        (calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < -1.0
-                        && calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -2.0) ? 2:
-                        (calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 1.0
-                        && calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= -1.0) ? 3 : 
-                        (calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 2.0
-                        && calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= 1.0) ? 4 : 
-                        (calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) < 3.0
-                        && calcularZ((metrics?.weight ?? 11.5), 
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].M,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].L,
-                        WFHGZD[Math.floor(((metrics?.height ?? 45) - 45) * 2) < 45 ? 45 : Math.floor(((metrics?.height ?? 45) - 45) * 2) > 120 ? 120 : Math.floor(((metrics?.height ?? 45) - 45) * 2)].S) >= 2.0) ? 5 : 6
-                    )]}</Text>
+                    <Text style={gs.description}>La puntuación z de tu niño es: {zScore.toFixed(2)}, por lo cual llegamos a la siguente conclusión.</Text>
+                    <Text style={gs.description}>{WFHGZ.description[(zScore < -3.0 ? 0:
+                                        (zScore < -2.0 && zScore >= -3.0) ? 1:
+                                        (zScore < -1.0 && zScore >= -2.0) ? 2:
+                                        (zScore < 1.0 && zScore >= -1.0) ? 3:
+                                        (zScore < 2.0 && zScore >= 1.0) ? 4:
+                                        (zScore < 3.0 && zScore >= 2.0) ? 5: 6)]}</Text>
                 </View>
             }
+            <View style={[gs.cardMetric, { width: screenWidth * 0.95 }]}>
+                <Text style={gs.title}>Los datos de las puntuaciones z salen de la OMS</Text>
+                <Text style={gs.description}>Hemos obtenido las tablas, las cuales son comunes a cualquier niño o niña del mundo de 
+                    entre 0 a 5 años, y las hemos traducido para un mejor entendimiento. Si desean saber más información o informarse 
+                    pueden visitar la página oficial de la OMS, se les advierte que está en su mayoria en inglés.</Text>
+                <a href="https://www.who.int/publications/i/item/924154693X" target="_blank" rel="noopener noreferrer">
+                    Patrones de crecimiento infantil de la OMS
+                </a>
+            </View>
         </ScrollView>
+        </View>
     );
 }

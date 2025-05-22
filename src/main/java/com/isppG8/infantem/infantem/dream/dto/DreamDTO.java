@@ -3,6 +3,7 @@ package com.isppG8.infantem.infantem.dream.dto;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.isppG8.infantem.infantem.baby.dto.BabyNameDTO;
 import com.isppG8.infantem.infantem.dream.Dream;
 import com.isppG8.infantem.infantem.dream.DreamType;
 
@@ -31,6 +32,8 @@ public class DreamDTO {
     @NotNull
     private DreamType DreamType;
 
+    private BabyNameDTO baby;
+
     public DreamDTO() {
     }
 
@@ -40,5 +43,7 @@ public class DreamDTO {
         this.dateEnd = dream.getDateEnd();
         this.numWakeups = dream.getNumWakeups();
         this.DreamType = dream.getDreamType();
+        this.baby = new BabyNameDTO(dream.getBaby());
+
     }
 }

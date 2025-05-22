@@ -5,8 +5,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.isppG8.infantem.infantem.disease.dto.DiseaseSummary;
+
+import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.util.Tuple;
 
 public interface DiseaseRepository extends JpaRepository<Disease, Long> {
@@ -16,5 +19,8 @@ public interface DiseaseRepository extends JpaRepository<Disease, Long> {
 
     @Query("SELECT new com.isppG8.infantem.infantem.disease.dto.DiseaseSummary(d.id, d.name) FROM Disease d WHERE d.baby.id = ?1 AND ?2 BETWEEN d.startDate AND d.endDate")
     List<DiseaseSummary> findDiseaseSummaryByBabyIdAndDate(Integer babyId, LocalDate day);
+
+    @Query("SELECT d FROM Disease d WHERE d.baby.id IN (SELECT b.id FROM Baby b WHERE :user MEMBER OF b.users)")
+    List<Disease> findAllByUser(@Param("user") User user);
 
 }

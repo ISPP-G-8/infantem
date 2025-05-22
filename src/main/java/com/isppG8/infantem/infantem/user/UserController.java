@@ -100,10 +100,10 @@ public class UserController {
         }
 
         // Mantén la foto de perfil existente
-        User existingUser = userService.getUserById(id);
-        if (existingUser != null) {
-            userDetails.setProfilePhoto(existingUser.getProfilePhoto());
-        }
+        // User existingUser = userService.getUserById(id);
+        // if (existingUser != null) {
+        // userDetails.setProfilePhoto(existingUser.getProfilePhoto());
+        // }
 
         User updatedUser = userService.updateUser(id, userDetails);
         String jwt = jwtUtils.generateTokenFromUsername(updatedUser.getUsername(), updatedUser.getAuthorities(),

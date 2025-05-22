@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
+import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.util.Tuple;
 
 public interface DreamRepository extends JpaRepository<Dream, Long> {
@@ -16,4 +18,8 @@ public interface DreamRepository extends JpaRepository<Dream, Long> {
 
     @Query("SELECT d FROM Dream d WHERE d.baby.id = ?1 AND (d.dateStart BETWEEN ?2 AND ?3 OR d.dateEnd BETWEEN ?2 AND ?3)")
     List<Dream> findDreamSummaryByBabyIdAndDate(Integer babyId, LocalDateTime start, LocalDateTime end);
+
+    @Query("SELECT d FROM Dream d WHERE d.baby.id IN (SELECT b.id FROM Baby b WHERE :user MEMBER OF b.users)")
+    List<Dream> findAllByUser(@Param("user") User user);
+
 }

@@ -17,6 +17,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,9 +33,11 @@ public class Dream {
     private Long id;
 
     @NotNull
+    @PastOrPresent
     private LocalDateTime dateStart;
 
     @NotNull
+    @PastOrPresent
     private LocalDateTime dateEnd;
 
     @Min(0)

@@ -11,10 +11,15 @@ import com.stripe.param.CustomerListParams;
 import com.stripe.param.PaymentMethodAttachParams;
 import com.stripe.param.PaymentMethodListParams;
 import com.stripe.param.SubscriptionCreateParams;
+
+import jakarta.persistence.EntityNotFoundException;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.isppG8.infantem.infantem.auth.Authorities;
 import com.isppG8.infantem.infantem.auth.AuthoritiesService;
+import com.isppG8.infantem.infantem.auth.jwt.JwtResponse;
+import com.isppG8.infantem.infantem.auth.jwt.JwtUtils;
 import com.isppG8.infantem.infantem.config.StripeConfig;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
 import com.isppG8.infantem.infantem.user.User;
@@ -23,12 +28,14 @@ import com.isppG8.infantem.infantem.user.dto.UserDTO;
 import com.stripe.model.checkout.Session;
 import com.stripe.exception.StripeException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -38,6 +45,9 @@ import java.util.stream.Collectors;
 public class SubscriptionInfantemService {
 
     private final StripeConfig stripeConfig;
+
+    @Autowired
+    private JwtUtils jwtUtils;
 
     public void processPayment() {
         String apiKey = stripeConfig.getStripeApiKey();
@@ -57,17 +67,27 @@ public class SubscriptionInfantemService {
     }
 
     @Transactional
-    public void activateSubscription(User user, String subscriptionId) {
+    public JwtResponse activateSubscription(User user, String subscriptionId) {
         SubscriptionInfantem subscription = subscriptionInfantemRepository.findByUser(user)
                 .orElseThrow(() -> new ResourceNotFoundException("Suscripción no encontrada"));
+
+        // Actualiza el rol a premium
         userService.upgradeToPremium(user);
+
+        // Marca la suscripción como activa
         subscription.setStripeSubscriptionId(subscriptionId);
         subscription.setActive(true);
         subscriptionInfantemRepository.save(subscription);
+
+        // Regenera el JWT con el nuevo rol del usuario
+        String token = jwtUtils.generateTokenFromUsername(user.getUsername(), user.getAuthorities(), user.getId());
+        List<String> roles = Collections.singletonList(user.getAuthorities().getAuthority());
+
+        return new JwtResponse(token, user.getId(), user.getUsername(), roles);
     }
 
     @Transactional
-    public void desactivateSubscription(User user, String subscriptionId) {
+    public JwtResponse desactivateSubscription(User user, String subscriptionId) {
         Optional<SubscriptionInfantem> subOpt = subscriptionInfantemRepository.findByUser(user);
 
         if (subOpt.isPresent()) {
@@ -80,7 +100,14 @@ public class SubscriptionInfantemService {
             subscription.setStripeSubscriptionId(subscriptionId);
             subscription.setActive(false);
             subscriptionInfantemRepository.save(subscription);
+
+            String token = jwtUtils.generateTokenFromUsername(user.getUsername(), authorities, user.getId());
+            List<String> roles = Collections.singletonList(authorities.getAuthority());
+
+            return new JwtResponse(token, user.getId(), user.getUsername(), roles);
         }
+
+        throw new EntityNotFoundException("No subscription found for user.");
     }
 
     // 1. Crear un cliente en Stripe
@@ -100,55 +127,32 @@ public class SubscriptionInfantemService {
         return paymentMethod.getId(); // Devuelve solo el ID del método de pago
     }
 
-    // 4. Crear una suscripción
-    public SubscriptionInfantem createSubscription(Long userId, String customerId, String priceId,
-            String paymentMethodId) throws Exception {
-        // Crear los parámetros de la suscripción en Stripe
+    public SubscriptionInfantem createSubscriptionNew(Long userId, String priceId, String paymentMethodId,
+            String customerId) throws Exception {
+        User user = userService.getUserById(userId);
+
+        // ⬇️ Este paso es la clave que falta
+        PaymentMethod paymentMethod = PaymentMethod.retrieve(paymentMethodId);
+        PaymentMethodAttachParams attachParams = PaymentMethodAttachParams.builder().setCustomer(customerId).build();
+        paymentMethod.attach(attachParams);
+
+        // Ahora sí, crear la suscripción con método asociado
         SubscriptionCreateParams params = SubscriptionCreateParams.builder().setCustomer(customerId)
                 .addItem(SubscriptionCreateParams.Item.builder().setPrice(priceId).build())
                 .setDefaultPaymentMethod(paymentMethodId).build();
 
-        // Crear la suscripción en Stripe
         Subscription stripeSubscription = Subscription.create(params);
-        User user = userService.getUserById(userId);
         userService.upgradeToPremium(user);
 
-        // Crear la suscripción en la base de datos
+        // Guardar en base de datos local
         SubscriptionInfantem newSubscription = new SubscriptionInfantem();
-        newSubscription.setUser(user); // Solo se necesita el ID del usuario
+        newSubscription.setUser(user);
         newSubscription.setStartDate(LocalDate.now());
         newSubscription.setActive(true);
         newSubscription.setStripePaymentMethodId(paymentMethodId);
-        newSubscription.setStripeSubscriptionId(stripeSubscription.getId()); // Extrae solo el ID
+        newSubscription.setStripeSubscriptionId(stripeSubscription.getId());
         newSubscription.setStripeCustomerId(customerId);
 
-        // Guardar en la base de datos
-        return subscriptionInfantemRepository.save(newSubscription);
-    }
-
-    public SubscriptionInfantem createSubscriptionNew(Long userId, String priceId, String paymentMethodId)
-            throws Exception {
-        User user = userService.getUserById(userId);
-        String customerId = createCustomer(user.getEmail(), user.getName(), "Cliente creado por Infantem");
-        String paymentMethod = attachPaymentMethodToCustomer(paymentMethodId, customerId);
-
-        SubscriptionCreateParams params = SubscriptionCreateParams.builder().setCustomer(customerId)
-                .addItem(SubscriptionCreateParams.Item.builder().setPrice(priceId).build())
-                .setDefaultPaymentMethod(paymentMethod).build();
-
-        // Crear la suscripción en Stripe
-        Subscription stripeSubscription = Subscription.create(params);
-
-        // Crear la suscripción en la base de datos
-        SubscriptionInfantem newSubscription = new SubscriptionInfantem();
-        newSubscription.setUser(user); // Solo se necesita el ID del usuario
-        newSubscription.setStartDate(LocalDate.now());
-        newSubscription.setActive(true);
-        newSubscription.setStripePaymentMethodId(paymentMethodId);
-        newSubscription.setStripeSubscriptionId(stripeSubscription.getId()); // Extrae solo el ID
-        newSubscription.setStripeCustomerId(customerId);
-
-        // Guardar en la base de datos
         return subscriptionInfantemRepository.save(newSubscription);
     }
 

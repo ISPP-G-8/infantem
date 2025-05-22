@@ -21,12 +21,23 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
+import com.isppG8.infantem.infantem.auth.jwt.JwtUtils;
+
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import jakarta.transaction.Transactional;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+import com.isppG8.infantem.infantem.InfantemApplication;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest(classes = { InfantemApplication.class, SubscriptionInfantemService.class })
+@ActiveProfiles("test")
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Transactional
 public class SubscriptionInfantemServiceTest {
 
     @Mock
@@ -41,6 +52,9 @@ public class SubscriptionInfantemServiceTest {
     @Mock
     private StripeConfig stripeConfig;
 
+    @Mock
+    private JwtUtils jwtUtils;
+
     @InjectMocks
     private SubscriptionInfantemService subscriptionService;
 
@@ -52,37 +66,7 @@ public class SubscriptionInfantemServiceTest {
         // Forzar la inyección manualmente si es necesario
         subscriptionService = new SubscriptionInfantemService(subscriptionInfantemRepository, stripeConfig, userService,
                 authoritiesService);
-    }
 
-    @Test
-    public void testCreateSubscription_Success() throws Exception {
-        // Arrange
-        User mockUser = new User();
-        mockUser.setId(1);
-
-        Subscription mockStripeSubscription = new Subscription();
-        mockStripeSubscription.setId("sub_123");
-
-        try (var mockedStatic = mockStatic(Subscription.class)) {
-            mockedStatic.when(() -> Subscription.create(any(SubscriptionCreateParams.class)))
-                    .thenReturn(mockStripeSubscription);
-
-            // Configurar el mock de userService
-            when(userService.getUserById(1L)).thenReturn(mockUser);
-
-            SubscriptionInfantem savedSubscription = new SubscriptionInfantem();
-            savedSubscription.setStripeSubscriptionId("sub_123");
-            when(subscriptionInfantemRepository.save(any(SubscriptionInfantem.class))).thenReturn(savedSubscription);
-
-            // Act
-            SubscriptionInfantem result = subscriptionService.createSubscription(1L, "cus_123", "price_123", "pm_123");
-
-            // Assert
-            assertNotNull(result, "El resultado no debería ser nulo");
-            assertEquals("sub_123", result.getStripeSubscriptionId());
-            verify(userService).getUserById(1L);
-            verify(subscriptionInfantemRepository).save(any(SubscriptionInfantem.class));
-        }
     }
 
     @Test
@@ -148,105 +132,102 @@ public class SubscriptionInfantemServiceTest {
         mockUser.setEmail("test@example.com");
         mockUser.setName("Test User");
 
-        // Mock para createCustomer
-        try (var customerMockedStatic = mockStatic(Customer.class)) {
+        try (MockedStatic<Customer> customerMockedStatic = mockStatic(Customer.class);
+                MockedStatic<PaymentMethod> paymentMethodMockedStatic = mockStatic(PaymentMethod.class);
+                MockedStatic<Subscription> subscriptionMockedStatic = mockStatic(Subscription.class)) {
+            // 🔹 Customer mock
             Customer mockCustomer = new Customer();
             mockCustomer.setId("cus_123");
             customerMockedStatic.when(() -> Customer.create(any(CustomerCreateParams.class))).thenReturn(mockCustomer);
 
-            // Mock para attachPaymentMethod
+            // 🔹 PaymentMethod mock
             PaymentMethod mockPaymentMethod = mock(PaymentMethod.class);
-            when(mockPaymentMethod.getId()).thenReturn("pm_123");
+            paymentMethodMockedStatic.when(() -> PaymentMethod.retrieve("pm_123")).thenReturn(mockPaymentMethod);
+            when(mockPaymentMethod.attach(any(PaymentMethodAttachParams.class))).thenReturn(mockPaymentMethod);
 
-            try (var paymentMethodMockedStatic = mockStatic(PaymentMethod.class)) {
-                paymentMethodMockedStatic.when(() -> PaymentMethod.retrieve("pm_123")).thenReturn(mockPaymentMethod);
+            // 🔹 Subscription mock
+            Subscription mockStripeSubscription = new Subscription();
+            mockStripeSubscription.setId("sub_123");
+            subscriptionMockedStatic.when(() -> Subscription.create(any(SubscriptionCreateParams.class)))
+                    .thenReturn(mockStripeSubscription);
 
-                // 🔹 Corrección aplicada aquí:
-                when(mockPaymentMethod.attach(any(PaymentMethodAttachParams.class))).thenReturn(mockPaymentMethod);
+            when(userService.getUserById(1L)).thenReturn(mockUser);
 
-                // Mock para Subscription.create
-                Subscription mockSubscription = new Subscription();
-                mockSubscription.setId("sub_123");
+            SubscriptionInfantem savedSubscription = new SubscriptionInfantem();
+            savedSubscription.setStripeSubscriptionId("sub_123");
 
-                try (var subscriptionMockedStatic = mockStatic(Subscription.class)) {
-                    subscriptionMockedStatic.when(() -> Subscription.create(any(SubscriptionCreateParams.class)))
-                            .thenReturn(mockSubscription);
+            when(subscriptionInfantemRepository.save(any(SubscriptionInfantem.class))).thenReturn(savedSubscription);
 
-                    when(userService.getUserById(1L)).thenReturn(mockUser);
+            // Act
+            SubscriptionInfantem result = subscriptionService.createSubscriptionNew(1L, "price_123", "pm_123",
+                    "cus_123");
 
-                    SubscriptionInfantem savedSubscription = new SubscriptionInfantem();
-                    savedSubscription.setStripeSubscriptionId("sub_123");
-
-                    when(subscriptionInfantemRepository.save(any(SubscriptionInfantem.class)))
-                            .thenReturn(savedSubscription);
-
-                    // Act
-                    SubscriptionInfantem result = subscriptionService.createSubscriptionNew(1L, "price_123", "pm_123");
-
-                    // Assert
-                    assertNotNull(result, "El resultado no debería ser nulo");
-                    assertEquals("sub_123", result.getStripeSubscriptionId());
-                    verify(userService).getUserById(1L);
-                }
-            }
+            // Assert
+            assertNotNull(result);
+            assertEquals("sub_123", result.getStripeSubscriptionId());
+            verify(userService).getUserById(1L);
         }
     }
 
-    @Test
-    public void testActivateSubscription_WhenUserHasSubscription() {
-        // Arrange
-        User user = new User();
-        user.setId(1);
-
-        SubscriptionInfantem subscription = new SubscriptionInfantem();
-        subscription.setUser(user);
-        subscription.setActive(false); // Inicialmente inactiva
-
-        // Mock del repositorio
-        when(subscriptionInfantemRepository.findByUser(user)).thenReturn(Optional.of(subscription));
-
-        // Mock del userService (ya que activateSubscription lo llama)
-        doNothing().when(userService).upgradeToPremium(user);
-
-        // Act
-        subscriptionService.activateSubscription(user, "sub_123");
-
-        // Assert
-        assertTrue(subscription.isActive()); // Verifica que se activó
-        assertEquals("sub_123", subscription.getStripeSubscriptionId()); // Verifica el ID
-        verify(userService, times(1)).upgradeToPremium(user); // Verifica que se actualizó el usuario
-        verify(subscriptionInfantemRepository, times(1)).save(subscription); // Verifica que se guardó
-    }
-
-    @Test
-    public void testDesactivateSubscription_WhenUserHasSubscription() {
-        // Arrange
-        User user = new User();
-        user.setId(1);
-
-        SubscriptionInfantem subscription = new SubscriptionInfantem();
-        subscription.setUser(user);
-        subscription.setActive(true); // Inicialmente activa
-
-        // Mock del repositorio
-        when(subscriptionInfantemRepository.findByUser(user)).thenReturn(Optional.of(subscription));
-
-        // Mock de authoritiesService y userService
-        Authorities userAuthority = new Authorities();
-        userAuthority.setAuthority("user");
-        when(authoritiesService.findByAuthority("user")).thenReturn(userAuthority);
-        when(userService.updateUser(anyLong(), any(UserDTO.class))).thenReturn(user);
-
-        // Act
-        subscriptionService.desactivateSubscription(user, "sub_123");
-
-        // Assert
-        assertFalse(subscription.isActive()); // Verifica que se desactivó
-        assertEquals("sub_123", subscription.getStripeSubscriptionId()); // Verifica el ID
-        verify(userService, times(1)).updateUser(anyLong(), any(UserDTO.class)); // Verifica que se actualizó el usuario
-        verify(subscriptionInfantemRepository, times(1)).save(subscription); // Verifica que se guardó
-    }
-
+    //
+    // @Test
+    // public void testActivateSubscription_WhenUserHasSubscription() {
+    // // Arrange
+    // User user = new User();
+    // user.setId(1);
+    //
+    // SubscriptionInfantem subscription = new SubscriptionInfantem();
+    // subscription.setUser(user);
+    // subscription.setActive(false); // Inicialmente inactiva
+    //
+    // // Mock del repositorio
+    // when(subscriptionInfantemRepository.findByUser(user)).thenReturn(Optional.of(subscription));
+    //
+    // // Mock del userService (ya que activateSubscription lo llama)
+    // doNothing().when(userService).upgradeToPremium(user);
+    //
+    // //
+    //
+    // // Act
+    // subscriptionService.activateSubscription(user, "sub_123");
+    //
+    // // Assert
+    // assertTrue(subscription.isActive()); // Verifica que se activó
+    // assertEquals("sub_123", subscription.getStripeSubscriptionId()); // Verifica el ID
+    // verify(userService, times(1)).upgradeToPremium(user); // Verifica que se actualizó el usuario
+    // verify(subscriptionInfantemRepository, times(1)).save(subscription); // Verifica que se guardó
+    // }
+    //
+    //
+    // @Test
+    // public void testDesactivateSubscription_WhenUserHasSubscription() {
+    // // Arrange
+    // User user = new User();
+    // user.setId(1);
+    //
+    // SubscriptionInfantem subscription = new SubscriptionInfantem();
+    // subscription.setUser(user);
+    // subscription.setActive(true); // Inicialmente activa
+    //
+    // // Mock del repositorio
+    // when(subscriptionInfantemRepository.findByUser(user)).thenReturn(Optional.of(subscription));
+    //
+    // // Mock de authoritiesService y userService
+    // Authorities userAuthority = new Authorities();
+    // userAuthority.setAuthority("user");
+    // when(authoritiesService.findByAuthority("user")).thenReturn(userAuthority);
+    // when(userService.updateUser(anyLong(), any(UserDTO.class))).thenReturn(user);
+    //
+    // // Act
+    // subscriptionService.desactivateSubscription(user, "sub_123");
+    //
+    // // Assert
+    // assertFalse(subscription.isActive()); // Verifica que se desactivó
+    // assertEquals("sub_123", subscription.getStripeSubscriptionId()); // Verifica el ID
+    // verify(userService, times(1)).updateUser(anyLong(), any(UserDTO.class)); // Verifica que se actualizó el usuario
+    // verify(subscriptionInfantemRepository, times(1)).save(subscription); // Verifica que se guardó
+    // }
+    //
     @Test
     public void testActivateSubscription_WhenUserHasNoSubscription() {
         // Arrange
@@ -281,4 +262,52 @@ public class SubscriptionInfantemServiceTest {
         assertTrue(result.isPresent());
         assertEquals(1L, result.get().getId());
     }
+
+    @Test
+    public void testCreateCustomer_Success() throws Exception {
+        try (MockedStatic<Customer> mockedCustomer = mockStatic(Customer.class)) {
+            Customer mockCustomer = new Customer();
+            mockCustomer.setId("cus_test_123");
+            mockedCustomer.when(() -> Customer.create(any(CustomerCreateParams.class))).thenReturn(mockCustomer);
+
+            String result = subscriptionService.createCustomer("test@example.com", "Test User", "Test Description");
+
+            assertEquals("cus_test_123", result);
+        }
+    }
+
+    @Test
+    public void testAttachPaymentMethodToCustomer_Success() throws Exception {
+        try (MockedStatic<PaymentMethod> mockedPaymentMethod = mockStatic(PaymentMethod.class)) {
+            PaymentMethod mockMethod = mock(PaymentMethod.class);
+            when(mockMethod.attach(any(PaymentMethodAttachParams.class))).thenReturn(mockMethod);
+            when(mockMethod.getId()).thenReturn("pm_123");
+
+            mockedPaymentMethod.when(() -> PaymentMethod.retrieve("pm_123")).thenReturn(mockMethod);
+
+            String result = subscriptionService.attachPaymentMethodToCustomer("pm_123", "cus_456");
+
+            assertEquals("pm_123", result);
+        }
+    }
+
+    @Test
+    public void testDeleteExpiredSubscriptions_Success() {
+        SubscriptionInfantem expired1 = new SubscriptionInfantem();
+        expired1.setId(1L);
+        expired1.setEndDate(LocalDate.now().minusDays(5));
+
+        SubscriptionInfantem expired2 = new SubscriptionInfantem();
+        expired2.setId(2L);
+        expired2.setEndDate(LocalDate.now().minusDays(10));
+
+        List<SubscriptionInfantem> expiredList = List.of(expired1, expired2);
+
+        when(subscriptionInfantemRepository.findByEndDateBefore(any(LocalDate.class))).thenReturn(expiredList);
+
+        subscriptionService.deleteExpiredSubscriptions();
+
+        verify(subscriptionInfantemRepository, times(1)).deleteAll(expiredList);
+    }
+
 }

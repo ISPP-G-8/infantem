@@ -7,7 +7,7 @@ export default function MarketItemComponent({ item }: { item: MarketItem }) {
   const { width } = useWindowDimensions();
 
   return (
-    <TouchableOpacity style={[gs.card, width < 500 ? { maxWidth: 400 } : null]}>
+    <TouchableOpacity style={[gs.card, { width: '80%', maxWidth: 768, marginHorizontal: 50 }]}>
       <View style={gs.row}>
       { item.imageUrl && (
         <View style={{ marginRight: 20 }}>
@@ -26,7 +26,7 @@ export default function MarketItemComponent({ item }: { item: MarketItem }) {
           <Text style={gs.cardTitle} numberOfLines={1}>{item.title}</Text>
           <Text style={gs.cardContent} numberOfLines={2}>{item.description}</Text>
           <TouchableOpacity 
-            style={[gs.mainButton, {marginTop: 10}]} 
+            style={[gs.mainButton, {marginTop: 10, width: '50%', marginHorizontal: 'auto'}]} 
             onPress={() => Linking.openURL(item.shopUrl)}
           >
             <Text style={{ color: 'white', fontWeight: 'bold' }}>Comprar</Text>
