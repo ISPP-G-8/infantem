@@ -134,7 +134,12 @@ INSERT INTO recipe_allergen(allergen_id,recipe_id) VALUES
 (2,2),
 (3,3),
 (4,4),
-(5,5);
+(5,5),
+(6,13),
+(1,15), (2,15),
+(2,17),
+(2,18),
+(2,19);
 
 
 -- Inserción de síntomas relacionados con las ingestas

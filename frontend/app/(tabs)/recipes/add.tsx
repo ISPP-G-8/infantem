@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Text,
   View,
@@ -13,6 +13,8 @@ import * as ImagePicker from "expo-image-picker";
 import UploadImageModal from "../../../components/UploadImageModal";
 import { Recipe } from "../../../types";
 import { set } from "date-fns";
+import CheckBox from "expo-checkbox";
+
 
 export default function AddBaby() {
   const gs = require("../../../static/styles/globalStyles");
@@ -50,9 +52,41 @@ export default function AddBaby() {
 
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
+  const [availableAllergens, setAvailableAllergens] = useState<any[]>([]);
+  const [selectedAllergens, setSelectedAllergens] = useState<number[]>([]);
+
+  useEffect(() => {
+    const fetchAllergens = async () => {
+      try {
+        const response = await fetch(`${apiUrl}/api/v1/allergens`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const data = await response.json();
+        if (Array.isArray(data)) {
+          setAvailableAllergens(data);
+        } else {
+          console.warn("La respuesta no es un array:", data);
+          setAvailableAllergens([]);
+        }
+      } catch (error) {
+        console.error("Error al cargar los alérgenos:", error);
+        setAvailableAllergens([]);
+      }
+    };
+
+    if (token) {
+      fetchAllergens();
+    }
+  }, [token]);
+
   const validateForm = () => {
     let isValid = true;
-  
+
     setNameError(null);
     setIngredientsError(null);
     setMinAgeError(null);
@@ -91,7 +125,7 @@ export default function AddBaby() {
       setMinAgeError("La edad mínima no puede ser mayor que la edad máxima.");
       isValid = false;
     }
-  
+
     return isValid;
   };
 
@@ -99,8 +133,8 @@ export default function AddBaby() {
     if (!validateForm()) return;
 
     const url = requestUserId && requestId && user?.role === 'nutritionist'
-      ?`${apiUrl}/api/v1/recipes/custom`
-      :`${apiUrl}/api/v1/recipes`
+      ? `${apiUrl}/api/v1/recipes/custom`
+      : `${apiUrl}/api/v1/recipes`
 
     if (token) {
       try {
@@ -111,21 +145,23 @@ export default function AddBaby() {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-              name: recipe.name,
-              description: recipe.description,
-              ingredients: recipe.ingredients,
-              minRecommendedAge: recipe.minRecommendedAge,
-              maxRecommendedAge: recipe.maxRecommendedAge,
-              elaboration: recipe.elaboration,
-              ...(requestId && requestUserId ? { requestId: requestId, user: requestUserId } : {}),
-            }),
+            name: recipe.name,
+            description: recipe.description,
+            ingredients: recipe.ingredients,
+            minRecommendedAge: recipe.minRecommendedAge,
+            maxRecommendedAge: recipe.maxRecommendedAge,
+            elaboration: recipe.elaboration,
+            allergens: selectedAllergens,
+            ...(requestId && requestUserId ? { requestId: requestId, user: requestUserId } : {}),
+          }),
         });
-    
+
         if (response.ok) {
           const data = await response.json();
+          console.log("Receta creada:", data);
           if (image) {
             await uploadRecipePhoto(data.id);
-          } 
+          }
 
           router.push("/recipes");
         } else {
@@ -395,7 +431,7 @@ export default function AddBaby() {
             value={recipe.description}
             onChangeText={(text) => setRecipe({ ...recipe, description: text })}
           />
-  
+
           <TextInput
             style={[
               gs.input,
@@ -483,6 +519,74 @@ export default function AddBaby() {
             onChangeText={(text) => setRecipe({ ...recipe, elaboration: text })}
             multiline
           />
+
+
+
+          <View style={{ width: "100%", alignItems: "center", marginTop: 20 }}>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "bold",
+                color: "#1565C0",
+                marginBottom: 16,
+              }}
+            >
+              Selecciona los alérgenos
+            </Text>
+
+            <View style={{ width: "90%" }}>
+              {availableAllergens.length > 0 ? (
+                availableAllergens.map((allergen: any) => (
+                  <TouchableOpacity
+                    key={allergen.id}
+                    onPress={() => {
+                      const isSelected = selectedAllergens.includes(allergen.id);
+                      if (isSelected) {
+                        setSelectedAllergens((prev) =>
+                          prev.filter((id) => id !== allergen.id)
+                        );
+                      } else {
+                        setSelectedAllergens((prev) => [...prev, allergen.id]);
+                      }
+                    }}
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      marginBottom: 12,
+                      backgroundColor: "#fff",
+                      padding: 14,
+                      borderRadius: 10,
+                      borderColor: "#ccc",
+                      borderWidth: 1,
+                      shadowColor: "#000",
+                      shadowOpacity: 0.05,
+                      shadowRadius: 4,
+                      elevation: 1,
+                    }}
+                  >
+                    <CheckBox
+                      value={selectedAllergens.includes(allergen.id)}
+                      onValueChange={() => {
+                        const isSelected = selectedAllergens.includes(allergen.id);
+                        if (isSelected) {
+                          setSelectedAllergens((prev) =>
+                            prev.filter((id) => id !== allergen.id)
+                          );
+                        } else {
+                          setSelectedAllergens((prev) => [...prev, allergen.id]);
+                        }
+                      }}
+                      tintColors={{ true: "#1565C0", false: "#ccc" }}
+                    />
+                    <Text style={{ marginLeft: 12, fontSize: 16 }}>{allergen.name}</Text>
+                  </TouchableOpacity>
+                ))
+              ) : (
+                <Text style={{ color: "gray" }}>Cargando alérgenos...</Text>
+              )}
+            </View>
+          </View>
+
 
           <TouchableOpacity
             style={[gs.mainButton, { alignSelf: "center", marginTop: 10 }]}

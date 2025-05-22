@@ -9,4 +9,5 @@ export type Recipe = {
   maxRecommendedAge: number | null;
   ingredients: string;
   elaboration: string;
+  allergens?: {id: number; name: string}[];
 };

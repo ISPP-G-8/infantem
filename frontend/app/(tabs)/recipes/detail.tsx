@@ -5,6 +5,7 @@ import { useAuth } from "../../../context/AuthContext";
 import { Recipe } from "../../../types";
 import UploadImageModal from "../../../components/UploadImageModal";
 import * as ImagePicker from "expo-image-picker";
+import CheckBox from "react-native-check-box";
 // import validateForm from './add';
 
 export default function RecipeDetails() {
@@ -26,13 +27,30 @@ export default function RecipeDetails() {
   const [imageBase64, setImageBase64] = useState<any>(null);
   const [imageModalVisible, setImageModalVisible] = useState(false);
 
+  const [allAllergens, setAllAllergens] = useState<{ id: number, name: string }[]>([]);
+
   const gs = require('../../../static/styles/globalStyles');
 
   const { token, user } = useAuth();
 
   useEffect(() => {
     obtainRecipe();
+    fetchAllAllergens();
   }, []);
+
+  const fetchAllAllergens = async () => {
+    try {
+      const response = await fetch(`${apiUrl}/api/v1/allergens`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setAllAllergens(data);
+      }
+    } catch (error) {
+      console.error('Error fetching allergens:', error);
+    }
+  };
 
   const validateForm = () => {
     let isValid = true;
@@ -118,7 +136,8 @@ export default function RecipeDetails() {
           maxRecommendedAge: recipeData.maxRecommendedAge,
           ingredients: recipeData.ingredients,
           elaboration: recipeData.elaboration,
-          recipePhoto: recipeData.recipePhoto, // <-- AQUÍ
+          recipePhoto: recipeData.recipePhoto,
+          allergens: recipeData.allergens || [],
         };
         setRecipe(recipeObject);
         handleOwnership(recipeObject);
@@ -145,7 +164,7 @@ export default function RecipeDetails() {
     if (!validateForm()) return;
 
     console.log("Estado recipe antes de handleSaveChanges:", recipe);
-  
+
     await fetch(`${apiUrl}/api/v1/recipes/${recipeId}`, {
       method: "PUT",
       headers: {
@@ -154,25 +173,25 @@ export default function RecipeDetails() {
       },
       body: JSON.stringify(recipe)
     })
-    .then(response => {
-      if (!response.ok) {
-        return response.json().then(err => { throw new Error(JSON.stringify(err)); });
-      }
-      return response.json();
-    })
-    .then(data => {
-      setIsEditing(false);
-      setRecipe(data);
-      // Si el backend devuelve la imagen actualizada, podrías querer actualizar imageBase64 aquí también
-      if (data.recipePhoto) {
-        processRecipePhoto(data.recipePhoto);
-      }
-      Alert.alert("Receta actualizada", "Los cambios han sido guardados correctamente");
-      router.push(`/recipes/detail?recipeId=${recipe.id}`);
-    })
-    .catch(error => {
-      Alert.alert("Error", `No se pudo guardar los cambios: ${error.message}`);
-    });
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(err => { throw new Error(JSON.stringify(err)); });
+        }
+        return response.json();
+      })
+      .then(data => {
+        setIsEditing(false);
+        setRecipe(data);
+        // Si el backend devuelve la imagen actualizada, podrías querer actualizar imageBase64 aquí también
+        if (data.recipePhoto) {
+          processRecipePhoto(data.recipePhoto);
+        }
+        Alert.alert("Receta actualizada", "Los cambios han sido guardados correctamente");
+        router.push(`/recipes/detail?recipeId=${recipe.id}`);
+      })
+      .catch(error => {
+        Alert.alert("Error", `No se pudo guardar los cambios: ${error.message}`);
+      });
   };
 
   const handleDeleteRecipe = async () => {
@@ -198,88 +217,88 @@ export default function RecipeDetails() {
 
   const uploadImage = async (action: string) => {
     if (action === "load") {
-        try {
-            // Pedir permisos (sin cambios)
-            const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-            if (!permissionResult.granted) {
-                alert("Permiso denegado para acceder a la galería.");
-                return;
-            }
-
-            // Lanzar librería (sin cambios en opciones base)
-            const result = await ImagePicker.launchImageLibraryAsync({
-                mediaTypes: ImagePicker.MediaTypeOptions.Images,
-                allowsEditing: true,
-                aspect: [1, 1],
-                quality: 1, // Calidad 1 puede generar base64 muy grandes, considera 0.7 o similar
-                base64: true, // Necesario para obtener base64
-            });
-
-            if (!result.canceled && result.assets && result.assets.length > 0) {
-                const asset = result.assets[0];
-
-                // ImagePicker con base64: true a menudo ya devuelve un data URI en asset.uri
-                // Si no, lo construimos nosotros usando el base64 que pedimos.
-                let displayUri: string | null = null;
-
-                if (asset.uri) {
-                     // Si ya es un data URI, úsalo directamente
-                     if (asset.uri.startsWith('data:')) {
-                         displayUri = asset.uri;
-                     }
-                     // Si no es data URI pero TENEMOS base64, constrúyelo
-                     else if (asset.base64) {
-                         const mimeType = asset.mimeType || 'image/jpeg'; // Intenta obtener MimeType o usa default
-                         displayUri = `data:<span class="math-inline">\{mimeType\};base64,</span>{asset.base64}`;
-                     }
-                }
-                // Fallback: Si no hay URI pero sí base64, constrúyelo
-                else if (asset.base64) {
-                     const mimeType = asset.mimeType || 'image/jpeg';
-                     displayUri = `data:<span class="math-inline">\{mimeType\};base64,</span>{asset.base64}`;
-                }
-
-
-                if (displayUri) {
-                    // Llama a saveImage SOLO con el URI (que contiene el base64)
-                    saveImage(displayUri);
-                } else {
-                    console.error("Image picker no devolvió datos utilizables (URI o Base64).");
-                    alert("No se pudo obtener la imagen seleccionada.");
-                    setImageModalVisible(false);
-                }
-
-            } else {
-                // Usuario canceló o no hubo assets
-                console.log("Selección de imagen cancelada o sin assets.");
-                // No cierres el modal aquí si el usuario solo canceló,
-                // déjalo abierto por si quiere intentar de nuevo o eliminar.
-                // setImageModalVisible(false); <-- quitar si quieres que modal siga abierto
-            }
-        } catch (err) {
-            // Manejo de errores (sin cambios)
-             if (err instanceof Error) {
-                 alert("Error al abrir la galería: " + err.message);
-             } else {
-                 alert("Error desconocido al abrir la galería.");
-             }
-             setImageModalVisible(false); // Cierra el modal en caso de error
+      try {
+        // Pedir permisos (sin cambios)
+        const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (!permissionResult.granted) {
+          alert("Permiso denegado para acceder a la galería.");
+          return;
         }
+
+        // Lanzar librería (sin cambios en opciones base)
+        const result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
+          allowsEditing: true,
+          aspect: [1, 1],
+          quality: 1, // Calidad 1 puede generar base64 muy grandes, considera 0.7 o similar
+          base64: true, // Necesario para obtener base64
+        });
+
+        if (!result.canceled && result.assets && result.assets.length > 0) {
+          const asset = result.assets[0];
+
+          // ImagePicker con base64: true a menudo ya devuelve un data URI en asset.uri
+          // Si no, lo construimos nosotros usando el base64 que pedimos.
+          let displayUri: string | null = null;
+
+          if (asset.uri) {
+            // Si ya es un data URI, úsalo directamente
+            if (asset.uri.startsWith('data:')) {
+              displayUri = asset.uri;
+            }
+            // Si no es data URI pero TENEMOS base64, constrúyelo
+            else if (asset.base64) {
+              const mimeType = asset.mimeType || 'image/jpeg'; // Intenta obtener MimeType o usa default
+              displayUri = `data:<span class="math-inline">\{mimeType\};base64,</span>{asset.base64}`;
+            }
+          }
+          // Fallback: Si no hay URI pero sí base64, constrúyelo
+          else if (asset.base64) {
+            const mimeType = asset.mimeType || 'image/jpeg';
+            displayUri = `data:<span class="math-inline">\{mimeType\};base64,</span>{asset.base64}`;
+          }
+
+
+          if (displayUri) {
+            // Llama a saveImage SOLO con el URI (que contiene el base64)
+            saveImage(displayUri);
+          } else {
+            console.error("Image picker no devolvió datos utilizables (URI o Base64).");
+            alert("No se pudo obtener la imagen seleccionada.");
+            setImageModalVisible(false);
+          }
+
+        } else {
+          // Usuario canceló o no hubo assets
+          console.log("Selección de imagen cancelada o sin assets.");
+          // No cierres el modal aquí si el usuario solo canceló,
+          // déjalo abierto por si quiere intentar de nuevo o eliminar.
+          // setImageModalVisible(false); <-- quitar si quieres que modal siga abierto
+        }
+      } catch (err) {
+        // Manejo de errores (sin cambios)
+        if (err instanceof Error) {
+          alert("Error al abrir la galería: " + err.message);
+        } else {
+          alert("Error desconocido al abrir la galería.");
+        }
+        setImageModalVisible(false); // Cierra el modal en caso de error
+      }
     } else if (action === "delete") {
-        try {
-            // Llama a saveImage con null para borrar
-            saveImage(null);
-        } catch (err) {
-             // Manejo de errores (sin cambios)
-            if (err instanceof Error) {
-                alert("Error al eliminar la imagen: " + err.message);
-            } else {
-                alert("Error desconocido al eliminar la imagen.");
-            }
-            setImageModalVisible(false); // Cierra el modal en caso de error
+      try {
+        // Llama a saveImage con null para borrar
+        saveImage(null);
+      } catch (err) {
+        // Manejo de errores (sin cambios)
+        if (err instanceof Error) {
+          alert("Error al eliminar la imagen: " + err.message);
+        } else {
+          alert("Error desconocido al eliminar la imagen.");
         }
+        setImageModalVisible(false); // Cierra el modal en caso de error
+      }
     }
-};
+  };
 
 
   // Simplificado: solo necesita el URI para mostrar (que contiene el base64)
@@ -322,7 +341,7 @@ export default function RecipeDetails() {
       setImageBase64(null);
     }
   };
-  
+
 
   return (
     <View style={{ flex: 1, backgroundColor: "#E3F2FD" }}>
@@ -404,6 +423,19 @@ export default function RecipeDetails() {
                     ? ` a ${recipe.maxRecommendedAge} meses`
                     : ""}
                 </Text>
+
+                {recipe.allergens && recipe.allergens.length > 0 && (
+                  <View style={{ marginTop: 20 }}>
+                    <Text style={{ fontSize: 16, fontWeight: "bold", color: "#1565C0", marginBottom: 6 }}>
+                      Alérgenos:
+                    </Text>
+                    {recipe.allergens.map((allergen) => (
+                      <Text key={allergen.id} style={{ color: "#1565C0" }}>
+                        • {allergen.name}
+                      </Text>
+                    ))}
+                  </View>
+                )}
               </View>
             </>
           }
@@ -580,10 +612,73 @@ export default function RecipeDetails() {
                 onChangeText={(text) => setRecipe({ ...recipe, elaboration: text })}
                 multiline
               />
+              <Text style={[gs.inputLabel, { width: "90%", color: "#1565C0", fontWeight: "bold", marginTop: 16 }]}>
+      Selecciona los alérgenos
+    </Text>
+    <View style={{ width: "90%" }}>
+      {allAllergens.length > 0 ? (
+        allAllergens.map((allergen: any) => {
+          const isSelected = recipe.allergens.some((a: any) => a.id === allergen.id);
+          return (
+            <TouchableOpacity
+              key={allergen.id}
+              onPress={() => {
+                if (isSelected) {
+                  setRecipe({
+                    ...recipe,
+                    allergens: recipe.allergens.filter((a: any) => a.id !== allergen.id),
+                  });
+                } else {
+                  setRecipe({
+                    ...recipe,
+                    allergens: [...recipe.allergens, allergen],
+                  });
+                }
+              }}
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginBottom: 12,
+                backgroundColor: "#fff",
+                padding: 14,
+                borderRadius: 10,
+                borderColor: "#ccc",
+                borderWidth: 1,
+                shadowColor: "#000",
+                shadowOpacity: 0.05,
+                shadowRadius: 4,
+                elevation: 1,
+              }}
+            >
+              <CheckBox
+                isChecked={isSelected}
+                onClick={() => {
+                  if (isSelected) {
+                    setRecipe({
+                      ...recipe,
+                      allergens: recipe.allergens.filter((a: any) => a.id !== allergen.id),
+                    });
+                  } else {
+                    setRecipe({
+                      ...recipe,
+                      allergens: [...recipe.allergens, allergen],
+                    });
+                  }
+                }}
+                checkBoxColor={isSelected ? "#1565C0" : "#ccc"}
+              />
+              <Text style={{ marginLeft: 12, fontSize: 16 }}>{allergen.name}</Text>
+            </TouchableOpacity>
+          );
+        })
+      ) : (
+        <Text style={{ color: "gray" }}>Cargando alérgenos...</Text>
+      )}
+    </View>
             </View>
           }
 
-          <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: 10, marginTop: 10}}>
+          <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: 10, marginTop: 10 }}>
             {/* Botones de acción */}
             {(isOwned && !isEditing && !recipe.isCustom) && (
               <TouchableOpacity
