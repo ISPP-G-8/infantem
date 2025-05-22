@@ -2,7 +2,6 @@ package com.isppG8.infantem.infantem.metric;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.isppG8.infantem.infantem.InfantemApplication;
 import com.isppG8.infantem.infantem.baby.Baby;
 import com.isppG8.infantem.infantem.baby.BabyService;
 import com.isppG8.infantem.infantem.exceptions.ResourceNotFoundException;
@@ -19,19 +18,15 @@ import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
-@SpringBootTest(classes = { InfantemApplication.class, MetricServiceTest.class, MetricServiceTest.TestConfig.class })
+@SpringBootTest
 @ActiveProfiles("test")
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) // Use the configured test database
 @Transactional
-@Import(MetricServiceTest.TestConfig.class)
 public class MetricServiceTest {
 
     @TestConfiguration
