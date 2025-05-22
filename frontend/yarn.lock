@@ -2414,6 +2414,7 @@ anymatch@^3.0.3, anymatch@~3.1.2:
     date-fns "^4.1.0"
     eslint-plugin-import "^2.31.0"
     expo "~52.0.31"
+    expo-checkbox "^4.1.4"
     expo-constants "~17.0.7"
     expo-image-picker "~16.0.6"
     expo-linking "~7.0.5"
@@ -3845,6 +3846,11 @@ expo-asset@~11.0.3:
     invariant "^2.2.4"
     md5-file "^3.2.3"
 
+expo-checkbox@^4.1.4:
+  version "4.1.4"
+  resolved "https://registry.npmjs.org/expo-checkbox/-/expo-checkbox-4.1.4.tgz"
+  integrity sha512-sahBTVble5/6EnHgLyGvX6fAytkZ7vmllHUbX5ko1kTQ59qTdiVmCznxqaT5DNWfxRZ0gdQVlao46dGQ3hbmeQ==
+
 expo-constants@*, expo-constants@~17.0.5, expo-constants@~17.0.7:
   version "17.0.7"
   resolved "https://registry.npmjs.org/expo-constants/-/expo-constants-17.0.7.tgz"
@@ -4195,6 +4201,7 @@ fresh@0.5.2:
     date-fns "^4.1.0"
     eslint-plugin-import "^2.31.0"
     expo "~52.0.31"
+    expo-checkbox "^4.1.4"
     expo-constants "~17.0.7"
     expo-image-picker "~16.0.6"
     expo-linking "~7.0.5"
@@ -6514,7 +6521,7 @@ react-native-swipe-gestures@^1.0.5:
   resolved "https://registry.npmjs.org/react-native-swipe-gestures/-/react-native-swipe-gestures-1.0.5.tgz"
   integrity sha512-Ns7Bn9H/Tyw278+5SQx9oAblDZ7JixyzeOczcBK8dipQk2pD7Djkcfnf1nB/8RErAmMLL9iXgW0QHqiII8AhKw==
 
-react-native-web@~0.19.13:
+react-native-web@*, react-native-web@~0.19.13:
   version "0.19.13"
   resolved "https://registry.npmjs.org/react-native-web/-/react-native-web-0.19.13.tgz"
   integrity sha512-etv3bN8rJglrRCp/uL4p7l8QvUNUC++QwDbdZ8CB7BvZiMvsxfFIRM1j04vxNldG3uo2puRd6OSWR3ibtmc29A==

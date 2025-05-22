@@ -48,6 +48,27 @@ export default function requests() {
     fetchRequests();
   }, [page]);
 
+  const handleDelete = async (id: number): Promise<boolean> => {
+      try {
+        const response = await fetch(`${apiUrl}/api/v1/recipes/custom-requests/${id}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) 
+          throw new Error("Error deleting the request");
+
+        setRequests(requests.filter((req) => req.id !== id));
+        return true;
+
+      } catch (error) {
+        console.error('Error deleting the request', error);
+        return false;
+      }
+    };
+    
   return (
     <View style={gs.container}>
       <Text style={{ color: "#1565C0", fontSize: 36, fontWeight: "bold", textAlign: "center", marginBottom: 10 }}>Solicitudes de recetas</Text>
@@ -60,8 +81,8 @@ export default function requests() {
       )}
 
       <ScrollView style={{maxWidth:600}}>
-        {requests.map((req, index) => (
-          <RequestComponent key={index} req={req} nutritionist={user?.role==='nutritionist'}/>
+        {requests.map((req) => (
+          <RequestComponent key={req.id} req={req} nutritionist={user?.role==='nutritionist'} handleDelete={() => handleDelete(req.id)}/>
         ))}
       </ScrollView>
 

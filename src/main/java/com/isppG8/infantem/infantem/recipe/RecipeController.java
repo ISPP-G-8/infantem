@@ -1,6 +1,8 @@
 package com.isppG8.infantem.infantem.recipe;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +29,7 @@ import com.isppG8.infantem.infantem.auth.payload.response.MessageResponse;
 import com.isppG8.infantem.infantem.recipe.dto.CustomRecipeDTO;
 import com.isppG8.infantem.infantem.recipe.dto.CustomRecipeRequestCreateDTO;
 import com.isppG8.infantem.infantem.recipe.dto.CustomRecipeRequestDTO;
+import com.isppG8.infantem.infantem.recipe.dto.RecipeCreateDTO;
 import com.isppG8.infantem.infantem.recipe.dto.RecipeDTO;
 import com.isppG8.infantem.infantem.user.User;
 import com.isppG8.infantem.infantem.user.UserService;
@@ -191,7 +194,7 @@ public class RecipeController {
             responseCode = "201", description = "Receta creada con éxito",
             content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = Recipe.class))) @PostMapping
-    public ResponseEntity<Recipe> createRecipe(@Valid @RequestBody Recipe recipe) {
+    public ResponseEntity<Recipe> createRecipe(@Valid @RequestBody RecipeCreateDTO recipe) {
         Recipe createdRecipe = recipeService.createRecipe(recipe);
         return ResponseEntity.status(201).body(createdRecipe);
     }
@@ -210,12 +213,18 @@ public class RecipeController {
             description = "Actualiza los detalles de una receta existente.") @ApiResponse(responseCode = "200",
                     description = "Receta actualizada con éxito", content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Recipe.class))) @PutMapping("/{id}")
-    public ResponseEntity<Recipe> updateRecipe(@PathVariable Long id, @Valid @RequestBody RecipeDTO recipeDetails) {
-        User user = userService.findCurrentUser();
-        Recipe recipe = recipeService.getRecipeById(id);
-        // recipeDetails.setRecipePhoto(recipe.getRecipePhoto()); // <-- ELIMINA ESTA LÍNEA
-        Recipe updatedRecipe = recipeService.updateRecipe(id, recipeDetails, user.getId());
-        return ResponseEntity.ok(updatedRecipe);
+    public ResponseEntity<?> updateRecipe(@PathVariable Long id, @Valid @RequestBody RecipeDTO recipeDetails) {
+        try {
+            User user = userService.findCurrentUser();
+            Recipe recipe = recipeService.getRecipeById(id);
+            Recipe updatedRecipe = recipeService.updateRecipe(id, recipeDetails, user.getId());
+            return ResponseEntity.ok(updatedRecipe);
+        } catch (Exception e) {
+            e.printStackTrace();
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            return ResponseEntity.badRequest().body(sw.toString());
+        }
     }
 
     @Operation(summary = "Actualizar la foto de perfil de un usuario",
