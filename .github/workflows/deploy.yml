@@ -28,7 +28,7 @@ jobs:
           cd frontend
           npm install
           echo "EXPO_PUBLIC_STRIPE_API_KEY=${{ secrets.EXPO_PUBLIC_STRIPE_API_KEY }}" >> .env
-          echo "EXPO_PUBLIC_API_URL=https://infantem-ppl.ew.r.appspot.com" >> .env
+          echo "EXPO_PUBLIC_API_URL=https://infantem-wpl.ew.r.appspot.com" >> .env
           npx expo export -p web
 
       - name: Set backend env variables
