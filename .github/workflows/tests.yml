@@ -1,21 +1,17 @@
 name: Run Tests
-
 on:
   push:
     branches:
       - "main"
       - "develop"
-      - "**"
   pull_request:
     branches:
       - "main"
-
+      - "develop"
 jobs:
   test-backend:
     name: Test Backend
-
     runs-on: ubuntu-latest
-
     services:
       mysql:
         image: mysql:8
@@ -31,13 +27,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
           distribution: 'adopt'
           java-version: 21
-
       - name: Create .env file
         run: |
           echo "SPRING_PROFILES_ACTIVE=test" >> .env
@@ -45,7 +39,6 @@ jobs:
           echo "STRIPE_API_KEY=${{ secrets.STRIPE_API_KEY }}" >> .env
           echo "STRIPE_WEBHOOK_SECRET=${{ secrets.STRIPE_WEBHOOK_SECRET }}" >> .env
           echo "EXPO_PUBLIC_STRIPE_API_KEY=${{ secrets.EXPO_PUBLIC_STRIPE_API_KEY }}" >> .env
-
       - name: Wait for MySQL
         run: |
           for i in {1..30}; do
@@ -56,25 +49,20 @@ jobs:
             echo "Waiting for MySQL..."
             sleep 2
           done
-
       - name: Run backend tests
         run: mvn clean test -Dspring.profiles.active=test
 
   test-frontend:
     name: Test Frontend
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-
       - name: Install dependencies
         run: cd frontend && npm install
-
       #- name: Run frontend tests
        # run: cd frontend && npm test
