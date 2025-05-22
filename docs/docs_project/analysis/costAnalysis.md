@@ -45,6 +45,7 @@
 - Josué Rodríguez López
   - Primera versión del documento
   - Revisión de costes del PPL
+  - Revisión de costes del WPL
 - Luis Giraldo
   - Actualizó el documento al sprint 3
 - Paula Luna Navarro
@@ -628,31 +629,31 @@ Ingresos del marketplace: 16.917,00 €
 
 
 | Trimestre | Caso       | Premium (€) | Publicidad (€) | Marketplace (€) | Total Trimestre (€) | Acumulado (€) |
-|-----------|------------|-------------|----------------|------------------|----------------------|----------------|
-| T2        | Pesimista  | 600         | 1.572          | 2.025            | 4.197                | 4.197          |
-|           | Realista   | 1.002       | 4.618          | 2.025            | 7.645                | 7.645          |
-|           | Optimista  | 1.617       | 10.432         | 2.025            | 14.074               | 14.074         |
-| T3        | Pesimista  | 1.209       | 3.134          | 4.038            | 8.381                | 12.578         |
-|           | Realista   | 2.013       | 9.208          | 4.038            | 15.259               | 22.904         |
-|           | Optimista  | 3.222       | 20.806         | 4.038            | 28.066               | 42.140         |
-| T4        | Pesimista  | 1.809       | 4.692          | 6.045            | 12.546               | 25.124         |
-|           | Realista   | 3.015       | 13.784         | 6.045            | 22.844               | 45.748         |
-|           | Optimista  | 4.824       | 31.146         | 6.045            | 42.015               | 84.155         |
-| T5        | Pesimista  | 2.421       | 12.554         | 8.088            | 23.063               | 48.187         |
-|           | Realista   | 4.035       | 30.738         | 8.088            | 42.861               | 88.609         |
-|           | Optimista  | 6.456       | 71.438         | 8.088            | 86.982               | 171.137        |
-| T6        | Pesimista  | 8.292       | 7.645          | 10.387,50        | 26.324,50            | 74.511,50      |
-|           | Realista   | 12.440      | 36.564         | 10.387,50        | 59.391,50            | 148.000,50     |
-|           | Optimista  | 15.550      | 91.742         | 10.387,50        | 117.679,50           | 288.816,50     |
-| T7        | Pesimista  | 10.482      | 28.998         | 13.132,50        | 52.612,50            | 127.124        |
-|           | Realista   | 15.727      | 64.722         | 13.132,50        | 93.581,50            | 241.582        |
-|           | Optimista  | 19.659      | 133.956        | 13.132,50        | 226.747,50           | 515.564        |
-| T8        | Pesimista  | 13.137      | 36.334         | 16.455           | 65.926               | 193.050        |
-|           | Realista   | 10.706      | 81.092         | 16.455           | 108.253              | 349.835        |
-|           | Optimista  | 24.633      | 167.850        | 16.455           | 208.938              | 724.502        |
-| T9        | Pesimista  | 13.506      | 37.352         | 16.917           | 67.775               | 260.825        |
-|           | Realista   | 20.259      | 83.370         | 16.917           | 120.546              | 470.381        |
-|           | Optimista  | 25.324      | 172.566        | 16.917           | 214.807              | 939.309        |
+|-----------|------------|-------------|----------------|------------------|--------------------|----------------|
+| T2        | Pesimista  | 600         | 1.572          | 2.025            | 4.197              | 4.197          |
+|           | Realista   | 1.002       | 4.618          | 2.025            | 7.645              | 7.645          |
+|           | Optimista  | 1.617       | 10.432         | 2.025            | 14.074             | 14.074         |
+| T3        | Pesimista  | 1.209       | 3.134          | 4.038            | 8.381              | 12.578         |
+|           | Realista   | 2.013       | 9.208          | 4.038            | 15.259             | 22.904         |
+|           | Optimista  | 3.222       | 20.806         | 4.038            | 28.066             | 42.140         |
+| T4        | Pesimista  | 1.809       | 4.692          | 6.045            | 12.546             | 25.124         |
+|           | Realista   | 3.015       | 13.784         | 6.045            | 22.844             | 45.748         |
+|           | Optimista  | 4.824       | 31.146         | 6.045            | 42.015             | 84.155         |
+| T5        | Pesimista  | 2.421       | 12.554         | 8.088            | 23.063             | 48.187         |
+|           | Realista   | 4.035       | 30.738         | 8.088            | 42.861             | 88.609         |
+|           | Optimista  | 6.456       | 71.438         | 8.088            | 86.982             | 171.137        |
+| T6        | Pesimista  | 8.292       | 7.645          | 10.387,50        | 26.324,50          | 74.511,50      |
+|           | Realista   | 12.440      | 36.564         | 10.387,50        | 59.391,50          | 148.000,50     |
+|           | Optimista  | 15.550      | 91.742         | 10.387,50        | 117.679,50         | 288.816,50     |
+| T7        | Pesimista  | 10.482      | 28.998         | 13.132,50        | 52.612,50          | 127.124        |
+|           | Realista   | 15.727      | 64.722         | 13.132,50        | 93.581,50          | 241.582        |
+|           | Optimista  | 19.659      | 133.956        | 13.132,50        | 226.747,50         | 515.564        |
+| T8        | Pesimista  | 13.137      | 36.334         | 16.455           | 65.926             | 193.050        |
+|           | Realista   | 10.706      | 81.092         | 16.455           | 108.253            | 349.835        |
+|           | Optimista  | 24.633      | 167.850        | 16.455           | 208.938            | 724.502        |
+| T9        | Pesimista  | 13.506      | 37.352         | 16.917           | 67.775             | 260.825        |
+|           | Realista   | 20.259      | 83.370         | 16.917           | 120.546            | 470.381        |
+|           | Optimista  | 25.324      | 172.566        | 16.917           | 214.807            | 939.309        |
 
 ---
 
@@ -660,30 +661,24 @@ Ingresos del marketplace: 16.917,00 €
 ## 5. Tabla de Beneficios Totales.
 En esta tabla no se muestran los beneficios acumulados.
 
-| Periodo     | CAPEX (€) | OPEX (€)  | TOTAL Costes (€) | Ingresos Pesimista (€) | Ingresos Realista (€) | Ingresos Optimista (€) |Beneficio Pesimista (€) | Beneficio Realista (€) |
-|-------------------|-----------|-----------|-------------------|-------------------------|------------------------|---------------|--------------------------|----------------------|
-| Trimestre 1 | 49.843,01 | 7.199,15  |  57904,55  |     0     |  0         |   0        | -57.904,55    | -57.904,55  |
-| Trimestre 2 |  0        | 25.879,30 | 25.879,30  | 4.197     | 7.645      | 14.074     | -18.34.30     | -18.234,30  |
-| Trimestre 3 |  0        | 33.975,60 | 33.975,6   | 8.381     | 15.259     | 28.066     | -21.682,30    | -18.716,30  |
-| Trimestre 4 | 0         | 39.271,00 | 39.271,00  | 12.546    | 22.844     | 	42.015   | -25.594,60    | -16.427     |
-| Trimestre 5 | 0         | 47.368,49 | 47.368,49  | 23.063    | 42.861     | 86.982     |     | -4.507,49   | 
-| Trimestre 6 | 0         | 52.918,45 | 52.918,45  | 26.324,50 | 59.391,50  | 117.679,50 |     | 6473,05     |
-| Trimestre 7 | 0         | 61.022,78 | 61.022,78  | 52.612,50 | 93.581,50  | 226.747,50 |     | 32.558,72   |
-| Trimestre 8 | 0         | 66.432,23 | 66.432,23  | 65.926    | 108.253    | 208.938    |     | 41820,77    |
+| Periodo     | CAPEX (€) | OPEX (€)  | TOTAL Costes (€) | Ingresos Pesimista (€) | Ingresos Realista (€) | Ingresos Optimista (€) |Beneficio Pesimista (€) | Beneficio Realista (€) | Beneficio Optimista (€) | Beneficio Acumulado Pesimista (€) | Beneficio Acumulado Realista (€) | Beneficio Acumulado Optimista (€) |
+|-------------|-----------|-----------|------------|-----------|------------|------------|---------------|-------------|-------------|---------------|------------------|------------------|
+| Trimestre 1 | 49.843,01 | 7.199,15  |  57904,55  |     0     |  0         |   0        | -57.904,55    | -57.904,55  | -57.904,55  | -57.904,55    | -57.904,55       | -57.904,55       |
+| Trimestre 2 |  0        | 25.879,30 | 25.879,30  | 4.197     | 7.645      | 14.074     | -21.682,30    | -18.234,30  | -11.805,30  | -79.586,85    | -76.138,85       | -69.709,85       |
+| Trimestre 3 |  0        | 33.975,60 | 33.975,6   | 8.381     | 15.259     | 28.066     | -25.594,60    | -18.716,30  | -5.909,60   | -105.181,45   | -94.855,15       | -75.619,45       |
+| Trimestre 4 | 0         | 39.271,00 | 39.271     | 12.546    | 22.844     | 	42.015   | -26.725       | -16.427     | 2.744       | -131.906,45   | -111.282,15      | -72.604,45       |
+| Trimestre 5 | 0         | 47.368,49 | 47.368,49  | 23.063    | 42.861     | 86.982     | -24.305,49    | -4.507,49   | 39.613,51   |  -156.211,94  | -115.789,64      | -33.020,94       |
+| Trimestre 6 | 0         | 52.918,45 | 52.918,45  | 26.324,50 | 59.391,50  | 117.679,50 | -26.593,95    | 6473,05     | 64.761,05   | -182.805,89   | -109.316,59      | 31.740,11        |
+| Trimestre 7 | 0         | 61.022,78 | 61.022,78  | 52.612,50 | 93.581,50  | 226.747,50 | -8.410,28     | 32.558,72   | 165.724,72  | -191.216,17   | -76.734,87       | 197.464,83       |
+| Trimestre 8 | 0         | 66.432,23 | 66.432,23  | 65.926    | 108.253    | 208.938,00 | -506,23       | 41820,77    | 142.505,77  | -191722,40    | -34.914,10       | 339.970,60       |
 
 > Nota: Los ingresos post-lanzamiento provienen de tres canales: suscripciones Premium, publicidad segmentada y comisiones del Marketplace. Los costes incluyen infraestructura, soporte técnico, mantenimiento, diseño, expertos y marketing.
 ---
 
 
-## 6. Conclusión
-
-El proyecto **Infantem** ha demostrado ser económicamente **viable y escalable**, puesto que consigue un retorno de la invesión a partir del noveno trimestre. A pesar de una inversión significativa durante las primeras 15 semanas (CAPEX + OPEX de 88.730,38 €), sumado a grandes costes operativos en los primeros trimestres, el modelo de negocio se sostiene gracias a un crecimiento sostenido de la base de usuarios y una diversificación de ingresos.
-
-El enfoque de monetización múltiple —suscripciones, publicidad y marketplace— ofrece un modelo equilibrado y diversificado, donde el **marketplace se consolida como el motor principal de ingresos**. Este modelo permite una recuperación rápida de la inversión y abre la puerta a una **expansión sostenible** a medio y largo plazo.
-
 ---
 
-## 7. Análisis de Rentabilidad
+## 6. Análisis de Rentabilidad
 
 - **Punto de equilibrio**: Se alcanza en noveno trimestre (escenario realista).
 - **ROI al año**: A los 12 meses, el beneficio neto es de **-111.282,15 €**, por lo que la invesión no se sigue en pérdidas. Sin embargo, se ha recuperado la invesión inicial de desarrollo.
@@ -691,16 +686,73 @@ El enfoque de monetización múltiple —suscripciones, publicidad y marketplace
 
 ---
 
-## 8. Análisis de Resultados
+## 7. Análisis de Rentabilidad
 
-- **Fase Pre-Lanzamiento**: Requiere una inversión considerable para diseñar, construir y posicionar la app. Aunque no genera ingresos en esta fase, se asientan las bases de la rentabilidad futura.
-- **Semana 1 Post-Lanzamiento**: Ya se alcanza un beneficio neto positivo (**+966,46 €**), lo que valida el producto y su acogida en el mercado.
-- **6 Meses**: Se evidencia una consolidación del modelo con ingresos estables y aumento progresivo de usuarios Premium.
-- **1 Año**: El negocio sigue en pérdidas pero con un crecimiento sostenido, recuperando la inversión inicial de desarrollo.
-- **2 Años**: Se alcanza una **madurez de mercado**, con ingresos estables y un retorno de la inversión a partir del noveno trimestre. 
+El análisis de rentabilidad del proyecto Infantem se evalúa considerando el punto de equilibrio y el retorno de la inversión (ROI) o beneficio acumulado en diferentes horizontes temporales, basándose en los tres escenarios proyectados (pesimista, realista y optimista) y tomando como referencia la "Tabla de Beneficios Totales". La inversión inicial a recuperar corresponde a los costes totales del Trimestre 1 (57.904,55 €).
+
+* **Punto de Equilibrio (Payback Period):** Momento en el que el Beneficio Acumulado se vuelve positivo.
+    * **Escenario Pesimista:** Dentro de los 8 trimestres analizados, el proyecto no alcanza el punto de equilibrio. Al finalizar el Trimestre 8, el beneficio acumulado es de **-191.722,40 €**, lo que indica que la inversión no se recupera y las pérdidas continúan aumentando.
+    * **Escenario Realista:** Según la información proporcionada y la tendencia de los beneficios, se proyecta que el punto de equilibrio se alcance durante el **noveno trimestre**. Al cierre del Trimestre 8, el beneficio acumulado es de **-34.914,10 €**, mostrando una clara progresión hacia la recuperación de la inversión.
+    * **Escenario Optimista:** El proyecto alcanza el punto de equilibrio durante el **sexto trimestre**. El beneficio acumulado pasa de -33.020,94 € en el Trimestre 5 a **+31.740,11 €** en el Trimestre 6.
+
+* **Beneficio Acumulado al Final del Primer Año (cierre del Trimestre 4):**
+    * **Escenario Pesimista:** Beneficio Acumulado de **-131.906,45 €**.
+    * **Escenario Realista:** Beneficio Acumulado de **-111.282,15 €**.
+    * **Escenario Optimista:** Beneficio Acumulado de **-72.604,45 €**.
+    * En los tres escenarios, después de un año desde el inicio del proyecto (incluyendo el trimestre de desarrollo), la inversión inicial no se ha recuperado y el proyecto presenta pérdidas acumuladas.
+
+* **Beneficio Acumulado al Final del Segundo Año (cierre del Trimestre 8):**
+    * **Escenario Pesimista:** Beneficio Acumulado de **-191.722,40 €**.
+    * **Escenario Realista:** Beneficio Acumulado de **-34.914,10 €**. El proyecto está muy cerca de recuperar la inversión.
+    * **Escenario Optimista:** Beneficio Acumulado de **+339.970,60 €**. En este escenario, el proyecto no solo ha recuperado la inversión, sino que genera un retorno positivo considerable.
+
 
 ---
 
-### 10. Conclusión final
+## 8. Análisis de Resultados
 
-**Infantem es un proyecto con rentabilidad comprobada, potencial de crecimiento y retorno acelerado de inversión.** El diseño estratégico del modelo de negocio, centrado en valor añadido para las familias, permite generar beneficios sostenibles y escalar sin comprometer la experiencia del usuario.
+La evolución de los resultados del proyecto Infantem, desde su fase inicial de desarrollo hasta la operación continua, se analiza a través de los beneficios trimestrales y acumulados presentados en la "Tabla de Beneficios Totales".
+
+* **Fase Pre-Lanzamiento (Trimestre 1):**
+    Esta fase se caracteriza por una inversión inicial de **57.904,55 €** (CAPEX + OPEX) sin generación de ingresos. Consecuentemente, el proyecto arranca con un beneficio acumulado negativo por este mismo importe, que representa la cantidad base a recuperar en los periodos subsiguientes.
+
+* **Primeros Trimestres de Operación (Trimestre 2 al Trimestre 4):**
+    * **Trimestre 2:** Se registran los primeros ingresos. No obstante, los costes operativos (25.879,30 €) son superiores a los ingresos en todos los escenarios (por ejemplo, 7.645 € en el escenario realista). Esto resulta en un incremento de las pérdidas acumuladas (Beneficio Acumulado Realista: -76.138,85 €).
+    * **Trimestre 3:** La tendencia de pérdidas trimestrales continúa, ya que los costes operativos (33.975,60 €) siguen excediendo los ingresos proyectados (Ingresos Realista: 15.259 €). Las pérdidas acumuladas siguen aumentando (Beneficio Acumulado Realista: -94.855,15 €).
+    * **Trimestre 4 (Cierre del primer año del proyecto):**
+        * En el **escenario optimista**, se observa el primer beneficio trimestral positivo (2.744 €), lo cual es un hito importante, aunque el beneficio acumulado sigue siendo negativo (-72.604,45 €).
+        * En los **escenarios realista y pesimista**, los beneficios trimestrales continúan siendo negativos, y las pérdidas acumuladas aumentan (Beneficio Acumulado Realista: -111.282,15 €).
+        * Al finalizar el primer año (contando el Trimestre 1 como desarrollo), la inversión inicial no se ha recuperado en ninguno de los escenarios.
+
+* **Consolidación y Camino hacia la Rentabilidad (Trimestre 5 al Trimestre 8):**
+    * **Trimestre 5:**
+        * El **escenario optimista** muestra un fuerte beneficio trimestral (39.613,51 €), lo que reduce drásticamente la pérdida acumulada a -33.020,94 €.
+        * En el **escenario realista**, aunque el beneficio trimestral sigue siendo negativo (-4.507,49 €), la pérdida es menor que en trimestres anteriores, indicando una mejora.
+    * **Trimestre 6:**
+        * **¡Punto de inflexión en el escenario optimista!** Se alcanza el punto de equilibrio, con un beneficio trimestral de 64.761,05 € que lleva el beneficio acumulado a terreno positivo: **+31.740,11 €**.
+        * En el **escenario realista**, el proyecto genera su primer beneficio trimestral positivo (6.473,05 €). Como resultado, la pérdida acumulada comienza a disminuir, situándose en -109.316,59 €.
+    * **Trimestre 7:**
+        * Los **escenarios realista y optimista** muestran un crecimiento robusto en los beneficios trimestrales. El beneficio acumulado en el escenario optimista crece hasta 197.464,83 €, mientras que en el realista, la pérdida acumulada se reduce a -76.734,87 €.
+    * **Trimestre 8 (Cierre del segundo año del proyecto):**
+        * El **escenario optimista** consolida una rentabilidad muy significativa, con un beneficio acumulado de **+339.970,60 €**.
+        * El **escenario realista** presenta un sólido beneficio trimestral (41.820,77 €), lo que reduce la pérdida acumulada a tan solo **-34.914,10 €**. Este resultado refuerza la proyección de alcanzar el retorno de la inversión en el siguiente trimestre (T9).
+        * El **escenario pesimista** muestra un beneficio trimestral casi nulo (-506,23 €), pero la pérdida acumulada se mantiene muy elevada (-191.722,40 €), confirmando la falta de viabilidad del proyecto bajo estas condiciones.
+
+Este análisis progresivo demuestra cómo, bajo los escenarios realista y optimista, el proyecto Infantem evoluciona desde una fase de inversión y pérdidas iniciales hacia la generación de beneficios y la recuperación de la inversión, aunque con cronogramas marcadamente diferentes. El escenario pesimista, por otro lado, resalta los riesgos inherentes si no se alcanzan los objetivos de ingresos.
+
+---
+
+## 9. Conclusión
+
+El análisis financiero del proyecto Infantem, basado en la tabla de costes, ingresos y beneficios proporcionada, indica que su viabilidad económica y escalabilidad son condicionales y dependen críticamente del escenario de ingresos que finalmente se materialice.
+
+El proyecto requiere una inversión inicial y costes operativos significativos desde el primer trimestre (un total de 57.904,55 € en costes en el Trimestre 1, incluyendo 49.843,01 € de CAPEX). La capacidad para cubrir estos costes y generar un retorno depende del comportamiento de los ingresos, como se detalla a continuación:
+
+- Escenario Pesimista: En esta proyección, el proyecto no alcanza la viabilidad dentro del horizonte de 8 trimestres analizado. Por el contrario, acumula pérdidas significativas, alcanzando un beneficio acumulado negativo de -191.722,40 € al final del Trimestre 8. Esto subraya un riesgo considerable si las condiciones del mercado o la ejecución del proyecto son desfavorables.
+
+- Escenario Realista: Se proyecta que el retorno de la inversión (ROI) se logre en el noveno trimestre. Al finalizar el Trimestre 8, el beneficio acumulado es aún negativo (-34.914,10 €), lo que implica que se necesitarían beneficios superiores a esta cifra en el Trimestre 9 para alcanzar el punto de equilibrio. Este escenario sugiere que el proyecto puede ser viable, con un periodo de recuperación de la inversión de dos años y tres meses, siempre y cuando se cumplan las previsiones de ingresos.
+
+- Escenario Optimista: Este es el panorama más favorable, donde el proyecto demuestra una sólida viabilidad y un rápido retorno de la inversión. El ROI se alcanza durante el sexto trimestre, y al final del Trimestre 8 se logra un beneficio acumulado sustancial de 339.970,60 €.
+
+El proyecto Infantem presenta un potencial de rentabilidad atractivo, especialmente en el escenario optimista. Sin embargo, la viabilidad no está garantizada, como lo demuestra el escenario pesimista. El camino hacia la rentabilidad en el escenario realista (ROI en 9 trimestres) exige una ejecución eficaz de la estrategia de negocio y una respuesta positiva del mercado.
+
