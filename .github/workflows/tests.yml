@@ -1,5 +1,4 @@
 name: Run Tests
-
 on:
   push:
     branches:
@@ -9,7 +8,6 @@ on:
     branches:
       - "main"
       - "develop"
-
 jobs:
   test-backend:
     name: Test Backend
@@ -24,48 +22,45 @@ jobs:
           MYSQL_PASSWORD: StrongPassword123!
         ports:
           - 3306:3306
-        options: --health-cmd="mysqladmin ping -P 3306 -u root --password=root_password --silent" --health-interval=10s --health-timeout=5s --health-retries=5
-
+        options: --health-cmd="mysqladmin ping --silent" --health-timeout=5s --health-retries=3
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-
+        uses: actions/checkout@v3
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
-          java-version: '21'
-
+          distribution: 'adopt'
+          java-version: 21
       - name: Create .env file
         run: |
           echo "STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }}" >> .env
           echo "STRIPE_API_KEY=${{ secrets.STRIPE_API_KEY }}" >> .env
           echo "STRIPE_WEBHOOK_SECRET=${{ secrets.STRIPE_WEBHOOK_SECRET }}" >> .env
           echo "EXPO_PUBLIC_STRIPE_API_KEY=${{ secrets.EXPO_PUBLIC_STRIPE_API_KEY }}" >> .env
-
+      - name: Wait for MySQL
+        run: |
+          for i in {1..30}; do
+            if mysql -h127.0.0.1 -uspring_user -pStrongPassword123! -e "USE infantem_db_test;" ; then
+              echo "MySQL is up!"
+              break
+            fi
+            echo "Waiting for MySQL..."
+            sleep 2
+          done
       - name: Run backend tests
-        env:
-          SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/infantem_db_test?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-          SPRING_DATASOURCE_USERNAME: spring_user
-          SPRING_DATASOURCE_PASSWORD: StrongPassword123!
-          SPRING_JPA_HIBERNATE_DDL_AUTO: create-drop
-          SPRING_PROFILES_ACTIVE: test
-        run: mvn clean test
+        run: mvn clean test -Dspring.profiles.active=test
 
   test-frontend:
     name: Test Frontend
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-
+        uses: actions/checkout@v3
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
-
       - name: Install dependencies
         run: cd frontend && npm install
-
-      # - name: Run frontend tests
-      #   run: cd frontend && npm test
+      #- name: Run frontend tests
+       # run: cd frontend && npm test
