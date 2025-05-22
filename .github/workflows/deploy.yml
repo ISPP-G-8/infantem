@@ -51,7 +51,7 @@ jobs:
         id: deploy
         uses: google-github-actions/deploy-appengine@fb144a90e63cfe1ed98ca5a4513f8f7145bf13cd
         with:
-          project_id: 'infantem-460615'
+          project_id: 'infantem-wpl'
           deliverables: 'app.yml'
           promote: true
           flags: '--quiet'
